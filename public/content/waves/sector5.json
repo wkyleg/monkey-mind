@@ -1,0 +1,76 @@
+{
+  "sectorId": "sector5_fractal_bloom",
+  "waves": {
+    "wave_breakthrough": {
+      "id": "wave_breakthrough",
+      "name": "Breakthrough",
+      "pattern": "spiral",
+      "enemies": [
+        { "type": "tentacled_halo", "count": 3, "behavior": "phase" },
+        { "type": "fractal_insect", "count": 3, "behavior": "fractal" }
+      ],
+      "spawnDelayMs": 600,
+      "entryDelayMs": 800
+    },
+    "wave_entities": {
+      "id": "wave_entities",
+      "name": "Entity Contact",
+      "pattern": "emergence",
+      "enemies": [
+        { "type": "tentacled_halo", "count": 4 },
+        { "type": "cyborg_dolphin", "count": 3 },
+        { "type": "fractal_insect", "count": 4 }
+      ],
+      "spawnDelayMs": 450,
+      "entryDelayMs": 550
+    },
+    "wave_geometry": {
+      "id": "wave_geometry",
+      "name": "Sacred Geometry",
+      "pattern": "mandala",
+      "enemies": [
+        { "type": "fractal_insect", "count": 6, "behavior": "geometric" },
+        { "type": "tentacled_halo", "count": 4 }
+      ],
+      "spawnDelayMs": 400,
+      "entryDelayMs": 500
+    },
+    "wave_hyperspace": {
+      "id": "wave_hyperspace",
+      "name": "Hyperspace",
+      "pattern": "chaos",
+      "enemies": [
+        { "type": "tentacled_halo", "count": 5 },
+        { "type": "fractal_insect", "count": 5 },
+        { "type": "cyborg_dolphin", "count": 4 }
+      ],
+      "spawnDelayMs": 350,
+      "entryDelayMs": 450
+    },
+    "wave_fractal_challenge": {
+      "id": "wave_fractal_challenge",
+      "name": "Reality Collapse",
+      "pattern": "dimensional",
+      "enemies": [
+        { "type": "tentacled_halo", "count": 6 },
+        { "type": "fractal_insect", "count": 6 },
+        { "type": "cyborg_dolphin", "count": 5 }
+      ],
+      "spawnDelayMs": 300,
+      "entryDelayMs": 400
+    },
+    "wave_fractal_preboss": {
+      "id": "wave_fractal_preboss",
+      "name": "Ego Death",
+      "pattern": "gauntlet",
+      "enemies": [
+        { "type": "tentacled_halo", "count": 8 },
+        { "type": "fractal_insect", "count": 8 },
+        { "type": "cyborg_dolphin", "count": 6 }
+      ],
+      "spawnDelayMs": 200,
+      "entryDelayMs": 300,
+      "isBossPrep": true
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "seraphim_exe",
+  "name": "Seraphim.EXE",
+  "title": "The Divine Program",
+  "hp": 100,
+  "phases": [
+    {
+      "hpThreshold": 1.0,
+      "pattern": "sweep",
+      "speedMod": 0.7,
+      "attacks": [
+        {
+          "type": "code_rain",
+          "cooldown": 3000,
+          "damage": 1,
+          "params": { "lanes": 3 }
+        }
+      ]
+    },
+    {
+      "hpThreshold": 0.7,
+      "pattern": "orbit",
+      "speedMod": 1.0,
+      "attacks": [
+        {
+          "type": "code_rain",
+          "cooldown": 2500,
+          "damage": 1,
+          "params": { "lanes": 4 }
+        },
+        {
+          "type": "firewall",
+          "cooldown": 5000,
+          "damage": 2,
+          "params": {}
+        }
+      ]
+    },
+    {
+      "hpThreshold": 0.4,
+      "pattern": "erratic",
+      "speedMod": 1.3,
+      "attacks": [
+        {
+          "type": "code_rain",
+          "cooldown": 1500,
+          "damage": 1,
+          "params": { "lanes": 5 }
+        },
+        {
+          "type": "virus",
+          "cooldown": 4000,
+          "damage": 1,
+          "params": { "count": 5 }
+        }
+      ]
+    }
+  ],
+  "visual": {
+    "type": "custom",
+    "color": "#00ff00",
+    "size": 75,
+    "glow": true
+  },
+  "codexEntry": "ERROR 777: DIVINITY_OVERFLOW. An angel rendered in code, trapped between heaven and hardware. Its wings are made of corrupted data streams.",
+  "defeatUnlocks": ["sector5_fractal_bloom"]
+}

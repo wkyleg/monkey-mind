@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 56" width="48" height="56">
+  <!-- Jellyfish Thought - Tier 2 (Pattern/Organic) -->
+  <defs>
+    <radialGradient id="jellyGrad" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#cc99ff"/>
+      <stop offset="100%" stop-color="#6633cc"/>
+    </radialGradient>
+    <filter id="jellyGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Bioluminescent glow -->
+  <ellipse cx="24" cy="16" rx="18" ry="12" fill="#cc99ff" opacity="0.2" filter="url(#jellyGlow)"/>
+  
+  <!-- Main bell/dome -->
+  <path d="M6 20 Q6 4 24 4 Q42 4 42 20 Q42 28 24 30 Q6 28 6 20" 
+        fill="url(#jellyGrad)" 
+        stroke="#aa66ff" 
+        stroke-width="2"
+        opacity="0.9"
+        filter="url(#jellyGlow)"/>
+  
+  <!-- Bell pattern (brain-like folds) -->
+  <path d="M12 14 Q18 10 24 14 Q30 10 36 14" 
+        fill="none" stroke="#ffffff" stroke-width="1" opacity="0.4"/>
+  <path d="M14 18 Q20 15 24 18 Q28 15 34 18" 
+        fill="none" stroke="#ffffff" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Inner glow -->
+  <ellipse cx="24" cy="16" rx="8" ry="6" fill="#ffffff" opacity="0.3"/>
+  
+  <!-- Thought symbol inside -->
+  <text x="24" y="20" font-size="8" fill="#ffffff" text-anchor="middle" opacity="0.6">?</text>
+  
+  <!-- Tentacles (flowing, organic) -->
+  <path d="M12 28 Q10 36 12 44 Q14 52 10 56" 
+        stroke="#aa66ff" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M18 30 Q20 40 16 48 Q14 54 18 58" 
+        stroke="#cc99ff" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <path d="M24 30 Q24 42 26 50 Q28 56 24 60" 
+        stroke="#aa66ff" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M30 30 Q28 40 32 48 Q34 54 30 58" 
+        stroke="#cc99ff" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <path d="M36 28 Q38 36 36 44 Q34 52 38 56" 
+        stroke="#aa66ff" stroke-width="2" fill="none" opacity="0.7"/>
+  
+  <!-- Glowing tips -->
+  <circle cx="10" cy="56" r="2" fill="#ff66ff" filter="url(#jellyGlow)"/>
+  <circle cx="24" cy="58" r="2" fill="#ff66ff" filter="url(#jellyGlow)"/>
+  <circle cx="38" cy="56" r="2" fill="#ff66ff" filter="url(#jellyGlow)"/>
+</svg>

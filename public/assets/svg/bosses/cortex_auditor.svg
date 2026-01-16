@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Cortex Auditor - The Mind Inspector -->
+  <!-- Clinical scanner arrays, data streams, cold analytical presence -->
+  <defs>
+    <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0a1a2a"/>
+      <stop offset="70%" stop-color="#0a0a14"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <linearGradient id="scanLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ffaa" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00ffaa" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#00ffaa" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="coldGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer scanner ring -->
+  <circle cx="64" cy="64" r="60" fill="none" stroke="#00cccc" stroke-width="1" opacity="0.3"/>
+  <circle cx="64" cy="64" r="56" fill="none" stroke="#00cccc" stroke-width="0.5" stroke-dasharray="4 8" opacity="0.4"/>
+  
+  <!-- Scanner array nodes (8 points) -->
+  <g filter="url(#coldGlow)">
+    <circle cx="64" cy="4" r="3" fill="#00ffaa"/>
+    <circle cx="64" cy="124" r="3" fill="#00ffaa"/>
+    <circle cx="4" cy="64" r="3" fill="#00ffaa"/>
+    <circle cx="124" cy="64" r="3" fill="#00ffaa"/>
+    <circle cx="21" cy="21" r="2" fill="#00cccc"/>
+    <circle cx="107" cy="21" r="2" fill="#00cccc"/>
+    <circle cx="21" cy="107" r="2" fill="#00cccc"/>
+    <circle cx="107" cy="107" r="2" fill="#00cccc"/>
+  </g>
+  
+  <!-- Data stream lines connecting to center -->
+  <g stroke="#00ffaa" stroke-width="0.5" opacity="0.4">
+    <line x1="64" y1="4" x2="64" y2="30"/>
+    <line x1="64" y1="124" x2="64" y2="98"/>
+    <line x1="4" y1="64" x2="30" y2="64"/>
+    <line x1="124" y1="64" x2="98" y2="64"/>
+    <line x1="21" y1="21" x2="38" y2="38"/>
+    <line x1="107" y1="21" x2="90" y2="38"/>
+    <line x1="21" y1="107" x2="38" y2="90"/>
+    <line x1="107" y1="107" x2="90" y2="90"/>
+  </g>
+  
+  <!-- Central core - dark void -->
+  <circle cx="64" cy="64" r="40" fill="url(#coreGrad)" stroke="#00cccc" stroke-width="2"/>
+  
+  <!-- Inner scanning rings -->
+  <circle cx="64" cy="64" r="35" fill="none" stroke="#00ffaa" stroke-width="0.5" opacity="0.3"/>
+  <circle cx="64" cy="64" r="28" fill="none" stroke="#00ffaa" stroke-width="0.5" opacity="0.4"/>
+  
+  <!-- Central eye - cold, analytical -->
+  <ellipse cx="64" cy="64" rx="18" ry="20" fill="#0a1a2a" stroke="#00cccc" stroke-width="1"/>
+  <ellipse cx="64" cy="64" rx="12" ry="14" fill="#001a1a" stroke="#00ffaa" stroke-width="0.5"/>
+  
+  <!-- Pupil - data core -->
+  <circle cx="64" cy="64" r="8" fill="#00ffaa" filter="url(#coldGlow)"/>
+  <circle cx="64" cy="64" r="4" fill="#ffffff"/>
+  
+  <!-- Scanning reticle over eye -->
+  <g stroke="#ff3300" stroke-width="0.5" opacity="0.8">
+    <line x1="46" y1="64" x2="56" y2="64"/>
+    <line x1="72" y1="64" x2="82" y2="64"/>
+    <line x1="64" y1="46" x2="64" y2="56"/>
+    <line x1="64" y1="72" x2="64" y2="82"/>
+    <!-- Corner brackets -->
+    <path d="M50 50 L50 54 M50 50 L54 50" fill="none"/>
+    <path d="M78 50 L78 54 M78 50 L74 50" fill="none"/>
+    <path d="M50 78 L50 74 M50 78 L54 78" fill="none"/>
+    <path d="M78 78 L78 74 M78 78 L74 78" fill="none"/>
+  </g>
+  
+  <!-- Status indicators around core -->
+  <g fill="#00ffaa" opacity="0.8">
+    <rect x="28" y="40" width="6" height="2"/>
+    <rect x="28" y="44" width="4" height="2"/>
+    <rect x="28" y="48" width="8" height="2"/>
+    <rect x="94" y="40" width="6" height="2"/>
+    <rect x="96" y="44" width="4" height="2"/>
+    <rect x="92" y="48" width="8" height="2"/>
+  </g>
+  
+  <!-- Data readout text areas -->
+  <g font-family="monospace" font-size="5" fill="#00cccc" opacity="0.7">
+    <text x="20" y="95">SCAN:ACTIVE</text>
+    <text x="80" y="95">THREAT:HIGH</text>
+    <text x="20" y="35">ID:AUDITOR</text>
+    <text x="80" y="35">NEURAL:LOCK</text>
+  </g>
+  
+  <!-- Floating data fragments -->
+  <g fill="#00ffaa" opacity="0.5" font-family="monospace" font-size="4">
+    <text x="10" y="60">01101</text>
+    <text x="108" y="70">10010</text>
+    <text x="55" y="20">MIND</text>
+    <text x="52" y="112">SCAN</text>
+  </g>
+</svg>

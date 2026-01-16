@@ -1,0 +1,84 @@
+{
+  "sectorId": "sector2_synaptic_reef",
+  "waves": {
+    "wave_reef_intro": {
+      "id": "wave_reef_intro",
+      "name": "Deep Dive",
+      "pattern": "drift",
+      "enemies": [
+        { "type": "zigzag_cherub", "count": 4, "behavior": "zigzag" }
+      ],
+      "spawnDelayMs": 600,
+      "entryDelayMs": 800
+    },
+    "wave_currents": {
+      "id": "wave_currents",
+      "name": "Against the Current",
+      "pattern": "wave",
+      "enemies": [
+        { "type": "zigzag_cherub", "count": 5, "behavior": "zigzag" },
+        { "type": "jellyfish_thought", "count": 2, "behavior": "drift" }
+      ],
+      "spawnDelayMs": 500,
+      "entryDelayMs": 600
+    },
+    "wave_eyes_open": {
+      "id": "wave_eyes_open",
+      "name": "Watching Eyes",
+      "pattern": "orbital",
+      "enemies": [
+        { "type": "orbital_eye", "count": 3, "behavior": "orbit" },
+        { "type": "zigzag_cherub", "count": 4 }
+      ],
+      "spawnDelayMs": 450,
+      "entryDelayMs": 550
+    },
+    "wave_jellyswarm": {
+      "id": "wave_jellyswarm",
+      "name": "Thought Storm",
+      "pattern": "swarm",
+      "enemies": [
+        { "type": "jellyfish_thought", "count": 6, "behavior": "drift" }
+      ],
+      "spawnDelayMs": 400,
+      "entryDelayMs": 500
+    },
+    "wave_reef_mixed": {
+      "id": "wave_reef_mixed",
+      "name": "Coral Defense",
+      "pattern": "mixed",
+      "enemies": [
+        { "type": "zigzag_cherub", "count": 4 },
+        { "type": "orbital_eye", "count": 3 },
+        { "type": "jellyfish_thought", "count": 3 }
+      ],
+      "spawnDelayMs": 350,
+      "entryDelayMs": 450
+    },
+    "wave_reef_challenge": {
+      "id": "wave_reef_challenge",
+      "name": "Deep Pressure",
+      "pattern": "pincer",
+      "enemies": [
+        { "type": "orbital_eye", "count": 4, "behavior": "orbit" },
+        { "type": "zigzag_cherub", "count": 6 },
+        { "type": "jellyfish_thought", "count": 4 }
+      ],
+      "spawnDelayMs": 300,
+      "entryDelayMs": 400
+    },
+    "wave_reef_preboss": {
+      "id": "wave_reef_preboss",
+      "name": "Abyssal Gate",
+      "pattern": "gauntlet",
+      "enemies": [
+        { "type": "zigzag_cherub", "count": 8 },
+        { "type": "orbital_eye", "count": 5 },
+        { "type": "jellyfish_thought", "count": 5 }
+      ],
+      "spawnDelayMs": 250,
+      "entryDelayMs": 350,
+      "isBossPrep": true
+    }
+  }
+}

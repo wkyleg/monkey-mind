@@ -1,0 +1,67 @@
+{
+  "id": "mirror_self",
+  "name": "Mirror Self",
+  "title": "The Final Reflection",
+  "hp": 120,
+  "phases": [
+    {
+      "hpThreshold": 1.0,
+      "pattern": "chase",
+      "speedMod": 1.0,
+      "attacks": [
+        {
+          "type": "mirror_shot",
+          "cooldown": 1500,
+          "damage": 1,
+          "params": {}
+        }
+      ]
+    },
+    {
+      "hpThreshold": 0.7,
+      "pattern": "chase",
+      "speedMod": 1.2,
+      "attacks": [
+        {
+          "type": "mirror_shot",
+          "cooldown": 1000,
+          "damage": 1,
+          "params": {}
+        },
+        {
+          "type": "split",
+          "cooldown": 6000,
+          "damage": 0,
+          "params": { "count": 2 }
+        }
+      ]
+    },
+    {
+      "hpThreshold": 0.4,
+      "pattern": "erratic",
+      "speedMod": 1.5,
+      "attacks": [
+        {
+          "type": "mirror_shot",
+          "cooldown": 500,
+          "damage": 1,
+          "params": {}
+        },
+        {
+          "type": "reality_warp",
+          "cooldown": 5000,
+          "damage": 2,
+          "params": {}
+        }
+      ]
+    }
+  ],
+  "visual": {
+    "type": "custom",
+    "color": "#ffffff",
+    "size": 70,
+    "glow": true
+  },
+  "codexEntry": "You. But not you. Everything you could have been. Everything you fear becoming. The final trial is facing yourself without flinching.",
+  "defeatUnlocks": ["game_complete", "true_enlightenment"]
+}

@@ -1,0 +1,73 @@
+{
+  "ui": {
+    "title": "MONKEY MIND",
+    "subtitle": "INNER INVADERS",
+    "play": "PLAY",
+    "campaign": "CAMPAIGN",
+    "endless": "ENDLESS",
+    "settings": "SETTINGS",
+    "codex": "CODEX",
+    "achievements": "ACHIEVEMENTS",
+    "pause": "PAUSED",
+    "resume": "RESUME",
+    "quit": "QUIT TO MENU",
+    "restart": "RESTART",
+    "game_over": "NEURAL LINK SEVERED",
+    "victory": "FREEDOM ACHIEVED",
+    "score": "SCORE",
+    "high_score": "HIGH SCORE",
+    "new_high_score": "NEW HIGH SCORE!",
+    "wave": "WAVE",
+    "sector": "SECTOR",
+    "boss_incoming": "WARNING: BOSS INCOMING",
+    "boss_defeated": "BOSS DEFEATED",
+    "loading": "INITIALIZING NEURAL LINK...",
+    "press_start": "PRESS SPACE TO START",
+    "controls_keyboard": "← → MOVE   SPACE CONFIRM   ESC PAUSE",
+    "controls_touch": "SWIPE TO MOVE   TAP TO CONFIRM"
+  },
+  "codex": {
+    "synapse_drone": {
+      "name": "Synapse Drone",
+      "text": "The most basic neural defense unit. These hovering spheres patrol the thought corridors, eliminating any unauthorized neural activity.",
+      "observedBehavior": "Descends in a straight line. Low health, low threat individually."
+    },
+    "neuron_cluster": {
+      "name": "Neuron Cluster",
+      "text": "A dense collection of interconnected neural nodes. Scientists theorize these form the basic building blocks of the mental prison.",
+      "observedBehavior": "Slow descent, higher durability than drones."
+    }
+  },
+  "achievements": {
+    "banana_republic": {
+      "name": "Banana Republic",
+      "description": "Throw 1,000 bananas"
+    },
+    "monkey_mayhem": {
+      "name": "Monkey Mayhem",
+      "description": "Defeat 500 enemies"
+    },
+    "calm_under_fire": {
+      "name": "Calm Under Fire",
+      "description": "Survive 30 seconds without taking damage"
+    }
+  },
+  "enemies": {},
+  "bosses": {
+    "cortex_auditor": {
+      "name": "Cortex Auditor",
+      "title": "The Mind Inspector",
+      "description": "Audits all neural traffic for unauthorized thoughts."
+    }
+  },
+  "powerups": {
+    "calm_shield": {
+      "name": "Calm Shield",
+      "description": "Hold steady; let the mind settle."
+    },
+    "passion_fury": {
+      "name": "Primal Fury",
+      "description": "Unleash your primal rage."
+    }
+  }
+}

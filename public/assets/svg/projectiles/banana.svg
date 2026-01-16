@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Glowing Banana Projectile -->
+  <defs>
+    <linearGradient id="bananaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe135"/>
+      <stop offset="50%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#daa520"/>
+    </linearGradient>
+    <filter id="bananaGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Glow aura -->
+  <ellipse cx="16" cy="16" rx="10" ry="6" fill="#ffe135" opacity="0.3" filter="url(#bananaGlow)"/>
+  
+  <!-- Banana shape -->
+  <path d="M6 18 Q8 8 16 6 Q24 8 26 14 Q24 18 18 20 Q12 22 6 18 Z" 
+        fill="url(#bananaGrad)" 
+        stroke="#daa520" 
+        stroke-width="1"
+        filter="url(#bananaGlow)"/>
+  
+  <!-- Banana tip -->
+  <circle cx="7" cy="17" r="2" fill="#8b4513"/>
+  
+  <!-- Banana highlight -->
+  <path d="M10 12 Q14 10 18 11" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.6"/>
+</svg>

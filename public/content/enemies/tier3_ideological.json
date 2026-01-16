@@ -1,0 +1,54 @@
+{
+  "id": "tier3_ideological",
+  "name": "Ideological Enemies",
+  "enemies": [
+    {
+      "id": "logic_cultist",
+      "name": "Cultist of Pure Logic",
+      "tier": 3,
+      "hp": 4,
+      "speed": 0.6,
+      "behavior": "straight_descend",
+      "scoreValue": 50,
+      "dropTable": "rare",
+      "visual": {
+        "type": "circle",
+        "color": "#ffffff",
+        "size": 22,
+        "glow": true
+      }
+    },
+    {
+      "id": "angelic_bureaucrat",
+      "name": "Angelic Bureaucrat",
+      "tier": 3,
+      "hp": 5,
+      "speed": 0.5,
+      "behavior": "zigzag",
+      "scoreValue": 60,
+      "dropTable": "rare",
+      "visual": {
+        "type": "circle",
+        "color": "#ffd700",
+        "size": 28,
+        "glow": true
+      }
+    },
+    {
+      "id": "animal_philosopher",
+      "name": "Animal-Headed Philosopher",
+      "tier": 3,
+      "hp": 4,
+      "speed": 0.8,
+      "behavior": "orbit",
+      "scoreValue": 55,
+      "dropTable": "rare",
+      "visual": {
+        "type": "circle",
+        "color": "#8b4513",
+        "size": 26,
+        "glow": true
+      }
+    }
+  ]
+}

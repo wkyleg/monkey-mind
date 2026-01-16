@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Passion Explosive Powerup (Exploding Bananas) -->
+  <defs>
+    <radialGradient id="explosiveGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffaa00"/>
+      <stop offset="100%" stop-color="#ff3300"/>
+    </radialGradient>
+    <filter id="explosiveGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Explosion rays -->
+  <line x1="16" y1="2" x2="16" y2="6" stroke="#ff6600" stroke-width="2" opacity="0.8"/>
+  <line x1="16" y1="26" x2="16" y2="30" stroke="#ff6600" stroke-width="2" opacity="0.8"/>
+  <line x1="2" y1="16" x2="6" y2="16" stroke="#ff6600" stroke-width="2" opacity="0.8"/>
+  <line x1="26" y1="16" x2="30" y2="16" stroke="#ff6600" stroke-width="2" opacity="0.8"/>
+  <!-- Diagonal rays -->
+  <line x1="5" y1="5" x2="8" y2="8" stroke="#ff6600" stroke-width="1.5" opacity="0.6"/>
+  <line x1="27" y1="5" x2="24" y2="8" stroke="#ff6600" stroke-width="1.5" opacity="0.6"/>
+  <line x1="5" y1="27" x2="8" y2="24" stroke="#ff6600" stroke-width="1.5" opacity="0.6"/>
+  <line x1="27" y1="27" x2="24" y2="24" stroke="#ff6600" stroke-width="1.5" opacity="0.6"/>
+  
+  <!-- Main circle -->
+  <circle cx="16" cy="16" r="10" fill="url(#explosiveGrad)" stroke="#ff0000" stroke-width="2" filter="url(#explosiveGlow)"/>
+  
+  <!-- Banana silhouette -->
+  <path d="M10 18 Q12 12 16 10 Q20 12 22 16 Q20 18 16 19 Q12 20 10 18 Z" 
+        fill="#ffdd00" stroke="#cc9900" stroke-width="0.5"/>
+  
+  <!-- Explosion symbol -->
+  <polygon points="16,8 18,14 24,14 19,18 21,24 16,20 11,24 13,18 8,14 14,14" 
+           fill="none" stroke="#ffffff" stroke-width="1" opacity="0.7"/>
+</svg>

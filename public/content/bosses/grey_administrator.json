@@ -1,0 +1,48 @@
+{
+  "id": "grey_administrator",
+  "name": "Grey Administrator",
+  "title": "The Visitor",
+  "hp": 75,
+  "phases": [
+    {
+      "hpThreshold": 1.0,
+      "pattern": "orbit",
+      "speedMod": 0.8,
+      "attacks": [
+        {
+          "type": "beam",
+          "cooldown": 3000,
+          "damage": 2,
+          "params": { "width": 50, "duration": 1500 }
+        }
+      ]
+    },
+    {
+      "hpThreshold": 0.5,
+      "pattern": "erratic",
+      "speedMod": 1.2,
+      "attacks": [
+        {
+          "type": "beam",
+          "cooldown": 2000,
+          "damage": 2,
+          "params": { "width": 80, "duration": 1000 }
+        },
+        {
+          "type": "summon",
+          "cooldown": 5000,
+          "damage": 0,
+          "params": { "enemyType": "orbital_eye", "count": 3 }
+        }
+      ]
+    }
+  ],
+  "visual": {
+    "type": "custom",
+    "color": "#888888",
+    "size": 70,
+    "glow": true
+  },
+  "codexEntry": "[CLASSIFIED] Origin: Unknown. First documented contact: [REDACTED]. The entity exhibits intelligence far beyond current understanding. Communication attempts ongoing.",
+  "defeatUnlocks": ["sector3_forgotten_pantheon"]
+}

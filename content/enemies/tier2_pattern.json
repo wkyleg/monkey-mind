@@ -1,0 +1,56 @@
+{
+  "id": "tier2_pattern",
+  "name": "Pattern Enemies",
+  "enemies": [
+    {
+      "id": "zigzag_cherub",
+      "name": "Zigzag Cherub",
+      "tier": 2,
+      "hp": 2,
+      "speed": 1.2,
+      "behavior": "zigzag",
+      "scoreValue": 30,
+      "dropTable": "uncommon",
+      "visual": {
+        "type": "circle",
+        "color": "#ff00aa",
+        "size": 20,
+        "glow": true
+      },
+      "codexEntry": "zigzag_cherub"
+    },
+    {
+      "id": "orbital_eye",
+      "name": "Orbital Eye",
+      "tier": 2,
+      "hp": 3,
+      "speed": 0.7,
+      "behavior": "orbit",
+      "scoreValue": 40,
+      "dropTable": "uncommon",
+      "visual": {
+        "type": "circle",
+        "color": "#ffaa00",
+        "size": 22,
+        "glow": true
+      },
+      "codexEntry": "orbital_eye"
+    },
+    {
+      "id": "jellyfish_thought",
+      "name": "Jellyfish Thought",
+      "tier": 2,
+      "hp": 2,
+      "speed": 0.5,
+      "behavior": "zigzag",
+      "scoreValue": 35,
+      "dropTable": "uncommon",
+      "visual": {
+        "type": "circle",
+        "color": "#aa00ff",
+        "size": 25,
+        "glow": true
+      }
+    }
+  ]
+}

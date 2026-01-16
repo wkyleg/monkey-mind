@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Mirror Self - Final Boss: Fragmented Reflection, Shattered Identity -->
+  <defs>
+    <linearGradient id="shardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="50%" stop-color="#2a2a4e"/>
+      <stop offset="100%" stop-color="#0a0a1e"/>
+    </linearGradient>
+    <linearGradient id="glitchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff0066"/>
+      <stop offset="50%" stop-color="#00ffff"/>
+      <stop offset="100%" stop-color="#ff0066"/>
+    </linearGradient>
+    <filter id="shardGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Shattered mirror frame -->
+  <circle cx="64" cy="64" r="58" fill="none" stroke="#4a4a6a" stroke-width="3"/>
+  <circle cx="64" cy="64" r="54" fill="#0a0a14"/>
+  
+  <!-- Major crack lines radiating from center -->
+  <g stroke="#6a6a8a" stroke-width="1" fill="none">
+    <line x1="64" y1="10" x2="64" y2="118"/>
+    <line x1="10" y1="64" x2="118" y2="64"/>
+    <line x1="22" y1="22" x2="106" y2="106"/>
+    <line x1="106" y1="22" x2="22" y2="106"/>
+    <line x1="64" y1="64" x2="30" y2="20"/>
+    <line x1="64" y1="64" x2="98" y2="20"/>
+    <line x1="64" y1="64" x2="30" y2="108"/>
+    <line x1="64" y1="64" x2="98" y2="108"/>
+  </g>
+  
+  <!-- Mirror shards with different reflections -->
+  <!-- Top shard - distorted eye -->
+  <polygon points="64,10 80,30 64,50 48,30" fill="url(#shardGrad)" stroke="#8a8aaa" stroke-width="1"/>
+  <ellipse cx="64" cy="32" rx="6" ry="8" fill="#ff0066" filter="url(#shardGlow)"/>
+  <ellipse cx="64" cy="32" rx="2" ry="4" fill="#000000"/>
+  
+  <!-- Right shard - fragmented face -->
+  <polygon points="80,30 108,50 100,80 70,60" fill="url(#shardGrad)" stroke="#8a8aaa" stroke-width="1"/>
+  <circle cx="88" cy="55" r="5" fill="#00cccc" filter="url(#shardGlow)"/>
+  
+  <!-- Bottom-right shard - twisted grin -->
+  <polygon points="70,60 100,80 90,110 64,80" fill="url(#shardGrad)" stroke="#8a8aaa" stroke-width="1"/>
+  <path d="M72 88 Q80 96 88 88" stroke="#ff0066" stroke-width="2" fill="none"/>
+  
+  <!-- Bottom shard - void -->
+  <polygon points="64,80 90,110 64,118 38,110" fill="url(#shardGrad)" stroke="#8a8aaa" stroke-width="1"/>
+  <circle cx="64" cy="100" r="8" fill="#0a0a0f" stroke="#ff0066" stroke-width="1"/>
+  
+  <!-- Bottom-left shard - corrupted data -->
+  <polygon points="38,110 64,80 58,60 28,80" fill="url(#shardGrad)" stroke="#8a8aaa" stroke-width="1"/>
+  <g font-family="monospace" font-size="4" fill="#00ffff" opacity="0.6">
+    <text x="42" y="88">ERR</text>
+    <text x="38" y="94">NULL</text>
+  </g>
+  
+  <!-- Left shard - another eye -->
+  <polygon points="28,80 58,60 48,30 20,50" fill="url(#shardGrad)" stroke="#8a8aaa" stroke-width="1"/>
+  <circle cx="38" cy="55" r="5" fill="#ff0066" filter="url(#shardGlow)"/>
+  
+  <!-- Top-left shard - helmet fragment -->
+  <polygon points="48,30 64,50 58,60 20,50 30,20" fill="url(#shardGrad)" stroke="#8a8aaa" stroke-width="1"/>
+  <path d="M35 35 Q45 28 55 35" stroke="#4a4a6a" stroke-width="2" fill="none"/>
+  
+  <!-- Top-right shard - EEG node -->
+  <polygon points="64,50 80,30 98,20 108,50 70,60" fill="url(#shardGrad)" stroke="#8a8aaa" stroke-width="1"/>
+  <circle cx="85" cy="38" r="4" fill="#00ffff" filter="url(#shardGlow)"/>
+  
+  <!-- Central void where reflections converge -->
+  <circle cx="64" cy="60" r="12" fill="#000000" stroke="#ff0066" stroke-width="2" filter="url(#shardGlow)"/>
+  
+  <!-- Multiple eyes in the void (fragmented consciousness) -->
+  <g filter="url(#shardGlow)">
+    <ellipse cx="60" cy="57" rx="3" ry="4" fill="#ff0066"/>
+    <ellipse cx="68" cy="57" rx="3" ry="4" fill="#00ffff"/>
+    <ellipse cx="64" cy="63" rx="2" ry="3" fill="#ffffff"/>
+  </g>
+  
+  <!-- Glitch lines across shards -->
+  <g stroke="url(#glitchGrad)" stroke-width="1" opacity="0.5">
+    <line x1="20" y1="40" x2="40" y2="40"/>
+    <line x1="88" y1="70" x2="108" y2="70"/>
+    <line x1="30" y1="95" x2="50" y2="95"/>
+    <line x1="78" y1="25" x2="98" y2="25"/>
+  </g>
+  
+  <!-- Floating shard fragments -->
+  <g fill="#2a2a4e" stroke="#6a6a8a" stroke-width="0.5" opacity="0.6">
+    <polygon points="8,30 14,25 18,32 12,38"/>
+    <polygon points="110,35 116,28 120,36 114,42"/>
+    <polygon points="12,95 18,90 22,98 16,104"/>
+    <polygon points="106,100 112,94 118,102 110,108"/>
+  </g>
+  
+  <!-- Identity text fragments -->
+  <g font-family="monospace" font-size="3" fill="#8a8aaa" opacity="0.4">
+    <text x="15" y="60">WHO</text>
+    <text x="105" y="60">ARE</text>
+    <text x="60" y="120" text-anchor="middle">YOU?</text>
+  </g>
+  
+  <!-- Corruption particles -->
+  <g fill="#ff0066" opacity="0.6">
+    <circle cx="25" cy="25" r="1.5"/>
+    <circle cx="103" cy="28" r="1.5"/>
+    <circle cx="20" cy="103" r="1.5"/>
+    <circle cx="108" cy="100" r="1.5"/>
+  </g>
+</svg>

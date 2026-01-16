@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Explosive Banana (Passion Power) -->
+  <defs>
+    <linearGradient id="explosiveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6600"/>
+      <stop offset="50%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#ff3300"/>
+    </linearGradient>
+    <filter id="explosiveGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Fire aura -->
+  <ellipse cx="16" cy="16" rx="12" ry="8" fill="#ff3300" opacity="0.4" filter="url(#explosiveGlow)"/>
+  
+  <!-- Flame trails -->
+  <path d="M4 16 L2 14 L5 15 L3 12" stroke="#ff6600" stroke-width="1.5" fill="none" opacity="0.8"/>
+  <path d="M4 18 L2 20 L5 19 L3 22" stroke="#ff6600" stroke-width="1.5" fill="none" opacity="0.8"/>
+  
+  <!-- Banana shape -->
+  <path d="M6 18 Q8 8 16 6 Q24 8 26 14 Q24 18 18 20 Q12 22 6 18 Z" 
+        fill="url(#explosiveGrad)" 
+        stroke="#ff3300" 
+        stroke-width="1.5"
+        filter="url(#explosiveGlow)"/>
+  
+  <!-- Banana tip (lit fuse) -->
+  <circle cx="7" cy="17" r="3" fill="#ff0000" filter="url(#explosiveGlow)"/>
+  
+  <!-- Spark -->
+  <path d="M5 15 L3 13 M7 14 L6 11 M9 15 L10 12" stroke="#ffff00" stroke-width="1" fill="none"/>
+  
+  <!-- Highlight -->
+  <path d="M10 12 Q14 10 18 11" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.7"/>
+</svg>

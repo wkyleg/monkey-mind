@@ -1,0 +1,40 @@
+{
+  "id": "sector2_synaptic_reef",
+  "name": "The Synaptic Reef",
+  "description": "Dive deep into organic neural waters. Flowing, bioluminescent, hypnotic.",
+  "theme": {
+    "bg": "synaptic_reef",
+    "palette": ["#001a33", "#003355", "#00ffcc", "#ff66aa"],
+    "pattern": "organic"
+  },
+  "lanes": 5,
+  "levels": [
+    {
+      "id": "2-1",
+      "waves": ["wave_reef_intro", "wave_currents"]
+    },
+    {
+      "id": "2-2",
+      "waves": ["wave_currents", "wave_eyes_open"]
+    },
+    {
+      "id": "2-3",
+      "waves": ["wave_jellyswarm", "wave_reef_mixed"]
+    },
+    {
+      "id": "2-4",
+      "waves": ["wave_reef_mixed", "wave_reef_challenge"]
+    },
+    {
+      "id": "2-5",
+      "waves": ["wave_reef_preboss"],
+      "miniboss": "coral_guardian"
+    }
+  ],
+  "boss": "grey_administrator",
+  "unlocks": {
+    "powerups": ["calm_beam"],
+    "codex": ["entry_synaptic_reef", "zigzag_cherub", "orbital_eye", "jellyfish_thought"],
+    "cosmetics": ["trail_bubbles"]
+  }
+}

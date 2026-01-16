@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Fractal Insect - Tier 4 (Aberrations/DMT) -->
+  <defs>
+    <linearGradient id="fractalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6600"/>
+      <stop offset="33%" stop-color="#ff00ff"/>
+      <stop offset="66%" stop-color="#00ffff"/>
+      <stop offset="100%" stop-color="#66ff00"/>
+    </linearGradient>
+    <filter id="fractalGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Fractal wings (self-similar patterns) -->
+  <!-- Left wing -->
+  <path d="M28 24 Q10 16 8 32 Q10 48 28 40" 
+        fill="none" stroke="url(#fractalGrad)" stroke-width="2" filter="url(#fractalGlow)"/>
+  <path d="M24 26 Q14 22 12 32 Q14 42 24 38" 
+        fill="none" stroke="#ff66ff" stroke-width="1.5" opacity="0.8"/>
+  <path d="M20 28 Q16 26 15 32 Q16 38 20 36" 
+        fill="none" stroke="#66ffff" stroke-width="1" opacity="0.6"/>
+  
+  <!-- Right wing -->
+  <path d="M36 24 Q54 16 56 32 Q54 48 36 40" 
+        fill="none" stroke="url(#fractalGrad)" stroke-width="2" filter="url(#fractalGlow)"/>
+  <path d="M40 26 Q50 22 52 32 Q50 42 40 38" 
+        fill="none" stroke="#ff66ff" stroke-width="1.5" opacity="0.8"/>
+  <path d="M44 28 Q48 26 49 32 Q48 38 44 36" 
+        fill="none" stroke="#66ffff" stroke-width="1" opacity="0.6"/>
+  
+  <!-- Antennae (fractal branches) -->
+  <path d="M28 16 L24 8 L20 12 L24 8 L28 4" stroke="#ffff00" stroke-width="1.5" fill="none" filter="url(#fractalGlow)"/>
+  <path d="M36 16 L40 8 L44 12 L40 8 L36 4" stroke="#ffff00" stroke-width="1.5" fill="none" filter="url(#fractalGlow)"/>
+  
+  <!-- Body segments -->
+  <ellipse cx="32" cy="20" rx="6" ry="5" fill="#1a0a1a" stroke="url(#fractalGrad)" stroke-width="2" filter="url(#fractalGlow)"/>
+  <ellipse cx="32" cy="32" rx="8" ry="7" fill="#1a0a1a" stroke="url(#fractalGrad)" stroke-width="2" filter="url(#fractalGlow)"/>
+  <ellipse cx="32" cy="46" rx="5" ry="6" fill="#1a0a1a" stroke="url(#fractalGrad)" stroke-width="2" filter="url(#fractalGlow)"/>
+  <ellipse cx="32" cy="56" rx="3" ry="4" fill="#1a0a1a" stroke="url(#fractalGrad)" stroke-width="1.5"/>
+  
+  <!-- Legs (fractal pattern) -->
+  <path d="M26 28 L16 32 L14 28 L16 32 L12 36" stroke="#ff6600" stroke-width="1" fill="none"/>
+  <path d="M26 36 L16 40 L14 36 L16 40 L12 44" stroke="#ff00ff" stroke-width="1" fill="none"/>
+  <path d="M38 28 L48 32 L50 28 L48 32 L52 36" stroke="#00ffff" stroke-width="1" fill="none"/>
+  <path d="M38 36 L48 40 L50 36 L48 40 L52 44" stroke="#66ff00" stroke-width="1" fill="none"/>
+  
+  <!-- Compound eyes -->
+  <circle cx="28" cy="18" r="3" fill="#ff0066" filter="url(#fractalGlow)"/>
+  <circle cx="36" cy="18" r="3" fill="#00ff66" filter="url(#fractalGlow)"/>
+  <!-- Eye facets -->
+  <circle cx="27" cy="17" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="29" cy="18" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="35" cy="17" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="37" cy="18" r="1" fill="#ffffff" opacity="0.5"/>
+</svg>

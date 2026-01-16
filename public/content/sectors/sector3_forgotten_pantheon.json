@@ -1,0 +1,40 @@
+{
+  "id": "sector3_forgotten_pantheon",
+  "name": "The Forgotten Pantheon",
+  "description": "Ancient temples of mind. Renaissance logic meets divine madness.",
+  "theme": {
+    "bg": "pantheon",
+    "palette": ["#1a0a2e", "#2a1050", "#ffcc00", "#ff00aa"],
+    "pattern": "sacred"
+  },
+  "lanes": 5,
+  "levels": [
+    {
+      "id": "3-1",
+      "waves": ["wave_pantheon_intro", "wave_logic_gates"]
+    },
+    {
+      "id": "3-2",
+      "waves": ["wave_philosophers", "wave_logic_gates"]
+    },
+    {
+      "id": "3-3",
+      "waves": ["wave_bureaucracy", "wave_pantheon_mixed"]
+    },
+    {
+      "id": "3-4",
+      "waves": ["wave_pantheon_mixed", "wave_pantheon_challenge"]
+    },
+    {
+      "id": "3-5",
+      "waves": ["wave_pantheon_preboss"],
+      "miniboss": "golden_ratio"
+    }
+  ],
+  "boss": "banana_pentagon",
+  "unlocks": {
+    "powerups": ["passion_fury"],
+    "codex": ["entry_forgotten_pantheon", "logic_cultist", "angelic_bureaucrat", "animal_philosopher"],
+    "cosmetics": ["halo_gold"]
+  }
+}

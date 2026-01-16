@@ -1,0 +1,40 @@
+{
+  "id": "sector3_forgotten_pantheon",
+  "name": "The Forgotten Pantheon",
+  "description": "Ancient gods and machine angels dwell here. Sacred, bizarre, transcendent.",
+  "theme": {
+    "bg": "pantheon",
+    "palette": ["#1a0a2e", "#2a1040", "#ffaa00", "#ff00aa"],
+    "pattern": "stained_glass"
+  },
+  "lanes": 5,
+  "levels": [
+    {
+      "id": "3-1",
+      "waves": ["wave_cherubs", "wave_acolytes"]
+    },
+    {
+      "id": "3-2",
+      "waves": ["wave_philosophers", "wave_hybrid_beasts"]
+    },
+    {
+      "id": "3-3",
+      "waves": ["wave_seraphim_scouts", "wave_ritual"]
+    },
+    {
+      "id": "3-4",
+      "waves": ["wave_ascension"],
+      "miniboss": "fallen_angel"
+    },
+    {
+      "id": "3-5",
+      "waves": ["wave_pantheon_finale"]
+    }
+  ],
+  "boss": "banana_pentagon",
+  "unlocks": {
+    "powerups": ["calm_beam"],
+    "codex": ["entry_forgotten_pantheon"],
+    "cosmetics": ["monkey_monk"]
+  }
+}

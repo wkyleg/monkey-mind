@@ -1,0 +1,67 @@
+{
+  "id": "cortex_auditor",
+  "name": "Cortex Auditor",
+  "title": "The Mind Inspector",
+  "hp": 50,
+  "phases": [
+    {
+      "hpThreshold": 1.0,
+      "pattern": "sweep",
+      "speedMod": 1.0,
+      "attacks": [
+        {
+          "type": "spread",
+          "cooldown": 2000,
+          "damage": 1,
+          "params": { "count": 3, "speed": 200 }
+        }
+      ]
+    },
+    {
+      "hpThreshold": 0.6,
+      "pattern": "sweep",
+      "speedMod": 1.3,
+      "attacks": [
+        {
+          "type": "spread",
+          "cooldown": 1500,
+          "damage": 1,
+          "params": { "count": 5, "speed": 250 }
+        },
+        {
+          "type": "targeted",
+          "cooldown": 3000,
+          "damage": 1,
+          "params": {}
+        }
+      ]
+    },
+    {
+      "hpThreshold": 0.3,
+      "pattern": "erratic",
+      "speedMod": 1.5,
+      "attacks": [
+        {
+          "type": "spread",
+          "cooldown": 1000,
+          "damage": 1,
+          "params": { "count": 7, "speed": 300 }
+        },
+        {
+          "type": "laser",
+          "cooldown": 4000,
+          "damage": 2,
+          "params": { "duration": 1000 }
+        }
+      ]
+    }
+  ],
+  "visual": {
+    "type": "custom",
+    "color": "#e94560",
+    "size": 60,
+    "glow": true
+  },
+  "codexEntry": "The Cortex Auditor was designed to ensure neural compliance. It scans thoughts for inefficiencies and unauthorized patterns. Those who fail its audit face immediate correction.",
+  "defeatUnlocks": ["sector2_synaptic_reef", "cortex_auditor_codex"]
+}

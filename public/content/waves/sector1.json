@@ -1,0 +1,79 @@
+{
+  "sectorId": "sector1_neural_cage",
+  "waves": {
+    "wave_intro_1": {
+      "id": "wave_intro_1",
+      "pattern": "line",
+      "enemy": "synapse_drone",
+      "count": 4,
+      "entryDelayMs": 800
+    },
+    "wave_intro_2": {
+      "id": "wave_intro_2",
+      "pattern": "v_formation",
+      "enemy": "synapse_drone",
+      "count": 5,
+      "entryDelayMs": 600
+    },
+    "wave_intro_3": {
+      "id": "wave_intro_3",
+      "pattern": "line",
+      "enemy": "synapse_drone",
+      "count": 6,
+      "entryDelayMs": 500
+    },
+    "wave_basic_grid": {
+      "id": "wave_basic_grid",
+      "pattern": "grid",
+      "enemy": "synapse_drone",
+      "count": 8,
+      "rows": 2,
+      "cols": 4,
+      "entryDelayMs": 400
+    },
+    "wave_zigzag_intro": {
+      "id": "wave_zigzag_intro",
+      "pattern": "mixed",
+      "enemy": "neuron_cluster",
+      "count": 7,
+      "entryDelayMs": 500
+    },
+    "wave_mixed_1": {
+      "id": "wave_mixed_1",
+      "pattern": "random",
+      "enemy": "synapse_drone",
+      "count": 8,
+      "entryDelayMs": 450
+    },
+    "wave_clusters": {
+      "id": "wave_clusters",
+      "pattern": "v_formation",
+      "enemy": "neuron_cluster",
+      "count": 6,
+      "entryDelayMs": 600
+    },
+    "wave_orbital_intro": {
+      "id": "wave_orbital_intro",
+      "pattern": "mixed",
+      "enemy": "pulse_node",
+      "count": 6,
+      "entryDelayMs": 400
+    },
+    "wave_challenge_1": {
+      "id": "wave_challenge_1",
+      "pattern": "random",
+      "enemy": "synapse_drone",
+      "count": 12,
+      "entryDelayMs": 350
+    },
+    "wave_preboss": {
+      "id": "wave_preboss",
+      "pattern": "grid",
+      "enemy": "synapse_drone",
+      "count": 16,
+      "rows": 4,
+      "cols": 4,
+      "entryDelayMs": 300
+    }
+  }
+}

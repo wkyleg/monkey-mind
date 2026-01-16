@@ -1,0 +1,85 @@
+{
+  "sectorId": "sector3_forgotten_pantheon",
+  "waves": {
+    "wave_pantheon_intro": {
+      "id": "wave_pantheon_intro",
+      "name": "Sacred Grounds",
+      "pattern": "procession",
+      "enemies": [
+        { "type": "logic_cultist", "count": 4 }
+      ],
+      "spawnDelayMs": 600,
+      "entryDelayMs": 800
+    },
+    "wave_logic_gates": {
+      "id": "wave_logic_gates",
+      "name": "Logic Gates",
+      "pattern": "formation",
+      "enemies": [
+        { "type": "logic_cultist", "count": 5 },
+        { "type": "angelic_bureaucrat", "count": 2 }
+      ],
+      "spawnDelayMs": 500,
+      "entryDelayMs": 600
+    },
+    "wave_philosophers": {
+      "id": "wave_philosophers",
+      "name": "The Thinkers",
+      "pattern": "spiral",
+      "enemies": [
+        { "type": "animal_philosopher", "count": 3, "behavior": "thoughtful" },
+        { "type": "logic_cultist", "count": 4 }
+      ],
+      "spawnDelayMs": 450,
+      "entryDelayMs": 550
+    },
+    "wave_bureaucracy": {
+      "id": "wave_bureaucracy",
+      "name": "Red Tape",
+      "pattern": "grid",
+      "enemies": [
+        { "type": "angelic_bureaucrat", "count": 5 },
+        { "type": "logic_cultist", "count": 3 }
+      ],
+      "spawnDelayMs": 400,
+      "entryDelayMs": 500
+    },
+    "wave_pantheon_mixed": {
+      "id": "wave_pantheon_mixed",
+      "name": "Divine Debate",
+      "pattern": "mixed",
+      "enemies": [
+        { "type": "logic_cultist", "count": 4 },
+        { "type": "angelic_bureaucrat", "count": 3 },
+        { "type": "animal_philosopher", "count": 3 }
+      ],
+      "spawnDelayMs": 350,
+      "entryDelayMs": 450
+    },
+    "wave_pantheon_challenge": {
+      "id": "wave_pantheon_challenge",
+      "name": "Inquisition",
+      "pattern": "siege",
+      "enemies": [
+        { "type": "logic_cultist", "count": 6 },
+        { "type": "angelic_bureaucrat", "count": 4 },
+        { "type": "animal_philosopher", "count": 4 }
+      ],
+      "spawnDelayMs": 300,
+      "entryDelayMs": 400
+    },
+    "wave_pantheon_preboss": {
+      "id": "wave_pantheon_preboss",
+      "name": "Final Judgment",
+      "pattern": "gauntlet",
+      "enemies": [
+        { "type": "logic_cultist", "count": 8 },
+        { "type": "angelic_bureaucrat", "count": 5 },
+        { "type": "animal_philosopher", "count": 5 }
+      ],
+      "spawnDelayMs": 250,
+      "entryDelayMs": 350,
+      "isBossPrep": true
+    }
+  }
+}

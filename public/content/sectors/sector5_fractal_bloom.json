@@ -1,0 +1,40 @@
+{
+  "id": "sector5_fractal_bloom",
+  "name": "The Fractal Bloom",
+  "description": "Beyond the veil. Reality dissolves. Face your true self.",
+  "theme": {
+    "bg": "fractal_bloom",
+    "palette": ["#0a0520", "#ff00ff", "#00ffff", "#ffff00"],
+    "pattern": "fractal"
+  },
+  "lanes": 5,
+  "levels": [
+    {
+      "id": "5-1",
+      "waves": ["wave_breakthrough", "wave_entities"]
+    },
+    {
+      "id": "5-2",
+      "waves": ["wave_geometry", "wave_entities"]
+    },
+    {
+      "id": "5-3",
+      "waves": ["wave_hyperspace", "wave_geometry"]
+    },
+    {
+      "id": "5-4",
+      "waves": ["wave_fractal_challenge", "wave_hyperspace"]
+    },
+    {
+      "id": "5-5",
+      "waves": ["wave_fractal_preboss"],
+      "miniboss": "machine_elf"
+    }
+  ],
+  "boss": "mirror_self",
+  "unlocks": {
+    "powerups": [],
+    "codex": ["entry_fractal_bloom", "the_breakthrough", "machine_elves", "return_to_monke"],
+    "cosmetics": ["aura_rainbow", "eyes_fractal"]
+  }
+}

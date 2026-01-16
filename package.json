@@ -1,0 +1,31 @@
+{
+  "name": "monkey-mind",
+  "version": "1.0.0",
+  "description": "Monkey Mind: Inner Invaders - A psychedelic arcade defense game",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wkyleg/monkey-mind.git"
+  },
+  "keywords": [
+    "game",
+    "arcade",
+    "bci",
+    "eeg"
+  ],
+  "author": "Elata",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "jsdom": "^27.4.0",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7",
+    "vitest": "^2.1.8"
+  }
+}

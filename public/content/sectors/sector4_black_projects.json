@@ -1,0 +1,40 @@
+{
+  "id": "sector4_black_projects",
+  "name": "Black Projects",
+  "description": "Top secret facilities. UFOs, experiments, and things they don't want you to know.",
+  "theme": {
+    "bg": "black_ops",
+    "palette": ["#000000", "#0a0a0a", "#00ff00", "#ff3300"],
+    "pattern": "classified"
+  },
+  "lanes": 5,
+  "levels": [
+    {
+      "id": "4-1",
+      "waves": ["wave_classified", "wave_experiment"]
+    },
+    {
+      "id": "4-2",
+      "waves": ["wave_specimens", "wave_experiment"]
+    },
+    {
+      "id": "4-3",
+      "waves": ["wave_dolphins", "wave_blackops_mixed"]
+    },
+    {
+      "id": "4-4",
+      "waves": ["wave_blackops_mixed", "wave_blackops_challenge"]
+    },
+    {
+      "id": "4-5",
+      "waves": ["wave_blackops_preboss"],
+      "miniboss": "project_monarch"
+    }
+  ],
+  "boss": "seraphim_exe",
+  "unlocks": {
+    "powerups": ["passion_explosive"],
+    "codex": ["entry_black_projects", "tentacled_halo", "fractal_insect", "cyborg_dolphin"],
+    "cosmetics": ["triangle_ufo"]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "sector4_black_projects",
+  "name": "Black Projects",
+  "description": "Classified experiments and shadow entities. Redacted, paranoid, watching.",
+  "theme": {
+    "bg": "black_ops",
+    "palette": ["#000000", "#0a0a0a", "#333333", "#00ff00"],
+    "pattern": "surveillance"
+  },
+  "lanes": 5,
+  "levels": [
+    {
+      "id": "4-1",
+      "waves": ["wave_observers", "wave_shadows"]
+    },
+    {
+      "id": "4-2",
+      "waves": ["wave_triangles", "wave_agents"]
+    },
+    {
+      "id": "4-3",
+      "waves": ["wave_classified", "wave_redacted"]
+    },
+    {
+      "id": "4-4",
+      "waves": ["wave_disclosure"],
+      "miniboss": "project_director"
+    },
+    {
+      "id": "4-5",
+      "waves": ["wave_black_finale"]
+    }
+  ],
+  "boss": "seraphim_exe",
+  "unlocks": {
+    "powerups": ["passion_explosive"],
+    "codex": ["entry_black_projects"],
+    "cosmetics": ["monkey_agent"]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "sector2_synaptic_reef",
+  "name": "Synaptic Reef",
+  "description": "Dive into the flowing neural currents. Organic, primal, alive.",
+  "theme": {
+    "bg": "synaptic_reef",
+    "palette": ["#001a33", "#002244", "#00ffaa", "#00aaff"],
+    "pattern": "organic"
+  },
+  "lanes": 5,
+  "levels": [
+    {
+      "id": "2-1",
+      "waves": ["wave_reef_intro", "wave_jellyfish_1"]
+    },
+    {
+      "id": "2-2",
+      "waves": ["wave_current_riders", "wave_school"]
+    },
+    {
+      "id": "2-3",
+      "waves": ["wave_predators", "wave_swarm_1"]
+    },
+    {
+      "id": "2-4",
+      "waves": ["wave_deep_ones"],
+      "miniboss": "alpha_synapse"
+    },
+    {
+      "id": "2-5",
+      "waves": ["wave_reef_finale"]
+    }
+  ],
+  "boss": "grey_administrator",
+  "unlocks": {
+    "powerups": ["passion_fury"],
+    "codex": ["entry_synaptic_reef"],
+    "cosmetics": ["monkey_diver"]
+  }
+}

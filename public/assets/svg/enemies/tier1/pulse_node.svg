@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- Pulse Node - Tier 1 (Neural/Clinical) -->
+  <defs>
+    <radialGradient id="pulseGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#66ffcc"/>
+      <stop offset="100%" stop-color="#00aa88"/>
+    </radialGradient>
+    <filter id="pulseGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Pulse rings (expanding) -->
+  <circle cx="24" cy="24" r="20" fill="none" stroke="#66ffcc" stroke-width="1" opacity="0.3"/>
+  <circle cx="24" cy="24" r="16" fill="none" stroke="#66ffcc" stroke-width="1" opacity="0.4"/>
+  <circle cx="24" cy="24" r="12" fill="none" stroke="#66ffcc" stroke-width="1.5" opacity="0.5"/>
+  
+  <!-- Connection lines (grid pattern) -->
+  <line x1="24" y1="4" x2="24" y2="10" stroke="#66ffcc" stroke-width="2" opacity="0.8"/>
+  <line x1="24" y1="38" x2="24" y2="44" stroke="#66ffcc" stroke-width="2" opacity="0.8"/>
+  <line x1="4" y1="24" x2="10" y2="24" stroke="#66ffcc" stroke-width="2" opacity="0.8"/>
+  <line x1="38" y1="24" x2="44" y2="24" stroke="#66ffcc" stroke-width="2" opacity="0.8"/>
+  
+  <!-- Main body (square with rounded corners) -->
+  <rect x="14" y="14" width="20" height="20" rx="4" ry="4" 
+        fill="#0a1a1a" 
+        stroke="#66ffcc" 
+        stroke-width="2"
+        filter="url(#pulseGlow)"/>
+  
+  <!-- Core -->
+  <circle cx="24" cy="24" r="6" fill="url(#pulseGrad)" filter="url(#pulseGlow)"/>
+  <circle cx="24" cy="24" r="3" fill="#ffffff"/>
+  
+  <!-- Corner nodes -->
+  <circle cx="14" cy="14" r="2" fill="#66ffcc" filter="url(#pulseGlow)"/>
+  <circle cx="34" cy="14" r="2" fill="#66ffcc" filter="url(#pulseGlow)"/>
+  <circle cx="14" cy="34" r="2" fill="#66ffcc" filter="url(#pulseGlow)"/>
+  <circle cx="34" cy="34" r="2" fill="#66ffcc" filter="url(#pulseGlow)"/>
+  
+  <!-- EKG line pattern -->
+  <polyline points="16,24 20,24 21,20 23,28 25,20 27,28 28,24 32,24" 
+            fill="none" 
+            stroke="#ffffff" 
+            stroke-width="1.5" 
+            opacity="0.8"/>
+</svg>

@@ -1,0 +1,61 @@
+{
+  "id": "banana_pentagon",
+  "name": "Banana Pentagon",
+  "title": "The Sacred Geometry",
+  "hp": 80,
+  "phases": [
+    {
+      "hpThreshold": 1.0,
+      "pattern": "sweep",
+      "speedMod": 0.5,
+      "attacks": [
+        {
+          "type": "spiral",
+          "cooldown": 2500,
+          "damage": 1,
+          "params": { "count": 5, "rotationSpeed": 2 }
+        }
+      ]
+    },
+    {
+      "hpThreshold": 0.6,
+      "pattern": "orbit",
+      "speedMod": 1.0,
+      "attacks": [
+        {
+          "type": "spiral",
+          "cooldown": 2000,
+          "damage": 1,
+          "params": { "count": 10, "rotationSpeed": 3 }
+        },
+        {
+          "type": "burst",
+          "cooldown": 4000,
+          "damage": 2,
+          "params": { "count": 15 }
+        }
+      ]
+    },
+    {
+      "hpThreshold": 0.25,
+      "pattern": "erratic",
+      "speedMod": 1.5,
+      "attacks": [
+        {
+          "type": "spiral",
+          "cooldown": 1000,
+          "damage": 1,
+          "params": { "count": 20, "rotationSpeed": 5 }
+        }
+      ]
+    }
+  ],
+  "visual": {
+    "type": "custom",
+    "color": "#ffaa00",
+    "size": 80,
+    "glow": true
+  },
+  "codexEntry": "A paradox made manifest. Five sides, five dimensions, infinite bananas. Some say it represents the monkey's ultimate potential. Others say it's just really weird.",
+  "defeatUnlocks": ["sector4_black_projects"]
+}

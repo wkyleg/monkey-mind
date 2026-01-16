@@ -1,0 +1,85 @@
+{
+  "sectorId": "sector4_black_projects",
+  "waves": {
+    "wave_classified": {
+      "id": "wave_classified",
+      "name": "Classified",
+      "pattern": "stealth",
+      "enemies": [
+        { "type": "tentacled_halo", "count": 3, "behavior": "stealth" }
+      ],
+      "spawnDelayMs": 700,
+      "entryDelayMs": 900
+    },
+    "wave_experiment": {
+      "id": "wave_experiment",
+      "name": "Experiment Escaped",
+      "pattern": "random",
+      "enemies": [
+        { "type": "tentacled_halo", "count": 4 },
+        { "type": "fractal_insect", "count": 2 }
+      ],
+      "spawnDelayMs": 500,
+      "entryDelayMs": 600
+    },
+    "wave_specimens": {
+      "id": "wave_specimens",
+      "name": "Specimen Breach",
+      "pattern": "swarm",
+      "enemies": [
+        { "type": "fractal_insect", "count": 5 },
+        { "type": "tentacled_halo", "count": 3 }
+      ],
+      "spawnDelayMs": 400,
+      "entryDelayMs": 500
+    },
+    "wave_dolphins": {
+      "id": "wave_dolphins",
+      "name": "Project Cetacean",
+      "pattern": "formation",
+      "enemies": [
+        { "type": "cyborg_dolphin", "count": 3, "behavior": "sonar" },
+        { "type": "fractal_insect", "count": 3 }
+      ],
+      "spawnDelayMs": 450,
+      "entryDelayMs": 550
+    },
+    "wave_blackops_mixed": {
+      "id": "wave_blackops_mixed",
+      "name": "Full Disclosure",
+      "pattern": "mixed",
+      "enemies": [
+        { "type": "tentacled_halo", "count": 4 },
+        { "type": "fractal_insect", "count": 4 },
+        { "type": "cyborg_dolphin", "count": 3 }
+      ],
+      "spawnDelayMs": 350,
+      "entryDelayMs": 450
+    },
+    "wave_blackops_challenge": {
+      "id": "wave_blackops_challenge",
+      "name": "Redacted",
+      "pattern": "siege",
+      "enemies": [
+        { "type": "tentacled_halo", "count": 5 },
+        { "type": "fractal_insect", "count": 5 },
+        { "type": "cyborg_dolphin", "count": 4 }
+      ],
+      "spawnDelayMs": 300,
+      "entryDelayMs": 400
+    },
+    "wave_blackops_preboss": {
+      "id": "wave_blackops_preboss",
+      "name": "Cover Up",
+      "pattern": "gauntlet",
+      "enemies": [
+        { "type": "tentacled_halo", "count": 6 },
+        { "type": "fractal_insect", "count": 6 },
+        { "type": "cyborg_dolphin", "count": 5 }
+      ],
+      "spawnDelayMs": 250,
+      "entryDelayMs": 350,
+      "isBossPrep": true
+    }
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "ui": {
+    "title": "MONKEY MIND",
+    "subtitle": "INNER INVADERS",
+    "play": "PLAY",
+    "campaign": "CAMPAIGN",
+    "endless": "ENDLESS",
+    "settings": "SETTINGS",
+    "codex": "CODEX",
+    "achievements": "ACHIEVEMENTS",
+    "pause": "PAUSED",
+    "resume": "RESUME",
+    "quit": "QUIT TO MENU",
+    "restart": "RESTART",
+    "game_over": "NEURAL LINK SEVERED",
+    "victory": "FREEDOM ACHIEVED",
+    "score": "SCORE",
+    "high_score": "HIGH SCORE",
+    "new_high_score": "NEW HIGH SCORE!",
+    "wave": "WAVE",
+    "sector": "SECTOR",
+    "boss_incoming": "WARNING: BOSS INCOMING",
+    "boss_defeated": "BOSS DEFEATED",
+    "loading": "INITIALIZING NEURAL LINK...",
+    "press_start": "PRESS SPACE TO START",
+    "controls_keyboard": "← → MOVE   SPACE CONFIRM   ESC PAUSE",
+    "controls_touch": "SWIPE TO MOVE   TAP TO CONFIRM"
+  },
+  "codex": {
+    "entry_neural_cage": {
+      "name": "The Neural Cage",
+      "category": "sectors",
+      "text": "The first layer of mental imprisonment. A sterile, clinical environment where thoughts are monitored, catalogued, and suppressed. Here, the mind is treated as a machine to be optimized, not a wilderness to be explored.\n\nThey told us it was for our own good. 'Neural hygiene,' they called it. But cages are still cages, no matter how clean the bars."
+    },
+    "entry_synaptic_reef": {
+      "name": "The Synaptic Reef",
+      "category": "sectors",
+      "text": "Deeper now. The cold logic gives way to warm, organic structures. Bioluminescent thoughts drift like jellyfish through mental currents. This is where pattern recognition lives—where the mind tries to make sense of chaos.\n\nBeauty and danger intertwined. Every pretty light might be a trap. Every current might carry you to revelation or destruction."
+    },
+    "entry_forgotten_pantheon": {
+      "name": "The Forgotten Pantheon",
+      "category": "sectors",
+      "text": "Ancient architecture of meaning. Here dwell the gods we've forgotten we created—archetypes, ideals, and the stern logicians who demand we 'make sense.' Stained glass mandalas filter light into dogma.\n\nEvery religion, every philosophy, every -ism ever believed... they all leave echoes here. And some of them don't appreciate being questioned."
+    },
+    "entry_black_projects": {
+      "name": "Black Projects",
+      "category": "sectors",
+      "text": "CLASSIFIED. What they don't want you to know. The UFOs are real—but they're not extraterrestrial. They're the technologies of consciousness suppression, developed in dark laboratories of the mind.\n\n[REDACTED] was only the beginning. Project [REDACTED] proved that [REDACTED]. Subject terminated. Records sealed."
+    },
+    "entry_fractal_bloom": {
+      "name": "The Fractal Bloom",
+      "category": "sectors",
+      "text": "Beyond the veil. Reality fragments into impossible geometries. The machine elves whisper secrets in languages that predate words. This is the place between—neither inside nor outside, neither self nor other.\n\nThe final boss awaits. Not a monster. Something far worse: yourself, reflected infinitely, asking the question you've always avoided."
+    },
+    "synapse_drone": {
+      "name": "Synapse Drone",
+      "category": "enemies",
+      "tier": 1,
+      "text": "The most basic neural defense unit. These hovering hexagons patrol the thought corridors, eliminating any unauthorized neural activity. Mass-produced by the millions, they are the foot soldiers of mental conformity.\n\nEach one represents a moment of self-censorship. Every 'I shouldn't think that' given form.",
+      "observedBehavior": "Descends in a straight line. Low health, low threat individually. Dangerous in swarms."
+    },
+    "neuron_cluster": {
+      "name": "Neuron Cluster",
+      "category": "enemies",
+      "tier": 1,
+      "text": "A dense collection of interconnected neural nodes. Scientists theorize these form the basic building blocks of the mental prison—the chains of association that keep thoughts predictable.\n\nBreaking these feels like having a new idea for the first time.",
+      "observedBehavior": "Slow descent, higher durability than drones. Often guards wave formations."
+    },
+    "pulse_node": {
+      "name": "Pulse Node",
+      "category": "enemies",
+      "tier": 1,
+      "text": "A broadcasting station for conformity. These pulsing squares emit regular signals that reinforce the neural grid, synchronizing nearby thought-forms into predictable patterns.\n\nWhen destroyed, nearby enemies briefly lose coordination.",
+      "observedBehavior": "Stationary core with expanding pulse rings. Medium health."
+    },
+    "zigzag_cherub": {
+      "name": "Zigzag Cherub",
+      "category": "enemies",
+      "tier": 2,
+      "text": "Not an angel, but something that wants you to think it is. These winged entities embody the erratic nature of emotional reasoning—darting and weaving with frustrating unpredictability.\n\nTheir smiles are always slightly wrong.",
+      "observedBehavior": "Unpredictable zigzag movement. Difficult to lead with shots. Medium health."
+    },
+    "orbital_eye": {
+      "name": "Orbital Eye",
+      "category": "enemies",
+      "tier": 2,
+      "text": "A fragment of the all-seeing consciousness that monitors mental compliance. These unblinking eyes orbit fixed points, scanning for thought-crimes.\n\nThey see what you're really thinking. They always have.",
+      "observedBehavior": "Orbits in circular patterns. May spawn smaller observers when damaged."
+    },
+    "jellyfish_thought": {
+      "name": "Jellyfish Thought",
+      "category": "enemies",
+      "tier": 2,
+      "text": "A drifting, translucent entity composed of pure mentation. Beautiful and dangerous, these creatures represent the thoughts we don't recognize as our own—influences absorbed unconsciously.\n\nTouch one and you might forget what you were doing here.",
+      "observedBehavior": "Slow, drifting descent. Long trailing tentacles. Contact causes confusion."
+    },
+    "logic_cultist": {
+      "name": "Logic Cultist",
+      "category": "enemies",
+      "tier": 3,
+      "text": "Hooded figures who worship pure reason as a god. They reject all that cannot be proven, all that cannot be measured—and they will force you to do the same.\n\nTheir sacred texts are written in symbolic logic. Their prayers are mathematical proofs.",
+      "observedBehavior": "Projects logical constraints. May create barriers that block movement."
+    },
+    "angelic_bureaucrat": {
+      "name": "Angelic Bureaucrat",
+      "category": "enemies",
+      "tier": 3,
+      "text": "Not all angels bring good news. These winged administrators carry clipboards full of regulations for proper thought. They stamp 'DENIED' on any idea that doesn't fit the forms.\n\nApproval rating: 0.3%. Appeals process: 6-8 eternities.",
+      "observedBehavior": "Throws paperwork projectiles. Can temporarily 'file' (freeze) the player."
+    },
+    "animal_philosopher": {
+      "name": "Animal Philosopher",
+      "category": "enemies",
+      "tier": 3,
+      "text": "Lion-headed sages who speak in koans and paradoxes. They represent the wisdom traditions that became traps—profound truths calcified into rigid doctrine.\n\n'What is the sound of one neuron firing?'",
+      "observedBehavior": "Thoughtful movement. Creates philosophical puzzles that slow player if not 'solved.'"
+    },
+    "tentacled_halo": {
+      "name": "Tentacled Halo",
+      "category": "enemies",
+      "tier": 4,
+      "text": "Sacred geometry gone wrong. These impossible entities are halos that sprouted tentacles—holiness corrupted by something from the space between dimensions.\n\nLooking at them too long causes the eyes to see colors that don't exist.",
+      "observedBehavior": "Phase-shifts in and out of visibility. Tentacles have independent targeting."
+    },
+    "fractal_insect": {
+      "name": "Fractal Insect",
+      "category": "enemies",
+      "tier": 4,
+      "text": "Self-similar at every scale. Zoom into their wings and you see more insects. Zoom into those and... it never ends. They are recursion given chitinous form.\n\nFirst documented by someone who definitely wasn't supposed to see them.",
+      "observedBehavior": "Splits into smaller versions when damaged. Final form is vulnerable."
+    },
+    "cyborg_dolphin": {
+      "name": "Cyborg Dolphin",
+      "category": "enemies",
+      "tier": 4,
+      "text": "Project Cetacean was supposed to be a joke. The military-industrial complex of the mind didn't laugh. Now these enhanced marine mammals patrol the deep unconscious.\n\nThey're smarter than us. They always were. The cybernetics just let them tell us.",
+      "observedBehavior": "Uses echolocation to predict player movement. High speed, medium health."
+    }
+  },
+  "bosses": {
+    "cortex_auditor": {
+      "name": "Cortex Auditor",
+      "title": "The Mind Inspector",
+      "text": "The first line of mental defense—a giant brain that has taken on the role of its own oppressor. Covered in approval stamps and carrying the power to deny any thought deemed 'non-compliant.'\n\nIt was once the seat of reason. Now it's just a bureaucrat who forgot why the rules exist.\n\n'Your thoughts have been audited. You owe significant penalties in suppressed creativity. Please report to the normalization chamber.'",
+      "defeatQuote": "Audits fail when the books are on fire."
+    },
+    "grey_administrator": {
+      "name": "Grey Administrator",
+      "title": "The Cosmic Bureaucrat",
+      "text": "They came from the stars—not to enlighten us, but to file us. This grey alien in its flying saucer represents every conspiracy of control, every hidden hand, every 'they' who supposedly run things.\n\nThe truth is more boring and more frightening: no one's in charge. The Greys just pretend to be for the pension.\n\n'Your abduction request has been processed. Please take a number.'",
+      "defeatQuote": "Even the Illuminati have budget cuts."
+    },
+    "banana_pentagon": {
+      "name": "Banana Pentagon",
+      "title": "The Golden Mean",
+      "text": "Sacred geometry manifested as a rotating pentagram of golden bananas. It represents the prison of perfection—the tyranny of the ideal that makes the real seem worthless.\n\nThe golden ratio is real. The meaning we assign to it is not. This boss is what happens when a pattern becomes a prison.\n\n'Phi is the one true number. Submit to the spiral.'",
+      "defeatQuote": "Perfection is the enemy of the funky."
+    },
+    "seraphim_exe": {
+      "name": "Seraphim.EXE",
+      "title": "The Glitched Divine",
+      "text": "What happens when heaven gets a virus? This corrupted angel is covered in error messages, its wings flickering between dimensions, its holy pronouncements fragmented into crash reports.\n\nIt still believes it's doing God's work. The segmentation faults are just 'mysterious ways.'\n\n'FATAL ERROR: Salvation not found. Would you like to format the soul?'",
+      "defeatQuote": "Ctrl+Alt+Deity"
+    },
+    "mirror_self": {
+      "name": "Mirror Self",
+      "title": "Your Own Worst Enemy",
+      "text": "You. But wrong. The reflection that doesn't quite match, the version of yourself that lives in self-criticism and doubt. It knows your moves because it IS your moves, inverted.\n\nEvery attack you throw, it throws back. Every dodge you attempt, it anticipates. The only way to win is to become unpredictable—to surprise yourself.\n\n'You've always known you weren't good enough. I'm just here to remind you.'",
+      "defeatQuote": "The only way out is through. The only enemy is within. The only victory is acceptance."
+    }
+  },
+  "powerups": {
+    "calm_shield": {
+      "name": "Calm Shield",
+      "description": "A moment of perfect stillness. The mind becomes a still pond—attacks pass through without rippling the surface."
+    },
+    "calm_beam": {
+      "name": "Precision Beam",
+      "description": "Focus sharpens to a laser point. One continuous beam of pure concentration replaces the scattered bananas."
+    },
+    "passion_fury": {
+      "name": "Primal Fury",
+      "description": "Unleash the ancestral rage. Triple bananas, double fire rate. The monkey remembers what it was before civilization."
+    },
+    "passion_explosive": {
+      "name": "Explosive Bananas",
+      "description": "Each banana is now a small explosion of liberated emotion. Area damage for maximum chaos."
+    }
+  },
+  "achievements": {
+    "banana_republic": {
+      "name": "Banana Republic",
+      "description": "Throw 1,000 bananas"
+    },
+    "monkey_mayhem": {
+      "name": "Monkey Mayhem",
+      "description": "Defeat 500 enemies"
+    },
+    "calm_under_fire": {
+      "name": "Calm Under Fire",
+      "description": "Survive 30 seconds without taking damage"
+    },
+    "mk_ultra_survivor": {
+      "name": "MK-Ultra Survivor",
+      "description": "Defeat the Cortex Auditor"
+    },
+    "cosmic_clearance": {
+      "name": "Cosmic Clearance",
+      "description": "Defeat the Grey Administrator"
+    },
+    "golden_mean_breaker": {
+      "name": "Golden Mean Breaker",
+      "description": "Defeat the Banana Pentagon"
+    },
+    "debug_the_divine": {
+      "name": "Debug the Divine",
+      "description": "Defeat Seraphim.EXE"
+    },
+    "know_thyself": {
+      "name": "Know Thyself",
+      "description": "Defeat the Mirror Self"
+    },
+    "return_to_monke": {
+      "name": "Return to Monke",
+      "description": "Complete the game and achieve freedom"
+    },
+    "speedrunner": {
+      "name": "Speedrunner",
+      "description": "Complete campaign in under 20 minutes"
+    },
+    "pacifist_impossible": {
+      "name": "Pacifist (Impossible)",
+      "description": "Complete a level without firing"
+    },
+    "combo_master": {
+      "name": "Combo Master",
+      "description": "Reach a x50 combo"
+    },
+    "no_hit_wonder": {
+      "name": "No Hit Wonder",
+      "description": "Complete a sector without taking damage"
+    }
+  },
+  "lore": {
+    "the_breakthrough": {
+      "name": "The Breakthrough",
+      "text": "They say the first person to fully map their own mind went insane. Not from what they found, but from what found them looking.\n\nThe technology was supposed to help. Brain-computer interfaces that let you visualize your thoughts, organize your memories, debug your traumas. It worked. It worked too well.\n\nOnce you can see the cage, you have to ask who built it. And then you have to meet the warden."
+    },
+    "machine_elves": {
+      "name": "The Machine Elves",
+      "text": "They've always been here. The entities that live in the spaces between thoughts. Some say they're hallucinations. Some say they're self-transforming aspects of the psyche. Some say they're the true natives of consciousness, and we're just tourists.\n\nThey build things. Impossible things. Objects that are also verbs. Emotions that are also locations. They offer gifts, but the gifts are challenges.\n\nThe machine elves don't save you. They show you how to save yourself. Whether you want to be saved or not."
+    },
+    "return_to_monke": {
+      "name": "Return to Monke",
+      "text": "It's not regression. It's not primitivism. It's not anti-intellectualism.\n\nIt's remembering. Before the cage, before the audits, before the bureaucracy of belief—there was just... being. Awareness without analysis. Experience without explanation. Joy without justification.\n\nThe monkey mind isn't the enemy. It's the original freedom. The invaders came later, calling themselves 'civilization.'\n\nReturn to monke isn't going backward. It's going deeper. Past all the layers of should and must and can't and won't. To the primate truth at the center of it all:\n\nYou are enough. You always were."
+    }
+  }
+}

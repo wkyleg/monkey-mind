@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Seraphim.EXE - Boss 4 (Glitching Digital Angel) -->
+  <defs>
+    <linearGradient id="angelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#eeeeff"/>
+      <stop offset="100%" stop-color="#aaaacc"/>
+    </linearGradient>
+    <linearGradient id="glitchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff0066"/>
+      <stop offset="50%" stop-color="#00ffff"/>
+      <stop offset="100%" stop-color="#00ff00"/>
+    </linearGradient>
+    <filter id="glitchFilter">
+      <feGaussianBlur stdDeviation="1" result="blur"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"/>
+    </filter>
+    <filter id="angelGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Halo (glitching) -->
+  <ellipse cx="64" cy="18" rx="20" ry="6" fill="none" stroke="#ffdd00" stroke-width="3" filter="url(#angelGlow)"/>
+  <!-- Glitch offset -->
+  <ellipse cx="66" cy="17" rx="20" ry="6" fill="none" stroke="#ff0066" stroke-width="1" opacity="0.5"/>
+  <ellipse cx="62" cy="19" rx="20" ry="6" fill="none" stroke="#00ffff" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Left wing (6 layers - seraphim style) -->
+  <g transform="translate(0,0)">
+    <path d="M32 44 Q8 30 4 50 Q8 70 32 60" fill="url(#angelGrad)" stroke="#aaaacc" stroke-width="1"/>
+    <path d="M28 48 Q10 38 8 52 Q10 66 28 58" fill="url(#angelGrad)" stroke="#aaaacc" stroke-width="0.5" opacity="0.8"/>
+    <path d="M24 52 Q14 46 12 54 Q14 62 24 56" fill="url(#angelGrad)" opacity="0.6"/>
+    <!-- Glitch fragments -->
+    <rect x="6" y="48" width="8" height="3" fill="#ff0066" opacity="0.6"/>
+    <rect x="14" y="54" width="6" height="2" fill="#00ffff" opacity="0.6"/>
+  </g>
+  
+  <!-- Right wing -->
+  <g transform="translate(0,0)">
+    <path d="M96 44 Q120 30 124 50 Q120 70 96 60" fill="url(#angelGrad)" stroke="#aaaacc" stroke-width="1"/>
+    <path d="M100 48 Q118 38 120 52 Q118 66 100 58" fill="url(#angelGrad)" stroke="#aaaacc" stroke-width="0.5" opacity="0.8"/>
+    <path d="M104 52 Q114 46 116 54 Q114 62 104 56" fill="url(#angelGrad)" opacity="0.6"/>
+    <!-- Glitch fragments -->
+    <rect x="114" y="46" width="8" height="3" fill="#00ff00" opacity="0.6"/>
+    <rect x="108" y="56" width="6" height="2" fill="#ff0066" opacity="0.6"/>
+  </g>
+  
+  <!-- Lower wings (covering face - seraphim) -->
+  <path d="M44 70 Q30 86 44 102 Q58 90 64 102 Q70 90 84 102 Q98 86 84 70" 
+        fill="url(#angelGrad)" stroke="#aaaacc" stroke-width="1" opacity="0.9"/>
+  
+  <!-- Face (serene but glitching) -->
+  <ellipse cx="64" cy="52" rx="18" ry="22" fill="#ffe4d4" stroke="#ddccbb" stroke-width="1"/>
+  
+  <!-- Eyes (holy light, glitching) -->
+  <ellipse cx="56" cy="48" rx="5" ry="4" fill="#ffffff" filter="url(#angelGlow)"/>
+  <ellipse cx="72" cy="48" rx="5" ry="4" fill="#ffffff" filter="url(#angelGlow)"/>
+  <!-- Glitch eye offset -->
+  <ellipse cx="57" cy="47" rx="4" ry="3" fill="#ff0066" opacity="0.3"/>
+  <ellipse cx="71" cy="49" rx="4" ry="3" fill="#00ffff" opacity="0.3"/>
+  
+  <!-- Mouth (speaking in tongues) -->
+  <path d="M58 60 Q64 64 70 60" stroke="#aa8888" stroke-width="1" fill="none"/>
+  
+  <!-- Binary/error messages floating -->
+  <text x="20" y="30" font-size="5" fill="#00ff00" opacity="0.7" font-family="monospace">01101000</text>
+  <text x="90" y="24" font-size="5" fill="#ff0066" opacity="0.7" font-family="monospace">ERROR</text>
+  <text x="14" y="90" font-size="4" fill="#00ffff" opacity="0.6" font-family="monospace">FATAL</text>
+  <text x="96" y="86" font-size="4" fill="#ffff00" opacity="0.6" font-family="monospace">0xDEAD</text>
+  
+  <!-- Error messages as attacks -->
+  <g transform="translate(30, 110)">
+    <rect x="0" y="0" width="68" height="14" fill="#aa0000" stroke="#ff0000" stroke-width="1" rx="2"/>
+    <text x="34" y="10" font-size="6" fill="#ffffff" text-anchor="middle" font-family="monospace">SYSTEM FAILURE</text>
+  </g>
+  
+  <!-- Scan lines (CRT effect) -->
+  <line x1="0" y1="40" x2="128" y2="40" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+  <line x1="0" y1="60" x2="128" y2="60" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+  <line x1="0" y1="80" x2="128" y2="80" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+  <line x1="0" y1="100" x2="128" y2="100" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 48" width="64" height="48">
+  <!-- Cyborg Dolphin - Tier 4 (Aberrations/DMT) -->
+  <defs>
+    <linearGradient id="dolphinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4488cc"/>
+      <stop offset="50%" stop-color="#66aaee"/>
+      <stop offset="100%" stop-color="#2266aa"/>
+    </linearGradient>
+    <linearGradient id="cyberGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ffaa"/>
+      <stop offset="50%" stop-color="#ffaa00"/>
+      <stop offset="100%" stop-color="#ff00aa"/>
+    </linearGradient>
+    <filter id="dolphinGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Sonar waves -->
+  <path d="M8 24 Q4 20 4 24 Q4 28 8 24" stroke="#00ffaa" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M6 24 Q0 18 0 24 Q0 30 6 24" stroke="#00ffaa" stroke-width="1" fill="none" opacity="0.3"/>
+  
+  <!-- Main body -->
+  <path d="M12 24 Q20 12 40 14 Q56 16 60 24 Q56 32 40 34 Q20 36 12 24 Z" 
+        fill="url(#dolphinGrad)" 
+        stroke="#3377aa" 
+        stroke-width="1"/>
+  
+  <!-- Cyber implants on body -->
+  <rect x="30" y="18" width="12" height="8" rx="1" fill="#1a1a2e" stroke="#00ffaa" stroke-width="1"/>
+  <line x1="32" y1="20" x2="32" y2="24" stroke="#00ffaa" stroke-width="0.5"/>
+  <line x1="35" y1="20" x2="35" y2="24" stroke="#ffaa00" stroke-width="0.5"/>
+  <line x1="38" y1="20" x2="38" y2="24" stroke="#ff00aa" stroke-width="0.5"/>
+  
+  <!-- Dorsal fin (cyber-enhanced) -->
+  <path d="M34 14 L38 4 L42 14" fill="#3377aa" stroke="#00ffaa" stroke-width="1"/>
+  <line x1="38" y1="6" x2="38" y2="12" stroke="#00ffaa" stroke-width="1" filter="url(#dolphinGlow)"/>
+  
+  <!-- Tail flukes -->
+  <path d="M56 24 L62 18 L60 24 L62 30 L56 24" 
+        fill="url(#dolphinGrad)" stroke="#3377aa" stroke-width="1"/>
+  
+  <!-- Cyber eye (replacing organic) -->
+  <circle cx="16" cy="22" r="5" fill="#1a1a2e" stroke="#00ffaa" stroke-width="1.5" filter="url(#dolphinGlow)"/>
+  <circle cx="16" cy="22" r="3" fill="#ff0066" filter="url(#dolphinGlow)"/>
+  <circle cx="16" cy="22" r="1.5" fill="#ffffff"/>
+  <!-- Targeting reticle -->
+  <line x1="16" y1="17" x2="16" y2="19" stroke="#00ffaa" stroke-width="0.5"/>
+  <line x1="16" y1="25" x2="16" y2="27" stroke="#00ffaa" stroke-width="0.5"/>
+  <line x1="11" y1="22" x2="13" y2="22" stroke="#00ffaa" stroke-width="0.5"/>
+  <line x1="19" y1="22" x2="21" y2="22" stroke="#00ffaa" stroke-width="0.5"/>
+  
+  <!-- Beak/Snout -->
+  <path d="M12 24 Q4 24 8 24" stroke="#4488cc" stroke-width="3" fill="none"/>
+  
+  <!-- Pectoral fin -->
+  <path d="M28 30 Q24 38 32 36 Q36 34 32 30" fill="#3377aa" stroke="#2266aa" stroke-width="0.5"/>
+  
+  <!-- Circuit traces along body -->
+  <path d="M20 22 L24 22 L26 20 L28 24" stroke="url(#cyberGrad)" stroke-width="1" fill="none" filter="url(#dolphinGlow)"/>
+  <path d="M44 22 L48 20 L52 22" stroke="url(#cyberGrad)" stroke-width="1" fill="none" filter="url(#dolphinGlow)"/>
+  
+  <!-- Data readout -->
+  <text x="46" y="30" font-size="4" fill="#00ffaa" opacity="0.8">EEE-eee</text>
+</svg>
