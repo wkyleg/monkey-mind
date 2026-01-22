@@ -6,7 +6,7 @@
 
 import { storage } from '../core/storage';
 
-type SectorMood = 'neural' | 'reef' | 'pantheon' | 'projects' | 'bloom' | 'boss';
+type SectorMood = 'neural' | 'reef' | 'pantheon' | 'projects' | 'bloom' | 'boss' | 'menu' | 'intro';
 
 interface MusicParams {
   tempo: number;
@@ -94,6 +94,30 @@ const SECTOR_PARAMS: Record<SectorMood, MusicParams> = {
     noiseType: 'highpass',
     useReverb: false,
     distortionAmount: 0.6,
+  },
+  menu: {
+    tempo: 70,
+    bassFreq: 30,
+    padNote: 110,
+    droneNote: 27.5,
+    intensity: 0.15,
+    filterCutoff: 300,
+    detuneAmount: 15,
+    noiseType: 'lowpass',
+    useReverb: true,
+    distortionAmount: 0.05,
+  },
+  intro: {
+    tempo: 60,
+    bassFreq: 25,
+    padNote: 82.4,
+    droneNote: 41.2,
+    intensity: 0.1,
+    filterCutoff: 200,
+    detuneAmount: 20,
+    noiseType: 'lowpass',
+    useReverb: true,
+    distortionAmount: 0.02,
   },
 };
 
@@ -289,6 +313,36 @@ export class ProceduralMusic {
     this.params = SECTOR_PARAMS.boss;
     this.beatInterval = 60 / this.params.tempo;
     this.targetIntensity = 1.0;
+    this.inBreakdown = false;
+    
+    if (this.playing) {
+      this.updateOscillators();
+    }
+  }
+  
+  /**
+   * Set menu mood - slower, atmospheric ambient
+   */
+  setMenuMood(): void {
+    this.mood = 'menu';
+    this.params = SECTOR_PARAMS.menu;
+    this.beatInterval = 60 / this.params.tempo;
+    this.targetIntensity = 0.2;
+    this.inBreakdown = false;
+    
+    if (this.playing) {
+      this.updateOscillators();
+    }
+  }
+  
+  /**
+   * Set intro/story mood - very slow, minimal, atmospheric
+   */
+  setIntroMood(): void {
+    this.mood = 'intro';
+    this.params = SECTOR_PARAMS.intro;
+    this.beatInterval = 60 / this.params.tempo;
+    this.targetIntensity = 0.1;
     this.inBreakdown = false;
     
     if (this.playing) {

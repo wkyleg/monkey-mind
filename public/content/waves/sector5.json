@@ -7,7 +7,8 @@
       "pattern": "spiral",
       "enemies": [
         { "type": "tentacled_halo", "count": 3, "behavior": "phase" },
-        { "type": "fractal_insect", "count": 3, "behavior": "fractal" }
+        { "type": "fractal_insect", "count": 3, "behavior": "fractal" },
+        { "type": "machine_elf", "count": 1, "behavior": "teleport" }
       ],
       "spawnDelayMs": 600,
       "entryDelayMs": 800
@@ -17,9 +18,9 @@
       "name": "Entity Contact",
       "pattern": "emergence",
       "enemies": [
-        { "type": "tentacled_halo", "count": 4 },
-        { "type": "cyborg_dolphin", "count": 3 },
-        { "type": "fractal_insect", "count": 4 }
+        { "type": "machine_elf", "count": 2 },
+        { "type": "tentacled_halo", "count": 3 },
+        { "type": "impossible_shape", "count": 2 }
       ],
       "spawnDelayMs": 450,
       "entryDelayMs": 550
@@ -29,8 +30,9 @@
       "name": "Sacred Geometry",
       "pattern": "mandala",
       "enemies": [
-        { "type": "fractal_insect", "count": 6, "behavior": "geometric" },
-        { "type": "tentacled_halo", "count": 4 }
+        { "type": "impossible_shape", "count": 4, "behavior": "geometric" },
+        { "type": "fractal_insect", "count": 4 },
+        { "type": "machine_elf", "count": 2 }
       ],
       "spawnDelayMs": 400,
       "entryDelayMs": 500
@@ -40,21 +42,33 @@
       "name": "Hyperspace",
       "pattern": "chaos",
       "enemies": [
-        { "type": "tentacled_halo", "count": 5 },
-        { "type": "fractal_insect", "count": 5 },
-        { "type": "cyborg_dolphin", "count": 4 }
+        { "type": "machine_elf", "count": 3 },
+        { "type": "impossible_shape", "count": 3 },
+        { "type": "ego_fragment", "count": 4 }
       ],
       "spawnDelayMs": 350,
       "entryDelayMs": 450
+    },
+    "wave_ego_storm": {
+      "id": "wave_ego_storm",
+      "name": "Ego Storm",
+      "pattern": "mirror",
+      "enemies": [
+        { "type": "ego_fragment", "count": 6, "behavior": "mirror" },
+        { "type": "machine_elf", "count": 2 }
+      ],
+      "spawnDelayMs": 400,
+      "entryDelayMs": 500
     },
     "wave_fractal_challenge": {
       "id": "wave_fractal_challenge",
       "name": "Reality Collapse",
       "pattern": "dimensional",
       "enemies": [
-        { "type": "tentacled_halo", "count": 6 },
-        { "type": "fractal_insect", "count": 6 },
-        { "type": "cyborg_dolphin", "count": 5 }
+        { "type": "machine_elf", "count": 3 },
+        { "type": "impossible_shape", "count": 4 },
+        { "type": "ego_fragment", "count": 5 },
+        { "type": "tentacled_halo", "count": 3 }
       ],
       "spawnDelayMs": 300,
       "entryDelayMs": 400
@@ -64,9 +78,10 @@
       "name": "Ego Death",
       "pattern": "gauntlet",
       "enemies": [
-        { "type": "tentacled_halo", "count": 8 },
-        { "type": "fractal_insect", "count": 8 },
-        { "type": "cyborg_dolphin", "count": 6 }
+        { "type": "machine_elf", "count": 4 },
+        { "type": "impossible_shape", "count": 4 },
+        { "type": "ego_fragment", "count": 6 },
+        { "type": "fractal_insect", "count": 4 }
       ],
       "spawnDelayMs": 200,
       "entryDelayMs": 300,

@@ -24,6 +24,7 @@ import { LevelStoryScene } from '../scenes/levelStoryScene';
 import { LevelSelectScene } from '../scenes/levelSelectScene';
 import { CONFIG } from '../config';
 import { contentLoader } from '../content/loader';
+import { svgAssets } from './svgAssets';
 
 export class Game {
   private readonly canvas: HTMLCanvasElement;
@@ -51,6 +52,9 @@ export class Game {
     
     // Load content
     await contentLoader.loadAll();
+    
+    // Preload SVG assets
+    await svgAssets.preloadAll();
     
     // Initialize subsystems
     this.input.init();

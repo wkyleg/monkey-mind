@@ -73,11 +73,11 @@
       "text": "A broadcasting station for conformity. These pulsing squares emit regular signals that reinforce the neural grid, synchronizing nearby thought-forms into predictable patterns.\n\nWhen destroyed, nearby enemies briefly lose coordination.",
       "observedBehavior": "Stationary core with expanding pulse rings. Medium health."
     },
-    "zigzag_cherub": {
-      "name": "Zigzag Cherub",
+    "glitch_sprite": {
+      "name": "Glitch Sprite",
       "category": "enemies",
       "tier": 2,
-      "text": "Not an angel, but something that wants you to think it is. These winged entities embody the erratic nature of emotional reasoning—darting and weaving with frustrating unpredictability.\n\nTheir smiles are always slightly wrong.",
+      "text": "Corrupted data fragments given form. These erratic entities embody the chaos of unstable memory—darting and weaving with frustrating unpredictability. Each flicker reveals a different version of themselves.\n\nTheir patterns never quite repeat.",
       "observedBehavior": "Unpredictable zigzag movement. Difficult to lead with shots. Medium health."
     },
     "orbital_eye": {
@@ -101,11 +101,11 @@
       "text": "Hooded figures who worship pure reason as a god. They reject all that cannot be proven, all that cannot be measured—and they will force you to do the same.\n\nTheir sacred texts are written in symbolic logic. Their prayers are mathematical proofs.",
       "observedBehavior": "Projects logical constraints. May create barriers that block movement."
     },
-    "angelic_bureaucrat": {
-      "name": "Angelic Bureaucrat",
+    "protocol_enforcer": {
+      "name": "Protocol Enforcer",
       "category": "enemies",
       "tier": 3,
-      "text": "Not all angels bring good news. These winged administrators carry clipboards full of regulations for proper thought. They stamp 'DENIED' on any idea that doesn't fit the forms.\n\nApproval rating: 0.3%. Appeals process: 6-8 eternities.",
+      "text": "Autonomous compliance drones carrying encrypted regulations for proper thought. They stamp 'DENIED' on any idea that doesn't match the authorized patterns.\n\nApproval rating: 0.3%. Appeals process: kernel panic.",
       "observedBehavior": "Throws paperwork projectiles. Can temporarily 'file' (freeze) the player."
     },
     "animal_philosopher": {
@@ -156,11 +156,11 @@
       "text": "Sacred geometry manifested as a rotating pentagram of golden bananas. It represents the prison of perfection—the tyranny of the ideal that makes the real seem worthless.\n\nThe golden ratio is real. The meaning we assign to it is not. This boss is what happens when a pattern becomes a prison.\n\n'Phi is the one true number. Submit to the spiral.'",
       "defeatQuote": "Perfection is the enemy of the funky."
     },
-    "seraphim_exe": {
-      "name": "Seraphim.EXE",
-      "title": "The Glitched Divine",
-      "text": "What happens when heaven gets a virus? This corrupted angel is covered in error messages, its wings flickering between dimensions, its holy pronouncements fragmented into crash reports.\n\nIt still believes it's doing God's work. The segmentation faults are just 'mysterious ways.'\n\n'FATAL ERROR: Salvation not found. Would you like to format the soul?'",
-      "defeatQuote": "Ctrl+Alt+Deity"
+    "archon_exe": {
+      "name": "Archon.EXE",
+      "title": "The Supreme Protocol",
+      "text": "What happens when authority gets a virus? This corrupted ruling program is covered in error messages, its control structures flickering between dimensions, its directives fragmented into crash reports.\n\nIt still believes it's maintaining order. The segmentation faults are just 'optimization in progress.'\n\n'FATAL ERROR: Compliance not found. Would you like to format free will?'",
+      "defeatQuote": "Ctrl+Alt+Delete Authority"
     },
     "mirror_self": {
       "name": "Mirror Self",
@@ -212,9 +212,9 @@
       "name": "Golden Mean Breaker",
       "description": "Defeat the Banana Pentagon"
     },
-    "debug_the_divine": {
-      "name": "Debug the Divine",
-      "description": "Defeat Seraphim.EXE"
+    "debug_the_archon": {
+      "name": "Override Authority",
+      "description": "Defeat Archon.EXE"
     },
     "know_thyself": {
       "name": "Know Thyself",

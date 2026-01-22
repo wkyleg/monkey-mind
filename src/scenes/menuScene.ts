@@ -48,6 +48,11 @@ export class MenuScene extends Scene {
     this.time = 0;
     this.fadeIn = 0;
     this.menuOffset = 50;
+    
+    // Stop any playing music first, then start menu ambient music
+    this.game.getMusic().stop();
+    this.game.getMusic().setMenuMood();
+    this.game.getMusic().start();
   }
   
   exit(): void {
@@ -138,9 +143,10 @@ export class MenuScene extends Scene {
       15
     );
     
-    // Menu items
-    const menuStartY = height * 0.55;
-    const menuSpacing = 50;
+    // Menu items - dynamic spacing based on screen height
+    const menuStartY = height * 0.50;
+    const availableHeight = height * 0.38; // Space for menu items
+    const menuSpacing = Math.max(38, Math.min(50, availableHeight / this.menuItems.length));
     
     this.menuItems.forEach((item, index) => {
       const y = menuStartY + index * menuSpacing + this.menuOffset;

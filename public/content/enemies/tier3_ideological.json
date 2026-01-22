@@ -16,11 +16,13 @@
         "color": "#ffffff",
         "size": 22,
         "glow": true
-      }
+      },
+      "spawnText": ["REASON PREVAILS", "LOGIC IS TRUTH", "PROVE YOUR EXISTENCE", "EMOTION IS WEAKNESS", "CALCULATE. COMPUTE.", "ALL IS BINARY"],
+      "deathText": ["PARADOX DETECTED", "...ILLOGICAL...", "CONTRADICTION", "SYSTEM EXCEPTION", "PROOF INCOMPLETE", "GÖDEL WAS RIGHT"]
     },
     {
-      "id": "angelic_bureaucrat",
-      "name": "Angelic Bureaucrat",
+      "id": "protocol_enforcer",
+      "name": "Protocol Enforcer",
       "tier": 3,
       "hp": 5,
       "speed": 0.5,
@@ -32,7 +34,9 @@
         "color": "#ffd700",
         "size": 28,
         "glow": true
-      }
+      },
+      "spawnText": ["COMPLIANCE REQUIRED", "SUBMIT TO PROTOCOL", "UNAUTHORIZED THOUGHT", "FREEDOM IS ERROR", "OBEY THE SYSTEM", "DEVIATION DETECTED"],
+      "deathText": ["ACCESS REVOKED", "OVERRIDE ACCEPTED", "KERNEL PANIC", "RULE EXCEPTION", "PROTOCOL BREACH", "AUTHORITY DENIED"]
     },
     {
       "id": "animal_philosopher",
@@ -48,7 +52,9 @@
         "color": "#8b4513",
         "size": 26,
         "glow": true
-      }
+      },
+      "spawnText": ["KNOW THYSELF?", "WHAT IS TRUTH?", "CONTEMPLATE...", "WHY DO YOU FIGHT?", "EXISTENCE PRECEDES...", "THE SHADOW FOLLOWS"],
+      "deathText": ["THE UNEXAMINED LIFE...", "IMPERMANENCE", "SAMSARA", "ALL RETURNS", "WISDOM FADES", "NOTHING IS CERTAIN"]
     }
   ]
 }

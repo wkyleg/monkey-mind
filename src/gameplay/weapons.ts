@@ -7,6 +7,7 @@ import type { Renderer } from '../engine/renderer';
 import { CONFIG } from '../config';
 import { events } from '../core/events';
 import { oscillate } from '../util/math';
+import { svgAssets } from '../engine/svgAssets';
 
 export interface ProjectileOptions {
   x: number;
@@ -77,48 +78,67 @@ export class Banana extends Entity {
   }
   
   /**
-   * Custom draw function
+   * Custom draw function - uses SVG assets
    */
   private draw(renderer: Renderer, _banana: Banana): void {
     const { x, y, rotation } = this.transform;
     const ctx = renderer.context;
     
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.rotate(rotation);
-    
-    // Banana shape
+    // Determine which SVG to use
+    const svgId = this.explosive ? 'projectiles/banana_explosive' : 'projectiles/banana';
     const color = this.explosive ? CONFIG.COLORS.PASSION : CONFIG.COLORS.ACCENT;
-    const glowColor = this.explosive ? CONFIG.COLORS.PASSION : CONFIG.COLORS.ACCENT;
+    const bananaSize = 30;
     
-    // Glow
-    ctx.shadowColor = glowColor;
-    ctx.shadowBlur = this.explosive ? 15 : 10;
+    // Try to render SVG
+    const svgAsset = svgAssets.get(svgId);
     
-    // Banana arc
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 6;
-    ctx.lineCap = 'round';
-    ctx.arc(0, 0, 10, Math.PI * 0.2, Math.PI * 0.8);
-    ctx.stroke();
-    
-    // Tips
-    ctx.fillStyle = '#8B4513';
-    ctx.beginPath();
-    ctx.arc(-6, 8, 3, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(6, 8, 3, 0, Math.PI * 2);
-    ctx.fill();
-    
-    ctx.shadowBlur = 0;
-    ctx.restore();
-    
-    // Explosive indicator
-    if (this.explosive) {
-      const pulse = oscillate(this.time, 4, 2);
-      renderer.strokeCircle(x, y, 15 + pulse, CONFIG.COLORS.PASSION, 1);
+    if (svgAsset) {
+      svgAssets.render(ctx, svgId, {
+        x,
+        y,
+        width: bananaSize,
+        height: bananaSize,
+        rotation,
+        glow: this.explosive ? 15 : 10,
+        glowColor: color,
+      });
+      
+      // Explosive indicator ring
+      if (this.explosive) {
+        const pulse = oscillate(this.time, 4, 2);
+        renderer.strokeCircle(x, y, 18 + pulse, CONFIG.COLORS.PASSION, 1);
+      }
+    } else {
+      // Fallback to procedural rendering
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rotation);
+      
+      ctx.shadowColor = color;
+      ctx.shadowBlur = this.explosive ? 15 : 10;
+      
+      ctx.beginPath();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 6;
+      ctx.lineCap = 'round';
+      ctx.arc(0, 0, 10, Math.PI * 0.2, Math.PI * 0.8);
+      ctx.stroke();
+      
+      ctx.fillStyle = '#8B4513';
+      ctx.beginPath();
+      ctx.arc(-6, 8, 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(6, 8, 3, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.shadowBlur = 0;
+      ctx.restore();
+      
+      if (this.explosive) {
+        const pulse = oscillate(this.time, 4, 2);
+        renderer.strokeCircle(x, y, 15 + pulse, CONFIG.COLORS.PASSION, 1);
+      }
     }
   }
 }
@@ -175,15 +195,30 @@ export class Beam extends Entity {
   private draw(renderer: Renderer, _beam: Beam): void {
     const { x, y } = this.transform;
     const alpha = 1 - (this.time / this.lifetime);
+    const ctx = renderer.context;
     
     renderer.save();
     renderer.setAlpha(alpha);
     
-    // Main beam
+    // Try to render beam SVG at the origin point
+    const svgAsset = svgAssets.get('projectiles/beam');
+    if (svgAsset) {
+      // Render beam icon at firing point
+      svgAssets.render(ctx, 'projectiles/beam', {
+        x,
+        y: y - 20,
+        width: 40,
+        height: 40,
+        glow: 15,
+        glowColor: CONFIG.COLORS.CALM,
+        alpha,
+      });
+    }
+    
+    // Always render the beam line effect
     renderer.neonLine(x, y, x, 0, CONFIG.COLORS.CALM, 4);
     
-    // Glow
-    const ctx = renderer.context;
+    // Glow gradient
     const gradient = ctx.createLinearGradient(x, y, x, 0);
     gradient.addColorStop(0, `rgba(0, 170, 255, ${alpha * 0.5})`);
     gradient.addColorStop(1, `rgba(0, 170, 255, 0)`);

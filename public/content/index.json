@@ -10,13 +10,14 @@
     "enemies/tier1_reflex.json",
     "enemies/tier2_pattern.json",
     "enemies/tier3_ideological.json",
-    "enemies/tier4_aberrations.json"
+    "enemies/tier4_aberrations.json",
+    "enemies/tier5_transcendent.json"
   ],
   "bosses": [
     "bosses/cortex_auditor.json",
     "bosses/grey_administrator.json",
     "bosses/banana_pentagon.json",
-    "bosses/seraphim_exe.json",
+    "bosses/archon_exe.json",
     "bosses/mirror_self.json"
   ],
   "powerups": [

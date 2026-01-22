@@ -1,0 +1,60 @@
+{
+  "id": "tier5_transcendent",
+  "name": "Transcendent Enemies",
+  "enemies": [
+    {
+      "id": "machine_elf",
+      "name": "Machine Elf",
+      "tier": 5,
+      "hp": 6,
+      "speed": 1.0,
+      "behavior": "teleport",
+      "scoreValue": 100,
+      "dropTable": "legendary",
+      "visual": {
+        "type": "custom",
+        "color": "#ff00ff",
+        "size": 30,
+        "glow": true
+      },
+      "spawnText": ["WELCOME BACK", "WE'VE BEEN EXPECTING", "LOOK CLOSER", "LANGUAGE IS OBJECT", "BEHOLD THE LOGOS", "NOVELTY APPROACHES", "TIME IS ART", "THE PATTERN SPEAKS"],
+      "deathText": ["UNTIL NEXT TIME", "YOU ALREADY KNEW", "∞", "HYPERSPACE CLOSES", "THE CHRYSANTHEMUM FOLDS", "BACK TO BASELINE", "SEE YOU IN 5 GRAMS"]
+    },
+    {
+      "id": "impossible_shape",
+      "name": "Impossible Shape",
+      "tier": 5,
+      "hp": 5,
+      "speed": 0.6,
+      "behavior": "phase",
+      "scoreValue": 90,
+      "dropTable": "legendary",
+      "visual": {
+        "type": "custom",
+        "color": "#00ffaa",
+        "size": 35,
+        "glow": true
+      },
+      "spawnText": ["GEOMETRY DENIED", "DIMENSION BREACH", "CANNOT BE", "ESCHER WAS HERE", "FOURTH WALL? WHAT FOURTH WALL?", "OBSERVING CHANGES OUTCOME", "PENROSE TRIANGLE OPENS"],
+      "deathText": ["EUCLIDEAN RESTORED", "PARADOX COLLAPSED", "???", "REALITY REASSERTS", "PHYSICS RESTORED", "MEASUREMENT COLLAPSED WAVE", "THREE DIMENSIONS AGAIN"]
+    },
+    {
+      "id": "ego_fragment",
+      "name": "Ego Fragment",
+      "tier": 5,
+      "hp": 4,
+      "speed": 1.2,
+      "behavior": "mirror",
+      "scoreValue": 80,
+      "dropTable": "legendary",
+      "visual": {
+        "type": "custom",
+        "color": "#ffaa00",
+        "size": 25,
+        "glow": true
+      },
+      "spawnText": ["I AM YOU", "REMEMBER ME?", "DENIED SELF", "YOUR DARKEST THOUGHT", "THE PART YOU HIDE", "MOTHER WAS RIGHT", "WHY DID YOU ABANDON ME?", "LOOK IN THE MIRROR"],
+      "deathText": ["INTEGRATED", "ACCEPTED", "FREE", "SHADOW WORK COMPLETE", "TRAUMA PROCESSED", "WHOLENESS ACHIEVED", "WE ARE ONE NOW"]
+    }
+  ]
+}

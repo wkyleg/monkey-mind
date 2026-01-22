@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Impossible Shape - Tier 5 (Transcendent) -->
+  <defs>
+    <linearGradient id="impossibleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffaa"/>
+      <stop offset="50%" stop-color="#00aaff"/>
+      <stop offset="100%" stop-color="#aa00ff"/>
+    </linearGradient>
+    <filter id="impossibleGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Penrose triangle / impossible object -->
+  <!-- Outer triangle -->
+  <polygon points="32,4 60,56 4,56" fill="none" stroke="url(#impossibleGrad)" stroke-width="4" filter="url(#impossibleGlow)"/>
+  
+  <!-- Inner impossible connections -->
+  <path d="M32 16 L 24 32 L 40 32 Z" fill="#003344" stroke="#00ffaa" stroke-width="2"/>
+  <path d="M32 16 L 40 32 L 32 48 Z" fill="#004433" stroke="#00aaff" stroke-width="2"/>
+  <path d="M24 32 L 32 48 L 16 48 Z" fill="#330044" stroke="#aa00ff" stroke-width="2"/>
+  
+  <!-- Impossible overlap effect -->
+  <rect x="28" y="30" width="8" height="12" fill="#001122"/>
+  <line x1="28" y1="30" x2="36" y2="30" stroke="#00ffff" stroke-width="1"/>
+  <line x1="28" y1="42" x2="36" y2="42" stroke="#ff00ff" stroke-width="1"/>
+  
+  <!-- Corner connections that shouldn't work -->
+  <circle cx="32" cy="10" r="4" fill="#00ffaa" opacity="0.8"/>
+  <circle cx="12" cy="52" r="4" fill="#00aaff" opacity="0.8"/>
+  <circle cx="52" cy="52" r="4" fill="#aa00ff" opacity="0.8"/>
+  
+  <!-- Dimensional tears -->
+  <line x1="32" y1="4" x2="32" y2="0" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+  <line x1="60" y1="56" x2="64" y2="60" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+  <line x1="4" y1="56" x2="0" y2="60" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+</svg>

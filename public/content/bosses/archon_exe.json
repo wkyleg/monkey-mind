@@ -1,7 +1,7 @@
 {
-  "id": "seraphim_exe",
-  "name": "Seraphim.EXE",
-  "title": "The Divine Program",
+  "id": "archon_exe",
+  "name": "Archon.EXE",
+  "title": "The Supreme Protocol",
   "hp": 100,
   "phases": [
     {
@@ -62,6 +62,6 @@
     "size": 75,
     "glow": true
   },
-  "codexEntry": "ERROR 777: DIVINITY_OVERFLOW. An angel rendered in code, trapped between heaven and hardware. Its wings are made of corrupted data streams.",
+  "codexEntry": "ERROR 777: AUTHORITY_OVERFLOW. A ruling protocol rendered in corrupted code, trapped between logic and chaos. Its command structures are made of recursive data streams.",
   "defeatUnlocks": ["sector5_fractal_bloom"]
 }

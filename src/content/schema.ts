@@ -2,6 +2,16 @@
  * Content schema types for data-driven game content
  */
 
+// Music parameters for data-driven music system
+export interface MusicParamsData {
+  tempo?: number;
+  intensity?: number;
+  filterCutoff?: number;
+  detuneAmount?: number;
+  useReverb?: boolean;
+  distortionAmount?: number;
+}
+
 // Sector (level group) schema
 export interface SectorData {
   id: string;
@@ -20,6 +30,10 @@ export interface SectorData {
     codex?: string[];
     cosmetics?: string[];
   };
+  // Music customization
+  musicParams?: MusicParamsData;
+  // Ambient visual effects
+  ambientEffects?: string[];
 }
 
 export interface LevelData {
@@ -27,13 +41,17 @@ export interface LevelData {
   waves: string[];
   miniboss?: string;
   duration?: number;
+  // Music overrides per level
+  musicOverrides?: MusicParamsData;
+  // Wave intro text
+  introText?: string;
 }
 
 // Enemy schema
 export interface EnemyData {
   id: string;
   name: string;
-  tier: 1 | 2 | 3 | 4;
+  tier: 1 | 2 | 3 | 4 | 5;
   hp: number;
   speed: number;
   behavior: string;
@@ -46,6 +64,10 @@ export interface EnemyData {
     glow?: boolean;
   };
   codexEntry?: string;
+  // Dialogue system
+  spawnText?: string[];    // Text when spawning (random selection)
+  deathText?: string[];    // Text when dying (random selection)
+  dialogue?: string[];     // General quotes (random selection)
 }
 
 export interface EnemyPackData {

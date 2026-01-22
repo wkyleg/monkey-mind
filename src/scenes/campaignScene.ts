@@ -21,6 +21,7 @@ import { drawBackground, getBackgroundForSector } from '../graphics/backgrounds'
 import { PowerupSystem, PowerupPickup } from '../gameplay/powerups';
 import { DropSystem, Drop } from '../gameplay/drops';
 import { particles } from '../graphics/particles';
+import { dialogueSystem } from '../gameplay/dialogue';
 
 export class CampaignScene extends Scene {
   override readonly canPause = true;
@@ -424,6 +425,9 @@ export class CampaignScene extends Scene {
     // Update particles
     particles.update(dt);
     
+    // Update dialogue system
+    dialogueSystem.update(dt);
+    
     // Update music combat intensity based on enemy count
     const enemyCount = this.enemies.getEnemies().length;
     const combatIntensity = Math.min(1, enemyCount / 8); // Max intensity at 8+ enemies
@@ -567,6 +571,9 @@ export class CampaignScene extends Scene {
     
     // Particles (on top of game objects)
     particles.render(renderer);
+    
+    // Floating dialogue text
+    dialogueSystem.render(renderer);
     
     // HUD
     this.hud.render(renderer, this.hudState, this.player);

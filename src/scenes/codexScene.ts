@@ -53,45 +53,58 @@ export class CodexScene extends Scene {
   private buildCategories(): void {
     const unlockedIds = new Set(storage.getData().codexUnlocked);
     
-    // Build enemy category
+    // Build enemy category dynamically from content
     const enemies = contentLoader.getAllEnemies();
-    const enemyEntries: CodexDisplayEntry[] = enemies.map(e => ({
-      id: e.id,
-      name: e.name,
-      unlocked: unlockedIds.has(e.id),
-      description: e.codexEntry,
-    }));
+    const enemyEntries: CodexDisplayEntry[] = enemies.length > 0 
+      ? enemies.map(e => ({
+          id: e.id,
+          name: e.name,
+          unlocked: unlockedIds.has(e.id),
+          description: e.codexEntry,
+        }))
+      : [
+          { id: 'synapse_drone', name: 'Synapse Drone', unlocked: true, description: 'Basic neural defense unit. Patrols thought corridors endlessly.' },
+          { id: 'neuron_cluster', name: 'Neuron Cluster', unlocked: false },
+          { id: 'glitch_sprite', name: 'Glitch Sprite', unlocked: false },
+          { id: 'orbital_eye', name: 'Orbital Eye', unlocked: false },
+        ];
     
-    // Build from default data
+    // Build boss category dynamically from content
+    const bosses = contentLoader.getAllBosses();
+    const bossEntries: CodexDisplayEntry[] = bosses.length > 0
+      ? bosses.map(b => ({
+          id: b.id,
+          name: b.name,
+          unlocked: unlockedIds.has(b.id),
+          description: b.codexEntry,
+        }))
+      : [
+          { id: 'cortex_auditor', name: 'Cortex Auditor', unlocked: unlockedIds.has('cortex_auditor'), description: 'The Mind Inspector. Audits all neural traffic for unauthorized thoughts.' },
+          { id: 'grey_administrator', name: 'Grey Administrator', unlocked: unlockedIds.has('grey_administrator') },
+          { id: 'banana_pentagon', name: 'Banana Pentagon', unlocked: unlockedIds.has('banana_pentagon') },
+          { id: 'archon_exe', name: 'Archon.EXE', unlocked: unlockedIds.has('archon_exe') },
+          { id: 'mirror_self', name: 'Mirror Self', unlocked: unlockedIds.has('mirror_self') },
+        ];
+    
+    // Build categories
     this.categories = [
       {
         id: 'enemies',
         name: 'ENEMIES',
-        entries: enemyEntries.length > 0 ? enemyEntries : [
-          { id: 'synapse_drone', name: 'Synapse Drone', unlocked: true, description: 'Basic neural defense unit. Patrols thought corridors endlessly.' },
-          { id: 'neuron_cluster', name: 'Neuron Cluster', unlocked: false },
-          { id: 'zigzag_cherub', name: 'Zigzag Cherub', unlocked: false },
-          { id: 'orbital_eye', name: 'Orbital Eye', unlocked: false },
-        ],
+        entries: enemyEntries,
       },
       {
         id: 'bosses',
         name: 'BOSSES',
-        entries: [
-          { id: 'cortex_auditor', name: 'Cortex Auditor', unlocked: unlockedIds.has('cortex_auditor'), description: 'The Mind Inspector. Audits all neural traffic for unauthorized thoughts.' },
-          { id: 'grey_administrator', name: 'Grey Administrator', unlocked: false },
-          { id: 'banana_pentagon', name: 'Banana Pentagon', unlocked: false },
-          { id: 'seraphim_exe', name: 'Seraphim.EXE', unlocked: false },
-          { id: 'mirror_self', name: 'Mirror Self', unlocked: false },
-        ],
+        entries: bossEntries,
       },
       {
         id: 'lore',
         name: 'SECRET FILES',
         entries: [
           { id: 'project_monkeymind', name: 'Project: Monkey Mind', unlocked: unlockedIds.has('project_monkeymind'), description: '[REDACTED] ...the subject exhibited unprecedented neural plasticity...' },
-          { id: 'neural_cage_memo', name: 'Neural Cage Memo', unlocked: false },
-          { id: 'synaptic_reef_report', name: 'Synaptic Reef Report', unlocked: false },
+          { id: 'neural_cage_memo', name: 'Neural Cage Memo', unlocked: unlockedIds.has('neural_cage_memo') },
+          { id: 'synaptic_reef_report', name: 'Synaptic Reef Report', unlocked: unlockedIds.has('synaptic_reef_report') },
         ],
       },
     ];

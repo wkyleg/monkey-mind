@@ -19,7 +19,7 @@ export interface GameEvents {
   'player:lane_change': { from: number; to: number };
   
   // Combat
-  'enemy:spawn': { id: string; type: string };
+  'enemy:spawn': { type: string; x: number; y: number };
   'enemy:damage': { id: string; amount: number };
   'enemy:death': { id: string; type: string; position: { x: number; y: number } };
   'boss:start': { bossId: string };

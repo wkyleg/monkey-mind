@@ -555,6 +555,8 @@ export class Spawner {
       const enemy = this.enemySystem.spawn(cmd.enemyId, cmd.x, cmd.y);
       if (enemy) {
         this.spawnedEnemies.add(enemy);
+        // Emit spawn event for dialogue system
+        events.emit('enemy:spawn', { type: cmd.enemyId, x: cmd.x, y: cmd.y });
       }
       this.currentWave.currentIndex++;
     }

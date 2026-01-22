@@ -16,7 +16,9 @@
         "color": "#7b68ee",
         "size": 35,
         "glow": true
-      }
+      },
+      "spawnText": ["BEYOND THE VEIL", "WITNESS ETERNITY", "THE STARS ALIGN", "INCOMPREHENSIBLE FORM", "PH'NGLUI...", "GAZE UPON INFINITY"],
+      "deathText": ["THE VOID RECLAIMS", "RETURN TO DARKNESS", "AEONS PASS", "SLEEPING AGAIN", "R'LYEH WAITS", "TENTACLES RETRACT"]
     },
     {
       "id": "fractal_insect",
@@ -32,7 +34,9 @@
         "color": "#00ff66",
         "size": 18,
         "glow": true
-      }
+      },
+      "spawnText": ["ITERATION BEGIN", "SELF-SIMILAR", "INFINITE REGRESS", "MANDELBROT STIRS", "ZOOM LEVEL: ∞", "RECURSIVE SPAWN"],
+      "deathText": ["PATTERN BROKEN", "RECURSION HALTED", "STACK OVERFLOW", "BASE CASE REACHED", "SET COLLAPSED", "ITERATION ENDED"]
     },
     {
       "id": "cyborg_dolphin",
@@ -48,7 +52,9 @@
         "color": "#4169e1",
         "size": 40,
         "glow": true
-      }
+      },
+      "spawnText": ["SONAR PING", "DEPTH CHARGE ARMED", "ECHOLOCATION ACTIVE", "AQUATIC PROTOCOL", "MARINE OVERRIDE", "CLICK CLICK CLICK"],
+      "deathText": ["BREACH DETECTED", "SURFACING...", "POD LOST", "FREQUENCY SILENT", "RETURNING TO DEEP", "CETACEAN OFFLINE"]
     },
     {
       "id": "impossible_geometry",
@@ -64,7 +70,9 @@
         "color": "#ff00ff",
         "size": 30,
         "glow": true
-      }
+      },
+      "spawnText": ["ANGLES DON'T ADD UP", "KLEIN BOTTLE OPENING", "TESSERACT UNFOLDING", "DIMENSION SHIFT", "π = 4 HERE", "MÖBIUS TWIST"],
+      "deathText": ["FLATTENED", "EUCLIDEAN AGAIN", "PARALLEL LINES MET", "TOPOLOGY COLLAPSED", "SURFACE: ORIENTABLE", "GEOMETRY NORMALIZED"]
     }
   ]
 }

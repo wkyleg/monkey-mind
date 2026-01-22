@@ -114,10 +114,14 @@ export class IntroScene extends Scene {
     this.fadeAlpha = 0;
     this.inputCooldown = 0.5;
     this.skipHintVisible = false;
+    
+    // Start atmospheric intro music
+    this.game.getMusic().setIntroMood();
+    this.game.getMusic().start();
   }
   
   exit(): void {
-    // Nothing to clean up
+    // Music will be changed by the next scene
   }
   
   update(dt: number, intent: PlayerIntent): void {

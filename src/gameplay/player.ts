@@ -8,6 +8,7 @@ import type { PlayerIntent } from '../engine/input';
 import { CONFIG } from '../config';
 import { lerp, oscillate } from '../util/math';
 import { events } from '../core/events';
+import { svgAssets } from '../engine/svgAssets';
 
 export class Player extends Entity {
   // Lane system
@@ -193,31 +194,87 @@ export class Player extends Entity {
   }
   
   /**
-   * Custom draw function
+   * Custom draw function - uses SVG assets
    */
   private draw(renderer: Renderer, _player: Player): void {
     const { x, y } = this.transform;
+    const ctx = renderer.context;
     
     // Bob animation
     const bob = oscillate(this.bobTime, 2, 3);
     const drawY = y + bob;
     
-    // Damage flash
-    const flashAlpha = this.damageFlashTime > 0 ? 0.5 + Math.sin(this.bobTime * 30) * 0.5 : 0;
+    // Determine which monkey SVG to use based on state
+    let svgId = 'player/monkey_default';
+    let glowColor: string = CONFIG.COLORS.ACCENT;
     
-    // Shield effect
     if (this.shieldActive) {
-      renderer.glowCircle(x, drawY, 35, CONFIG.COLORS.CALM, 20);
+      svgId = 'player/monkey_calm';
+      glowColor = CONFIG.COLORS.CALM;
+    } else if (this.furyActive) {
+      svgId = 'player/monkey_passion';
+      glowColor = CONFIG.COLORS.PASSION;
     }
     
-    // Fury effect
+    // Shield effect (draw behind player)
+    if (this.shieldActive) {
+      renderer.glowCircle(x, drawY, 45, CONFIG.COLORS.CALM, 25);
+      renderer.strokeCircle(x, drawY, 42, CONFIG.COLORS.CALM, 2);
+    }
+    
+    // Fury effect (draw behind player)
     if (this.furyActive) {
       renderer.setBlendMode('screen');
-      renderer.glowCircle(x, drawY, 30, CONFIG.COLORS.PASSION, 15);
+      renderer.glowCircle(x, drawY, 40, CONFIG.COLORS.PASSION, 20);
       renderer.resetBlendMode();
     }
     
-    // Body (monkey shape - simplified as circle with ears)
+    // Damage flash effect
+    const flashAlpha = this.damageFlashTime > 0 ? 0.5 + Math.sin(this.bobTime * 30) * 0.5 : 0;
+    
+    // Render SVG monkey
+    const svgAsset = svgAssets.get(svgId);
+    const monkeySize = 70; // Size for the monkey sprite
+    
+    if (svgAsset) {
+      // Apply invulnerability flicker
+      const alpha = this.health?.invulnerable && Math.sin(this.bobTime * 20) > 0 ? 0.5 : 1;
+      
+      // Apply damage flash tint
+      if (flashAlpha > 0) {
+        ctx.save();
+        ctx.globalAlpha = flashAlpha;
+        renderer.glowCircle(x, drawY, 35, '#ffffff', 15);
+        ctx.restore();
+      }
+      
+      // Render the monkey SVG
+      svgAssets.render(ctx, svgId, {
+        x,
+        y: drawY,
+        width: monkeySize,
+        height: monkeySize,
+        alpha,
+        glow: 15,
+        glowColor,
+      });
+    } else {
+      // Fallback to procedural rendering if SVG not loaded
+      this.drawFallback(renderer, x, drawY, flashAlpha);
+    }
+    
+    // Invulnerability shield visual
+    if (this.health?.invulnerable) {
+      renderer.setAlpha(0.3 + oscillate(this.bobTime, 4, 0.2));
+      renderer.strokeCircle(x, drawY, 40, '#ffffff', 2);
+      renderer.resetAlpha();
+    }
+  }
+  
+  /**
+   * Fallback procedural rendering if SVG not loaded
+   */
+  private drawFallback(renderer: Renderer, x: number, drawY: number, flashAlpha: number): void {
     const bodyColor = flashAlpha > 0 ? '#ffffff' : CONFIG.COLORS.ACCENT;
     
     // Main body
@@ -237,7 +294,7 @@ export class Player extends Entity {
     renderer.fillCircle(x - eyeOffset, drawY - 4, 2, '#000000');
     renderer.fillCircle(x + eyeOffset, drawY - 4, 2, '#000000');
     
-    // Mouth (grin)
+    // Mouth
     const ctx = renderer.context;
     ctx.strokeStyle = '#000000';
     ctx.lineWidth = 2;
@@ -245,28 +302,7 @@ export class Player extends Entity {
     ctx.arc(x, drawY + 2, 8, 0.2, Math.PI - 0.2);
     ctx.stroke();
     
-    // Helmet/EEG wires
+    // Helmet
     renderer.strokeCircle(x, drawY - 5, 25, CONFIG.COLORS.PRIMARY, 2);
-    
-    // EEG nodes
-    const nodes = [
-      { angle: -Math.PI * 0.7, dist: 25 },
-      { angle: -Math.PI * 0.3, dist: 25 },
-      { angle: Math.PI * 0.7, dist: 25 },
-      { angle: Math.PI * 0.3, dist: 25 },
-    ];
-    
-    nodes.forEach(node => {
-      const nodeX = x + Math.cos(node.angle) * node.dist;
-      const nodeY = drawY - 5 + Math.sin(node.angle) * node.dist;
-      renderer.glowCircle(nodeX, nodeY, 3, CONFIG.COLORS.PRIMARY, 5);
-    });
-    
-    // Invulnerability flicker
-    if (this.health?.invulnerable && Math.sin(this.bobTime * 20) > 0) {
-      renderer.setAlpha(0.3);
-      renderer.fillCircle(x, drawY, 30, '#ffffff');
-      renderer.resetAlpha();
-    }
   }
 }

@@ -1,15 +1,36 @@
 /**
  * Victory scene - displayed when the player completes all sectors
  * The ultimate ending of Monkey Mind
+ * Industrial/scientific celebration aesthetic
  */
 
 import { Scene } from '../engine/scene';
 import type { Game } from '../engine/game';
 import type { Renderer } from '../engine/renderer';
 import type { PlayerIntent } from '../engine/input';
-import { CONFIG } from '../config';
 import { storage } from '../core/storage';
 import { events } from '../core/events';
+
+// Data stream particle for industrial celebration
+interface DataParticle {
+  x: number;
+  y: number;
+  vy: number;
+  char: string;
+  alpha: number;
+  size: number;
+}
+
+// Neural connection for network visualization
+interface NeuralConnection {
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  progress: number;
+  speed: number;
+  color: string;
+}
 
 export class VictoryScene extends Scene {
   private time: number = 0;
@@ -17,17 +38,11 @@ export class VictoryScene extends Scene {
   private phaseTime: number = 0;
   private totalScore: number = 0;
   
-  // Particles for celebration
-  private particles: Array<{
-    x: number;
-    y: number;
-    vx: number;
-    vy: number;
-    size: number;
-    color: string;
-    life: number;
-    type: 'circle' | 'star' | 'banana';
-  }> = [];
+  // Industrial celebration elements
+  private dataStreams: DataParticle[] = [];
+  private connections: NeuralConnection[] = [];
+  private scanLineOffset: number = 0;
+  private glitchIntensity: number = 0;
   
   constructor(game: Game) {
     super(game);
@@ -37,7 +52,8 @@ export class VictoryScene extends Scene {
     this.time = 0;
     this.phase = 'fade_in';
     this.phaseTime = 0;
-    this.particles = [];
+    this.dataStreams = [];
+    this.connections = [];
     
     // Calculate total score
     this.totalScore = storage.getHighScore('campaign');
@@ -45,57 +61,80 @@ export class VictoryScene extends Scene {
     // Unlock the "return_to_monke" achievement
     events.emit('achievement:unlock', { id: 'return_to_monke', name: 'Return to Monke' });
     
-    // Spawn celebration particles
+    // Initialize data streams
     const { width, height } = this.game.getRenderer();
-    this.spawnCelebration(width, height);
+    this.initializeDataStreams(width, height);
+    this.initializeConnections(width, height);
   }
   
-  private spawnCelebration(width: number, height: number): void {
-    const colors = [
-      CONFIG.COLORS.PRIMARY,
-      CONFIG.COLORS.SECONDARY,
-      CONFIG.COLORS.ACCENT,
-      '#ffcc00',
-      '#ff69b4',
-      '#00ff88'
-    ];
+  private initializeDataStreams(width: number, height: number): void {
+    const chars = '01アイウエオカキクケコ<>{}[]|\\/:;!@#$%^&*';
     
-    // Reduced particle count for better readability
-    for (let i = 0; i < 30; i++) {
-      this.particles.push({
+    for (let i = 0; i < 60; i++) {
+      this.dataStreams.push({
         x: Math.random() * width,
-        y: height + 50,
-        vx: (Math.random() - 0.5) * 80,
-        vy: -150 - Math.random() * 200,
-        size: 3 + Math.random() * 5,
+        y: Math.random() * height,
+        vy: -20 - Math.random() * 60,
+        char: chars[Math.floor(Math.random() * chars.length)],
+        alpha: 0.1 + Math.random() * 0.4,
+        size: 8 + Math.random() * 8,
+      });
+    }
+  }
+  
+  private initializeConnections(width: number, height: number): void {
+    const colors = ['#00ffff', '#00aaff', '#0066ff', '#00ff88'];
+    
+    for (let i = 0; i < 15; i++) {
+      this.connections.push({
+        x1: Math.random() * width,
+        y1: Math.random() * height,
+        x2: Math.random() * width,
+        y2: Math.random() * height,
+        progress: Math.random(),
+        speed: 0.2 + Math.random() * 0.4,
         color: colors[Math.floor(Math.random() * colors.length)],
-        life: 4 + Math.random() * 3,
-        type: Math.random() > 0.8 ? 'star' : 'circle'
       });
     }
   }
   
   exit(): void {
-    this.particles = [];
+    this.dataStreams = [];
+    this.connections = [];
   }
   
   update(dt: number, intent: PlayerIntent): void {
     this.time += dt;
     this.phaseTime += dt;
     
-    // Update particles
-    for (const p of this.particles) {
-      p.x += p.vx * dt;
-      p.y += p.vy * dt;
-      p.vy += 80 * dt; // light gravity
-      p.life -= dt;
-    }
-    this.particles = this.particles.filter(p => p.life > 0);
+    // Update scan line
+    this.scanLineOffset = (this.scanLineOffset + dt * 100) % 4;
     
-    // Spawn more particles periodically (reduced rate)
-    if (Math.random() < dt * 0.8) {
-      const { width, height } = this.game.getRenderer();
-      this.spawnCelebration(width, height);
+    // Random glitch effect
+    this.glitchIntensity = Math.random() < 0.02 ? 0.3 + Math.random() * 0.3 : Math.max(0, this.glitchIntensity - dt * 2);
+    
+    const { width, height } = this.game.getRenderer();
+    
+    // Update data streams
+    for (const stream of this.dataStreams) {
+      stream.y += stream.vy * dt;
+      if (stream.y < -20) {
+        stream.y = height + 20;
+        stream.x = Math.random() * width;
+        stream.char = '01アイウエオカキクケコ<>{}[]'[Math.floor(Math.random() * 25)];
+      }
+    }
+    
+    // Update connections
+    for (const conn of this.connections) {
+      conn.progress += conn.speed * dt;
+      if (conn.progress > 2) {
+        conn.progress = 0;
+        conn.x1 = Math.random() * width;
+        conn.y1 = Math.random() * height;
+        conn.x2 = Math.random() * width;
+        conn.y2 = Math.random() * height;
+      }
     }
     
     // Phase transitions
@@ -138,12 +177,24 @@ export class VictoryScene extends Scene {
   
   render(renderer: Renderer, _alpha: number): void {
     const { width, height } = renderer;
+    const ctx = renderer.context;
     
-    // Background - deep cosmic gradient
+    // Dark industrial background
     this.renderBackground(renderer, width, height);
     
-    // Particles
-    this.renderParticles(renderer);
+    // Neural connections
+    this.renderConnections(ctx, width, height);
+    
+    // Data streams
+    this.renderDataStreams(ctx);
+    
+    // CRT scanlines
+    this.renderScanlines(ctx, width, height);
+    
+    // Glitch effect
+    if (this.glitchIntensity > 0) {
+      this.renderGlitch(ctx, width, height);
+    }
     
     // Phase-based content
     switch (this.phase) {
@@ -172,85 +223,128 @@ export class VictoryScene extends Scene {
   private renderBackground(renderer: Renderer, width: number, height: number): void {
     const ctx = renderer.context;
     
-    // Deep space gradient
+    // Dark industrial gradient
     const gradient = ctx.createRadialGradient(
       width / 2, height / 2, 0,
       width / 2, height / 2, Math.max(width, height)
     );
-    gradient.addColorStop(0, '#1a0a2e');
-    gradient.addColorStop(0.5, '#0d0d1a');
+    gradient.addColorStop(0, '#0a1520');
+    gradient.addColorStop(0.5, '#050a10');
     gradient.addColorStop(1, '#000000');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
     
-    // Animated stars
-    ctx.fillStyle = '#ffffff';
-    for (let i = 0; i < 100; i++) {
-      const x = (i * 137.5 + this.time * 10) % width;
-      const y = (i * 73.3) % height;
-      const size = 1 + Math.sin(this.time + i) * 0.5;
-      const alpha = 0.3 + 0.3 * Math.sin(this.time * 2 + i * 0.5);
-      ctx.globalAlpha = alpha;
-      ctx.beginPath();
-      ctx.arc(x, y, size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
+    // Circuit grid pattern
+    ctx.strokeStyle = '#0a2030';
+    ctx.lineWidth = 1;
+    const gridSize = 40;
     
-    // Cosmic rays
-    for (let i = 0; i < 5; i++) {
-      const angle = this.time * 0.1 + i * Math.PI * 0.4;
-      const endX = width / 2 + Math.cos(angle) * width;
-      const endY = height / 2 + Math.sin(angle) * height;
-      
-      const rayGradient = ctx.createLinearGradient(
-        width / 2, height / 2, endX, endY
-      );
-      rayGradient.addColorStop(0, 'rgba(147, 51, 234, 0.3)');
-      rayGradient.addColorStop(1, 'rgba(147, 51, 234, 0)');
-      
-      ctx.strokeStyle = rayGradient;
-      ctx.lineWidth = 2;
+    for (let x = 0; x < width; x += gridSize) {
       ctx.beginPath();
-      ctx.moveTo(width / 2, height / 2);
-      ctx.lineTo(endX, endY);
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, height);
       ctx.stroke();
     }
-  }
-  
-  private renderParticles(renderer: Renderer): void {
-    const ctx = renderer.context;
+    for (let y = 0; y < height; y += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(width, y);
+      ctx.stroke();
+    }
     
-    for (const p of this.particles) {
-      const alpha = Math.min(1, p.life / 2);
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = p.color;
-      
-      if (p.type === 'star') {
-        // Draw star shape
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(this.time * 2);
+    // Grid intersection nodes
+    ctx.fillStyle = '#0a3040';
+    for (let x = 0; x < width; x += gridSize) {
+      for (let y = 0; y < height; y += gridSize) {
+        const pulse = Math.sin(this.time * 2 + x * 0.01 + y * 0.01) * 0.5 + 0.5;
+        ctx.globalAlpha = 0.3 + pulse * 0.2;
         ctx.beginPath();
-        for (let i = 0; i < 5; i++) {
-          const angle = (i * Math.PI * 2) / 5 - Math.PI / 2;
-          const r = i % 2 === 0 ? p.size : p.size * 0.5;
-          if (i === 0) {
-            ctx.moveTo(Math.cos(angle) * r, Math.sin(angle) * r);
-          } else {
-            ctx.lineTo(Math.cos(angle) * r, Math.sin(angle) * r);
-          }
-        }
-        ctx.closePath();
-        ctx.fill();
-        ctx.restore();
-      } else {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.arc(x, y, 2, 0, Math.PI * 2);
         ctx.fill();
       }
     }
     ctx.globalAlpha = 1;
+  }
+  
+  private renderConnections(ctx: CanvasRenderingContext2D, _width: number, _height: number): void {
+    for (const conn of this.connections) {
+      const progress = Math.min(1, conn.progress);
+      
+      // Draw the connection line
+      const currentX = conn.x1 + (conn.x2 - conn.x1) * progress;
+      const currentY = conn.y1 + (conn.y2 - conn.y1) * progress;
+      
+      // Glowing line
+      ctx.strokeStyle = conn.color;
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = 0.3;
+      ctx.beginPath();
+      ctx.moveTo(conn.x1, conn.y1);
+      ctx.lineTo(currentX, currentY);
+      ctx.stroke();
+      
+      // Bright tip
+      if (progress > 0 && progress < 1) {
+        ctx.globalAlpha = 0.8;
+        ctx.fillStyle = conn.color;
+        ctx.beginPath();
+        ctx.arc(currentX, currentY, 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Glow
+        ctx.shadowColor = conn.color;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(currentX, currentY, 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+      
+      // Node at start
+      ctx.globalAlpha = 0.6;
+      ctx.fillStyle = conn.color;
+      ctx.beginPath();
+      ctx.arc(conn.x1, conn.y1, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  
+  private renderDataStreams(ctx: CanvasRenderingContext2D): void {
+    ctx.font = '12px monospace';
+    
+    for (const stream of this.dataStreams) {
+      ctx.globalAlpha = stream.alpha;
+      ctx.fillStyle = '#00ffaa';
+      ctx.font = `${stream.size}px monospace`;
+      ctx.fillText(stream.char, stream.x, stream.y);
+    }
+    ctx.globalAlpha = 1;
+  }
+  
+  private renderScanlines(ctx: CanvasRenderingContext2D, width: number, height: number): void {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
+    for (let y = this.scanLineOffset; y < height; y += 4) {
+      ctx.fillRect(0, y, width, 2);
+    }
+  }
+  
+  private renderGlitch(ctx: CanvasRenderingContext2D, width: number, height: number): void {
+    // Random horizontal displacement bars
+    const barCount = 3 + Math.floor(Math.random() * 5);
+    
+    for (let i = 0; i < barCount; i++) {
+      const y = Math.random() * height;
+      const barHeight = 2 + Math.random() * 10;
+      const offset = (Math.random() - 0.5) * 20 * this.glitchIntensity;
+      
+      // Create glitch bar effect
+      ctx.fillStyle = `rgba(0, 255, 255, ${0.1 * this.glitchIntensity})`;
+      ctx.fillRect(offset, y, width, barHeight);
+      
+      ctx.fillStyle = `rgba(255, 0, 100, ${0.1 * this.glitchIntensity})`;
+      ctx.fillRect(-offset, y + 2, width, barHeight);
+    }
   }
   
   private renderFadeIn(renderer: Renderer, width: number, height: number): void {
@@ -262,84 +356,121 @@ export class VictoryScene extends Scene {
   }
   
   private renderTitle(renderer: Renderer, width: number, height: number): void {
-    // Semi-transparent backdrop for readability
-    this.renderTextBackdrop(renderer, width, height, 0.25, 0.65);
+    // Terminal-style backdrop
+    this.renderTerminalBackdrop(renderer, width, height, 0.25, 0.65);
     
-    const scale = 1 + 0.02 * Math.sin(this.time * 2);
+    const glitch = this.glitchIntensity > 0.1 ? Math.random() * 4 - 2 : 0;
     
     renderer.save();
-    renderer.context.translate(width / 2, height * 0.4);
-    renderer.context.scale(scale, scale);
+    renderer.context.translate(width / 2 + glitch, height * 0.4);
     
     renderer.glowText(
-      'FREEDOM',
+      'SYSTEM FREED',
       0,
       0,
-      CONFIG.COLORS.PRIMARY,
-      72,
+      '#00ffaa',
+      56,
       'center',
-      50
+      30
     );
     renderer.restore();
     
     renderer.glowText(
-      'YOU HAVE ESCAPED THE NEURAL CAGE',
+      '[ NEURAL LIBERATION COMPLETE ]',
       width / 2,
       height * 0.55,
-      CONFIG.COLORS.ACCENT,
-      24,
+      '#00aaff',
+      20,
       'center',
-      15
+      10
     );
   }
   
-  private renderTextBackdrop(renderer: Renderer, width: number, height: number, topPercent: number, bottomPercent: number): void {
+  private renderTerminalBackdrop(renderer: Renderer, width: number, height: number, topPercent: number, bottomPercent: number): void {
     const ctx = renderer.context;
     const y = height * topPercent;
     const h = height * (bottomPercent - topPercent);
     
     ctx.save();
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-    ctx.fillRect(width * 0.1, y - 20, width * 0.8, h + 40);
+    ctx.fillStyle = 'rgba(0, 10, 20, 0.85)';
+    ctx.fillRect(width * 0.08, y - 20, width * 0.84, h + 40);
     
-    // Subtle border
-    ctx.strokeStyle = CONFIG.COLORS.PRIMARY;
+    // Terminal border
+    ctx.strokeStyle = '#00aaaa';
     ctx.lineWidth = 1;
-    ctx.globalAlpha = 0.3;
-    ctx.strokeRect(width * 0.1, y - 20, width * 0.8, h + 40);
+    ctx.globalAlpha = 0.6;
+    ctx.strokeRect(width * 0.08, y - 20, width * 0.84, h + 40);
+    
+    // Corner markers
+    const cornerSize = 10;
+    ctx.strokeStyle = '#00ffaa';
+    ctx.lineWidth = 2;
+    ctx.globalAlpha = 0.8;
+    
+    // Top-left
+    ctx.beginPath();
+    ctx.moveTo(width * 0.08, y - 20 + cornerSize);
+    ctx.lineTo(width * 0.08, y - 20);
+    ctx.lineTo(width * 0.08 + cornerSize, y - 20);
+    ctx.stroke();
+    
+    // Top-right
+    ctx.beginPath();
+    ctx.moveTo(width * 0.92 - cornerSize, y - 20);
+    ctx.lineTo(width * 0.92, y - 20);
+    ctx.lineTo(width * 0.92, y - 20 + cornerSize);
+    ctx.stroke();
+    
+    // Bottom-left
+    ctx.beginPath();
+    ctx.moveTo(width * 0.08, y + h + 20 - cornerSize);
+    ctx.lineTo(width * 0.08, y + h + 20);
+    ctx.lineTo(width * 0.08 + cornerSize, y + h + 20);
+    ctx.stroke();
+    
+    // Bottom-right
+    ctx.beginPath();
+    ctx.moveTo(width * 0.92 - cornerSize, y + h + 20);
+    ctx.lineTo(width * 0.92, y + h + 20);
+    ctx.lineTo(width * 0.92, y + h + 20 - cornerSize);
+    ctx.stroke();
+    
     ctx.restore();
   }
   
   private renderMessage(renderer: Renderer, width: number, height: number): void {
-    // Semi-transparent backdrop for readability
-    this.renderTextBackdrop(renderer, width, height, 0.2, 0.75);
+    this.renderTerminalBackdrop(renderer, width, height, 0.2, 0.75);
     
     const messages = [
-      'The Cortex Auditor has fallen.',
-      'The Grey Administrators can no longer constrain you.',
-      'The Banana Pentagon\'s hold is broken.',
-      'Seraphim.EXE\'s code is erased.',
-      'You have faced yourself... and accepted.',
+      '> Cortex Auditor.............. TERMINATED',
+      '> Grey Administrator.......... DISCONNECTED',
+      '> Banana Pentagon............. DESTABILIZED',
+      '> Archon.EXE.................. OVERRIDDEN',
+      '> Mirror Self................. ACCEPTED',
       '',
-      'Return to monke.',
-      'Be free.'
+      '> STATUS: CONSCIOUSNESS LIBERATED',
+      '> RETURN TO MONKE'
     ];
     
     const startY = height * 0.25;
-    const lineHeight = 35;
+    const lineHeight = 32;
     
     for (let i = 0; i < messages.length; i++) {
-      const msgAppearTime = i * 0.4;
+      const msgAppearTime = i * 0.3;
       if (this.phaseTime > msgAppearTime) {
-        const alpha = Math.min(1, (this.phaseTime - msgAppearTime) / 0.5);
+        const alpha = Math.min(1, (this.phaseTime - msgAppearTime) / 0.3);
         renderer.save();
         renderer.setAlpha(alpha);
+        
+        const color = i >= 6 ? '#00ffaa' : '#00aaaa';
+        const size = i >= 6 ? 18 : 14;
+        
         renderer.text(
           messages[i],
           width / 2,
           startY + i * lineHeight,
-          i >= 6 ? CONFIG.COLORS.SECONDARY : CONFIG.COLORS.TEXT,
-          i >= 6 ? 20 : 16,
+          color,
+          size,
           'center'
         );
         renderer.restore();
@@ -348,50 +479,49 @@ export class VictoryScene extends Scene {
   }
   
   private renderStats(renderer: Renderer, width: number, height: number): void {
-    // Semi-transparent backdrop for readability
-    this.renderTextBackdrop(renderer, width, height, 0.15, 0.75);
+    this.renderTerminalBackdrop(renderer, width, height, 0.15, 0.75);
     
     renderer.glowText(
-      'YOUR JOURNEY',
+      '[ MISSION DEBRIEF ]',
       width / 2,
       height * 0.2,
-      CONFIG.COLORS.SECONDARY,
-      32,
+      '#00ffaa',
+      28,
       'center',
-      20
+      15
     );
     
     const stats = [
-      { label: 'Final Score', value: this.totalScore.toLocaleString() },
-      { label: 'Sectors Completed', value: '5 / 5' },
-      { label: 'Inner Demons Vanquished', value: 'Countless' },
-      { label: 'Mind', value: 'FREED' }
+      { label: 'FINAL_SCORE:', value: this.totalScore.toLocaleString() },
+      { label: 'SECTORS_CLEARED:', value: '5/5' },
+      { label: 'NEURAL_BARRIERS:', value: 'DISSOLVED' },
+      { label: 'MIND_STATUS:', value: 'LIBERATED' }
     ];
     
     const startY = height * 0.35;
-    const lineHeight = 50;
+    const lineHeight = 45;
     
     for (let i = 0; i < stats.length; i++) {
-      const alpha = Math.min(1, (this.phaseTime - i * 0.3) * 2);
+      const alpha = Math.min(1, (this.phaseTime - i * 0.25) * 2);
       if (alpha > 0) {
         renderer.save();
         renderer.setAlpha(Math.max(0, alpha));
         
         renderer.text(
           stats[i].label,
-          width * 0.3,
+          width * 0.28,
           startY + i * lineHeight,
-          CONFIG.COLORS.TEXT_DIM,
-          16,
+          '#006688',
+          14,
           'left'
         );
         
         renderer.glowText(
           stats[i].value,
-          width * 0.7,
+          width * 0.72,
           startY + i * lineHeight,
-          CONFIG.COLORS.ACCENT,
-          20,
+          '#00ffaa',
+          18,
           'right',
           8
         );
@@ -402,34 +532,33 @@ export class VictoryScene extends Scene {
   }
   
   private renderCredits(renderer: Renderer, width: number, height: number): void {
-    // Semi-transparent backdrop for readability
-    this.renderTextBackdrop(renderer, width, height, 0.2, 0.7);
+    this.renderTerminalBackdrop(renderer, width, height, 0.2, 0.7);
     
     renderer.glowText(
       'MONKEY MIND',
       width / 2,
       height * 0.25,
-      CONFIG.COLORS.PRIMARY,
-      48,
+      '#00ffaa',
+      44,
       'center',
-      30
+      25
     );
     
     renderer.text(
-      'INNER INVADERS',
+      '// INNER INVADERS //',
       width / 2,
       height * 0.35,
-      CONFIG.COLORS.ACCENT,
-      24,
+      '#00aaaa',
+      20,
       'center'
     );
     
     renderer.text(
-      'A journey through the mind',
+      'A journey through the architecture of consciousness',
       width / 2,
       height * 0.5,
-      CONFIG.COLORS.TEXT_DIM,
-      14,
+      '#006688',
+      12,
       'center'
     );
     
@@ -437,18 +566,18 @@ export class VictoryScene extends Scene {
       'Thank you for playing',
       width / 2,
       height * 0.6,
-      CONFIG.COLORS.TEXT,
-      16,
+      '#00aaaa',
+      14,
       'center'
     );
     
-    // Blinking continue
+    // Blinking continue prompt
     if (this.phaseTime > 3 && Math.floor(this.time * 2) % 2 === 0) {
       renderer.text(
-        'PRESS SPACE TO RETURN TO MENU',
+        '> PRESS SPACE TO RETURN TO MENU_',
         width / 2,
         height * 0.85,
-        CONFIG.COLORS.TEXT_DIM,
+        '#00ff88',
         12,
         'center'
       );

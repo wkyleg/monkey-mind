@@ -31,7 +31,7 @@
       "miniboss": "project_monarch"
     }
   ],
-  "boss": "seraphim_exe",
+  "boss": "archon_exe",
   "unlocks": {
     "powerups": ["passion_explosive"],
     "codex": ["entry_black_projects", "tentacled_halo", "fractal_insect", "cyborg_dolphin"],

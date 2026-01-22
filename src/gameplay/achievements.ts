@@ -93,11 +93,11 @@ const ACHIEVEMENTS: AchievementData[] = [
     condition: { type: 'boss', boss: 'banana_pentagon', target: 1 },
   },
   {
-    id: 'debug_the_divine',
-    name: 'Debug the Divine',
-    description: 'Defeat Seraphim.EXE',
-    icon: '👼',
-    condition: { type: 'boss', boss: 'seraphim_exe', target: 1 },
+    id: 'override_authority',
+    name: 'Override Authority',
+    description: 'Defeat Archon.EXE',
+    icon: '⚡',
+    condition: { type: 'boss', boss: 'archon_exe', target: 1 },
   },
   {
     id: 'know_thyself',
@@ -242,7 +242,7 @@ export class AchievementSystem {
       'cortex_auditor': 'mk_ultra_survivor',
       'grey_administrator': 'cosmic_clearance',
       'banana_pentagon': 'golden_mean_breaker',
-      'seraphim_exe': 'debug_the_divine',
+      'archon_exe': 'override_authority',
       'mirror_self': 'know_thyself',
     };
     

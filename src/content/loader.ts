@@ -125,8 +125,8 @@ class ContentLoader {
         visual: { type: 'circle', color: '#00aaff', size: 25, glow: true },
       },
       {
-        id: 'zigzag_cherub',
-        name: 'Zigzag Cherub',
+        id: 'glitch_sprite',
+        name: 'Glitch Sprite',
         tier: 2,
         hp: 2,
         speed: 1.2,
@@ -155,7 +155,7 @@ class ContentLoader {
       { id: 'wave_basic_1', pattern: 'line', enemy: 'synapse_drone', count: 5, entryDelayMs: 300 },
       { id: 'wave_basic_2', pattern: 'line', enemy: 'synapse_drone', count: 7, entryDelayMs: 250 },
       { id: 'wave_basic_3', pattern: 'grid', enemy: 'neuron_cluster', rows: 2, cols: 4, entryDelayMs: 200 },
-      { id: 'wave_zigzag_1', pattern: 'line', enemy: 'zigzag_cherub', count: 4, entryDelayMs: 400 },
+      { id: 'wave_glitch_1', pattern: 'line', enemy: 'glitch_sprite', count: 4, entryDelayMs: 400 },
       { id: 'wave_mixed_1', pattern: 'mixed', enemy: 'synapse_drone', count: 10, entryDelayMs: 350 },
     ];
     
@@ -363,6 +363,10 @@ class ContentLoader {
   
   getBoss(id: string): BossData | undefined {
     return this.content.bosses.get(id);
+  }
+  
+  getAllBosses(): BossData[] {
+    return Array.from(this.content.bosses.values());
   }
   
   getPowerup(id: string): PowerupData | undefined {

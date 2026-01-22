@@ -23,7 +23,7 @@
     },
     {
       "id": "5-4",
-      "waves": ["wave_fractal_challenge", "wave_hyperspace"]
+      "waves": ["wave_ego_storm", "wave_fractal_challenge"]
     },
     {
       "id": "5-5",
@@ -34,7 +34,7 @@
   "boss": "mirror_self",
   "unlocks": {
     "powerups": [],
-    "codex": ["entry_fractal_bloom", "the_breakthrough", "machine_elves", "return_to_monke"],
+    "codex": ["entry_fractal_bloom", "the_breakthrough", "machine_elves", "return_to_monke", "machine_elf", "impossible_shape", "ego_fragment"],
     "cosmetics": ["aura_rainbow", "eyes_fractal"]
   }
 }

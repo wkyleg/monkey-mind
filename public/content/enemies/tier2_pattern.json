@@ -3,8 +3,8 @@
   "name": "Pattern Enemies",
   "enemies": [
     {
-      "id": "zigzag_cherub",
-      "name": "Zigzag Cherub",
+      "id": "glitch_sprite",
+      "name": "Glitch Sprite",
       "tier": 2,
       "hp": 2,
       "speed": 1.2,
@@ -17,7 +17,9 @@
         "size": 20,
         "glow": true
       },
-      "codexEntry": "zigzag_cherub"
+      "codexEntry": "glitch_sprite",
+      "spawnText": ["GLITCH DETECTED", "REALITY UNSTABLE", "CORRUPTION IN PROGRESS", "DATA FRAGMENTED", "SYSTEM ANOMALY"],
+      "deathText": ["STABILIZED", "PATCH APPLIED", "EXCEPTION HANDLED", "BUFFER OVERFLOW", "NULL POINTER"]
     },
     {
       "id": "orbital_eye",
@@ -34,7 +36,9 @@
         "size": 22,
         "glow": true
       },
-      "codexEntry": "orbital_eye"
+      "codexEntry": "orbital_eye",
+      "spawnText": ["I SEE YOU", "WATCHING...", "SURVEILLANCE ACTIVE", "ALL-SEEING", "YOUR MOVES ARE KNOWN"],
+      "deathText": ["BLIND", "VISION FADES", "CANNOT PERCEIVE", "DARKNESS", "PUPIL DILATING..."]
     },
     {
       "id": "jellyfish_thought",
@@ -50,7 +54,9 @@
         "color": "#aa00ff",
         "size": 25,
         "glow": true
-      }
+      },
+      "spawnText": ["DRIFTING...", "ELECTRIC TENDRILS", "THOUGHT FORM", "SUBCONSCIOUS ENTITY", "DREAM FRAGMENT"],
+      "deathText": ["DISSOLVING", "RETURNING TO VOID", "THOUGHT FORGOTTEN", "FADING MEMORY", "DREAMLESS"]
     }
   ]
 }

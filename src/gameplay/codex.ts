@@ -28,10 +28,10 @@ const CODEX_ENTRIES: CodexEntry[] = [
     unlockCondition: 'defeat_3',
   },
   {
-    id: 'zigzag_cherub',
+    id: 'glitch_sprite',
     category: 'enemy',
-    name: 'Zigzag Cherub',
-    text: 'Part of the second-generation defense systems. These entities were designed to look angelic but serve a sinister purpose. Their erratic movement patterns make them difficult to track.',
+    name: 'Glitch Sprite',
+    text: 'Part of the second-generation defense systems. These corrupted data fragments were designed as erratic defense protocols. Their unpredictable movement patterns make them difficult to track.',
     observedBehavior: 'Alternates left and right while descending.',
     unlockCondition: 'defeat_first',
   },

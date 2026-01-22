@@ -34,7 +34,7 @@
   "boss": "grey_administrator",
   "unlocks": {
     "powerups": ["calm_beam"],
-    "codex": ["entry_synaptic_reef", "zigzag_cherub", "orbital_eye", "jellyfish_thought"],
+    "codex": ["entry_synaptic_reef", "glitch_sprite", "orbital_eye", "jellyfish_thought"],
     "cosmetics": ["trail_bubbles"]
   }
 }

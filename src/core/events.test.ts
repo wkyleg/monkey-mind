@@ -333,7 +333,7 @@ describe('EventEmitter', () => {
       // Simulate game flow
       events.emit('game:start', { mode: 'campaign' });
       events.emit('wave:start', { waveId: 'w1', number: 1 });
-      events.emit('enemy:spawn', { id: 'e1', type: 'basic' });
+      events.emit('enemy:spawn', { type: 'basic', x: 100, y: 0 });
       events.emit('enemy:death', { id: 'e1', type: 'basic', position: { x: 0, y: 0 } });
       events.emit('wave:complete', { waveId: 'w1' });
       events.emit('level:complete', { levelId: 'l1', score: 1000 });

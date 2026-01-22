@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Archon.EXE - Boss 4 (Supreme Digital Authority) -->
+  <defs>
+    <linearGradient id="archonGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#334466"/>
+      <stop offset="50%" stop-color="#223355"/>
+      <stop offset="100%" stop-color="#112244"/>
+    </linearGradient>
+    <linearGradient id="glitchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff0066"/>
+      <stop offset="50%" stop-color="#00ffff"/>
+      <stop offset="100%" stop-color="#00ff00"/>
+    </linearGradient>
+    <filter id="glitchFilter">
+      <feGaussianBlur stdDeviation="1" result="blur"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"/>
+    </filter>
+    <filter id="archonGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Crown of authority (glitching) -->
+  <polygon points="64,4 74,16 84,8 80,20 96,18 82,26 90,36 74,30 64,40 54,30 38,36 46,26 32,18 48,20 44,8 54,16" 
+           fill="none" stroke="#ffd700" stroke-width="2" filter="url(#archonGlow)"/>
+  <!-- Glitch offset -->
+  <polygon points="66,5 75,17 85,9 81,21 97,19 83,27 91,37 75,31 65,41 55,31 39,37 47,27 33,19 49,21 45,9 55,17" 
+           fill="none" stroke="#ff0066" stroke-width="1" opacity="0.4"/>
+  <polygon points="62,5 73,17 83,9 79,21 95,19 81,27 89,37 73,31 63,41 53,31 37,37 45,27 31,19 47,21 43,9 53,17" 
+           fill="none" stroke="#00ffff" stroke-width="1" opacity="0.4"/>
+  
+  <!-- Left data stream wing -->
+  <g transform="translate(0,0)">
+    <path d="M32 50 Q8 36 4 56 Q8 76 32 66" fill="url(#archonGrad)" stroke="#00aaff" stroke-width="1"/>
+    <path d="M28 54 Q10 44 8 58 Q10 72 28 64" fill="url(#archonGrad)" stroke="#00aaff" stroke-width="0.5" opacity="0.8"/>
+    <path d="M24 58 Q14 52 12 60 Q14 68 24 62" fill="url(#archonGrad)" opacity="0.6"/>
+    <!-- Data fragments -->
+    <rect x="6" y="54" width="8" height="3" fill="#00ff00" opacity="0.6"/>
+    <rect x="14" y="60" width="6" height="2" fill="#00ffff" opacity="0.6"/>
+  </g>
+  
+  <!-- Right data stream wing -->
+  <g transform="translate(0,0)">
+    <path d="M96 50 Q120 36 124 56 Q120 76 96 66" fill="url(#archonGrad)" stroke="#00aaff" stroke-width="1"/>
+    <path d="M100 54 Q118 44 120 58 Q118 72 100 64" fill="url(#archonGrad)" stroke="#00aaff" stroke-width="0.5" opacity="0.8"/>
+    <path d="M104 58 Q114 52 116 60 Q114 68 104 62" fill="url(#archonGrad)" opacity="0.6"/>
+    <!-- Data fragments -->
+    <rect x="114" y="52" width="8" height="3" fill="#00ff00" opacity="0.6"/>
+    <rect x="108" y="62" width="6" height="2" fill="#ff0066" opacity="0.6"/>
+  </g>
+  
+  <!-- Lower control matrix -->
+  <path d="M44 76 Q30 92 44 108 Q58 96 64 108 Q70 96 84 108 Q98 92 84 76" 
+        fill="url(#archonGrad)" stroke="#00aaff" stroke-width="1" opacity="0.9"/>
+  
+  <!-- Central processor face -->
+  <rect x="46" y="36" width="36" height="44" rx="4" fill="#0a0a1a" stroke="#334455" stroke-width="2"/>
+  <!-- Screen -->
+  <rect x="50" y="40" width="28" height="36" fill="#111133"/>
+  
+  <!-- Digital eyes (authority scanners) -->
+  <rect x="52" y="48" width="8" height="6" fill="#ff3300" filter="url(#archonGlow)"/>
+  <rect x="68" y="48" width="8" height="6" fill="#ff3300" filter="url(#archonGlow)"/>
+  <!-- Glitch eye offset -->
+  <rect x="53" y="47" width="7" height="5" fill="#ff0066" opacity="0.3"/>
+  <rect x="67" y="49" width="7" height="5" fill="#00ffff" opacity="0.3"/>
+  
+  <!-- Mouth (command interface) -->
+  <rect x="56" y="64" width="16" height="4" fill="#00aaff"/>
+  <line x1="58" y1="66" x2="70" y2="66" stroke="#00ffff" stroke-width="1"/>
+  
+  <!-- Binary/authority messages floating -->
+  <text x="20" y="36" font-size="5" fill="#00ff00" opacity="0.7" font-family="monospace">CTRL</text>
+  <text x="96" y="30" font-size="5" fill="#ff0066" opacity="0.7" font-family="monospace">AUTH</text>
+  <text x="14" y="96" font-size="4" fill="#00ffff" opacity="0.6" font-family="monospace">ADMIN</text>
+  <text x="96" y="92" font-size="4" fill="#ffff00" opacity="0.6" font-family="monospace">ROOT</text>
+  
+  <!-- Error messages as attacks -->
+  <g transform="translate(30, 112)">
+    <rect x="0" y="0" width="68" height="12" fill="#660000" stroke="#ff0000" stroke-width="1" rx="2"/>
+    <text x="34" y="9" font-size="5" fill="#ffffff" text-anchor="middle" font-family="monospace">ACCESS DENIED</text>
+  </g>
+  
+  <!-- Scan lines (CRT effect) -->
+  <line x1="0" y1="46" x2="128" y2="46" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+  <line x1="0" y1="66" x2="128" y2="66" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+  <line x1="0" y1="86" x2="128" y2="86" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+  <line x1="0" y1="106" x2="128" y2="106" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+</svg>

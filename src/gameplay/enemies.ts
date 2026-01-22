@@ -110,8 +110,7 @@ export class Enemy extends Entity {
     });
     
     this.setHealth(data.hp);
-    
-    events.emit('enemy:spawn', { id: this.id.toString(), type: data.id });
+    // Note: spawn event is emitted by Spawner with position data
   }
   
   /**

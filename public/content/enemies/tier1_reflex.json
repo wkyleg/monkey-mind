@@ -17,7 +17,9 @@
         "size": 18,
         "glow": true
       },
-      "codexEntry": "synapse_drone"
+      "codexEntry": "synapse_drone",
+      "spawnText": ["PATROLLING...", "SCANNING...", "COMPLIANCE CHECK", "MONITORING SUBJECT", "BRAIN ACTIVITY DETECTED", "TARGET ACQUIRED"],
+      "deathText": ["SIGNAL LOST", "CONNECTION TERMINATED", "...", "SYSTEM FAILURE", "GOING DARK", "ERROR 404"]
     },
     {
       "id": "neuron_cluster",
@@ -34,7 +36,9 @@
         "size": 24,
         "glow": true
       },
-      "codexEntry": "neuron_cluster"
+      "codexEntry": "neuron_cluster",
+      "spawnText": ["LINKING...", "SYNCING NODES...", "COLLECTIVE THOUGHT", "JOIN US", "RESISTANCE IS FUTILE"],
+      "deathText": ["FRAGMENT LOST", "CLUSTER DISBANDED", "ALONE...", "WE WERE MANY", "DISCONNECTING"]
     },
     {
       "id": "pulse_node",
@@ -50,7 +54,9 @@
         "color": "#ffaa00",
         "size": 15,
         "glow": true
-      }
+      },
+      "spawnText": ["PULSE ACTIVE", "FREQUENCY LOCKED", "TRANSMITTING...", "ENERGY SPIKE"],
+      "deathText": ["PULSE FADING", "FLATLINE", "ENERGY DEPLETED", "...beep..."]
     }
   ]
 }

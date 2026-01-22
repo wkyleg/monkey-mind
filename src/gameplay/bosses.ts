@@ -12,6 +12,26 @@ import { contentLoader } from '../content/loader';
 import { svgAssets } from '../engine/svgAssets';
 
 /**
+ * Boss projectile - visible, moving attack
+ */
+export interface BossProjectile {
+  id: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  radius: number;
+  damage: number;
+  life: number;
+  maxLife: number;
+  color: string;
+  type: 'orb' | 'laser' | 'ring' | 'homing';
+  targetX?: number;
+  targetY?: number;
+  telegraph: number; // Telegraph time before becoming active
+}
+
+/**
  * Boss entity
  */
 export class Boss extends Entity {
@@ -29,9 +49,13 @@ export class Boss extends Entity {
   private defeated: boolean = false;
   
   private readonly targetY: number;
+  private readonly screenWidth: number;
   
-  constructor(data: BossData, screenWidth: number) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  constructor(data: BossData, screenWidth: number, _screenHeight: number = 600) {
     super(screenWidth / 2, -100, 'enemy', ['enemy', 'boss']);
+    
+    this.screenWidth = screenWidth;
     
     this.bossId = data.id;
     this.name = data.name;
@@ -68,7 +92,11 @@ export class Boss extends Entity {
     return this.phases[this.currentPhaseIndex];
   }
   
-  // Active attacks for collision
+  // Active projectiles for collision and rendering
+  private projectiles: BossProjectile[] = [];
+  private projectileIdCounter: number = 0;
+  
+  // Legacy active attacks (for backwards compatibility)
   private activeAttacks: { x: number; y: number; radius: number }[] = [];
   private attackCleanupTimer: number = 0;
   
@@ -78,7 +106,10 @@ export class Boss extends Entity {
   update(dt: number, playerX: number, playerY: number): void {
     this.time += dt;
     
-    // Clean up old attacks
+    // Update projectiles
+    this.updateProjectiles(dt, playerX, playerY);
+    
+    // Clean up old legacy attacks
     this.attackCleanupTimer += dt;
     if (this.attackCleanupTimer > 0.5) {
       this.activeAttacks = [];
@@ -119,6 +150,80 @@ export class Boss extends Entity {
   }
   
   /**
+   * Update all projectiles
+   */
+  private updateProjectiles(dt: number, playerX: number, playerY: number): void {
+    for (const proj of this.projectiles) {
+      // Decrement telegraph time
+      if (proj.telegraph > 0) {
+        proj.telegraph -= dt;
+        continue; // Don't move while telegraphing
+      }
+      
+      // Move projectile
+      if (proj.type === 'homing' && proj.targetX !== undefined && proj.targetY !== undefined) {
+        // Update target to player position
+        proj.targetX = playerX;
+        proj.targetY = playerY;
+        
+        const dx = proj.targetX - proj.x;
+        const dy = proj.targetY - proj.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > 5) {
+          const homingSpeed = 150;
+          proj.vx = (dx / dist) * homingSpeed;
+          proj.vy = (dy / dist) * homingSpeed;
+        }
+      }
+      
+      proj.x += proj.vx * dt;
+      proj.y += proj.vy * dt;
+      proj.life -= dt;
+    }
+    
+    // Remove expired projectiles
+    this.projectiles = this.projectiles.filter(p => p.life > 0);
+  }
+  
+  /**
+   * Spawn a visible projectile
+   */
+  private spawnProjectile(
+    x: number, 
+    y: number, 
+    vx: number, 
+    vy: number, 
+    type: BossProjectile['type'],
+    options: { 
+      radius?: number; 
+      damage?: number; 
+      life?: number; 
+      color?: string;
+      telegraph?: number;
+      targetX?: number;
+      targetY?: number;
+    } = {}
+  ): void {
+    const proj: BossProjectile = {
+      id: this.projectileIdCounter++,
+      x,
+      y,
+      vx,
+      vy,
+      radius: options.radius ?? 15,
+      damage: options.damage ?? 1,
+      life: options.life ?? 3,
+      maxLife: options.life ?? 3,
+      color: options.color ?? CONFIG.COLORS.DANGER,
+      type,
+      telegraph: options.telegraph ?? 0.3,
+      targetX: options.targetX,
+      targetY: options.targetY,
+    };
+    this.projectiles.push(proj);
+  }
+  
+  /**
    * Check for phase transition
    */
   private checkPhaseTransition(): void {
@@ -139,46 +244,60 @@ export class Boss extends Entity {
    */
   private applyPattern(pattern: string, dt: number, playerX: number, _playerY: number): void {
     const speed = 100;
-    const margin = 100;
-    const screenWidth = 600; // Approximate, will be passed from scene
+    const margin = 80;
+    const sw = this.screenWidth;
+    const centerX = sw / 2;
     
     switch (pattern) {
       case 'sweep':
-        // Side to side sweep
-        const sweepX = screenWidth / 2 + Math.sin(this.time * 0.5) * (screenWidth / 2 - margin);
+        // Side to side sweep - smooth sinusoidal movement
+        const sweepX = centerX + Math.sin(this.time * 0.5) * (sw / 2 - margin);
         this.transform.x += (sweepX - this.transform.x) * dt * 2;
         break;
         
       case 'chase':
-        // Chase player X position
-        const chaseSpeed = 80;
+        // Chase player X position with smoothing
+        const chaseSpeed = 100;
         const dx = playerX - this.transform.x;
         this.transform.x += Math.sign(dx) * Math.min(Math.abs(dx), chaseSpeed * dt);
         break;
         
       case 'orbit':
-        // Circular orbit
-        const orbitRadius = 150;
-        const centerX = screenWidth / 2;
+        // Circular orbit around center
+        const orbitRadius = Math.min(150, sw / 4);
         this.transform.x = centerX + Math.cos(this.time * 0.3) * orbitRadius;
         this.transform.y = this.targetY + Math.sin(this.time * 0.3) * 50;
         break;
         
       case 'erratic':
-        // Random movement
-        if (Math.random() < 0.02) {
-          this.transform.vx = (Math.random() - 0.5) * speed * 2;
+        // Random movement with better control
+        if (Math.random() < 0.03) {
+          // Bias toward center when near edges
+          const edgeBias = (this.transform.x < sw * 0.3) ? 0.3 : (this.transform.x > sw * 0.7) ? -0.3 : 0;
+          this.transform.vx = ((Math.random() - 0.5) + edgeBias) * speed * 2;
         }
         this.transform.x += this.transform.vx * dt;
-        this.transform.x = Math.max(margin, Math.min(screenWidth - margin, this.transform.x));
         break;
         
       case 'teleport':
-        // Occasional teleport
-        if (Math.random() < 0.005) {
-          this.transform.x = margin + Math.random() * (screenWidth - margin * 2);
+        // Occasional teleport to random position
+        if (Math.random() < 0.008) {
+          this.transform.x = margin + Math.random() * (sw - margin * 2);
         }
         break;
+        
+      default:
+        // Default: gentle hover around center
+        const hoverX = centerX + Math.sin(this.time * 0.2) * (sw / 4);
+        this.transform.x += (hoverX - this.transform.x) * dt;
+    }
+    
+    // Always constrain to screen bounds
+    this.transform.x = Math.max(margin, Math.min(sw - margin, this.transform.x));
+    
+    // Keep Y position stable around target (prevent drifting)
+    if (pattern !== 'orbit') {
+      this.transform.y += (this.targetY - this.transform.y) * dt * 0.5;
     }
   }
   
@@ -186,56 +305,219 @@ export class Boss extends Entity {
    * Execute an attack
    */
   private executeAttack(type: string, params: Record<string, unknown>, playerX: number, playerY: number): void {
-    // Attack execution - add to active attacks for collision checking
     events.emit('audio:play_sfx', { id: 'boss_attack' });
     
-    const attackRadius = (params.radius as number) || 30;
+    const attackRadius = (params.radius as number) || 15;
+    const projectileSpeed = 200;
     
     switch (type) {
-      case 'straight_shot':
-        // Shoots toward player
-        this.activeAttacks.push({
-          x: playerX,
-          y: playerY,
+      case 'straight_shot': {
+        // Shoots toward player - visible projectile
+        const dx = playerX - this.transform.x;
+        const dy = playerY - this.transform.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const vx = (dx / dist) * projectileSpeed;
+        const vy = (dy / dist) * projectileSpeed;
+        
+        this.spawnProjectile(this.transform.x, this.transform.y, vx, vy, 'orb', {
           radius: attackRadius,
+          color: '#ff3300',
+          telegraph: 0.3,
         });
         break;
+      }
         
-      case 'spread_shot':
+      case 'spread_shot': {
         // Multiple shots in a spread
         const count = (params.count as number) || 3;
+        const spreadAngle = Math.PI / 4; // 45 degree spread
+        const baseAngle = Math.atan2(playerY - this.transform.y, playerX - this.transform.x);
+        
         for (let i = 0; i < count; i++) {
-          const offset = (i - (count - 1) / 2) * 40;
-          this.activeAttacks.push({
-            x: playerX + offset,
-            y: playerY,
-            radius: attackRadius,
+          const angle = baseAngle + (i - (count - 1) / 2) * (spreadAngle / count);
+          const vx = Math.cos(angle) * projectileSpeed;
+          const vy = Math.sin(angle) * projectileSpeed;
+          
+          this.spawnProjectile(this.transform.x, this.transform.y, vx, vy, 'orb', {
+            radius: attackRadius * 0.8,
+            color: '#ff6600',
+            telegraph: 0.2 + i * 0.1,
           });
         }
         break;
+      }
         
-      case 'radial':
-        // Radial burst
+      case 'radial': {
+        // Radial burst of projectiles
         const radialCount = (params.count as number) || 8;
+        
         for (let i = 0; i < radialCount; i++) {
-          const angle = (i / radialCount) * Math.PI * 2;
-          const dist = 100;
-          this.activeAttacks.push({
-            x: this.transform.x + Math.cos(angle) * dist,
-            y: this.transform.y + Math.sin(angle) * dist,
-            radius: attackRadius * 0.7,
+          const angle = (i / radialCount) * Math.PI * 2 + this.time * 0.5;
+          const vx = Math.cos(angle) * projectileSpeed * 0.8;
+          const vy = Math.sin(angle) * projectileSpeed * 0.8;
+          
+          this.spawnProjectile(this.transform.x, this.transform.y, vx, vy, 'orb', {
+            radius: attackRadius * 0.6,
+            color: '#ff00ff',
+            telegraph: 0.4,
           });
         }
         break;
+      }
         
-      case 'laser':
-        // Vertical laser at boss X
-        this.activeAttacks.push({
-          x: this.transform.x,
-          y: playerY,
-          radius: attackRadius * 1.5,
+      case 'laser': {
+        // Vertical laser beam
+        this.spawnProjectile(this.transform.x, this.transform.y, 0, projectileSpeed * 1.5, 'laser', {
+          radius: attackRadius * 2,
+          color: '#00ffff',
+          telegraph: 0.6,
+          life: 2,
         });
         break;
+      }
+      
+      case 'homing': {
+        // Homing projectile that tracks the player
+        this.spawnProjectile(this.transform.x, this.transform.y, 0, projectileSpeed * 0.5, 'homing', {
+          radius: attackRadius * 1.2,
+          color: '#ff0088',
+          telegraph: 0.5,
+          life: 4,
+          targetX: playerX,
+          targetY: playerY,
+        });
+        break;
+      }
+      
+      case 'ring': {
+        // Expanding ring attack
+        this.spawnProjectile(this.transform.x, this.transform.y, 0, 0, 'ring', {
+          radius: 20,
+          color: '#ffaa00',
+          telegraph: 0.3,
+          life: 2,
+        });
+        break;
+      }
+      
+      case 'code_rain': {
+        // Multiple projectiles raining down in lanes
+        const lanes = (params.lanes as number) || 3;
+        for (let i = 0; i < lanes; i++) {
+          const laneX = (this.screenWidth / (lanes + 1)) * (i + 1);
+          this.spawnProjectile(laneX, 0, 0, projectileSpeed, 'orb', {
+            radius: attackRadius,
+            color: '#00ff00',
+            telegraph: 0.2 + i * 0.15,
+            life: 3,
+          });
+        }
+        break;
+      }
+      
+      case 'firewall':
+      case 'virus': {
+        // Multiple homing projectiles
+        const virusCount = (params.count as number) || 3;
+        for (let i = 0; i < virusCount; i++) {
+          const offsetAngle = (i / virusCount) * Math.PI * 2;
+          const startX = this.transform.x + Math.cos(offsetAngle) * 30;
+          const startY = this.transform.y + Math.sin(offsetAngle) * 30;
+          
+          this.spawnProjectile(startX, startY, 0, 0, 'homing', {
+            radius: attackRadius * 0.8,
+            color: type === 'firewall' ? '#ff4400' : '#00ff88',
+            telegraph: 0.4 + i * 0.2,
+            life: 5,
+            targetX: playerX,
+            targetY: playerY,
+          });
+        }
+        break;
+      }
+      
+      // Mirror Self boss attacks
+      case 'mirror_shot': {
+        // Mirror the player's position - shoot from where player is mirrored
+        const mirrorX = this.screenWidth - playerX;
+        const dx = playerX - mirrorX;
+        const dy = playerY - this.transform.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const vx = dist > 0 ? (dx / dist) * projectileSpeed * 0.8 : 0;
+        const vy = dist > 0 ? (dy / dist) * projectileSpeed * 0.8 : projectileSpeed;
+        
+        // Shoot from both the boss and a mirrored position
+        this.spawnProjectile(this.transform.x, this.transform.y, vx, vy, 'orb', {
+          radius: attackRadius,
+          color: '#ffff00',
+          telegraph: 0.3,
+        });
+        this.spawnProjectile(mirrorX, this.transform.y, -vx, vy, 'orb', {
+          radius: attackRadius,
+          color: '#ffff00',
+          telegraph: 0.3,
+        });
+        break;
+      }
+      
+      case 'split': {
+        // Projectile that splits into multiple
+        const splitCount = (params.count as number) || 4;
+        const centerX = this.screenWidth / 2;
+        
+        // Initial shot toward player
+        this.spawnProjectile(this.transform.x, this.transform.y, 0, projectileSpeed * 0.6, 'orb', {
+          radius: attackRadius * 1.5,
+          color: '#aa00ff',
+          telegraph: 0.4,
+          life: 1.5,
+        });
+        
+        // Delayed split projectiles
+        for (let i = 0; i < splitCount; i++) {
+          const angle = (i / splitCount) * Math.PI * 2;
+          const vx = Math.cos(angle) * projectileSpeed * 0.7;
+          const vy = Math.sin(angle) * projectileSpeed * 0.7;
+          
+          this.spawnProjectile(centerX, this.transform.y + 100, vx, vy, 'orb', {
+            radius: attackRadius * 0.6,
+            color: '#cc44ff',
+            telegraph: 0.8 + i * 0.1,
+            life: 2,
+          });
+        }
+        break;
+      }
+      
+      case 'reality_warp': {
+        // Screen-wide distortion attack - lanes of projectiles
+        const warpLanes = 5;
+        const warpSpeed = projectileSpeed * 0.7;
+        
+        // Create wave pattern across the screen
+        for (let i = 0; i < warpLanes; i++) {
+          const laneX = (this.screenWidth / (warpLanes + 1)) * (i + 1);
+          const offset = (i % 2 === 0) ? 0 : 0.3;
+          
+          this.spawnProjectile(laneX, 0, 0, warpSpeed, 'orb', {
+            radius: attackRadius * 1.2,
+            color: '#ff00ff',
+            telegraph: 0.5 + offset,
+            life: 4,
+          });
+        }
+        
+        // Also spawn homing "ego fragments"
+        this.spawnProjectile(this.transform.x, this.transform.y, 0, 0, 'homing', {
+          radius: attackRadius,
+          color: '#ffff00',
+          telegraph: 1.0,
+          life: 5,
+          targetX: playerX,
+          targetY: playerY,
+        });
+        break;
+      }
         
       case 'summon':
         // Would spawn minions - emit event for spawner
@@ -301,18 +583,189 @@ export class Boss extends Entity {
   }
   
   /**
-   * Get active attacks for collision checking
+   * Get active attacks for collision checking (includes projectiles)
    */
   getActiveAttacks(): { x: number; y: number; radius: number }[] {
-    return this.activeAttacks;
+    // Include active projectiles (not in telegraph phase)
+    const projectileAttacks = this.projectiles
+      .filter(p => p.telegraph <= 0)
+      .map(p => ({
+        x: p.x,
+        y: p.y,
+        radius: p.type === 'ring' ? 20 + (p.maxLife - p.life) * 100 : p.radius, // Ring expands
+      }));
+    
+    return [...this.activeAttacks, ...projectileAttacks];
+  }
+  
+  /**
+   * Get all projectiles for rendering
+   */
+  getProjectiles(): BossProjectile[] {
+    return this.projectiles;
+  }
+  
+  /**
+   * Check if any projectile hits the player
+   */
+  checkProjectileHit(playerX: number, playerY: number, playerRadius: number): { hit: boolean; damage: number } {
+    for (const proj of this.projectiles) {
+      if (proj.telegraph > 0) continue; // Not active yet
+      
+      let hitRadius = proj.radius;
+      if (proj.type === 'ring') {
+        // Ring is a donut shape - check if player is at the ring edge
+        const ringRadius = 20 + (proj.maxLife - proj.life) * 100;
+        const ringThickness = 20;
+        const dx = playerX - proj.x;
+        const dy = playerY - proj.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (Math.abs(dist - ringRadius) < ringThickness + playerRadius) {
+          return { hit: true, damage: proj.damage };
+        }
+        continue;
+      }
+      
+      const dx = playerX - proj.x;
+      const dy = playerY - proj.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      
+      if (dist < hitRadius + playerRadius) {
+        // Remove projectile on hit
+        proj.life = 0;
+        return { hit: true, damage: proj.damage };
+      }
+    }
+    
+    return { hit: false, damage: 0 };
   }
   
   /**
    * Render the boss
    */
   render(renderer: Renderer): void {
+    // Render projectiles first (behind boss)
+    this.renderProjectiles(renderer);
+    
     if (this.renderable?.draw) {
       this.renderable.draw(renderer, this);
+    }
+  }
+  
+  /**
+   * Render boss projectiles
+   */
+  private renderProjectiles(renderer: Renderer): void {
+    const ctx = renderer.context;
+    
+    for (const proj of this.projectiles) {
+      // Telegraphing phase - show warning indicator
+      if (proj.telegraph > 0) {
+        const telegraphAlpha = 0.3 + Math.sin(this.time * 20) * 0.2;
+        ctx.save();
+        ctx.globalAlpha = telegraphAlpha;
+        ctx.strokeStyle = proj.color;
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 5]);
+        
+        if (proj.type === 'laser') {
+          // Laser telegraph - vertical line
+          ctx.beginPath();
+          ctx.moveTo(proj.x, proj.y);
+          ctx.lineTo(proj.x, 600);
+          ctx.stroke();
+        } else if (proj.type === 'ring') {
+          // Ring telegraph - expanding circle indicator
+          ctx.beginPath();
+          ctx.arc(proj.x, proj.y, 30, 0, Math.PI * 2);
+          ctx.stroke();
+        } else {
+          // Standard telegraph - crosshair
+          ctx.beginPath();
+          ctx.arc(proj.x, proj.y, proj.radius + 5, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        
+        ctx.setLineDash([]);
+        ctx.restore();
+        continue;
+      }
+      
+      // Active projectile rendering
+      ctx.save();
+      
+      const lifePercent = proj.life / proj.maxLife;
+      ctx.globalAlpha = Math.min(1, lifePercent * 2);
+      
+      // Glow effect
+      ctx.shadowColor = proj.color;
+      ctx.shadowBlur = 15;
+      
+      ctx.fillStyle = proj.color;
+      ctx.strokeStyle = proj.color;
+      
+      switch (proj.type) {
+        case 'orb': {
+          // Glowing orb
+          renderer.glowCircle(proj.x, proj.y, proj.radius, proj.color, 15);
+          renderer.fillCircle(proj.x, proj.y, proj.radius * 0.6, '#ffffff');
+          break;
+        }
+        
+        case 'laser': {
+          // Vertical beam
+          const beamWidth = proj.radius;
+          const gradient = ctx.createLinearGradient(proj.x - beamWidth, proj.y, proj.x + beamWidth, proj.y);
+          gradient.addColorStop(0, 'transparent');
+          gradient.addColorStop(0.3, proj.color);
+          gradient.addColorStop(0.5, '#ffffff');
+          gradient.addColorStop(0.7, proj.color);
+          gradient.addColorStop(1, 'transparent');
+          ctx.fillStyle = gradient;
+          ctx.fillRect(proj.x - beamWidth, proj.y, beamWidth * 2, 600);
+          break;
+        }
+        
+        case 'ring': {
+          // Expanding ring
+          const ringRadius = 20 + (proj.maxLife - proj.life) * 100;
+          ctx.lineWidth = 10;
+          ctx.strokeStyle = proj.color;
+          ctx.beginPath();
+          ctx.arc(proj.x, proj.y, ringRadius, 0, Math.PI * 2);
+          ctx.stroke();
+          
+          // Inner glow
+          ctx.lineWidth = 4;
+          ctx.strokeStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(proj.x, proj.y, ringRadius, 0, Math.PI * 2);
+          ctx.stroke();
+          break;
+        }
+        
+        case 'homing': {
+          // Homing projectile with trail
+          renderer.glowCircle(proj.x, proj.y, proj.radius, proj.color, 20);
+          
+          // Direction indicator
+          const angle = Math.atan2(proj.vy, proj.vx);
+          ctx.save();
+          ctx.translate(proj.x, proj.y);
+          ctx.rotate(angle);
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.moveTo(proj.radius, 0);
+          ctx.lineTo(-proj.radius / 2, proj.radius / 2);
+          ctx.lineTo(-proj.radius / 2, -proj.radius / 2);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+          break;
+        }
+      }
+      
+      ctx.restore();
     }
   }
   
@@ -505,7 +958,7 @@ export class BossFactory {
   /**
    * Create a boss from data
    */
-  static create(data: BossData, screenWidth: number, _screenHeight: number): Boss {
-    return new Boss(data, screenWidth);
+  static create(data: BossData, screenWidth: number, screenHeight: number): Boss {
+    return new Boss(data, screenWidth, screenHeight);
   }
 }

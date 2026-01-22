@@ -17,7 +17,7 @@
       "pattern": "formation",
       "enemies": [
         { "type": "logic_cultist", "count": 5 },
-        { "type": "angelic_bureaucrat", "count": 2 }
+        { "type": "protocol_enforcer", "count": 2 }
       ],
       "spawnDelayMs": 500,
       "entryDelayMs": 600
@@ -38,7 +38,7 @@
       "name": "Red Tape",
       "pattern": "grid",
       "enemies": [
-        { "type": "angelic_bureaucrat", "count": 5 },
+        { "type": "protocol_enforcer", "count": 5 },
         { "type": "logic_cultist", "count": 3 }
       ],
       "spawnDelayMs": 400,
@@ -50,7 +50,7 @@
       "pattern": "mixed",
       "enemies": [
         { "type": "logic_cultist", "count": 4 },
-        { "type": "angelic_bureaucrat", "count": 3 },
+        { "type": "protocol_enforcer", "count": 3 },
         { "type": "animal_philosopher", "count": 3 }
       ],
       "spawnDelayMs": 350,
@@ -62,7 +62,7 @@
       "pattern": "siege",
       "enemies": [
         { "type": "logic_cultist", "count": 6 },
-        { "type": "angelic_bureaucrat", "count": 4 },
+        { "type": "protocol_enforcer", "count": 4 },
         { "type": "animal_philosopher", "count": 4 }
       ],
       "spawnDelayMs": 300,
@@ -74,7 +74,7 @@
       "pattern": "gauntlet",
       "enemies": [
         { "type": "logic_cultist", "count": 8 },
-        { "type": "angelic_bureaucrat", "count": 5 },
+        { "type": "protocol_enforcer", "count": 5 },
         { "type": "animal_philosopher", "count": 5 }
       ],
       "spawnDelayMs": 250,

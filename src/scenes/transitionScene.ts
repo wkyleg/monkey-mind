@@ -30,15 +30,24 @@ export class TransitionScene extends Scene {
   private unlockMessages: string[] = [];
   private canSkip: boolean = false;
   
-  // Visual effects
-  private particles: Array<{
+  // Industrial visual effects - data streams instead of fireworks
+  private dataStreams: Array<{
     x: number;
     y: number;
-    vx: number;
-    vy: number;
-    size: number;
+    speed: number;
+    chars: string[];
     color: string;
+    length: number;
     life: number;
+  }> = [];
+  
+  private circuitNodes: Array<{
+    x: number;
+    y: number;
+    radius: number;
+    pulsePhase: number;
+    connections: number[];
+    color: string;
   }> = [];
   
   constructor(game: Game) {
@@ -50,7 +59,8 @@ export class TransitionScene extends Scene {
     this.phase = 'fade_in';
     this.phaseTime = 0;
     this.canSkip = false;
-    this.particles = [];
+    this.dataStreams = [];
+    this.circuitNodes = [];
     
     // Get context from scene manager
     const ctx = this.game.getScenes().getTransitionContext();
@@ -98,33 +108,73 @@ export class TransitionScene extends Scene {
       }
     }
     
-    // Create celebration particles
+    // Create industrial visual effects
     const { width, height } = this.game.getRenderer();
-    this.spawnCelebrationParticles(width, height);
+    this.spawnDataStreams(width, height);
+    this.spawnCircuitNodes(width, height);
     
     // Play celebration audio
     this.game.getAudio().playPowerup();
   }
   
-  private spawnCelebrationParticles(width: number, height: number): void {
-    const colors = [CONFIG.COLORS.PRIMARY, CONFIG.COLORS.SECONDARY, CONFIG.COLORS.ACCENT, '#ffffff', '#ffcc00'];
+  private spawnDataStreams(width: number, height: number): void {
+    const dataChars = '01アイウエオカキクケコ▓▒░█▌▐';
+    const colors = [CONFIG.COLORS.PRIMARY, CONFIG.COLORS.SECONDARY, '#00ff88', '#00aaff'];
     
-    for (let i = 0; i < 50; i++) {
-      this.particles.push({
-        x: width / 2 + (Math.random() - 0.5) * 100,
-        y: height / 2,
-        vx: (Math.random() - 0.5) * 200,
-        vy: -100 - Math.random() * 200,
-        size: 3 + Math.random() * 5,
+    // Spawn vertical data streams
+    for (let i = 0; i < 12; i++) {
+      const chars: string[] = [];
+      const length = 8 + Math.floor(Math.random() * 12);
+      for (let j = 0; j < length; j++) {
+        chars.push(dataChars[Math.floor(Math.random() * dataChars.length)]);
+      }
+      
+      this.dataStreams.push({
+        x: Math.random() * width,
+        y: -Math.random() * height,
+        speed: 80 + Math.random() * 120,
+        chars,
         color: colors[Math.floor(Math.random() * colors.length)],
-        life: 2 + Math.random() * 2
+        length,
+        life: 4 + Math.random() * 3,
       });
+    }
+  }
+  
+  private spawnCircuitNodes(width: number, height: number): void {
+    const colors = [CONFIG.COLORS.PRIMARY, CONFIG.COLORS.SECONDARY];
+    
+    // Create a grid of circuit nodes
+    for (let i = 0; i < 8; i++) {
+      const x = (width / 8) * (i + 0.5) + (Math.random() - 0.5) * 40;
+      const y = height * 0.3 + (Math.random() - 0.5) * 60;
+      
+      this.circuitNodes.push({
+        x,
+        y,
+        radius: 3 + Math.random() * 3,
+        pulsePhase: Math.random() * Math.PI * 2,
+        connections: [],
+        color: colors[Math.floor(Math.random() * colors.length)],
+      });
+    }
+    
+    // Create connections between nearby nodes
+    for (let i = 0; i < this.circuitNodes.length; i++) {
+      for (let j = i + 1; j < this.circuitNodes.length; j++) {
+        const dx = this.circuitNodes[i].x - this.circuitNodes[j].x;
+        const dy = this.circuitNodes[i].y - this.circuitNodes[j].y;
+        if (Math.sqrt(dx * dx + dy * dy) < 150 && Math.random() > 0.4) {
+          this.circuitNodes[i].connections.push(j);
+        }
+      }
     }
   }
   
   exit(): void {
     this.context = null;
-    this.particles = [];
+    this.dataStreams = [];
+    this.circuitNodes = [];
     this.game.getScenes().clearTransitionContext();
   }
   
@@ -132,14 +182,19 @@ export class TransitionScene extends Scene {
     this.time += dt;
     this.phaseTime += dt;
     
-    // Update particles
-    for (const p of this.particles) {
-      p.x += p.vx * dt;
-      p.y += p.vy * dt;
-      p.vy += 150 * dt; // gravity
-      p.life -= dt;
+    // Update data streams (falling matrix-style)
+    for (const stream of this.dataStreams) {
+      stream.y += stream.speed * dt;
+      stream.life -= dt;
+      
+      // Randomize characters occasionally
+      if (Math.random() < 0.1) {
+        const dataChars = '01アイウエオカキクケコ▓▒░█▌▐';
+        const idx = Math.floor(Math.random() * stream.chars.length);
+        stream.chars[idx] = dataChars[Math.floor(Math.random() * dataChars.length)];
+      }
     }
-    this.particles = this.particles.filter(p => p.life > 0);
+    this.dataStreams = this.dataStreams.filter(s => s.life > 0 && s.y < 800);
     
     // Phase transitions
     switch (this.phase) {
@@ -210,16 +265,60 @@ export class TransitionScene extends Scene {
     renderer.fillRect(0, 0, width, height, '#000000');
     renderer.restore();
     
-    // Particles
-    for (const p of this.particles) {
-      const alpha = Math.min(1, p.life);
-      renderer.save();
-      renderer.setAlpha(alpha);
-      renderer.context.beginPath();
-      renderer.context.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      renderer.context.fillStyle = p.color;
-      renderer.context.fill();
-      renderer.restore();
+    // Render data streams (matrix-style falling code)
+    const ctx = renderer.context;
+    for (const stream of this.dataStreams) {
+      const alpha = Math.min(1, stream.life / 2);
+      ctx.save();
+      ctx.font = '12px monospace';
+      ctx.textAlign = 'center';
+      
+      for (let i = 0; i < stream.chars.length; i++) {
+        const charY = stream.y + i * 14;
+        const charAlpha = alpha * (1 - i / stream.chars.length * 0.7);
+        ctx.globalAlpha = charAlpha;
+        ctx.fillStyle = i === 0 ? '#ffffff' : stream.color;
+        ctx.fillText(stream.chars[i], stream.x, charY);
+      }
+      ctx.restore();
+    }
+    
+    // Render circuit nodes and connections
+    for (const node of this.circuitNodes) {
+      // Draw connections first
+      for (const connIdx of node.connections) {
+        const other = this.circuitNodes[connIdx];
+        const pulsePos = (Math.sin(this.time * 3 + node.pulsePhase) + 1) / 2;
+        
+        ctx.save();
+        ctx.strokeStyle = node.color;
+        ctx.globalAlpha = 0.3;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(node.x, node.y);
+        ctx.lineTo(other.x, other.y);
+        ctx.stroke();
+        
+        // Traveling pulse
+        const pulseX = node.x + (other.x - node.x) * pulsePos;
+        const pulseY = node.y + (other.y - node.y) * pulsePos;
+        ctx.globalAlpha = 0.8;
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(pulseX, pulseY, 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+      
+      // Draw node
+      const pulse = Math.sin(this.time * 4 + node.pulsePhase) * 0.3 + 0.7;
+      ctx.save();
+      ctx.globalAlpha = pulse;
+      ctx.fillStyle = node.color;
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
     }
     
     // Phase-based content

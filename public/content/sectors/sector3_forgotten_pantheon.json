@@ -34,7 +34,7 @@
   "boss": "banana_pentagon",
   "unlocks": {
     "powerups": ["passion_fury"],
-    "codex": ["entry_forgotten_pantheon", "logic_cultist", "angelic_bureaucrat", "animal_philosopher"],
+    "codex": ["entry_forgotten_pantheon", "logic_cultist", "protocol_enforcer", "animal_philosopher"],
     "cosmetics": ["halo_gold"]
   }
 }

@@ -10,6 +10,7 @@ import type { WeaponSystem } from './weapons';
 import { events } from '../core/events';
 import { oscillate } from '../util/math';
 import { contentLoader } from '../content/loader';
+import { svgAssets } from '../engine/svgAssets';
 
 /**
  * Powerup pickup entity
@@ -55,44 +56,64 @@ export class PowerupPickup extends Entity {
   private draw(renderer: Renderer, _pickup: PowerupPickup, data: PowerupData): void {
     const { x, y } = this.transform;
     const color = data.visual.color;
+    const ctx = renderer.context;
     
     // Floating animation
     const float = oscillate(this.time, 2, 5);
     const drawY = y + float;
     
+    // Determine SVG ID based on powerup id
+    const svgId = `powerups/${data.id}`;
+    const svgAsset = svgAssets.get(svgId);
+    const powerupSize = 50;
+    
     // Outer glow
-    renderer.glowCircle(x, drawY, 25, color, 20);
+    renderer.glowCircle(x, drawY, 28, color, 25);
     
-    // Inner circle
-    renderer.fillCircle(x, drawY, 18, color);
-    
-    // Icon (simplified)
-    const ctx = renderer.context;
-    ctx.fillStyle = '#ffffff';
-    ctx.font = "16px 'SF Mono', Consolas, monospace";
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    
-    switch (data.visual.icon) {
-      case 'shield':
-        ctx.fillText('🛡', x, drawY);
-        break;
-      case 'flame':
-        ctx.fillText('🔥', x, drawY);
-        break;
-      case 'bolt':
-        ctx.fillText('⚡', x, drawY);
-        break;
-      default:
-        ctx.fillText('★', x, drawY);
+    if (svgAsset) {
+      // Render SVG powerup icon
+      svgAssets.render(ctx, svgId, {
+        x,
+        y: drawY,
+        width: powerupSize,
+        height: powerupSize,
+        rotation: oscillate(this.time, 8, 0.1),
+        glow: 15,
+        glowColor: color,
+      });
+    } else {
+      // Fallback to procedural rendering
+      renderer.fillCircle(x, drawY, 18, color);
+      
+      ctx.fillStyle = '#ffffff';
+      ctx.font = "16px 'SF Mono', Consolas, monospace";
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      
+      switch (data.visual.icon) {
+        case 'shield':
+          ctx.fillText('🛡', x, drawY);
+          break;
+        case 'flame':
+          ctx.fillText('🔥', x, drawY);
+          break;
+        case 'bolt':
+          ctx.fillText('⚡', x, drawY);
+          break;
+        default:
+          ctx.fillText('★', x, drawY);
+      }
     }
     
-    // Rotating ring
+    // Rotating ring effect
     const ringAngle = this.time * 2;
     ctx.strokeStyle = color;
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.arc(x, drawY, 22, ringAngle, ringAngle + Math.PI);
+    ctx.arc(x, drawY, 30, ringAngle, ringAngle + Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(x, drawY, 30, ringAngle + Math.PI, ringAngle + Math.PI * 2);
     ctx.stroke();
   }
 }

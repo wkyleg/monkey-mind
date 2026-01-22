@@ -6,7 +6,7 @@
       "name": "Deep Dive",
       "pattern": "drift",
       "enemies": [
-        { "type": "zigzag_cherub", "count": 4, "behavior": "zigzag" }
+        { "type": "glitch_sprite", "count": 4, "behavior": "zigzag" }
       ],
       "spawnDelayMs": 600,
       "entryDelayMs": 800
@@ -16,7 +16,7 @@
       "name": "Against the Current",
       "pattern": "wave",
       "enemies": [
-        { "type": "zigzag_cherub", "count": 5, "behavior": "zigzag" },
+        { "type": "glitch_sprite", "count": 5, "behavior": "zigzag" },
         { "type": "jellyfish_thought", "count": 2, "behavior": "drift" }
       ],
       "spawnDelayMs": 500,
@@ -28,7 +28,7 @@
       "pattern": "orbital",
       "enemies": [
         { "type": "orbital_eye", "count": 3, "behavior": "orbit" },
-        { "type": "zigzag_cherub", "count": 4 }
+        { "type": "glitch_sprite", "count": 4 }
       ],
       "spawnDelayMs": 450,
       "entryDelayMs": 550
@@ -48,7 +48,7 @@
       "name": "Coral Defense",
       "pattern": "mixed",
       "enemies": [
-        { "type": "zigzag_cherub", "count": 4 },
+        { "type": "glitch_sprite", "count": 4 },
         { "type": "orbital_eye", "count": 3 },
         { "type": "jellyfish_thought", "count": 3 }
       ],
@@ -61,7 +61,7 @@
       "pattern": "pincer",
       "enemies": [
         { "type": "orbital_eye", "count": 4, "behavior": "orbit" },
-        { "type": "zigzag_cherub", "count": 6 },
+        { "type": "glitch_sprite", "count": 6 },
         { "type": "jellyfish_thought", "count": 4 }
       ],
       "spawnDelayMs": 300,
@@ -72,7 +72,7 @@
       "name": "Abyssal Gate",
       "pattern": "gauntlet",
       "enemies": [
-        { "type": "zigzag_cherub", "count": 8 },
+        { "type": "glitch_sprite", "count": 8 },
         { "type": "orbital_eye", "count": 5 },
         { "type": "jellyfish_thought", "count": 5 }
       ],
