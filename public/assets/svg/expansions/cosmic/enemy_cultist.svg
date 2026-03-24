@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Cosmic Cultist - Hooded figure with eldritch corruption -->
+  <defs>
+    <linearGradient id="cultistRobe" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a0a2a"/>
+      <stop offset="100%" stop-color="#0a0515"/>
+    </linearGradient>
+    <filter id="madness">
+      <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="3"/>
+      <feDisplacementMap in="SourceGraphic" scale="1"/>
+    </filter>
+  </defs>
+  
+  <g transform="translate(30,30)">
+    <!-- Robe body -->
+    <path d="M-15,25 L-18,-5 L0,-18 L18,-5 L15,25 Z" fill="url(#cultistRobe)"/>
+    
+    <!-- Hood -->
+    <ellipse cx="0" cy="-12" rx="14" ry="12" fill="#0a0515"/>
+    <ellipse cx="0" cy="-14" rx="10" ry="9" fill="#1a0a2a"/>
+    
+    <!-- Glowing eyes in hood darkness -->
+    <circle cx="-4" cy="-14" r="2" fill="#00ff88" opacity="0.9"/>
+    <circle cx="4" cy="-14" r="2" fill="#00ff88" opacity="0.9"/>
+    
+    <!-- Tentacle corruption escaping from robes -->
+    <g stroke="#2a1a4a" stroke-width="3" fill="none" opacity="0.8">
+      <path d="M-10,15 Q-20,20 -18,28"/>
+      <path d="M10,15 Q20,20 18,28"/>
+      <path d="M0,25 Q5,30 0,35"/>
+    </g>
+    
+    <!-- Eldritch symbol on chest -->
+    <g stroke="#ff00ff" stroke-width="1" fill="none" opacity="0.5">
+      <circle cx="0" cy="5" r="6"/>
+      <path d="M0,-1 L0,11 M-5,5 L5,5"/>
+      <circle cx="0" cy="5" r="3"/>
+    </g>
+    
+    <!-- Madness particles -->
+    <g fill="#00ff88" opacity="0.4" filter="url(#madness)">
+      <circle cx="-8" cy="-20" r="2"/>
+      <circle cx="8" cy="-22" r="1.5"/>
+      <circle cx="0" cy="-25" r="1"/>
+    </g>
+  </g>
+</svg>

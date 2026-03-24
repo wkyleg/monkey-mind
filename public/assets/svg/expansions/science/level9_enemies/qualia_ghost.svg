@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="qualiaGlow"><feGaussianBlur stdDeviation="4"/></filter></defs>
+  <circle cx="30" cy="30" r="18" fill="#ff6666" opacity="0.3" filter="url(#qualiaGlow)"/>
+  <circle cx="30" cy="30" r="10" fill="#ff4444" opacity="0.5"/>
+</svg>

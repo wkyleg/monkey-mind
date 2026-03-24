@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="neuralGlow"><feGaussianBlur stdDeviation="3"/></filter></defs>
+  <circle cx="30" cy="30" r="18" fill="#3a4a5a" opacity="0.5" filter="url(#neuralGlow)"/>
+  <g stroke="#88ccff" stroke-width="1" fill="none" opacity="0.7">
+    <path d="M 20 25 Q 25 20 30 25 Q 35 30 40 25"/>
+    <path d="M 20 35 Q 25 30 30 35 Q 35 40 40 35"/>
+  </g>
+  <circle cx="30" cy="30" r="6" fill="#88ccff" opacity="0.6"/>
+</svg>

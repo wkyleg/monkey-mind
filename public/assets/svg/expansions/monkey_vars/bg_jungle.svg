@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Primeval jungle -->
+  <defs>
+    <linearGradient id="jungleDepth" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a2a0a"/>
+      <stop offset="50%" style="stop-color:#1a4a1a"/>
+      <stop offset="100%" style="stop-color:#0a1a0a"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="400" height="600" fill="url(#jungleDepth)"/>
+  
+  <!-- Canopy layers -->
+  <g opacity="0.5">
+    <!-- Back layer -->
+    <ellipse cx="100" cy="50" rx="120" ry="80" fill="#1a3a1a"/>
+    <ellipse cx="300" cy="80" rx="150" ry="100" fill="#1a3a1a"/>
+    <ellipse cx="200" cy="30" rx="100" ry="60" fill="#0a2a0a"/>
+    
+    <!-- Mid layer -->
+    <ellipse cx="50" cy="150" rx="100" ry="80" fill="#2a5a2a"/>
+    <ellipse cx="350" cy="180" rx="120" ry="90" fill="#2a5a2a"/>
+  </g>
+  
+  <!-- Vines -->
+  <g stroke="#3a6a3a" stroke-width="4" fill="none" opacity="0.6">
+    <path d="M50,0 Q30,100 60,200 Q90,300 50,400"/>
+    <path d="M150,0 Q180,150 140,300"/>
+    <path d="M300,0 Q280,100 320,200 Q360,300 320,400"/>
+    <path d="M380,100 Q360,200 390,300"/>
+  </g>
+  
+  <!-- Exotic flowers -->
+  <g opacity="0.6">
+    <circle cx="80" cy="350" r="8" fill="#ff4a6a"/>
+    <circle cx="80" cy="350" r="4" fill="#ffa">
+      <animate attributeName="r" values="4;6;4" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="320" cy="420" r="10" fill="#6a4aff"/>
+    <circle cx="320" cy="420" r="5" fill="#ffa">
+      <animate attributeName="r" values="5;7;5" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Hanging moss -->
+  <g fill="#5a8a5a" opacity="0.4">
+    <path d="M20,200 Q25,220 20,240 Q15,260 20,280"/>
+    <path d="M120,180 Q125,200 120,220"/>
+    <path d="M280,190 Q285,210 280,230 Q275,250 280,270"/>
+    <path d="M380,210 Q385,230 380,250"/>
+  </g>
+</svg>

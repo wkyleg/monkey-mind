@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">
+  <defs>
+    <radialGradient id="quiet_void" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a2a"/>
+      <stop offset="50%" stop-color="#0a0a15"/>
+      <stop offset="100%" stop-color="#000005"/>
+    </radialGradient>
+    <filter id="quiet_glow">
+      <feGaussianBlur stdDeviation="5" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="quiet_soft">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+  <!-- Void background -->
+  <circle cx="70" cy="70" r="65" fill="url(#quiet_void)"/>
+  <!-- Serene face outline - barely visible -->
+  <ellipse cx="70" cy="70" rx="40" ry="45" fill="none" stroke="#334455" stroke-width="1" opacity="0.5"/>
+  <!-- Closed eyes - peaceful -->
+  <path d="M45 60 Q55 55 65 60" fill="none" stroke="#667788" stroke-width="2" stroke-linecap="round"/>
+  <path d="M75 60 Q85 55 95 60" fill="none" stroke="#667788" stroke-width="2" stroke-linecap="round"/>
+  <!-- Subtle smile -->
+  <path d="M55 85 Q70 95 85 85" fill="none" stroke="#667788" stroke-width="2" stroke-linecap="round"/>
+  <!-- Aura rings - expanding slowly -->
+  <circle cx="70" cy="70" r="50" fill="none" stroke="#4444aa" stroke-width="1" opacity="0.3">
+    <animate attributeName="r" values="50;65;50" dur="8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;0.1;0.3" dur="8s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="70" cy="70" r="55" fill="none" stroke="#6666cc" stroke-width="1" opacity="0.2">
+    <animate attributeName="r" values="55;70;55" dur="10s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.2;0.05;0.2" dur="10s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Meditation lotus base -->
+  <g fill="#223344" opacity="0.4">
+    <ellipse cx="70" cy="120" rx="30" ry="10"/>
+    <path d="M50 115 Q55 105 70 110 Q85 105 90 115" fill="#334455"/>
+    <path d="M55 112 Q60 100 70 105 Q80 100 85 112" fill="#445566"/>
+  </g>
+  <!-- Third eye - gentle glow -->
+  <circle cx="70" cy="45" r="8" fill="#1a1a2a" stroke="#8888ff" stroke-width="1">
+    <animate attributeName="stroke-opacity" values="1;0.5;1" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="70" cy="45" r="4" fill="#8888ff" filter="url(#quiet_glow)" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;0.3;0.6" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Floating particles of thought dissolving -->
+  <g fill="#aaaaff" filter="url(#quiet_soft)">
+    <circle cx="30" cy="50" r="2" opacity="0.3">
+      <animate attributeName="cy" values="50;40;50" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0;0.3" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="110" cy="60" r="1.5" opacity="0.2">
+      <animate attributeName="cy" values="60;50;60" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.2;0;0.2" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="50" cy="30" r="1" opacity="0.25">
+      <animate attributeName="cy" values="30;20;30" dur="7s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.25;0;0.25" dur="7s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><defs><filter id="illnessGlow"><feGaussianBlur stdDeviation="3"/></filter></defs><ellipse cx="30" cy="30" rx="15" ry="18" fill="#4a4a6a" opacity="0.6" filter="url(#illnessGlow)"/><path d="M 20 25 Q 30 15 40 25" stroke="#ff4444" stroke-width="2" fill="none"/></svg>

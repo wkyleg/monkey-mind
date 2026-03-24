@@ -1,0 +1,66 @@
+{
+  "redacted_agent": {
+    "spawn": [
+      "[CLASSIFIED]",
+      "You saw nothing.",
+      "This meeting never happened.",
+      "Clearance: DENIED",
+      "Move along, citizen."
+    ],
+    "death": [
+      "[REDACTED]...",
+      "Cover... blown...",
+      "Disavowed...",
+      "The agency... forgets...",
+      "Burn... notice..."
+    ]
+  },
+  "grey_visitor": {
+    "spawn": [
+      "We have watched.",
+      "The probe begins.",
+      "Your species... curious.",
+      "Contact initiated.",
+      "Take us to..."
+    ],
+    "death": [
+      "Signal... lost...",
+      "Returning... home...",
+      "The experiment... ends...",
+      "Your sky... safe...",
+      "Phone... home..."
+    ]
+  },
+  "numbers_broadcaster": {
+    "spawn": [
+      "7... 4... 1... 9...",
+      "The station broadcasts!",
+      "Attention: RECIPIENT",
+      "Message incoming!",
+      "5... 8... 2... 6..."
+    ],
+    "death": [
+      "Static...",
+      "Transmission... ends...",
+      "Off... air...",
+      "Signal... terminated...",
+      "...silence..."
+    ]
+  },
+  "signal_phantom": {
+    "spawn": [
+      "Do you receive?",
+      "Frequency locked.",
+      "Ghost in the waves.",
+      "The signal speaks.",
+      "Tuning in..."
+    ],
+    "death": [
+      "White... noise...",
+      "Channel... closed...",
+      "Frequency... dead...",
+      "Lost... in static...",
+      "Broadcast... over..."
+    ]
+  }
+}

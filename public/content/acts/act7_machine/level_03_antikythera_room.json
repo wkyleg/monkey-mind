@@ -1,0 +1,63 @@
+{
+  "id": "act7_level3_antikythera_room",
+  "act": 7,
+  "index": 3,
+  "title": "Antikythera Room",
+  "subtitle": "The gears rotate. Align them to proceed.",
+  "themeTags": ["antikythera", "clockwork", "alignment"],
+  "ruleCard": {
+    "icon": "gear",
+    "hint": "Shieldbearers are clockwork. Gear rotation exposes their weak points.",
+    "mechanic": "rhythm_sync",
+    "params": { "gearCycle": 4, "alignmentWindow": 1 }
+  },
+  "enemyDeck": [
+    { "archetype": "shieldbearer", "modifiers": [], "weight": 5 },
+    { "archetype": "drifter", "modifiers": [], "weight": 3 },
+    { "archetype": "weaver", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "clockwork_soldier": {
+      "visualId": "clockwork_soldier",
+      "dialogue": {
+        "spawn": ["TICK TOCK!", "Gears aligned!", "Mechanical precision!", "The cycle continues!", "Wound and ready!"],
+        "death": ["Gears... grinding...", "Spring... broken...", "Mechanism... stops...", "Unwound... forever...", "TICK... ..."]
+      }
+    },
+    "bronze_gear": {
+      "visualId": "bronze_gear",
+      "dialogue": {
+        "spawn": ["Rotation eternal!", "Teeth engage!", "The mechanism turns!", "Celestial calculation!", "Ancient precision!"],
+        "death": ["Teeth... worn...", "Rotation... stops...", "The mechanism... jams...", "Calculation... error...", "Rust... wins..."]
+      }
+    },
+    "astronomical_dial": {
+      "visualId": "astronomical_dial",
+      "dialogue": {
+        "spawn": ["The stars align!", "Celestial prediction!", "The calendar computed!", "Ancient astronomy!", "Heavens calculated!"],
+        "death": ["Stars... misaligned...", "Prediction... failed...", "Calendar... wrong...", "The sky... unknown...", "Computation... ends..."]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "gear_crush", "lanes": [1, 3, 5], "timing": 4000, "damage": 2, "visual": "gear_teeth" }
+  ],
+  "bgLayers": [
+    { "svgId": "mechanism", "parallaxSpeed": 0.05, "opacity": 0.5 },
+    { "svgId": "gears", "parallaxSpeed": 0.2, "opacity": 0.7 },
+    { "svgId": "bronze", "parallaxSpeed": 0.4, "opacity": 0.4 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The gears rotate. Align them to proceed.",
+    "codexSnippet": "The Antikythera mechanism computed the heavens two thousand years ago. The monkey learned that the ancients knew more than we remember.",
+    "radioWhisper": "Caller found a gear in his attic. It predicts the stock market. Badly."
+  },
+  "musicSeed": {
+    "seed": "antikythera_003",
+    "mode": "lydian",
+    "tempoRange": [100, 115],
+    "intensity": 0.6
+  },
+  "duration": 120,
+  "unlockCondition": "act7_level2_complete"
+}

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Base -->
+  <rect width="800" height="600" fill="#050308"/>
+  
+  <!-- Chaotic lines -->
+  <g stroke-width="1" fill="none" opacity="0.4">
+    <path d="M 0 100 Q 200 50 400 150 Q 600 250 800 100" stroke="#ff00aa"/>
+    <path d="M 0 200 Q 200 300 400 200 Q 600 100 800 250" stroke="#00ffaa"/>
+    <path d="M 0 350 Q 200 250 400 350 Q 600 450 800 300" stroke="#ffaa00"/>
+    <path d="M 0 450 Q 200 550 400 450 Q 600 350 800 500" stroke="#00aaff"/>
+    <path d="M 0 550 Q 200 450 400 550 Q 600 600 800 450" stroke="#ff5500"/>
+  </g>
+  
+  <!-- Random shapes -->
+  <g opacity="0.2">
+    <polygon points="100,100 150,50 200,100 150,150" fill="#ff00aa"/>
+    <polygon points="650,400 700,350 750,400 700,450" fill="#00ffaa"/>
+    <polygon points="350,500 400,450 450,500 400,550" fill="#ffaa00"/>
+    <rect x="600" y="100" width="40" height="40" fill="#00aaff" transform="rotate(45 620 120)"/>
+    <rect x="100" y="400" width="35" height="35" fill="#ff5500" transform="rotate(30 117 417)"/>
+  </g>
+  
+  <!-- Static noise dots -->
+  <g fill="#ffffff" opacity="0.1">
+    <circle cx="50" cy="150" r="2"/>
+    <circle cx="180" cy="280" r="1.5"/>
+    <circle cx="320" cy="100" r="2"/>
+    <circle cx="480" cy="350" r="1.5"/>
+    <circle cx="620" cy="200" r="2"/>
+    <circle cx="750" cy="450" r="1.5"/>
+    <circle cx="280" cy="520" r="2"/>
+    <circle cx="550" cy="80" r="1.5"/>
+  </g>
+</svg>

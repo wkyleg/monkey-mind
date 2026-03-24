@@ -1,0 +1,63 @@
+{
+  "id": "act7_level4_time_arrow_loop",
+  "act": 7,
+  "index": 4,
+  "title": "Time Arrow/Loop",
+  "subtitle": "Recursive enemies return. Choose your exit: arrow or loop.",
+  "themeTags": ["time", "recursion", "choice"],
+  "ruleCard": {
+    "icon": "arrow_loop",
+    "hint": "Recursive modifier means they return. Choose: escape forward (arrow) or master the loop.",
+    "mechanic": "contract_clause",
+    "params": { "choices": ["arrow", "loop"], "arrowBonus": "speed", "loopBonus": "power" }
+  },
+  "enemyDeck": [
+    { "archetype": "drifter", "modifiers": ["recursive"], "weight": 5 },
+    { "archetype": "chaser", "modifiers": ["recursive"], "weight": 3 },
+    { "archetype": "phaser", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "time_arrow": {
+      "visualId": "time_arrow",
+      "dialogue": {
+        "spawn": ["Forward only!", "The future calls!", "No going back!", "Entropy increases!", "One direction!"],
+        "death": ["Time... reversed?", "The arrow... breaks...", "Entropy... decreases?", "Future... changes...", "Direction... lost..."]
+      }
+    },
+    "loop_guardian": {
+      "visualId": "loop_guardian",
+      "dialogue": {
+        "spawn": ["Again and again!", "The cycle repeats!", "You've been here before!", "Eternal return!", "No escape from the loop!"],
+        "death": ["Cycle... broken...", "The loop... ends...", "Something new... finally...", "First time... ever...", "Linear... now..."]
+      }
+    },
+    "recursion_echo": {
+      "visualId": "recursion_echo",
+      "dialogue": {
+        "spawn": ["Call myself!", "Stack overflow!", "Base case never!", "Recursion forever!", "Echo echo echo!"],
+        "death": ["Stack... unwound...", "Base case... found...", "Return... finally...", "Recursion... ends...", "Once... is enough..."]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "time_loop", "lanes": [2, 3, 4], "timing": 12000, "damage": 0, "visual": "clock_rewind" }
+  ],
+  "bgLayers": [
+    { "svgId": "timeline", "parallaxSpeed": 0.08, "opacity": 0.5 },
+    { "svgId": "arrows", "parallaxSpeed": 0.25, "opacity": 0.6 },
+    { "svgId": "loops", "parallaxSpeed": 0.4, "opacity": 0.5 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Recursive enemies return. Choose your exit: arrow or loop.",
+    "codexSnippet": "Time's arrow points one way, but loops suggest otherwise. The monkey learned that the choice between progress and repetition is itself a loop.",
+    "radioWhisper": "Caller says he's been here before. He's been here before. He's been here before."
+  },
+  "musicSeed": {
+    "seed": "time_arrow_004",
+    "mode": "chromatic",
+    "tempoRange": [105, 125],
+    "intensity": 0.65
+  },
+  "duration": 130,
+  "unlockCondition": "act7_level3_complete"
+}

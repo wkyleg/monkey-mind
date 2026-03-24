@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="tulpaGlow"><feGaussianBlur stdDeviation="4"/></filter></defs>
+  <ellipse cx="30" cy="30" rx="18" ry="22" fill="#3a4a5a" opacity="0.5" filter="url(#tulpaGlow)"/>
+  <circle cx="25" cy="25" r="4" fill="#88ccff"/><circle cx="35" cy="25" r="4" fill="#88ccff"/>
+  <path d="M 22 35 Q 30 40 38 35" fill="none" stroke="#88ccff" stroke-width="2"/>
+  <circle cx="30" cy="8" r="5" fill="#aaddff" opacity="0.4"/>
+</svg>

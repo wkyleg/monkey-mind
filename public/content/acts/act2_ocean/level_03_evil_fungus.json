@@ -1,0 +1,99 @@
+{
+  "id": "act2_level3_evil_fungus",
+  "act": 2,
+  "index": 3,
+  "title": "Evil Fungus",
+  "subtitle": "Spores spread. Quarantine the infected.",
+  "themeTags": ["fungus", "infection", "quarantine"],
+  "ruleCard": {
+    "icon": "spore",
+    "hint": "Splitters release spores. Stay out of quarantine zones or spread the infection.",
+    "mechanic": "quarantine_zone",
+    "params": { "infectionRadius": 50, "spreadRate": 2 }
+  },
+  "enemyDeck": [
+    { "archetype": "splitter", "modifiers": ["entropy"], "weight": 5 },
+    { "archetype": "anchor", "modifiers": [], "weight": 3 },
+    { "archetype": "swarm", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "spore_mother": {
+      "visualId": "spore_mother",
+      "dialogue": {
+        "spawn": [
+          "Join the network!",
+          "Breathe deep, child!",
+          "The spores bring unity!",
+          "Resistance is infection!",
+          "We are ONE!"
+        ],
+        "death": [
+          "The network... fractures...",
+          "My children... scattered...",
+          "Connection... lost...",
+          "The hive... mind... fades...",
+          "Alone... at last..."
+        ]
+      }
+    },
+    "infected_host": {
+      "visualId": "infected_host",
+      "dialogue": {
+        "spawn": [
+          "I... can't... control...",
+          "The fungus... commands!",
+          "Help... me... NO! ATTACK!",
+          "Not... my... thoughts...",
+          "It... speaks... through... me!"
+        ],
+        "death": [
+          "Free... finally... free...",
+          "Thank... you...",
+          "The voice... stops...",
+          "I remember... who I...",
+          "Peace... at... last..."
+        ]
+      }
+    },
+    "mycelia_tendril": {
+      "visualId": "mycelia_tendril",
+      "dialogue": {
+        "spawn": [
+          "GROW! SPREAD! CONNECT!",
+          "The network expands!",
+          "Reaching... grasping...",
+          "You will be assimilated!",
+          "Root and branch!"
+        ],
+        "death": [
+          "Severed... from... whole...",
+          "The root... dies...",
+          "Cut... off... alone...",
+          "Withering... shrinking...",
+          "No... nutrients..."
+        ]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "spore_cloud", "lanes": [2, 3, 4], "timing": 6000, "damage": 1, "visual": "fungal_mist" }
+  ],
+  "bgLayers": [
+    { "svgId": "fungal", "parallaxSpeed": 0.08, "opacity": 0.5 },
+    { "svgId": "spores", "parallaxSpeed": 0.25, "opacity": 0.4 },
+    { "svgId": "tendrils", "parallaxSpeed": 0.4, "opacity": 0.3 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Spores spread. Quarantine the infected.",
+    "codexSnippet": "The fungus does not think. It connects. Every spore is a synapse in a mind that spans the ocean floor.",
+    "radioWhisper": "Caller claims the mushrooms in his basement are whispering coordinates."
+  },
+  "musicSeed": {
+    "seed": "evil_fungus_003",
+    "mode": "locrian",
+    "tempoRange": [80, 95],
+    "intensity": 0.55
+  },
+  "duration": 120,
+  "unlockCondition": "act2_level2_complete"
+}

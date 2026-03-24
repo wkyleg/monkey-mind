@@ -1,0 +1,63 @@
+{
+  "id": "act6_level3_kafka_bureau",
+  "act": 6,
+  "index": 3,
+  "title": "Kafka Bureau",
+  "subtitle": "The sequence is wrong. Appeal to reverse it.",
+  "themeTags": ["kafka", "bureaucracy", "appeal"],
+  "ruleCard": {
+    "icon": "stamp",
+    "hint": "Bureaucratic enemies require sequence. Appeal action reverses the order.",
+    "mechanic": "sequence_kill",
+    "params": { "appealReverse": true, "formCount": 4 }
+  },
+  "enemyDeck": [
+    { "archetype": "shieldbearer", "modifiers": ["bureaucratic"], "weight": 5 },
+    { "archetype": "drifter", "modifiers": ["bureaucratic"], "weight": 3 },
+    { "archetype": "sniper", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "form_processor": {
+      "visualId": "form_processor",
+      "dialogue": {
+        "spawn": ["Form 27-B/6!", "In triplicate!", "Sign here, here, and here!", "The queue never ends!", "Next window please!"],
+        "death": ["Filed... away...", "Processed... finally...", "The form... rejected...", "Stamp... denied...", "Bureaucracy... ends..."]
+      }
+    },
+    "desk_warden": {
+      "visualId": "desk_warden",
+      "dialogue": {
+        "spawn": ["Take a number!", "Office hours only!", "Your case is pending!", "The committee decides!", "Appeal denied!"],
+        "death": ["Retiring... early...", "The desk... empty...", "Files... scattered...", "No more... numbers...", "Closed... indefinitely..."]
+      }
+    },
+    "stamp_horror": {
+      "visualId": "stamp_horror",
+      "dialogue": {
+        "spawn": ["REJECTED!", "INSUFFICIENT!", "INCOMPLETE!", "PENDING!", "DENIED!"],
+        "death": ["Approved... finally...", "The ink... runs dry...", "Stamp... worn out...", "No more... red tape...", "Accepted..."]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "form_rejection", "lanes": [2, 3, 4], "timing": 10000, "damage": 1, "visual": "red_stamp" }
+  ],
+  "bgLayers": [
+    { "svgId": "office", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "desks", "parallaxSpeed": 0.3, "opacity": 0.6 },
+    { "svgId": "papers", "parallaxSpeed": 0.5, "opacity": 0.4 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The sequence is wrong. Appeal to reverse it.",
+    "codexSnippet": "Kafka's protagonists were never told their crime. The monkey learned that in bureaucracy, the process is the punishment.",
+    "radioWhisper": "Caller filed an appeal. The appeal requires an appeal form. The form is on backorder."
+  },
+  "musicSeed": {
+    "seed": "kafka_003",
+    "mode": "phrygian",
+    "tempoRange": [80, 95],
+    "intensity": 0.55
+  },
+  "duration": 120,
+  "unlockCondition": "act6_level2_complete"
+}

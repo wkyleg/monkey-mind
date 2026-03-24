@@ -2,13 +2,13 @@
  * Settings scene
  */
 
-import { Scene } from '../engine/scene';
-import type { Game } from '../engine/game';
-import type { Renderer } from '../engine/renderer';
-import type { PlayerIntent } from '../engine/input';
 import { CONFIG } from '../config';
 import { storage } from '../core/storage';
-import { oscillate, clamp } from '../util/math';
+import type { Game } from '../engine/game';
+import type { PlayerIntent } from '../engine/input';
+import type { Renderer } from '../engine/renderer';
+import { Scene } from '../engine/scene';
+import { clamp, oscillate } from '../util/math';
 
 interface SettingItem {
   id: string;
@@ -22,14 +22,17 @@ interface SettingItem {
 }
 
 export class SettingsScene extends Scene {
+  // Mark as overlay - renders on top of the previous scene
+  readonly isOverlay: boolean = true;
+
   private settings: SettingItem[] = [];
   private selectedIndex: number = 0;
   private time: number = 0;
   private inputCooldown: number = 0;
-  
+
   constructor(game: Game) {
     super(game);
-    
+
     this.settings = [
       {
         id: 'masterVolume',
@@ -77,33 +80,33 @@ export class SettingsScene extends Scene {
       },
     ];
   }
-  
+
   enter(): void {
     this.selectedIndex = 0;
     this.time = 0;
     this.inputCooldown = 0.2;
   }
-  
+
   exit(): void {
     storage.save();
     this.game.getAudio().updateVolumes();
   }
-  
+
   update(dt: number, intent: PlayerIntent): void {
     this.time += dt;
-    
+
     // Input cooldown
     if (this.inputCooldown > 0) {
       this.inputCooldown -= dt;
       return;
     }
-    
+
     // Back
     if (intent.cancel) {
       this.game.getScenes().pop();
       return;
     }
-    
+
     // Navigation
     if (intent.moveAxis < -0.5) {
       // Move up or adjust value left
@@ -124,7 +127,7 @@ export class SettingsScene extends Scene {
         this.inputCooldown = 0.1;
       }
     }
-    
+
     // Confirm (toggle or next item)
     if (intent.confirm) {
       const setting = this.settings[this.selectedIndex];
@@ -138,49 +141,37 @@ export class SettingsScene extends Scene {
       }
     }
   }
-  
+
   render(renderer: Renderer, _alpha: number): void {
     const { width, height } = renderer;
-    
+
+    // Clear canvas and reset context state
+    renderer.context.globalAlpha = 1;
+    renderer.fillRect(0, 0, width, height, '#000000');
+
     // Background
     renderer.radialGradientBackground(
       [CONFIG.COLORS.BACKGROUND, CONFIG.COLORS.BACKGROUND_LIGHT],
       width / 2,
-      height / 2
+      height / 2,
     );
-    
+
     // Title
-    renderer.glowText(
-      'SETTINGS',
-      width / 2,
-      height * 0.15,
-      CONFIG.COLORS.ACCENT,
-      40,
-      'center',
-      20
-    );
-    
+    renderer.glowText('SETTINGS', width / 2, height * 0.15, CONFIG.COLORS.ACCENT, 40, 'center', 20);
+
     // Settings list
     const startY = height * 0.3;
     const spacing = 60;
-    
+
     this.settings.forEach((setting, index) => {
       const y = startY + index * spacing;
       const isSelected = index === this.selectedIndex;
-      
+
       const labelColor = isSelected ? CONFIG.COLORS.PRIMARY : CONFIG.COLORS.TEXT;
-      
+
       // Label
-      renderer.text(
-        setting.label,
-        width * 0.3,
-        y,
-        labelColor,
-        isSelected ? 22 : 20,
-        'left',
-        'middle'
-      );
-      
+      renderer.text(setting.label, width * 0.3, y, labelColor, isSelected ? 22 : 20, 'left', 'middle');
+
       // Value
       if (setting.type === 'slider') {
         const value = setting.getValue() as number;
@@ -188,28 +179,32 @@ export class SettingsScene extends Scene {
         const barHeight = 10;
         const barX = width * 0.55;
         const barY = y - barHeight / 2;
-        
+
         // Background bar
         renderer.fillRect(barX, barY, barWidth, barHeight, CONFIG.COLORS.BACKGROUND_LIGHT);
-        
+
         // Fill bar
         const fillWidth = value * barWidth;
-        renderer.fillRect(barX, barY, fillWidth, barHeight, isSelected ? CONFIG.COLORS.PRIMARY : CONFIG.COLORS.TEXT_DIM);
-        
-        // Border
-        renderer.strokeRect(barX, barY, barWidth, barHeight, isSelected ? CONFIG.COLORS.PRIMARY : CONFIG.COLORS.TEXT_DIM);
-        
-        // Value text
-        renderer.text(
-          `${Math.round(value * 100)}%`,
-          barX + barWidth + 20,
-          y,
-          labelColor,
-          18,
-          'left',
-          'middle'
+        renderer.fillRect(
+          barX,
+          barY,
+          fillWidth,
+          barHeight,
+          isSelected ? CONFIG.COLORS.PRIMARY : CONFIG.COLORS.TEXT_DIM,
         );
-        
+
+        // Border
+        renderer.strokeRect(
+          barX,
+          barY,
+          barWidth,
+          barHeight,
+          isSelected ? CONFIG.COLORS.PRIMARY : CONFIG.COLORS.TEXT_DIM,
+        );
+
+        // Value text
+        renderer.text(`${Math.round(value * 100)}%`, barX + barWidth + 20, y, labelColor, 18, 'left', 'middle');
+
         if (isSelected) {
           // Arrows
           const pulse = oscillate(this.time, 3, 3);
@@ -219,28 +214,20 @@ export class SettingsScene extends Scene {
       } else if (setting.type === 'toggle') {
         const value = setting.getValue() as boolean;
         const toggleX = width * 0.55;
-        
+
         const text = value ? 'ON' : 'OFF';
         const color = value ? CONFIG.COLORS.SUCCESS : CONFIG.COLORS.DANGER;
-        
-        renderer.glowText(
-          text,
-          toggleX,
-          y,
-          color,
-          20,
-          'left',
-          isSelected ? 10 : 0
-        );
+
+        renderer.glowText(text, toggleX, y, color, 20, 'left', isSelected ? 10 : 0);
       }
-      
+
       // Selection indicator
       if (isSelected) {
         const pulse = oscillate(this.time, 2, 5);
         renderer.glowCircle(width * 0.25 - 20 + pulse, y, 5, CONFIG.COLORS.PRIMARY, 8);
       }
     });
-    
+
     // Controls hint
     renderer.text(
       '← → ADJUST   SPACE TOGGLE/NEXT   ESC BACK',
@@ -248,7 +235,7 @@ export class SettingsScene extends Scene {
       height - 40,
       CONFIG.COLORS.TEXT_DIM,
       12,
-      'center'
+      'center',
     );
   }
 }

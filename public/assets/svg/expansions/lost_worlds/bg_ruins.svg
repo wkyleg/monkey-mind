@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Ancient ruins overgrown -->
+  <defs>
+    <linearGradient id="jungleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a1a"/>
+      <stop offset="100%" style="stop-color:#0a1a0a"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="400" height="600" fill="url(#jungleGrad)"/>
+  
+  <!-- Ruined structures -->
+  <g fill="#4a4a4a" opacity="0.5">
+    <!-- Temple pyramid -->
+    <polygon points="200,100 100,350 300,350"/>
+    <rect x="175" y="200" width="50" height="100" fill="#3a3a3a"/>
+    
+    <!-- Broken columns -->
+    <rect x="50" y="300" width="30" height="200"/>
+    <rect x="50" y="280" width="30" height="10" fill="#5a5a5a"/>
+    <rect x="320" y="350" width="30" height="150"/>
+    <rect x="320" y="330" width="30" height="10" fill="#5a5a5a"/>
+  </g>
+  
+  <!-- Vines and overgrowth -->
+  <g stroke="#2a5a2a" stroke-width="3" fill="none" opacity="0.6">
+    <path d="M0,200 Q50,250 30,350 Q10,450 50,550"/>
+    <path d="M400,150 Q350,200 370,300 Q390,400 350,500"/>
+    <path d="M150,100 Q180,150 160,200"/>
+    <path d="M250,100 Q220,150 240,200"/>
+  </g>
+  
+  <!-- Glowing runes -->
+  <g fill="#4ac" opacity="0.4">
+    <text x="185" y="250" font-family="serif" font-size="20">☥</text>
+    <text x="110" y="340" font-family="serif" font-size="15">☉</text>
+    <text x="280" y="340" font-family="serif" font-size="15">☽</text>
+  </g>
+  
+  <!-- Fireflies -->
+  <g fill="#ff0">
+    <circle cx="80" cy="400" r="2">
+      <animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="320" cy="450" r="2">
+      <animate attributeName="opacity" values="0;1;0" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="380" r="2">
+      <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+{
+  "id": "paranoia_level2_roswell",
+  "expansion": "paranoia",
+  "index": 2,
+  "title": "Roswell",
+  "subtitle": "1947. Something crashed in the desert.",
+  "themeTags": ["roswell", "ufo", "aliens", "coverup"],
+  "ruleCard": {
+    "icon": "ufo",
+    "hint": "The government denies everything. Trust nothing official.",
+    "mechanic": "cover_up",
+    "params": { "truthHidden": 0.7, "revelationBonus": 80 }
+  },
+  "enemyDeck": [
+    { "archetype": "phaser", "modifiers": [], "weight": 4, "visualId": "enemy_grey" },
+    { "archetype": "chaser", "modifiers": [], "weight": 3, "visualId": "enemy_military_police" },
+    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_crashed_disk" }
+  ],
+  "levelEnemies": {
+    "grey_alien": {
+      "visualId": "grey_alien",
+      "dialogue": {
+        "spawn": ["We came in peace!", "The crash was unintended!", "Your government knows!", "Take me to your leader!", "The coverup continues!"],
+        "death": ["Peace... achieved...", "Crash... acknowledged...", "Government... silent...", "Leader... met...", "Truth... revealed..."]
+      }
+    },
+    "military_guard": {
+      "visualId": "military_guard",
+      "dialogue": {
+        "spawn": ["Weather balloon!", "Nothing to see here!", "Classified!", "Area secured!", "Move along, citizen!"],
+        "death": ["Not... balloon...", "Something... here...", "Declassified...", "Area... open...", "Seeing... now..."]
+      }
+    },
+    "debris_fragment": {
+      "visualId": "debris_fragment",
+      "dialogue": {
+        "spawn": ["Not of this Earth!", "The metal remembers!", "Reverse engineering!", "What crashed here?", "The truth is out there!"],
+        "death": ["Earth... material...", "Metal... forgets...", "Engineering... unknown...", "Weather balloon...", "Truth... found..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "government_denial", "params": { "confusionDuration": 5000, "clarityBonus": 50 } }],
+  "bgLayers": [
+    { "svgId": "desert", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "crash_site", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "military_presence", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The government denies everything. Trust nothing official.",
+    "codexSnippet": "In 1947, something crashed near Roswell, New Mexico. The military first said flying disk, then weather balloon. The monkey knows that the truth changes depending on who's asking.",
+    "radioWhisper": "The bodies were taken to Area 51. The survivors are still there."
+  },
+  "musicSeed": { "seed": "roswell_002", "mode": "chromatic", "tempoRange": [60, 75], "intensity": 0.5 },
+  "duration": 120,
+  "unlockCondition": "paranoia_level1_complete"
+}

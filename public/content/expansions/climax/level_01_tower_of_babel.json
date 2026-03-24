@@ -1,0 +1,56 @@
+{
+  "id": "climax_level1_tower_of_babel",
+  "expansion": "climax",
+  "index": 1,
+  "title": "The Tower of Babel",
+  "subtitle": "Reaching for heaven. Language fragments.",
+  "themeTags": ["babel", "tower", "language", "ambition"],
+  "ruleCard": {
+    "icon": "tower",
+    "hint": "Communication breaks down. UI text becomes gibberish. Rely on instinct.",
+    "mechanic": "language_confusion",
+    "params": { "textScramble": true, "instinctBonus": 40 }
+  },
+  "enemyDeck": [
+    { "archetype": "anchor", "modifiers": ["labyrinthine"], "weight": 4, "visualId": "enemy_void_tendril" },
+    { "archetype": "chaser", "modifiers": [], "weight": 3, "visualId": "enemy_memory_ghost" },
+    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_ego_shard" }
+  ],
+  "levelEnemies": {
+    "babel_builder": {
+      "visualId": "babel_builder",
+      "dialogue": {
+        "spawn": ["The tower rises!", "Heaven within reach!", "One language, one people!", "Build higher!", "God will see us!"],
+        "death": ["Tower... crumbles...", "Heaven... too far...", "Languages... scatter...", "Building... stops...", "God... has spoken..."]
+      }
+    },
+    "confused_tongue": {
+      "visualId": "confused_tongue",
+      "dialogue": {
+        "spawn": ["*unintelligible*", "What are you saying?!", "I don't understand!", "The words... wrong!", "Lost in translation!"],
+        "death": ["Finally... clarity...", "Words... return...", "Understanding... found...", "Translation... complete...", "Communication... restored..."]
+      }
+    },
+    "divine_wrath": {
+      "visualId": "divine_wrath",
+      "dialogue": {
+        "spawn": ["Pride punished!", "Scatter across the earth!", "No unity for mortals!", "The tower falls!", "Heaven is not yours!"],
+        "death": ["Wrath... appeased...", "Pride... humbled...", "Scattered... but alive...", "Tower... lesson learned...", "Mortal... but unified..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "confusion_zone", "params": { "controlScramble": true, "duration": 5000 } }],
+  "bgLayers": [
+    { "svgId": "tower", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "bricks", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "sky", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Communication breaks down. UI text becomes gibberish. Rely on instinct.",
+    "codexSnippet": "They built a tower to reach heaven. God scattered them and confused their tongues. The monkey climbs despite the confusion, learning that communication transcends mere words.",
+    "radioWhisper": "YHWH SCATTERED THEM ACROSS THE EARTH"
+  },
+  "musicSeed": { "seed": "babel_001", "mode": "chromatic", "tempoRange": [70, 90], "intensity": 0.7 },
+  "duration": 130,
+  "unlockCondition": "all_expansions_complete"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "lit_level6_kafka_metamorphosis",
+  "expansion": "literature",
+  "index": 6,
+  "title": "Kafka's Metamorphosis",
+  "subtitle": "One morning, Gregor Samsa awoke as a giant insect.",
+  "themeTags": ["kafka", "metamorphosis", "alienation", "family"],
+  "levelEnemies": {
+    "gregor_insect": { "visualId": "gregor_insect", "dialogue": { "spawn": ["What happened to me?", "My family!", "I must get to work!", "The apple in my back!", "Am I still human?"], "death": ["Happened... understood...", "Family... gone...", "Work... forgotten...", "Apple... removed...", "Human... always..."] } },
+    "disapproving_family": { "visualId": "disapproving_family", "dialogue": { "spawn": ["Vermin!", "Close the door!", "He disgusts us!", "We must be rid of it!", "That thing is not Gregor!"], "death": ["Not vermin...", "Door... open...", "Not disgusted...", "Keeping...", "Still Gregor..."] } },
+    "chief_clerk": { "visualId": "chief_clerk", "dialogue": { "spawn": ["Where is Samsa?", "Unacceptable absence!", "The firm demands!", "Open this door!", "Your position is not secure!"], "death": ["Here...", "Excused...", "Firm... understanding...", "Door... opened...", "Position... secure..."] } }
+  },
+  "bgLayers": [{ "svgId": "bedroom", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "furniture", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "apple", "parallaxSpeed": 0.2, "opacity": 0.6 }],
+  "copyLayers": { "codexSnippet": "One morning Gregor Samsa awoke to find himself transformed into a monstrous insect. The monkey confronts alienation made literal." },
+  "musicSeed": { "seed": "metamorphosis_006", "mode": "phrygian", "tempoRange": [50, 65], "intensity": 0.5 },
+  "duration": 120, "unlockCondition": "lit_level5_complete"
+}

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Floating fruit creature -->
+  <g transform="translate(30,30)">
+    <!-- Body - apple -->
+    <circle cx="0" cy="0" r="18" fill="#dc143c"/>
+    <ellipse cx="0" cy="-2" rx="14" ry="12" fill="#ff4444"/>
+    
+    <!-- Stem -->
+    <path d="M0,-18 Q2,-25 0,-28" stroke="#8b4513" stroke-width="3" fill="none"/>
+    
+    <!-- Leaf -->
+    <ellipse cx="5" cy="-22" rx="8" ry="4" fill="#228b22" transform="rotate(30 5 -22)"/>
+    
+    <!-- Face made of seeds -->
+    <g fill="#1a0a0a">
+      <!-- Eyes - seeds -->
+      <ellipse cx="-6" cy="-3" rx="3" ry="4" transform="rotate(-10 -6 -3)"/>
+      <ellipse cx="6" cy="-3" rx="3" ry="4" transform="rotate(10 6 -3)"/>
+      <!-- Mouth -->
+      <path d="M-5,8 Q0,12 5,8" stroke="#1a0a0a" stroke-width="2" fill="none"/>
+    </g>
+    
+    <!-- Highlight -->
+    <circle cx="-8" cy="-8" r="4" fill="#ffffff" opacity="0.4"/>
+  </g>
+</svg>

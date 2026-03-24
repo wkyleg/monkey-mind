@@ -3,8 +3,8 @@
  */
 
 import type { Renderer } from '../engine/renderer';
-import { rng } from '../util/rng';
 import { hexToRgba } from '../util/color';
+import { rng } from '../util/rng';
 
 export interface Particle {
   x: number;
@@ -23,7 +23,7 @@ export interface Particle {
 export class ParticleSystem {
   private particles: Particle[] = [];
   private readonly maxParticles: number = 500;
-  
+
   /**
    * Emit particles at a position
    */
@@ -44,7 +44,7 @@ export class ParticleSystem {
       type: Particle['type'];
       gravity: number;
       friction: number;
-    }> = {}
+    }> = {},
   ): void {
     const {
       color = '#ffffff',
@@ -60,15 +60,15 @@ export class ParticleSystem {
       gravity = 0,
       friction = 0.98,
     } = options;
-    
+
     for (let i = 0; i < count; i++) {
       if (this.particles.length >= this.maxParticles) break;
-      
+
       const particleAngle = angle + (rng.random() - 0.5) * angleSpread;
       const particleSpeed = speed + (rng.random() - 0.5) * speedVariance;
       const particleLife = life + (rng.random() - 0.5) * lifeVariance;
       const particleSize = size + (rng.random() - 0.5) * sizeVariance;
-      
+
       this.particles.push({
         x,
         y,
@@ -84,7 +84,7 @@ export class ParticleSystem {
       });
     }
   }
-  
+
   /**
    * Emit explosion effect
    */
@@ -102,7 +102,7 @@ export class ParticleSystem {
       friction: 0.95,
     });
   }
-  
+
   /**
    * Emit hit sparks
    */
@@ -118,7 +118,7 @@ export class ParticleSystem {
       type: 'spark',
     });
   }
-  
+
   /**
    * Emit trail particles
    */
@@ -132,7 +132,7 @@ export class ParticleSystem {
       friction: 0.9,
     });
   }
-  
+
   /**
    * Emit powerup collect effect
    */
@@ -152,14 +152,14 @@ export class ParticleSystem {
       });
     }
   }
-  
+
   /**
    * Enemy death explosion with enemy color
    */
   enemyDeath(x: number, y: number, color: string): void {
     // Main explosion
     this.explode(x, y, color, 15);
-    
+
     // Inner bright burst
     this.emit(x, y, 8, {
       color: '#ffffff',
@@ -170,7 +170,7 @@ export class ParticleSystem {
       type: 'circle',
     });
   }
-  
+
   /**
    * Player damage effect
    */
@@ -186,7 +186,7 @@ export class ParticleSystem {
       gravity: 100,
     });
   }
-  
+
   /**
    * Banana hit sparks
    */
@@ -202,7 +202,7 @@ export class ParticleSystem {
       type: 'spark',
     });
   }
-  
+
   /**
    * Boss phase transition effect
    */
@@ -227,17 +227,17 @@ export class ParticleSystem {
       }, delay * 1000);
     }
   }
-  
+
   /**
    * Victory confetti
    */
   confetti(width: number, _height: number): void {
     const colors = ['#ff0066', '#00ffaa', '#ffdd00', '#00aaff', '#ff6600'];
-    
+
     for (let i = 0; i < 50; i++) {
       const x = rng.random() * width;
       const color = colors[Math.floor(rng.random() * colors.length)];
-      
+
       this.emit(x, -10, 1, {
         color,
         speed: 50 + rng.random() * 100,
@@ -251,14 +251,14 @@ export class ParticleSystem {
       });
     }
   }
-  
+
   /**
    * Update all particles
    */
   update(dt: number): void {
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
-      
+
       // Apply physics
       if (p.gravity) {
         p.vy += p.gravity * dt;
@@ -267,28 +267,28 @@ export class ParticleSystem {
         p.vx *= p.friction;
         p.vy *= p.friction;
       }
-      
+
       p.x += p.vx * dt;
       p.y += p.vy * dt;
       p.life -= dt;
-      
+
       // Remove dead particles
       if (p.life <= 0) {
         this.particles.splice(i, 1);
       }
     }
   }
-  
+
   /**
    * Render all particles
    */
   render(renderer: Renderer): void {
     const ctx = renderer.context;
-    
+
     for (const p of this.particles) {
       const alpha = p.life / p.maxLife;
       const size = p.size * alpha;
-      
+
       switch (p.type) {
         case 'circle':
           ctx.fillStyle = hexToRgba(p.color, alpha);
@@ -296,7 +296,7 @@ export class ParticleSystem {
           ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
           ctx.fill();
           break;
-          
+
         case 'spark':
           ctx.strokeStyle = hexToRgba(p.color, alpha);
           ctx.lineWidth = Math.max(1, size / 2);
@@ -306,12 +306,9 @@ export class ParticleSystem {
           ctx.lineTo(p.x - p.vx * 0.05, p.y - p.vy * 0.05);
           ctx.stroke();
           break;
-          
-        case 'trail':
-          const gradient = ctx.createRadialGradient(
-            p.x, p.y, 0,
-            p.x, p.y, size
-          );
+
+        case 'trail': {
+          const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size);
           gradient.addColorStop(0, hexToRgba(p.color, alpha));
           gradient.addColorStop(1, hexToRgba(p.color, 0));
           ctx.fillStyle = gradient;
@@ -319,17 +316,18 @@ export class ParticleSystem {
           ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
           ctx.fill();
           break;
+        }
       }
     }
   }
-  
+
   /**
    * Get particle count
    */
   count(): number {
     return this.particles.length;
   }
-  
+
   /**
    * Clear all particles
    */

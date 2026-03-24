@@ -1,0 +1,66 @@
+{
+  "depth_drifter": {
+    "spawn": [
+      "From the abyss...",
+      "The deep calls...",
+      "Drifting upward...",
+      "Pressure rising...",
+      "Dark waters..."
+    ],
+    "death": [
+      "Sinking... down...",
+      "Into the depths...",
+      "The current takes...",
+      "Dissolving...",
+      "Back to darkness..."
+    ]
+  },
+  "angler_chaser": {
+    "spawn": [
+      "Pretty light, yes?",
+      "Come closer...",
+      "Follow the glow!",
+      "I see you in the dark!",
+      "My light finds all!"
+    ],
+    "death": [
+      "Light... fading...",
+      "The lure... broken...",
+      "Darkness... wins...",
+      "No more... glow...",
+      "Consumed..."
+    ]
+  },
+  "pearl_courier": {
+    "spawn": [
+      "Precious cargo!",
+      "Delivering treasure!",
+      "The pearl must reach!",
+      "Ocean's gift incoming!",
+      "From the oyster's heart!"
+    ],
+    "death": [
+      "Pearl... lost...",
+      "Delivery... failed...",
+      "Treasure... scattered...",
+      "The gift... returns...",
+      "Back to sand..."
+    ]
+  },
+  "echo_swarm": {
+    "spawn": [
+      "ECHO... echo... echo...",
+      "We resonate!",
+      "Sound carries here!",
+      "The swarm sings!",
+      "Vibrations multiply!"
+    ],
+    "death": [
+      "Silence...",
+      "No more... echo...",
+      "Sound... dies...",
+      "The wave... ends...",
+      "Quiet now..."
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="reefGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#003344;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#002233;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="800" height="600" fill="url(#reefGradient)"/>
+  
+  <!-- Coral formations at bottom -->
+  <g fill="#cc5566" opacity="0.4">
+    <ellipse cx="100" cy="580" rx="40" ry="60"/>
+    <ellipse cx="200" cy="570" rx="30" ry="50"/>
+    <ellipse cx="350" cy="590" rx="50" ry="40"/>
+    <ellipse cx="500" cy="575" rx="35" ry="55"/>
+    <ellipse cx="650" cy="585" rx="45" ry="45"/>
+    <ellipse cx="750" cy="570" rx="30" ry="60"/>
+  </g>
+  
+  <!-- Coral branches -->
+  <g stroke="#ff7788" stroke-width="3" fill="none" opacity="0.3">
+    <path d="M 100 520 Q 90 480 110 450"/>
+    <path d="M 200 510 Q 210 470 190 440"/>
+    <path d="M 350 530 Q 340 490 360 460"/>
+    <path d="M 500 515 Q 510 475 490 445"/>
+    <path d="M 650 525 Q 640 485 660 455"/>
+  </g>
+</svg>

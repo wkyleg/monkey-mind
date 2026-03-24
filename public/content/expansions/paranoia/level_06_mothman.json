@@ -1,0 +1,56 @@
+{
+  "id": "paranoia_level6_mothman",
+  "expansion": "paranoia",
+  "index": 6,
+  "title": "Mothman",
+  "subtitle": "Point Pleasant, 1966. The bridge will fall.",
+  "themeTags": ["mothman", "prophecy", "point_pleasant", "disaster"],
+  "ruleCard": {
+    "icon": "moth",
+    "hint": "Mothman appears before disasters. What does he warn of?",
+    "mechanic": "disaster_prophecy",
+    "params": { "warningTime": 5000, "heededBonus": 100 }
+  },
+  "enemyDeck": [
+    { "archetype": "phaser", "modifiers": [], "weight": 5, "visualId": "enemy_mothman" },
+    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_red_eyes" },
+    { "archetype": "anchor", "modifiers": [], "weight": 2, "visualId": "enemy_silver_bridge" }
+  ],
+  "levelEnemies": {
+    "mothman_entity": {
+      "visualId": "mothman_entity",
+      "dialogue": {
+        "spawn": ["The bridge!", "Red eyes watching!", "Prophecy!", "Point Pleasant!", "Disaster approaches!"],
+        "death": ["Bridge... stands...", "Eyes... closed...", "Prophecy... averted...", "Pleasant... peaceful...", "Disaster... prevented..."]
+      }
+    },
+    "glowing_eyes": {
+      "visualId": "glowing_eyes",
+      "dialogue": {
+        "spawn": ["In the TNT area!", "Seen by many!", "Hypnotic gaze!", "Can't look away!", "What does it want?"],
+        "death": ["TNT... empty...", "Seen... by none...", "Gaze... broken...", "Looking... away...", "Wanting... nothing..."]
+      }
+    },
+    "bridge_collapse": {
+      "visualId": "bridge_collapse",
+      "dialogue": {
+        "spawn": ["December 15th!", "46 people!", "The Silver Bridge!", "Mothman warned us!", "Why didn't we listen?"],
+        "death": ["Not... December...", "All... saved...", "Bridge... holds...", "Warning... heeded...", "We... listened..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "prophetic_vision", "params": { "visionDuration": 3000, "clarityBonus": 60 } }],
+  "bgLayers": [
+    { "svgId": "west_virginia", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "tnt_area", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "bridge", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Mothman appears before disasters. What does he warn of?",
+    "codexSnippet": "In 1966, Point Pleasant residents reported a winged creature with glowing red eyes. A year later, the Silver Bridge collapsed. The monkey confronts Mothman and asks: warning or omen?",
+    "radioWhisper": "I see it on the bridge. The red eyes. Every night before sleep."
+  },
+  "musicSeed": { "seed": "mothman_006", "mode": "aeolian", "tempoRange": [50, 65], "intensity": 0.6 },
+  "duration": 140,
+  "unlockCondition": "paranoia_level5_complete"
+}

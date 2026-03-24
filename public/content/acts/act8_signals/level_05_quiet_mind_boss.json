@@ -1,0 +1,40 @@
+{
+  "id": "act8_level5_quiet_mind",
+  "act": 8,
+  "index": 5,
+  "title": "The Quiet Mind",
+  "subtitle": "Final Boss: Survive the stillness windows.",
+  "themeTags": ["boss", "stillness", "final"],
+  "ruleCard": {
+    "icon": "stillness",
+    "hint": "Survive the stillness windows. The Quiet Mind attacks when you move.",
+    "mechanic": "stillness_windows",
+    "params": { "windowDuration": 3000, "movementPenalty": 20 }
+  },
+  "enemyDeck": [],
+  "boss": {
+    "id": "quiet_mind",
+    "introText": "The final signal is silence. The Quiet Mind awaits.",
+    "outroText": "In the end, the monkey found what it sought: not answers, but peace."
+  },
+  "hazards": [
+    { "type": "stillness_zone", "params": { "radius": 150, "damageOnMove": 15 } }
+  ],
+  "bgLayers": [
+    { "svgId": "act8_bg_void", "parallaxSpeed": 0.01, "opacity": 0.9 },
+    { "svgId": "act8_bg_neural_static", "parallaxSpeed": 0.05, "opacity": 0.4, "animation": "pulse" }
+  ],
+  "copyLayers": {
+    "ruleCard": "Survive the stillness windows. The Quiet Mind attacks when you move.",
+    "codexSnippet": "The Quiet Mind is not an enemy. It is the final lesson: that peace is found not in fighting, but in stillness.",
+    "radioWhisper": "The last caller never spoke. Just breathed. Then the line went dead."
+  },
+  "musicSeed": {
+    "seed": "quiet_mind_boss",
+    "mode": "aeolian",
+    "tempoRange": [40, 55],
+    "intensity": 0.2
+  },
+  "duration": 180,
+  "unlockCondition": "act8_level4_complete"
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="lampBgGlow"><feGaussianBlur stdDeviation="5"/></filter></defs>
+  <g filter="url(#lampBgGlow)">
+    <circle cx="100" cy="200" r="15" fill="#ffaa00" opacity="0.6"/>
+    <circle cx="250" cy="150" r="12" fill="#ff8800" opacity="0.5"/>
+    <circle cx="400" cy="180" r="18" fill="#ffcc00" opacity="0.7"/>
+    <circle cx="550" cy="140" r="14" fill="#ffaa00" opacity="0.6"/>
+    <circle cx="700" cy="190" r="16" fill="#ff8800" opacity="0.5"/>
+  </g>
+</svg>

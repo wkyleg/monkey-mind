@@ -1,0 +1,17 @@
+{
+  "id": "myth_level10_gnostic_sophia",
+  "expansion": "myth",
+  "index": 10,
+  "title": "Gnostic Sophia",
+  "subtitle": "The fallen wisdom. Escape the Demiurge.",
+  "themeTags": ["gnosticism", "sophia", "demiurge", "pleroma"],
+  "levelEnemies": {
+    "demiurge": { "visualId": "demiurge", "dialogue": { "spawn": ["I am the only god!", "Yaldabaoth rules!", "The material is mine!", "Ignorant creator!", "Worship me!"], "death": ["Not... only...", "Yaldabaoth... limited...", "Material... transcended...", "Knowing... now...", "Worship... the true..."] } },
+    "archon": { "visualId": "archon", "dialogue": { "spawn": ["Guard the spheres!", "No escape!", "The planetary rulers!", "Sophia is trapped!", "Stay ignorant!"], "death": ["Spheres... passed...", "Escaping...", "Rulers... bypassed...", "Sophia... rising...", "Gnosis..."] } },
+    "divine_spark": { "visualId": "divine_spark", "dialogue": { "spawn": ["Remember!", "You are light!", "The spark within!", "Escape the prison!", "Return to Pleroma!"], "death": ["Remembered...", "Light... awakened...", "Spark... burning...", "Prison... opened...", "Pleroma... home..."] } }
+  },
+  "bgLayers": [{ "svgId": "archonic_spheres", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "pleroma", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "sophia", "parallaxSpeed": 0.2, "opacity": 0.6 }],
+  "copyLayers": { "codexSnippet": "Sophia fell from the Pleroma and created the flawed Demiurge. The monkey carries a spark of divine light, seeking return to the fullness." },
+  "musicSeed": { "seed": "gnostic_010", "mode": "phrygian", "tempoRange": [55, 70], "intensity": 0.6 },
+  "duration": 170, "unlockCondition": "myth_level9_complete"
+}

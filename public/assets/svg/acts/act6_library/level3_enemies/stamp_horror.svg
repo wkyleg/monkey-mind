@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <rect x="15" y="35" width="30" height="20" fill="#aa2222" stroke="#880000" stroke-width="2"/>
+  <rect x="22" y="10" width="16" height="25" fill="#4a3020" stroke="#886644" stroke-width="2"/>
+  <text x="18" y="50" fill="#ffffff" font-size="10" font-weight="bold">DENIED</text>
+  <circle cx="25" cy="22" r="3" fill="#ff0000"/><circle cx="35" cy="22" r="3" fill="#ff0000"/>
+</svg>

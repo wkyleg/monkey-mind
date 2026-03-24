@@ -1,0 +1,17 @@
+{
+  "id": "lit_level19_sartre_nausea",
+  "expansion": "literature",
+  "index": 19,
+  "title": "Sartre's Nausea",
+  "subtitle": "Existence precedes essence. The chestnut tree roots.",
+  "themeTags": ["sartre", "nausea", "existence", "freedom"],
+  "levelEnemies": {
+    "roquentin": { "visualId": "roquentin", "dialogue": { "spawn": ["Nausea overwhelms!", "The chestnut root!", "Existence is absurd!", "De trop!", "Things exist too much!"], "death": ["Nausea... passed...", "Root... understood...", "Existence... embraced...", "Necessary...", "Existing... right..."] } },
+    "chestnut_root": { "visualId": "chestnut_root", "dialogue": { "spawn": ["I simply exist!", "No reason!", "Contingent!", "Absurd presence!", "Being itself!"], "death": ["Existing...", "Reason... none needed...", "Contingent... free...", "Presence... meaningful...", "Being... affirmed..."] } },
+    "self_taught_man": { "visualId": "self_taught_man", "dialogue": { "spawn": ["I read alphabetically!", "Humanism!", "Love mankind!", "Knowledge saves!", "All books in order!"], "death": ["Reading... freely...", "Humanism... evolved...", "Mankind... specific...", "Living... saves...", "Books... understood..."] } }
+  },
+  "bgLayers": [{ "svgId": "bouville", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "park", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "tree", "parallaxSpeed": 0.2, "opacity": 0.6 }],
+  "copyLayers": { "codexSnippet": "I exist—the world exists—and I know that the world exists. The monkey confronts the viscous superfluity of being." },
+  "musicSeed": { "seed": "nausea_019", "mode": "phrygian", "tempoRange": [45, 60], "intensity": 0.5 },
+  "duration": 135, "unlockCondition": "lit_level18_complete"
+}

@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="thermalNoise"><feTurbulence type="fractalNoise" baseFrequency="0.02"/></filter></defs>
+  <rect width="800" height="600" fill="#2a2a3a" opacity="0.2" filter="url(#thermalNoise)"/>
+</svg>

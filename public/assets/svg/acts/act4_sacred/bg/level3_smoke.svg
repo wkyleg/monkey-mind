@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="smokeBgGlow"><feGaussianBlur stdDeviation="8"/></filter></defs>
+  <g fill="#6644aa" opacity="0.2" filter="url(#smokeBgGlow)">
+    <ellipse cx="150" cy="300" rx="60" ry="100"/>
+    <ellipse cx="350" cy="250" rx="80" ry="120"/>
+    <ellipse cx="550" cy="320" rx="70" ry="90"/>
+    <ellipse cx="700" cy="280" rx="50" ry="110"/>
+  </g>
+</svg>

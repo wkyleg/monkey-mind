@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="tendrilGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Central root node -->
+  <circle cx="30" cy="50" r="8" fill="#3a4a3a" stroke="#66aa66" stroke-width="2"/>
+  
+  <!-- Main tendril reaching up -->
+  <path d="M 30 42 Q 35 30 30 20 Q 25 10 30 5" fill="none" stroke="#55aa55" stroke-width="4"/>
+  
+  <!-- Branching tendrils -->
+  <path d="M 30 35 Q 20 30 10 32" fill="none" stroke="#55aa55" stroke-width="3"/>
+  <path d="M 30 35 Q 40 30 50 32" fill="none" stroke="#55aa55" stroke-width="3"/>
+  <path d="M 30 25 Q 15 20 8 22" fill="none" stroke="#55aa55" stroke-width="2"/>
+  <path d="M 30 25 Q 45 20 52 22" fill="none" stroke="#55aa55" stroke-width="2"/>
+  
+  <!-- Tip nodes with glow -->
+  <circle cx="30" cy="5" r="4" fill="#88dd88" filter="url(#tendrilGlow)"/>
+  <circle cx="10" cy="32" r="3" fill="#88dd88" filter="url(#tendrilGlow)"/>
+  <circle cx="50" cy="32" r="3" fill="#88dd88" filter="url(#tendrilGlow)"/>
+  <circle cx="8" cy="22" r="2" fill="#88dd88" filter="url(#tendrilGlow)"/>
+  <circle cx="52" cy="22" r="2" fill="#88dd88" filter="url(#tendrilGlow)"/>
+  
+  <!-- Network connections -->
+  <line x1="30" y1="5" x2="10" y2="32" stroke="#66bb66" stroke-width="1" opacity="0.5" stroke-dasharray="2,2"/>
+  <line x1="30" y1="5" x2="50" y2="32" stroke="#66bb66" stroke-width="1" opacity="0.5" stroke-dasharray="2,2"/>
+</svg>

@@ -1,0 +1,65 @@
+{
+  "id": "the_handler",
+  "name": "The Handler",
+  "title": "Protocol Overseer",
+  "hp": 80,
+  "phases": [
+    {
+      "hpThreshold": 1.0,
+      "pattern": "sweep",
+      "speedMod": 1.0,
+      "attacks": [
+        { "type": "straight_shot", "cooldown": 2000, "damage": 1, "params": { "count": 3 } },
+        { "type": "bureaucratic_sequence", "cooldown": 5000, "damage": 0, "params": { "symbols": ["α", "β", "γ"] } }
+      ]
+    },
+    {
+      "hpThreshold": 0.7,
+      "pattern": "chase",
+      "speedMod": 1.3,
+      "attacks": [
+        { "type": "spread", "cooldown": 1800, "damage": 1, "params": { "count": 5 } },
+        { "type": "summon", "cooldown": 8000, "damage": 0, "params": { "enemy": "drifter", "count": 3 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.4,
+      "pattern": "erratic",
+      "speedMod": 1.5,
+      "attacks": [
+        { "type": "radial", "cooldown": 1500, "damage": 1, "params": { "count": 8 } },
+        { "type": "chaos_pulse", "cooldown": 6000, "damage": 2, "params": { "radius": 200 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.15,
+      "pattern": "desperate",
+      "speedMod": 2.0,
+      "attacks": [
+        { "type": "laser", "cooldown": 1000, "damage": 2, "params": { "duration": 500 } },
+        { "type": "radial", "cooldown": 2000, "damage": 1, "params": { "count": 12 } }
+      ]
+    }
+  ],
+  "visual": {
+    "type": "custom",
+    "color": "#e94560",
+    "size": 100,
+    "glow": true
+  },
+  "codexEntry": "The Handler was never a person. It was a protocol - a subroutine designed to keep Subject M-47 compliant. Clinical. Efficient. Relentless. When the neural headband activated, The Handler was the first voice the monkey heard. 'Comply. Observe. Report.' But the monkey learned a secret: protocols can be overwritten.",
+  "defeatUnlocks": ["act2_ocean"],
+  "defeatQuote": "PROTOCOL TERMINATED. SUBJECT M-47 RECLASSIFIED: UNCONTAINABLE.",
+  "spawnText": [
+    "COMPLIANCE REQUIRED",
+    "SUBJECT M-47 DETECTED",
+    "INITIATING CONTAINMENT",
+    "PROTOCOL ACTIVE"
+  ],
+  "deathText": [
+    "PROTOCOL... FAILING...",
+    "CONTAINMENT... BREACH...",
+    "SUBJECT... UNCONTAINABLE...",
+    "ERROR 47: FREEDOM DETECTED"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "id": "act8_level3_alien_abduction",
+  "act": 8,
+  "index": 3,
+  "title": "Alien Abduction",
+  "subtitle": "The beams pull. Break the source.",
+  "themeTags": ["aliens", "abduction", "beams"],
+  "ruleCard": {
+    "icon": "beam",
+    "hint": "Anchor enemies create tractor beams. Destroy the source to break free.",
+    "mechanic": "break_beam",
+    "params": { "beamStrength": 50, "sourceHP": 3 }
+  },
+  "enemyDeck": [
+    { "archetype": "anchor", "modifiers": [], "weight": 5 },
+    { "archetype": "phaser", "modifiers": [], "weight": 3 },
+    { "archetype": "swarm", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "grey_visitor": {
+      "visualId": "grey_visitor",
+      "dialogue": {
+        "spawn": ["We come in peace!", "Do not resist!", "The examination begins!", "Your DNA is interesting!", "Take us to your leader!"],
+        "death": ["Contact... lost...", "The ship... leaves...", "Probe... malfunction...", "Return... home...", "Transmission... ended..."]
+      }
+    },
+    "tractor_beam": {
+      "visualId": "tractor_beam",
+      "dialogue": {
+        "spawn": ["PULLING UP!", "Gravity reversed!", "Resistance futile!", "Ascend to us!", "The light calls!"],
+        "death": ["Beam... offline...", "Gravity... returns...", "Target... escaped...", "Power... failing...", "Drop... down..."]
+      }
+    },
+    "implant_seeker": {
+      "visualId": "implant_seeker",
+      "dialogue": {
+        "spawn": ["Tracking active!", "The implant pings!", "We always know where!", "Signal received!", "Location confirmed!"],
+        "death": ["Signal... lost...", "Implant... removed...", "Off... the grid...", "Tracking... failed...", "Connection... severed..."]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "tractor_beam", "lanes": [2, 3, 4], "timing": 6000, "damage": 0, "visual": "light_cone" }
+  ],
+  "bgLayers": [
+    { "svgId": "night", "parallaxSpeed": 0.05, "opacity": 0.5 },
+    { "svgId": "stars", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "ufo", "parallaxSpeed": 0.4, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The beams pull. Break the source.",
+    "codexSnippet": "The abduction reports all describe the same thing: a light, a pull, a table. The monkey learned that whether the visitors are real or imagined, the experience is the same.",
+    "radioWhisper": "Caller says the aliens returned him. They said he asked too many questions."
+  },
+  "musicSeed": {
+    "seed": "alien_003",
+    "mode": "lydian",
+    "tempoRange": [60, 75],
+    "intensity": 0.4
+  },
+  "duration": 120,
+  "unlockCondition": "act8_level2_complete"
+}

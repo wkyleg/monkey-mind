@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <filter id="warningGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Warning triangles -->
+  <g fill="none" stroke="#e94560" stroke-width="2" opacity="0.5" filter="url(#warningGlow)">
+    <polygon points="100,50 120,90 80,90"/>
+    <polygon points="700,50 720,90 680,90"/>
+    <polygon points="100,510 120,550 80,550"/>
+    <polygon points="700,510 720,550 680,550"/>
+  </g>
+  
+  <!-- Exclamation marks in triangles -->
+  <g fill="#e94560" opacity="0.5">
+    <rect x="97" y="60" width="6" height="15" rx="1"/>
+    <circle cx="100" cy="82" r="3"/>
+    <rect x="697" y="60" width="6" height="15" rx="1"/>
+    <circle cx="700" cy="82" r="3"/>
+    <rect x="97" y="520" width="6" height="15" rx="1"/>
+    <circle cx="100" cy="542" r="3"/>
+    <rect x="697" y="520" width="6" height="15" rx="1"/>
+    <circle cx="700" cy="542" r="3"/>
+  </g>
+  
+  <!-- Warning text strips -->
+  <g fill="#e94560" opacity="0.3" font-family="monospace" font-size="10">
+    <text x="150" y="70" transform="rotate(-5 150 70)">SUBJECT M-47</text>
+    <text x="550" y="70" transform="rotate(5 550 70)">CONTAINMENT</text>
+    <text x="150" y="540" transform="rotate(5 150 540)">NEURAL ACTIVE</text>
+    <text x="550" y="540" transform="rotate(-5 550 540)">PROTOCOL 7</text>
+  </g>
+  
+  <!-- Biohazard symbols (simplified) -->
+  <g fill="none" stroke="#e94560" stroke-width="1.5" opacity="0.3">
+    <circle cx="400" cy="50" r="15"/>
+    <circle cx="400" cy="50" r="8"/>
+    <line x1="400" y1="35" x2="400" y2="25"/>
+    <line x1="387" y1="57" x2="380" y2="65"/>
+    <line x1="413" y1="57" x2="420" y2="65"/>
+  </g>
+  
+  <!-- Experiment label -->
+  <g opacity="0.4">
+    <rect x="300" y="560" width="200" height="30" fill="none" stroke="#00ff88" stroke-width="1"/>
+    <text x="400" y="580" fill="#00ff88" font-family="monospace" font-size="12" text-anchor="middle">
+      EXPERIMENT: MONKEY MIND
+    </text>
+  </g>
+</svg>

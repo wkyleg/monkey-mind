@@ -1,0 +1,40 @@
+{
+  "id": "act1_escape",
+  "number": 1,
+  "name": "The Escape from the Zoo of the Mind",
+  "thesis": "The cage is loud; the exit is simple.",
+  "storyBeat": "The cyborg monkey awakens in a sterile lab, neural headband activating. The first rupture of escape begins - breaking free from clinical control into the chaos of inner space.",
+  "visualCallbacks": [
+    "Lab bars and cage imagery",
+    "Warning signs and experiment labels",
+    "Clinical grid patterns",
+    "Neural headband as shackle"
+  ],
+  "levels": [
+    "act1_level1_zoo_escape",
+    "act1_level2_wrong_guy",
+    "act1_level3_underground_man",
+    "act1_level4_salem_accusation",
+    "act1_level5_monkey_mind_boss"
+  ],
+  "visualStyle": {
+    "palette": ["#1a1a2e", "#16213e", "#0f3460", "#e94560", "#00ff88"],
+    "bgPattern": "clinical_grid",
+    "enemyStyle": "geometric_bureaucratic",
+    "particleStyle": "data_fragments",
+    "uiTheme": "terminal_green"
+  },
+  "bossId": "the_handler",
+  "unlocks": {
+    "powerups": ["calm_shield", "focus_lens"],
+    "codex": ["entry_neural_cage", "entry_lab_escape", "entry_handler"],
+    "cosmetics": ["headband_cracked"]
+  },
+  "musicParams": {
+    "tempo": 110,
+    "intensity": 0.6,
+    "filterCutoff": 800,
+    "useReverb": true,
+    "distortionAmount": 0.1
+  }
+}

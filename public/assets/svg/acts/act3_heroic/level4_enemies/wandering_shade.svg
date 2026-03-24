@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="shadeGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="fadeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#335566;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#112233;stop-opacity:0.2"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="30" cy="35" rx="15" ry="20" fill="url(#fadeGrad)"/>
+  <circle cx="30" cy="15" r="10" fill="#223344" opacity="0.7"/>
+  <circle cx="25" cy="14" r="3" fill="#446688" filter="url(#shadeGlow)"/>
+  <circle cx="35" cy="14" r="3" fill="#446688" filter="url(#shadeGlow)"/>
+  <path d="M 20 50 Q 25 55 30 50 Q 35 55 40 50" fill="none" stroke="#223344" stroke-width="2" opacity="0.5"/>
+</svg>

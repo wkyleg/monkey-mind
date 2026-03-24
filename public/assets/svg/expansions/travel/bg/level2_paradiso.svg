@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="paradisoGlow"><feGaussianBlur stdDeviation="10"/></filter></defs>
+  <circle cx="400" cy="150" r="80" fill="#ffffcc" opacity="0.2" filter="url(#paradisoGlow)"/>
+  <g fill="#ffff88" opacity="0.1">
+    <circle cx="200" cy="100" r="3"/><circle cx="350" cy="80" r="2"/><circle cx="500" cy="120" r="3"/>
+    <circle cx="600" cy="90" r="2"/><circle cx="150" cy="200" r="2"/><circle cx="650" cy="180" r="3"/>
+  </g>
+</svg>

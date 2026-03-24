@@ -1,0 +1,63 @@
+{
+  "id": "act7_level2_santa_fe_swarm",
+  "act": 7,
+  "index": 2,
+  "title": "Santa Fe Swarm",
+  "subtitle": "Emergence from simplicity. Kill the queen node.",
+  "themeTags": ["emergence", "complexity", "swarm"],
+  "ruleCard": {
+    "icon": "hive",
+    "hint": "Swarms exhibit emergence. Kill the queen node to collapse the system.",
+    "mechanic": "sequence_kill",
+    "params": { "queenTarget": true, "swarmCollapse": true }
+  },
+  "enemyDeck": [
+    { "archetype": "swarm", "modifiers": [], "weight": 6 },
+    { "archetype": "anchor", "modifiers": [], "weight": 2 },
+    { "archetype": "courier", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "ant_queen": {
+      "visualId": "ant_queen",
+      "dialogue": {
+        "spawn": ["The colony serves me!", "Millions obey!", "Emergence is power!", "Simple rules, complex results!", "I am the pattern!"],
+        "death": ["The colony... collapses...", "No more... orders...", "Emergence... fades...", "Individual... again...", "Pattern... broken..."]
+      }
+    },
+    "emergence_node": {
+      "visualId": "emergence_node",
+      "dialogue": {
+        "spawn": ["More than the sum!", "Complexity arises!", "From chaos, order!", "The pattern emerges!", "Connection is strength!"],
+        "death": ["Reduced... to parts...", "Complexity... falls...", "Just... components...", "Pattern... dissolves...", "Isolated... now..."]
+      }
+    },
+    "swarm_cell": {
+      "visualId": "swarm_cell",
+      "dialogue": {
+        "spawn": ["Follow the pheromone!", "The colony directs!", "One of many!", "Simple rule: attack!", "Together we are more!"],
+        "death": ["Lost... the scent...", "Colony... distant...", "Alone... now...", "Rule... broken...", "Just... one..."]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "emergence_zone", "lanes": [1, 2, 3, 4, 5], "timing": 10000, "damage": 0, "visual": "pattern_form" }
+  ],
+  "bgLayers": [
+    { "svgId": "desert", "parallaxSpeed": 0.1, "opacity": 0.4 },
+    { "svgId": "ants", "parallaxSpeed": 0.3, "opacity": 0.6 },
+    { "svgId": "patterns", "parallaxSpeed": 0.5, "opacity": 0.5 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Emergence from simplicity. Kill the queen node.",
+    "codexSnippet": "The Santa Fe Institute studies how simple rules create complex behavior. The monkey learned that the whole is not just more than the sum - it is different.",
+    "radioWhisper": "Caller says the ants in his kitchen have formed a democracy. They voted him out."
+  },
+  "musicSeed": {
+    "seed": "santa_fe_002",
+    "mode": "dorian",
+    "tempoRange": [115, 130],
+    "intensity": 0.7
+  },
+  "duration": 110,
+  "unlockCondition": "act7_level1_complete"
+}

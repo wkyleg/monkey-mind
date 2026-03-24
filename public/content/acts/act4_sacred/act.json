@@ -1,0 +1,40 @@
+{
+  "id": "act4_sacred",
+  "number": 4,
+  "name": "Sacred Technologies",
+  "thesis": "The divine is a design pattern.",
+  "storyBeat": "The monkey confronts meaning itself - is the experiment divine or profane? The headband becomes ambiguous: halo or crown, blessing or curse.",
+  "visualCallbacks": [
+    "Prayer flags and star wheels",
+    "Illuminated manuscript borders",
+    "Mandala patterns and sacred geometry",
+    "Headband as halo/crown ambiguity"
+  ],
+  "levels": [
+    "act4_level1_bhagavad_field",
+    "act4_level2_tibetan_sky",
+    "act4_level3_djinn_market",
+    "act4_level4_hildegard_engine",
+    "act4_level5_seven_seals_boss"
+  ],
+  "visualStyle": {
+    "palette": ["#1a0a1a", "#2d1b3d", "#4a2c6a", "#00ffcc", "#ff9500"],
+    "bgPattern": "mandala_sacred",
+    "enemyStyle": "illuminated_geometric",
+    "particleStyle": "incense_light",
+    "uiTheme": "sacred_gold"
+  },
+  "bossId": "seven_seals",
+  "unlocks": {
+    "powerups": ["compassion_shield", "dharma_wheel"],
+    "codex": ["entry_sacred_tech", "entry_seven_seals", "entry_divine_code"],
+    "cosmetics": ["headband_halo"]
+  },
+  "musicParams": {
+    "tempo": 75,
+    "intensity": 0.55,
+    "filterCutoff": 700,
+    "useReverb": true,
+    "distortionAmount": 0.03
+  }
+}

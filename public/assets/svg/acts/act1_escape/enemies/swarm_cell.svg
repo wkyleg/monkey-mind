@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+  <defs>
+    <filter id="cellGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="cellGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#00ff88;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Cell membrane -->
+  <circle cx="15" cy="15" r="12" fill="url(#cellGradient)" stroke="#00ff88" stroke-width="1" filter="url(#cellGlow)"/>
+  
+  <!-- Nucleus -->
+  <circle cx="15" cy="15" r="5" fill="#16213e" stroke="#e94560" stroke-width="1"/>
+  
+  <!-- Inner structure -->
+  <circle cx="15" cy="15" r="2" fill="#e94560"/>
+  
+  <!-- Flagella/tentacles -->
+  <g stroke="#00ff88" stroke-width="1" fill="none" opacity="0.6">
+    <path d="M 15 3 Q 12 -2 15 -5"/>
+    <path d="M 27 15 Q 32 12 35 15"/>
+    <path d="M 15 27 Q 18 32 15 35"/>
+    <path d="M 3 15 Q -2 18 -5 15"/>
+  </g>
+</svg>

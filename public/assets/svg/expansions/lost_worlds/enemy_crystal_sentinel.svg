@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 70">
+  <!-- Crystal Sentinel - Ancient guardian of lost civilizations -->
+  <defs>
+    <linearGradient id="crystalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#88ffff"/>
+      <stop offset="50%" stop-color="#4488aa"/>
+      <stop offset="100%" stop-color="#224466"/>
+    </linearGradient>
+  </defs>
+  
+  <g transform="translate(30,35)">
+    <!-- Crystal body - geometric -->
+    <polygon points="0,-25 15,-5 10,20 -10,20 -15,-5" fill="url(#crystalGrad)" opacity="0.85"/>
+    
+    <!-- Inner facets -->
+    <g stroke="#aaffff" stroke-width="1" fill="none" opacity="0.5">
+      <line x1="0" y1="-25" x2="0" y2="20"/>
+      <line x1="-15" y1="-5" x2="10" y2="20"/>
+      <line x1="15" y1="-5" x2="-10" y2="20"/>
+    </g>
+    
+    <!-- Energy core -->
+    <circle cx="0" cy="0" r="8" fill="#00ffff" opacity="0.6"/>
+    <circle cx="0" cy="0" r="5" fill="#ffffff" opacity="0.8"/>
+    
+    <!-- Ancient runes on surface -->
+    <g stroke="#004466" stroke-width="1" fill="none" opacity="0.7">
+      <path d="M-5,-15 L0,-12 L5,-15"/>
+      <path d="M-3,-8 L3,-8"/>
+      <circle cx="0" cy="10" r="3"/>
+    </g>
+    
+    <!-- Floating crystal shards -->
+    <g fill="#88ffff" opacity="0.6">
+      <polygon points="-20,-10 -18,-5 -22,-5"/>
+      <polygon points="20,-8 22,-3 18,-3"/>
+      <polygon points="-18,15 -16,20 -20,20"/>
+      <polygon points="18,12 20,17 16,17"/>
+    </g>
+    
+    <!-- Energy beams -->
+    <g stroke="#00ffff" stroke-width="1" opacity="0.4">
+      <line x1="0" y1="0" x2="-20" y2="-10"/>
+      <line x1="0" y1="0" x2="20" y2="-8"/>
+    </g>
+  </g>
+</svg>

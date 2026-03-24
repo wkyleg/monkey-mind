@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="memBlur"><feGaussianBlur stdDeviation="8"/></filter></defs>
+  <g fill="#6a5a4a" opacity="0.2" filter="url(#memBlur)">
+    <ellipse cx="150" cy="250" rx="60" ry="80"/><ellipse cx="400" cy="300" rx="80" ry="100"/>
+    <ellipse cx="650" cy="270" rx="70" ry="90"/>
+  </g>
+</svg>

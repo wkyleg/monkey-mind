@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70">
+  <!-- Labyrinth Beast - Borges-inspired maze creature (chaser) -->
+  <g transform="translate(35,35)">
+    <!-- Body made of maze pattern -->
+    <rect x="-20" y="-18" width="40" height="36" fill="#d4c4a8" opacity="0.9"/>
+    
+    <!-- Maze pattern on body -->
+    <g stroke="#2a1810" stroke-width="1.5" fill="none">
+      <path d="M-15,-12 L-15,0 L-5,0 L-5,-8"/>
+      <path d="M-10,-12 L-10,-4 L0,-4"/>
+      <path d="M5,-12 L5,0 L15,0"/>
+      <path d="M10,-8 L10,4 L0,4 L0,12"/>
+      <path d="M-15,8 L-5,8 L-5,12"/>
+      <path d="M15,8 L15,12"/>
+      <path d="M-10,4 L-10,12"/>
+    </g>
+    
+    <!-- Horns (minotaur reference) -->
+    <g fill="#5a4030">
+      <path d="M-12,-18 Q-20,-30 -25,-25 Q-22,-20 -15,-18"/>
+      <path d="M12,-18 Q20,-30 25,-25 Q22,-20 15,-18"/>
+    </g>
+    
+    <!-- Eyes - searching, hunting -->
+    <circle cx="-8" cy="-5" r="5" fill="#1a1008"/>
+    <circle cx="8" cy="-5" r="5" fill="#1a1008"/>
+    <circle cx="-8" cy="-5" r="3" fill="#ff3300"/>
+    <circle cx="8" cy="-5" r="3" fill="#ff3300"/>
+    
+    <!-- Snorting breath -->
+    <g fill="#8b7355" opacity="0.5">
+      <ellipse cx="-18" cy="0" rx="4" ry="2"/>
+      <ellipse cx="18" cy="0" rx="4" ry="2"/>
+    </g>
+    
+    <!-- Hooves -->
+    <g fill="#3a2810">
+      <rect x="-18" y="18" width="8" height="6"/>
+      <rect x="10" y="18" width="8" height="6"/>
+    </g>
+  </g>
+</svg>

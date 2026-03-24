@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="unpersonGlow"><feGaussianBlur stdDeviation="4"/></filter></defs>
+  <ellipse cx="30" cy="38" rx="12" ry="16" fill="#5a5a6a" opacity="0.3" filter="url(#unpersonGlow)"/>
+  <circle cx="30" cy="18" r="10" fill="#5a5a6a" opacity="0.3"/>
+  <line x1="15" y1="15" x2="45" y2="45" stroke="#ff0000" stroke-width="2" opacity="0.5"/>
+  <line x1="45" y1="15" x2="15" y2="45" stroke="#ff0000" stroke-width="2" opacity="0.5"/>
+</svg>

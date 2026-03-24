@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="smokeGlow"><feGaussianBlur stdDeviation="3"/></filter></defs>
+  <ellipse cx="30" cy="45" rx="12" ry="10" fill="#886644" stroke="#aa8866" stroke-width="2"/>
+  <rect x="26" y="35" width="8" height="10" fill="#886644"/>
+  <line x1="30" y1="35" x2="30" y2="20" stroke="#666666" stroke-width="2"/>
+  <ellipse cx="30" cy="20" rx="15" ry="10" fill="#aaaaaa" opacity="0.3" filter="url(#smokeGlow)"/>
+  <ellipse cx="25" cy="12" rx="8" ry="6" fill="#999999" opacity="0.2" filter="url(#smokeGlow)"/>
+  <ellipse cx="35" cy="8" rx="6" ry="5" fill="#888888" opacity="0.15" filter="url(#smokeGlow)"/>
+</svg>

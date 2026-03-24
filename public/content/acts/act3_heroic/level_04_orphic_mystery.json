@@ -1,0 +1,99 @@
+{
+  "id": "act3_level4_orphic_mystery",
+  "act": 3,
+  "index": 4,
+  "title": "Orphic Mystery",
+  "subtitle": "Don't look back. The dead follow the gaze.",
+  "themeTags": ["orpheus", "underworld", "gaze"],
+  "ruleCard": {
+    "icon": "eye_crossed",
+    "hint": "Unseen enemies are vulnerable. Looking back resurrects them.",
+    "mechanic": "dont_look_back",
+    "params": { "resurrectOnLook": true, "lookBackPenalty": 5 }
+  },
+  "enemyDeck": [
+    { "archetype": "drifter", "modifiers": ["unseen"], "weight": 5 },
+    { "archetype": "phaser", "modifiers": [], "weight": 3 },
+    { "archetype": "mimic", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "wandering_shade": {
+      "visualId": "wandering_shade",
+      "dialogue": {
+        "spawn": [
+          "Remember... me...",
+          "I was... someone...",
+          "The river... so cold...",
+          "Cannot... rest...",
+          "Take me... with you..."
+        ],
+        "death": [
+          "Peace... finally...",
+          "Lethe... calls...",
+          "I forget... everything...",
+          "The pain... ends...",
+          "Thank... you..."
+        ]
+      }
+    },
+    "cerberus_head": {
+      "visualId": "cerberus_head",
+      "dialogue": {
+        "spawn": [
+          "NONE SHALL PASS!",
+          "Three heads watch!",
+          "Hades' loyal guard!",
+          "The gates are sealed!",
+          "NO ESCAPE!"
+        ],
+        "death": [
+          "The gate... opens...",
+          "Hades... forgive me...",
+          "Orpheus' song... again...",
+          "Sleep... at last...",
+          "The dead... flee..."
+        ]
+      }
+    },
+    "eurydice_phantom": {
+      "visualId": "eurydice_phantom",
+      "dialogue": {
+        "spawn": [
+          "Don't turn around...",
+          "I'm right behind you...",
+          "Almost... there...",
+          "Trust... me...",
+          "Keep... walking..."
+        ],
+        "death": [
+          "You... looked...",
+          "Almost... saved...",
+          "Back... to darkness...",
+          "We were... so close...",
+          "Next time... don't look..."
+        ]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "underworld_pull", "lanes": [3], "timing": 15000, "damage": 1, "visual": "shadow_hands" }
+  ],
+  "bgLayers": [
+    { "svgId": "underworld", "parallaxSpeed": 0.05, "opacity": 0.5 },
+    { "svgId": "shades", "parallaxSpeed": 0.2, "opacity": 0.4 },
+    { "svgId": "eurydice", "parallaxSpeed": 0.4, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Don't look back. The dead follow the gaze.",
+    "codexSnippet": "Orpheus almost saved Eurydice. Almost. The monkey learned that some rescues require faith, not verification.",
+    "radioWhisper": "Caller says his wife is right behind him. He hasn't turned around in three days."
+  },
+  "musicSeed": {
+    "seed": "orphic_004",
+    "mode": "locrian",
+    "tempoRange": [70, 85],
+    "intensity": 0.55
+  },
+  "duration": 130,
+  "unlockCondition": "act3_level3_complete"
+}

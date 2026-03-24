@@ -1,0 +1,66 @@
+{
+  "fruit_drifter": {
+    "spawn": [
+      "Still life... moves!",
+      "The arrangement shifts!",
+      "Ripe for chaos!",
+      "From the canvas!",
+      "Nature morte awakens!"
+    ],
+    "death": [
+      "Bruised...",
+      "Rotting... away...",
+      "Back to canvas...",
+      "Composition... broken...",
+      "Overripe..."
+    ]
+  },
+  "paint_splatter": {
+    "spawn": [
+      "SPLASH!",
+      "Color explosion!",
+      "Jackson was here!",
+      "Abstract fury!",
+      "Drip drip drip!"
+    ],
+    "death": [
+      "Drying...",
+      "The stroke... ends...",
+      "Absorbed...",
+      "Fading... pigment...",
+      "Canvas... drinks..."
+    ]
+  },
+  "portrait_mimic": {
+    "spawn": [
+      "I am you.",
+      "The eyes follow...",
+      "Reflection captured!",
+      "Who is the subject?",
+      "Mirror mirror..."
+    ],
+    "death": [
+      "Frame... cracking...",
+      "The likeness... fades...",
+      "Unsigned...",
+      "Portrait... ruined...",
+      "Who was I..."
+    ]
+  },
+  "brush_weaver": {
+    "spawn": [
+      "Stroke by stroke!",
+      "The brush dances!",
+      "Patterns emerge!",
+      "Weaving color!",
+      "Art attacks!"
+    ],
+    "death": [
+      "Bristles... bent...",
+      "No more... strokes...",
+      "Dried out...",
+      "The masterpiece... unfinished...",
+      "Cleaned..."
+    ]
+  }
+}

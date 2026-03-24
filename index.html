@@ -3,7 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="Monkey Mind: Inner Invaders - A psychedelic arcade defense game">
+  <meta name="description" content="Monkey Mind: Inner Invaders - A psychedelic arcade shooter where you escape the confines of your own mind">
+  <meta name="keywords" content="arcade, shooter, game, browser game, psychedelic, monkey, mind">
+  <meta name="author" content="Monkey Mind Team">
+  <meta name="theme-color" content="#00cccc">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Monkey Mind: Inner Invaders">
+  <meta property="og:description" content="A psychedelic arcade shooter where you escape the confines of your own mind">
+
+  
   <title>Monkey Mind: Inner Invaders</title>
   <style>
     * {
@@ -16,8 +30,8 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #0a0a0f;
-      font-family: 'Courier New', monospace;
+      background: #080810;
+      font-family: 'SF Mono', 'Consolas', 'Liberation Mono', monospace;
     }
     
     #game-container {
@@ -26,7 +40,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
+      background: radial-gradient(ellipse at center, #12141e 0%, #080810 70%, #050508 100%);
     }
     
     #game-canvas {
@@ -36,32 +50,308 @@
       image-rendering: crisp-edges;
     }
     
-    #loading {
+    /* Loading Screen Styles */
+    #loading-screen {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #00ffaa;
-      font-size: 24px;
-      text-shadow: 0 0 20px #00ffaa;
-      animation: pulse 1.5s ease-in-out infinite;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(ellipse at center, #12141e 0%, #080810 70%, #050508 100%);
+      z-index: 100;
     }
     
-    @keyframes pulse {
+    /* Neural Network Animation Background */
+    #neural-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.15;
+      overflow: hidden;
+    }
+    
+    .neural-node {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #00cccc;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00cccc;
+      animation: nodeGlow 2s ease-in-out infinite;
+    }
+    
+    .neural-line {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #00cccc, transparent);
+      opacity: 0.3;
+      animation: linePulse 3s ease-in-out infinite;
+    }
+    
+    @keyframes nodeGlow {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+    
+    @keyframes linePulse {
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: 0.4; }
+    }
+    
+    /* Logo and Title */
+    .loading-logo {
+      position: relative;
+      margin-bottom: 40px;
+    }
+    
+    .logo-icon {
+      width: 100px;
+      height: 100px;
+      border: 3px solid #00cccc;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: logoSpin 4s linear infinite, logoPulse 2s ease-in-out infinite;
+      box-shadow: 0 0 30px rgba(0, 204, 204, 0.5), inset 0 0 20px rgba(0, 204, 204, 0.2);
+    }
+    
+    .logo-icon::before {
+      content: '🐵';
+      font-size: 48px;
+      filter: drop-shadow(0 0 10px #00cccc);
+    }
+    
+    @keyframes logoSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes logoPulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(0, 204, 204, 0.5), inset 0 0 20px rgba(0, 204, 204, 0.2); }
+      50% { box-shadow: 0 0 50px rgba(0, 204, 204, 0.8), inset 0 0 30px rgba(0, 204, 204, 0.4); }
+    }
+    
+    .loading-title {
+      color: #00cccc;
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px #00cccc, 0 0 40px rgba(0, 204, 204, 0.5);
+      letter-spacing: 4px;
+    }
+    
+    .loading-subtitle {
+      color: #cc0066;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 40px;
+      text-shadow: 0 0 10px #cc0066;
+      letter-spacing: 2px;
+    }
+    
+    /* Progress Bar */
+    .progress-container {
+      width: 300px;
+      margin-bottom: 20px;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #1a1a2e;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid #00cccc;
+      box-shadow: 0 0 10px rgba(0, 204, 204, 0.3);
+    }
+    
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #00cccc, #00ffaa);
+      border-radius: 4px;
+      transition: width 0.3s ease-out;
+      box-shadow: 0 0 10px #00cccc;
+    }
+    
+    .progress-text {
+      color: #5a6070;
+      font-size: 12px;
+      text-align: center;
+      margin-top: 8px;
+    }
+    
+    /* Loading Status */
+    .loading-status {
+      color: #00cccc;
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 30px;
+      animation: statusBlink 1.5s ease-in-out infinite;
+      text-shadow: 0 0 10px #00cccc;
+    }
+    
+    @keyframes statusBlink {
       0%, 100% { opacity: 0.5; }
       50% { opacity: 1; }
+    }
+    
+    /* Loading Tips */
+    .loading-tips {
+      color: #5a6070;
+      font-size: 12px;
+      text-align: center;
+      max-width: 400px;
+      line-height: 1.6;
+      padding: 15px 20px;
+      border: 1px solid #2a2a3e;
+      border-radius: 4px;
+      background: rgba(10, 10, 15, 0.8);
+    }
+    
+    .loading-tips::before {
+      content: '◈ ';
+      color: #00cccc;
+    }
+    
+    .loading-tips::after {
+      content: ' ◈';
+      color: #00cccc;
     }
     
     .hidden {
       display: none !important;
     }
+    
+    /* Scan Lines Effect */
+    #loading-screen::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0.1) 4px
+      );
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
   <div id="game-container">
-    <div id="loading">INITIALIZING NEURAL LINK...</div>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+      <!-- Neural Network Background -->
+      <div id="neural-bg"></div>
+      
+      <!-- Logo -->
+      <div class="loading-logo">
+        <div class="logo-icon"></div>
+      </div>
+      
+      <!-- Title -->
+      <div class="loading-title">MONKEY MIND</div>
+      <div class="loading-subtitle">INNER INVADERS</div>
+      
+      <!-- Loading Status -->
+      <div class="loading-status" id="loading-status">INITIALIZING NEURAL LINK...</div>
+      
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="progress-text" id="progress-text">0%</div>
+      </div>
+      
+      <!-- Loading Tips -->
+      <div class="loading-tips" id="loading-tip">
+        Use arrow keys or A/D to switch lanes. Your mind is your battlefield.
+      </div>
+    </div>
+    
+    <!-- Game Canvas -->
     <canvas id="game-canvas" class="hidden"></canvas>
   </div>
+  
+  <script>
+    // Loading tips rotation
+    const tips = [
+      "Use arrow keys or A/D to switch lanes. Your mind is your battlefield.",
+      "CALM powers focus your attacks. PASSION powers unleash fury.",
+      "Each sector represents a layer of consciousness to escape.",
+      "Enemies are manifestations of fear, doubt, and distraction.",
+      "The monkey mind is restless. Learn to quiet it through play.",
+      "Higher combos mean better scores. Stay focused.",
+      "Power-ups drop from defeated enemies. Collect them!",
+      "Boss fights require pattern recognition and patience.",
+    ];
+    
+    let tipIndex = 0;
+    const tipElement = document.getElementById('loading-tip');
+    
+    setInterval(() => {
+      tipIndex = (tipIndex + 1) % tips.length;
+      if (tipElement) {
+        tipElement.style.opacity = '0';
+        setTimeout(() => {
+          tipElement.textContent = tips[tipIndex];
+          tipElement.style.opacity = '1';
+        }, 300);
+      }
+    }, 4000);
+    
+    // Generate neural network background
+    const neuralBg = document.getElementById('neural-bg');
+    if (neuralBg) {
+      // Create nodes
+      for (let i = 0; i < 20; i++) {
+        const node = document.createElement('div');
+        node.className = 'neural-node';
+        node.style.left = `${Math.random() * 100}%`;
+        node.style.top = `${Math.random() * 100}%`;
+        node.style.animationDelay = `${Math.random() * 2}s`;
+        neuralBg.appendChild(node);
+      }
+      
+      // Create lines
+      for (let i = 0; i < 15; i++) {
+        const line = document.createElement('div');
+        line.className = 'neural-line';
+        line.style.left = `${Math.random() * 80}%`;
+        line.style.top = `${Math.random() * 100}%`;
+        line.style.width = `${50 + Math.random() * 150}px`;
+        line.style.transform = `rotate(${Math.random() * 360}deg)`;
+        line.style.animationDelay = `${Math.random() * 3}s`;
+        neuralBg.appendChild(line);
+      }
+    }
+    
+    // Expose progress update function for main.ts
+    window.updateLoadingProgress = function(percent, status) {
+      const fill = document.getElementById('progress-fill');
+      const text = document.getElementById('progress-text');
+      const statusEl = document.getElementById('loading-status');
+      
+      if (fill) fill.style.width = `${percent}%`;
+      if (text) text.textContent = `${Math.round(percent)}%`;
+      if (statusEl && status) statusEl.textContent = status;
+    };
+  </script>
+  
   <script type="module" src="/src/main.ts"></script>
 </body>
 </html>

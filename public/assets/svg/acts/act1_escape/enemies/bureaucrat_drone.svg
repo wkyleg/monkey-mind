@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="droneGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Main body - rectangular bureaucratic form -->
+  <rect x="15" y="10" width="30" height="40" rx="3" 
+        fill="#16213e" stroke="#0f3460" stroke-width="2"/>
+  
+  <!-- Document lines -->
+  <g stroke="#00ff88" stroke-width="1" opacity="0.6">
+    <line x1="20" y1="18" x2="40" y2="18"/>
+    <line x1="20" y1="24" x2="40" y2="24"/>
+    <line x1="20" y1="30" x2="35" y2="30"/>
+    <line x1="20" y1="36" x2="40" y2="36"/>
+    <line x1="20" y1="42" x2="30" y2="42"/>
+  </g>
+  
+  <!-- Stamp/seal -->
+  <circle cx="35" cy="40" r="6" fill="none" stroke="#e94560" stroke-width="1.5" opacity="0.7"/>
+  <text x="35" y="42" fill="#e94560" font-size="6" text-anchor="middle" opacity="0.7">✓</text>
+  
+  <!-- Sequence symbol display -->
+  <rect x="22" y="2" width="16" height="10" rx="2" fill="#1a1a2e" stroke="#e94560" stroke-width="1"/>
+  <text x="30" y="10" fill="#e94560" font-family="monospace" font-size="8" text-anchor="middle">α</text>
+  
+  <!-- Scanner eye -->
+  <ellipse cx="30" cy="55" rx="8" ry="3" fill="#0f3460" stroke="#00ff88" stroke-width="1" filter="url(#droneGlow)"/>
+  <ellipse cx="30" cy="55" rx="3" ry="1.5" fill="#00ff88"/>
+</svg>

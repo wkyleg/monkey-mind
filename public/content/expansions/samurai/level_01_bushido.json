@@ -1,0 +1,56 @@
+{
+  "id": "samurai_level1_bushido",
+  "expansion": "samurai",
+  "index": 1,
+  "title": "Bushido",
+  "subtitle": "The way of the warrior. Seven virtues.",
+  "themeTags": ["bushido", "samurai", "honor", "virtue"],
+  "ruleCard": {
+    "icon": "katana",
+    "hint": "Seven virtues. Each grants power when upheld, weakness when violated.",
+    "mechanic": "virtue_system",
+    "params": { "virtues": ["gi", "yu", "jin", "rei", "makoto", "meiyo", "chugi"], "virtueBonus": 15, "violationPenalty": 20 }
+  },
+  "enemyDeck": [
+    { "archetype": "chaser", "modifiers": [], "weight": 4, "visualId": "enemy_oni_mask" },
+    { "archetype": "sniper", "modifiers": [], "weight": 3, "visualId": "enemy_shadow_ninja" },
+    { "archetype": "shieldbearer", "modifiers": [], "weight": 3, "visualId": "enemy_ronin" }
+  ],
+  "levelEnemies": {
+    "dishonored_ronin": {
+      "visualId": "dishonored_ronin",
+      "dialogue": {
+        "spawn": ["I have no master!", "Honor means nothing!", "The code is broken!", "Masterless, I wander!", "Virtue is weakness!"],
+        "death": ["My lord... forgive...", "Honor... restored...", "The code... was right...", "I find... my master...", "Bushido... guides me..."]
+      }
+    },
+    "virtue_spirit": {
+      "visualId": "virtue_spirit",
+      "dialogue": {
+        "spawn": ["GI! Righteousness!", "YU! Courage!", "JIN! Benevolence!", "REI! Respect!", "MAKOTO! Honesty!"],
+        "death": ["Virtue... fades...", "The way... forgotten...", "Seven... become six...", "Honor... dimmed...", "The code... weakens..."]
+      }
+    },
+    "oath_keeper": {
+      "visualId": "oath_keeper",
+      "dialogue": {
+        "spawn": ["My oath binds me!", "I serve unto death!", "CHUGI! Loyalty!", "MEIYO! Honor!", "The code is my life!"],
+        "death": ["Oath... fulfilled...", "Duty... complete...", "Loyalty... proven...", "My master... served...", "Honor... in death..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "dishonor", "params": { "honorLoss": 10, "shameDebuff": 0.2 } }],
+  "bgLayers": [
+    { "svgId": "dojo", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "scrolls", "parallaxSpeed": 0.2, "opacity": 0.4 },
+    { "svgId": "katana", "parallaxSpeed": 0.3, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Seven virtues. Each grants power when upheld, weakness when violated.",
+    "codexSnippet": "Bushido is the way of the warrior. The monkey learns that true strength comes from virtue, not violence. The seven virtues are the foundation of the samurai soul.",
+    "radioWhisper": "The sword is the soul of the samurai."
+  },
+  "musicSeed": { "seed": "bushido_001", "mode": "pentatonic", "tempoRange": [55, 70], "intensity": 0.5 },
+  "duration": 120,
+  "unlockCondition": "act8_complete"
+}

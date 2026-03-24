@@ -1,0 +1,17 @@
+{
+  "id": "lit_level14_dostoevsky_underground",
+  "expansion": "literature",
+  "index": 14,
+  "title": "Notes from Underground",
+  "subtitle": "I am a sick man. I am a spiteful man.",
+  "themeTags": ["dostoevsky", "underground", "spite", "consciousness"],
+  "levelEnemies": {
+    "underground_man": { "visualId": "underground_man", "dialogue": { "spawn": ["I am sick!", "Consciousness is disease!", "2+2=5 if I wish!", "I spite myself!", "The crystal palace!"], "death": ["Well...", "Consciousness... cure...", "2+2... equals...", "Spite... released...", "Palace... built..."] } },
+    "crystal_palace": { "visualId": "crystal_palace", "dialogue": { "spawn": ["Utopia built!", "Reason triumphant!", "No more suffering!", "2+2=4 forever!", "Progress inevitable!"], "death": ["Utopia... lived...", "Reason... balanced...", "Suffering... meaningful...", "2+2... free...", "Progress... human..."] } },
+    "liza": { "visualId": "liza", "dialogue": { "spawn": ["You spoke truth!", "I came to help!", "Your cruelty!", "I offer love!", "Underground rejects!"], "death": ["Truth... heard...", "Helped...", "Kindness...", "Love... accepted...", "Surfaced..."] } }
+  },
+  "bgLayers": [{ "svgId": "mousehole", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "st_petersburg", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "wall", "parallaxSpeed": 0.2, "opacity": 0.6 }],
+  "copyLayers": { "codexSnippet": "I am a sick man... I am a spiteful man. I am an unpleasant man. The monkey descends into the hyperconscious underground." },
+  "musicSeed": { "seed": "underground_014", "mode": "phrygian", "tempoRange": [45, 60], "intensity": 0.6 },
+  "duration": 130, "unlockCondition": "lit_level13_complete"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "act8_signals",
+  "number": 8,
+  "name": "Signals and Night Radio",
+  "thesis": "Paranoia, cosmic silence, and the search for meaning in static.",
+  "storyBeat": "The monkey has traveled through all realms of mind. Now it faces the ultimate questions: Is anyone out there? What lies beyond the static? The final confrontation awaits in the silence between signals.",
+  "visualCallbacks": [
+    "Number stations and encrypted broadcasts",
+    "Redacted documents and surveillance imagery",
+    "Alien abduction aesthetics",
+    "Cosmic void and distant stars"
+  ],
+  "levels": [
+    "act8_level1_agencies_redacted",
+    "act8_level2_ussr_psyops",
+    "act8_level3_alien_abduction",
+    "act8_level4_fermi_silence",
+    "act8_level5_quiet_mind"
+  ],
+  "visualStyle": {
+    "palette": ["#0a0a0a", "#1a1a1a", "#333333", "#00ff00", "#ff0000", "#ffffff"],
+    "bgPattern": "static",
+    "enemyStyle": "paranoia_cosmic",
+    "particleStyle": "signal_noise",
+    "uiTheme": "terminal_green"
+  },
+  "bossId": "quiet_mind",
+  "unlocks": {
+    "powerups": ["cosmic_awareness", "signal_clarity"],
+    "codex": ["entry_signals", "entry_fermi_paradox", "entry_quiet_mind"],
+    "cosmetics": ["antenna_headband"]
+  },
+  "musicParams": {
+    "tempo": 95,
+    "intensity": 0.9,
+    "filterCutoff": 1500,
+    "useReverb": true,
+    "distortionAmount": 0.4
+  }
+}

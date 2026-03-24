@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <filter id="redactedGlitch">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  
+  <!-- Shadowy figure -->
+  <g filter="url(#redactedGlitch)">
+    <!-- Body - dark suit -->
+    <rect x="22" y="30" width="20" height="30" fill="#1a1a1a" rx="2"/>
+    
+    <!-- Head -->
+    <circle cx="32" cy="20" r="12" fill="#2a2a2a"/>
+    
+    <!-- Sunglasses - hiding eyes -->
+    <rect x="22" y="16" width="20" height="6" fill="#000000" rx="1"/>
+    <line x1="22" y1="19" x2="42" y2="19" stroke="#333333" stroke-width="0.5"/>
+    
+    <!-- Earpiece -->
+    <circle cx="44" cy="20" r="2" fill="#333333"/>
+    <path d="M44,22 Q48,25 46,30" stroke="#333333" fill="none" stroke-width="1"/>
+    
+    <!-- Tie -->
+    <path d="M32,30 L30,35 L32,55 L34,35 Z" fill="#000000"/>
+    
+    <!-- Arms -->
+    <rect x="14" y="32" width="8" height="20" fill="#1a1a1a" rx="2"/>
+    <rect x="42" y="32" width="8" height="20" fill="#1a1a1a" rx="2"/>
+  </g>
+  
+  <!-- Redaction bars -->
+  <g fill="#000000" opacity="0.8">
+    <rect x="20" y="8" width="24" height="4"/>
+    <rect x="18" y="14" width="28" height="3"/>
+  </g>
+  
+  <!-- Classification stamp -->
+  <text x="32" y="62" text-anchor="middle" font-family="monospace" font-size="4" fill="#ff0000" opacity="0.5">
+    [REDACTED]
+  </text>
+</svg>

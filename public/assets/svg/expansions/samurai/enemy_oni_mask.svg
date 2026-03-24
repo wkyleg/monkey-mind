@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 70">
+  <!-- Oni Mask - Demonic Japanese spirit -->
+  <g transform="translate(30,35)">
+    <!-- Face base -->
+    <ellipse cx="0" cy="0" rx="20" ry="25" fill="#cc3333"/>
+    
+    <!-- Forehead ridges -->
+    <g fill="#aa2222">
+      <ellipse cx="-8" cy="-18" rx="6" ry="4"/>
+      <ellipse cx="8" cy="-18" rx="6" ry="4"/>
+    </g>
+    
+    <!-- Horns -->
+    <g fill="#1a1a1a">
+      <path d="M-12,-22 Q-20,-40 -15,-45 Q-10,-42 -8,-25"/>
+      <path d="M12,-22 Q20,-40 15,-45 Q10,-42 8,-25"/>
+    </g>
+    
+    <!-- Fierce eyebrows -->
+    <g fill="#aa2222">
+      <path d="M-15,-10 L-5,-15 L-5,-10 L-15,-5 Z"/>
+      <path d="M15,-10 L5,-15 L5,-10 L15,-5 Z"/>
+    </g>
+    
+    <!-- Eyes (glowing) -->
+    <circle cx="-8" cy="-5" r="5" fill="#ffff00"/>
+    <circle cx="8" cy="-5" r="5" fill="#ffff00"/>
+    <circle cx="-8" cy="-5" r="2" fill="#000000"/>
+    <circle cx="8" cy="-5" r="2" fill="#000000"/>
+    
+    <!-- Nose -->
+    <path d="M0,-5 L-3,5 L0,8 L3,5 Z" fill="#bb3333"/>
+    
+    <!-- Mouth (terrifying grin) -->
+    <path d="M-12,12 Q0,20 12,12" fill="#1a0a0a"/>
+    
+    <!-- Fangs -->
+    <g fill="#ffffff">
+      <polygon points="-10,12 -8,20 -6,12"/>
+      <polygon points="-4,13 -2,18 0,13"/>
+      <polygon points="4,13 6,18 8,13"/>
+      <polygon points="10,12 12,20 14,12"/>
+    </g>
+    
+    <!-- Decorative swirls -->
+    <g stroke="#ffcc00" stroke-width="1" fill="none" opacity="0.5">
+      <path d="M-15,5 Q-18,10 -15,15"/>
+      <path d="M15,5 Q18,10 15,15"/>
+    </g>
+  </g>
+</svg>

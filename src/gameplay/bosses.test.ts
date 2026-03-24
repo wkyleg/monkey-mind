@@ -1,13 +1,13 @@
 /**
  * Boss System Tests
- * 
+ *
  * Tests for boss creation, movement patterns, attack execution, and projectile behavior.
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { Boss, BossFactory } from './bosses';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { BossData } from '../content/schema';
 import { events } from '../core/events';
+import { Boss, BossFactory } from './bosses';
 
 // Mock events
 vi.mock('../core/events', () => ({
@@ -179,10 +179,10 @@ describe('Boss', () => {
       completeBossEntrance(boss);
 
       const initialX = boss.transform.x;
-      
+
       // Update to trigger pattern movement
       boss.update(1, 400, 500);
-      
+
       // Sweep pattern should move the boss
       expect(boss.transform.x).not.toBe(initialX);
     });
@@ -209,12 +209,14 @@ describe('Boss', () => {
   describe('Attack Execution', () => {
     it('should emit audio event when attacking', () => {
       const data = createMockBossData({
-        phases: [{ 
-          hpThreshold: 1, 
-          pattern: 'sweep', 
-          speedMod: 1,
-          attacks: [{ type: 'straight_shot', cooldown: 100, damage: 1, params: {} }] 
-        }],
+        phases: [
+          {
+            hpThreshold: 1,
+            pattern: 'sweep',
+            speedMod: 1,
+            attacks: [{ type: 'straight_shot', cooldown: 100, damage: 1, params: {} }],
+          },
+        ],
       });
       const boss = new Boss(data, 800, 600);
 
@@ -230,12 +232,14 @@ describe('Boss', () => {
 
     it('should spawn projectiles after attack', () => {
       const data = createMockBossData({
-        phases: [{ 
-          hpThreshold: 1, 
-          pattern: 'sweep', 
-          speedMod: 1,
-          attacks: [{ type: 'straight_shot', cooldown: 100, damage: 1, params: {} }] 
-        }],
+        phases: [
+          {
+            hpThreshold: 1,
+            pattern: 'sweep',
+            speedMod: 1,
+            attacks: [{ type: 'straight_shot', cooldown: 100, damage: 1, params: {} }],
+          },
+        ],
       });
       const boss = new Boss(data, 800, 600);
 
@@ -250,12 +254,14 @@ describe('Boss', () => {
 
     it('should spawn spread_shot projectiles', () => {
       const data = createMockBossData({
-        phases: [{ 
-          hpThreshold: 1, 
-          pattern: 'sweep', 
-          speedMod: 1,
-          attacks: [{ type: 'spread_shot', cooldown: 100, damage: 1, params: { count: 5 } }] 
-        }],
+        phases: [
+          {
+            hpThreshold: 1,
+            pattern: 'sweep',
+            speedMod: 1,
+            attacks: [{ type: 'spread_shot', cooldown: 100, damage: 1, params: { count: 5 } }],
+          },
+        ],
       });
       const boss = new Boss(data, 800, 600);
 
@@ -268,12 +274,14 @@ describe('Boss', () => {
 
     it('should spawn radial attack projectiles', () => {
       const data = createMockBossData({
-        phases: [{ 
-          hpThreshold: 1, 
-          pattern: 'sweep', 
-          speedMod: 1,
-          attacks: [{ type: 'radial', cooldown: 100, damage: 1, params: { count: 8 } }] 
-        }],
+        phases: [
+          {
+            hpThreshold: 1,
+            pattern: 'sweep',
+            speedMod: 1,
+            attacks: [{ type: 'radial', cooldown: 100, damage: 1, params: { count: 8 } }],
+          },
+        ],
       });
       const boss = new Boss(data, 800, 600);
 
@@ -286,12 +294,14 @@ describe('Boss', () => {
 
     it('should spawn mirror_shot projectiles', () => {
       const data = createMockBossData({
-        phases: [{ 
-          hpThreshold: 1, 
-          pattern: 'sweep', 
-          speedMod: 1,
-          attacks: [{ type: 'mirror_shot', cooldown: 100, damage: 1, params: {} }] 
-        }],
+        phases: [
+          {
+            hpThreshold: 1,
+            pattern: 'sweep',
+            speedMod: 1,
+            attacks: [{ type: 'mirror_shot', cooldown: 100, damage: 1, params: {} }],
+          },
+        ],
       });
       const boss = new Boss(data, 800, 600);
 
@@ -304,12 +314,14 @@ describe('Boss', () => {
 
     it('should spawn split attack projectiles', () => {
       const data = createMockBossData({
-        phases: [{ 
-          hpThreshold: 1, 
-          pattern: 'sweep', 
-          speedMod: 1,
-          attacks: [{ type: 'split', cooldown: 100, damage: 1, params: { count: 4 } }] 
-        }],
+        phases: [
+          {
+            hpThreshold: 1,
+            pattern: 'sweep',
+            speedMod: 1,
+            attacks: [{ type: 'split', cooldown: 100, damage: 1, params: { count: 4 } }],
+          },
+        ],
       });
       const boss = new Boss(data, 800, 600);
 
@@ -322,12 +334,14 @@ describe('Boss', () => {
 
     it('should spawn reality_warp projectiles', () => {
       const data = createMockBossData({
-        phases: [{ 
-          hpThreshold: 1, 
-          pattern: 'sweep', 
-          speedMod: 1,
-          attacks: [{ type: 'reality_warp', cooldown: 100, damage: 1, params: {} }] 
-        }],
+        phases: [
+          {
+            hpThreshold: 1,
+            pattern: 'sweep',
+            speedMod: 1,
+            attacks: [{ type: 'reality_warp', cooldown: 100, damage: 1, params: {} }],
+          },
+        ],
       });
       const boss = new Boss(data, 800, 600);
 
@@ -342,12 +356,14 @@ describe('Boss', () => {
   describe('Projectile Behavior', () => {
     it('should update projectile positions over time', () => {
       const data = createMockBossData({
-        phases: [{ 
-          hpThreshold: 1, 
-          pattern: 'sweep', 
-          speedMod: 1,
-          attacks: [{ type: 'straight_shot', cooldown: 100, damage: 1, params: {} }] 
-        }],
+        phases: [
+          {
+            hpThreshold: 1,
+            pattern: 'sweep',
+            speedMod: 1,
+            attacks: [{ type: 'straight_shot', cooldown: 100, damage: 1, params: {} }],
+          },
+        ],
       });
       const boss = new Boss(data, 800, 600);
 
@@ -356,7 +372,7 @@ describe('Boss', () => {
 
       const projectiles = boss.getProjectiles();
       expect(projectiles.length).toBeGreaterThan(0);
-      
+
       const initialY = projectiles[0].y;
 
       // Wait for telegraph to finish and projectile to move
@@ -367,12 +383,14 @@ describe('Boss', () => {
 
     it('should remove expired projectiles', () => {
       const data = createMockBossData({
-        phases: [{ 
-          hpThreshold: 1, 
-          pattern: 'sweep', 
-          speedMod: 1,
-          attacks: [{ type: 'straight_shot', cooldown: 100000, damage: 1, params: {} }] // Very long cooldown
-        }],
+        phases: [
+          {
+            hpThreshold: 1,
+            pattern: 'sweep',
+            speedMod: 1,
+            attacks: [{ type: 'straight_shot', cooldown: 100000, damage: 1, params: {} }], // Very long cooldown
+          },
+        ],
       });
       const boss = new Boss(data, 800, 600);
 
@@ -393,12 +411,14 @@ describe('Boss', () => {
   describe('Projectile Hit Detection', () => {
     it('should detect player collision with active projectile', () => {
       const data = createMockBossData({
-        phases: [{ 
-          hpThreshold: 1, 
-          pattern: 'sweep', 
-          speedMod: 1,
-          attacks: [{ type: 'straight_shot', cooldown: 100, damage: 1, params: {} }] 
-        }],
+        phases: [
+          {
+            hpThreshold: 1,
+            pattern: 'sweep',
+            speedMod: 1,
+            attacks: [{ type: 'straight_shot', cooldown: 100, damage: 1, params: {} }],
+          },
+        ],
       });
       const boss = new Boss(data, 800, 600);
 
@@ -411,7 +431,7 @@ describe('Boss', () => {
       const projectiles = boss.getProjectiles();
       if (projectiles.length > 0) {
         const proj = projectiles[0];
-        
+
         // Check hit at projectile position
         const result = boss.checkProjectileHit(proj.x, proj.y, 10);
         expect(result.hit).toBe(true);
@@ -421,12 +441,14 @@ describe('Boss', () => {
 
     it('should not detect hit when player is far away', () => {
       const data = createMockBossData({
-        phases: [{ 
-          hpThreshold: 1, 
-          pattern: 'sweep', 
-          speedMod: 1,
-          attacks: [{ type: 'straight_shot', cooldown: 100, damage: 1, params: {} }] 
-        }],
+        phases: [
+          {
+            hpThreshold: 1,
+            pattern: 'sweep',
+            speedMod: 1,
+            attacks: [{ type: 'straight_shot', cooldown: 100, damage: 1, params: {} }],
+          },
+        ],
       });
       const boss = new Boss(data, 800, 600);
 
@@ -462,8 +484,11 @@ describe('Boss', () => {
       // Damage boss to below 50%
       boss.onDamage(55);
 
-      // Update to check phase transition
-      boss.update(0.01, 400, 500);
+      // Boss has a 2-second phase transition animation
+      // Update enough frames to complete the transition (~125 frames at 0.016s each)
+      for (let i = 0; i < 150; i++) {
+        boss.update(0.016, 400, 500);
+      }
 
       expect(boss.getCurrentPhase()?.pattern).toBe('chase');
     });

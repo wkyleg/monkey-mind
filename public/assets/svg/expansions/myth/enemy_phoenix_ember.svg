@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+  <!-- Phoenix Ember - Small fiery swarm -->
+  <defs>
+    <radialGradient id="emberGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffff00"/>
+      <stop offset="50%" stop-color="#ff6600"/>
+      <stop offset="100%" stop-color="#ff0000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <g transform="translate(25,25)">
+    <!-- Glow aura -->
+    <circle cx="0" cy="0" r="20" fill="url(#emberGlow)" opacity="0.5"/>
+    
+    <!-- Core flame body -->
+    <path d="M0,-12 Q8,-5 5,5 Q2,12 0,8 Q-2,12 -5,5 Q-8,-5 0,-12" fill="#ff9900"/>
+    
+    <!-- Inner flame -->
+    <path d="M0,-8 Q4,-3 3,3 Q1,6 0,4 Q-1,6 -3,3 Q-4,-3 0,-8" fill="#ffcc00"/>
+    
+    <!-- White hot center -->
+    <ellipse cx="0" cy="0" rx="3" ry="4" fill="#ffffff" opacity="0.9"/>
+    
+    <!-- Eyes -->
+    <circle cx="-2" cy="-2" r="1.5" fill="#000000"/>
+    <circle cx="2" cy="-2" r="1.5" fill="#000000"/>
+    
+    <!-- Trailing sparks -->
+    <g fill="#ff6600" opacity="0.7">
+      <circle cx="-8" cy="8" r="2"/>
+      <circle cx="8" cy="10" r="1.5"/>
+      <circle cx="-5" cy="12" r="1"/>
+      <circle cx="3" cy="14" r="1.5"/>
+    </g>
+    
+    <!-- Wing shapes (small) -->
+    <g fill="#ff3300" opacity="0.6">
+      <path d="M-5,-2 Q-15,-5 -12,5 Q-8,2 -5,0"/>
+      <path d="M5,-2 Q15,-5 12,5 Q8,2 5,0"/>
+    </g>
+  </g>
+</svg>

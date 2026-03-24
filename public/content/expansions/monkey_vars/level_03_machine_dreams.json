@@ -1,0 +1,56 @@
+{
+  "id": "monkey_vars_level3_machine_dreams",
+  "expansion": "monkey_vars",
+  "index": 3,
+  "title": "Machine Dreams",
+  "subtitle": "The interface awakens. Mind meets circuit.",
+  "themeTags": ["machine", "interface", "dreams", "digital"],
+  "ruleCard": {
+    "icon": "circuit",
+    "hint": "The BCI activates. Digital and organic merge.",
+    "mechanic": "neural_interface",
+    "params": { "digitalBoost": 40, "overloadRisk": 0.25 }
+  },
+  "enemyDeck": [
+    { "archetype": "weaver", "modifiers": ["bureaucratic"], "weight": 4, "visualId": "enemy_cyber_chimp" },
+    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_shadow_monkey" },
+    { "archetype": "sniper", "modifiers": [], "weight": 3, "visualId": "enemy_alpha_ape" }
+  ],
+  "levelEnemies": {
+    "digital_self": {
+      "visualId": "digital_self",
+      "dialogue": {
+        "spawn": ["I am your upload!", "Consciousness copied!", "The cloud contains me!", "Digital immortality!", "Flesh is obsolete!"],
+        "death": ["Upload... corrupted...", "Consciousness... singular...", "Cloud... erased...", "Mortality... accepted...", "Flesh... remains..."]
+      }
+    },
+    "circuit_demon": {
+      "visualId": "circuit_demon",
+      "dialogue": {
+        "spawn": ["Error in the system!", "Malware awakens!", "The interface corrupts!", "Digital nightmare!", "Virus spreads!"],
+        "death": ["Error... resolved...", "Malware... deleted...", "Interface... clean...", "Nightmare... ends...", "Virus... purged..."]
+      }
+    },
+    "neural_echo": {
+      "visualId": "neural_echo",
+      "dialogue": {
+        "spawn": ["Thought becomes data!", "Every synapse recorded!", "The mind mapped!", "Echo of consciousness!", "Pattern recognized!"],
+        "death": ["Data... lost...", "Synapse... fades...", "Map... incomplete...", "Echo... silenced...", "Pattern... broken..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "digital_glitch", "params": { "visualDistortion": true, "inputLag": 200 } }],
+  "bgLayers": [
+    { "svgId": "circuits", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "data_streams", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "neural_patterns", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The BCI activates. Digital and organic merge.",
+    "codexSnippet": "The brain-computer interface was meant to enhance cognition. The monkey discovers that when mind meets machine, neither emerges unchanged.",
+    "radioWhisper": "The neural readings are off the charts. It's not just thinking. It's... computing."
+  },
+  "musicSeed": { "seed": "machine_dreams_003", "mode": "chromatic", "tempoRange": [70, 90], "intensity": 0.6 },
+  "duration": 140,
+  "unlockCondition": "monkey_vars_level2_complete"
+}

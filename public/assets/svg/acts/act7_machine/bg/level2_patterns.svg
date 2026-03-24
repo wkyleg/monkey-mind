@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <g stroke="#44aa66" fill="none" stroke-width="1" opacity="0.3">
+    <path d="M 100 400 L 150 350 L 200 400 L 250 350 L 300 400"/>
+    <path d="M 400 380 L 450 330 L 500 380 L 550 330 L 600 380"/>
+  </g>
+</svg>

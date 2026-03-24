@@ -1,0 +1,40 @@
+{
+  "id": "act7_machine",
+  "number": 7,
+  "name": "Mind as Machine",
+  "thesis": "Is the mind computable? The answer is the question.",
+  "storyBeat": "The monkey confronts the ultimate question: is consciousness just computation? The headband reveals gears and circuits within, the experiment's true nature exposed.",
+  "visualCallbacks": [
+    "Theorem boxes and proof trees",
+    "Gears and clockwork mechanisms",
+    "Cellular automata patterns",
+    "Circuits in the headband"
+  ],
+  "levels": [
+    "act7_level1_godel_gate",
+    "act7_level2_santa_fe_swarm",
+    "act7_level3_antikythera_room",
+    "act7_level4_time_arrow_loop",
+    "act7_level5_paradox_engine_boss"
+  ],
+  "visualStyle": {
+    "palette": ["#0a0a1a", "#1a1a3a", "#2a2a5a", "#00ffff", "#ff00ff"],
+    "bgPattern": "circuit_logic",
+    "enemyStyle": "clockwork_recursive",
+    "particleStyle": "binary_stream",
+    "uiTheme": "terminal_cyan"
+  },
+  "bossId": "paradox_engine",
+  "unlocks": {
+    "powerups": ["logic_bomb", "recursive_shield"],
+    "codex": ["entry_machine_mind", "entry_paradox", "entry_computation"],
+    "cosmetics": ["headband_circuit"]
+  },
+  "musicParams": {
+    "tempo": 120,
+    "intensity": 0.7,
+    "filterCutoff": 1200,
+    "useReverb": false,
+    "distortionAmount": 0.15
+  }
+}

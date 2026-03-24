@@ -1,0 +1,61 @@
+{
+  "id": "act8_level4_fermi_silence",
+  "act": 8,
+  "index": 4,
+  "title": "Fermi Silence",
+  "subtitle": "The universe is silent. Minimal shots score highest.",
+  "themeTags": ["fermi", "silence", "minimal"],
+  "ruleCard": {
+    "icon": "silence",
+    "hint": "Strong sniper enemies guard the silence. Minimal shots = maximum score.",
+    "mechanic": "minimal_shots",
+    "params": { "shotPenalty": 5, "perfectBonus": 100 }
+  },
+  "enemyDeck": [
+    { "archetype": "sniper", "modifiers": [], "weight": 5 },
+    { "archetype": "drifter", "modifiers": [], "weight": 3 },
+    { "archetype": "phaser", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "cosmic_silence": {
+      "visualId": "cosmic_silence",
+      "dialogue": {
+        "spawn": ["Shhhh...", "The void listens!", "No signal detected!", "Where is everyone?", "The great filter..."],
+        "death": ["Finally... a signal...", "Contact... made...", "We are... not alone...", "The silence... broken...", "Someone... heard..."]
+      }
+    },
+    "dark_forest_hunter": {
+      "visualId": "dark_forest_hunter",
+      "dialogue": {
+        "spawn": ["Stay quiet!", "Detection means death!", "The forest watches!", "Never broadcast!", "Hide or die!"],
+        "death": ["Detected...", "The hunters... found...", "Broadcast... mistake...", "Location... known...", "Too... loud..."]
+      }
+    },
+    "filter_survivor": {
+      "visualId": "filter_survivor",
+      "dialogue": {
+        "spawn": ["We passed the filter!", "Survival at any cost!", "The test continues!", "Evolution selected us!", "The filter claims most!"],
+        "death": ["The filter... wins...", "Failed... the test...", "Selection... against...", "Not... fit...", "Filtered... out..."]
+      }
+    }
+  },
+  "hazards": [],
+  "bgLayers": [
+    { "svgId": "void", "parallaxSpeed": 0.02, "opacity": 0.6 },
+    { "svgId": "distant_stars", "parallaxSpeed": 0.1, "opacity": 0.3 },
+    { "svgId": "signal", "parallaxSpeed": 0.3, "opacity": 0.2 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The universe is silent. Minimal shots score highest.",
+    "codexSnippet": "Fermi asked: where is everyone? The monkey learned that perhaps the answer is not that they are hiding, but that they learned to be quiet.",
+    "radioWhisper": "Caller says he's been listening for forty years. The silence is getting louder."
+  },
+  "musicSeed": {
+    "seed": "fermi_004",
+    "mode": "dorian",
+    "tempoRange": [50, 65],
+    "intensity": 0.3
+  },
+  "duration": 130,
+  "unlockCondition": "act8_level3_complete"
+}

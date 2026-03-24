@@ -27,16 +27,29 @@
       }
     },
     {
-      "id": "passion_berserk",
-      "name": "Berserk Mode",
+      "id": "passion_multi_shot",
+      "name": "Triple Strike",
       "category": "passion",
-      "durationMs": 4000,
-      "effect": "berserk",
-      "uiName": "BERSERK",
-      "description": "Damage and speed doubled. But so is incoming damage.",
+      "durationMs": 5000,
+      "effect": "multi_shot",
+      "uiName": "TRIPLE",
+      "description": "Fire three projectiles at once in a spread pattern.",
       "visual": {
-        "color": "#ff0000",
-        "icon": "skull"
+        "color": "#ffaa00",
+        "icon": "spread"
+      }
+    },
+    {
+      "id": "passion_magnet",
+      "name": "Pickup Magnet",
+      "category": "passion",
+      "durationMs": 8000,
+      "effect": "magnet",
+      "uiName": "MAGNET",
+      "description": "Powerups and drops are attracted to you from greater distance.",
+      "visual": {
+        "color": "#ff44aa",
+        "icon": "magnet"
       }
     }
   ]

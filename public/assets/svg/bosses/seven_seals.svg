@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">
+  <defs>
+    <radialGradient id="seal_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="70%" stop-color="#cc8800"/>
+      <stop offset="100%" stop-color="#664400"/>
+    </radialGradient>
+    <filter id="seal_light">
+      <feGaussianBlur stdDeviation="2" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Central seal -->
+  <circle cx="70" cy="70" r="20" fill="#1a0a00" stroke="#ffd700" stroke-width="3"/>
+  <circle cx="70" cy="70" r="12" fill="url(#seal_glow)" filter="url(#seal_light)">
+    <animate attributeName="r" values="12;14;12" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Seven orbiting seals -->
+  <g>
+    <!-- Seal 1 - Red -->
+    <circle cx="70" cy="20" r="12" fill="#330000" stroke="#ff3300" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" from="0 70 70" to="360 70 70" dur="20s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Seal 2 - Orange -->
+    <circle cx="115" cy="40" r="12" fill="#331500" stroke="#ff6600" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" from="51 70 70" to="411 70 70" dur="20s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Seal 3 - Yellow -->
+    <circle cx="115" cy="100" r="12" fill="#332200" stroke="#ffcc00" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" from="102 70 70" to="462 70 70" dur="20s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Seal 4 - Green -->
+    <circle cx="70" cy="120" r="12" fill="#003300" stroke="#00ff00" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" from="153 70 70" to="513 70 70" dur="20s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Seal 5 - Blue -->
+    <circle cx="25" cy="100" r="12" fill="#000033" stroke="#0066ff" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" from="204 70 70" to="564 70 70" dur="20s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Seal 6 - Indigo -->
+    <circle cx="25" cy="40" r="12" fill="#1a0033" stroke="#6600cc" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" from="255 70 70" to="615 70 70" dur="20s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Seal 7 - Violet -->
+    <circle cx="95" cy="25" r="12" fill="#220022" stroke="#cc00cc" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" from="306 70 70" to="666 70 70" dur="20s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <!-- Connecting energy lines -->
+  <circle cx="70" cy="70" r="50" fill="none" stroke="#ffd700" stroke-width="1" stroke-dasharray="5,5" opacity="0.5">
+    <animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

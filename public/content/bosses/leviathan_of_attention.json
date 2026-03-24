@@ -1,0 +1,65 @@
+{
+  "id": "leviathan_of_attention",
+  "name": "Leviathan of Attention",
+  "title": "The Devourer of Focus",
+  "hp": 100,
+  "phases": [
+    {
+      "hpThreshold": 1.0,
+      "pattern": "undulate",
+      "speedMod": 0.8,
+      "attacks": [
+        { "type": "tentacle_sweep", "cooldown": 3000, "damage": 1, "params": { "lanes": [1, 2, 3] } },
+        { "type": "attention_pull", "cooldown": 8000, "damage": 0, "params": { "strength": 0.5 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.7,
+      "pattern": "dive",
+      "speedMod": 1.0,
+      "attacks": [
+        { "type": "biolum_burst", "cooldown": 2500, "damage": 1, "params": { "count": 6 } },
+        { "type": "summon", "cooldown": 10000, "damage": 0, "params": { "enemy": "swarm", "count": 8 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.4,
+      "pattern": "rage",
+      "speedMod": 1.3,
+      "attacks": [
+        { "type": "radial", "cooldown": 2000, "damage": 1, "params": { "count": 10 } },
+        { "type": "ink_cloud", "cooldown": 6000, "damage": 0, "params": { "duration": 3000 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.15,
+      "pattern": "desperate",
+      "speedMod": 1.5,
+      "attacks": [
+        { "type": "maw_attack", "cooldown": 1500, "damage": 3, "params": { "width": 200 } },
+        { "type": "radial", "cooldown": 2500, "damage": 1, "params": { "count": 16 } }
+      ]
+    }
+  ],
+  "visual": {
+    "type": "custom",
+    "color": "#00d4aa",
+    "size": 150,
+    "glow": true
+  },
+  "codexEntry": "The Leviathan of Attention is not a creature of the deep - it is the deep itself, given form by the collective weight of human distraction. Every notification ping, every infinite scroll, every 'just one more episode' feeds its mass. The monkey learned that the only way to defeat it was not to fight, but to refuse to look.",
+  "defeatUnlocks": ["act3_heroic"],
+  "defeatQuote": "THE DEPTHS... GROW QUIET... ATTENTION... RETURNED...",
+  "spawnText": [
+    "LOOK AT ME",
+    "YOUR FOCUS IS MINE",
+    "SUBSCRIBE TO THE DEEP",
+    "NOTIFICATION: DOOM"
+  ],
+  "deathText": [
+    "THE SIGNAL... FADES...",
+    "UNSUBSCRIBED...",
+    "ATTENTION... FREED...",
+    "THE DEEP... SLEEPS..."
+  ]
+}

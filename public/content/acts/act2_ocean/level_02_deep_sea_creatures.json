@@ -1,0 +1,97 @@
+{
+  "id": "act2_level2_deep_sea_creatures",
+  "act": 2,
+  "index": 2,
+  "title": "Deep Sea Creatures",
+  "subtitle": "Pearls reduce noise. Collect the calm.",
+  "themeTags": ["creatures", "collection", "calm"],
+  "ruleCard": {
+    "icon": "pearl",
+    "hint": "Pearls dropped by couriers reduce your Noise meter. Stay calm in the deep.",
+    "mechanic": "stillness_reward",
+    "params": { "requiredStillness": 3, "reward": "pearl_calm" }
+  },
+  "enemyDeck": [
+    { "archetype": "sniper", "modifiers": [], "weight": 3 },
+    { "archetype": "courier", "modifiers": [], "weight": 5 },
+    { "archetype": "drifter", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "angler_hunter": {
+      "visualId": "angler_hunter",
+      "dialogue": {
+        "spawn": [
+          "My light draws you in!",
+          "Come closer, little one...",
+          "The lure never lies!",
+          "Deep darkness feeds me!",
+          "Follow the glow!"
+        ],
+        "death": [
+          "My light... dims...",
+          "The lure... extinguished...",
+          "Darkness... claims me...",
+          "No more... victims...",
+          "The deep... reclaims..."
+        ]
+      }
+    },
+    "pearl_guardian": {
+      "visualId": "pearl_guardian",
+      "dialogue": {
+        "spawn": [
+          "These pearls are MINE!",
+          "Treasure of the deep!",
+          "You shall not have them!",
+          "Centuries of collection!",
+          "The oysters chose ME!"
+        ],
+        "death": [
+          "Take them... thief...",
+          "The pearls... scatter...",
+          "My collection... lost...",
+          "Worthless... now...",
+          "The sea... inherits..."
+        ]
+      }
+    },
+    "reef_stalker": {
+      "visualId": "reef_stalker",
+      "dialogue": {
+        "spawn": [
+          "The coral hides me!",
+          "Camouflage complete!",
+          "You cannot see me!",
+          "The reef is my home!",
+          "Ambush from the rocks!"
+        ],
+        "death": [
+          "Exposed... revealed...",
+          "The reef... betrayed me...",
+          "No more... hiding...",
+          "Coral... crumbles...",
+          "Naked... defenseless..."
+        ]
+      }
+    }
+  },
+  "hazards": [],
+  "bgLayers": [
+    { "svgId": "reef", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "creatures", "parallaxSpeed": 0.3, "opacity": 0.4 },
+    { "svgId": "pearls", "parallaxSpeed": 0.5, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Pearls reduce noise. Collect the calm.",
+    "codexSnippet": "The deep sea creatures do not fear the monkey. They fear the noise it brings. Silence is their currency.",
+    "radioWhisper": "They say the pearls remember every thought you've ever had."
+  },
+  "musicSeed": {
+    "seed": "deep_sea_002",
+    "mode": "mixolydian",
+    "tempoRange": [75, 85],
+    "intensity": 0.45
+  },
+  "duration": 110,
+  "unlockCondition": "act2_level1_complete"
+}

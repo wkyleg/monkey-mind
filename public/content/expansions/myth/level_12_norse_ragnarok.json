@@ -1,0 +1,17 @@
+{
+  "id": "myth_level12_norse_ragnarok",
+  "expansion": "myth",
+  "index": 12,
+  "title": "Norse Ragnarok",
+  "subtitle": "The twilight of the gods. Even Odin falls.",
+  "themeTags": ["norse", "ragnarok", "apocalypse", "rebirth"],
+  "levelEnemies": {
+    "fenrir": { "visualId": "fenrir", "dialogue": { "spawn": ["Chains broken!", "I swallow Odin!", "The wolf unchained!", "Ragnarok begins!", "All-Father falls!"], "death": ["Chained... again...", "Odin... lives...", "Wolf... bound...", "Ragnarok... delayed...", "All-Father... stands..."] } },
+    "jormungandr": { "visualId": "jormungandr", "dialogue": { "spawn": ["The world serpent!", "I release my tail!", "Thor's doom!", "Midgard trembles!", "Nine steps and he falls!"], "death": ["Serpent... coiled...", "Tail... held...", "Thor... standing...", "Midgard... stable...", "Nine steps... never..."] } },
+    "surtr": { "visualId": "surtr", "dialogue": { "spawn": ["Fire giant!", "I burn the worlds!", "Muspelheim rises!", "The sword blazes!", "All shall burn!"], "death": ["Fire... contained...", "Worlds... cool...", "Muspelheim... distant...", "Sword... sheathed...", "Burning... ends..."] } }
+  },
+  "bgLayers": [{ "svgId": "yggdrasil", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "asgard", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "flames", "parallaxSpeed": 0.2, "opacity": 0.6 }],
+  "copyLayers": { "codexSnippet": "Even the gods die at Ragnarok. But from the ashes, a new world rises. The monkey faces the twilight and finds hope in endings." },
+  "musicSeed": { "seed": "ragnarok_012", "mode": "locrian", "tempoRange": [70, 90], "intensity": 0.8 },
+  "duration": 180, "unlockCondition": "myth_level11_complete"
+}

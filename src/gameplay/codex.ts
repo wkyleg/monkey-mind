@@ -39,11 +39,11 @@ const CODEX_ENTRIES: CodexEntry[] = [
     id: 'orbital_eye',
     category: 'enemy',
     name: 'Orbital Eye',
-    text: 'Surveillance entities that orbit in lazy circles. They watch, they record, they report. The lab uses them to track the monkey\'s neural patterns. Destroying them provides momentary privacy.',
+    text: "Surveillance entities that orbit in lazy circles. They watch, they record, they report. The lab uses them to track the monkey's neural patterns. Destroying them provides momentary privacy.",
     observedBehavior: 'Circular orbit pattern. Durable.',
     unlockCondition: 'defeat_first',
   },
-  
+
   // Bosses
   {
     id: 'cortex_auditor',
@@ -61,7 +61,7 @@ const CODEX_ENTRIES: CodexEntry[] = [
     observedBehavior: '[DATA EXPUNGED]',
     unlockCondition: 'defeat',
   },
-  
+
   // Lore
   {
     id: 'project_monkeymind',
@@ -88,22 +88,22 @@ const CODEX_ENTRIES: CodexEntry[] = [
 
 export class CodexSystem {
   private defeatedEnemies: Map<string, number> = new Map();
-  
+
   constructor() {
     this.setupListeners();
   }
-  
+
   private setupListeners(): void {
     events.on('enemy:death', ({ type }) => {
       const count = (this.defeatedEnemies.get(type) ?? 0) + 1;
       this.defeatedEnemies.set(type, count);
       this.checkUnlocks(type, count);
     });
-    
+
     events.on('boss:defeat', ({ id }) => {
       this.unlockEntry(id);
     });
-    
+
     events.on('sector:complete', ({ sectorId }) => {
       // Unlock lore entries for completed sectors
       if (sectorId === 'sector1_neural_cage') {
@@ -111,14 +111,14 @@ export class CodexSystem {
       }
     });
   }
-  
+
   /**
    * Check if any entries should be unlocked
    */
   private checkUnlocks(enemyType: string, count: number): void {
     for (const entry of CODEX_ENTRIES) {
       if (storage.isCodexUnlocked(entry.id)) continue;
-      
+
       if (entry.id === enemyType) {
         if (entry.unlockCondition === 'defeat_first' && count >= 1) {
           this.unlockEntry(entry.id);
@@ -130,43 +130,43 @@ export class CodexSystem {
       }
     }
   }
-  
+
   /**
    * Unlock a codex entry
    */
   unlockEntry(id: string): boolean {
-    const entry = CODEX_ENTRIES.find(e => e.id === id);
+    const entry = CODEX_ENTRIES.find((e) => e.id === id);
     if (!entry) return false;
-    
+
     if (storage.unlockCodex(id)) {
       events.emit('codex:unlock', { id, category: entry.category });
       return true;
     }
     return false;
   }
-  
+
   /**
    * Get entry by ID
    */
   getEntry(id: string): CodexEntry | undefined {
-    return CODEX_ENTRIES.find(e => e.id === id);
+    return CODEX_ENTRIES.find((e) => e.id === id);
   }
-  
+
   /**
    * Get all entries in a category
    */
   getCategory(category: string): CodexEntry[] {
-    return CODEX_ENTRIES.filter(e => e.category === category);
+    return CODEX_ENTRIES.filter((e) => e.category === category);
   }
-  
+
   /**
    * Get unlock progress
    */
   getProgress(): { unlocked: number; total: number } {
-    const unlocked = CODEX_ENTRIES.filter(e => storage.isCodexUnlocked(e.id)).length;
+    const unlocked = CODEX_ENTRIES.filter((e) => storage.isCodexUnlocked(e.id)).length;
     return { unlocked, total: CODEX_ENTRIES.length };
   }
-  
+
   /**
    * Reset session tracking
    */

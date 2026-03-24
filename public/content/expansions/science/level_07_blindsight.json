@@ -1,0 +1,56 @@
+{
+  "id": "science_level7_blindsight",
+  "expansion": "science",
+  "index": 7,
+  "title": "Blindsight",
+  "subtitle": "Seeing without consciousness.",
+  "themeTags": ["blindsight", "consciousness", "perception", "zombies"],
+  "ruleCard": {
+    "icon": "eye_closed",
+    "hint": "You see but don't know you see. Trust your unconscious vision.",
+    "mechanic": "unconscious_vision",
+    "params": { "consciousBlindness": 0.5, "blindsightAccuracy": 0.8 }
+  },
+  "enemyDeck": [
+    { "archetype": "phaser", "modifiers": [], "weight": 4, "visualId": "enemy_invisible" },
+    { "archetype": "chaser", "modifiers": [], "weight": 3, "visualId": "enemy_subliminal" },
+    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_cortical" }
+  ],
+  "levelEnemies": {
+    "unseen_threat": {
+      "visualId": "unseen_threat",
+      "dialogue": {
+        "spawn": ["You can't see me!", "But you know I'm here!", "Unconscious perception!", "V1 is dark!", "Blindsight!"],
+        "death": ["Seen... consciously...", "Known... now...", "Conscious... perception...", "V1... active...", "Sight... restored..."]
+      }
+    },
+    "subliminal_attacker": {
+      "visualId": "subliminal_attacker",
+      "dialogue": {
+        "spawn": ["Below threshold!", "You respond without knowing!", "33 milliseconds!", "Priming your reactions!", "The unconscious guides!"],
+        "death": ["Above... threshold...", "Conscious... response...", "Seen... clearly...", "Reactions... chosen...", "Conscious... guides..."]
+      }
+    },
+    "zombification_wave": {
+      "visualId": "zombification_wave",
+      "dialogue": {
+        "spawn": ["Behavior without experience!", "The lights are off but someone's home!", "Philosophical zombie!", "Are you conscious?", "Function without feeling!"],
+        "death": ["Experience... returns...", "Lights... on...", "Consciousness... confirmed...", "I am... aware...", "Feeling... restored..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "conscious_blindness", "params": { "blindDuration": 3000, "unconsciousHint": true } }],
+  "bgLayers": [
+    { "svgId": "darkness", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "visual_cortex", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "subliminal", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "You see but don't know you see. Trust your unconscious vision.",
+    "codexSnippet": "Patients with blindsight can navigate obstacles they cannot consciously see. The monkey explores the gap between perception and awareness and wonders how much we miss.",
+    "radioWhisper": "Your body sees more than your mind knows."
+  },
+  "musicSeed": { "seed": "blindsight_007", "mode": "aeolian", "tempoRange": [45, 60], "intensity": 0.4 },
+  "duration": 150,
+  "unlockCondition": "science_level6_complete"
+}

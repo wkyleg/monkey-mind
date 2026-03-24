@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <filter id="bioGlow">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Bioluminescent organisms -->
+  <g filter="url(#bioGlow)">
+    <circle cx="100" cy="150" r="4" fill="#00ffff" opacity="0.6"/>
+    <circle cx="300" cy="100" r="3" fill="#00ccff" opacity="0.5"/>
+    <circle cx="500" cy="200" r="5" fill="#00ffaa" opacity="0.7"/>
+    <circle cx="700" cy="80" r="3" fill="#00ffff" opacity="0.5"/>
+    <circle cx="150" cy="350" r="4" fill="#00aaff" opacity="0.6"/>
+    <circle cx="350" cy="400" r="3" fill="#00ffcc" opacity="0.5"/>
+    <circle cx="550" cy="320" r="5" fill="#00ffff" opacity="0.7"/>
+    <circle cx="750" cy="380" r="3" fill="#00ccff" opacity="0.5"/>
+    <circle cx="200" cy="500" r="4" fill="#00ffaa" opacity="0.6"/>
+    <circle cx="400" cy="550" r="3" fill="#00ffff" opacity="0.5"/>
+    <circle cx="600" cy="480" r="5" fill="#00aaff" opacity="0.7"/>
+  </g>
+</svg>

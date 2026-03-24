@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="divineGlow"><feGaussianBlur stdDeviation="15"/></filter></defs>
+  <circle cx="400" cy="100" r="100" fill="#ffcc44" opacity="0.2" filter="url(#divineGlow)"/>
+  <g stroke="#ffcc44" stroke-width="2" opacity="0.1">
+    <line x1="400" y1="200" x2="200" y2="600"/><line x1="400" y1="200" x2="400" y2="600"/>
+    <line x1="400" y1="200" x2="600" y2="600"/>
+  </g>
+</svg>

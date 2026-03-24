@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="constructGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffcc66;stop-opacity:1"/>
+      <stop offset="50%" style="stop-color:#ffaa33;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#cc8822;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Mechanical body - angular construct -->
+  <polygon points="30,5 45,20 45,45 30,55 15,45 15,20" fill="url(#metalGrad)" stroke="#ffdd88" stroke-width="2"/>
+  
+  <!-- Segmented armor plates -->
+  <line x1="15" y1="30" x2="45" y2="30" stroke="#cc8822" stroke-width="1"/>
+  <line x1="20" y1="20" x2="40" y2="20" stroke="#cc8822" stroke-width="1"/>
+  <line x1="20" y1="40" x2="40" y2="40" stroke="#cc8822" stroke-width="1"/>
+  
+  <!-- Power core -->
+  <circle cx="30" cy="30" r="8" fill="#00ccff" filter="url(#constructGlow)"/>
+  <circle cx="30" cy="30" r="4" fill="#00ffff"/>
+  
+  <!-- Ancient rune eyes -->
+  <polygon points="22,18 25,15 28,18 25,21" fill="#00ffff" filter="url(#constructGlow)"/>
+  <polygon points="32,18 35,15 38,18 35,21" fill="#00ffff" filter="url(#constructGlow)"/>
+  
+  <!-- Mechanical arms -->
+  <rect x="5" y="25" width="10" height="5" fill="url(#metalGrad)" stroke="#ffdd88" stroke-width="1"/>
+  <rect x="45" y="25" width="10" height="5" fill="url(#metalGrad)" stroke="#ffdd88" stroke-width="1"/>
+  
+  <!-- Atlantean symbol -->
+  <circle cx="30" cy="45" r="4" fill="none" stroke="#00ccff" stroke-width="1"/>
+  <polygon points="30,43 28,47 32,47" fill="#00ccff"/>
+</svg>

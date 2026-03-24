@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="thoughtGlow"><feGaussianBlur stdDeviation="4"/></filter></defs>
+  <ellipse cx="30" cy="30" rx="18" ry="20" fill="#8a7aaa" opacity="0.4" filter="url(#thoughtGlow)"/>
+  <ellipse cx="30" cy="30" rx="12" ry="14" fill="#aa88cc" opacity="0.6"/>
+  <circle cx="25" cy="28" r="3" fill="#ffffff" opacity="0.8"/><circle cx="35" cy="28" r="3" fill="#ffffff" opacity="0.8"/>
+</svg>

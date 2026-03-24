@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 60">
+  <!-- Cerberus Head - One of three, chaser enemy -->
+  <g transform="translate(35,30)">
+    <!-- Neck stump (emerging from below) -->
+    <ellipse cx="0" cy="20" rx="12" ry="8" fill="#2a1a1a"/>
+    
+    <!-- Main head -->
+    <ellipse cx="0" cy="0" rx="20" ry="15" fill="#3a2a2a"/>
+    
+    <!-- Snout -->
+    <ellipse cx="0" cy="-8" rx="12" ry="10" fill="#4a3a3a"/>
+    
+    <!-- Nose -->
+    <ellipse cx="0" cy="-15" rx="5" ry="4" fill="#1a0a0a"/>
+    
+    <!-- Eyes (hellfire) -->
+    <circle cx="-10" cy="-2" r="5" fill="#1a0a0a"/>
+    <circle cx="10" cy="-2" r="5" fill="#1a0a0a"/>
+    <circle cx="-10" cy="-2" r="3" fill="#ff3300"/>
+    <circle cx="10" cy="-2" r="3" fill="#ff3300"/>
+    <circle cx="-9" cy="-3" r="1" fill="#ffff00"/>
+    <circle cx="11" cy="-3" r="1" fill="#ffff00"/>
+    
+    <!-- Open mouth with teeth -->
+    <path d="M-12,5 Q0,15 12,5" fill="#2a0a0a"/>
+    <g fill="#ffffff">
+      <polygon points="-10,5 -8,10 -6,5"/>
+      <polygon points="-4,6 -2,12 0,6"/>
+      <polygon points="4,6 6,12 8,6"/>
+      <polygon points="10,5 12,10 14,5"/>
+    </g>
+    
+    <!-- Ears -->
+    <g fill="#3a2a2a">
+      <polygon points="-18,-8 -25,-20 -15,-12"/>
+      <polygon points="18,-8 25,-20 15,-12"/>
+    </g>
+    
+    <!-- Drool/flame drips -->
+    <g fill="#ff6600" opacity="0.6">
+      <ellipse cx="-5" cy="15" rx="2" ry="5"/>
+      <ellipse cx="5" cy="17" rx="2" ry="6"/>
+    </g>
+    
+    <!-- Smoke from nostrils -->
+    <g fill="#555555" opacity="0.3">
+      <circle cx="-3" cy="-20" r="3"/>
+      <circle cx="3" cy="-22" r="4"/>
+    </g>
+  </g>
+</svg>

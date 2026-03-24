@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Base -->
+  <rect width="800" height="600" fill="#0f0808"/>
+  
+  <!-- Pointing fingers from all directions -->
+  <g stroke="#8b4513" stroke-width="3" fill="none" opacity="0.5">
+    <!-- From left -->
+    <path d="M 0 200 L 150 200 L 200 250"/>
+    <path d="M 0 300 L 180 300 L 230 320"/>
+    <path d="M 0 400 L 150 400 L 200 350"/>
+    
+    <!-- From right -->
+    <path d="M 800 200 L 650 200 L 600 250"/>
+    <path d="M 800 300 L 620 300 L 570 320"/>
+    <path d="M 800 400 L 650 400 L 600 350"/>
+    
+    <!-- From top -->
+    <path d="M 300 0 L 300 100 L 350 150"/>
+    <path d="M 500 0 L 500 100 L 450 150"/>
+    
+    <!-- From bottom -->
+    <path d="M 300 600 L 300 500 L 350 450"/>
+    <path d="M 500 600 L 500 500 L 450 450"/>
+  </g>
+  
+  <!-- Center target (the accused) -->
+  <circle cx="400" cy="300" r="80" fill="none" stroke="#e94560" stroke-width="2" opacity="0.4"/>
+  <circle cx="400" cy="300" r="50" fill="none" stroke="#e94560" stroke-width="2" opacity="0.3"/>
+  <circle cx="400" cy="300" r="20" fill="#e94560" opacity="0.2"/>
+  
+  <!-- "GUILTY" text fading -->
+  <text x="400" y="300" fill="#e94560" font-family="serif" font-size="36" text-anchor="middle" font-weight="bold" opacity="0.3">GUILTY</text>
+</svg>

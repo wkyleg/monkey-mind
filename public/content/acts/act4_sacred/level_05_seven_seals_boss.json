@@ -1,0 +1,43 @@
+{
+  "id": "act4_level5_seven_seals_boss",
+  "act": 4,
+  "index": 5,
+  "title": "Seven Seals",
+  "subtitle": "Each seal changes the rules. Adapt or perish.",
+  "themeTags": ["boss", "apocalypse", "seals", "transformation"],
+  "ruleCard": {
+    "icon": "seal",
+    "hint": "Seven seals, seven rules. Each broken seal transforms the battlefield.",
+    "mechanic": "sequence_kill",
+    "params": { "seals": 7, "ruleChange": true }
+  },
+  "enemyDeck": [
+    { "archetype": "drifter", "modifiers": [], "weight": 2 },
+    { "archetype": "chaser", "modifiers": [], "weight": 2 },
+    { "archetype": "swarm", "modifiers": [], "weight": 2 },
+    { "archetype": "sniper", "modifiers": [], "weight": 2 },
+    { "archetype": "splitter", "modifiers": [], "weight": 2 }
+  ],
+  "hazards": [
+    { "type": "seal_break", "lanes": [1, 2, 3, 4, 5], "timing": 20000, "damage": 0, "visual": "apocalypse_light" }
+  ],
+  "bgLayers": [
+    { "svgId": "act4_bg_scroll", "parallaxSpeed": 0.05, "opacity": 0.4 },
+    { "svgId": "act4_bg_seals", "parallaxSpeed": 0.2, "opacity": 0.6, "animation": "break" },
+    { "svgId": "act4_bg_revelation", "parallaxSpeed": 0.4, "opacity": 0.5, "animation": "pulse" }
+  ],
+  "boss": "seven_seals",
+  "copyLayers": {
+    "ruleCard": "Each seal changes the rules. Adapt or perish.",
+    "codexSnippet": "The Seven Seals were not meant to be broken. They were meant to be understood. Each seal is a lesson, each lesson a transformation.",
+    "radioWhisper": "Caller says he broke the seventh seal. Customer service put him on hold."
+  },
+  "musicSeed": {
+    "seed": "seven_seals_boss_005",
+    "mode": "chromatic",
+    "tempoRange": [90, 130],
+    "intensity": 0.9
+  },
+  "duration": 240,
+  "unlockCondition": "act4_level4_complete"
+}

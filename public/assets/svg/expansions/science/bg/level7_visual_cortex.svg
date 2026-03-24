@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <g fill="#3a3a4a" opacity="0.3">
+    <rect x="600" y="200" width="150" height="200"/>
+  </g>
+  <text x="620" y="310" fill="#666666" font-size="16" opacity="0.4">V1</text>
+</svg>

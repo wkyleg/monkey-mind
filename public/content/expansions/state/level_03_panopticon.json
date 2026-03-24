@@ -1,0 +1,56 @@
+{
+  "id": "state_level3_panopticon",
+  "expansion": "state",
+  "index": 3,
+  "title": "The Panopticon",
+  "subtitle": "The perfect prison. Visibility is a trap.",
+  "themeTags": ["bentham", "foucault", "prison", "discipline"],
+  "ruleCard": {
+    "icon": "tower",
+    "hint": "You might be watched at any moment. Self-discipline through uncertainty.",
+    "mechanic": "possible_surveillance",
+    "params": { "watchChance": 0.3, "selfDisciplineBonus": 40 }
+  },
+  "enemyDeck": [
+    { "archetype": "sniper", "modifiers": ["observed"], "weight": 4, "visualId": "enemy_guard" },
+    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_warden" },
+    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_spotlight" }
+  ],
+  "levelEnemies": {
+    "central_tower": {
+      "visualId": "central_tower",
+      "dialogue": {
+        "spawn": ["The tower sees all!", "Every cell visible!", "No shadows remain!", "Discipline through light!", "Obey without watching!"],
+        "death": ["Tower... dark...", "Cells... private...", "Shadows... return...", "Light... fades...", "Freedom... to hide..."]
+      }
+    },
+    "invisible_watcher": {
+      "visualId": "invisible_watcher",
+      "dialogue": {
+        "spawn": ["Am I watching now?", "You'll never know!", "Internalize the gaze!", "Discipline yourself!", "The watcher is you!"],
+        "death": ["Watching... revealed...", "Now you know...", "Gaze... external...", "Self... liberated...", "Watcher... gone..."]
+      }
+    },
+    "disciplined_soul": {
+      "visualId": "disciplined_soul",
+      "dialogue": {
+        "spawn": ["I obey without compulsion!", "The rules are in my bones!", "No need to watch me!", "Perfect self-control!", "Discipline is freedom!"],
+        "death": ["Compulsion... external...", "Rules... questioned...", "Watching... necessary...", "Control... released...", "Freedom... is choice..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "visibility_zone", "params": { "exposureDamage": 10, "hiddenBonus": 30 } }],
+  "bgLayers": [
+    { "svgId": "prison", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "cells", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "light_beams", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "You might be watched at any moment. Self-discipline through uncertainty.",
+    "codexSnippet": "Bentham's Panopticon was a prison where inmates could be watched at any moment, so they learned to watch themselves. The monkey discovers that the most effective prisons are built in the mind.",
+    "radioWhisper": "He who is subjected to a field of visibility becomes the principle of his own subjection."
+  },
+  "musicSeed": { "seed": "panopticon_003", "mode": "locrian", "tempoRange": [55, 70], "intensity": 0.5 },
+  "duration": 150,
+  "unlockCondition": "state_level2_complete"
+}

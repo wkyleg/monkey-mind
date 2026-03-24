@@ -1,0 +1,28 @@
+{
+  "id": "expansion_myth",
+  "name": "Myth & Religion",
+  "description": "15 levels exploring the sacred stories and spiritual traditions that shaped human consciousness.",
+  "unlockCondition": "act8_complete",
+  "levels": [
+    "expansions/myth/level_01_gilgamesh.json",
+    "expansions/myth/level_02_egyptian_book_dead.json",
+    "expansions/myth/level_03_vedic_hymns.json",
+    "expansions/myth/level_04_upanishads.json",
+    "expansions/myth/level_05_bhagavad_gita.json",
+    "expansions/myth/level_06_tao_te_ching.json",
+    "expansions/myth/level_07_zen_koans.json",
+    "expansions/myth/level_08_tibetan_bardo.json",
+    "expansions/myth/level_09_kabbalah_tree.json",
+    "expansions/myth/level_10_gnostic_sophia.json",
+    "expansions/myth/level_11_sufi_rumi.json",
+    "expansions/myth/level_12_norse_ragnarok.json",
+    "expansions/myth/level_13_mayan_popol_vuh.json",
+    "expansions/myth/level_14_aboriginal_dreamtime.json",
+    "expansions/myth/level_15_shamanic_journey.json"
+  ],
+  "visualStyle": {
+    "backgrounds": ["myth_bg_temple", "myth_bg_cosmos", "myth_bg_underworld", "myth_bg_sacred", "myth_bg_void"],
+    "enemyStyles": ["mythic", "divine", "demonic", "ancestral"],
+    "palette": ["#8b4513", "#ffd700", "#4a0080", "#1a1a2e", "#c41e3a"]
+  }
+}

@@ -1,2 +1,8 @@
 dist/
 node_modules/
+.DS_Store
+
+# Planning docs
+conversation-extended.txt
+infleunce-ideas.txt
+new-theme-plan.txt

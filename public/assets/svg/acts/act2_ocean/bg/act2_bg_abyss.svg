@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <defs>
+    <linearGradient id="abyssGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#001122"/>
+      <stop offset="50%" style="stop-color:#002244"/>
+      <stop offset="100%" style="stop-color:#000011"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Deep ocean gradient -->
+  <rect width="400" height="600" fill="url(#abyssGrad)"/>
+  
+  <!-- Bioluminescent particles -->
+  <g filter="url(#glow)" opacity="0.6">
+    <circle cx="50" cy="100" r="2" fill="#00ffff">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="150" cy="200" r="1.5" fill="#00ff88">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="300" cy="150" r="2" fill="#00aaff">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="80" cy="350" r="1" fill="#00ffcc">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="400" r="2.5" fill="#00ff66">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="350" cy="300" r="1.5" fill="#00ddff">
+      <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Flowing currents -->
+  <path d="M0,200 Q100,180 200,200 T400,180" stroke="#004466" stroke-width="30" fill="none" opacity="0.3">
+    <animate attributeName="d" values="M0,200 Q100,180 200,200 T400,180;M0,200 Q100,220 200,200 T400,220;M0,200 Q100,180 200,200 T400,180" dur="8s" repeatCount="indefinite"/>
+  </path>
+  <path d="M0,400 Q150,420 300,400 T400,420" stroke="#003355" stroke-width="20" fill="none" opacity="0.2">
+    <animate attributeName="d" values="M0,400 Q150,420 300,400 T400,420;M0,400 Q150,380 300,400 T400,380;M0,400 Q150,420 300,400 T400,420" dur="10s" repeatCount="indefinite"/>
+  </path>
+</svg>

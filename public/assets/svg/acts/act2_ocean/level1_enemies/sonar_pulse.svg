@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="sonarGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Central emitter -->
+  <circle cx="30" cy="30" r="8" fill="#0a2a3a" stroke="#00ffff" stroke-width="2" filter="url(#sonarGlow)"/>
+  
+  <!-- Sonar waves expanding outward -->
+  <circle cx="30" cy="30" r="12" fill="none" stroke="#00ccff" stroke-width="2" opacity="0.8"/>
+  <circle cx="30" cy="30" r="18" fill="none" stroke="#00aacc" stroke-width="2" opacity="0.6"/>
+  <circle cx="30" cy="30" r="24" fill="none" stroke="#0088aa" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Direction indicator -->
+  <polygon points="30,15 25,5 35,5" fill="#00ffff" opacity="0.8"/>
+  
+  <!-- Core eye -->
+  <circle cx="30" cy="30" r="4" fill="#00ffff" filter="url(#sonarGlow)"/>
+  <circle cx="30" cy="30" r="2" fill="#0a1a2a"/>
+</svg>

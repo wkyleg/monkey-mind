@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 60">
+  <!-- Propaganda Speaker - Stationary mind control -->
+  <g transform="translate(35,30)">
+    <!-- Speaker body -->
+    <rect x="-20" y="-15" width="40" height="30" fill="#4a4a4a" rx="3"/>
+    
+    <!-- Speaker cone -->
+    <circle cx="0" cy="0" r="12" fill="#2a2a2a"/>
+    <circle cx="0" cy="0" r="8" fill="#1a1a1a"/>
+    <circle cx="0" cy="0" r="4" fill="#3a3a3a"/>
+    
+    <!-- Sound waves (propaganda) -->
+    <g stroke="#ff0000" stroke-width="2" fill="none" opacity="0.6">
+      <path d="M15,0 Q22,-8 22,0 Q22,8 15,0"/>
+      <path d="M20,0 Q30,-12 30,0 Q30,12 20,0"/>
+      <path d="M25,0 Q38,-16 38,0 Q38,16 25,0"/>
+    </g>
+    
+    <!-- Text waves (subliminal) -->
+    <g fill="#ff0000" opacity="0.4" font-size="4">
+      <text x="20" y="-5">OBEY</text>
+      <text x="25" y="3">COMPLY</text>
+      <text x="22" y="10">SUBMIT</text>
+    </g>
+    
+    <!-- Status lights -->
+    <g fill="#00ff00">
+      <circle cx="-15" cy="-10" r="2"/>
+      <circle cx="-15" cy="10" r="2"/>
+    </g>
+    
+    <!-- Mounting pole -->
+    <rect x="-3" y="15" width="6" height="15" fill="#3a3a3a"/>
+    
+    <!-- Eye (watching) -->
+    <circle cx="-15" cy="0" r="5" fill="#1a1a1a"/>
+    <circle cx="-15" cy="0" r="3" fill="#ff0000"/>
+    <circle cx="-14" cy="-1" r="1" fill="#ffffff"/>
+  </g>
+</svg>

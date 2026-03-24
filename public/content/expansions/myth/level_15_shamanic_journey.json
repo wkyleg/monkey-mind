@@ -1,0 +1,17 @@
+{
+  "id": "myth_level15_shamanic_journey",
+  "expansion": "myth",
+  "index": 15,
+  "title": "The Shamanic Journey",
+  "subtitle": "World Tree. Upper, middle, lower worlds.",
+  "themeTags": ["shamanism", "world_tree", "spirits", "healing"],
+  "levelEnemies": {
+    "power_animal": { "visualId": "power_animal", "dialogue": { "spawn": ["I am your guide!", "Find your totem!", "Animal wisdom!", "The spirit world opens!", "Trust your ally!"], "death": ["Guided...", "Totem... found...", "Wisdom... received...", "World... navigated...", "Allied..."] } },
+    "spirit_illness": { "visualId": "spirit_illness", "dialogue": { "spawn": ["Soul loss!", "Intrusion!", "Extract me!", "Retrieve the pieces!", "The shaman heals!"], "death": ["Soul... whole...", "Extracted...", "Pieces... retrieved...", "Healed...", "Shaman... succeeded..."] } },
+    "world_tree": { "visualId": "world_tree", "dialogue": { "spawn": ["Climb me!", "Roots to the lower world!", "Branches to the upper!", "Axis mundi!", "All worlds connect!"], "death": ["Climbed...", "Lower... visited...", "Upper... reached...", "Axis... traveled...", "Connected..."] } }
+  },
+  "bgLayers": [{ "svgId": "world_tree", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "spirit_realm", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "drums", "parallaxSpeed": 0.2, "opacity": 0.6 }],
+  "copyLayers": { "codexSnippet": "The shaman travels between worlds on the World Tree. The monkey journeys to the upper and lower realms and returns with healing." },
+  "musicSeed": { "seed": "shamanic_015", "mode": "drumming", "tempoRange": [80, 100], "intensity": 0.7 },
+  "duration": 180, "unlockCondition": "myth_level14_complete"
+}

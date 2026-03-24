@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Alpha ape variant -->
+  <g transform="translate(30,30)">
+    <!-- Body -->
+    <ellipse cx="0" cy="5" rx="15" ry="18" fill="#4a3a2a"/>
+    
+    <!-- Arms -->
+    <ellipse cx="-18" cy="5" rx="6" ry="12" fill="#4a3a2a"/>
+    <ellipse cx="18" cy="5" rx="6" ry="12" fill="#4a3a2a"/>
+    
+    <!-- Head -->
+    <ellipse cx="0" cy="-15" rx="12" ry="10" fill="#5a4a3a"/>
+    
+    <!-- Face -->
+    <ellipse cx="0" cy="-12" rx="8" ry="6" fill="#3a2a1a"/>
+    
+    <!-- Eyes (fierce) -->
+    <ellipse cx="-4" cy="-16" rx="3" ry="2" fill="#1a1a1a"/>
+    <ellipse cx="4" cy="-16" rx="3" ry="2" fill="#1a1a1a"/>
+    <circle cx="-4" cy="-16" r="1" fill="#ff4a00"/>
+    <circle cx="4" cy="-16" r="1" fill="#ff4a00"/>
+    
+    <!-- Brow ridge -->
+    <path d="M-8,-18 Q0,-22 8,-18" stroke="#3a2a1a" stroke-width="2" fill="none"/>
+    
+    <!-- Nostrils -->
+    <ellipse cx="-2" cy="-11" rx="1.5" ry="1" fill="#2a1a0a"/>
+    <ellipse cx="2" cy="-11" rx="1.5" ry="1" fill="#2a1a0a"/>
+    
+    <!-- Silver back markings -->
+    <g fill="#8a8a8a" opacity="0.4">
+      <ellipse cx="0" cy="0" rx="10" ry="8"/>
+    </g>
+    
+    <!-- Scars -->
+    <g stroke="#6a3a2a" stroke-width="1">
+      <line x1="-6" y1="-20" x2="-3" y2="-14"/>
+      <line x1="8" y1="-18" x2="10" y2="-12"/>
+    </g>
+  </g>
+</svg>

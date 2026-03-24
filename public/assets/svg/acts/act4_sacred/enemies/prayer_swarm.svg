@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Prayer flags/paper swarm -->
+  <g transform="translate(30,30)">
+    <!-- Multiple prayer papers -->
+    <g fill="#ffd700" opacity="0.8">
+      <!-- Paper 1 -->
+      <rect x="-15" y="-10" width="8" height="12" transform="rotate(-15)">
+        <animate attributeName="transform" values="rotate(-15);rotate(-25);rotate(-15)" dur="1s" repeatCount="indefinite"/>
+      </rect>
+      <!-- Paper 2 -->
+      <rect x="-5" y="-12" width="10" height="14" transform="rotate(5)">
+        <animate attributeName="transform" values="rotate(5);rotate(15);rotate(5)" dur="1.2s" repeatCount="indefinite"/>
+      </rect>
+      <!-- Paper 3 -->
+      <rect x="5" y="-8" width="8" height="10" transform="rotate(20)">
+        <animate attributeName="transform" values="rotate(20);rotate(10);rotate(20)" dur="0.9s" repeatCount="indefinite"/>
+      </rect>
+      <!-- Paper 4 -->
+      <rect x="-8" y="5" width="7" height="9" transform="rotate(-10)">
+        <animate attributeName="transform" values="rotate(-10);rotate(-20);rotate(-10)" dur="1.1s" repeatCount="indefinite"/>
+      </rect>
+      <!-- Paper 5 -->
+      <rect x="3" y="3" width="9" height="11" transform="rotate(8)">
+        <animate attributeName="transform" values="rotate(8);rotate(18);rotate(8)" dur="1.3s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    
+    <!-- Sacred text marks -->
+    <g fill="#880000" font-size="6" font-family="serif">
+      <text x="-12" y="-2">ॐ</text>
+      <text x="0" y="-5">卍</text>
+      <text x="8" y="0">☸</text>
+    </g>
+  </g>
+</svg>

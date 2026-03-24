@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <g fill="#4a4a3a" opacity="0.3">
+    <ellipse cx="100" cy="550" rx="8" ry="15"/><ellipse cx="130" cy="545" rx="8" ry="15"/>
+    <ellipse cx="160" cy="550" rx="8" ry="15"/><ellipse cx="190" cy="548" rx="8" ry="15"/>
+    <ellipse cx="220" cy="552" rx="8" ry="15"/><ellipse cx="250" cy="547" rx="8" ry="15"/>
+    <ellipse cx="280" cy="550" rx="8" ry="15"/><ellipse cx="310" cy="545" rx="8" ry="15"/>
+    <ellipse cx="340" cy="552" rx="8" ry="15"/><ellipse cx="370" cy="548" rx="8" ry="15"/>
+    <ellipse cx="400" cy="550" rx="8" ry="15"/><ellipse cx="430" cy="547" rx="8" ry="15"/>
+    <ellipse cx="460" cy="552" rx="8" ry="15"/><ellipse cx="490" cy="545" rx="8" ry="15"/>
+    <ellipse cx="520" cy="550" rx="8" ry="15"/><ellipse cx="550" cy="548" rx="8" ry="15"/>
+    <ellipse cx="580" cy="552" rx="8" ry="15"/><ellipse cx="610" cy="547" rx="8" ry="15"/>
+    <ellipse cx="640" cy="550" rx="8" ry="15"/><ellipse cx="670" cy="545" rx="8" ry="15"/>
+    <ellipse cx="700" cy="552" rx="8" ry="15"/>
+  </g>
+  <g stroke="#888866" stroke-width="1" opacity="0.3">
+    <line x1="100" y1="535" x2="100" y2="510"/><line x1="160" y1="535" x2="160" y2="510"/>
+    <line x1="220" y1="537" x2="220" y2="512"/><line x1="280" y1="535" x2="280" y2="510"/>
+    <line x1="340" y1="537" x2="340" y2="512"/><line x1="400" y1="535" x2="400" y2="510"/>
+    <line x1="460" y1="537" x2="460" y2="512"/><line x1="520" y1="535" x2="520" y2="510"/>
+    <line x1="580" y1="537" x2="580" y2="512"/><line x1="640" y1="535" x2="640" y2="510"/>
+    <line x1="700" y1="537" x2="700" y2="512"/>
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+{
+  "id": "expansion_climax",
+  "name": "The Final Ascent",
+  "description": "7 levels representing the ultimate challenges and the monkey's final transformation.",
+  "unlockCondition": "all_expansions_complete",
+  "levels": [
+    "expansions/climax/level_01_tower_of_babel.json",
+    "expansions/climax/level_02_heat_death.json",
+    "expansions/climax/level_03_omega_point.json",
+    "expansions/climax/level_04_technological_singularity.json",
+    "expansions/climax/level_05_cosmic_consciousness.json",
+    "expansions/climax/level_06_return_to_lab.json",
+    "expansions/climax/level_07_true_self.json"
+  ],
+  "visualStyle": {
+    "backgrounds": ["climax_bg_tower", "climax_bg_void", "climax_bg_singularity", "climax_bg_cosmos", "climax_bg_lab", "climax_bg_mirror"],
+    "enemyStyles": ["ultimate", "cosmic", "self"],
+    "palette": ["#ffffff", "#000000", "#ffd700", "#ff00ff", "#00ffff"]
+  }
+}

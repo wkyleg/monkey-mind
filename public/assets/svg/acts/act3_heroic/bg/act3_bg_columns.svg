@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <defs>
+    <linearGradient id="marbleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8e4dc"/>
+      <stop offset="50%" style="stop-color:#d4cfc4"/>
+      <stop offset="100%" style="stop-color:#c8c0b4"/>
+    </linearGradient>
+    <linearGradient id="columnShade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d4cfc4"/>
+      <stop offset="30%" style="stop-color:#e8e4dc"/>
+      <stop offset="70%" style="stop-color:#e8e4dc"/>
+      <stop offset="100%" style="stop-color:#c8c0b4"/>
+    </linearGradient>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a2e"/>
+      <stop offset="100%" style="stop-color:#2a1050"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background sky -->
+  <rect width="400" height="600" fill="url(#skyGrad)"/>
+  
+  <!-- Distant columns (smaller, faded) -->
+  <g opacity="0.3">
+    <rect x="50" y="100" width="20" height="500" fill="url(#columnShade)"/>
+    <rect x="150" y="150" width="18" height="450" fill="url(#columnShade)"/>
+    <rect x="230" y="120" width="22" height="480" fill="url(#columnShade)"/>
+    <rect x="330" y="140" width="20" height="460" fill="url(#columnShade)"/>
+  </g>
+  
+  <!-- Foreground columns -->
+  <g opacity="0.5">
+    <!-- Left column -->
+    <rect x="20" y="50" width="35" height="550" fill="url(#columnShade)"/>
+    <!-- Column capital (top) -->
+    <rect x="12" y="40" width="51" height="15" fill="url(#marbleGrad)"/>
+    <!-- Column base -->
+    <rect x="12" y="580" width="51" height="20" fill="url(#marbleGrad)"/>
+    <!-- Fluting (vertical lines) -->
+    <g stroke="#bbb5a8" stroke-width="1" opacity="0.4">
+      <line x1="28" y1="55" x2="28" y2="575"/>
+      <line x1="38" y1="55" x2="38" y2="575"/>
+      <line x1="48" y1="55" x2="48" y2="575"/>
+    </g>
+    
+    <!-- Right column -->
+    <rect x="345" y="50" width="35" height="550" fill="url(#columnShade)"/>
+    <rect x="337" y="40" width="51" height="15" fill="url(#marbleGrad)"/>
+    <rect x="337" y="580" width="51" height="20" fill="url(#marbleGrad)"/>
+    <g stroke="#bbb5a8" stroke-width="1" opacity="0.4">
+      <line x1="353" y1="55" x2="353" y2="575"/>
+      <line x1="363" y1="55" x2="363" y2="575"/>
+      <line x1="373" y1="55" x2="373" y2="575"/>
+    </g>
+  </g>
+  
+  <!-- Marble floor reflection -->
+  <rect x="0" y="550" width="400" height="50" fill="url(#marbleGrad)" opacity="0.2"/>
+</svg>

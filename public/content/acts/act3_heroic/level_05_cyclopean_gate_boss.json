@@ -1,0 +1,42 @@
+{
+  "id": "act3_level5_cyclopean_gate_boss",
+  "act": 3,
+  "index": 5,
+  "title": "Cyclopean Gate",
+  "subtitle": "The single eye sees all. But only what you show it.",
+  "themeTags": ["boss", "cyclops", "gaze", "deception"],
+  "ruleCard": {
+    "icon": "single_eye",
+    "hint": "The Cyclops attacks when stared at. Look away to survive. Strike when blind.",
+    "mechanic": "dont_look_back",
+    "params": { "gazeAttack": true, "blindWindow": 3 }
+  },
+  "enemyDeck": [
+    { "archetype": "drifter", "modifiers": ["observed"], "weight": 3 },
+    { "archetype": "chaser", "modifiers": [], "weight": 3 },
+    { "archetype": "sniper", "modifiers": [], "weight": 2 },
+    { "archetype": "swarm", "modifiers": [], "weight": 2 }
+  ],
+  "hazards": [
+    { "type": "gaze_beam", "lanes": [2, 3, 4], "timing": 5000, "damage": 2, "visual": "eye_laser" }
+  ],
+  "bgLayers": [
+    { "svgId": "act3_bg_gate", "parallaxSpeed": 0.05, "opacity": 0.4 },
+    { "svgId": "act3_bg_stones", "parallaxSpeed": 0.2, "opacity": 0.5 },
+    { "svgId": "act3_bg_eye", "parallaxSpeed": 0.4, "opacity": 0.7, "animation": "blink" }
+  ],
+  "boss": "cyclopean_gate",
+  "copyLayers": {
+    "ruleCard": "The single eye sees all. But only what you show it.",
+    "codexSnippet": "The Cyclopean Gate was built by giants who saw only one truth at a time. Their single-mindedness was their strength and their weakness.",
+    "radioWhisper": "Caller says the eye in the sky blinked. Just once. That was enough."
+  },
+  "musicSeed": {
+    "seed": "cyclopean_boss_005",
+    "mode": "phrygian",
+    "tempoRange": [100, 120],
+    "intensity": 0.85
+  },
+  "duration": 200,
+  "unlockCondition": "act3_level4_complete"
+}

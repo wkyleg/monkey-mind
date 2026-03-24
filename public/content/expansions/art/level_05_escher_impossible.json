@@ -1,0 +1,56 @@
+{
+  "id": "art_level5_escher_impossible",
+  "expansion": "art",
+  "index": 5,
+  "title": "Impossible Constructions",
+  "subtitle": "Escher's paradoxes. Up is down.",
+  "themeTags": ["escher", "impossible", "paradox", "geometry"],
+  "ruleCard": {
+    "icon": "stairs",
+    "hint": "Gravity shifts. The impossible becomes possible.",
+    "mechanic": "gravity_paradox",
+    "params": { "gravityShiftChance": 0.3, "adaptationBonus": 40 }
+  },
+  "enemyDeck": [
+    { "archetype": "phaser", "modifiers": ["recursive"], "weight": 4, "visualId": "enemy_impossible_figure" },
+    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_tessellation" },
+    { "archetype": "weaver", "modifiers": [], "weight": 3, "visualId": "enemy_mobius_creature" }
+  ],
+  "levelEnemies": {
+    "penrose_entity": {
+      "visualId": "penrose_entity",
+      "dialogue": {
+        "spawn": ["Impossible stairs!", "Up leads down!", "The triangle that cannot be!", "Escher's logic!", "Paradox manifest!"],
+        "death": ["Possible... now...", "Up... is up...", "Triangle... resolved...", "Logic... Euclidean...", "Paradox... solved..."]
+      }
+    },
+    "tessellation": {
+      "visualId": "tessellation",
+      "dialogue": {
+        "spawn": ["Birds become fish!", "Angels and demons!", "The pattern repeats!", "Infinite tiling!", "Metamorphosis!"],
+        "death": ["Bird... is bird...", "Angels... separate...", "Pattern... ends...", "Finite... now...", "Form... fixed..."]
+      }
+    },
+    "hands_drawing": {
+      "visualId": "hands_drawing",
+      "dialogue": {
+        "spawn": ["I draw myself!", "Creation loop!", "Artist creates artist!", "The hand emerges!", "Self-reference!"],
+        "death": ["Drawn... complete...", "Loop... opens...", "Created... once...", "Hand... rests...", "Reference... resolved..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "gravity_shift", "params": { "shiftDuration": 5000, "orientationBonus": 30 } }],
+  "bgLayers": [
+    { "svgId": "impossible_stairs", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "tessellations", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "waterfall", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Gravity shifts. The impossible becomes possible.",
+    "codexSnippet": "M.C. Escher drew worlds where water flows uphill and staircases lead everywhere and nowhere. The monkey navigates impossible geometry and discovers that perspective determines reality.",
+    "radioWhisper": "Follow the water. It flows upward to the top, where it falls again."
+  },
+  "musicSeed": { "seed": "escher_005", "mode": "chromatic", "tempoRange": [60, 75], "intensity": 0.6 },
+  "duration": 150,
+  "unlockCondition": "art_level4_complete"
+}

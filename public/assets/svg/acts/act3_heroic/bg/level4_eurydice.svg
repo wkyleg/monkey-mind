@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <filter id="euryGlow">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="euryFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#aaccff;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#668899;stop-opacity:0.1"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="400" cy="300" rx="40" ry="80" fill="url(#euryFade)" filter="url(#euryGlow)"/>
+  <circle cx="400" cy="240" r="20" fill="#6688aa" opacity="0.4"/>
+  <path d="M 380 320 Q 360 380 380 420" stroke="#6688aa" stroke-width="2" fill="none" opacity="0.3"/>
+  <path d="M 420 320 Q 440 380 420 420" stroke="#6688aa" stroke-width="2" fill="none" opacity="0.3"/>
+</svg>

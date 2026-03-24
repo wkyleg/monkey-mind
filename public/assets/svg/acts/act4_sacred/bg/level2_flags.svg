@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <g>
+    <line x1="100" y1="200" x2="250" y2="180" stroke="#666666" stroke-width="2"/>
+    <polygon points="110,195 130,200 130,215 110,210" fill="#ff4444"/>
+    <polygon points="140,192 160,197 160,212 140,207" fill="#ffaa00"/>
+    <polygon points="170,189 190,194 190,209 170,204" fill="#44ff44"/>
+    <polygon points="200,186 220,191 220,206 200,201" fill="#4444ff"/>
+    <polygon points="230,183 250,188 250,203 230,198" fill="#ffffff"/>
+  </g>
+  <g>
+    <line x1="500" y1="250" x2="650" y2="230" stroke="#666666" stroke-width="2"/>
+    <polygon points="510,245 530,250 530,265 510,260" fill="#ffaa00"/>
+    <polygon points="540,242 560,247 560,262 540,257" fill="#44ff44"/>
+    <polygon points="570,239 590,244 590,259 570,254" fill="#4444ff"/>
+    <polygon points="600,236 620,241 620,256 600,251" fill="#ff4444"/>
+  </g>
+</svg>

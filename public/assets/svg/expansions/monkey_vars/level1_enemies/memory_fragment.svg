@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="memGlow"><feGaussianBlur stdDeviation="4"/></filter></defs>
+  <ellipse cx="30" cy="30" rx="18" ry="20" fill="#6a6a8a" opacity="0.4" filter="url(#memGlow)"/>
+  <polygon points="20,20 30,15 40,20 35,35 25,35" fill="#8a8aaa" opacity="0.7"/>
+  <circle cx="30" cy="28" r="5" fill="#aaaacc"/>
+</svg>

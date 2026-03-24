@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Base -->
+  <rect width="800" height="600" fill="#080810"/>
+  
+  <!-- Multiple doors pattern -->
+  <g>
+    <!-- Row 1 -->
+    <rect x="50" y="50" width="100" height="180" fill="#101020" stroke="#334455" stroke-width="2"/>
+    <circle cx="135" cy="140" r="8" fill="#e94560"/>
+    
+    <rect x="200" y="30" width="100" height="180" fill="#101020" stroke="#334455" stroke-width="2"/>
+    <circle cx="285" cy="120" r="8" fill="#00ffaa"/>
+    
+    <rect x="350" y="60" width="100" height="180" fill="#101020" stroke="#334455" stroke-width="2"/>
+    <circle cx="435" cy="150" r="8" fill="#e94560"/>
+    
+    <rect x="500" y="40" width="100" height="180" fill="#101020" stroke="#334455" stroke-width="2"/>
+    <circle cx="585" cy="130" r="8" fill="#e94560"/>
+    
+    <rect x="650" y="70" width="100" height="180" fill="#101020" stroke="#334455" stroke-width="2"/>
+    <circle cx="735" cy="160" r="8" fill="#00ffaa"/>
+    
+    <!-- Row 2 -->
+    <rect x="100" y="350" width="100" height="180" fill="#101020" stroke="#334455" stroke-width="2"/>
+    <circle cx="185" cy="440" r="8" fill="#e94560"/>
+    
+    <rect x="300" y="370" width="100" height="180" fill="#101020" stroke="#334455" stroke-width="2"/>
+    <circle cx="385" cy="460" r="8" fill="#e94560"/>
+    
+    <rect x="500" y="340" width="100" height="180" fill="#101020" stroke="#334455" stroke-width="2"/>
+    <circle cx="585" cy="430" r="8" fill="#00ffaa"/>
+  </g>
+  
+  <!-- "ACCESS DENIED" markers -->
+  <g font-family="monospace" font-size="8" fill="#e94560" opacity="0.6">
+    <text x="60" y="245">ACCESS DENIED</text>
+    <text x="360" y="255">ACCESS DENIED</text>
+    <text x="510" y="235">ACCESS DENIED</text>
+  </g>
+</svg>

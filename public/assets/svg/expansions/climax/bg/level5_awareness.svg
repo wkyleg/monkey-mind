@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="awareGlow"><feGaussianBlur stdDeviation="15"/></filter></defs>
+  <circle cx="400" cy="300" r="100" fill="#6a8aaa" opacity="0.1" filter="url(#awareGlow)"/>
+  <circle cx="400" cy="300" r="50" fill="#8aaacc" opacity="0.15" filter="url(#awareGlow)"/>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <g fill="#886644" font-family="serif" font-size="14" opacity="0.3">
+    <text x="150" y="280">URANUS</text>
+    <text x="300" y="350">KRONOS</text>
+    <text x="450" y="350">RHEA</text>
+    <text x="200" y="420">ZEUS</text>
+    <text x="350" y="420">POSEIDON</text>
+    <text x="500" y="420">HADES</text>
+    <text x="100" y="490">ATHENA</text>
+    <text x="250" y="490">APOLLO</text>
+    <text x="400" y="490">ARTEMIS</text>
+    <text x="550" y="490">ARES</text>
+    <text x="680" y="490">HERMES</text>
+    <text x="375" y="220">GAIA</text>
+    <text x="370" y="150">CHAOS</text>
+  </g>
+</svg>

@@ -17,11 +17,11 @@ export class ScoringSystem {
   private maxCombo: number = 0;
   private comboTimer: number = 0;
   private readonly comboTimeout: number = 2; // seconds
-  
+
   // Multipliers
   private baseMultiplier: number = 1;
   private difficultyMultiplier: number = 1;
-  
+
   /**
    * Add to score
    */
@@ -29,28 +29,28 @@ export class ScoringSystem {
     const comboMultiplier = 1 + this.combo * 0.1;
     const totalMultiplier = this.baseMultiplier * this.difficultyMultiplier * comboMultiplier;
     const amount = Math.floor(baseAmount * totalMultiplier);
-    
+
     this.score += amount;
-    
+
     events.emit('score:add', { amount, reason });
-    
+
     return amount;
   }
-  
+
   /**
    * Increment combo
    */
   incrementCombo(): void {
     this.combo++;
     this.comboTimer = this.comboTimeout;
-    
+
     if (this.combo > this.maxCombo) {
       this.maxCombo = this.combo;
     }
-    
+
     events.emit('combo:increase', { count: this.combo });
   }
-  
+
   /**
    * Break the combo
    */
@@ -60,7 +60,7 @@ export class ScoringSystem {
       this.combo = 0;
     }
   }
-  
+
   /**
    * Update combo timer
    */
@@ -72,21 +72,21 @@ export class ScoringSystem {
       }
     }
   }
-  
+
   /**
    * Set difficulty multiplier
    */
   setDifficultyMultiplier(value: number): void {
     this.difficultyMultiplier = value;
   }
-  
+
   /**
    * Set base multiplier
    */
   setBaseMultiplier(value: number): void {
     this.baseMultiplier = value;
   }
-  
+
   /**
    * Get current state
    */
@@ -98,21 +98,21 @@ export class ScoringSystem {
       multiplier: this.baseMultiplier * this.difficultyMultiplier * (1 + this.combo * 0.1),
     };
   }
-  
+
   /**
    * Get score
    */
   getScore(): number {
     return this.score;
   }
-  
+
   /**
    * Get combo
    */
   getCombo(): number {
     return this.combo;
   }
-  
+
   /**
    * Reset scoring
    */

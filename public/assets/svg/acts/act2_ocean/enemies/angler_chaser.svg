@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <radialGradient id="anglerLure" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#ffff00"/>
+      <stop offset="50%" style="stop-color:#ff8800"/>
+      <stop offset="100%" style="stop-color:#ff4400;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="lureGlow">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+  
+  <!-- Anglerfish-like chaser -->
+  <g transform="translate(30,35)">
+    <!-- Body -->
+    <ellipse cx="0" cy="0" rx="18" ry="14" fill="#112233"/>
+    <ellipse cx="0" cy="0" rx="15" ry="11" fill="#1a3344"/>
+    
+    <!-- Mouth with teeth -->
+    <path d="M-12,5 Q0,15 12,5" fill="#0a1a22" stroke="#223344" stroke-width="1"/>
+    <!-- Teeth -->
+    <g fill="#88aacc">
+      <polygon points="-8,6 -6,10 -4,6"/>
+      <polygon points="-2,7 0,12 2,7"/>
+      <polygon points="4,6 6,10 8,6"/>
+    </g>
+    
+    <!-- Eye -->
+    <circle cx="-5" cy="-5" r="5" fill="#001122"/>
+    <circle cx="-5" cy="-5" r="3" fill="#ff4400"/>
+    <circle cx="-6" cy="-6" r="1" fill="#ffffff"/>
+    
+    <!-- Angler lure -->
+    <g>
+      <path d="M0,-14 Q5,-25 0,-30" stroke="#334455" stroke-width="1.5" fill="none"/>
+      <circle cx="0" cy="-32" r="5" fill="url(#anglerLure)" filter="url(#lureGlow)">
+        <animate attributeName="r" values="5;7;5" dur="1s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    
+    <!-- Fins -->
+    <g fill="#223344" opacity="0.7">
+      <path d="M15,0 Q25,-5 20,-15 Q15,-5 15,0"/>
+      <path d="M-15,0 Q-25,-5 -20,-15 Q-15,-5 -15,0"/>
+      <path d="M10,10 Q20,15 15,20 Q10,12 10,10"/>
+    </g>
+  </g>
+</svg>

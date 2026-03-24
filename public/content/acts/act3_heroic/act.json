@@ -1,0 +1,40 @@
+{
+  "id": "act3_heroic",
+  "number": 3,
+  "name": "The Heroic Mind",
+  "thesis": "The hero's journey is the mind's oldest pattern.",
+  "storyBeat": "The monkey finds strength in ancient patterns of courage. The neural headband glows with mythic purpose as the monkey channels the archetypes of heroes past.",
+  "visualCallbacks": [
+    "Star charts and constellations",
+    "Hero silhouettes and family trees",
+    "Ancient maps and quest markers",
+    "The headband glowing with purpose"
+  ],
+  "levels": [
+    "act3_level1_hesiod_genealogy",
+    "act3_level2_odyssey_homeward",
+    "act3_level3_anabasis_retreat",
+    "act3_level4_orphic_mystery",
+    "act3_level5_cyclopean_gate_boss"
+  ],
+  "visualStyle": {
+    "palette": ["#1a0a2e", "#2d1b4e", "#4a2c7a", "#ffd700", "#ff6b35"],
+    "bgPattern": "constellation_map",
+    "enemyStyle": "mythic_creature",
+    "particleStyle": "starlight",
+    "uiTheme": "golden_heroic"
+  },
+  "bossId": "cyclopean_gate",
+  "unlocks": {
+    "powerups": ["hero_shield", "fate_arrow"],
+    "codex": ["entry_heroic_mind", "entry_cyclopean", "entry_odyssey"],
+    "cosmetics": ["headband_laurel"]
+  },
+  "musicParams": {
+    "tempo": 100,
+    "intensity": 0.65,
+    "filterCutoff": 1000,
+    "useReverb": true,
+    "distortionAmount": 0.08
+  }
+}

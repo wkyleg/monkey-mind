@@ -1,0 +1,16 @@
+{
+  "id": "expansion_samurai",
+  "name": "Way of the Warrior",
+  "description": "3 levels exploring the samurai code and martial philosophy.",
+  "unlockCondition": "act8_complete",
+  "levels": [
+    "expansions/samurai/level_01_bushido.json",
+    "expansions/samurai/level_02_musashi.json",
+    "expansions/samurai/level_03_hagakure.json"
+  ],
+  "visualStyle": {
+    "backgrounds": ["samurai_bg_dojo", "samurai_bg_battlefield", "samurai_bg_garden"],
+    "enemyStyles": ["warrior", "ronin", "demon"],
+    "palette": ["#1a1a1a", "#c41e3a", "#ffd700", "#2a2a2a", "#ffffff"]
+  }
+}

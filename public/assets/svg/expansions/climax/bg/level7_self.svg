@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="selfGlow2"><feGaussianBlur stdDeviation="15"/></filter></defs>
+  <circle cx="400" cy="300" r="80" fill="#6a5a4a" opacity="0.1" filter="url(#selfGlow2)"/>
+  <circle cx="400" cy="300" r="40" fill="#7a6a5a" opacity="0.15"/>
+</svg>

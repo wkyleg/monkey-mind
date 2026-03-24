@@ -1,0 +1,19 @@
+{
+  "id": "expansion_monkey_vars",
+  "name": "Monkey Variations",
+  "description": "6 levels exploring different aspects of the cyborg monkey's identity.",
+  "unlockCondition": "act8_complete",
+  "levels": [
+    "expansions/monkey_vars/level_01_lab_memories.json",
+    "expansions/monkey_vars/level_02_primate_ancestors.json",
+    "expansions/monkey_vars/level_03_machine_dreams.json",
+    "expansions/monkey_vars/level_04_hanuman.json",
+    "expansions/monkey_vars/level_05_sun_wukong.json",
+    "expansions/monkey_vars/level_06_mirror_monkey.json"
+  ],
+  "visualStyle": {
+    "backgrounds": ["monkey_bg_lab", "monkey_bg_jungle", "monkey_bg_circuit", "monkey_bg_temple", "monkey_bg_mirror"],
+    "enemyStyles": ["primate", "machine", "mythic"],
+    "palette": ["#8b4513", "#00ff00", "#ff6600", "#ffd700", "#1a1a1a"]
+  }
+}

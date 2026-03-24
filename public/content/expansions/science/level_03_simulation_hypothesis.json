@@ -1,0 +1,56 @@
+{
+  "id": "science_level3_simulation_hypothesis",
+  "expansion": "science",
+  "index": 3,
+  "title": "Simulation Hypothesis",
+  "subtitle": "Are we NPCs in a cosmic game?",
+  "themeTags": ["simulation", "bostrom", "matrix", "reality"],
+  "ruleCard": {
+    "icon": "matrix",
+    "hint": "Reality glitches. The simulation strains under your observation.",
+    "mechanic": "simulation_glitch",
+    "params": { "glitchChance": 0.2, "exploitBonus": 100 }
+  },
+  "enemyDeck": [
+    { "archetype": "phaser", "modifiers": [], "weight": 4, "visualId": "enemy_glitch" },
+    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_npc" },
+    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_system" }
+  ],
+  "levelEnemies": {
+    "glitch_entity": {
+      "visualId": "glitch_entity",
+      "dialogue": {
+        "spawn": ["Rendering error!", "The simulation strains!", "Buffer overflow!", "I shouldn't exist!", "Base reality?"],
+        "death": ["Error... corrected...", "Simulation... stable...", "Buffer... cleared...", "Deleted...", "Reality... patched..."]
+      }
+    },
+    "ancestor_sim": {
+      "visualId": "ancestor_sim",
+      "dialogue": {
+        "spawn": ["Are you running me?", "Bostrom's argument!", "Probability one!", "Simulated history!", "Who runs the top level?"],
+        "death": ["No longer... running...", "Argument... paused...", "Probability... zero...", "History... concluded...", "Top level... unreachable..."]
+      }
+    },
+    "render_limit": {
+      "visualId": "render_limit",
+      "dialogue": {
+        "spawn": ["Edge of the map!", "Resolution limit!", "Planck length!", "No more detail!", "The simulation ends here!"],
+        "death": ["Map... expanded...", "Resolution... increased...", "Beyond Planck...", "Detail... added...", "Simulation... continues..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "reality_glitch", "params": { "glitchDuration": 3000, "randomEffects": true } }],
+  "bgLayers": [
+    { "svgId": "matrix_code", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "server_room", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "glitch_overlay", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Reality glitches. The simulation strains under your observation.",
+    "codexSnippet": "If civilizations create simulations, we're almost certainly in one. The monkey explores the simulation hypothesis and wonders who is playing the game that contains us.",
+    "radioWhisper": "The NPCs are starting to notice."
+  },
+  "musicSeed": { "seed": "simulation_003", "mode": "synthetic", "tempoRange": [80, 100], "intensity": 0.6 },
+  "duration": 120,
+  "unlockCondition": "science_level2_complete"
+}

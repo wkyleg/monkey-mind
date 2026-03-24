@@ -1,0 +1,66 @@
+{
+  "gear_drifter": {
+    "spawn": [
+      "Cog... turning...",
+      "The machine awakens.",
+      "Grinding forward.",
+      "Part of the whole.",
+      "Clockwork motion."
+    ],
+    "death": [
+      "Teeth... stripped...",
+      "Gear... jammed...",
+      "Mechanism... failed...",
+      "Rust... claims...",
+      "Obsolete..."
+    ]
+  },
+  "circuit_swarm": {
+    "spawn": [
+      "CURRENT FLOWING!",
+      "Electrons multiply!",
+      "The circuit completes!",
+      "Resistance futile!",
+      "Voltage rising!"
+    ],
+    "death": [
+      "Short... circuit...",
+      "Power... drained...",
+      "Capacitor... burst...",
+      "Grounded...",
+      "System... offline..."
+    ]
+  },
+  "piston_anchor": {
+    "spawn": [
+      "COMPRESSION!",
+      "The cylinder holds!",
+      "Pneumatic power!",
+      "Anchored in steel!",
+      "Pressure builds!"
+    ],
+    "death": [
+      "Pressure... released...",
+      "Seal... broken...",
+      "Hydraulic... failure...",
+      "Deflated...",
+      "Steam... escaping..."
+    ]
+  },
+  "servo_chaser": {
+    "spawn": [
+      "TARGET ACQUIRED!",
+      "Servo tracking!",
+      "Pursuit algorithm!",
+      "Motor engaging!",
+      "Precision hunt!"
+    ],
+    "death": [
+      "Motor... burned...",
+      "Signal... lost...",
+      "Calibration... failed...",
+      "Servo... seized...",
+      "Powering... down..."
+    ]
+  }
+}

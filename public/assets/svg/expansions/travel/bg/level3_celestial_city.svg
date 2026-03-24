@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="celestialGlow"><feGaussianBlur stdDeviation="8"/></filter></defs>
+  <g fill="#ffcc44" opacity="0.2" filter="url(#celestialGlow)">
+    <rect x="350" y="50" width="100" height="150"/>
+    <polygon points="350,50 400,0 450,50"/>
+  </g>
+  <g fill="#ffdd66" opacity="0.1">
+    <rect x="320" y="100" width="30" height="100"/><rect x="450" y="100" width="30" height="100"/>
+  </g>
+</svg>

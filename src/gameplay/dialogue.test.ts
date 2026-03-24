@@ -1,21 +1,19 @@
 /**
  * Dialogue System Tests
- * 
- * Tests for floating text spawning, enemy dialogue triggers, and rendering.
+ *
+ * Tests for event-driven dialogue spawning, rendering, and lifecycle.
  * Uses dynamic imports to avoid singleton initialization issues.
  */
 
-import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 describe('DialogueSystem', () => {
-  // Event listener storage
   let eventListeners: Map<string, Function[]>;
 
   beforeEach(() => {
     vi.resetModules();
     eventListeners = new Map();
 
-    // Mock events module before importing DialogueSystem
     vi.doMock('../core/events', () => ({
       events: {
         emit: vi.fn(),
@@ -30,24 +28,13 @@ describe('DialogueSystem', () => {
       },
     }));
 
-    // Mock contentLoader
     vi.doMock('../content/loader', () => ({
       contentLoader: {
-        getEnemy: vi.fn((type: string) => {
+        getEnemyDialogue: vi.fn((type: string) => {
           if (type === 'test_enemy') {
             return {
-              id: 'test_enemy',
-              name: 'Test Enemy',
-              visual: { color: '#00ff00' },
-              spawnText: ['SPAWNING!', 'HELLO!'],
-              deathText: ['DYING!', 'GOODBYE!'],
-            };
-          }
-          if (type === 'silent_enemy') {
-            return {
-              id: 'silent_enemy',
-              name: 'Silent Enemy',
-              visual: { color: '#ff0000' },
+              spawn: ['SPAWNING!', 'HELLO!'],
+              death: ['DYING!', 'GOODBYE!'],
             };
           }
           return null;
@@ -61,7 +48,6 @@ describe('DialogueSystem', () => {
     vi.resetModules();
   });
 
-  // Helper to trigger events
   const triggerEvent = (eventName: string, data: unknown) => {
     const listeners = eventListeners.get(eventName) || [];
     for (const listener of listeners) {
@@ -79,28 +65,32 @@ describe('DialogueSystem', () => {
     it('should register event listeners on construction', async () => {
       const { DialogueSystem } = await import('./dialogue');
       new DialogueSystem();
-      
+
       expect(eventListeners.has('enemy:spawn')).toBe(true);
       expect(eventListeners.has('enemy:death')).toBe(true);
     });
   });
 
-  describe('Manual Text Spawning', () => {
-    it('should spawn text manually', async () => {
+  describe('Enable / Disable', () => {
+    it('should allow disabling dialogue', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
-      dialogue.spawnText('TEST MESSAGE', 100, 200, 'dialogue', '#ffffff');
+      dialogue.setEnabled(false);
+
+      vi.spyOn(Math, 'random').mockReturnValue(0.01);
+      triggerEvent('enemy:spawn', { type: 'drifter', x: 100, y: 50 });
       dialogue.update(0.1);
+      // No crash — dialogue silently ignored
     });
 
-    it('should spawn different text types', async () => {
+    it('should allow re-enabling dialogue', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
-      dialogue.spawnText('Spawn', 100, 100, 'spawn', '#00ff00');
-      dialogue.spawnText('Death', 100, 150, 'death', '#ff0000');
-      dialogue.spawnText('Dialog', 100, 200, 'dialogue', '#ffffff');
+      dialogue.setEnabled(false);
+      dialogue.setEnabled(true);
+
+      vi.spyOn(Math, 'random').mockReturnValue(0.01);
+      triggerEvent('enemy:spawn', { type: 'drifter', x: 100, y: 50 });
       dialogue.update(0.1);
     });
   });
@@ -109,27 +99,31 @@ describe('DialogueSystem', () => {
     it('should update without crashing', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
+
       expect(() => dialogue.update(0.1)).not.toThrow();
     });
 
-    it('should remove expired texts', async () => {
+    it('should remove expired dialogues after their maxLifetime', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
-      dialogue.spawnText('TEST', 100, 100);
-      dialogue.update(3); // Past 2 second lifetime
+
+      vi.spyOn(Math, 'random').mockReturnValue(0.01);
+      triggerEvent('enemy:spawn', { type: 'drifter', x: 100, y: 50 });
+
+      dialogue.update(5);
+      // After 5s the 1.5s-lifetime dialogue is gone — no crash
     });
   });
 
   describe('Clear', () => {
-    it('should clear all texts', async () => {
+    it('should clear all dialogues', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
-      dialogue.spawnText('TEST 1', 100, 100);
-      dialogue.spawnText('TEST 2', 100, 150);
+
+      vi.spyOn(Math, 'random').mockReturnValue(0.01);
+      triggerEvent('enemy:spawn', { type: 'drifter', x: 100, y: 50 });
       dialogue.update(0.1);
+
       dialogue.clear();
       dialogue.update(0.1);
     });
@@ -139,9 +133,8 @@ describe('DialogueSystem', () => {
     it('should handle enemy spawn event when probability allows', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
-      vi.spyOn(Math, 'random').mockReturnValue(0.1);
 
+      vi.spyOn(Math, 'random').mockReturnValue(0.1);
       triggerEvent('enemy:spawn', { type: 'test_enemy', x: 100, y: 50 });
       dialogue.update(0.1);
     });
@@ -149,43 +142,30 @@ describe('DialogueSystem', () => {
     it('should handle enemy death event', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
-      vi.spyOn(Math, 'random').mockReturnValue(0.1);
 
+      vi.spyOn(Math, 'random').mockReturnValue(0.1);
       triggerEvent('enemy:death', { type: 'test_enemy', position: { x: 100, y: 200 } });
-      dialogue.update(0.1);
-    });
-
-    it('should not spawn text for silent enemies', async () => {
-      const { DialogueSystem } = await import('./dialogue');
-      const dialogue = new DialogueSystem();
-      
-      vi.spyOn(Math, 'random').mockReturnValue(0.1);
-
-      triggerEvent('enemy:spawn', { type: 'silent_enemy', x: 100, y: 50 });
       dialogue.update(0.1);
     });
 
     it('should not spawn text when probability blocks', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
-      vi.spyOn(Math, 'random').mockReturnValue(0.9);
 
+      vi.spyOn(Math, 'random').mockReturnValue(0.9);
       triggerEvent('enemy:spawn', { type: 'test_enemy', x: 100, y: 50 });
       dialogue.update(0.1);
     });
 
-    it('should respect cooldown', async () => {
+    it('should respect cooldown between dialogues', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
+
       vi.spyOn(Math, 'random').mockReturnValue(0.1);
 
       triggerEvent('enemy:spawn', { type: 'test_enemy', x: 100, y: 50 });
       dialogue.update(0.1);
 
-      // Second spawn immediately (should be blocked by cooldown)
       triggerEvent('enemy:spawn', { type: 'test_enemy', x: 200, y: 50 });
       dialogue.update(0.1);
     });
@@ -193,131 +173,80 @@ describe('DialogueSystem', () => {
     it('should allow spawn after cooldown expires', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
+
       vi.spyOn(Math, 'random').mockReturnValue(0.1);
 
       triggerEvent('enemy:spawn', { type: 'test_enemy', x: 100, y: 50 });
-      dialogue.update(2); // Past cooldown
+      dialogue.update(2);
 
       triggerEvent('enemy:spawn', { type: 'test_enemy', x: 200, y: 50 });
+      dialogue.update(0.1);
+    });
+
+    it('should handle actVisual field for unique enemy dialogue', async () => {
+      const { DialogueSystem } = await import('./dialogue');
+      const dialogue = new DialogueSystem();
+
+      vi.spyOn(Math, 'random').mockReturnValue(0.1);
+      triggerEvent('enemy:spawn', { type: 'drifter', x: 100, y: 50, actVisual: 'test_enemy' });
       dialogue.update(0.1);
     });
   });
 
   describe('Render', () => {
-    it('should render without crashing', async () => {
+    const createMockRenderer = () => ({
+      context: {
+        save: vi.fn(),
+        restore: vi.fn(),
+        translate: vi.fn(),
+        scale: vi.fn(),
+        font: '',
+        textAlign: '',
+        textBaseline: '',
+        shadowColor: '',
+        shadowBlur: 0,
+        strokeStyle: '',
+        lineWidth: 0,
+        fillStyle: '',
+        globalAlpha: 1,
+        fillText: vi.fn(),
+        strokeText: vi.fn(),
+      },
+    });
+
+    it('should render without crashing when empty', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
-      const mockRenderer = {
-        context: {
-          save: vi.fn(),
-          restore: vi.fn(),
-          font: '',
-          textAlign: '',
-          textBaseline: '',
-          shadowColor: '',
-          shadowBlur: 0,
-          shadowOffsetX: 0,
-          shadowOffsetY: 0,
-          fillStyle: '',
-          globalAlpha: 1,
-          fillText: vi.fn(),
-        },
-      };
-
-      dialogue.spawnText('TEST', 100, 100);
-      dialogue.update(0.1);
+      const mockRenderer = createMockRenderer();
 
       expect(() => dialogue.render(mockRenderer as any)).not.toThrow();
     });
 
-    it('should call fillText for active texts', async () => {
+    it('should render active dialogues', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
-      const mockRenderer = {
-        context: {
-          save: vi.fn(),
-          restore: vi.fn(),
-          font: '',
-          textAlign: '',
-          textBaseline: '',
-          shadowColor: '',
-          shadowBlur: 0,
-          shadowOffsetX: 0,
-          shadowOffsetY: 0,
-          fillStyle: '',
-          globalAlpha: 1,
-          fillText: vi.fn(),
-        },
-      };
+      const mockRenderer = createMockRenderer();
 
-      dialogue.spawnText('TEST', 100, 100);
+      vi.spyOn(Math, 'random').mockReturnValue(0.01);
+      vi.spyOn(performance, 'now').mockReturnValue(5000);
+      triggerEvent('enemy:spawn', { type: 'drifter', x: 100, y: 50 });
       dialogue.update(0.1);
-      dialogue.render(mockRenderer as any);
 
+      dialogue.render(mockRenderer as any);
       expect(mockRenderer.context.fillText).toHaveBeenCalled();
     });
 
-    it('should not render expired texts', async () => {
+    it('should not render expired dialogues', async () => {
       const { DialogueSystem } = await import('./dialogue');
       const dialogue = new DialogueSystem();
-      
-      const mockRenderer = {
-        context: {
-          save: vi.fn(),
-          restore: vi.fn(),
-          font: '',
-          textAlign: '',
-          textBaseline: '',
-          shadowColor: '',
-          shadowBlur: 0,
-          shadowOffsetX: 0,
-          shadowOffsetY: 0,
-          fillStyle: '',
-          globalAlpha: 1,
-          fillText: vi.fn(),
-        },
-      };
+      const mockRenderer = createMockRenderer();
 
-      dialogue.spawnText('TEST', 100, 100);
-      dialogue.update(3); // Past lifetime
+      vi.spyOn(Math, 'random').mockReturnValue(0.01);
+      triggerEvent('enemy:spawn', { type: 'drifter', x: 100, y: 50 });
+      dialogue.update(5);
+
       dialogue.render(mockRenderer as any);
-
       expect(mockRenderer.context.fillText).not.toHaveBeenCalled();
-    });
-
-    it('should use correct colors for text types', async () => {
-      const { DialogueSystem } = await import('./dialogue');
-      const dialogue = new DialogueSystem();
-      
-      const fillStyles: string[] = [];
-      const mockRenderer = {
-        context: {
-          save: vi.fn(),
-          restore: vi.fn(),
-          font: '',
-          textAlign: '',
-          textBaseline: '',
-          shadowColor: '',
-          shadowBlur: 0,
-          shadowOffsetX: 0,
-          shadowOffsetY: 0,
-          get fillStyle() { return ''; },
-          set fillStyle(v: string) { fillStyles.push(v); },
-          globalAlpha: 1,
-          fillText: vi.fn(),
-        },
-      };
-
-      dialogue.spawnText('Spawn', 100, 100, 'spawn', '#00ff00');
-      dialogue.spawnText('Death', 100, 150, 'death', '#ff0000');
-      dialogue.update(0.1);
-      dialogue.render(mockRenderer as any);
-
-      expect(fillStyles).toContain('#66ff66');
-      expect(fillStyles).toContain('#ff6666');
     });
   });
 });

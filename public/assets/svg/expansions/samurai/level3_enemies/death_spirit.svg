@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="deathGlow"><feGaussianBlur stdDeviation="4"/></filter></defs>
+  <ellipse cx="30" cy="35" rx="16" ry="20" fill="#2a2a3a" opacity="0.6" filter="url(#deathGlow)"/>
+  <circle cx="30" cy="20" r="12" fill="#2a2a3a" stroke="#444455" stroke-width="1"/>
+  <circle cx="25" cy="18" r="4" fill="#000000"/><circle cx="35" cy="18" r="4" fill="#000000"/>
+  <path d="M 24 28 Q 30 32 36 28" fill="none" stroke="#444455" stroke-width="1"/>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <radialGradient id="drifterGlow" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#00ffff;stop-opacity:0.8"/>
+      <stop offset="70%" style="stop-color:#0088aa;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#004466;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="2" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Jellyfish-like drifter -->
+  <g transform="translate(30,30)" filter="url(#softGlow)">
+    <!-- Bell/dome -->
+    <ellipse cx="0" cy="-5" rx="18" ry="12" fill="#0066aa" opacity="0.7"/>
+    <ellipse cx="0" cy="-5" rx="14" ry="9" fill="#0088cc" opacity="0.5"/>
+    
+    <!-- Inner glow -->
+    <circle cx="0" cy="-5" r="8" fill="url(#drifterGlow)">
+      <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Trailing tentacles -->
+    <g stroke="#00aacc" stroke-width="2" fill="none" opacity="0.6">
+      <path d="M-10,5 Q-12,15 -8,25">
+        <animate attributeName="d" values="M-10,5 Q-12,15 -8,25;M-10,5 Q-8,15 -12,25;M-10,5 Q-12,15 -8,25" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <path d="M0,7 Q2,18 -2,28">
+        <animate attributeName="d" values="M0,7 Q2,18 -2,28;M0,7 Q-2,18 2,28;M0,7 Q2,18 -2,28" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M10,5 Q12,15 8,25">
+        <animate attributeName="d" values="M10,5 Q12,15 8,25;M10,5 Q8,15 12,25;M10,5 Q12,15 8,25" dur="2s" repeatCount="indefinite" begin="0.3s"/>
+      </path>
+    </g>
+    
+    <!-- Bioluminescent spots -->
+    <circle cx="-6" cy="-8" r="2" fill="#00ffff" opacity="0.8">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="6" cy="-8" r="2" fill="#00ffcc" opacity="0.8">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite" begin="0.4s"/>
+    </circle>
+  </g>
+</svg>

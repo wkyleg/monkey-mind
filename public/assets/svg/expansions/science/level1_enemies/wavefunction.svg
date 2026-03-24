@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="waveBlur"><feGaussianBlur stdDeviation="4"/></filter></defs>
+  <path d="M 10 30 Q 20 15 30 30 Q 40 45 50 30" stroke="#6a8aaa" stroke-width="4" fill="none" filter="url(#waveBlur)"/>
+  <circle cx="30" cy="30" r="8" fill="#4a6a8a" opacity="0.5"/>
+</svg>

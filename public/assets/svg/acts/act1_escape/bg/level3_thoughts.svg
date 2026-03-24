@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Base -->
+  <rect width="800" height="600" fill="#08080f"/>
+  
+  <!-- Swirling thought patterns -->
+  <g stroke="#334466" stroke-width="1" fill="none" opacity="0.4">
+    <circle cx="200" cy="200" r="60"/>
+    <circle cx="200" cy="200" r="80"/>
+    <circle cx="200" cy="200" r="100"/>
+    
+    <circle cx="600" cy="400" r="50"/>
+    <circle cx="600" cy="400" r="70"/>
+    <circle cx="600" cy="400" r="90"/>
+    
+    <circle cx="400" cy="100" r="40"/>
+    <circle cx="400" cy="100" r="55"/>
+    
+    <circle cx="150" cy="450" r="45"/>
+    <circle cx="150" cy="450" r="60"/>
+    
+    <circle cx="700" cy="150" r="35"/>
+    <circle cx="700" cy="150" r="50"/>
+  </g>
+  
+  <!-- Connecting lines (thoughts) -->
+  <g stroke="#445577" stroke-width="1" opacity="0.3">
+    <path d="M 200 200 Q 300 150 400 100" fill="none"/>
+    <path d="M 400 100 Q 550 200 600 400" fill="none"/>
+    <path d="M 200 200 Q 200 350 150 450" fill="none"/>
+    <path d="M 600 400 Q 650 300 700 150" fill="none"/>
+  </g>
+  
+  <!-- Random words floating -->
+  <g fill="#556688" font-family="serif" font-size="10" opacity="0.3">
+    <text x="250" y="180">why</text>
+    <text x="500" y="350">alone</text>
+    <text x="380" y="280">escape</text>
+    <text x="120" y="400">time</text>
+    <text x="620" y="200">outside</text>
+  </g>
+</svg>

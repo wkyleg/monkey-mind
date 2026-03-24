@@ -1,0 +1,17 @@
+{
+  "id": "lit_level4_dante_purgatorio",
+  "expansion": "literature",
+  "index": 4,
+  "title": "Dante's Purgatorio",
+  "subtitle": "The mountain of purification. Hope returns.",
+  "themeTags": ["dante", "purgatory", "purification", "hope"],
+  "levelEnemies": {
+    "penitent": { "visualId": "penitent", "dialogue": { "spawn": ["I climb toward heaven!", "Seven terraces!", "Pride, envy, wrath!", "Purging my sins!", "Hope sustains!"], "death": ["Climbing...", "Terraces... passed...", "Sins... purged...", "Purified...", "Hope... fulfilled..."] } },
+    "guardian_angel": { "visualId": "guardian_angel", "dialogue": { "spawn": ["Pass, worthy one!", "The P is removed!", "One terrace complete!", "Continue upward!", "Beatrice waits!"], "death": ["Passed...", "P... erased...", "Complete...", "Upward...", "Beatrice... seen..."] } },
+    "earthly_paradise": { "visualId": "earthly_paradise", "dialogue": { "spawn": ["Eden restored!", "Lethe and Eunoe!", "Memory washed!", "Good remembered!", "Heaven approaches!"], "death": ["Eden... entered...", "Waters... drunk...", "Memory... clean...", "Good... only...", "Heaven... here..."] } }
+  },
+  "bgLayers": [{ "svgId": "mountain", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "terraces", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "stars", "parallaxSpeed": 0.2, "opacity": 0.6 }],
+  "copyLayers": { "codexSnippet": "To run over better waters the little ship of my genius now hoists its sails. The monkey climbs the seven terraces toward the Earthly Paradise." },
+  "musicSeed": { "seed": "purgatorio_004", "mode": "mixolydian", "tempoRange": [55, 70], "intensity": 0.5 },
+  "duration": 140, "unlockCondition": "lit_level3_complete"
+}

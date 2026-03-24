@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="infectGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Humanoid host body -->
+  <ellipse cx="30" cy="38" rx="12" ry="15" fill="#3a3a3a" stroke="#666666" stroke-width="2"/>
+  
+  <!-- Head with fungal growths -->
+  <circle cx="30" cy="18" r="10" fill="#3a3a3a" stroke="#666666" stroke-width="2"/>
+  
+  <!-- Fungal growths bursting from head -->
+  <ellipse cx="22" cy="10" rx="5" ry="8" fill="#4a5a4a" stroke="#77aa77" stroke-width="1"/>
+  <ellipse cx="38" cy="10" rx="5" ry="8" fill="#4a5a4a" stroke="#77aa77" stroke-width="1"/>
+  <circle cx="30" cy="5" r="4" fill="#5a6a5a" stroke="#88bb88" stroke-width="1"/>
+  
+  <!-- Pained expression - one eye normal, one infected -->
+  <circle cx="25" cy="18" r="3" fill="#ffffff"/>
+  <circle cx="25" cy="18" r="1.5" fill="#000000"/>
+  <circle cx="35" cy="18" r="3" fill="#88ff88" filter="url(#infectGlow)"/>
+  
+  <!-- Fungal veins spreading -->
+  <path d="M 25 25 L 22 35" stroke="#77aa77" stroke-width="1"/>
+  <path d="M 35 25 L 38 35" stroke="#77aa77" stroke-width="1"/>
+  <path d="M 30 22 L 30 32" stroke="#77aa77" stroke-width="1"/>
+  
+  <!-- Arms reaching out (zombie-like) -->
+  <line x1="18" y1="35" x2="5" y2="30" stroke="#3a3a3a" stroke-width="3"/>
+  <line x1="42" y1="35" x2="55" y2="30" stroke="#3a3a3a" stroke-width="3"/>
+</svg>

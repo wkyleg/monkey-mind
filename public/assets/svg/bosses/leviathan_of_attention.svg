@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">
+  <defs>
+    <radialGradient id="leviathan_eye" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ffff"/>
+      <stop offset="40%" stop-color="#0088aa"/>
+      <stop offset="100%" stop-color="#003344"/>
+    </radialGradient>
+    <filter id="leviathan_glow">
+      <feGaussianBlur stdDeviation="4" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Massive eye body -->
+  <ellipse cx="70" cy="70" rx="55" ry="45" fill="#0a2a3a" stroke="#00ffff" stroke-width="2"/>
+  <!-- Pupil -->
+  <ellipse cx="70" cy="70" rx="25" ry="30" fill="url(#leviathan_eye)" filter="url(#leviathan_glow)">
+    <animate attributeName="rx" values="25;20;25" dur="4s" repeatCount="indefinite"/>
+  </ellipse>
+  <!-- Inner pupil slit -->
+  <ellipse cx="70" cy="70" rx="8" ry="25" fill="#001122">
+    <animate attributeName="rx" values="8;5;8" dur="4s" repeatCount="indefinite"/>
+  </ellipse>
+  <!-- Glowing center -->
+  <ellipse cx="70" cy="70" rx="3" ry="12" fill="#00ffff" filter="url(#leviathan_glow)"/>
+  <!-- Tentacles reaching out -->
+  <g stroke="#00aaaa" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M15 70 Q0 50 10 30">
+      <animate attributeName="d" values="M15 70 Q0 50 10 30;M15 70 Q-5 55 5 25;M15 70 Q0 50 10 30" dur="5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M125 70 Q140 50 130 30">
+      <animate attributeName="d" values="M125 70 Q140 50 130 30;M125 70 Q145 55 135 25;M125 70 Q140 50 130 30" dur="5s" repeatCount="indefinite" begin="1s"/>
+    </path>
+    <path d="M40 115 Q30 130 20 125">
+      <animate attributeName="d" values="M40 115 Q30 130 20 125;M40 115 Q25 135 15 130;M40 115 Q30 130 20 125" dur="4s" repeatCount="indefinite"/>
+    </path>
+    <path d="M100 115 Q110 130 120 125">
+      <animate attributeName="d" values="M100 115 Q110 130 120 125;M100 115 Q115 135 125 130;M100 115 Q110 130 120 125" dur="4s" repeatCount="indefinite" begin="0.5s"/>
+    </path>
+  </g>
+  <!-- Smaller watching eyes on tentacles -->
+  <circle cx="10" cy="30" r="5" fill="#00ffff" opacity="0.7">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="130" cy="30" r="5" fill="#00ffff" opacity="0.7">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" begin="1s"/>
+  </circle>
+</svg>

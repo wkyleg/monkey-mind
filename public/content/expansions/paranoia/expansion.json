@@ -1,0 +1,24 @@
+{
+  "id": "expansion_paranoia",
+  "name": "Paranoia & Folk Gothic",
+  "description": "11 levels exploring conspiracy, folk horror, and the uncanny.",
+  "unlockCondition": "act8_complete",
+  "levels": [
+    "expansions/paranoia/level_01_mk_ultra.json",
+    "expansions/paranoia/level_02_roswell.json",
+    "expansions/paranoia/level_03_men_in_black.json",
+    "expansions/paranoia/level_04_wicker_man.json",
+    "expansions/paranoia/level_05_midsommar.json",
+    "expansions/paranoia/level_06_mothman.json",
+    "expansions/paranoia/level_07_skinwalker.json",
+    "expansions/paranoia/level_08_black_eyed_kids.json",
+    "expansions/paranoia/level_09_slenderman.json",
+    "expansions/paranoia/level_10_backrooms.json",
+    "expansions/paranoia/level_11_scp_foundation.json"
+  ],
+  "visualStyle": {
+    "backgrounds": ["paranoia_bg_redacted", "paranoia_bg_forest", "paranoia_bg_liminal", "paranoia_bg_static", "paranoia_bg_facility"],
+    "enemyStyles": ["redacted", "folk", "liminal", "creepypasta"],
+    "palette": ["#0a0a0a", "#1a1a1a", "#333333", "#ff0000", "#00ff00"]
+  }
+}

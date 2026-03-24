@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="lampGlow"><feGaussianBlur stdDeviation="3"/></filter></defs>
+  <ellipse cx="30" cy="50" rx="20" ry="8" fill="#cc9900" stroke="#ffcc00" stroke-width="2"/>
+  <path d="M 20 50 Q 25 30 30 25 Q 35 30 40 50" fill="#cc9900" stroke="#ffcc00" stroke-width="2"/>
+  <ellipse cx="30" cy="20" rx="12" ry="15" fill="#6644aa" opacity="0.6" filter="url(#lampGlow)"/>
+  <circle cx="26" cy="18" r="2" fill="#ffff00"/><circle cx="34" cy="18" r="2" fill="#ffff00"/>
+</svg>

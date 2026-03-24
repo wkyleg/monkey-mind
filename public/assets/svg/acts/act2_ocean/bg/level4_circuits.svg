@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <filter id="circuitGlowBg">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Circuit traces -->
+  <g stroke="#00aacc" fill="none" opacity="0.4" stroke-width="2">
+    <path d="M 0 100 L 200 100 L 200 200 L 400 200"/>
+    <path d="M 400 200 L 400 100 L 600 100 L 600 200 L 800 200"/>
+    <path d="M 0 300 L 100 300 L 100 400 L 300 400"/>
+    <path d="M 300 400 L 500 400 L 500 300 L 700 300 L 700 400 L 800 400"/>
+    <path d="M 0 500 L 150 500 L 150 450 L 350 450"/>
+    <path d="M 350 450 L 350 550 L 550 550 L 550 450 L 750 450 L 750 500 L 800 500"/>
+  </g>
+  
+  <!-- Circuit nodes -->
+  <g fill="#00ffff" filter="url(#circuitGlowBg)">
+    <circle cx="200" cy="100" r="5"/>
+    <circle cx="400" cy="200" r="6"/>
+    <circle cx="600" cy="100" r="5"/>
+    <circle cx="100" cy="300" r="5"/>
+    <circle cx="300" cy="400" r="6"/>
+    <circle cx="500" cy="300" r="5"/>
+    <circle cx="700" cy="400" r="5"/>
+    <circle cx="150" cy="500" r="5"/>
+    <circle cx="350" cy="450" r="6"/>
+    <circle cx="550" cy="550" r="5"/>
+    <circle cx="750" cy="450" r="5"/>
+  </g>
+</svg>

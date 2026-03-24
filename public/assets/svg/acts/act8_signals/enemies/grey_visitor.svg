@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="greyHead" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" style="stop-color:#666666"/>
+      <stop offset="100%" style="stop-color:#333333"/>
+    </radialGradient>
+    <filter id="alienGlow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Classic grey alien form -->
+  <g filter="url(#alienGlow)">
+    <!-- Large head -->
+    <ellipse cx="32" cy="22" rx="18" ry="20" fill="url(#greyHead)"/>
+    
+    <!-- Large black eyes -->
+    <ellipse cx="24" cy="22" rx="7" ry="10" fill="#000000"/>
+    <ellipse cx="40" cy="22" rx="7" ry="10" fill="#000000"/>
+    
+    <!-- Eye reflections -->
+    <ellipse cx="22" cy="19" rx="2" ry="3" fill="#333333" opacity="0.5"/>
+    <ellipse cx="38" cy="19" rx="2" ry="3" fill="#333333" opacity="0.5"/>
+    
+    <!-- Small nose -->
+    <path d="M32,28 L30,32 L34,32 Z" fill="#444444"/>
+    
+    <!-- Thin mouth -->
+    <line x1="28" y1="36" x2="36" y2="36" stroke="#444444" stroke-width="1"/>
+    
+    <!-- Thin neck -->
+    <rect x="29" y="40" width="6" height="6" fill="#555555"/>
+    
+    <!-- Thin body -->
+    <ellipse cx="32" cy="52" rx="10" ry="8" fill="#555555"/>
+    
+    <!-- Long thin arms -->
+    <path d="M22,48 Q12,55 14,62" stroke="#555555" fill="none" stroke-width="3" stroke-linecap="round"/>
+    <path d="M42,48 Q52,55 50,62" stroke="#555555" fill="none" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Long fingers -->
+    <g stroke="#555555" fill="none" stroke-width="1.5" stroke-linecap="round">
+      <line x1="14" y1="62" x2="10" y2="64"/>
+      <line x1="14" y1="62" x2="14" y2="66"/>
+      <line x1="14" y1="62" x2="18" y2="64"/>
+      <line x1="50" y1="62" x2="46" y2="64"/>
+      <line x1="50" y1="62" x2="50" y2="66"/>
+      <line x1="50" y1="62" x2="54" y2="64"/>
+    </g>
+  </g>
+  
+  <!-- Subtle glow around -->
+  <ellipse cx="32" cy="32" rx="28" ry="30" fill="none" stroke="#00ff00" stroke-width="0.5" opacity="0.2">
+    <animate attributeName="opacity" values="0.2;0.05;0.2" dur="3s" repeatCount="indefinite"/>
+  </ellipse>
+</svg>

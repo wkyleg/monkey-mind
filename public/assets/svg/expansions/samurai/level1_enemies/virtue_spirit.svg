@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="virtueGlow"><feGaussianBlur stdDeviation="3"/></filter></defs>
+  <circle cx="30" cy="30" r="20" fill="#4a4a6a" opacity="0.5" filter="url(#virtueGlow)"/>
+  <circle cx="30" cy="30" r="12" fill="#6a6a8a" stroke="#8888aa" stroke-width="1"/>
+  <text x="24" y="35" fill="#aaaacc" font-size="12">GI</text>
+  <circle cx="15" cy="20" r="4" fill="#88aacc" opacity="0.6"/>
+  <circle cx="45" cy="20" r="4" fill="#88aacc" opacity="0.6"/>
+  <circle cx="15" cy="40" r="4" fill="#88aacc" opacity="0.6"/>
+  <circle cx="45" cy="40" r="4" fill="#88aacc" opacity="0.6"/>
+</svg>

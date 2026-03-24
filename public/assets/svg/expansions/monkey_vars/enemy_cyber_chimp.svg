@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 70">
+  <!-- Cyber Chimp - Technological variant -->
+  <g transform="translate(30,35)">
+    <!-- Metallic body -->
+    <ellipse cx="0" cy="5" rx="15" ry="20" fill="#4a4a5a"/>
+    
+    <!-- Armor plating -->
+    <g fill="#3a3a4a">
+      <rect x="-12" y="-8" width="24" height="10" rx="2"/>
+      <rect x="-10" y="5" width="20" height="12" rx="2"/>
+    </g>
+    
+    <!-- Head -->
+    <circle cx="0" cy="-18" r="14" fill="#5a5a6a"/>
+    
+    <!-- Cybernetic eye -->
+    <circle cx="-6" cy="-20" r="5" fill="#1a1a2a"/>
+    <circle cx="-6" cy="-20" r="3" fill="#ff0000"/>
+    <circle cx="-5" cy="-21" r="1" fill="#ffffff"/>
+    
+    <!-- Organic eye -->
+    <circle cx="6" cy="-20" r="4" fill="#ffffff"/>
+    <circle cx="6" cy="-20" r="2" fill="#4a2a1a"/>
+    
+    <!-- Snout with metal plate -->
+    <ellipse cx="0" cy="-10" rx="8" ry="6" fill="#6a5a5a"/>
+    <rect x="-6" y="-12" width="12" height="3" fill="#4a4a5a"/>
+    
+    <!-- Ears (one organic, one antenna) -->
+    <ellipse cx="-14" cy="-22" rx="5" ry="7" fill="#6a5a5a"/>
+    <rect x="10" y="-30" width="3" height="12" fill="#4a4a5a"/>
+    <circle cx="11.5" cy="-30" r="2" fill="#00ff00"/>
+    
+    <!-- Circuit patterns -->
+    <g stroke="#00ffff" stroke-width="1" fill="none" opacity="0.5">
+      <path d="M-10,0 L-5,0 L-5,8 L5,8"/>
+      <path d="M10,2 L8,2 L8,12"/>
+      <circle cx="0" cy="15" r="3"/>
+    </g>
+    
+    <!-- Mechanical arm -->
+    <g fill="#4a4a5a">
+      <rect x="-20" y="-5" width="8" height="4" rx="1"/>
+      <rect x="-25" y="-6" width="6" height="6" rx="1"/>
+    </g>
+  </g>
+</svg>

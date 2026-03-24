@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Servo motor chaser -->
+  <g transform="translate(30,30)">
+    <!-- Motor body -->
+    <rect x="-12" y="-15" width="24" height="30" fill="#2d3748" stroke="#4a5568" stroke-width="2"/>
+    
+    <!-- Motor cap -->
+    <rect x="-10" y="-18" width="20" height="5" fill="#4a5568"/>
+    
+    <!-- Rotating arm -->
+    <g>
+      <rect x="-3" y="15" width="6" height="15" fill="#708090"/>
+      <circle cx="0" cy="30" r="4" fill="#4a5568"/>
+      <animateTransform attributeName="transform" type="rotate" values="-30;30;-30" dur="0.5s" repeatCount="indefinite"/>
+    </g>
+    
+    <!-- Status LEDs -->
+    <circle cx="-6" cy="-10" r="2" fill="#00ff00">
+      <animate attributeName="opacity" values="1;0.3;1" dur="0.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="6" cy="-10" r="2" fill="#ff0000"/>
+    
+    <!-- Wires -->
+    <g stroke="#ff0000" stroke-width="1" fill="none">
+      <path d="M-12,-5 Q-20,-5 -20,5"/>
+      <path d="M12,-5 Q20,-5 20,5"/>
+    </g>
+    
+    <!-- Sensor eye -->
+    <rect x="-5" y="-2" width="10" height="6" fill="#1a1a1a"/>
+    <rect x="-3" y="0" width="6" height="2" fill="#00aaff">
+      <animate attributeName="width" values="6;2;6" dur="1s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+</svg>

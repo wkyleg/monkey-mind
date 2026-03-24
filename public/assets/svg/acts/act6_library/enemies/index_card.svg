@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Index card drifter -->
+  <g transform="translate(30,30)">
+    <!-- Card -->
+    <rect x="-18" y="-12" width="36" height="24" fill="#f5f5dc" stroke="#8b7355" stroke-width="1"/>
+    
+    <!-- Lines on card -->
+    <g stroke="#add8e6" stroke-width="0.5">
+      <line x1="-15" y1="-6" x2="15" y2="-6"/>
+      <line x1="-15" y1="0" x2="15" y2="0"/>
+      <line x1="-15" y1="6" x2="15" y2="6"/>
+    </g>
+    
+    <!-- Faux text -->
+    <g fill="#333" font-size="4" font-family="serif">
+      <text x="-14" y="-4">Subject: TRUTH</text>
+      <text x="-14" y="2">See also: LIES</text>
+      <text x="-14" y="8">Ref: ∞.∞.∞</text>
+    </g>
+    
+    <!-- Tab -->
+    <rect x="10" y="-15" width="8" height="5" fill="#daa520"/>
+    
+    <!-- Slight hover animation -->
+    <animateTransform attributeName="transform" type="translate" values="0,0;0,-2;0,0" dur="2s" repeatCount="indefinite"/>
+  </g>
+</svg>

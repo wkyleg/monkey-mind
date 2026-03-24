@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 45">
+  <!-- Baby Monkey - Small fast swarm -->
+  <g transform="translate(20,22)">
+    <!-- Body -->
+    <ellipse cx="0" cy="5" rx="8" ry="10" fill="#8b6914"/>
+    
+    <!-- Head (proportionally larger) -->
+    <circle cx="0" cy="-8" r="10" fill="#a07828"/>
+    
+    <!-- Big ears -->
+    <circle cx="-10" cy="-10" r="5" fill="#c9a227"/>
+    <circle cx="10" cy="-10" r="5" fill="#c9a227"/>
+    <circle cx="-10" cy="-10" r="3" fill="#e8d4b8"/>
+    <circle cx="10" cy="-10" r="3" fill="#e8d4b8"/>
+    
+    <!-- Big cute eyes -->
+    <circle cx="-4" cy="-10" r="4" fill="#ffffff"/>
+    <circle cx="4" cy="-10" r="4" fill="#ffffff"/>
+    <circle cx="-4" cy="-10" r="2" fill="#4a2a1a"/>
+    <circle cx="4" cy="-10" r="2" fill="#4a2a1a"/>
+    <circle cx="-3" cy="-11" r="1" fill="#ffffff"/>
+    <circle cx="5" cy="-11" r="1" fill="#ffffff"/>
+    
+    <!-- Small snout -->
+    <ellipse cx="0" cy="-4" rx="4" ry="3" fill="#e8d4b8"/>
+    <ellipse cx="0" cy="-5" rx="2" ry="1" fill="#4a2a1a"/>
+    
+    <!-- Small limbs -->
+    <g fill="#8b6914">
+      <ellipse cx="-8" cy="8" rx="4" ry="3"/>
+      <ellipse cx="8" cy="8" rx="4" ry="3"/>
+    </g>
+    
+    <!-- Curled tail -->
+    <path d="M0,15 Q8,18 5,22 Q2,25 0,22" stroke="#8b6914" stroke-width="3" fill="none"/>
+  </g>
+</svg>

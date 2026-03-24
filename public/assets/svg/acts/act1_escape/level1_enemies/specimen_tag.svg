@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="tagGlow">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Tag body -->
+  <polygon points="30,5 50,20 50,50 10,50 10,20" fill="#1a1a2e" stroke="#00ffaa" stroke-width="2"/>
+  
+  <!-- Hole for string -->
+  <circle cx="30" cy="12" r="3" fill="#0a0a15" stroke="#00ffaa" stroke-width="1"/>
+  
+  <!-- Barcode -->
+  <g fill="#00ffaa" opacity="0.8">
+    <rect x="15" y="25" width="2" height="15"/>
+    <rect x="19" y="25" width="1" height="15"/>
+    <rect x="22" y="25" width="3" height="15"/>
+    <rect x="27" y="25" width="1" height="15"/>
+    <rect x="30" y="25" width="2" height="15"/>
+    <rect x="34" y="25" width="1" height="15"/>
+    <rect x="37" y="25" width="3" height="15"/>
+    <rect x="42" y="25" width="2" height="15"/>
+  </g>
+  
+  <!-- ID text -->
+  <text x="30" y="50" fill="#00ffaa" font-family="monospace" font-size="8" text-anchor="middle" filter="url(#tagGlow)">M-47</text>
+  
+  <!-- Floating particles -->
+  <g fill="#00ffaa" opacity="0.5">
+    <circle cx="5" cy="30" r="1.5"/>
+    <circle cx="55" cy="25" r="1"/>
+    <circle cx="8" cy="55" r="1"/>
+    <circle cx="52" cy="52" r="1.5"/>
+  </g>
+</svg>

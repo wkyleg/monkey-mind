@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#0a1a0a"/>
+  <g fill="#00ff00" opacity="0.2" font-size="12">
+    <text x="50" y="50">01100101</text><text x="150" y="100">10110010</text>
+    <text x="300" y="80">00101101</text><text x="450" y="120">11010011</text>
+    <text x="600" y="60">01011010</text><text x="700" y="110">10101010</text>
+  </g>
+</svg>

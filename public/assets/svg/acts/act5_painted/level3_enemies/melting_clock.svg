@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="meltFilter"><feGaussianBlur stdDeviation="1"/></filter></defs>
+  <ellipse cx="30" cy="30" rx="18" ry="12" fill="#ccaa66" stroke="#aa8844" stroke-width="2"/>
+  <path d="M 30 42 Q 32 50 28 55" stroke="#aa8844" stroke-width="3" fill="none"/>
+  <circle cx="30" cy="28" r="10" fill="#ffffee" stroke="#ccccaa" stroke-width="1"/>
+  <line x1="30" y1="28" x2="30" y2="22" stroke="#333333" stroke-width="2"/>
+  <line x1="30" y1="28" x2="36" y2="30" stroke="#333333" stroke-width="1"/>
+</svg>

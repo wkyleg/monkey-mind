@@ -1,0 +1,99 @@
+{
+  "id": "act1_level4_salem_accusation",
+  "act": 1,
+  "index": 4,
+  "title": "Salem Accusation",
+  "subtitle": "The mob grows with each accusation.",
+  "themeTags": ["mob", "accusation", "hysteria"],
+  "ruleCard": {
+    "icon": "mob",
+    "hint": "Each kill spawns two more. The mob meter rises. Survive the hysteria.",
+    "mechanic": "sequence_kill",
+    "params": { "mobGrowth": 2, "maxMob": 20 }
+  },
+  "enemyDeck": [
+    { "archetype": "swarm", "modifiers": [], "weight": 6 },
+    { "archetype": "splitter", "modifiers": [], "weight": 3 },
+    { "archetype": "chaser", "modifiers": ["apophenic"], "weight": 1 }
+  ],
+  "levelEnemies": {
+    "accuser": {
+      "visualId": "accuser",
+      "dialogue": {
+        "spawn": [
+          "WITCH!",
+          "I accuse thee!",
+          "The devil's mark!",
+          "Confess your sins!",
+          "Burn the heretic!"
+        ],
+        "death": [
+          "Perhaps... I was wrong...",
+          "The evidence... unclear...",
+          "My testimony... false...",
+          "Who... accuses me now...",
+          "The pyre... awaits us all..."
+        ]
+      }
+    },
+    "pyre_flame": {
+      "visualId": "pyre_flame",
+      "dialogue": {
+        "spawn": [
+          "BURN!",
+          "Purify! Purify!",
+          "The flames judge!",
+          "No escape from fire!",
+          "Light consumes!"
+        ],
+        "death": [
+          "Ash... to ash...",
+          "The fire... dies...",
+          "Smoke... clears...",
+          "Embers... fade...",
+          "Cold... at last..."
+        ]
+      }
+    },
+    "hysteria": {
+      "visualId": "hysteria",
+      "dialogue": {
+        "spawn": [
+          "AAAAAHHH!",
+          "They're everywhere!",
+          "Mass panic!",
+          "Run! RUN!",
+          "THE END IS NIGH!"
+        ],
+        "death": [
+          "It's... over...",
+          "Calm... returns...",
+          "Was it... real...",
+          "The fever... breaks...",
+          "Sanity... restored..."
+        ]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "accusation_zone", "lanes": [2, 4], "timing": 8000, "damage": 1, "visual": "pointing_hands" }
+  ],
+  "bgLayers": [
+    { "svgId": "trial", "parallaxSpeed": 0.1, "opacity": 0.4 },
+    { "svgId": "accusation", "parallaxSpeed": 0.3, "opacity": 0.5 },
+    { "svgId": "flames", "parallaxSpeed": 0.5, "opacity": 0.3 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The mob grows with each accusation.",
+    "codexSnippet": "In Salem, to be accused was to be guilty. To deny was proof of guilt. The only escape was confession - which was also guilt.",
+    "radioWhisper": "Caller swears the neighbors are watching. All of them. Even the new ones."
+  },
+  "musicSeed": {
+    "seed": "salem_004",
+    "mode": "phrygian",
+    "tempoRange": [120, 140],
+    "intensity": 0.75
+  },
+  "duration": 120,
+  "unlockCondition": "act1_level3_complete"
+}

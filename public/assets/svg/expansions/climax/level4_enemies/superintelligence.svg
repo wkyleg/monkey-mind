@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="siGlow"><feGaussianBlur stdDeviation="4"/></filter></defs>
+  <circle cx="30" cy="30" r="20" fill="#2a4a5a" stroke="#4a8aaa" stroke-width="2"/>
+  <circle cx="30" cy="30" r="10" fill="#00ffff" opacity="0.5" filter="url(#siGlow)"/>
+  <circle cx="30" cy="30" r="5" fill="#ffffff"/>
+</svg>

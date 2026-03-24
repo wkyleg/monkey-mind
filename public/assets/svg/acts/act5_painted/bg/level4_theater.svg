@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><linearGradient id="theaterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" style="stop-color:#2a2a3a;stop-opacity:1"/>
+    <stop offset="100%" style="stop-color:#1a1a2a;stop-opacity:1"/>
+  </linearGradient></defs>
+  <rect width="800" height="600" fill="url(#theaterGrad)"/>
+  <rect x="100" y="400" width="600" height="200" fill="#3a3a4a" opacity="0.5"/>
+  <polygon points="100,400 400,200 700,400" fill="#4a4a5a" opacity="0.4"/>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="burnGlow"><feGaussianBlur stdDeviation="2"/></filter></defs>
+  <ellipse cx="30" cy="45" rx="12" ry="10" fill="#cc9944" stroke="#aa7722" stroke-width="2"/>
+  <rect x="26" y="15" width="8" height="30" fill="#cc9944" stroke="#aa7722" stroke-width="1"/>
+  <ellipse cx="30" cy="10" rx="8" ry="6" fill="#cc9944" stroke="#aa7722" stroke-width="1"/>
+  <polygon points="25,8 27,0 29,8" fill="#aa7722"/>
+  <polygon points="31,8 33,0 35,8" fill="#aa7722"/>
+  <polygon points="26,30 24,35 28,35" fill="#ff6600" filter="url(#burnGlow)"/>
+  <polygon points="34,25 32,30 36,30" fill="#ff6600" filter="url(#burnGlow)"/>
+</svg>

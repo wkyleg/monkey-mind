@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Circuit board patterns -->
+  <g stroke="#00ff00" stroke-width="2" fill="none" opacity="0.25">
+    <!-- Horizontal traces -->
+    <path d="M0,50 L100,50 L100,80 L200,80 L200,50 L300,50"/>
+    <path d="M100,150 L200,150 L200,180 L350,180"/>
+    <path d="M50,250 L150,250 L150,280 L250,280 L250,250 L400,250"/>
+    <path d="M0,350 L80,350 L80,380 L180,380 L180,350 L280,350 L280,380 L400,380"/>
+    <path d="M100,450 L180,450 L180,480 L280,480 L280,450 L350,450"/>
+    <path d="M0,550 L120,550 L120,520 L220,520 L220,550 L340,550"/>
+    
+    <!-- Vertical traces -->
+    <path d="M80,0 L80,100 L110,100 L110,200"/>
+    <path d="M200,100 L200,200 L230,200 L230,300"/>
+    <path d="M320,0 L320,150 L290,150 L290,250"/>
+    <path d="M150,300 L150,400 L180,400 L180,500"/>
+    <path d="M350,350 L350,450 L320,450 L320,550"/>
+    
+    <!-- Connection nodes -->
+    <g fill="#00ff00">
+      <circle cx="100" cy="50" r="4"/>
+      <circle cx="200" cy="80" r="4"/>
+      <circle cx="200" cy="150" r="4"/>
+      <circle cx="150" cy="250" r="4"/>
+      <circle cx="250" cy="280" r="4"/>
+      <circle cx="180" cy="380" r="4"/>
+      <circle cx="280" cy="350" r="4"/>
+      <circle cx="180" cy="480" r="4"/>
+      <circle cx="220" cy="520" r="4"/>
+    </g>
+    
+    <!-- IC chips -->
+    <rect x="60" y="100" width="40" height="20" stroke="#00ff00" fill="#001100"/>
+    <rect x="250" y="200" width="50" height="30" stroke="#00ff00" fill="#001100"/>
+    <rect x="100" y="400" width="60" height="25" stroke="#00ff00" fill="#001100"/>
+  </g>
+</svg>

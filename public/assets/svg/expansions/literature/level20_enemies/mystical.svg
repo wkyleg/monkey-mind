@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><defs><filter id="mysticalGlow"><feGaussianBlur stdDeviation="5"/></filter></defs><circle cx="30" cy="30" r="20" fill="#8888cc" opacity="0.3" filter="url(#mysticalGlow)"/><text x="20" y="35" fill="#ffffff" font-size="12">...</text></svg>

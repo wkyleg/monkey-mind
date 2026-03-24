@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="accuseGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Pointing hand shape -->
+  <g fill="#2a2a3e" stroke="#ff6666" stroke-width="2">
+    <polygon points="10,30 35,25 35,35"/>
+    <rect x="35" y="20" width="15" height="20" rx="3"/>
+  </g>
+  
+  <!-- Accusatory text bubble -->
+  <g transform="translate(25, 5)">
+    <rect x="0" y="0" width="30" height="15" rx="3" fill="#1a1a2e" stroke="#ff6666" stroke-width="1"/>
+    <text x="15" y="11" fill="#ff6666" font-family="monospace" font-size="7" text-anchor="middle" filter="url(#accuseGlow)">YOU!</text>
+    <polygon points="5,15 10,20 15,15" fill="#1a1a2e" stroke="#ff6666" stroke-width="1"/>
+  </g>
+  
+  <!-- Energy particles -->
+  <g fill="#ff6666" opacity="0.6">
+    <circle cx="5" cy="35" r="2"/>
+    <circle cx="8" cy="25" r="1.5"/>
+    <circle cx="3" cy="45" r="1"/>
+  </g>
+</svg>

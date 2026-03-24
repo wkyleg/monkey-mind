@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Kafkaesque bureaucratic nightmare -->
+  <defs>
+    <pattern id="kafkaPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="#1a1a1a"/>
+      <rect x="0" y="0" width="38" height="38" fill="none" stroke="#3a2a1a" stroke-width="1"/>
+      <text x="20" y="25" font-family="serif" font-size="8" fill="#4a3a2a" text-anchor="middle">§</text>
+    </pattern>
+  </defs>
+  
+  <rect width="400" height="600" fill="url(#kafkaPattern)" opacity="0.4"/>
+  
+  <!-- Filing cabinets receding into infinity -->
+  <g opacity="0.3" fill="#2d2d2d">
+    <rect x="20" y="100" width="50" height="400"/>
+    <rect x="80" y="150" width="40" height="350"/>
+    <rect x="130" y="200" width="35" height="300"/>
+    <rect x="240" y="200" width="35" height="300"/>
+    <rect x="285" y="150" width="40" height="350"/>
+    <rect x="335" y="100" width="50" height="400"/>
+  </g>
+  
+  <!-- Endless corridor perspective lines -->
+  <g stroke="#4a3a2a" stroke-width="1" opacity="0.5">
+    <line x1="0" y1="0" x2="200" y2="300"/>
+    <line x1="400" y1="0" x2="200" y2="300"/>
+    <line x1="0" y1="100" x2="200" y2="300"/>
+    <line x1="400" y1="100" x2="200" y2="300"/>
+    <line x1="0" y1="600" x2="200" y2="300"/>
+    <line x1="400" y1="600" x2="200" y2="300"/>
+  </g>
+</svg>

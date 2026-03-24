@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs><filter id="divineLightGlow"><feGaussianBlur stdDeviation="40"/></filter></defs><circle cx="400" cy="100" r="100" fill="#ffffff" opacity="0.1" filter="url(#divineLightGlow)"/></svg>

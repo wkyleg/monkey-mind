@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <radialGradient id="lotusGlow" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#ff88cc"/>
+      <stop offset="100%" style="stop-color:#ff44aa;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Sacred lotus (phases in and out) -->
+  <g transform="translate(30,30)">
+    <!-- Petals (multiple layers) -->
+    <g fill="#ff66aa" opacity="0.8">
+      <!-- Outer petals -->
+      <ellipse cx="0" cy="-15" rx="6" ry="12"/>
+      <ellipse cx="13" cy="-8" rx="6" ry="12" transform="rotate(30 13 -8)"/>
+      <ellipse cx="15" cy="5" rx="6" ry="12" transform="rotate(60 15 5)"/>
+      <ellipse cx="8" cy="13" rx="6" ry="12" transform="rotate(90 8 13)"/>
+      <ellipse cx="-8" cy="13" rx="6" ry="12" transform="rotate(-90 -8 13)"/>
+      <ellipse cx="-15" cy="5" rx="6" ry="12" transform="rotate(-60 -15 5)"/>
+      <ellipse cx="-13" cy="-8" rx="6" ry="12" transform="rotate(-30 -13 -8)"/>
+    </g>
+    
+    <!-- Inner petals -->
+    <g fill="#ff88cc" opacity="0.9">
+      <ellipse cx="0" cy="-10" rx="4" ry="8"/>
+      <ellipse cx="9" cy="-5" rx="4" ry="8" transform="rotate(45 9 -5)"/>
+      <ellipse cx="9" cy="5" rx="4" ry="8" transform="rotate(90 9 5)"/>
+      <ellipse cx="0" cy="10" rx="4" ry="8" transform="rotate(180)"/>
+      <ellipse cx="-9" cy="5" rx="4" ry="8" transform="rotate(-90 -9 5)"/>
+      <ellipse cx="-9" cy="-5" rx="4" ry="8" transform="rotate(-45 -9 -5)"/>
+    </g>
+    
+    <!-- Center -->
+    <circle cx="0" cy="0" r="5" fill="url(#lotusGlow)"/>
+    <circle cx="0" cy="0" r="3" fill="#ffcc00"/>
+    
+    <!-- Phase effect (fading in/out) -->
+    <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
+  </g>
+</svg>

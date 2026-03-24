@@ -1,0 +1,74 @@
+{
+  "id": "paradox_engine",
+  "name": "Paradox Engine",
+  "title": "The Machine of Contradiction",
+  "hp": 180,
+  "phases": [
+    {
+      "hpThreshold": 1.0,
+      "pattern": "oscillate",
+      "speedMod": 0.8,
+      "attacks": [
+        { "type": "binary_shot", "cooldown": 2500, "damage": 1, "params": { "state": "alternating", "count": 4 } },
+        { "type": "state_flip", "cooldown": 6000, "damage": 0, "params": { "invulnerableDuring": true } }
+      ]
+    },
+    {
+      "hpThreshold": 0.75,
+      "pattern": "superposition",
+      "speedMod": 0.9,
+      "attacks": [
+        { "type": "quantum_spread", "cooldown": 2200, "damage": 1, "params": { "positions": 3 } },
+        { "type": "logic_bomb", "cooldown": 8000, "damage": 2, "params": { "radius": 100 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.5,
+      "pattern": "contradiction",
+      "speedMod": 1.0,
+      "attacks": [
+        { "type": "paradox_beam", "cooldown": 2000, "damage": 2, "params": { "width": 80, "both_states": true } },
+        { "type": "recursive_summon", "cooldown": 10000, "damage": 0, "params": { "enemy": "phaser", "count": 4 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.25,
+      "pattern": "collapse",
+      "speedMod": 1.2,
+      "attacks": [
+        { "type": "observation_attack", "cooldown": 1800, "damage": 2, "params": { "collapseOnHit": true } },
+        { "type": "entanglement", "cooldown": 4000, "damage": 1, "params": { "mirrorDamage": true } }
+      ]
+    },
+    {
+      "hpThreshold": 0.1,
+      "pattern": "resolution",
+      "speedMod": 0.5,
+      "attacks": [
+        { "type": "final_paradox", "cooldown": 1500, "damage": 3, "params": { "unavoidable": false, "truthWindow": 1 } },
+        { "type": "self_reference", "cooldown": 3000, "damage": 2, "params": { "loop": true } }
+      ]
+    }
+  ],
+  "visual": {
+    "type": "custom",
+    "color": "#00ffff",
+    "size": 160,
+    "glow": true
+  },
+  "codexEntry": "The Paradox Engine was built to solve the unsolvable. It succeeded - by becoming the unsolvable itself. The monkey learned that some machines are not meant to produce answers, but to embody questions.",
+  "defeatUnlocks": ["act8_signals"],
+  "defeatQuote": "THE PARADOX... RESOLVES... TRUTH AND FALSE... BECOME ONE...",
+  "spawnText": [
+    "TRUE AND FALSE",
+    "OBSERVE ME",
+    "THE ANSWER IS THE QUESTION",
+    "I AM BOTH"
+  ],
+  "deathText": [
+    "CONTRADICTION... RESOLVED...",
+    "THE LOOP... BREAKS...",
+    "ONE STATE... REMAINS...",
+    "THE ENGINE... STOPS..."
+  ]
+}

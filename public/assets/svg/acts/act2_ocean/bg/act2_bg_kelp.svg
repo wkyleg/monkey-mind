@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <defs>
+    <linearGradient id="kelpGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#002211"/>
+      <stop offset="100%" style="stop-color:#004422"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Kelp forest strands -->
+  <g opacity="0.4">
+    <!-- Left kelp -->
+    <path d="M30,600 Q25,500 35,400 Q30,300 40,200 Q35,100 45,0" 
+          stroke="url(#kelpGrad)" stroke-width="8" fill="none">
+      <animate attributeName="d" 
+               values="M30,600 Q25,500 35,400 Q30,300 40,200 Q35,100 45,0;
+                       M30,600 Q35,500 25,400 Q35,300 25,200 Q40,100 30,0;
+                       M30,600 Q25,500 35,400 Q30,300 40,200 Q35,100 45,0" 
+               dur="6s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Center-left kelp -->
+    <path d="M100,600 Q95,450 110,300 Q100,150 115,0" 
+          stroke="#003322" stroke-width="6" fill="none">
+      <animate attributeName="d" 
+               values="M100,600 Q95,450 110,300 Q100,150 115,0;
+                       M100,600 Q110,450 95,300 Q110,150 100,0;
+                       M100,600 Q95,450 110,300 Q100,150 115,0" 
+               dur="5s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Center kelp -->
+    <path d="M200,600 Q190,400 210,200 Q195,100 215,0" 
+          stroke="#004433" stroke-width="10" fill="none">
+      <animate attributeName="d" 
+               values="M200,600 Q190,400 210,200 Q195,100 215,0;
+                       M200,600 Q215,400 185,200 Q210,100 190,0;
+                       M200,600 Q190,400 210,200 Q195,100 215,0" 
+               dur="7s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Right kelp -->
+    <path d="M320,600 Q310,480 330,360 Q315,200 340,0" 
+          stroke="#003311" stroke-width="7" fill="none">
+      <animate attributeName="d" 
+               values="M320,600 Q310,480 330,360 Q315,200 340,0;
+                       M320,600 Q335,480 305,360 Q330,200 310,0;
+                       M320,600 Q310,480 330,360 Q315,200 340,0" 
+               dur="5.5s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Far right kelp -->
+    <path d="M380,600 Q370,500 390,400 Q375,250 395,0" 
+          stroke="#002211" stroke-width="5" fill="none">
+      <animate attributeName="d" 
+               values="M380,600 Q370,500 390,400 Q375,250 395,0;
+                       M380,600 Q395,500 365,400 Q390,250 370,0;
+                       M380,600 Q370,500 390,400 Q375,250 395,0" 
+               dur="6.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Kelp leaf details -->
+  <g fill="#005533" opacity="0.3">
+    <ellipse cx="35" cy="350" rx="15" ry="5" transform="rotate(-15 35 350)"/>
+    <ellipse cx="110" cy="250" rx="12" ry="4" transform="rotate(10 110 250)"/>
+    <ellipse cx="205" cy="180" rx="18" ry="6" transform="rotate(-5 205 180)"/>
+    <ellipse cx="325" cy="300" rx="14" ry="5" transform="rotate(20 325 300)"/>
+  </g>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Conspiracy board with strings -->
+  <rect width="400" height="600" fill="#1a1a1a"/>
+  
+  <!-- Cork board texture -->
+  <rect width="400" height="600" fill="#8b6914" opacity="0.2"/>
+  
+  <!-- Photos/documents pinned -->
+  <g opacity="0.5">
+    <rect x="50" y="80" width="60" height="80" fill="#ddd" transform="rotate(-5 80 120)"/>
+    <rect x="280" y="100" width="70" height="90" fill="#eee" transform="rotate(8 315 145)"/>
+    <rect x="100" y="280" width="50" height="70" fill="#ddd" transform="rotate(-3 125 315)"/>
+    <rect x="250" y="350" width="60" height="80" fill="#eee" transform="rotate(5 280 390)"/>
+    <rect x="150" y="480" width="55" height="75" fill="#ddd" transform="rotate(-7 178 518)"/>
+  </g>
+  
+  <!-- Red strings connecting -->
+  <g stroke="#ff0000" stroke-width="2" fill="none" opacity="0.6">
+    <line x1="80" y1="120" x2="315" y2="145"/>
+    <line x1="315" y1="145" x2="125" y2="315"/>
+    <line x1="125" y1="315" x2="280" y2="390"/>
+    <line x1="280" y1="390" x2="178" y2="518"/>
+    <line x1="80" y1="120" x2="125" y2="315"/>
+    <line x1="315" y1="145" x2="280" y2="390"/>
+  </g>
+  
+  <!-- Push pins -->
+  <g fill="#ff0000">
+    <circle cx="80" cy="120" r="5"/>
+    <circle cx="315" cy="145" r="5"/>
+    <circle cx="125" cy="315" r="5"/>
+    <circle cx="280" cy="390" r="5"/>
+    <circle cx="178" cy="518" r="5"/>
+  </g>
+  
+  <!-- All-seeing eye -->
+  <g transform="translate(200,200)" opacity="0.3">
+    <polygon points="0,-40 -35,20 35,20" fill="none" stroke="#ffd700" stroke-width="2"/>
+    <circle cx="0" cy="0" r="12" fill="none" stroke="#ffd700" stroke-width="2"/>
+    <circle cx="0" cy="0" r="5" fill="#ffd700"/>
+  </g>
+</svg>

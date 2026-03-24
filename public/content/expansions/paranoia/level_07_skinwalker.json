@@ -1,0 +1,56 @@
+{
+  "id": "paranoia_level7_skinwalker",
+  "expansion": "paranoia",
+  "index": 7,
+  "title": "Skinwalker",
+  "subtitle": "The Navajo speak of those who walk in animal skins.",
+  "themeTags": ["skinwalker", "navajo", "shapeshifter", "taboo"],
+  "ruleCard": {
+    "icon": "wolf",
+    "hint": "Don't say their name. They might hear you.",
+    "mechanic": "name_taboo",
+    "params": { "attractionRadius": 150, "silenceBonus": 80 }
+  },
+  "enemyDeck": [
+    { "archetype": "mimic", "modifiers": ["shapeshifter"], "weight": 5, "visualId": "enemy_skinwalker" },
+    { "archetype": "chaser", "modifiers": [], "weight": 3, "visualId": "enemy_coyote" },
+    { "archetype": "phaser", "modifiers": [], "weight": 2, "visualId": "enemy_doppelganger" }
+  ],
+  "levelEnemies": {
+    "skinwalker_witch": {
+      "visualId": "skinwalker_witch",
+      "dialogue": {
+        "spawn": ["You spoke the name!", "I wear many faces!", "The taboo is broken!", "Animal or human?", "Navajo witchcraft!"],
+        "death": ["Name... unspoken...", "One face... only...", "Taboo... respected...", "Human... always...", "Witchcraft... ended..."]
+      }
+    },
+    "animal_mimic": {
+      "visualId": "animal_mimic",
+      "dialogue": {
+        "spawn": ["Is that your dog?", "Something's wrong with its legs!", "It's trying to speak!", "The eyes are human!", "Don't let it in!"],
+        "death": ["My dog...", "Legs... normal...", "Silent...", "Animal eyes...", "Kept... out..."]
+      }
+    },
+    "familiar_face": {
+      "visualId": "familiar_face",
+      "dialogue": {
+        "spawn": ["It's me! Let me in!", "Why won't you open the door?", "I'm your family!", "Don't you recognize me?", "The voice is almost right!"],
+        "death": ["Not... you...", "Door... closed...", "Family... inside...", "Recognized... imposter...", "Voice... wrong..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "shapeshifter_presence", "params": { "mimicryAccuracy": 0.9, "detectionBonus": 100 } }],
+  "bgLayers": [
+    { "svgId": "navajo_desert", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "mesa", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "night_sky", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Don't say their name. They might hear you.",
+    "codexSnippet": "The Navajo tradition speaks of witches who wear animal skins and mimic voices. The monkey ventures into forbidden territory and learns that some legends are taboo for a reason.",
+    "radioWhisper": "It looked like my grandmother. But the way it moved..."
+  },
+  "musicSeed": { "seed": "skinwalker_007", "mode": "locrian", "tempoRange": [45, 60], "intensity": 0.6 },
+  "duration": 150,
+  "unlockCondition": "paranoia_level6_complete"
+}

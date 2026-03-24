@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <defs>
+    <radialGradient id="bubbleGrad" cx="30%" cy="30%">
+      <stop offset="0%" style="stop-color:#88ccff;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#4488cc;stop-opacity:0.2"/>
+    </radialGradient>
+    <filter id="bubbleBlur">
+      <feGaussianBlur stdDeviation="1"/>
+    </filter>
+  </defs>
+  
+  <!-- Rising bubbles -->
+  <g filter="url(#bubbleBlur)">
+    <!-- Column 1 -->
+    <circle cx="50" cy="550" r="8" fill="url(#bubbleGrad)" stroke="#66aacc" stroke-width="0.5">
+      <animate attributeName="cy" values="600;-20" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="50;60;45;55;50" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="55" cy="400" r="5" fill="url(#bubbleGrad)" stroke="#66aacc" stroke-width="0.5">
+      <animate attributeName="cy" values="600;-20" dur="6s" repeatCount="indefinite" begin="1s"/>
+      <animate attributeName="cx" values="55;48;58;50;55" dur="6s" repeatCount="indefinite" begin="1s"/>
+    </circle>
+    
+    <!-- Column 2 -->
+    <circle cx="120" cy="500" r="10" fill="url(#bubbleGrad)" stroke="#66aacc" stroke-width="0.5">
+      <animate attributeName="cy" values="620;-30" dur="10s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="120;130;115;125;120" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="130" cy="300" r="6" fill="url(#bubbleGrad)" stroke="#66aacc" stroke-width="0.5">
+      <animate attributeName="cy" values="600;-20" dur="7s" repeatCount="indefinite" begin="2s"/>
+    </circle>
+    
+    <!-- Column 3 -->
+    <circle cx="200" cy="580" r="12" fill="url(#bubbleGrad)" stroke="#66aacc" stroke-width="0.5">
+      <animate attributeName="cy" values="630;-40" dur="12s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="200;215;190;205;200" dur="12s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="190" cy="350" r="4" fill="url(#bubbleGrad)" stroke="#66aacc" stroke-width="0.5">
+      <animate attributeName="cy" values="600;-20" dur="5s" repeatCount="indefinite" begin="3s"/>
+    </circle>
+    
+    <!-- Column 4 -->
+    <circle cx="280" cy="520" r="7" fill="url(#bubbleGrad)" stroke="#66aacc" stroke-width="0.5">
+      <animate attributeName="cy" values="600;-20" dur="9s" repeatCount="indefinite" begin="1.5s"/>
+      <animate attributeName="cx" values="280;270;290;275;280" dur="9s" repeatCount="indefinite" begin="1.5s"/>
+    </circle>
+    <circle cx="290" cy="200" r="9" fill="url(#bubbleGrad)" stroke="#66aacc" stroke-width="0.5">
+      <animate attributeName="cy" values="620;-30" dur="11s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Column 5 -->
+    <circle cx="350" cy="480" r="6" fill="url(#bubbleGrad)" stroke="#66aacc" stroke-width="0.5">
+      <animate attributeName="cy" values="600;-20" dur="7.5s" repeatCount="indefinite" begin="2.5s"/>
+      <animate attributeName="cx" values="350;340;360;345;350" dur="7.5s" repeatCount="indefinite" begin="2.5s"/>
+    </circle>
+    <circle cx="360" cy="150" r="11" fill="url(#bubbleGrad)" stroke="#66aacc" stroke-width="0.5">
+      <animate attributeName="cy" values="620;-30" dur="13s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

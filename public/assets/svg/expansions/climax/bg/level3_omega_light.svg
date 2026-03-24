@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="omegaGlow"><feGaussianBlur stdDeviation="20"/></filter></defs>
+  <circle cx="400" cy="300" r="80" fill="#88aacc" opacity="0.2" filter="url(#omegaGlow)"/>
+  <text x="370" y="320" fill="#aaccee" font-size="60" opacity="0.3">�</text>
+</svg>

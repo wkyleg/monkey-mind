@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="raiderGlow">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <ellipse cx="30" cy="38" rx="12" ry="16" fill="#3a3a3a" stroke="#666666" stroke-width="2"/>
+  <circle cx="30" cy="18" r="9" fill="#3a3a3a" stroke="#666666" stroke-width="2"/>
+  <polygon points="20,10 30,0 40,10 30,15" fill="#4a4a4a" stroke="#666666" stroke-width="1"/>
+  <circle cx="25" cy="17" r="3" fill="#ffcc00" filter="url(#raiderGlow)"/>
+  <circle cx="35" cy="17" r="3" fill="#ffcc00" filter="url(#raiderGlow)"/>
+  <path d="M 45 25 L 58 20" stroke="#8a7a6a" stroke-width="2"/>
+  <polygon points="58,20 60,15 55,22" fill="#aaaaaa"/>
+  <path d="M 25 26 L 35 26" stroke="#2a2a2a" stroke-width="2"/>
+</svg>

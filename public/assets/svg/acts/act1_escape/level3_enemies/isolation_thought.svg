@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="thoughtGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Thought bubble shape -->
+  <circle cx="30" cy="25" r="18" fill="#1a2030" stroke="#5566aa" stroke-width="2"/>
+  <circle cx="20" cy="45" r="6" fill="#1a2030" stroke="#5566aa" stroke-width="1.5"/>
+  <circle cx="12" cy="52" r="3" fill="#1a2030" stroke="#5566aa" stroke-width="1"/>
+  
+  <!-- Swirling thoughts inside -->
+  <g stroke="#5566aa" stroke-width="1" fill="none" opacity="0.6">
+    <circle cx="30" cy="25" r="10"/>
+    <circle cx="30" cy="25" r="6"/>
+    <path d="M 25 20 Q 30 15 35 20 Q 40 25 35 30 Q 30 35 25 30 Q 20 25 25 20"/>
+  </g>
+  
+  <!-- Question mark -->
+  <text x="30" y="30" fill="#5566aa" font-family="serif" font-size="14" text-anchor="middle" filter="url(#thoughtGlow)">?</text>
+</svg>

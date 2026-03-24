@@ -1,10 +1,10 @@
 /**
  * Vitest global test setup
- * 
+ *
  * This file runs before each test file to set up the testing environment.
  */
 
-import { vi, beforeEach } from 'vitest';
+import { beforeEach, vi } from 'vitest';
 
 // Mock Canvas 2D context for rendering tests
 class MockCanvasRenderingContext2D {
@@ -20,7 +20,7 @@ class MockCanvasRenderingContext2D {
   shadowBlur = 0;
   shadowOffsetX = 0;
   shadowOffsetY = 0;
-  
+
   save = vi.fn();
   restore = vi.fn();
   fillRect = vi.fn();
@@ -75,7 +75,7 @@ class MockCanvasRenderingContext2D {
 // Mock HTMLCanvasElement
 const originalGetContext = HTMLCanvasElement.prototype.getContext;
 // @ts-expect-error - Mocking getContext with simplified signature
-HTMLCanvasElement.prototype.getContext = function(contextId: string) {
+HTMLCanvasElement.prototype.getContext = function (contextId: string) {
   if (contextId === '2d') {
     return new MockCanvasRenderingContext2D() as unknown as CanvasRenderingContext2D;
   }
@@ -88,7 +88,7 @@ class MockAudioContext {
   destination = { maxChannelCount: 2 };
   sampleRate = 44100;
   state = 'running' as AudioContextState;
-  
+
   createOscillator = vi.fn(() => ({
     type: 'sine',
     frequency: { value: 440, setValueAtTime: vi.fn(), exponentialRampToValueAtTime: vi.fn() },
@@ -98,13 +98,18 @@ class MockAudioContext {
     stop: vi.fn(),
     disconnect: vi.fn(),
   }));
-  
+
   createGain = vi.fn(() => ({
-    gain: { value: 1, setValueAtTime: vi.fn(), linearRampToValueAtTime: vi.fn(), exponentialRampToValueAtTime: vi.fn() },
+    gain: {
+      value: 1,
+      setValueAtTime: vi.fn(),
+      linearRampToValueAtTime: vi.fn(),
+      exponentialRampToValueAtTime: vi.fn(),
+    },
     connect: vi.fn(),
     disconnect: vi.fn(),
   }));
-  
+
   createBiquadFilter = vi.fn(() => ({
     type: 'lowpass',
     frequency: { value: 1000, setValueAtTime: vi.fn(), exponentialRampToValueAtTime: vi.fn() },
@@ -112,7 +117,7 @@ class MockAudioContext {
     connect: vi.fn(),
     disconnect: vi.fn(),
   }));
-  
+
   createDynamicsCompressor = vi.fn(() => ({
     threshold: { value: -24 },
     knee: { value: 30 },
@@ -122,14 +127,14 @@ class MockAudioContext {
     connect: vi.fn(),
     disconnect: vi.fn(),
   }));
-  
+
   createWaveShaper = vi.fn(() => ({
     curve: null,
     oversample: 'none',
     connect: vi.fn(),
     disconnect: vi.fn(),
   }));
-  
+
   createBufferSource = vi.fn(() => ({
     buffer: null,
     loop: false,
@@ -139,7 +144,7 @@ class MockAudioContext {
     stop: vi.fn(),
     disconnect: vi.fn(),
   }));
-  
+
   createBuffer = vi.fn((channels: number, length: number, sampleRate: number) => ({
     numberOfChannels: channels,
     length,
@@ -147,7 +152,7 @@ class MockAudioContext {
     duration: length / sampleRate,
     getChannelData: vi.fn(() => new Float32Array(length)),
   }));
-  
+
   decodeAudioData = vi.fn();
   resume = vi.fn(() => Promise.resolve());
   suspend = vi.fn(() => Promise.resolve());
@@ -206,4 +211,4 @@ beforeEach(() => {
 });
 
 // Export mocks for use in tests
-export { MockCanvasRenderingContext2D, MockAudioContext, localStorageMock };
+export { localStorageMock, MockAudioContext, MockCanvasRenderingContext2D };

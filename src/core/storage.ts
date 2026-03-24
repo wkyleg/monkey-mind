@@ -76,11 +76,11 @@ class Storage {
   private data: SaveData;
   private dirty: boolean = false;
   private autoSaveInterval: number | null = null;
-  
+
   constructor() {
     this.data = this.load();
   }
-  
+
   /**
    * Load save data from localStorage
    */
@@ -90,14 +90,14 @@ class Storage {
       if (!raw) {
         return { ...DEFAULT_SAVE };
       }
-      
+
       const parsed = JSON.parse(raw) as SaveData;
-      
+
       // Handle version migration
       if (parsed.version < CURRENT_VERSION) {
         return this.migrate(parsed);
       }
-      
+
       // Merge with defaults to handle new fields
       return this.mergeWithDefaults(parsed);
     } catch (error) {
@@ -105,24 +105,24 @@ class Storage {
       return { ...DEFAULT_SAVE };
     }
   }
-  
+
   /**
    * Migrate old save data to current version
    */
   private migrate(data: SaveData): SaveData {
-    let migrated = { ...data };
-    
+    const migrated = { ...data };
+
     // Version migrations would go here
     // Example:
     // if (migrated.version < 2) {
     //   migrated.newField = defaultValue;
     //   migrated.version = 2;
     // }
-    
+
     migrated.version = CURRENT_VERSION;
     return this.mergeWithDefaults(migrated);
   }
-  
+
   /**
    * Merge loaded data with defaults to handle new fields
    */
@@ -136,7 +136,7 @@ class Storage {
       stats: { ...DEFAULT_SAVE.stats, ...data.stats },
     };
   }
-  
+
   /**
    * Save data to localStorage
    */
@@ -149,14 +149,14 @@ class Storage {
       console.error('Failed to save data:', error);
     }
   }
-  
+
   /**
    * Mark data as dirty (needs saving)
    */
   private markDirty(): void {
     this.dirty = true;
   }
-  
+
   /**
    * Start auto-save interval
    */
@@ -168,7 +168,7 @@ class Storage {
       }
     }, intervalMs);
   }
-  
+
   /**
    * Stop auto-save interval
    */
@@ -178,7 +178,7 @@ class Storage {
       this.autoSaveInterval = null;
     }
   }
-  
+
   /**
    * Reset all save data
    */
@@ -198,31 +198,31 @@ class Storage {
     };
     this.save();
   }
-  
+
   /**
    * Get all save data
    */
   getData(): Readonly<SaveData> {
     return this.data;
   }
-  
+
   // Convenience getters/setters
-  
+
   get highestSector(): number {
     return this.data.highestSectorCompleted;
   }
-  
+
   set highestSector(value: number) {
     if (value > this.data.highestSectorCompleted) {
       this.data.highestSectorCompleted = value;
       this.markDirty();
     }
   }
-  
+
   getHighScore(mode: 'campaign' | 'endless'): number {
     return this.data.highScore[mode];
   }
-  
+
   setHighScore(mode: 'campaign' | 'endless', score: number): boolean {
     if (score > this.data.highScore[mode]) {
       this.data.highScore[mode] = score;
@@ -231,31 +231,31 @@ class Storage {
     }
     return false;
   }
-  
+
   get settings(): SaveData['settings'] {
     return this.data.settings;
   }
-  
+
   updateSettings(updates: Partial<SaveData['settings']>): void {
     this.data.settings = { ...this.data.settings, ...updates };
     this.markDirty();
   }
-  
+
   get stats(): SaveData['stats'] {
     return this.data.stats;
   }
-  
+
   incrementStat(stat: keyof SaveData['stats'], amount: number = 1): void {
     this.data.stats[stat] += amount;
     this.markDirty();
   }
-  
+
   // Unlock tracking
-  
+
   isCodexUnlocked(id: string): boolean {
     return this.data.codexUnlocked.includes(id);
   }
-  
+
   unlockCodex(id: string): boolean {
     if (!this.isCodexUnlocked(id)) {
       this.data.codexUnlocked.push(id);
@@ -264,11 +264,11 @@ class Storage {
     }
     return false;
   }
-  
+
   isAchievementUnlocked(id: string): boolean {
     return this.data.achievementsUnlocked.includes(id);
   }
-  
+
   unlockAchievement(id: string): boolean {
     if (!this.isAchievementUnlocked(id)) {
       this.data.achievementsUnlocked.push(id);
@@ -277,11 +277,11 @@ class Storage {
     }
     return false;
   }
-  
+
   isCosmeticUnlocked(id: string): boolean {
     return this.data.cosmeticsUnlocked.includes(id);
   }
-  
+
   unlockCosmetic(id: string): boolean {
     if (!this.isCosmeticUnlocked(id)) {
       this.data.cosmeticsUnlocked.push(id);
@@ -290,7 +290,7 @@ class Storage {
     }
     return false;
   }
-  
+
   /**
    * Unlock a sector (by number, 1-indexed)
    */
@@ -302,25 +302,25 @@ class Storage {
     }
     return false;
   }
-  
+
   /**
    * Check if sector is unlocked
    */
   isSectorUnlocked(sectorNum: number): boolean {
     return sectorNum <= this.data.highestSectorCompleted + 1;
   }
-  
+
   /**
    * Unlock a codex entry
    */
   unlockCodexEntry(id: string): boolean {
     return this.unlockCodex(id);
   }
-  
+
   get selectedCosmetics(): SaveData['selectedCosmetics'] {
     return this.data.selectedCosmetics;
   }
-  
+
   selectCosmetic(type: keyof SaveData['selectedCosmetics'], id: string): void {
     if (this.isCosmeticUnlocked(id) || id === 'none') {
       this.data.selectedCosmetics[type] = id;

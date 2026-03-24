@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Renaissance art gallery -->
+  <defs>
+    <linearGradient id="renaissanceWall" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b7355"/>
+      <stop offset="100%" style="stop-color:#5a4a3a"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="400" height="600" fill="url(#renaissanceWall)"/>
+  
+  <!-- Picture frames -->
+  <g stroke="#c9a227" stroke-width="4" fill="none">
+    <rect x="30" y="80" width="100" height="140"/>
+    <rect x="270" y="80" width="100" height="140"/>
+    <rect x="150" y="350" width="100" height="140"/>
+  </g>
+  
+  <!-- Frame contents (abstract Renaissance-style) -->
+  <g opacity="0.5">
+    <!-- Madonna silhouette -->
+    <ellipse cx="80" cy="130" rx="30" ry="40" fill="#3a2a1a"/>
+    <circle cx="80" cy="110" r="12" fill="#8b7355"/>
+    
+    <!-- Landscape -->
+    <rect x="275" y="85" width="90" height="130" fill="#4a6a4a"/>
+    <path d="M280,180 Q310,140 340,180 Q360,150 370,180 L370,215 L280,215 Z" fill="#3a5a3a"/>
+    
+    <!-- Portrait -->
+    <ellipse cx="200" cy="400" rx="25" ry="35" fill="#3a2a1a"/>
+    <circle cx="200" cy="380" r="15" fill="#8b7355"/>
+  </g>
+  
+  <!-- Decorative molding -->
+  <g fill="#6a5a4a">
+    <rect x="0" y="250" width="400" height="8"/>
+    <rect x="0" y="500" width="400" height="8"/>
+  </g>
+  
+  <!-- Checkered floor -->
+  <g opacity="0.3">
+    <pattern id="checkerFloor" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="#4a3a2a"/>
+      <rect width="20" height="20" fill="#3a2a1a"/>
+      <rect x="20" y="20" width="20" height="20" fill="#3a2a1a"/>
+    </pattern>
+    <rect x="0" y="520" width="400" height="80" fill="url(#checkerFloor)"/>
+  </g>
+</svg>

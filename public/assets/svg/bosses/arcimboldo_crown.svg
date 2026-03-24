@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140">
+  <defs>
+    <linearGradient id="fruit_glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6600"/>
+      <stop offset="50%" stop-color="#cc3300"/>
+      <stop offset="100%" stop-color="#661100"/>
+    </linearGradient>
+    <filter id="crown_glow">
+      <feGaussianBlur stdDeviation="2" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Face outline made of produce -->
+  <ellipse cx="60" cy="75" rx="45" ry="55" fill="#1a2a1a" stroke="#88cc44" stroke-width="2"/>
+  <!-- Fruit and vegetable face features -->
+  <!-- Apple cheeks -->
+  <circle cx="35" cy="70" r="12" fill="#cc2222"/>
+  <circle cx="85" cy="70" r="12" fill="#cc2222"/>
+  <!-- Grape eyes -->
+  <g fill="#6633aa">
+    <circle cx="40" cy="55" r="6"/>
+    <circle cx="45" cy="50" r="5"/>
+    <circle cx="50" cy="55" r="5"/>
+    <circle cx="45" cy="60" r="4"/>
+    <circle cx="80" cy="55" r="6"/>
+    <circle cx="75" cy="50" r="5"/>
+    <circle cx="70" cy="55" r="5"/>
+    <circle cx="75" cy="60" r="4"/>
+  </g>
+  <!-- Carrot nose -->
+  <polygon points="60,65 55,90 65,90" fill="#ff6600"/>
+  <ellipse cx="60" cy="65" rx="6" ry="4" fill="#ff8833"/>
+  <!-- Corn mouth -->
+  <ellipse cx="60" cy="105" rx="15" ry="8" fill="#ffcc00"/>
+  <g fill="#ffdd44">
+    <circle cx="50" cy="103" r="2"/>
+    <circle cx="55" cy="105" r="2"/>
+    <circle cx="60" cy="106" r="2"/>
+    <circle cx="65" cy="105" r="2"/>
+    <circle cx="70" cy="103" r="2"/>
+  </g>
+  <!-- Crown of leaves and flowers -->
+  <g fill="#228822">
+    <ellipse cx="30" cy="30" rx="8" ry="15" transform="rotate(-30 30 30)"/>
+    <ellipse cx="50" cy="20" rx="7" ry="14"/>
+    <ellipse cx="70" cy="20" rx="7" ry="14"/>
+    <ellipse cx="90" cy="30" rx="8" ry="15" transform="rotate(30 90 30)"/>
+  </g>
+  <!-- Flowers on crown -->
+  <circle cx="40" cy="25" r="6" fill="#ff66aa" filter="url(#crown_glow)"/>
+  <circle cx="60" cy="15" r="7" fill="#ffaa00" filter="url(#crown_glow)"/>
+  <circle cx="80" cy="25" r="6" fill="#ff66aa" filter="url(#crown_glow)"/>
+  <!-- Glowing effect on eyes -->
+  <circle cx="45" cy="55" r="8" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;0.8;0.5" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="75" cy="55" r="8" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;0.8;0.5" dur="2s" repeatCount="indefinite" begin="1s"/>
+  </circle>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 70">
+  <!-- Riot Bot - Authoritarian enforcer (chaser) -->
+  <g transform="translate(30,35)">
+    <!-- Armored body -->
+    <rect x="-15" y="-10" width="30" height="35" fill="#2a2a3a" rx="3"/>
+    
+    <!-- Chest armor plates -->
+    <g fill="#3a3a4a">
+      <rect x="-12" y="-8" width="10" height="15" rx="1"/>
+      <rect x="2" y="-8" width="10" height="15" rx="1"/>
+    </g>
+    
+    <!-- Helmet -->
+    <rect x="-14" y="-28" width="28" height="20" fill="#1a1a2a" rx="5"/>
+    
+    <!-- Visor (menacing) -->
+    <rect x="-10" y="-22" width="20" height="8" fill="#ff0000" opacity="0.8" rx="2"/>
+    <line x1="-8" y1="-18" x2="8" y2="-18" stroke="#aa0000" stroke-width="2"/>
+    
+    <!-- Shield -->
+    <g transform="translate(-22,0)">
+      <rect x="-5" y="-15" width="10" height="30" fill="#4a4a5a" rx="2"/>
+      <line x1="0" y1="-12" x2="0" y2="12" stroke="#5a5a6a" stroke-width="2"/>
+      <text x="0" y="5" fill="#ff0000" font-size="8" text-anchor="middle">!</text>
+    </g>
+    
+    <!-- Baton -->
+    <g transform="translate(18,-5) rotate(20)">
+      <rect x="-2" y="-15" width="4" height="25" fill="#3a3a3a"/>
+      <rect x="-3" y="8" width="6" height="4" fill="#5a5a5a"/>
+    </g>
+    
+    <!-- Warning lights -->
+    <circle cx="-8" cy="-28" r="3" fill="#ff0000" opacity="0.8"/>
+    <circle cx="8" cy="-28" r="3" fill="#0000ff" opacity="0.8"/>
+    
+    <!-- Leg armor -->
+    <g fill="#2a2a3a">
+      <rect x="-12" y="25" width="10" height="8" rx="1"/>
+      <rect x="2" y="25" width="10" height="8" rx="1"/>
+    </g>
+  </g>
+</svg>

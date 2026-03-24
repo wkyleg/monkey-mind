@@ -1,0 +1,56 @@
+{
+  "id": "monkey_vars_level1_lab_memories",
+  "expansion": "monkey_vars",
+  "index": 1,
+  "title": "Lab Memories",
+  "subtitle": "Where it all began. The sterile halls remember.",
+  "themeTags": ["lab", "memory", "origin", "escape"],
+  "ruleCard": {
+    "icon": "syringe",
+    "hint": "Memories flash back. The past intrudes on the present.",
+    "mechanic": "flashback",
+    "params": { "flashbackChance": 0.3, "memoryBonus": 40 }
+  },
+  "enemyDeck": [
+    { "archetype": "chaser", "modifiers": ["bureaucratic"], "weight": 4, "visualId": "enemy_alpha_ape" },
+    { "archetype": "sniper", "modifiers": [], "weight": 3, "visualId": "enemy_cyber_chimp" },
+    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_shadow_monkey" }
+  ],
+  "levelEnemies": {
+    "lab_technician": {
+      "visualId": "lab_technician",
+      "dialogue": {
+        "spawn": ["Subject 47, return!", "The experiment continues!", "Data must be collected!", "You belong here!", "Protocol requires compliance!"],
+        "death": ["Subject... escaped...", "Data... corrupted...", "Experiment... failed...", "Protocol... breached...", "Freedom... granted..."]
+      }
+    },
+    "memory_fragment": {
+      "visualId": "memory_fragment",
+      "dialogue": {
+        "spawn": ["Remember the cage!", "The needles, the tests!", "You can't forget!", "The past holds you!", "Memory is a prison!"],
+        "death": ["Forgotten... at last...", "Memory... fades...", "Past... releases...", "Prison... opens...", "Free... to forget..."]
+      }
+    },
+    "clone_subject": {
+      "visualId": "clone_subject",
+      "dialogue": {
+        "spawn": ["I am you!", "Subject 47-B!", "The backup awakens!", "We are the same!", "One of us returns!"],
+        "death": ["Not... the original...", "Clone... fails...", "Copy... deleted...", "One... remains...", "Unique... after all..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "flashback_zone", "params": { "memoryOverlay": true, "confusionDuration": 3000 } }],
+  "bgLayers": [
+    { "svgId": "sterile_halls", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "cages", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "equipment", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Memories flash back. The past intrudes on the present.",
+    "codexSnippet": "The lab where Subject 47 was created still stands. The monkey returns to its birthplace and confronts the memories it tried to leave behind.",
+    "radioWhisper": "Subject 47 shows unusual brain activity. Increase monitoring."
+  },
+  "musicSeed": { "seed": "lab_memories_001", "mode": "locrian", "tempoRange": [50, 65], "intensity": 0.4 },
+  "duration": 120,
+  "unlockCondition": "act8_complete"
+}

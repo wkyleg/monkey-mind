@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="fireBgGlow"><feGaussianBlur stdDeviation="10"/></filter></defs>
+  <g filter="url(#fireBgGlow)">
+    <polygon points="380,500 400,350 420,500" fill="#ff6600" opacity="0.5"/>
+    <polygon points="360,500 380,380 400,500" fill="#ff4400" opacity="0.4"/>
+    <polygon points="400,500 420,380 440,500" fill="#ff4400" opacity="0.4"/>
+  </g>
+</svg>

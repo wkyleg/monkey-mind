@@ -18,7 +18,15 @@
     "bosses/grey_administrator.json",
     "bosses/banana_pentagon.json",
     "bosses/archon_exe.json",
-    "bosses/mirror_self.json"
+    "bosses/mirror_self.json",
+    "bosses/the_handler.json",
+    "bosses/leviathan_of_attention.json",
+    "bosses/cyclopean_gate.json",
+    "bosses/seven_seals.json",
+    "bosses/arcimboldo_crown.json",
+    "bosses/minotaur_of_interpretation.json",
+    "bosses/paradox_engine.json",
+    "bosses/quiet_mind.json"
   ],
   "powerups": [
     "powerups/calm.json",
@@ -33,5 +41,29 @@
   ],
   "strings": [
     "strings/en.json"
+  ],
+  "acts": [
+    "acts/act1_escape/act.json",
+    "acts/act2_ocean/act.json",
+    "acts/act3_heroic/act.json",
+    "acts/act4_sacred/act.json",
+    "acts/act5_painted/act.json",
+    "acts/act6_library/act.json",
+    "acts/act7_machine/act.json",
+    "acts/act8_signals/act.json"
+  ],
+  "expansionCategories": [
+    "expansions/literature/expansion.json",
+    "expansions/myth/expansion.json",
+    "expansions/art/expansion.json",
+    "expansions/paranoia/expansion.json",
+    "expansions/state/expansion.json",
+    "expansions/science/expansion.json",
+    "expansions/lost_worlds/expansion.json",
+    "expansions/cosmic/expansion.json",
+    "expansions/monkey_vars/expansion.json",
+    "expansions/travel/expansion.json",
+    "expansions/samurai/expansion.json",
+    "expansions/climax/expansion.json"
   ]
 }

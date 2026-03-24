@@ -1,0 +1,82 @@
+{
+  "id": "quiet_mind",
+  "name": "The Quiet Mind",
+  "title": "The Final Stillness",
+  "hp": 200,
+  "phases": [
+    {
+      "hpThreshold": 1.0,
+      "pattern": "stillness",
+      "speedMod": 0.3,
+      "attacks": [
+        { "type": "silence_pulse", "cooldown": 4000, "damage": 1, "params": { "radius": 200, "damageOnMove": true } },
+        { "type": "whisper", "cooldown": 6000, "damage": 0, "params": { "distraction": true, "text": "Be still..." } }
+      ]
+    },
+    {
+      "hpThreshold": 0.8,
+      "pattern": "meditation",
+      "speedMod": 0.4,
+      "attacks": [
+        { "type": "stillness_zone", "cooldown": 3500, "damage": 1, "params": { "zones": 2, "duration": 5000 } },
+        { "type": "breath_attack", "cooldown": 5000, "damage": 1, "params": { "slow": true, "duration": 3000 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.6,
+      "pattern": "awareness",
+      "speedMod": 0.5,
+      "attacks": [
+        { "type": "gaze_beam", "cooldown": 3000, "damage": 2, "params": { "trackPlayer": true, "width": 60 } },
+        { "type": "thought_summon", "cooldown": 8000, "damage": 0, "params": { "enemy": "drifter", "count": 3, "modifier": "unseen" } }
+      ]
+    },
+    {
+      "hpThreshold": 0.4,
+      "pattern": "acceptance",
+      "speedMod": 0.6,
+      "attacks": [
+        { "type": "peace_wave", "cooldown": 2500, "damage": 2, "params": { "slowsPlayer": true, "duration": 2000 } },
+        { "type": "memory_flash", "cooldown": 6000, "damage": 1, "params": { "blindDuration": 1500 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.2,
+      "pattern": "release",
+      "speedMod": 0.4,
+      "attacks": [
+        { "type": "final_breath", "cooldown": 2000, "damage": 2, "params": { "expandingRing": true, "maxRadius": 300 } },
+        { "type": "ego_death", "cooldown": 10000, "damage": 3, "params": { "screenWide": true, "safeZone": "center" } }
+      ]
+    },
+    {
+      "hpThreshold": 0.05,
+      "pattern": "peace",
+      "speedMod": 0.1,
+      "attacks": [
+        { "type": "silence", "cooldown": 5000, "damage": 0, "params": { "healing": true, "forPlayer": true } }
+      ]
+    }
+  ],
+  "visual": {
+    "type": "custom",
+    "color": "#ffffff",
+    "size": 180,
+    "glow": true
+  },
+  "codexEntry": "The Quiet Mind is not an enemy. It is the final lesson. The monkey, having escaped the lab, traversed oceans of signals, climbed mythic mountains, walked through sacred texts, gazed upon painted worlds, navigated libraries of meaning, and questioned the very nature of logic - finally arrives at stillness. The Quiet Mind does not fight. It waits. It breathes. It accepts. To defeat it is not to destroy it, but to understand it. In the end, the cyborg monkey finds what it sought: not answers, but peace.",
+  "defeatUnlocks": ["game_complete", "endless_mode_plus"],
+  "defeatQuote": "...",
+  "spawnText": [
+    "...",
+    "Be still.",
+    "Listen.",
+    "The signal ends here."
+  ],
+  "deathText": [
+    "Peace.",
+    "...",
+    "You found it.",
+    "The mind... quiets..."
+  ]
+}

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 70">
+  <!-- Shadow Figure from Plato's Cave - philosophical drifter -->
+  <defs>
+    <linearGradient id="shadowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a2020"/>
+      <stop offset="100%" stop-color="#0a0505"/>
+    </linearGradient>
+  </defs>
+  
+  <g transform="translate(30,35)">
+    <!-- Shadowy humanoid form -->
+    <ellipse cx="0" cy="5" rx="15" ry="25" fill="url(#shadowGrad)" opacity="0.8"/>
+    
+    <!-- Head silhouette -->
+    <circle cx="0" cy="-22" r="12" fill="#1a1515"/>
+    
+    <!-- Flickering edges (like firelight shadows) -->
+    <g stroke="#3a2a2a" stroke-width="2" fill="none" opacity="0.6">
+      <path d="M-15,-5 Q-20,-10 -18,-18"/>
+      <path d="M15,-5 Q20,-10 18,-18"/>
+      <path d="M-12,20 Q-18,25 -15,32"/>
+      <path d="M12,20 Q18,25 15,32"/>
+    </g>
+    
+    <!-- Chain links (prisoner of the cave) -->
+    <g stroke="#4a3a3a" stroke-width="2" fill="none">
+      <ellipse cx="-8" cy="30" rx="4" ry="3"/>
+      <ellipse cx="0" cy="33" rx="4" ry="3"/>
+      <ellipse cx="8" cy="30" rx="4" ry="3"/>
+    </g>
+    
+    <!-- Hollow eyes -->
+    <circle cx="-5" cy="-24" r="3" fill="#0a0505"/>
+    <circle cx="5" cy="-24" r="3" fill="#0a0505"/>
+    
+    <!-- Faint fire reflection in eyes -->
+    <circle cx="-4" cy="-25" r="1" fill="#ff6633" opacity="0.4"/>
+    <circle cx="6" cy="-25" r="1" fill="#ff6633" opacity="0.4"/>
+  </g>
+</svg>

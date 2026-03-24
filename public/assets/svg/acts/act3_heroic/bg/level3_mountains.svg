@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="mtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a3a4a;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#2a2a3a;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#mtGrad)"/>
+  <g fill="#4a4a5a" opacity="0.5">
+    <polygon points="0,600 100,300 200,600"/>
+    <polygon points="150,600 300,200 450,600"/>
+    <polygon points="350,600 500,250 650,600"/>
+    <polygon points="550,600 700,180 850,600"/>
+  </g>
+  <g fill="#5a5a6a" opacity="0.3">
+    <polygon points="100,300 80,280 120,280"/>
+    <polygon points="300,200 280,180 320,180"/>
+    <polygon points="500,250 480,230 520,230"/>
+    <polygon points="700,180 680,160 720,160"/>
+  </g>
+</svg>

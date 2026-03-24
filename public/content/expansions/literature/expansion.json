@@ -1,0 +1,33 @@
+{
+  "id": "expansion_literature",
+  "name": "Literature & Philosophy",
+  "description": "20 levels exploring the great texts and thinkers that shaped human consciousness.",
+  "unlockCondition": "act8_complete",
+  "levels": [
+    "expansions/literature/level_01_plato_allegory.json",
+    "expansions/literature/level_02_aristotle_categories.json",
+    "expansions/literature/level_03_dante_inferno.json",
+    "expansions/literature/level_04_dante_purgatorio.json",
+    "expansions/literature/level_05_dante_paradiso.json",
+    "expansions/literature/level_06_kafka_metamorphosis.json",
+    "expansions/literature/level_07_kafka_trial.json",
+    "expansions/literature/level_08_kafka_castle.json",
+    "expansions/literature/level_09_borges_garden.json",
+    "expansions/literature/level_10_borges_library.json",
+    "expansions/literature/level_11_borges_aleph.json",
+    "expansions/literature/level_12_joyce_ulysses.json",
+    "expansions/literature/level_13_joyce_finnegans.json",
+    "expansions/literature/level_14_dostoevsky_underground.json",
+    "expansions/literature/level_15_dostoevsky_brothers.json",
+    "expansions/literature/level_16_nietzsche_zarathustra.json",
+    "expansions/literature/level_17_nietzsche_twilight.json",
+    "expansions/literature/level_18_camus_sisyphus.json",
+    "expansions/literature/level_19_sartre_nausea.json",
+    "expansions/literature/level_20_wittgenstein_tractatus.json"
+  ],
+  "visualStyle": {
+    "backgrounds": ["lit_bg_parchment", "lit_bg_library", "lit_bg_abstract", "lit_bg_inferno", "lit_bg_labyrinth"],
+    "enemyStyles": ["literary", "philosophical", "existential"],
+    "palette": ["#2a1810", "#d4c4a8", "#8b4513", "#1a1a2e", "#4a4a6a"]
+  }
+}

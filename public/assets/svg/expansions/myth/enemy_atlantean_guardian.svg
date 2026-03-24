@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Ancient Atlantean guardian -->
+  <g transform="translate(30,30)">
+    <!-- Stone body -->
+    <rect x="-12" y="-15" width="24" height="30" fill="#5a7a8a" rx="3"/>
+    
+    <!-- Glowing runes -->
+    <g stroke="#4ac" stroke-width="1" fill="none">
+      <path d="M-8,-10 L0,-5 L8,-10">
+        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <path d="M-6,0 L0,5 L6,0">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <path d="M-8,10 L0,5 L8,10">
+        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    
+    <!-- Crystal eye -->
+    <circle cx="0" cy="-8" r="5" fill="#0a2a4a"/>
+    <circle cx="0" cy="-8" r="3" fill="#4ac">
+      <animate attributeName="r" values="3;4;3" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Arms -->
+    <rect x="-20" y="-8" width="10" height="8" fill="#4a6a7a"/>
+    <rect x="10" y="-8" width="10" height="8" fill="#4a6a7a"/>
+    
+    <!-- Coral growth -->
+    <g fill="#8a4a60" opacity="0.7">
+      <circle cx="-15" cy="-15" r="3"/>
+      <circle cx="15" cy="-12" r="4"/>
+      <circle cx="-10" cy="18" r="2"/>
+    </g>
+  </g>
+</svg>

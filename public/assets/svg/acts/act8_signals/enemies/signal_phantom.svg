@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="phantomFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3"/>
+      <stop offset="50%" style="stop-color:#888888;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="phantomBlur">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+  
+  <!-- Ghostly signal form -->
+  <g filter="url(#phantomBlur)">
+    <!-- Main ethereal body -->
+    <ellipse cx="32" cy="28" rx="16" ry="20" fill="url(#phantomFade)"/>
+    
+    <!-- Trailing wisps -->
+    <path d="M20,40 Q16,50 20,60" stroke="#666666" fill="none" stroke-width="3" opacity="0.3"/>
+    <path d="M32,45 Q32,55 32,65" stroke="#888888" fill="none" stroke-width="4" opacity="0.4"/>
+    <path d="M44,40 Q48,50 44,60" stroke="#666666" fill="none" stroke-width="3" opacity="0.3"/>
+  </g>
+  
+  <!-- Face - barely visible -->
+  <g opacity="0.5">
+    <!-- Hollow eyes -->
+    <ellipse cx="26" cy="24" rx="4" ry="5" fill="#000000"/>
+    <ellipse cx="38" cy="24" rx="4" ry="5" fill="#000000"/>
+    
+    <!-- Faint mouth -->
+    <ellipse cx="32" cy="34" rx="5" ry="3" fill="#000000" opacity="0.3"/>
+  </g>
+  
+  <!-- Signal interference pattern -->
+  <g stroke="#ffffff" fill="none" stroke-width="0.5" opacity="0.2">
+    <path d="M10,20 L15,25 L10,30 L15,35"/>
+    <path d="M54,20 L49,25 L54,30 L49,35"/>
+  </g>
+  
+  <!-- Static noise around -->
+  <g fill="#ffffff" opacity="0.1">
+    <rect x="8" y="15" width="2" height="1"/>
+    <rect x="52" y="22" width="3" height="1"/>
+    <rect x="12" y="40" width="2" height="1"/>
+    <rect x="48" y="45" width="2" height="1"/>
+  </g>
+  
+  <!-- Pulsing core -->
+  <circle cx="32" cy="28" r="5" fill="#ffffff" opacity="0.1">
+    <animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.1;0.02;0.1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

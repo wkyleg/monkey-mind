@@ -1,0 +1,56 @@
+{
+  "id": "art_level6_dali_persistence",
+  "expansion": "art",
+  "index": 6,
+  "title": "The Persistence of Memory",
+  "subtitle": "Dalí's melting clocks. Time dissolves.",
+  "themeTags": ["dali", "surrealism", "time", "memory"],
+  "ruleCard": {
+    "icon": "clock",
+    "hint": "Time melts. Duration becomes unreliable.",
+    "mechanic": "melting_time",
+    "params": { "timeDistortion": 0.5, "memoryBonus": 50 }
+  },
+  "enemyDeck": [
+    { "archetype": "drifter", "modifiers": [], "weight": 4, "visualId": "enemy_melting_figure" },
+    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_dream_creature" },
+    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_soft_watch" }
+  ],
+  "levelEnemies": {
+    "soft_watch": {
+      "visualId": "soft_watch",
+      "dialogue": {
+        "spawn": ["Time melts!", "Hours drip!", "The clock softens!", "Memory persists!", "Dalí's landscape!"],
+        "death": ["Time... solid...", "Hours... tick...", "Clock... hard...", "Memory... fades...", "Landscape... real..."]
+      }
+    },
+    "ants_swarm": {
+      "visualId": "ants_swarm",
+      "dialogue": {
+        "spawn": ["Dalí's obsession!", "Decay incarnate!", "The ants consume!", "Paranoid symbol!", "Crawling time!"],
+        "death": ["Obsession... released...", "Decay... halted...", "Ants... dispersed...", "Symbol... understood...", "Time... crawls on..."]
+      }
+    },
+    "dream_elephant": {
+      "visualId": "dream_elephant",
+      "dialogue": {
+        "spawn": ["Legs of spider!", "Weight of dream!", "Surreal beast!", "Dalí's menagerie!", "The impossible walks!"],
+        "death": ["Legs... grounded...", "Dream... wakes...", "Beast... normal...", "Menagerie... freed...", "Possible... walks..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "time_distortion", "params": { "slowZones": true, "fastZones": true } }],
+  "bgLayers": [
+    { "svgId": "catalonia", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "melting_clocks", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "dreamscape", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Time melts. Duration becomes unreliable.",
+    "codexSnippet": "Salvador Dalí painted soft watches draped across a barren landscape. The monkey enters the persistence of memory and finds that time is merely another medium for consciousness to shape.",
+    "radioWhisper": "The soft watches tell perfect time. It is we who are wrong about duration."
+  },
+  "musicSeed": { "seed": "dali_006", "mode": "lydian", "tempoRange": [40, 55], "intensity": 0.4 },
+  "duration": 160,
+  "unlockCondition": "art_level5_complete"
+}

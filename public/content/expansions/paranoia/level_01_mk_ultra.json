@@ -1,0 +1,56 @@
+{
+  "id": "paranoia_level1_mk_ultra",
+  "expansion": "paranoia",
+  "index": 1,
+  "title": "MK-ULTRA",
+  "subtitle": "Project MKULTRA. The CIA's mind control experiments.",
+  "themeTags": ["mk_ultra", "cia", "mind_control", "experiments"],
+  "ruleCard": {
+    "icon": "syringe",
+    "hint": "Your controls randomly invert. Fight through the confusion.",
+    "mechanic": "control_inversion",
+    "params": { "inversionChance": 0.2, "inversionDuration": 3000 }
+  },
+  "enemyDeck": [
+    { "archetype": "chaser", "modifiers": ["bureaucratic"], "weight": 4, "visualId": "enemy_shadow_agent" },
+    { "archetype": "sniper", "modifiers": [], "weight": 3, "visualId": "enemy_men_in_black" },
+    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_black_helicopter" }
+  ],
+  "levelEnemies": {
+    "cia_operative": {
+      "visualId": "cia_operative",
+      "dialogue": {
+        "spawn": ["Subject acquired!", "Dosage administered!", "Mind control protocol!", "The program continues!", "You never left the lab!"],
+        "death": ["Subject... escaped...", "Dosage... ineffective...", "Protocol... failed...", "Program... terminated...", "Lab... closed..."]
+      }
+    },
+    "lsd_hallucination": {
+      "visualId": "lsd_hallucination",
+      "dialogue": {
+        "spawn": ["Is this real?", "The walls breathe!", "Colors speak!", "Consciousness expanding!", "Trip beginning!"],
+        "death": ["Reality... stable...", "Walls... solid...", "Colors... normal...", "Consciousness... grounded...", "Trip... ending..."]
+      }
+    },
+    "unwitting_subject": {
+      "visualId": "unwitting_subject",
+      "dialogue": {
+        "spawn": ["I didn't consent!", "What did they give me?", "The files were destroyed!", "But I remember!", "The experiments continue!"],
+        "death": ["Consent... given...", "Nothing... given...", "Files... recovered...", "Memory... fading...", "Experiments... over..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "lsd_dose", "params": { "visualDistortion": 0.5, "duration": 8000 } }],
+  "bgLayers": [
+    { "svgId": "cia_lab", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "documents", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "distortion", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Your controls randomly invert. Fight through the confusion.",
+    "codexSnippet": "The CIA experimented on unwitting subjects with LSD and hypnosis. The monkey knows: the lab never really closed, and the files that survived tell only part of the story.",
+    "radioWhisper": "Subject shows resistance. Increase dosage."
+  },
+  "musicSeed": { "seed": "mk_ultra_001", "mode": "locrian", "tempoRange": [55, 70], "intensity": 0.5 },
+  "duration": 110,
+  "unlockCondition": "act8_complete"
+}

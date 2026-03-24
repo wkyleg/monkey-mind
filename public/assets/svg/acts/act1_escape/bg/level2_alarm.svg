@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <radialGradient id="alarmPulse" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#e94560;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#e94560;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Base -->
+  <rect width="800" height="600" fill="#0a0008"/>
+  
+  <!-- Alarm pulse circles -->
+  <circle cx="400" cy="300" r="100" fill="url(#alarmPulse)"/>
+  <circle cx="400" cy="300" r="200" fill="url(#alarmPulse)"/>
+  <circle cx="400" cy="300" r="300" fill="url(#alarmPulse)"/>
+  
+  <!-- Warning stripes -->
+  <g fill="#e94560" opacity="0.15">
+    <rect x="0" y="0" width="50" height="600" transform="skewX(-20)"/>
+    <rect x="100" y="0" width="50" height="600" transform="skewX(-20)"/>
+    <rect x="200" y="0" width="50" height="600" transform="skewX(-20)"/>
+    <rect x="550" y="0" width="50" height="600" transform="skewX(-20)"/>
+    <rect x="650" y="0" width="50" height="600" transform="skewX(-20)"/>
+    <rect x="750" y="0" width="50" height="600" transform="skewX(-20)"/>
+  </g>
+  
+  <!-- Alert text -->
+  <text x="400" y="80" fill="#e94560" font-family="monospace" font-size="24" text-anchor="middle" font-weight="bold" opacity="0.7">INTRUDER ALERT</text>
+  <text x="400" y="550" fill="#e94560" font-family="monospace" font-size="24" text-anchor="middle" font-weight="bold" opacity="0.7">INTRUDER ALERT</text>
+</svg>

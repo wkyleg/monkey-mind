@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="corruptGlow"><feGaussianBlur stdDeviation="8"/></filter></defs>
+  <g fill="#ff88ff" opacity="0.2" filter="url(#corruptGlow)">
+    <ellipse cx="400" cy="500" rx="200" ry="80"/>
+    <ellipse cx="300" cy="450" rx="100" ry="50"/>
+    <ellipse cx="550" cy="480" rx="120" ry="60"/>
+  </g>
+</svg>

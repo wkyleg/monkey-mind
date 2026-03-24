@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <radialGradient id="pearlShineGrad">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#aaccff;stop-opacity:0.4"/>
+    </radialGradient>
+    <filter id="pearlGlowBg">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Scattered pearls -->
+  <g filter="url(#pearlGlowBg)">
+    <circle cx="100" cy="500" r="8" fill="url(#pearlShineGrad)"/>
+    <circle cx="200" cy="520" r="6" fill="url(#pearlShineGrad)"/>
+    <circle cx="350" cy="480" r="10" fill="url(#pearlShineGrad)"/>
+    <circle cx="450" cy="530" r="7" fill="url(#pearlShineGrad)"/>
+    <circle cx="550" cy="490" r="9" fill="url(#pearlShineGrad)"/>
+    <circle cx="700" cy="510" r="6" fill="url(#pearlShineGrad)"/>
+    <circle cx="750" cy="550" r="8" fill="url(#pearlShineGrad)"/>
+  </g>
+  
+  <!-- Oyster shells -->
+  <g fill="#556677" opacity="0.4">
+    <ellipse cx="100" cy="560" rx="20" ry="10"/>
+    <ellipse cx="350" cy="540" rx="25" ry="12"/>
+    <ellipse cx="550" cy="550" rx="22" ry="11"/>
+  </g>
+</svg>

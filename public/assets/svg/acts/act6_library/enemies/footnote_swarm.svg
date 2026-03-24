@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Swarm of footnote numbers -->
+  <g transform="translate(30,30)" font-family="serif">
+    <!-- Scattered footnote numbers -->
+    <text x="-15" y="-10" fill="#5c4033" font-size="10">¹</text>
+    <text x="5" y="-15" fill="#5c4033" font-size="12">²</text>
+    <text x="-8" y="5" fill="#5c4033" font-size="14">³</text>
+    <text x="12" y="0" fill="#5c4033" font-size="10">⁴</text>
+    <text x="-12" y="15" fill="#5c4033" font-size="11">⁵</text>
+    <text x="8" y="12" fill="#5c4033" font-size="13">⁶</text>
+    <text x="0" y="-5" fill="#5c4033" font-size="16">*</text>
+    <text x="-5" y="20" fill="#5c4033" font-size="9">†</text>
+    
+    <!-- Swirling animation -->
+    <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="8s" repeatCount="indefinite" additive="sum"/>
+  </g>
+</svg>

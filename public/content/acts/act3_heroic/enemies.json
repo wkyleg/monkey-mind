@@ -1,0 +1,66 @@
+{
+  "bronze_hoplite": {
+    "spawn": [
+      "FOR GLORY!",
+      "Shield wall!",
+      "By Zeus, I stand!",
+      "The phalanx holds!",
+      "SPARTAAAA!"
+    ],
+    "death": [
+      "A hero's end...",
+      "Tell them... I held...",
+      "To Elysium...",
+      "My shield... broken...",
+      "Glory found..."
+    ]
+  },
+  "harpy_swarm": {
+    "spawn": [
+      "SCREEEEE!",
+      "The furies descend!",
+      "Wings of vengeance!",
+      "We claim this sky!",
+      "Talons ready!"
+    ],
+    "death": [
+      "Wings... clipped...",
+      "Falling... from grace...",
+      "The hunt... ends...",
+      "Feathers... scattered...",
+      "Grounded..."
+    ]
+  },
+  "oracle_eye": {
+    "spawn": [
+      "I have foreseen this.",
+      "The prophecy unfolds.",
+      "Your fate is written.",
+      "The oracle sees all.",
+      "Destiny approaches."
+    ],
+    "death": [
+      "Did not... foresee...",
+      "The vision... clouded...",
+      "Prophecy... wrong...",
+      "Blind now...",
+      "Fate... changes..."
+    ]
+  },
+  "fate_spinner": {
+    "spawn": [
+      "Your thread is measured!",
+      "The Moirai weave!",
+      "Clotho spins your doom!",
+      "The loom awaits!",
+      "Destiny tangles!"
+    ],
+    "death": [
+      "Thread... cut...",
+      "The pattern... unravels...",
+      "Lachesis... weeps...",
+      "My thread... ends...",
+      "Fate... severed..."
+    ]
+  }
+}

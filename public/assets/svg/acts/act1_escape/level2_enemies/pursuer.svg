@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="pursuerGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Shadow body -->
+  <ellipse cx="30" cy="35" rx="18" ry="20" fill="#0a0a10" stroke="#334455" stroke-width="2"/>
+  
+  <!-- Intense eyes -->
+  <g filter="url(#pursuerGlow)">
+    <ellipse cx="22" cy="28" rx="5" ry="3" fill="#ff4466"/>
+    <ellipse cx="38" cy="28" rx="5" ry="3" fill="#ff4466"/>
+  </g>
+  <circle cx="22" cy="28" r="1.5" fill="#ffffff"/>
+  <circle cx="38" cy="28" r="1.5" fill="#ffffff"/>
+  
+  <!-- Reaching hands -->
+  <g fill="#0a0a10" stroke="#334455" stroke-width="1">
+    <ellipse cx="8" cy="40" rx="6" ry="4"/>
+    <ellipse cx="52" cy="40" rx="6" ry="4"/>
+  </g>
+  
+  <!-- Speed lines -->
+  <g stroke="#334455" stroke-width="1" opacity="0.5">
+    <line x1="5" y1="50" x2="15" y2="45"/>
+    <line x1="5" y1="55" x2="18" y2="50"/>
+    <line x1="45" y1="50" x2="55" y2="45"/>
+    <line x1="42" y1="55" x2="55" y2="50"/>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+{
+  "id": "science_level9_philosophical_zombie",
+  "expansion": "science",
+  "index": 9,
+  "title": "Philosophical Zombies",
+  "subtitle": "Behavior without experience.",
+  "themeTags": ["chalmers", "p_zombie", "consciousness", "qualia"],
+  "ruleCard": {
+    "icon": "zombie",
+    "hint": "They act conscious but feel nothing. Can you tell the difference?",
+    "mechanic": "zombie_detection",
+    "params": { "zombiePercentage": 0.5, "detectionBonus": 100, "misidentificationPenalty": 50 }
+  },
+  "enemyDeck": [
+    { "archetype": "mimic", "modifiers": [], "weight": 5, "visualId": "enemy_p_zombie" },
+    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_qualia" },
+    { "archetype": "phaser", "modifiers": [], "weight": 2, "visualId": "enemy_consciousness" }
+  ],
+  "levelEnemies": {
+    "p_zombie": {
+      "visualId": "p_zombie",
+      "dialogue": {
+        "spawn": ["I act conscious!", "But is anyone home?", "Behavioral twin!", "No inner life!", "Chalmers' monster!"],
+        "death": ["Acting... stops...", "Home... empty...", "Twin... different...", "Inner... void...", "Monster... gone..."]
+      }
+    },
+    "qualia_ghost": {
+      "visualId": "qualia_ghost",
+      "dialogue": {
+        "spawn": ["The redness of red!", "What it's like!", "Subjective experience!", "Ineffable sensation!", "Mary sees color!"],
+        "death": ["Redness... fades...", "No longer... like...", "Experience... objective...", "Sensation... described...", "Mary... understands..."]
+      }
+    },
+    "other_mind": {
+      "visualId": "other_mind",
+      "dialogue": {
+        "spawn": ["How do you know I'm conscious?", "The other minds problem!", "Inference from behavior!", "Solipsism threatens!", "Only you are certain!"],
+        "death": ["Consciousness... shared...", "Other minds... real...", "Behavior... proves...", "Solipsism... defeated...", "We... are certain..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "zombie_mimicry", "params": { "mimicryDuration": 5000, "detectionWindow": 2000 } }],
+  "bgLayers": [
+    { "svgId": "philosophical_void", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "qualia_space", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "conscious_field", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "They act conscious but feel nothing. Can you tell the difference?",
+    "codexSnippet": "A philosophical zombie is functionally identical to you but has no inner experience. The monkey confronts p-zombies and asks whether consciousness makes any difference from the outside.",
+    "radioWhisper": "Everyone around you might be empty inside. Including you."
+  },
+  "musicSeed": { "seed": "pzombie_009", "mode": "locrian", "tempoRange": [45, 60], "intensity": 0.4 },
+  "duration": 160,
+  "unlockCondition": "science_level8_complete"
+}

@@ -1,14 +1,14 @@
 /**
  * Spawner System Tests
- * 
+ *
  * Tests for wave generation, spawn timing, enemy selection, and pattern generation.
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { Spawner } from './spawner';
-import type { EnemySystem } from './enemies';
-import type { WaveData, LevelData, SectorData } from '../content/schema';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { LevelData, SectorData, WaveData } from '../content/schema';
 import { events } from '../core/events';
+import type { EnemySystem } from './enemies';
+import { Spawner } from './spawner';
 
 // Mock events
 vi.mock('../core/events', () => ({
@@ -34,24 +34,28 @@ vi.mock('../content/loader', () => ({
 const createMockEnemySystem = (): EnemySystem => {
   const spawned: { id: string; x: number; y: number; active: boolean }[] = [];
   let nextId = 0;
-  
+
   return {
     spawn: vi.fn((enemyId: string, x: number, y: number) => {
-      const enemy = { 
-        id: (nextId++).toString(), 
+      const enemy = {
+        id: (nextId++).toString(),
         enemyId,
-        x, 
-        y, 
+        x,
+        y,
         active: true,
         transform: { x, y },
-        destroy: function() { this.active = false; },
+        destroy: function () {
+          this.active = false;
+        },
       };
       spawned.push(enemy);
       return enemy;
     }),
-    getEnemies: vi.fn(() => spawned.filter(e => e.active)),
-    count: vi.fn(() => spawned.filter(e => e.active).length),
-    clear: vi.fn(() => { spawned.length = 0; }),
+    getEnemies: vi.fn(() => spawned.filter((e) => e.active)),
+    count: vi.fn(() => spawned.filter((e) => e.active).length),
+    clear: vi.fn(() => {
+      spawned.length = 0;
+    }),
     update: vi.fn(),
     render: vi.fn(),
     spawnLine: vi.fn(),
@@ -66,8 +70,8 @@ describe('Spawner', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    Object.keys(mockWaveData).forEach(key => delete mockWaveData[key]);
-    Object.keys(mockSectorData).forEach(key => delete mockSectorData[key]);
+    Object.keys(mockWaveData).forEach((key) => delete mockWaveData[key]);
+    Object.keys(mockSectorData).forEach((key) => delete mockSectorData[key]);
     enemySystem = createMockEnemySystem();
     spawner = new Spawner(enemySystem, screenWidth);
   });
@@ -93,7 +97,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 3,
@@ -113,7 +117,7 @@ describe('Spawner', () => {
         waves: ['wave1', 'wave2', 'wave3'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 3,
@@ -140,16 +144,18 @@ describe('Spawner', () => {
           pattern: 'grid',
         },
         lanes: 5,
-        levels: [{
-          id: 'level1',
-          waves: ['wave1'],
-        }],
+        levels: [
+          {
+            id: 'level1',
+            waves: ['wave1'],
+          },
+        ],
         boss: 'test_boss',
         unlocks: {},
       };
 
-      mockSectorData['sector1'] = sector;
-      mockWaveData['wave1'] = {
+      mockSectorData.sector1 = sector;
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 1,
@@ -176,7 +182,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 5,
@@ -214,7 +220,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 3,
@@ -243,7 +249,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 5,
@@ -267,7 +273,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 4,
@@ -280,10 +286,10 @@ describe('Spawner', () => {
 
       // Should spawn 4 enemies in a line
       expect(enemySystem.spawn).toHaveBeenCalledTimes(4);
-      
+
       // Check X positions are within bounds
       const calls = (enemySystem.spawn as ReturnType<typeof vi.fn>).mock.calls;
-      calls.forEach(call => {
+      calls.forEach((call) => {
         const x = call[1];
         expect(x).toBeGreaterThanOrEqual(80);
         expect(x).toBeLessThanOrEqual(screenWidth - 80);
@@ -298,7 +304,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         pattern: 'grid',
@@ -322,7 +328,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 5,
@@ -344,7 +350,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 8,
@@ -359,7 +365,7 @@ describe('Spawner', () => {
 
       // X positions should all be within bounds
       const calls = (enemySystem.spawn as ReturnType<typeof vi.fn>).mock.calls;
-      calls.forEach(call => {
+      calls.forEach((call) => {
         const x = call[1];
         expect(x).toBeGreaterThanOrEqual(80);
         expect(x).toBeLessThanOrEqual(screenWidth - 80);
@@ -374,7 +380,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 10,
@@ -396,7 +402,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 6,
@@ -418,7 +424,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 8,
@@ -440,7 +446,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 6,
@@ -462,7 +468,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 10,
@@ -484,7 +490,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 8,
@@ -506,7 +512,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 15,
@@ -528,7 +534,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: '',
         pattern: 'line',
@@ -552,7 +558,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: '',
         pattern: 'line',
@@ -577,7 +583,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 3,
@@ -598,7 +604,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 2,
@@ -611,7 +617,9 @@ describe('Spawner', () => {
 
       // Simulate killing enemies by making them inactive
       const enemies = (enemySystem as any).spawn.mock.results.map((r: any) => r.value);
-      enemies.forEach((e: any) => { e.active = false; });
+      enemies.forEach((e: any) => {
+        e.active = false;
+      });
 
       vi.clearAllMocks();
       spawner.update(0.1);
@@ -625,7 +633,7 @@ describe('Spawner', () => {
         waves: ['wave1', 'wave2'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 2,
@@ -633,7 +641,7 @@ describe('Spawner', () => {
         entryDelayMs: 100,
       };
 
-      mockWaveData['wave2'] = {
+      mockWaveData.wave2 = {
         id: 'wave2',
         enemy: 'pulse_node',
         count: 3,
@@ -648,7 +656,9 @@ describe('Spawner', () => {
 
       // Kill enemies
       const enemies = (enemySystem as any).spawn.mock.results.map((r: any) => r.value);
-      enemies.forEach((e: any) => { e.active = false; });
+      enemies.forEach((e: any) => {
+        e.active = false;
+      });
 
       spawner.update(0.1);
 
@@ -664,7 +674,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 2,
@@ -677,7 +687,9 @@ describe('Spawner', () => {
 
       // Kill all enemies
       const enemies = (enemySystem as any).spawn.mock.results.map((r: any) => r.value);
-      enemies.forEach((e: any) => { e.active = false; });
+      enemies.forEach((e: any) => {
+        e.active = false;
+      });
 
       vi.clearAllMocks();
       spawner.update(0.1);
@@ -694,7 +706,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 1,
@@ -702,7 +714,7 @@ describe('Spawner', () => {
         entryDelayMs: 100,
       };
 
-      mockWaveData['wave2'] = {
+      mockWaveData.wave2 = {
         id: 'wave2',
         enemy: 'pulse_node',
         count: 1,
@@ -717,7 +729,9 @@ describe('Spawner', () => {
 
       // Kill enemy from wave1
       const enemies1 = (enemySystem as any).spawn.mock.results.map((r: any) => r.value);
-      enemies1.forEach((e: any) => { e.active = false; });
+      enemies1.forEach((e: any) => {
+        e.active = false;
+      });
 
       spawner.update(0.1);
 
@@ -726,7 +740,7 @@ describe('Spawner', () => {
     });
 
     it('should start next wave if idle when queueing', () => {
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 1,
@@ -749,7 +763,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 3,
@@ -776,7 +790,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 20,
@@ -788,7 +802,7 @@ describe('Spawner', () => {
       spawner.update(1);
 
       const calls = (enemySystem.spawn as ReturnType<typeof vi.fn>).mock.calls;
-      calls.forEach(call => {
+      calls.forEach((call) => {
         const x = call[1];
         expect(x).toBeGreaterThanOrEqual(80);
         expect(x).toBeLessThanOrEqual(screenWidth - 80);
@@ -803,7 +817,7 @@ describe('Spawner', () => {
         waves: ['wave1'],
       };
 
-      mockWaveData['wave1'] = {
+      mockWaveData.wave1 = {
         id: 'wave1',
         enemy: 'synapse_drone',
         count: 3,
@@ -817,7 +831,7 @@ describe('Spawner', () => {
 
       // Should emit 3 spawn events
       const spawnCalls = (events.emit as ReturnType<typeof vi.fn>).mock.calls.filter(
-        call => call[0] === 'enemy:spawn'
+        (call) => call[0] === 'enemy:spawn',
       );
       expect(spawnCalls.length).toBe(3);
     });

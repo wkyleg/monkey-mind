@@ -1,0 +1,16 @@
+{
+  "id": "expansion_travel",
+  "name": "Journeys",
+  "description": "3 levels exploring legendary journeys and pilgrimages.",
+  "unlockCondition": "act8_complete",
+  "levels": [
+    "expansions/travel/level_01_odyssey.json",
+    "expansions/travel/level_02_divine_comedy.json",
+    "expansions/travel/level_03_pilgrims_progress.json"
+  ],
+  "visualStyle": {
+    "backgrounds": ["travel_bg_sea", "travel_bg_mountain", "travel_bg_road"],
+    "enemyStyles": ["mythic", "allegorical", "obstacle"],
+    "palette": ["#1a4a6a", "#8b4513", "#2a5a2a", "#ffd700", "#4a0080"]
+  }
+}

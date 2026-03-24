@@ -1,0 +1,17 @@
+{
+  "id": "expansion_cosmic",
+  "name": "Cosmic Horror",
+  "description": "4 levels exploring the vast indifference of the cosmos.",
+  "unlockCondition": "act8_complete",
+  "levels": [
+    "expansions/cosmic/level_01_lovecraft_cthulhu.json",
+    "expansions/cosmic/level_02_azathoth.json",
+    "expansions/cosmic/level_03_yog_sothoth.json",
+    "expansions/cosmic/level_04_color_out_of_space.json"
+  ],
+  "visualStyle": {
+    "backgrounds": ["cosmic_bg_void", "cosmic_bg_stars", "cosmic_bg_tentacles", "cosmic_bg_geometry"],
+    "enemyStyles": ["eldritch", "cosmic", "unknowable"],
+    "palette": ["#0a0a1a", "#1a0a2a", "#2a1a3a", "#00ff88", "#ff00ff"]
+  }
+}

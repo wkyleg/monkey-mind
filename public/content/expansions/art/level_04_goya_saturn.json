@@ -1,0 +1,56 @@
+{
+  "id": "art_level4_goya_saturn",
+  "expansion": "art",
+  "index": 4,
+  "title": "Saturn Devouring His Son",
+  "subtitle": "Goya's Black Painting. Madness and horror.",
+  "themeTags": ["goya", "saturn", "horror", "madness"],
+  "ruleCard": {
+    "icon": "saturn",
+    "hint": "The father consumes. Power destroys what it creates.",
+    "mechanic": "consumption",
+    "params": { "consumptionDamage": 15, "escapeWindow": 3000 }
+  },
+  "enemyDeck": [
+    { "archetype": "boss_chassis", "modifiers": ["mythic"], "weight": 3, "visualId": "enemy_saturn" },
+    { "archetype": "chaser", "modifiers": [], "weight": 4, "visualId": "enemy_black_figure" },
+    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_nightmare" }
+  ],
+  "levelEnemies": {
+    "saturn_giant": {
+      "visualId": "saturn_giant",
+      "dialogue": {
+        "spawn": ["I devour my children!", "Power consumes!", "The prophecy!", "None shall surpass!", "Mad with fear!"],
+        "death": ["Children... spared...", "Power... shared...", "Prophecy... broken...", "Surpassed... at last...", "Fear... conquered..."]
+      }
+    },
+    "black_painting": {
+      "visualId": "black_painting",
+      "dialogue": {
+        "spawn": ["From Goya's walls!", "Quinta del Sordo!", "Deaf man's visions!", "Darkness manifest!", "The black paintings!"],
+        "death": ["Walls... cleansed...", "Quinta... silent...", "Visions... fade...", "Light... returns...", "Paintings... rest..."]
+      }
+    },
+    "madness_specter": {
+      "visualId": "madness_specter",
+      "dialogue": {
+        "spawn": ["Goya's mind!", "Illness and war!", "The deaf painter!", "Reason sleeps!", "Monsters produced!"],
+        "death": ["Mind... clear...", "Peace... found...", "Hearing... returns...", "Reason... wakes...", "Monsters... gone..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "madness_zone", "params": { "sanityDrain": 5, "clarityBonus": 30 } }],
+  "bgLayers": [
+    { "svgId": "black_walls", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "saturn", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "darkness", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The father consumes. Power destroys what it creates.",
+    "codexSnippet": "Goya painted Saturn on his dining room wall. The monkey confronts the horror of power that devours its own future and learns that creation requires releasing control.",
+    "radioWhisper": "He painted this while going deaf, alone in the House of the Deaf Man."
+  },
+  "musicSeed": { "seed": "goya_004", "mode": "locrian", "tempoRange": [45, 60], "intensity": 0.5 },
+  "duration": 140,
+  "unlockCondition": "art_level3_complete"
+}

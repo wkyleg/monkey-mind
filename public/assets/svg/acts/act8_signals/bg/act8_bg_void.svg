@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <defs>
+    <radialGradient id="voidCenter" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#000000"/>
+      <stop offset="100%" style="stop-color:#0a0a0a"/>
+    </radialGradient>
+    <filter id="voidGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Absolute void -->
+  <rect width="400" height="600" fill="url(#voidCenter)"/>
+  
+  <!-- Distant, dying stars -->
+  <g fill="#ffffff" opacity="0.1">
+    <circle cx="50" cy="100" r="0.5"/>
+    <circle cx="350" cy="150" r="0.3"/>
+    <circle cx="120" cy="400" r="0.4"/>
+    <circle cx="280" cy="500" r="0.3"/>
+    <circle cx="200" cy="300" r="0.2"/>
+  </g>
+  
+  <!-- Faint cosmic dust -->
+  <g opacity="0.05">
+    <ellipse cx="100" cy="200" rx="80" ry="40" fill="#333333"/>
+    <ellipse cx="300" cy="450" rx="60" ry="30" fill="#222222"/>
+  </g>
+  
+  <!-- The great silence - subtle rings -->
+  <g stroke="#1a1a1a" fill="none" opacity="0.3">
+    <circle cx="200" cy="300" r="100" stroke-width="0.5"/>
+    <circle cx="200" cy="300" r="150" stroke-width="0.3"/>
+    <circle cx="200" cy="300" r="200" stroke-width="0.2"/>
+  </g>
+  
+  <!-- Fermi paradox - where is everyone? -->
+  <text x="200" y="580" text-anchor="middle" font-family="monospace" font-size="8" fill="#333333" opacity="0.3">
+    WHERE IS EVERYONE?
+  </text>
+</svg>

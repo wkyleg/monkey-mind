@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="expGlow"><feGaussianBlur stdDeviation="30"/></filter></defs>
+  <ellipse cx="400" cy="300" rx="250" ry="180" fill="#aa88cc" opacity="0.1" filter="url(#expGlow)"/>
+</svg>

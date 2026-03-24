@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Living painting that escaped the canvas -->
+  <g transform="translate(30,30)">
+    <!-- Frame -->
+    <rect x="-18" y="-22" width="36" height="44" fill="none" stroke="#c9a227" stroke-width="3"/>
+    
+    <!-- Canvas background -->
+    <rect x="-15" y="-19" width="30" height="38" fill="#2a1a0a"/>
+    
+    <!-- Abstract figure emerging -->
+    <g>
+      <!-- Body mass -->
+      <ellipse cx="0" cy="5" rx="10" ry="15" fill="#5a4a3a" opacity="0.8"/>
+      
+      <!-- Head -->
+      <circle cx="0" cy="-8" r="8" fill="#8b7355"/>
+      
+      <!-- Dripping paint effect -->
+      <g fill="#5a4a3a">
+        <ellipse cx="-8" cy="18" rx="3" ry="8"/>
+        <ellipse cx="0" cy="20" rx="2" ry="10"/>
+        <ellipse cx="8" cy="17" rx="3" ry="7"/>
+      </g>
+      
+      <!-- Eyes (unsettling) -->
+      <circle cx="-3" cy="-10" r="2" fill="#1a1a1a"/>
+      <circle cx="3" cy="-10" r="2" fill="#1a1a1a"/>
+      <circle cx="-3" cy="-10" r="1" fill="#ff6600"/>
+      <circle cx="3" cy="-10" r="1" fill="#ff6600"/>
+    </g>
+    
+    <!-- Paint drips outside frame -->
+    <g fill="#c9a227" opacity="0.5">
+      <ellipse cx="-18" cy="25" rx="2" ry="5"/>
+      <ellipse cx="18" cy="28" rx="2" ry="6"/>
+    </g>
+  </g>
+</svg>

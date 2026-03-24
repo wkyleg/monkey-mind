@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="keeperGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Main body - uniform shape -->
+  <ellipse cx="30" cy="35" rx="15" ry="18" fill="#1a3a2a" stroke="#00aa66" stroke-width="2"/>
+  
+  <!-- Head -->
+  <circle cx="30" cy="15" r="10" fill="#1a3a2a" stroke="#00aa66" stroke-width="2"/>
+  
+  <!-- Cap -->
+  <ellipse cx="30" cy="8" rx="12" ry="4" fill="#2a4a3a" stroke="#00aa66" stroke-width="1"/>
+  <rect x="22" y="5" width="16" height="5" fill="#2a4a3a"/>
+  
+  <!-- Eyes (vigilant) -->
+  <circle cx="26" cy="14" r="3" fill="#00ffaa" filter="url(#keeperGlow)"/>
+  <circle cx="34" cy="14" r="3" fill="#00ffaa" filter="url(#keeperGlow)"/>
+  <circle cx="26" cy="14" r="1.5" fill="#0a1a10"/>
+  <circle cx="34" cy="14" r="1.5" fill="#0a1a10"/>
+  
+  <!-- Net/catching tool -->
+  <line x1="45" y1="25" x2="55" y2="10" stroke="#888888" stroke-width="2"/>
+  <circle cx="55" cy="10" r="8" fill="none" stroke="#888888" stroke-width="1.5" stroke-dasharray="2,2"/>
+  
+  <!-- Keys hanging -->
+  <g transform="translate(20, 45)">
+    <circle cx="0" cy="0" r="3" fill="none" stroke="#ffaa00" stroke-width="1"/>
+    <rect x="-1" y="3" width="2" height="6" fill="#ffaa00"/>
+  </g>
+</svg>

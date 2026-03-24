@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">
+  <defs>
+    <linearGradient id="engine_metal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#556677"/>
+      <stop offset="50%" stop-color="#334455"/>
+      <stop offset="100%" stop-color="#112233"/>
+    </linearGradient>
+    <filter id="engine_glow">
+      <feGaussianBlur stdDeviation="3" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Main gear body -->
+  <circle cx="70" cy="70" r="45" fill="url(#engine_metal)" stroke="#00ff00" stroke-width="2"/>
+  <!-- Gear teeth -->
+  <g fill="url(#engine_metal)" stroke="#00ff00" stroke-width="1">
+    <rect x="63" y="18" width="14" height="12" rx="2"/>
+    <rect x="63" y="110" width="14" height="12" rx="2"/>
+    <rect x="18" y="63" width="12" height="14" rx="2"/>
+    <rect x="110" y="63" width="12" height="14" rx="2"/>
+    <rect x="30" y="30" width="12" height="12" rx="2" transform="rotate(45 36 36)"/>
+    <rect x="98" y="30" width="12" height="12" rx="2" transform="rotate(45 104 36)"/>
+    <rect x="30" y="98" width="12" height="12" rx="2" transform="rotate(45 36 104)"/>
+    <rect x="98" y="98" width="12" height="12" rx="2" transform="rotate(45 104 104)"/>
+  </g>
+  <!-- Rotating inner mechanism -->
+  <g>
+    <circle cx="70" cy="70" r="25" fill="#0a0a1a" stroke="#00ff00" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" from="0 70 70" to="360 70 70" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Impossible triangle in center -->
+    <path d="M70 45 L90 85 L50 85 Z" fill="none" stroke="#00ff00" stroke-width="3" filter="url(#engine_glow)">
+      <animateTransform attributeName="transform" type="rotate" from="0 70 70" to="-360 70 70" dur="15s" repeatCount="indefinite"/>
+    </path>
+    <path d="M70 55 L82 78 L58 78 Z" fill="none" stroke="#00ffff" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" from="0 70 70" to="360 70 70" dur="8s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  <!-- Infinity symbol overlay -->
+  <path d="M45 70 Q55 55 70 70 Q85 85 95 70 Q85 55 70 70 Q55 85 45 70" fill="none" stroke="#ff00ff" stroke-width="2" opacity="0.7" filter="url(#engine_glow)">
+    <animate attributeName="stroke-dashoffset" from="0" to="100" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="stroke-dasharray" values="10,5;5,10;10,5" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <!-- Sparking energy -->
+  <circle cx="35" cy="35" r="3" fill="#00ff00" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="0.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="105" cy="105" r="3" fill="#00ff00" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="0.5s" repeatCount="indefinite" begin="0.25s"/>
+  </circle>
+</svg>

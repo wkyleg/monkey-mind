@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+  <!-- Temple Scarab - Small fast swarm enemy -->
+  <g transform="translate(25,25)">
+    <!-- Shell -->
+    <ellipse cx="0" cy="0" rx="12" ry="10" fill="#c9a227"/>
+    
+    <!-- Shell segments -->
+    <g stroke="#8b6914" stroke-width="1" fill="none">
+      <line x1="-8" y1="-3" x2="-8" y2="5"/>
+      <line x1="0" y1="-5" x2="0" y2="8"/>
+      <line x1="8" y1="-3" x2="8" y2="5"/>
+    </g>
+    
+    <!-- Head -->
+    <circle cx="0" cy="-12" r="5" fill="#1a1a0a"/>
+    
+    <!-- Eyes -->
+    <circle cx="-2" cy="-13" r="2" fill="#00ff00"/>
+    <circle cx="2" cy="-13" r="2" fill="#00ff00"/>
+    
+    <!-- Mandibles -->
+    <g stroke="#3a3a1a" stroke-width="2" fill="none">
+      <path d="M-3,-16 Q-6,-20 -8,-18"/>
+      <path d="M3,-16 Q6,-20 8,-18"/>
+    </g>
+    
+    <!-- Legs -->
+    <g stroke="#5a4a2a" stroke-width="2" fill="none">
+      <path d="M-10,-2 L-16,-6"/>
+      <path d="M-11,2 L-17,4"/>
+      <path d="M-10,6 L-16,10"/>
+      <path d="M10,-2 L16,-6"/>
+      <path d="M11,2 L17,4"/>
+      <path d="M10,6 L16,10"/>
+    </g>
+    
+    <!-- Hieroglyph on shell -->
+    <g stroke="#4a3a1a" stroke-width="1" fill="none" opacity="0.5">
+      <circle cx="0" cy="0" r="4"/>
+      <line x1="-3" y1="0" x2="3" y2="0"/>
+      <line x1="0" y1="-3" x2="0" y2="3"/>
+    </g>
+  </g>
+</svg>

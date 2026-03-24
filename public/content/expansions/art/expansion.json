@@ -1,0 +1,22 @@
+{
+  "id": "expansion_art",
+  "name": "Art History",
+  "description": "9 levels exploring the great works and movements that shaped visual consciousness.",
+  "unlockCondition": "act8_complete",
+  "levels": [
+    "expansions/art/level_01_lascaux_caves.json",
+    "expansions/art/level_02_bosch_garden.json",
+    "expansions/art/level_03_bruegel_triumph.json",
+    "expansions/art/level_04_goya_saturn.json",
+    "expansions/art/level_05_escher_impossible.json",
+    "expansions/art/level_06_dali_persistence.json",
+    "expansions/art/level_07_bacon_screaming.json",
+    "expansions/art/level_08_rothko_chapel.json",
+    "expansions/art/level_09_basquiat_crown.json"
+  ],
+  "visualStyle": {
+    "backgrounds": ["art_bg_canvas", "art_bg_gallery", "art_bg_surreal", "art_bg_abstract", "art_bg_cave"],
+    "enemyStyles": ["painted", "surreal", "expressionist", "abstract"],
+    "palette": ["#2a1810", "#ffd700", "#c41e3a", "#1a1a2e", "#8b4513"]
+  }
+}

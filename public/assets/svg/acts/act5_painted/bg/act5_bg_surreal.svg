@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Surrealist floating elements (Dali/Bosch inspired) -->
+  <g opacity="0.25">
+    <!-- Melting clock -->
+    <ellipse cx="100" cy="150" rx="30" ry="20" fill="#c0c0c0" transform="skewY(20)"/>
+    <ellipse cx="102" cy="145" rx="25" ry="15" fill="#a0a0a0" transform="skewY(20)"/>
+    
+    <!-- Floating eye -->
+    <g transform="translate(300,250)">
+      <ellipse cx="0" cy="0" rx="25" ry="15" fill="#f5f5dc"/>
+      <circle cx="0" cy="0" r="10" fill="#8b4513"/>
+      <circle cx="0" cy="0" r="5" fill="#000"/>
+      <circle cx="-2" cy="-2" r="2" fill="#fff"/>
+    </g>
+    
+    <!-- Strange fruit -->
+    <g transform="translate(80,400)">
+      <ellipse cx="0" cy="0" rx="20" ry="25" fill="#ff6347"/>
+      <path d="M0,-25 Q5,-35 0,-40 Q-5,-35 0,-25" fill="#228b22"/>
+    </g>
+    
+    <!-- Distorted face fragment -->
+    <g transform="translate(320,100)" opacity="0.5">
+      <ellipse cx="0" cy="0" rx="15" ry="20" fill="#deb887"/>
+      <ellipse cx="-5" cy="-5" rx="4" ry="3" fill="#000"/>
+      <path d="M-8,8 Q0,12 8,8" stroke="#8b4513" stroke-width="2" fill="none"/>
+    </g>
+    
+    <!-- Flying fish -->
+    <g transform="translate(200,500) rotate(-15)">
+      <ellipse cx="0" cy="0" rx="25" ry="10" fill="#4682b4"/>
+      <polygon points="25,0 35,-8 35,8" fill="#4682b4"/>
+      <ellipse cx="-15" cy="-5" rx="10" ry="5" fill="#87ceeb" transform="rotate(-20 -15 -5)"/>
+      <circle cx="-18" cy="-2" r="3" fill="#000"/>
+    </g>
+  </g>
+</svg>

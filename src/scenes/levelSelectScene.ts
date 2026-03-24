@@ -1,222 +1,373 @@
 /**
- * Level Select scene - allows replaying completed sectors
+ * Level Select scene - allows selecting Acts and Expansions
+ * Updated for Level Bible v2 with 8 Acts and Expansion Vault
  */
 
-import { Scene } from '../engine/scene';
-import type { Game } from '../engine/game';
-import type { Renderer } from '../engine/renderer';
-import type { PlayerIntent } from '../engine/input';
 import { CONFIG } from '../config';
+import { contentLoader } from '../content/loader';
+import type { ActData, ExpansionCategory } from '../content/schema';
 import { storage } from '../core/storage';
+import type { PlayerIntent } from '../engine/input';
+import type { Renderer } from '../engine/renderer';
+import { Scene } from '../engine/scene';
 
-interface SectorInfo {
-  id: string;
-  name: string;
+type ViewMode = 'acts' | 'expansions';
+
+interface ActInfo {
+  act: ActData;
+  index: number;
+  unlocked: boolean;
+  completed: boolean;
+}
+
+interface ExpansionInfo {
+  expansion: ExpansionCategory;
   index: number;
   unlocked: boolean;
 }
 
 export class LevelSelectScene extends Scene {
-  private sectors: SectorInfo[] = [];
+  private viewMode: ViewMode = 'acts';
+  private acts: ActInfo[] = [];
+  private expansions: ExpansionInfo[] = [];
   private selectedIndex: number = 0;
   private time: number = 0;
   private inputCooldown: number = 0;
-  
-  constructor(game: Game) {
-    super(game);
-  }
-  
+  private tabCooldown: number = 0;
+
   enter(): void {
     this.selectedIndex = 0;
     this.time = 0;
     this.inputCooldown = 0.2;
-    
-    this.buildSectorList();
+    this.tabCooldown = 0;
+    this.viewMode = 'acts';
+
+    this.buildActList();
+    this.buildExpansionList();
   }
-  
+
   exit(): void {
     // Cleanup
   }
-  
-  private buildSectorList(): void {
-    const highestCompleted = storage.highestSector;
-    
-    this.sectors = [
-      { id: 'sector1_neural_cage', name: 'THE NEURAL CAGE', index: 0, unlocked: true },
-      { id: 'sector2_synaptic_reef', name: 'SYNAPTIC REEF', index: 1, unlocked: highestCompleted >= 1 },
-      { id: 'sector3_pantheon', name: 'THE PANTHEON', index: 2, unlocked: highestCompleted >= 2 },
-      { id: 'sector4_black_projects', name: 'BLACK PROJECTS', index: 3, unlocked: highestCompleted >= 3 },
-      { id: 'sector5_fractal_bloom', name: 'THE FRACTAL BLOOM', index: 4, unlocked: highestCompleted >= 4 },
-    ];
+
+  private buildActList(): void {
+    const highestCompleted = storage.highestSector; // Acts completed
+    const allActs = contentLoader.getAllActs();
+
+    // Sort by act number
+    allActs.sort((a, b) => a.number - b.number);
+
+    this.acts = allActs.map((act, index) => ({
+      act,
+      index,
+      // For testing, unlock all acts; in production: highestCompleted >= index
+      unlocked: true, // highestCompleted >= index,
+      completed: highestCompleted > index,
+    }));
   }
-  
+
+  private buildExpansionList(): void {
+    const allExpansions = contentLoader.getAllExpansionCategories();
+
+    this.expansions = allExpansions.map((expansion, index) => ({
+      expansion,
+      index,
+      // For testing, unlock all expansions
+      unlocked: true,
+    }));
+  }
+
   update(dt: number, intent: PlayerIntent): void {
     this.time += dt;
-    
+
     // Input cooldown
     if (this.inputCooldown > 0) {
       this.inputCooldown -= dt;
-      return;
     }
-    
-    // Back
+    if (this.tabCooldown > 0) {
+      this.tabCooldown -= dt;
+    }
+
+    // Back to menu
     if (intent.cancel) {
-      this.game.getScenes().pop();
+      this.game.getScenes().goto('menu');
       return;
     }
-    
-    // Navigate with up/down
-    if (intent.menuAxis < -0.5) {
-      this.selectedIndex = Math.max(0, this.selectedIndex - 1);
-      this.inputCooldown = 0.15;
-    } else if (intent.menuAxis > 0.5) {
-      this.selectedIndex = Math.min(this.sectors.length - 1, this.selectedIndex + 1);
-      this.inputCooldown = 0.15;
+
+    // Tab switching with left/right at top
+    if (this.tabCooldown <= 0) {
+      if (intent.moveAxis < -0.5) {
+        this.viewMode = 'acts';
+        this.selectedIndex = 0;
+        this.tabCooldown = 0.2;
+      } else if (intent.moveAxis > 0.5) {
+        this.viewMode = 'expansions';
+        this.selectedIndex = 0;
+        this.tabCooldown = 0.2;
+      }
     }
-    
-    // Select sector
-    if (intent.confirm) {
-      const sector = this.sectors[this.selectedIndex];
-      if (sector.unlocked) {
-        // Store the selected sector and start campaign from there
-        this.game.getScenes().setContext('levelSelect', { sectorIndex: sector.index });
-        this.game.getScenes().replace('campaign');
+
+    // Navigate with up/down
+    if (this.inputCooldown <= 0) {
+      const items = this.viewMode === 'acts' ? this.acts : this.expansions;
+
+      if (intent.menuAxis < -0.5) {
+        this.selectedIndex = Math.max(0, this.selectedIndex - 1);
+        this.inputCooldown = 0.15;
+      } else if (intent.menuAxis > 0.5) {
+        this.selectedIndex = Math.min(items.length - 1, this.selectedIndex + 1);
+        this.inputCooldown = 0.15;
+      }
+
+      // Select item
+      if (intent.confirm) {
+        if (this.viewMode === 'acts') {
+          const actInfo = this.acts[this.selectedIndex];
+          if (actInfo.unlocked) {
+            this.game.getScenes().setContext('levelSelect', {
+              mode: 'act',
+              actId: actInfo.act.id,
+              actIndex: actInfo.index,
+            });
+            this.game.getScenes().replace('campaign');
+          }
+        } else {
+          const expInfo = this.expansions[this.selectedIndex];
+          if (expInfo.unlocked) {
+            this.game.getScenes().setContext('levelSelect', {
+              mode: 'expansion',
+              expansionId: expInfo.expansion.id,
+            });
+            this.game.getScenes().replace('campaign');
+          }
+        }
+        this.inputCooldown = 0.2;
       }
     }
   }
-  
+
   render(renderer: Renderer, _alpha: number): void {
     const { width, height } = renderer;
-    
+
+    // Clear canvas and reset context state
+    renderer.context.globalAlpha = 1;
+    renderer.fillRect(0, 0, width, height, '#000000');
+
     // Background
-    renderer.radialGradientBackground(
-      [CONFIG.COLORS.BACKGROUND, '#1a1a2e'],
-      width / 2,
-      height / 2
-    );
-    
+    renderer.radialGradientBackground([CONFIG.COLORS.BACKGROUND, '#1a1a2e'], width / 2, height / 2);
+
     // Title
-    renderer.glowText(
-      'LEVEL SELECT',
-      width / 2,
-      60,
-      CONFIG.COLORS.PRIMARY,
-      40,
-      'center',
-      20
-    );
-    
-    // Subtitle
+    renderer.glowText('SELECT CAMPAIGN', width / 2, 50, CONFIG.COLORS.PRIMARY, 36, 'center', 20);
+
+    // Tab buttons
+    this.renderTabs(renderer, width);
+
+    // Content based on view mode
+    if (this.viewMode === 'acts') {
+      this.renderActList(renderer, width, height);
+    } else {
+      this.renderExpansionList(renderer, width, height);
+    }
+
+    // Controls hint
     renderer.text(
-      'Choose a sector to replay',
+      '← → TABS   ↑ ↓ SELECT   SPACE START   ESC BACK',
       width / 2,
-      100,
+      height - 25,
       CONFIG.COLORS.TEXT_DIM,
-      16,
-      'center'
+      11,
+      'center',
     );
-    
-    // Sector list
-    const startY = 180;
-    const spacing = 70;
-    
-    this.sectors.forEach((sector, index) => {
-      const y = startY + index * spacing;
-      const isSelected = index === this.selectedIndex;
-      
+  }
+
+  private renderTabs(renderer: Renderer, width: number): void {
+    const tabY = 95;
+    const tabWidth = 160;
+    const gap = 20;
+    const leftX = width / 2 - tabWidth - gap / 2;
+    const rightX = width / 2 + gap / 2;
+
+    // Acts tab
+    const actsSelected = this.viewMode === 'acts';
+    renderer.fillRect(leftX, tabY - 15, tabWidth, 30, actsSelected ? CONFIG.COLORS.PRIMARY : '#333344');
+    renderer.text(
+      'CANON CAMPAIGN',
+      leftX + tabWidth / 2,
+      tabY,
+      actsSelected ? '#000000' : CONFIG.COLORS.TEXT_DIM,
+      14,
+      'center',
+    );
+
+    // Expansions tab
+    const expSelected = this.viewMode === 'expansions';
+    renderer.fillRect(rightX, tabY - 15, tabWidth, 30, expSelected ? CONFIG.COLORS.ACCENT : '#333344');
+    renderer.text(
+      'EXPANSION VAULT',
+      rightX + tabWidth / 2,
+      tabY,
+      expSelected ? '#000000' : CONFIG.COLORS.TEXT_DIM,
+      14,
+      'center',
+    );
+  }
+
+  private renderActList(renderer: Renderer, width: number, height: number): void {
+    const startY = 150;
+    const itemHeight = 65;
+    const maxVisible = Math.floor((height - startY - 60) / itemHeight);
+
+    // Calculate scroll offset
+    const scrollOffset = Math.max(0, this.selectedIndex - Math.floor(maxVisible / 2));
+    const visibleActs = this.acts.slice(scrollOffset, scrollOffset + maxVisible);
+
+    visibleActs.forEach((actInfo, displayIndex) => {
+      const actualIndex = scrollOffset + displayIndex;
+      const y = startY + displayIndex * itemHeight;
+      const isSelected = actualIndex === this.selectedIndex;
+
       // Selection box
       if (isSelected) {
-        renderer.strokeRect(
-          width / 2 - 200,
-          y - 25,
-          400,
-          50,
-          CONFIG.COLORS.PRIMARY,
-          2
-        );
+        renderer.strokeRect(width / 2 - 220, y - 25, 440, 55, CONFIG.COLORS.PRIMARY, 2);
       }
-      
-      if (sector.unlocked) {
-        // Sector number
+
+      if (actInfo.unlocked) {
+        // Act number badge
+        const badgeColor = this.getActColor(actInfo.act.number);
+        renderer.fillRect(width / 2 - 210, y - 18, 50, 36, badgeColor);
+        renderer.text(`ACT ${actInfo.act.number}`, width / 2 - 185, y, '#000000', 12, 'center');
+
+        // Act name
         renderer.hudText(
-          `SECTOR ${index + 1}`,
-          width / 2 - 180,
+          actInfo.act.name.toUpperCase(),
+          width / 2 - 150,
           y - 8,
-          isSelected ? CONFIG.COLORS.ACCENT : CONFIG.COLORS.TEXT_DIM,
-          12,
-          'left'
-        );
-        
-        // Sector name
-        renderer.hudText(
-          sector.name,
-          width / 2 - 180,
-          y + 10,
           isSelected ? CONFIG.COLORS.PRIMARY : CONFIG.COLORS.TEXT,
-          isSelected ? 22 : 18,
-          'left'
+          isSelected ? 18 : 16,
+          'left',
         );
-        
+
+        // Act thesis
+        renderer.text(actInfo.act.thesis, width / 2 - 150, y + 12, CONFIG.COLORS.TEXT_DIM, 11, 'left');
+
         // Status indicator
-        const completed = storage.highestSector > index;
-        if (completed) {
+        if (actInfo.completed) {
+          renderer.hudText('✓ COMPLETED', width / 2 + 210, y, CONFIG.COLORS.SUCCESS, 12, 'right');
+        } else {
           renderer.hudText(
-            '✓ COMPLETED',
-            width / 2 + 180,
+            `${actInfo.act.levels.length} LEVELS`,
+            width / 2 + 210,
             y,
-            CONFIG.COLORS.SUCCESS,
-            14,
-            'right'
-          );
-        } else if (storage.highestSector === index) {
-          renderer.hudText(
-            'IN PROGRESS',
-            width / 2 + 180,
-            y,
-            CONFIG.COLORS.WARNING,
-            14,
-            'right'
+            CONFIG.COLORS.TEXT_DIM,
+            12,
+            'right',
           );
         }
       } else {
-        // Locked sector
+        // Locked act
+        renderer.hudText(`ACT ${actInfo.act.number}`, width / 2 - 180, y - 8, CONFIG.COLORS.TEXT_DIM, 12, 'left');
+
+        renderer.hudText('[ LOCKED ]', width / 2 - 180, y + 10, CONFIG.COLORS.TEXT_DIM, 16, 'left');
+
         renderer.hudText(
-          `SECTOR ${index + 1}`,
-          width / 2 - 180,
-          y - 8,
-          CONFIG.COLORS.TEXT_DIM,
-          12,
-          'left'
-        );
-        
-        renderer.hudText(
-          '[ LOCKED ]',
-          width / 2 - 180,
-          y + 10,
-          CONFIG.COLORS.TEXT_DIM,
-          18,
-          'left'
-        );
-        
-        renderer.hudText(
-          `Complete Sector ${index} to unlock`,
+          `Complete Act ${actInfo.index} to unlock`,
           width / 2 + 180,
           y,
           CONFIG.COLORS.TEXT_DIM,
-          12,
-          'right'
+          11,
+          'right',
         );
       }
     });
-    
-    // Controls hint
-    renderer.text(
-      '↑ ↓ SELECT   SPACE START   ESC BACK',
-      width / 2,
-      height - 30,
-      CONFIG.COLORS.TEXT_DIM,
-      12,
-      'center'
-    );
+
+    // Scroll indicators
+    if (scrollOffset > 0) {
+      renderer.text('▲ MORE', width / 2, startY - 15, CONFIG.COLORS.TEXT_DIM, 11, 'center');
+    }
+    if (scrollOffset + maxVisible < this.acts.length) {
+      renderer.text('▼ MORE', width / 2, height - 55, CONFIG.COLORS.TEXT_DIM, 11, 'center');
+    }
+  }
+
+  private renderExpansionList(renderer: Renderer, width: number, height: number): void {
+    const startY = 150;
+    const itemHeight = 55;
+    const maxVisible = Math.floor((height - startY - 60) / itemHeight);
+
+    if (this.expansions.length === 0) {
+      renderer.text('No expansions available yet.', width / 2, height / 2, CONFIG.COLORS.TEXT_DIM, 16, 'center');
+      return;
+    }
+
+    // Calculate scroll offset
+    const scrollOffset = Math.max(0, this.selectedIndex - Math.floor(maxVisible / 2));
+    const visibleExpansions = this.expansions.slice(scrollOffset, scrollOffset + maxVisible);
+
+    visibleExpansions.forEach((expInfo, displayIndex) => {
+      const actualIndex = scrollOffset + displayIndex;
+      const y = startY + displayIndex * itemHeight;
+      const isSelected = actualIndex === this.selectedIndex;
+
+      // Selection box
+      if (isSelected) {
+        renderer.strokeRect(width / 2 - 220, y - 20, 440, 45, CONFIG.COLORS.ACCENT, 2);
+      }
+
+      if (expInfo.unlocked) {
+        // Expansion name
+        renderer.hudText(
+          expInfo.expansion.name.toUpperCase(),
+          width / 2 - 200,
+          y - 3,
+          isSelected ? CONFIG.COLORS.ACCENT : CONFIG.COLORS.TEXT,
+          isSelected ? 16 : 14,
+          'left',
+        );
+
+        // Description
+        renderer.text(
+          expInfo.expansion.description.substring(0, 60) + (expInfo.expansion.description.length > 60 ? '...' : ''),
+          width / 2 - 200,
+          y + 14,
+          CONFIG.COLORS.TEXT_DIM,
+          10,
+          'left',
+        );
+
+        // Level count
+        renderer.hudText(
+          `${expInfo.expansion.levels.length} LEVELS`,
+          width / 2 + 200,
+          y,
+          CONFIG.COLORS.TEXT_DIM,
+          12,
+          'right',
+        );
+      } else {
+        renderer.hudText('[ LOCKED ]', width / 2 - 200, y, CONFIG.COLORS.TEXT_DIM, 14, 'left');
+      }
+    });
+
+    // Scroll indicators
+    if (scrollOffset > 0) {
+      renderer.text('▲ MORE', width / 2, startY - 15, CONFIG.COLORS.TEXT_DIM, 11, 'center');
+    }
+    if (scrollOffset + maxVisible < this.expansions.length) {
+      renderer.text('▼ MORE', width / 2, height - 55, CONFIG.COLORS.TEXT_DIM, 11, 'center');
+    }
+  }
+
+  private getActColor(actNumber: number): string {
+    const colors = [
+      '#00ff88', // Act 1 - Escape (green)
+      '#00aaff', // Act 2 - Ocean (blue)
+      '#d4af37', // Act 3 - Heroic (gold)
+      '#ff6600', // Act 4 - Sacred (orange)
+      '#ff00aa', // Act 5 - Painted (magenta)
+      '#8855ff', // Act 6 - Library (purple)
+      '#888888', // Act 7 - Machine (silver)
+      '#ffffff', // Act 8 - Signals (white)
+    ];
+    return colors[(actNumber - 1) % colors.length];
   }
 }

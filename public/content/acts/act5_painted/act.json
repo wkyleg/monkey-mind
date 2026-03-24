@@ -1,0 +1,40 @@
+{
+  "id": "act5_painted",
+  "number": 5,
+  "name": "The Painted Mind",
+  "thesis": "Art is how the mind sees itself seeing.",
+  "storyBeat": "The monkey's perception warps through art history - Bosch's nightmares, Goya's shadows, Dali's melting time. The headband shows distorted self-portraits, fragmented identity.",
+  "visualCallbacks": [
+    "Ink wash and brushstroke textures",
+    "Melting clocks and surreal forms",
+    "Planar shards and cubist fragments",
+    "Distorted self-portraits"
+  ],
+  "levels": [
+    "act5_level1_bosch_garden",
+    "act5_level2_goya_night",
+    "act5_level3_dali_clockworks",
+    "act5_level4_cubist_theater",
+    "act5_level5_arcimboldo_boss"
+  ],
+  "visualStyle": {
+    "palette": ["#2a1a0a", "#4a3020", "#6a4a30", "#ff4444", "#44ff88"],
+    "bgPattern": "brushstroke_chaos",
+    "enemyStyle": "surreal_hybrid",
+    "particleStyle": "paint_splatter",
+    "uiTheme": "gallery_cream"
+  },
+  "bossId": "arcimboldo_crown",
+  "unlocks": {
+    "powerups": ["perspective_shift", "color_shield"],
+    "codex": ["entry_painted_mind", "entry_arcimboldo", "entry_surreal"],
+    "cosmetics": ["headband_painted"]
+  },
+  "musicParams": {
+    "tempo": 95,
+    "intensity": 0.6,
+    "filterCutoff": 900,
+    "useReverb": true,
+    "distortionAmount": 0.12
+  }
+}

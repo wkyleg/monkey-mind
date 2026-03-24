@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="lightBgGlow"><feGaussianBlur stdDeviation="15"/></filter></defs>
+  <g filter="url(#lightBgGlow)">
+    <polygon points="400,100 350,300 450,300" fill="#ffdd88" opacity="0.3"/>
+    <polygon points="300,120 270,280 330,280" fill="#ffcc66" opacity="0.2"/>
+    <polygon points="500,120 470,280 530,280" fill="#ffcc66" opacity="0.2"/>
+  </g>
+</svg>

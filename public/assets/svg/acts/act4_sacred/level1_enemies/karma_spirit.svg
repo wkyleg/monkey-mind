@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="karmaGlow"><feGaussianBlur stdDeviation="3"/></filter></defs>
+  <circle cx="30" cy="30" r="20" fill="#2a1a3a" stroke="#aa66ff" stroke-width="2"/>
+  <circle cx="30" cy="30" r="12" fill="none" stroke="#cc88ff" stroke-width="2" opacity="0.5"/>
+  <path d="M 20 30 Q 30 20 40 30 Q 30 40 20 30" fill="#aa66ff" opacity="0.6"/>
+  <circle cx="30" cy="30" r="4" fill="#ffffff" filter="url(#karmaGlow)"/>
+</svg>

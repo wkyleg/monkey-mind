@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70">
+  <!-- Neural Network - AI/consciousness themed -->
+  <g transform="translate(35,35)">
+    <!-- Network nodes -->
+    <g fill="#00aaff">
+      <!-- Input layer -->
+      <circle cx="-25" cy="-15" r="5"/>
+      <circle cx="-25" cy="0" r="5"/>
+      <circle cx="-25" cy="15" r="5"/>
+      
+      <!-- Hidden layer -->
+      <circle cx="0" cy="-20" r="6"/>
+      <circle cx="0" cy="-5" r="6"/>
+      <circle cx="0" cy="10" r="6"/>
+      <circle cx="0" cy="25" r="5"/>
+      
+      <!-- Output layer -->
+      <circle cx="25" cy="-8" r="7"/>
+      <circle cx="25" cy="8" r="7"/>
+    </g>
+    
+    <!-- Connections -->
+    <g stroke="#0066aa" stroke-width="1" fill="none" opacity="0.5">
+      <!-- Input to hidden -->
+      <line x1="-20" y1="-15" x2="-6" y2="-20"/>
+      <line x1="-20" y1="-15" x2="-6" y2="-5"/>
+      <line x1="-20" y1="0" x2="-6" y2="-5"/>
+      <line x1="-20" y1="0" x2="-6" y2="10"/>
+      <line x1="-20" y1="15" x2="-6" y2="10"/>
+      <line x1="-20" y1="15" x2="-5" y2="25"/>
+      
+      <!-- Hidden to output -->
+      <line x1="6" y1="-20" x2="18" y2="-8"/>
+      <line x1="6" y1="-5" x2="18" y2="-8"/>
+      <line x1="6" y1="-5" x2="18" y2="8"/>
+      <line x1="6" y1="10" x2="18" y2="8"/>
+      <line x1="5" y1="25" x2="18" y2="8"/>
+    </g>
+    
+    <!-- Active signals (pulsing) -->
+    <g fill="#00ffff" opacity="0.8">
+      <circle cx="-12" cy="-8" r="2"/>
+      <circle cx="12" cy="0" r="2"/>
+      <circle cx="-10" cy="8" r="2"/>
+    </g>
+    
+    <!-- Central "consciousness" eye -->
+    <circle cx="0" cy="-5" r="4" fill="#ffffff"/>
+    <circle cx="0" cy="-5" r="2" fill="#000000"/>
+    
+    <!-- Data streams -->
+    <g stroke="#00ffff" stroke-width="1" stroke-dasharray="3,2" fill="none" opacity="0.4">
+      <path d="M-30,-15 L-25,-15"/>
+      <path d="M-30,0 L-25,0"/>
+      <path d="M-30,15 L-25,15"/>
+      <path d="M25,-8 L32,-8"/>
+      <path d="M25,8 L32,8"/>
+    </g>
+  </g>
+</svg>

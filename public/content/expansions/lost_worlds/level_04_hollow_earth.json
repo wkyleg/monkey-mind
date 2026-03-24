@@ -1,0 +1,56 @@
+{
+  "id": "lost_worlds_level4_hollow_earth",
+  "expansion": "lost_worlds",
+  "index": 4,
+  "title": "Hollow Earth",
+  "subtitle": "Agartha awaits. The inner sun burns.",
+  "themeTags": ["hollow_earth", "agartha", "inner_sun", "underground"],
+  "ruleCard": {
+    "icon": "inner_sun",
+    "hint": "The inner sun provides different light. Your shadow betrays you.",
+    "mechanic": "shadow_betrayal",
+    "params": { "shadowDamage": 10, "lightBonus": 30 }
+  },
+  "enemyDeck": [
+    { "archetype": "chaser", "modifiers": [], "weight": 4, "visualId": "enemy_stone_golem" },
+    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_temple_scarab" },
+    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_crystal_sentinel" }
+  ],
+  "levelEnemies": {
+    "agarthan_elder": {
+      "visualId": "agarthan_elder",
+      "dialogue": {
+        "spawn": ["The surface dweller!", "Agartha is forbidden!", "Inner light burns!", "The hollow protects!", "Descend no further!"],
+        "death": ["Surface... calls...", "Agartha... opens...", "Light... fades...", "Hollow... breached...", "Descent... permitted..."]
+      }
+    },
+    "inner_sun_priest": {
+      "visualId": "inner_sun_priest",
+      "dialogue": {
+        "spawn": ["Behold the inner sun!", "No shadows below!", "Eternal light!", "The core illuminates!", "Surface darkness lies!"],
+        "death": ["Sun... dims...", "Shadows... return...", "Light... ends...", "Core... cools...", "Darkness... truth..."]
+      }
+    },
+    "tunnel_guardian": {
+      "visualId": "tunnel_guardian",
+      "dialogue": {
+        "spawn": ["The tunnels are mine!", "No passage granted!", "Miles of stone!", "The earth closes!", "Buried forever!"],
+        "death": ["Tunnels... open...", "Passage... granted...", "Stone... parts...", "Earth... releases...", "Freedom... above..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "gravity_reversal", "params": { "flipChance": 0.2, "adaptationBonus": 40 } }],
+  "bgLayers": [
+    { "svgId": "caverns", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "inner_sun", "parallaxSpeed": 0.05, "opacity": 0.4 },
+    { "svgId": "tunnels", "parallaxSpeed": 0.15, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The inner sun provides different light. Your shadow betrays you.",
+    "codexSnippet": "The Hollow Earth theory suggests an inner sun illuminates a world beneath the crust. The monkey descends through polar openings and finds that what lies below mirrors what lies above.",
+    "radioWhisper": "Admiral Byrd's diary was never released. Now you know why."
+  },
+  "musicSeed": { "seed": "hollow_earth_004", "mode": "locrian", "tempoRange": [50, 65], "intensity": 0.5 },
+  "duration": 130,
+  "unlockCondition": "lost_worlds_level3_complete"
+}

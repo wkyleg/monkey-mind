@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 80">
+  <!-- Void Tendril - Final expansion chaser -->
+  <defs>
+    <linearGradient id="voidTendril" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a0a4a"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  
+  <g transform="translate(30,40)">
+    <!-- Main tendril body -->
+    <path d="M0,-35 Q15,-20 10,0 Q5,20 0,40" stroke="url(#voidTendril)" stroke-width="15" fill="none" stroke-linecap="round"/>
+    
+    <!-- Inner void core -->
+    <path d="M0,-35 Q10,-20 8,0 Q4,18 0,35" stroke="#0a0020" stroke-width="8" fill="none" stroke-linecap="round"/>
+    
+    <!-- Tip with eye -->
+    <circle cx="0" cy="-35" r="10" fill="#1a0a3a"/>
+    <circle cx="0" cy="-35" r="6" fill="#000000"/>
+    <circle cx="0" cy="-35" r="4" fill="#ff00ff"/>
+    <circle cx="1" cy="-36" r="1.5" fill="#ffffff"/>
+    
+    <!-- Smaller tendrils branching -->
+    <g stroke="#2a0a4a" stroke-width="4" fill="none" stroke-linecap="round">
+      <path d="M8,-15 Q18,-10 20,0"/>
+      <path d="M-5,-10 Q-15,-5 -18,5"/>
+      <path d="M6,10 Q14,15 12,25"/>
+      <path d="M-4,15 Q-12,20 -10,30"/>
+    </g>
+    
+    <!-- Void particles -->
+    <g fill="#4a0a6a" opacity="0.5">
+      <circle cx="-12" cy="-20" r="3"/>
+      <circle cx="15" cy="-5" r="2"/>
+      <circle cx="-15" cy="10" r="2"/>
+      <circle cx="10" cy="20" r="3"/>
+    </g>
+    
+    <!-- Energy crackling -->
+    <g stroke="#ff00ff" stroke-width="1" fill="none" opacity="0.4">
+      <path d="M-5,-30 L-10,-25 L-5,-20"/>
+      <path d="M5,-32 L10,-28 L5,-24"/>
+    </g>
+  </g>
+</svg>

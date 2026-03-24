@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="dreamBlur"><feGaussianBlur stdDeviation="10"/></filter></defs>
+  <ellipse cx="300" cy="400" rx="100" ry="60" fill="#aa8866" opacity="0.2" filter="url(#dreamBlur)"/>
+  <ellipse cx="550" cy="350" rx="80" ry="50" fill="#aa8866" opacity="0.2" filter="url(#dreamBlur)"/>
+</svg>

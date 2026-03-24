@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="atlanteanGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="orichalcumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffaa44;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#cc7722;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Orichalcum armor body -->
+  <ellipse cx="30" cy="38" rx="14" ry="16" fill="url(#orichalcumGrad)" stroke="#ffcc66" stroke-width="2"/>
+  
+  <!-- Helmeted head -->
+  <circle cx="30" cy="18" r="10" fill="url(#orichalcumGrad)" stroke="#ffcc66" stroke-width="2"/>
+  
+  <!-- Helmet crest -->
+  <polygon points="30,3 25,12 35,12" fill="#00ccff" stroke="#00ffff" stroke-width="1"/>
+  
+  <!-- Glowing eyes through helmet -->
+  <rect x="22" y="15" width="6" height="3" fill="#00ffff" filter="url(#atlanteanGlow)"/>
+  <rect x="32" y="15" width="6" height="3" fill="#00ffff" filter="url(#atlanteanGlow)"/>
+  
+  <!-- Trident weapon -->
+  <line x1="50" y1="55" x2="55" y2="5" stroke="#ffcc66" stroke-width="2"/>
+  <polygon points="52,5 55,0 58,5 55,10" fill="#00ccff"/>
+  <polygon points="48,8 51,3 54,8 51,13" fill="#00ccff"/>
+  <polygon points="56,8 59,3 62,8 59,13" fill="#00ccff"/>
+  
+  <!-- Atlantean symbols on armor -->
+  <circle cx="30" cy="38" r="5" fill="none" stroke="#00ffff" stroke-width="1"/>
+  <polygon points="30,35 27,41 33,41" fill="none" stroke="#00ffff" stroke-width="1"/>
+</svg>

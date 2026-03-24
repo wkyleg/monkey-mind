@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 70">
+  <!-- DNA Strand - Biological horror (swarm) -->
+  <g transform="translate(25,35)">
+    <!-- Double helix backbone -->
+    <g stroke="#00aaff" stroke-width="3" fill="none">
+      <path d="M-10,-30 Q10,-20 -10,-10 Q10,0 -10,10 Q10,20 -10,30"/>
+      <path d="M10,-30 Q-10,-20 10,-10 Q-10,0 10,10 Q-10,20 10,30"/>
+    </g>
+    
+    <!-- Base pairs -->
+    <g stroke="#00ff88" stroke-width="2">
+      <line x1="-8" y1="-25" x2="8" y2="-25"/>
+      <line x1="-5" y1="-15" x2="5" y2="-15"/>
+      <line x1="-8" y1="-5" x2="8" y2="-5"/>
+      <line x1="-5" y1="5" x2="5" y2="5"/>
+      <line x1="-8" y1="15" x2="8" y2="15"/>
+      <line x1="-5" y1="25" x2="5" y2="25"/>
+    </g>
+    
+    <!-- Nucleotide markers -->
+    <g fill="#ff4400">
+      <circle cx="-8" cy="-25" r="2"/>
+      <circle cx="5" cy="-15" r="2"/>
+      <circle cx="-8" cy="-5" r="2"/>
+      <circle cx="5" cy="5" r="2"/>
+    </g>
+    <g fill="#ffaa00">
+      <circle cx="8" cy="-25" r="2"/>
+      <circle cx="-5" cy="-15" r="2"/>
+      <circle cx="8" cy="-5" r="2"/>
+      <circle cx="-5" cy="5" r="2"/>
+    </g>
+    
+    <!-- Mutation glow -->
+    <circle cx="0" cy="0" r="8" fill="#ff0066" opacity="0.2"/>
+    
+    <!-- Eyes (alive!) -->
+    <circle cx="-3" cy="-2" r="3" fill="#ffffff"/>
+    <circle cx="3" cy="2" r="3" fill="#ffffff"/>
+    <circle cx="-3" cy="-2" r="1.5" fill="#000000"/>
+    <circle cx="3" cy="2" r="1.5" fill="#000000"/>
+  </g>
+</svg>

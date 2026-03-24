@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="abyssGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#001a33;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#000a1a;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="800" height="600" fill="url(#abyssGradient)"/>
+  
+  <!-- Deep water pressure lines -->
+  <g stroke="#003355" stroke-width="1" opacity="0.3">
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="0" y1="500" x2="800" y2="500"/>
+  </g>
+  
+  <!-- Depth markers -->
+  <text x="20" y="120" fill="#004466" font-family="monospace" font-size="10" opacity="0.5">-1000m</text>
+  <text x="20" y="220" fill="#004466" font-family="monospace" font-size="10" opacity="0.5">-2000m</text>
+  <text x="20" y="320" fill="#004466" font-family="monospace" font-size="10" opacity="0.5">-3000m</text>
+  <text x="20" y="420" fill="#004466" font-family="monospace" font-size="10" opacity="0.5">-4000m</text>
+  <text x="20" y="520" fill="#004466" font-family="monospace" font-size="10" opacity="0.5">-5000m</text>
+</svg>

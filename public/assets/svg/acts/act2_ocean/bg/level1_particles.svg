@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Marine snow particles -->
+  <g fill="#446688" opacity="0.4">
+    <circle cx="50" cy="80" r="2"/>
+    <circle cx="150" cy="120" r="1.5"/>
+    <circle cx="250" cy="200" r="2"/>
+    <circle cx="350" cy="150" r="1"/>
+    <circle cx="450" cy="280" r="2"/>
+    <circle cx="550" cy="100" r="1.5"/>
+    <circle cx="650" cy="220" r="2"/>
+    <circle cx="750" cy="180" r="1"/>
+    <circle cx="100" cy="350" r="1.5"/>
+    <circle cx="200" cy="400" r="2"/>
+    <circle cx="300" cy="450" r="1"/>
+    <circle cx="400" cy="380" r="2"/>
+    <circle cx="500" cy="480" r="1.5"/>
+    <circle cx="600" cy="420" r="2"/>
+    <circle cx="700" cy="520" r="1"/>
+    <circle cx="80" cy="550" r="1.5"/>
+    <circle cx="180" cy="500" r="2"/>
+    <circle cx="280" cy="580" r="1"/>
+    <circle cx="380" cy="540" r="2"/>
+    <circle cx="480" cy="560" r="1.5"/>
+    <circle cx="580" cy="530" r="2"/>
+    <circle cx="680" cy="570" r="1"/>
+    <circle cx="780" cy="590" r="1.5"/>
+  </g>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <linearGradient id="wheelGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700"/>
+      <stop offset="100%" style="stop-color:#b8860b"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Dharma wheel enemy -->
+  <g transform="translate(30,30)">
+    <!-- Outer rim -->
+    <circle cx="0" cy="0" r="20" fill="none" stroke="url(#wheelGold)" stroke-width="3"/>
+    
+    <!-- Eight spokes -->
+    <g stroke="url(#wheelGold)" stroke-width="2">
+      <line x1="0" y1="-18" x2="0" y2="18"/>
+      <line x1="-18" y1="0" x2="18" y2="0"/>
+      <line x1="-12.7" y1="-12.7" x2="12.7" y2="12.7"/>
+      <line x1="-12.7" y1="12.7" x2="12.7" y2="-12.7"/>
+    </g>
+    
+    <!-- Hub -->
+    <circle cx="0" cy="0" r="5" fill="url(#wheelGold)"/>
+    <circle cx="0" cy="0" r="2" fill="#8b4513"/>
+    
+    <!-- Spoke ends (deer on wheel) -->
+    <g fill="#ffd700">
+      <circle cx="0" cy="-18" r="2"/>
+      <circle cx="0" cy="18" r="2"/>
+      <circle cx="-18" cy="0" r="2"/>
+      <circle cx="18" cy="0" r="2"/>
+    </g>
+    
+    <!-- Rotation -->
+    <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="3s" repeatCount="indefinite"/>
+  </g>
+</svg>

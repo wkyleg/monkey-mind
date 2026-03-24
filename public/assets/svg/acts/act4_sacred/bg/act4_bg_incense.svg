@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Rising incense smoke -->
+  <g opacity="0.2">
+    <!-- Smoke column 1 -->
+    <path d="M80,600 Q70,500 90,400 Q75,300 95,200 Q80,100 100,0" 
+          fill="none" stroke="#daa520" stroke-width="20">
+      <animate attributeName="d" 
+               values="M80,600 Q70,500 90,400 Q75,300 95,200 Q80,100 100,0;
+                       M80,600 Q90,500 70,400 Q90,300 75,200 Q95,100 80,0;
+                       M80,600 Q70,500 90,400 Q75,300 95,200 Q80,100 100,0" 
+               dur="8s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Smoke column 2 -->
+    <path d="M200,600 Q180,450 210,300 Q190,150 220,0" 
+          fill="none" stroke="#b8860b" stroke-width="25">
+      <animate attributeName="d" 
+               values="M200,600 Q180,450 210,300 Q190,150 220,0;
+                       M200,600 Q220,450 185,300 Q215,150 190,0;
+                       M200,600 Q180,450 210,300 Q190,150 220,0" 
+               dur="10s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Smoke column 3 -->
+    <path d="M320,600 Q310,480 330,360 Q315,240 335,120 Q320,60 340,0" 
+          fill="none" stroke="#cd853f" stroke-width="18">
+      <animate attributeName="d" 
+               values="M320,600 Q310,480 330,360 Q315,240 335,120 Q320,60 340,0;
+                       M320,600 Q335,480 305,360 Q330,240 310,120 Q335,60 315,0;
+                       M320,600 Q310,480 330,360 Q315,240 335,120 Q320,60 340,0" 
+               dur="9s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Floating particles/embers -->
+  <g fill="#ffd700" opacity="0.4">
+    <circle cx="100" cy="300" r="2">
+      <animate attributeName="cy" values="400;100" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="350" r="3">
+      <animate attributeName="cy" values="500;50" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="300" cy="400" r="2">
+      <animate attributeName="cy" values="550;150" dur="7s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0" dur="7s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

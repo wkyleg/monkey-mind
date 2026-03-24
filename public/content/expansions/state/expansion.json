@@ -1,0 +1,20 @@
+{
+  "id": "expansion_state",
+  "name": "State & Surveillance",
+  "description": "7 levels exploring power, control, and the machinery of the state.",
+  "unlockCondition": "act8_complete",
+  "levels": [
+    "expansions/state/level_01_orwell_1984.json",
+    "expansions/state/level_02_kafka_process.json",
+    "expansions/state/level_03_panopticon.json",
+    "expansions/state/level_04_stasi_files.json",
+    "expansions/state/level_05_social_credit.json",
+    "expansions/state/level_06_propaganda.json",
+    "expansions/state/level_07_ministry_truth.json"
+  ],
+  "visualStyle": {
+    "backgrounds": ["state_bg_ministry", "state_bg_surveillance", "state_bg_files", "state_bg_screens"],
+    "enemyStyles": ["bureaucratic", "surveillance", "propaganda"],
+    "palette": ["#1a1a1a", "#333333", "#666666", "#ff0000", "#ffffff"]
+  }
+}

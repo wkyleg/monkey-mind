@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Metamorphosis-inspired creature -->
+  <g transform="translate(30,30)">
+    <!-- Carapace -->
+    <ellipse cx="0" cy="0" rx="15" ry="20" fill="#4a3520"/>
+    <ellipse cx="0" cy="-5" rx="12" ry="10" fill="#5a4530"/>
+    
+    <!-- Segments -->
+    <g stroke="#3a2510" stroke-width="1">
+      <path d="M-12,-5 Q0,-10 12,-5"/>
+      <path d="M-14,0 Q0,-5 14,0"/>
+      <path d="M-14,5 Q0,0 14,5"/>
+      <path d="M-12,10 Q0,5 12,10"/>
+    </g>
+    
+    <!-- Legs (6) -->
+    <g stroke="#3a2510" stroke-width="2" fill="none">
+      <path d="M-12,-8 Q-25,-5 -28,-15"/>
+      <path d="M12,-8 Q25,-5 28,-15"/>
+      <path d="M-14,0 Q-25,0 -30,5"/>
+      <path d="M14,0 Q25,0 30,5"/>
+      <path d="M-12,10 Q-20,15 -25,20"/>
+      <path d="M12,10 Q20,15 25,20"/>
+    </g>
+    
+    <!-- Antennae -->
+    <g stroke="#3a2510" stroke-width="1" fill="none">
+      <path d="M-5,-15 Q-8,-25 -3,-30"/>
+      <path d="M5,-15 Q8,-25 3,-30"/>
+    </g>
+    
+    <!-- Eyes (sad, human-like) -->
+    <g>
+      <ellipse cx="-5" cy="-12" rx="3" ry="4" fill="#1a1a1a"/>
+      <ellipse cx="5" cy="-12" rx="3" ry="4" fill="#1a1a1a"/>
+      <circle cx="-5" cy="-11" r="1.5" fill="#8b7355"/>
+      <circle cx="5" cy="-11" r="1.5" fill="#8b7355"/>
+    </g>
+  </g>
+</svg>

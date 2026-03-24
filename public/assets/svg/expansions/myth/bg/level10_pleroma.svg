@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs><filter id="pleromaGlow"><feGaussianBlur stdDeviation="30"/></filter></defs><ellipse cx="400" cy="100" rx="300" ry="80" fill="#ffcc44" opacity="0.1" filter="url(#pleromaGlow)"/></svg>

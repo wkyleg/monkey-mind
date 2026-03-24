@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <path d="M 30 10 Q 50 20 50 35 Q 50 50 30 55 L 30 10" fill="#8888cc" stroke="#6666aa" stroke-width="2"/>
+  <text x="38" y="35" fill="#ffffff" font-size="10">R</text>
+</svg>

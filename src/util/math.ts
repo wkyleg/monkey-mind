@@ -61,13 +61,7 @@ export function inverseLerp(a: number, b: number, value: number): number {
   return (value - a) / (b - a);
 }
 
-export function remap(
-  value: number,
-  inMin: number,
-  inMax: number,
-  outMin: number,
-  outMax: number
-): number {
+export function remap(value: number, inMin: number, inMax: number, outMin: number, outMax: number): number {
   const t = inverseLerp(inMin, inMax, value);
   return lerp(outMin, outMax, t);
 }

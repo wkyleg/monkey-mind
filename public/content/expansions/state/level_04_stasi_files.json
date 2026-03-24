@@ -1,0 +1,56 @@
+{
+  "id": "state_level4_stasi",
+  "expansion": "state",
+  "index": 4,
+  "title": "The Stasi Files",
+  "subtitle": "Everyone informs. Trust no one.",
+  "themeTags": ["stasi", "ddr", "informants", "paranoia"],
+  "ruleCard": {
+    "icon": "file",
+    "hint": "Anyone could be an informant. Your allies might betray you.",
+    "mechanic": "informant_network",
+    "params": { "betrayalChance": 0.25, "trustedAllyBonus": 60 }
+  },
+  "enemyDeck": [
+    { "archetype": "mimic", "modifiers": ["bureaucratic"], "weight": 5, "visualId": "enemy_informant" },
+    { "archetype": "sniper", "modifiers": [], "weight": 3, "visualId": "enemy_officer" },
+    { "archetype": "weaver", "modifiers": [], "weight": 2, "visualId": "enemy_file_clerk" }
+  ],
+  "levelEnemies": {
+    "unofficial_collaborator": {
+      "visualId": "unofficial_collaborator",
+      "dialogue": {
+        "spawn": ["I'm your friend!", "Trust me completely!", "I report nothing!", "We're in this together!", "No secrets between us!"],
+        "death": ["Friend... truly...", "Trust... earned...", "Report... destroyed...", "Together... honestly...", "Secrets... kept..."]
+      }
+    },
+    "file_mountain": {
+      "visualId": "file_mountain",
+      "dialogue": {
+        "spawn": ["Every word recorded!", "Every action filed!", "The archive knows all!", "Your life on paper!", "111 kilometers of files!"],
+        "death": ["Records... shredded...", "Actions... forgotten...", "Archive... empty...", "Life... private...", "Files... burned..."]
+      }
+    },
+    "stasi_officer": {
+      "visualId": "stasi_officer",
+      "dialogue": {
+        "spawn": ["The state protects you!", "From yourself, if necessary!", "Surveillance is love!", "We know best!", "Decomposition measures!"],
+        "death": ["State... released...", "Self... trusted...", "Surveillance... ended...", "Knowledge... shared...", "Measures... ceased..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "informant_reveal", "params": { "revealInterval": 15000, "trustPenalty": 30 } }],
+  "bgLayers": [
+    { "svgId": "office", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "filing_cabinets", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "papers_scattered", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Anyone could be an informant. Your allies might betray you.",
+    "codexSnippet": "The Stasi had files on 5.6 million people and 180,000 informants in a country of 16 million. The monkey navigates a world where neighbors spy on neighbors and trust is revolutionary.",
+    "radioWhisper": "The best informant is the one you never suspect."
+  },
+  "musicSeed": { "seed": "stasi_004", "mode": "aeolian", "tempoRange": [50, 65], "intensity": 0.5 },
+  "duration": 140,
+  "unlockCondition": "state_level3_complete"
+}

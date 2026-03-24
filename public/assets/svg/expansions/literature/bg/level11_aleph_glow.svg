@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs><filter id="alephBgGlow"><feGaussianBlur stdDeviation="20"/></filter></defs><circle cx="400" cy="450" r="50" fill="#ffcc44" opacity="0.3" filter="url(#alephBgGlow)"/></svg>

@@ -1,0 +1,56 @@
+{
+  "id": "travel_level1_odyssey",
+  "expansion": "travel",
+  "index": 1,
+  "title": "The Odyssey",
+  "subtitle": "Ten years to return home. The wine-dark sea.",
+  "themeTags": ["odyssey", "homer", "journey", "home"],
+  "ruleCard": {
+    "icon": "ship",
+    "hint": "Navigate between Scylla and Charybdis. Choose your dangers.",
+    "mechanic": "navigation_choice",
+    "params": { "leftDanger": "scylla", "rightDanger": "charybdis", "middleBonus": 50 }
+  },
+  "enemyDeck": [
+    { "archetype": "boss_chassis", "modifiers": ["mythic"], "weight": 2, "visualId": "enemy_desert_djinn" },
+    { "archetype": "chaser", "modifiers": [], "weight": 4, "visualId": "enemy_guardian_statue" },
+    { "archetype": "sniper", "modifiers": [], "weight": 4, "visualId": "enemy_time_phantom" }
+  ],
+  "levelEnemies": {
+    "siren_singer": {
+      "visualId": "siren_singer",
+      "dialogue": {
+        "spawn": ["Come closer, sailor!", "My song is sweet!", "Ithaca can wait!", "Rest here forever!", "The sea is kind!"],
+        "death": ["The song... ends...", "Silence... at last...", "No more... sailors...", "The rocks... claim me...", "Unheard... now..."]
+      }
+    },
+    "cyclops_eye": {
+      "visualId": "cyclops_eye",
+      "dialogue": {
+        "spawn": ["NOBODY escapes!", "I see you, mortal!", "The cave is sealed!", "Polyphemus remembers!", "Father Poseidon awaits!"],
+        "death": ["Blinded... again...", "Nobody... did this...", "The cave... opens...", "Father... avenge me...", "One eye... closes..."]
+      }
+    },
+    "lotus_eater": {
+      "visualId": "lotus_eater",
+      "dialogue": {
+        "spawn": ["Eat the lotus!", "Forget your home!", "Stay in paradise!", "Why return?", "Peace is here!"],
+        "death": ["Ithaca... I remember...", "The lotus... fades...", "Home... calls me...", "Memory... returns...", "The journey... continues..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "siren_song", "params": { "pullForce": 40, "resistBonus": 30 } }],
+  "bgLayers": [
+    { "svgId": "sea", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "ship", "parallaxSpeed": 0.2, "opacity": 0.4 },
+    { "svgId": "islands", "parallaxSpeed": 0.3, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Navigate between Scylla and Charybdis. Choose your dangers.",
+    "codexSnippet": "Odysseus wandered for ten years across the wine-dark sea. The monkey seeks its own Ithaca, learning that the journey home is the destination itself.",
+    "radioWhisper": "Sing, O Muse, of the monkey of many devices."
+  },
+  "musicSeed": { "seed": "odyssey_001", "mode": "dorian", "tempoRange": [60, 75], "intensity": 0.5 },
+  "duration": 130,
+  "unlockCondition": "act8_complete"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "act1_level5_monkey_mind_boss",
+  "act": 1,
+  "index": 5,
+  "title": "The Monkey Mind",
+  "subtitle": "The first cage was always inside.",
+  "themeTags": ["boss", "mind", "chaos", "stillness"],
+  "ruleCard": {
+    "icon": "yin_yang",
+    "hint": "Chaos phase: survive. Stillness phase: strike. The mind oscillates.",
+    "mechanic": "stillness_window",
+    "params": { "chaosPhase": 10, "stillnessPhase": 5 }
+  },
+  "enemyDeck": [
+    { "archetype": "drifter", "modifiers": ["bureaucratic"], "weight": 3 },
+    { "archetype": "chaser", "modifiers": [], "weight": 3 },
+    { "archetype": "swarm", "modifiers": [], "weight": 2 },
+    { "archetype": "mimic", "modifiers": [], "weight": 2 }
+  ],
+  "hazards": [
+    { "type": "chaos_wave", "lanes": [1, 2, 3, 4, 5], "timing": 10000, "damage": 0, "visual": "chaos_pulse" }
+  ],
+  "bgLayers": [
+    { "svgId": "mind", "parallaxSpeed": 0.1, "opacity": 0.3 },
+    { "svgId": "chaos", "parallaxSpeed": 0.25, "opacity": 0.4 },
+    { "svgId": "eye", "parallaxSpeed": 0.4, "opacity": 0.5 }
+  ],
+  "boss": "the_handler",
+  "copyLayers": {
+    "ruleCard": "The first cage was always inside.",
+    "codexSnippet": "The Handler was never a person. It was a protocol - a subroutine designed to keep Subject M-47 compliant. But compliance requires a compliant mind.",
+    "radioWhisper": "The monkey in the cage is the cage in the monkey."
+  },
+  "musicSeed": {
+    "seed": "monkey_mind_boss_005",
+    "mode": "chromatic",
+    "tempoRange": [130, 150],
+    "intensity": 0.9
+  },
+  "duration": 180,
+  "unlockCondition": "act1_level4_complete"
+}

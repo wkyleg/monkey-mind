@@ -1,0 +1,99 @@
+{
+  "id": "act2_level4_atlantis_blueprint",
+  "act": 2,
+  "index": 4,
+  "title": "Atlantis Blueprint",
+  "subtitle": "The circuit nodes must be activated in order.",
+  "themeTags": ["atlantis", "puzzle", "circuits"],
+  "ruleCard": {
+    "icon": "circuit",
+    "hint": "Activate circuit nodes in sequence. The blueprint reveals the path.",
+    "mechanic": "sequence_kill",
+    "params": { "sequence": ["node_alpha", "node_beta", "node_gamma", "node_delta"] }
+  },
+  "enemyDeck": [
+    { "archetype": "shieldbearer", "modifiers": ["bureaucratic"], "weight": 4 },
+    { "archetype": "drifter", "modifiers": [], "weight": 3 },
+    { "archetype": "sniper", "modifiers": [], "weight": 3 }
+  ],
+  "levelEnemies": {
+    "atlantean_guard": {
+      "visualId": "atlantean_guard",
+      "dialogue": {
+        "spawn": [
+          "INTRUDER DETECTED!",
+          "The city must be protected!",
+          "None shall pass!",
+          "For Atlantis eternal!",
+          "The archives are sacred!"
+        ],
+        "death": [
+          "The city... falls... again...",
+          "I have... failed...",
+          "Atlantis... forgive me...",
+          "The waters... claim...",
+          "Poseidon... receive me..."
+        ]
+      }
+    },
+    "circuit_node": {
+      "visualId": "circuit_node",
+      "dialogue": {
+        "spawn": [
+          "SEQUENCE INITIATED",
+          "Power flowing...",
+          "Node online!",
+          "Connection established!",
+          "Awaiting activation!"
+        ],
+        "death": [
+          "SEQUENCE BROKEN",
+          "Power... fluctuating...",
+          "Node... offline...",
+          "Connection... lost...",
+          "Rebooting... failed..."
+        ]
+      }
+    },
+    "orichalcum_construct": {
+      "visualId": "orichalcum_construct",
+      "dialogue": {
+        "spawn": [
+          "Ancient metal awakens!",
+          "The alloy remembers!",
+          "Orichalcum never rusts!",
+          "Built to last forever!",
+          "Metal from the gods!"
+        ],
+        "death": [
+          "Even orichalcum... breaks...",
+          "The alloy... fails...",
+          "Entropy... wins...",
+          "Returning... to ore...",
+          "The forge... grows cold..."
+        ]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "circuit_barrier", "lanes": [1, 3, 5], "timing": 10000, "damage": 0, "visual": "energy_wall" }
+  ],
+  "bgLayers": [
+    { "svgId": "atlantis", "parallaxSpeed": 0.1, "opacity": 0.6 },
+    { "svgId": "circuits", "parallaxSpeed": 0.3, "opacity": 0.5 },
+    { "svgId": "ruins", "parallaxSpeed": 0.5, "opacity": 0.4 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The circuit nodes must be activated in order.",
+    "codexSnippet": "Atlantis was not a city. It was a server farm. The ocean did not swallow it - it was submerged intentionally, to cool the processors.",
+    "radioWhisper": "The coordinates spell out 'REMEMBER' in ancient Greek."
+  },
+  "musicSeed": {
+    "seed": "atlantis_004",
+    "mode": "dorian",
+    "tempoRange": [90, 100],
+    "intensity": 0.6
+  },
+  "duration": 130,
+  "unlockCondition": "act2_level3_complete"
+}

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Painting frame that mimics player -->
+  <g transform="translate(30,30)">
+    <!-- Frame -->
+    <rect x="-22" y="-25" width="44" height="50" fill="#8b4513" stroke="#daa520" stroke-width="3"/>
+    <rect x="-18" y="-21" width="36" height="42" fill="#2a1a0a"/>
+    
+    <!-- Canvas interior -->
+    <rect x="-16" y="-19" width="32" height="38" fill="#3a2a1a"/>
+    
+    <!-- Distorted face (player reflection) -->
+    <g opacity="0.7">
+      <!-- Face shape -->
+      <ellipse cx="0" cy="0" rx="12" ry="15" fill="#deb887"/>
+      
+      <!-- Eyes (watching) -->
+      <ellipse cx="-5" cy="-5" rx="4" ry="3" fill="#fff"/>
+      <ellipse cx="5" cy="-5" rx="4" ry="3" fill="#fff"/>
+      <circle cx="-5" cy="-5" r="2" fill="#000">
+        <animate attributeName="cx" values="-6;-4;-6" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="5" cy="-5" r="2" fill="#000">
+        <animate attributeName="cx" values="4;6;4" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      
+      <!-- Creepy smile -->
+      <path d="M-8,8 Q0,15 8,8" stroke="#8b0000" stroke-width="2" fill="none"/>
+    </g>
+    
+    <!-- Frame decorations -->
+    <g fill="#daa520">
+      <circle cx="-22" cy="-25" r="4"/>
+      <circle cx="22" cy="-25" r="4"/>
+      <circle cx="-22" cy="25" r="4"/>
+      <circle cx="22" cy="25" r="4"/>
+    </g>
+  </g>
+</svg>

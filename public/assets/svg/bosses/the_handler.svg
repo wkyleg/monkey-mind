@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <radialGradient id="handler_core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff6600"/>
+      <stop offset="60%" stop-color="#cc3300"/>
+      <stop offset="100%" stop-color="#660000"/>
+    </radialGradient>
+    <filter id="handler_glow">
+      <feGaussianBlur stdDeviation="3" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Lab coat silhouette -->
+  <path d="M30 35 L40 25 L60 20 L80 25 L90 35 L95 70 L85 110 L60 115 L35 110 L25 70 Z" 
+        fill="#1a1a2e" stroke="#ff6600" stroke-width="2"/>
+  <!-- Face - featureless except for glowing eyes -->
+  <ellipse cx="60" cy="40" rx="20" ry="18" fill="#2a2a3e"/>
+  <!-- Glowing eyes -->
+  <circle cx="52" cy="38" r="4" fill="#ff3300" filter="url(#handler_glow)">
+    <animate attributeName="r" values="4;5;4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="68" cy="38" r="4" fill="#ff3300" filter="url(#handler_glow)">
+    <animate attributeName="r" values="4;5;4" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+  </circle>
+  <!-- Clipboard/control device -->
+  <rect x="42" y="60" width="36" height="40" rx="3" fill="#333344" stroke="#ff6600"/>
+  <line x1="48" y1="68" x2="72" y2="68" stroke="#00ff00" stroke-width="2"/>
+  <line x1="48" y1="76" x2="66" y2="76" stroke="#00ff00" stroke-width="2"/>
+  <line x1="48" y1="84" x2="70" y2="84" stroke="#ff0000" stroke-width="2"/>
+  <!-- Reaching hands -->
+  <path d="M20 50 Q10 60 15 75 L25 70" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round">
+    <animate attributeName="d" values="M20 50 Q10 60 15 75 L25 70;M20 50 Q5 65 15 80 L25 75;M20 50 Q10 60 15 75 L25 70" dur="3s" repeatCount="indefinite"/>
+  </path>
+  <path d="M100 50 Q110 60 105 75 L95 70" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round">
+    <animate attributeName="d" values="M100 50 Q110 60 105 75 L95 70;M100 50 Q115 65 105 80 L95 75;M100 50 Q110 60 105 75 L95 70" dur="3s" repeatCount="indefinite" begin="1.5s"/>
+  </path>
+</svg>

@@ -1,0 +1,56 @@
+{
+  "id": "myth_level1_gilgamesh",
+  "expansion": "myth",
+  "index": 1,
+  "title": "The Epic of Gilgamesh",
+  "subtitle": "He who saw the Deep. The oldest story.",
+  "themeTags": ["gilgamesh", "mesopotamia", "immortality", "friendship"],
+  "ruleCard": {
+    "icon": "tablet",
+    "hint": "Enkidu fights beside you. Protect your friend.",
+    "mechanic": "companion_bond",
+    "params": { "companionHP": 50, "bondDamageShare": 0.3, "lossDebuff": 0.5 }
+  },
+  "enemyDeck": [
+    { "archetype": "boss_chassis", "modifiers": ["mythic"], "weight": 2, "visualId": "enemy_humbaba" },
+    { "archetype": "chaser", "modifiers": [], "weight": 4, "visualId": "enemy_scorpion_man" },
+    { "archetype": "sniper", "modifiers": [], "weight": 4, "visualId": "enemy_siduri" }
+  ],
+  "levelEnemies": {
+    "humbaba": {
+      "visualId": "humbaba",
+      "dialogue": {
+        "spawn": ["Guardian of the Cedar!", "Who disturbs my forest?", "Enlil commands me!", "Face divine wrath!", "The Cedar Forest burns!"],
+        "death": ["Forest... silent...", "Enlil... forgive...", "Guardian... falls...", "Wrath... spent...", "Cedars... freed..."]
+      }
+    },
+    "bull_of_heaven": {
+      "visualId": "bull_of_heaven",
+      "dialogue": {
+        "spawn": ["Ishtar's vengeance!", "Seven years of famine!", "Divine beast!", "Heaven's fury!", "Uruk trembles!"],
+        "death": ["Vengeance... complete...", "Famine... ends...", "Beast... mortal...", "Fury... calmed...", "Uruk... stands..."]
+      }
+    },
+    "utnapishtim": {
+      "visualId": "utnapishtim",
+      "dialogue": {
+        "spawn": ["You seek immortality!", "The flood survivor!", "I know the secret!", "Sleep for seven days!", "The plant grows deep!"],
+        "death": ["Seeking... ends...", "Flood... remembered...", "Secret... told...", "Sleep... came...", "Plant... lost..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "cedar_forest", "params": { "visibility": 0.6, "humbabaThreat": true } }],
+  "bgLayers": [
+    { "svgId": "uruk", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "cedar_forest", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "ziggurats", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Enkidu fights beside you. Protect your friend.",
+    "codexSnippet": "He who saw the Deep, the country's foundation, who knew the seas, was wise in all matters. The monkey seeks what Gilgamesh sought: meaning beyond death.",
+    "radioWhisper": "The life you seek you will never find."
+  },
+  "musicSeed": { "seed": "gilgamesh_001", "mode": "phrygian", "tempoRange": [60, 75], "intensity": 0.6 },
+  "duration": 120,
+  "unlockCondition": "act8_complete"
+}

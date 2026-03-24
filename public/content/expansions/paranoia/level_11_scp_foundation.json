@@ -1,0 +1,56 @@
+{
+  "id": "paranoia_level11_scp_foundation",
+  "expansion": "paranoia",
+  "index": 11,
+  "title": "SCP Foundation",
+  "subtitle": "Secure. Contain. Protect. The anomalies are real.",
+  "themeTags": ["scp", "foundation", "anomaly", "containment"],
+  "ruleCard": {
+    "icon": "facility",
+    "hint": "Containment breach. All SCPs are loose.",
+    "mechanic": "containment_breach",
+    "params": { "anomalySpawnRate": 2.0, "recontainmentBonus": 100 }
+  },
+  "enemyDeck": [
+    { "archetype": "chaser", "modifiers": [], "weight": 4, "visualId": "enemy_scp_173" },
+    { "archetype": "phaser", "modifiers": [], "weight": 4, "visualId": "enemy_scp_106" },
+    { "archetype": "anchor", "modifiers": [], "weight": 2, "visualId": "enemy_scp_999" }
+  ],
+  "levelEnemies": {
+    "scp_173": {
+      "visualId": "scp_173",
+      "dialogue": {
+        "spawn": ["Don't blink!", "The sculpture moves!", "Snapped neck!", "Direct eye contact!", "Class Euclid!"],
+        "death": ["Blinking... safe...", "Sculpture... still...", "Neck... intact...", "Eyes... closed...", "Contained..."]
+      }
+    },
+    "scp_096": {
+      "visualId": "scp_096",
+      "dialogue": {
+        "spawn": ["You looked at my face!", "Screaming!", "It won't stop running!", "Four pixels was enough!", "Class Keter!"],
+        "death": ["Didn't... look...", "Silent...", "Stopped...", "No image...", "Recontained..."]
+      }
+    },
+    "d_class": {
+      "visualId": "d_class",
+      "dialogue": {
+        "spawn": ["I'm just a test subject!", "Monthly termination!", "They don't tell us anything!", "Class D expendable!", "Please, I just want out!"],
+        "death": ["Not... expendable...", "Termination... cancelled...", "Truth... revealed...", "Class... upgraded...", "Freedom... granted..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "anomaly_breach", "params": { "breachDamage": 30, "containmentRadius": 80 } }],
+  "bgLayers": [
+    { "svgId": "foundation_facility", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "containment_cells", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "breach_alarms", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Containment breach. All SCPs are loose.",
+    "codexSnippet": "The SCP Foundation catalogs anomalies that threaten reality. The monkey enters the breached facility and learns that some things exist beyond explanation.",
+    "radioWhisper": "MTF Epsilon-11 designated Nine-Tailed Fox has entered the facility."
+  },
+  "musicSeed": { "seed": "scp_011", "mode": "industrial", "tempoRange": [70, 90], "intensity": 0.8 },
+  "duration": 180,
+  "unlockCondition": "paranoia_level10_complete"
+}

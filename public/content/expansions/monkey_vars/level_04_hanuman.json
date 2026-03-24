@@ -1,0 +1,56 @@
+{
+  "id": "monkey_vars_level4_hanuman",
+  "expansion": "monkey_vars",
+  "index": 4,
+  "title": "Hanuman",
+  "subtitle": "The divine monkey. Devotion incarnate.",
+  "themeTags": ["hanuman", "hindu", "devotion", "divine"],
+  "ruleCard": {
+    "icon": "devotion",
+    "hint": "Devotion grants power. Serve to become stronger.",
+    "mechanic": "devotion_power",
+    "params": { "devotionMultiplier": 2.0, "selfishnessPenalty": 50 }
+  },
+  "enemyDeck": [
+    { "archetype": "boss_chassis", "modifiers": ["mythic"], "weight": 3, "visualId": "enemy_alpha_ape" },
+    { "archetype": "chaser", "modifiers": ["liturgical"], "weight": 4, "visualId": "enemy_shadow_monkey" },
+    { "archetype": "courier", "modifiers": [], "weight": 3, "visualId": "enemy_baby_monkey" }
+  ],
+  "levelEnemies": {
+    "rakshasa_demon": {
+      "visualId": "rakshasa_demon",
+      "dialogue": {
+        "spawn": ["Hanuman's foe returns!", "Lanka burns again!", "Ravana's servant!", "Divine monkey, face me!", "The war continues!"],
+        "death": ["Lanka... falls...", "Ravana... mourns...", "Divine... victory...", "War... ends...", "Demon... vanquished..."]
+      }
+    },
+    "devotion_test": {
+      "visualId": "devotion_test",
+      "dialogue": {
+        "spawn": ["Prove your devotion!", "Serve without reward!", "Rama tests you!", "Faith requires sacrifice!", "The heart is weighed!"],
+        "death": ["Devotion... proven...", "Service... complete...", "Rama... pleased...", "Sacrifice... accepted...", "Heart... pure..."]
+      }
+    },
+    "mountain_bearer": {
+      "visualId": "mountain_bearer",
+      "dialogue": {
+        "spawn": ["I carry mountains!", "Hanuman's strength!", "Sanjeevani sought!", "No burden too great!", "For Rama, anything!"],
+        "death": ["Mountain... set down...", "Strength... shared...", "Sanjeevani... found...", "Burden... lifted...", "For Rama... done..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "devotion_trial", "params": { "testInterval": 12000, "faithBonus": 60 } }],
+  "bgLayers": [
+    { "svgId": "lanka", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "burning_city", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "divine_light", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Devotion grants power. Serve to become stronger.",
+    "codexSnippet": "Hanuman, the divine monkey, could move mountains for his lord Rama. Subject 47 discovers that devotion to something greater than oneself unlocks powers beyond measure.",
+    "radioWhisper": "The subject shows unprecedented strength when motivated by... purpose? Faith?"
+  },
+  "musicSeed": { "seed": "hanuman_004", "mode": "mixolydian", "tempoRange": [65, 80], "intensity": 0.7 },
+  "duration": 150,
+  "unlockCondition": "monkey_vars_level3_complete"
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="watchGlow"><feGaussianBlur stdDeviation="4"/></filter></defs>
+  <circle cx="30" cy="30" r="18" fill="#3a3a4a" opacity="0.3" filter="url(#watchGlow)"/>
+  <ellipse cx="30" cy="30" rx="10" ry="6" fill="#ffffff" opacity="0.5"/>
+  <circle cx="30" cy="30" r="4" fill="#000000" opacity="0.5"/>
+</svg>

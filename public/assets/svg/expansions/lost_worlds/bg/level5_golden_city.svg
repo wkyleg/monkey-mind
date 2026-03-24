@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="goldGlow"><feGaussianBlur stdDeviation="8"/></filter></defs>
+  <g fill="#cc9922" opacity="0.3" filter="url(#goldGlow)">
+    <polygon points="300,600 350,350 400,600"/><polygon points="400,600 470,300 540,600"/>
+    <polygon points="500,600 550,400 600,600"/>
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <g stroke="#666677" fill="none" stroke-width="3" opacity="0.3">
+    <line x1="200" y1="400" x2="350" y2="250"/>
+    <line x1="450" y1="380" x2="600" y2="230"/>
+  </g>
+  <g fill="#888899" opacity="0.2">
+    <rect x="190" y="395" width="30" height="10" transform="rotate(-45 205 400)"/>
+    <rect x="440" y="375" width="30" height="10" transform="rotate(-45 455 380)"/>
+  </g>
+</svg>

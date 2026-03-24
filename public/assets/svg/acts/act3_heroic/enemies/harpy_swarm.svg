@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#444455"/>
+      <stop offset="100%" style="stop-color:#222233"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Harpy creature -->
+  <g transform="translate(30,30)">
+    <!-- Wings -->
+    <g fill="url(#wingGrad)">
+      <!-- Left wing -->
+      <path d="M-5,-5 Q-25,-15 -25,5 Q-20,0 -15,-5 Q-20,5 -10,0">
+        <animate attributeName="d" values="M-5,-5 Q-25,-15 -25,5 Q-20,0 -15,-5 Q-20,5 -10,0;M-5,-5 Q-25,-5 -25,10 Q-20,5 -15,0 Q-20,10 -10,5;M-5,-5 Q-25,-15 -25,5 Q-20,0 -15,-5 Q-20,5 -10,0" dur="0.3s" repeatCount="indefinite"/>
+      </path>
+      <!-- Right wing -->
+      <path d="M5,-5 Q25,-15 25,5 Q20,0 15,-5 Q20,5 10,0">
+        <animate attributeName="d" values="M5,-5 Q25,-15 25,5 Q20,0 15,-5 Q20,5 10,0;M5,-5 Q25,-5 25,10 Q20,5 15,0 Q20,10 10,5;M5,-5 Q25,-15 25,5 Q20,0 15,-5 Q20,5 10,0" dur="0.3s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    
+    <!-- Body -->
+    <ellipse cx="0" cy="0" rx="8" ry="10" fill="#554455"/>
+    
+    <!-- Head -->
+    <circle cx="0" cy="-12" r="6" fill="#665566"/>
+    <!-- Eyes (angry) -->
+    <circle cx="-2" cy="-13" r="1.5" fill="#ffcc00"/>
+    <circle cx="2" cy="-13" r="1.5" fill="#ffcc00"/>
+    <!-- Beak -->
+    <polygon points="0,-10 -2,-7 2,-7" fill="#aa8800"/>
+    
+    <!-- Talons -->
+    <g fill="#444444">
+      <path d="M-4,10 L-6,18 L-4,15 L-2,18 L-2,10"/>
+      <path d="M4,10 L6,18 L4,15 L2,18 L2,10"/>
+    </g>
+    
+    <!-- Feather details -->
+    <g stroke="#333344" stroke-width="0.5" fill="none">
+      <line x1="-3" y1="-3" x2="-3" y2="5"/>
+      <line x1="0" y1="-2" x2="0" y2="6"/>
+      <line x1="3" y1="-3" x2="3" y2="5"/>
+    </g>
+  </g>
+</svg>

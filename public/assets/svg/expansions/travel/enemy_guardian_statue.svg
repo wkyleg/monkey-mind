@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Temple guardian statue -->
+  <g transform="translate(30,30)">
+    <!-- Base -->
+    <rect x="-15" y="15" width="30" height="10" fill="#4a4a4a"/>
+    
+    <!-- Body -->
+    <rect x="-10" y="-10" width="20" height="25" fill="#5a5a5a"/>
+    
+    <!-- Head with headdress -->
+    <rect x="-8" y="-22" width="16" height="15" fill="#6a6a6a"/>
+    <polygon points="-12,-22 0,-30 12,-22" fill="#8a6a2a"/>
+    
+    <!-- Face -->
+    <rect x="-6" y="-20" width="12" height="10" fill="#4a4a4a"/>
+    
+    <!-- Eyes (gem-like) -->
+    <rect x="-5" y="-18" width="3" height="4" fill="#00ffaa">
+      <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="2" y="-18" width="3" height="4" fill="#00ffaa">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Arms holding weapon -->
+    <rect x="-18" y="-8" width="8" height="18" fill="#5a5a5a"/>
+    <rect x="10" y="-8" width="8" height="18" fill="#5a5a5a"/>
+    
+    <!-- Spear -->
+    <rect x="-2" y="-25" width="4" height="50" fill="#8a6a2a"/>
+    <polygon points="0,-30 -4,-25 4,-25" fill="#aaa"/>
+    
+    <!-- Decorative carvings -->
+    <g stroke="#8a6a2a" stroke-width="1" fill="none">
+      <rect x="-6" y="-5" width="12" height="10"/>
+      <line x1="-6" y1="0" x2="6" y2="0"/>
+    </g>
+  </g>
+</svg>

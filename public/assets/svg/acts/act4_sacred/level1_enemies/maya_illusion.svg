@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><linearGradient id="mayaFade" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" style="stop-color:#6644aa;stop-opacity:0.8"/>
+    <stop offset="100%" style="stop-color:#332255;stop-opacity:0.2"/>
+  </linearGradient></defs>
+  <ellipse cx="30" cy="30" rx="22" ry="20" fill="url(#mayaFade)"/>
+  <circle cx="22" cy="25" r="4" fill="#aa88ff" opacity="0.6"/>
+  <circle cx="38" cy="25" r="4" fill="#aa88ff" opacity="0.6"/>
+  <path d="M 15 35 Q 30 45 45 35" fill="none" stroke="#8866cc" stroke-width="2" opacity="0.5"/>
+</svg>

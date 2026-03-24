@@ -1,0 +1,17 @@
+{
+  "id": "myth_level6_tao_te_ching",
+  "expansion": "myth",
+  "index": 6,
+  "title": "The Tao Te Ching",
+  "subtitle": "The way that can be spoken is not the eternal Way.",
+  "themeTags": ["tao", "laozi", "wu_wei", "naturalness"],
+  "levelEnemies": {
+    "striving_demon": { "visualId": "striving_demon", "dialogue": { "spawn": ["Push harder!", "Force your way!", "Control everything!", "Effort conquers!", "Will to power!"], "death": ["Effortless...", "Flowing...", "Yielding...", "Wu wei...", "Water wins..."] } },
+    "naming_trap": { "visualId": "naming_trap", "dialogue": { "spawn": ["Name it!", "Define it!", "Categorize!", "The named is limited!", "Words capture!"], "death": ["Unnamed...", "Beyond words...", "Categories... dissolve...", "Limitless...", "Silence..."] } },
+    "uncarved_block": { "visualId": "uncarved_block", "dialogue": { "spawn": ["Pure potential!", "Before distinction!", "The uncarved block!", "Simplicity!", "Return to origin!"], "death": ["Carved... whole...", "Distinction... unity...", "Block... complete...", "Simplicity... maintained...", "Origin... present..."] } }
+  },
+  "bgLayers": [{ "svgId": "mountain", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "mist", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "yin_yang", "parallaxSpeed": 0.2, "opacity": 0.6 }],
+  "copyLayers": { "codexSnippet": "The Tao that can be told is not the eternal Tao. The monkey learns that the way is found by not seeking." },
+  "musicSeed": { "seed": "tao_006", "mode": "pentatonic", "tempoRange": [35, 50], "intensity": 0.3 },
+  "duration": 140, "unlockCondition": "myth_level5_complete"
+}

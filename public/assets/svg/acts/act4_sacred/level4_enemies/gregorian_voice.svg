@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="voiceGlow"><feGaussianBlur stdDeviation="2"/></filter></defs>
+  <ellipse cx="30" cy="40" rx="14" ry="16" fill="#3a2a1a" stroke="#cc9966" stroke-width="2"/>
+  <circle cx="30" cy="20" r="10" fill="#3a2a1a" stroke="#cc9966" stroke-width="2"/>
+  <ellipse cx="30" cy="10" rx="12" ry="5" fill="#4a3a2a"/>
+  <ellipse cx="30" cy="28" rx="5" ry="3" fill="#000000"/>
+  <circle cx="30" cy="5" r="8" fill="none" stroke="#ffdd88" stroke-width="2" opacity="0.5" filter="url(#voiceGlow)"/>
+  <circle cx="30" cy="5" r="12" fill="none" stroke="#ffdd88" stroke-width="1" opacity="0.3"/>
+</svg>

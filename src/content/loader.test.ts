@@ -1,10 +1,10 @@
 /**
  * Content Loader Tests
- * 
+ *
  * Tests for content loading, caching, accessors, and error handling.
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Create a mock ContentLoader class for testing since the real one is a singleton
@@ -27,12 +27,12 @@ class TestableContentLoader {
       powerups: {} as Record<string, string>,
     },
   };
-  
+
   private loaded = false;
 
   async loadAll(): Promise<void> {
     if (this.loaded) return;
-    
+
     try {
       const indexResponse = await fetch('/content/index.json');
       if (!indexResponse.ok) {
@@ -40,9 +40,9 @@ class TestableContentLoader {
         this.loaded = true;
         return;
       }
-      
+
       const index = await indexResponse.json();
-      
+
       await Promise.all([
         this.loadSectors(index.sectors || []),
         this.loadEnemyPacks(index.enemyPacks || []),
@@ -51,9 +51,9 @@ class TestableContentLoader {
         this.loadWaves(index.waves || []),
         this.loadStrings(index.strings || []),
       ]);
-      
+
       this.loaded = true;
-    } catch (error) {
+    } catch (_error) {
       this.loadDefaults();
       this.loaded = true;
     }
@@ -70,9 +70,7 @@ class TestableContentLoader {
         palette: ['#1a1a2e', '#16213e', '#0f3460'],
         pattern: 'grid',
       },
-      levels: [
-        { id: '1-1', waves: ['wave_basic_1', 'wave_basic_2'] },
-      ],
+      levels: [{ id: '1-1', waves: ['wave_basic_1', 'wave_basic_2'] }],
       boss: 'cortex_auditor',
     });
 
@@ -252,7 +250,7 @@ describe('ContentLoader', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     loader = new TestableContentLoader();
-    
+
     mockFetch = vi.fn();
     global.fetch = mockFetch;
   });
@@ -545,13 +543,13 @@ describe('ContentLoader', () => {
           json: async () => ({
             sectorId: 'sector1',
             waves: {
-              'wave_test_1': {
+              wave_test_1: {
                 pattern: 'line',
                 enemy: 'synapse_drone',
                 count: 5,
                 entryDelayMs: 300,
               },
-              'wave_test_2': {
+              wave_test_2: {
                 pattern: 'grid',
                 enemy: 'synapse_drone',
                 rows: 2,
@@ -570,7 +568,7 @@ describe('ContentLoader', () => {
       expect(wave1).toBeDefined();
       expect(wave1?.id).toBe('wave_test_1');
       expect(wave1?.pattern).toBe('line');
-      
+
       expect(wave2).toBeDefined();
       expect(wave2?.id).toBe('wave_test_2');
       expect(wave2?.pattern).toBe('grid');
@@ -738,7 +736,7 @@ describe('ContentLoader', () => {
 
     it('should have correct enemy structure', () => {
       const enemy = loader.getEnemy('synapse_drone');
-      
+
       expect(enemy).toHaveProperty('id');
       expect(enemy).toHaveProperty('name');
       expect(enemy).toHaveProperty('tier');
@@ -751,7 +749,7 @@ describe('ContentLoader', () => {
 
     it('should have correct boss structure', () => {
       const boss = loader.getBoss('cortex_auditor');
-      
+
       expect(boss).toHaveProperty('id');
       expect(boss).toHaveProperty('name');
       expect(boss).toHaveProperty('hp');
@@ -761,7 +759,7 @@ describe('ContentLoader', () => {
 
     it('should have correct sector structure', () => {
       const sector = loader.getSector('sector1_neural_cage');
-      
+
       expect(sector).toHaveProperty('id');
       expect(sector).toHaveProperty('name');
       expect(sector).toHaveProperty('levels');
@@ -770,7 +768,7 @@ describe('ContentLoader', () => {
 
     it('should have correct powerup structure', () => {
       const powerup = loader.getPowerup('calm_shield');
-      
+
       expect(powerup).toHaveProperty('id');
       expect(powerup).toHaveProperty('name');
       expect(powerup).toHaveProperty('category');
@@ -781,7 +779,7 @@ describe('ContentLoader', () => {
 
     it('should have correct wave structure', () => {
       const wave = loader.getWave('wave_basic_1');
-      
+
       expect(wave).toHaveProperty('id');
       expect(wave).toHaveProperty('pattern');
       expect(wave).toHaveProperty('enemy');

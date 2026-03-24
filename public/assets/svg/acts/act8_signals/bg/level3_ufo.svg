@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs><filter id="ufoGlow"><feGaussianBlur stdDeviation="5"/></filter></defs>
+  <ellipse cx="400" cy="150" rx="80" ry="25" fill="#666666" stroke="#888888" stroke-width="2"/>
+  <ellipse cx="400" cy="145" rx="40" ry="15" fill="#555555"/>
+  <g fill="#88ff88" opacity="0.5" filter="url(#ufoGlow)">
+    <circle cx="360" cy="150" r="5"/><circle cx="400" cy="150" r="5"/><circle cx="440" cy="150" r="5"/>
+  </g>
+  <polygon points="400,175 350,350 450,350" fill="#88ff88" opacity="0.2" filter="url(#ufoGlow)"/>
+</svg>

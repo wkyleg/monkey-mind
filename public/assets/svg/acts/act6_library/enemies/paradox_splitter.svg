@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Paradox entity that splits -->
+  <g transform="translate(30,30)">
+    <!-- Impossible triangle (Penrose) -->
+    <g stroke="#8855ff" stroke-width="3" fill="none">
+      <path d="M0,-18 L16,9 L-16,9 Z"/>
+      <!-- Impossible overlaps -->
+      <path d="M0,-10 L10,5"/>
+      <path d="M-10,5 L10,5"/>
+      <path d="M-10,5 L0,-10"/>
+    </g>
+    
+    <!-- Split indicator -->
+    <g fill="#8855ff" opacity="0.5">
+      <circle cx="-12" cy="12" r="5">
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="12" cy="12" r="5">
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+      </circle>
+    </g>
+    
+    <!-- Question marks -->
+    <text x="0" y="3" fill="#8855ff" font-size="12" text-anchor="middle" font-family="serif">?</text>
+  </g>
+</svg>

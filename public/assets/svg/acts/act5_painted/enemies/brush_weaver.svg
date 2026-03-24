@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Paintbrush creature that draws hazards -->
+  <g transform="translate(30,30)">
+    <!-- Brush handle -->
+    <rect x="-4" y="-25" width="8" height="30" fill="#8b4513"/>
+    <rect x="-3" y="-20" width="6" height="25" fill="#a0522d"/>
+    
+    <!-- Metal ferrule -->
+    <rect x="-5" y="5" width="10" height="8" fill="#c0c0c0"/>
+    <rect x="-5" y="5" width="10" height="2" fill="#a0a0a0"/>
+    
+    <!-- Brush bristles -->
+    <g fill="#1a1a0a">
+      <path d="M-6,13 Q-8,25 -4,28 L0,30 L4,28 Q8,25 6,13 Z"/>
+    </g>
+    
+    <!-- Paint on bristles -->
+    <g fill="#4169e1" opacity="0.8">
+      <path d="M-4,20 Q0,28 4,20 Q2,25 -2,25 Z"/>
+    </g>
+    
+    <!-- Eyes on handle -->
+    <g transform="translate(0,-10)">
+      <circle cx="-2" cy="0" r="2" fill="#fff"/>
+      <circle cx="2" cy="0" r="2" fill="#fff"/>
+      <circle cx="-2" cy="0" r="1" fill="#000"/>
+      <circle cx="2" cy="0" r="1" fill="#000"/>
+    </g>
+    
+    <!-- Paint trail -->
+    <path d="M0,30 Q10,40 5,50" stroke="#4169e1" stroke-width="3" fill="none" opacity="0.5">
+      <animate attributeName="d" values="M0,30 Q10,40 5,50;M0,30 Q-5,40 0,50;M0,30 Q10,40 5,50" dur="1s" repeatCount="indefinite"/>
+    </path>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <g stroke="#4a4a6a" stroke-width="3" fill="none" opacity="0.3">
+    <path d="M 400 300 Q 450 250 400 200 Q 350 150 400 100"/>
+    <path d="M 400 300 Q 350 350 400 400 Q 450 450 400 500"/>
+    <path d="M 400 300 Q 300 300 250 300 Q 200 300 150 300"/>
+    <path d="M 400 300 Q 500 300 550 300 Q 600 300 650 300"/>
+  </g>
+</svg>

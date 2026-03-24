@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Stained glass pattern -->
+  <g opacity="0.25">
+    <!-- Geometric stained glass sections -->
+    <polygon points="200,0 300,100 200,200 100,100" fill="#ff6600" stroke="#333" stroke-width="2"/>
+    <polygon points="0,0 100,100 0,200" fill="#0066ff" stroke="#333" stroke-width="2"/>
+    <polygon points="400,0 400,200 300,100" fill="#00ff66" stroke="#333" stroke-width="2"/>
+    
+    <polygon points="0,200 100,100 200,200 100,300" fill="#ffcc00" stroke="#333" stroke-width="2"/>
+    <polygon points="400,200 300,100 200,200 300,300" fill="#ff0066" stroke="#333" stroke-width="2"/>
+    
+    <polygon points="0,200 0,400 100,300" fill="#6600ff" stroke="#333" stroke-width="2"/>
+    <polygon points="400,200 400,400 300,300" fill="#00ffcc" stroke="#333" stroke-width="2"/>
+    
+    <polygon points="100,300 200,200 300,300 200,400" fill="#ff3300" stroke="#333" stroke-width="2"/>
+    
+    <polygon points="0,400 100,300 200,400 100,500" fill="#33ff00" stroke="#333" stroke-width="2"/>
+    <polygon points="400,400 300,300 200,400 300,500" fill="#ff00ff" stroke="#333" stroke-width="2"/>
+    
+    <polygon points="100,500 200,400 300,500 200,600" fill="#00aaff" stroke="#333" stroke-width="2"/>
+    <polygon points="0,400 0,600 100,500" fill="#ffaa00" stroke="#333" stroke-width="2"/>
+    <polygon points="400,400 400,600 300,500" fill="#00ff00" stroke="#333" stroke-width="2"/>
+  </g>
+  
+  <!-- Lead lines -->
+  <g stroke="#222" stroke-width="3" opacity="0.4">
+    <line x1="0" y1="0" x2="200" y2="200"/>
+    <line x1="400" y1="0" x2="200" y2="200"/>
+    <line x1="200" y1="200" x2="200" y2="600"/>
+    <line x1="0" y1="200" x2="400" y2="200"/>
+    <line x1="0" y1="400" x2="400" y2="400"/>
+  </g>
+</svg>

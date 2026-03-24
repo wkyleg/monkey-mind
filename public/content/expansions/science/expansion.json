@@ -1,0 +1,23 @@
+{
+  "id": "expansion_science",
+  "name": "Science & Mind",
+  "description": "10 levels exploring the scientific study of consciousness and reality.",
+  "unlockCondition": "act8_complete",
+  "levels": [
+    "expansions/science/level_01_schrodinger_cat.json",
+    "expansions/science/level_02_double_slit.json",
+    "expansions/science/level_03_simulation_hypothesis.json",
+    "expansions/science/level_04_boltzmann_brain.json",
+    "expansions/science/level_05_bicameral_mind.json",
+    "expansions/science/level_06_split_brain.json",
+    "expansions/science/level_07_blindsight.json",
+    "expansions/science/level_08_chinese_room.json",
+    "expansions/science/level_09_philosophical_zombie.json",
+    "expansions/science/level_10_hard_problem.json"
+  ],
+  "visualStyle": {
+    "backgrounds": ["science_bg_lab", "science_bg_quantum", "science_bg_brain", "science_bg_simulation"],
+    "enemyStyles": ["quantum", "neural", "philosophical"],
+    "palette": ["#0a1a2a", "#00ffff", "#ff00ff", "#ffffff", "#1a1a1a"]
+  }
+}

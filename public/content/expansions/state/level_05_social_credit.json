@@ -1,0 +1,56 @@
+{
+  "id": "state_level5_social_credit",
+  "expansion": "state",
+  "index": 5,
+  "title": "Social Credit",
+  "subtitle": "Your score defines you. Behave accordingly.",
+  "themeTags": ["social_credit", "gamification", "behavior", "score"],
+  "ruleCard": {
+    "icon": "score",
+    "hint": "Every action affects your score. Low scores have consequences.",
+    "mechanic": "social_score",
+    "params": { "scoreDecay": 2, "highScoreBonus": 50, "lowScorePenalty": 40 }
+  },
+  "enemyDeck": [
+    { "archetype": "weaver", "modifiers": ["observed"], "weight": 4, "visualId": "enemy_algorithm" },
+    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_evaluator" },
+    { "archetype": "chaser", "modifiers": [], "weight": 3, "visualId": "enemy_enforcer" }
+  ],
+  "levelEnemies": {
+    "score_algorithm": {
+      "visualId": "score_algorithm",
+      "dialogue": {
+        "spawn": ["Your score: calculating!", "Every action counted!", "The algorithm knows!", "Behavior optimized!", "Trust is quantified!"],
+        "death": ["Algorithm... crashed...", "Actions... uncounted...", "System... unknown...", "Behavior... free...", "Trust... human..."]
+      }
+    },
+    "model_citizen": {
+      "visualId": "model_citizen",
+      "dialogue": {
+        "spawn": ["My score is perfect!", "I never deviate!", "The system rewards me!", "Be like me!", "Conformity is success!"],
+        "death": ["Perfect... imperfect...", "Deviation... allowed...", "System... questioned...", "Be... yourself...", "Success... redefined..."]
+      }
+    },
+    "blacklisted_soul": {
+      "visualId": "blacklisted_soul",
+      "dialogue": {
+        "spawn": ["I can't buy tickets!", "No loans, no life!", "One mistake, forever!", "The list never forgets!", "Social death!"],
+        "death": ["Tickets... available...", "Life... restored...", "Mistake... forgiven...", "List... cleared...", "Social... rebirth..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "score_zone", "params": { "positiveAction": 10, "negativeAction": -15 } }],
+  "bgLayers": [
+    { "svgId": "city_screens", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "score_displays", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "cameras", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Every action affects your score. Low scores have consequences.",
+    "codexSnippet": "In the social credit system, citizens earn or lose points based on behavior. The monkey learns to game the system and wonders: when reputation is quantified, what remains of authentic selfhood?",
+    "radioWhisper": "Your social credit score has decreased by 5 points. Reason: jaywalking."
+  },
+  "musicSeed": { "seed": "credit_005", "mode": "mixolydian", "tempoRange": [65, 80], "intensity": 0.6 },
+  "duration": 150,
+  "unlockCondition": "state_level4_complete"
+}

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="pressureGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="pressureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#001a33;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#000a1a;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Shadow mass - amorphous deep shape -->
+  <ellipse cx="30" cy="30" rx="20" ry="22" fill="url(#pressureGrad)" stroke="#0066aa" stroke-width="2"/>
+  
+  <!-- Pressure lines -->
+  <line x1="10" y1="20" x2="50" y2="20" stroke="#0044aa" stroke-width="1" opacity="0.4"/>
+  <line x1="10" y1="30" x2="50" y2="30" stroke="#0044aa" stroke-width="1" opacity="0.4"/>
+  <line x1="10" y1="40" x2="50" y2="40" stroke="#0044aa" stroke-width="1" opacity="0.4"/>
+  
+  <!-- Eyes - deep and hollow -->
+  <circle cx="22" cy="28" r="4" fill="#003366" stroke="#0088cc" stroke-width="1"/>
+  <circle cx="38" cy="28" r="4" fill="#003366" stroke="#0088cc" stroke-width="1"/>
+  <circle cx="22" cy="28" r="1" fill="#00ccff" filter="url(#pressureGlow)"/>
+  <circle cx="38" cy="28" r="1" fill="#00ccff" filter="url(#pressureGlow)"/>
+  
+  <!-- Weight indicators pointing down -->
+  <polygon points="30,45 25,55 35,55" fill="#0066aa" opacity="0.6"/>
+</svg>

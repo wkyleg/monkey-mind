@@ -1,0 +1,63 @@
+{
+  "id": "act5_level2_goya_night",
+  "act": 5,
+  "index": 2,
+  "title": "Goya Night",
+  "subtitle": "The sleep of reason produces monsters.",
+  "themeTags": ["goya", "darkness", "reason"],
+  "ruleCard": {
+    "icon": "spotlight",
+    "hint": "Unseen enemies lurk in darkness. Your spotlight cone reveals them.",
+    "mechanic": "dont_look_back",
+    "params": { "spotlightRadius": 100, "darknessSpawn": true }
+  },
+  "enemyDeck": [
+    { "archetype": "sniper", "modifiers": ["unseen"], "weight": 4 },
+    { "archetype": "chaser", "modifiers": [], "weight": 3 },
+    { "archetype": "phaser", "modifiers": [], "weight": 3 }
+  ],
+  "levelEnemies": {
+    "saturn_fragment": {
+      "visualId": "saturn_fragment",
+      "dialogue": {
+        "spawn": ["I devour my children!", "Time consumes all!", "The old god hungers!", "Nothing escapes!", "CRONOS FEEDS!"],
+        "death": ["Full... at last...", "The hunger... fades...", "My children... free...", "Time... stops...", "Regurgitating... legacy..."]
+      }
+    },
+    "witch_flight": {
+      "visualId": "witch_flight",
+      "dialogue": {
+        "spawn": ["To the sabbath!", "Broomstick ready!", "The coven gathers!", "Night belongs to us!", "Hexes incoming!"],
+        "death": ["Grounded... forever...", "The coven... mourns...", "No more... flying...", "Spell... broken...", "Burned... at stake..."]
+      }
+    },
+    "reason_sleeper": {
+      "visualId": "reason_sleeper",
+      "dialogue": {
+        "spawn": ["ZZZ... monsters...", "Dreaming nightmares!", "Don't wake me!", "Sleep logic!", "The unconscious attacks!"],
+        "death": ["Waking... up...", "Dream... ends...", "Reality... returns...", "The mind... clears...", "Rested... at last..."]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "darkness_zone", "lanes": [1, 2, 4, 5], "timing": 6000, "damage": 0, "visual": "shadow_creep" }
+  ],
+  "bgLayers": [
+    { "svgId": "night", "parallaxSpeed": 0.05, "opacity": 0.6 },
+    { "svgId": "monsters", "parallaxSpeed": 0.2, "opacity": 0.5 },
+    { "svgId": "spotlight", "parallaxSpeed": 0.4, "opacity": 0.7 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The sleep of reason produces monsters.",
+    "codexSnippet": "Goya's black paintings were never meant to be seen. The monkey learned that some truths are painted on the walls of rooms we never enter.",
+    "radioWhisper": "Caller says Saturn is eating his children again. Typical Tuesday."
+  },
+  "musicSeed": {
+    "seed": "goya_002",
+    "mode": "phrygian",
+    "tempoRange": [75, 90],
+    "intensity": 0.55
+  },
+  "duration": 110,
+  "unlockCondition": "act5_level1_complete"
+}

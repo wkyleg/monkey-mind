@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 60">
+  <!-- Auroch Ghost - Aggressive charging prehistoric bull (chaser) -->
+  <defs>
+    <filter id="paintBlur">
+      <feGaussianBlur stdDeviation="0.5"/>
+    </filter>
+  </defs>
+  
+  <g transform="translate(40,35)" filter="url(#paintBlur)">
+    <!-- Body mass -->
+    <ellipse cx="0" cy="0" rx="28" ry="15" fill="#8b4513" opacity="0.85"/>
+    
+    <!-- Head -->
+    <ellipse cx="-28" cy="-5" rx="14" ry="10" fill="#704010"/>
+    
+    <!-- Horns - curved and menacing -->
+    <g stroke="#5a3010" stroke-width="4" fill="none" stroke-linecap="round">
+      <path d="M-38,-10 Q-50,-25 -40,-30"/>
+      <path d="M-38,-10 Q-50,-25 -35,-35"/>
+    </g>
+    
+    <!-- Glowing eyes (angry) -->
+    <circle cx="-32" cy="-5" r="3" fill="#1a0a00"/>
+    <circle cx="-25" cy="-5" r="3" fill="#1a0a00"/>
+    <circle cx="-32" cy="-5" r="1.5" fill="#ff3300"/>
+    <circle cx="-25" cy="-5" r="1.5" fill="#ff3300"/>
+    
+    <!-- Legs (motion blur effect) -->
+    <g fill="#704010" opacity="0.8">
+      <rect x="-15" y="10" width="8" height="18" transform="rotate(-15,-11,10)"/>
+      <rect x="-5" y="10" width="8" height="18"/>
+      <rect x="8" y="10" width="8" height="18"/>
+      <rect x="18" y="10" width="8" height="16" transform="rotate(15,22,10)"/>
+    </g>
+    
+    <!-- Tail -->
+    <path d="M28,0 Q38,5 35,15" stroke="#5a3010" stroke-width="3" fill="none"/>
+    
+    <!-- Hump -->
+    <ellipse cx="-5" cy="-12" rx="12" ry="8" fill="#8b4513" opacity="0.7"/>
+    
+    <!-- Dust/motion lines -->
+    <g stroke="#c4713a" stroke-width="2" opacity="0.4">
+      <line x1="30" y1="-5" x2="45" y2="-5"/>
+      <line x1="30" y1="0" x2="48" y2="0"/>
+      <line x1="30" y1="5" x2="42" y2="5"/>
+    </g>
+  </g>
+</svg>

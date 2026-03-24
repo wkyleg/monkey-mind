@@ -1,0 +1,65 @@
+{
+  "id": "cyclopean_gate",
+  "name": "Cyclopean Gate",
+  "title": "The Single-Minded Watcher",
+  "hp": 120,
+  "phases": [
+    {
+      "hpThreshold": 1.0,
+      "pattern": "stationary",
+      "speedMod": 0.5,
+      "attacks": [
+        { "type": "gaze_beam", "cooldown": 4000, "damage": 2, "params": { "width": 100, "duration": 2000 } },
+        { "type": "stone_throw", "cooldown": 2500, "damage": 1, "params": { "count": 3 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.7,
+      "pattern": "sweep",
+      "speedMod": 0.8,
+      "attacks": [
+        { "type": "gaze_sweep", "cooldown": 3000, "damage": 2, "params": { "sweepSpeed": 100 } },
+        { "type": "summon", "cooldown": 12000, "damage": 0, "params": { "enemy": "drifter", "count": 5, "modifier": "observed" } }
+      ]
+    },
+    {
+      "hpThreshold": 0.4,
+      "pattern": "rage",
+      "speedMod": 1.2,
+      "attacks": [
+        { "type": "radial_gaze", "cooldown": 2500, "damage": 2, "params": { "beams": 4 } },
+        { "type": "boulder_rain", "cooldown": 5000, "damage": 1, "params": { "count": 8 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.15,
+      "pattern": "blind_rage",
+      "speedMod": 1.5,
+      "attacks": [
+        { "type": "wild_swing", "cooldown": 1500, "damage": 3, "params": { "radius": 150 } },
+        { "type": "desperate_gaze", "cooldown": 2000, "damage": 2, "params": { "random": true } }
+      ]
+    }
+  ],
+  "visual": {
+    "type": "custom",
+    "color": "#ffd700",
+    "size": 180,
+    "glow": true
+  },
+  "codexEntry": "The Cyclopean Gate was not built by the Cyclops - it IS the Cyclops, petrified into architecture by its own obsessive focus. The single eye still watches, still judges, still punishes those who meet its gaze. The monkey learned that sometimes the best way to defeat a watcher is to refuse to be watched.",
+  "defeatUnlocks": ["act4_sacred"],
+  "defeatQuote": "THE EYE... CLOSES... NOBODY... DEFEATED ME...",
+  "spawnText": [
+    "I SEE YOU",
+    "ONE TRUTH",
+    "FOCUS ON ME",
+    "THE GATE WATCHES"
+  ],
+  "deathText": [
+    "BLIND... AT LAST...",
+    "NOBODY... WAS HERE...",
+    "THE GATE... CRUMBLES...",
+    "VISION... FADES..."
+  ]
+}

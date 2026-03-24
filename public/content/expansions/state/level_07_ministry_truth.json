@@ -1,0 +1,56 @@
+{
+  "id": "state_level7_ministry_truth",
+  "expansion": "state",
+  "index": 7,
+  "title": "The Ministry of Truth",
+  "subtitle": "History is rewritten daily. Memory is the enemy.",
+  "themeTags": ["minitrue", "history", "memory", "revision"],
+  "ruleCard": {
+    "icon": "eraser",
+    "hint": "The past changes. Your memories contradict official history.",
+    "mechanic": "memory_revision",
+    "params": { "revisionChance": 0.4, "memoryBonus": 100 }
+  },
+  "enemyDeck": [
+    { "archetype": "weaver", "modifiers": ["bureaucratic"], "weight": 4, "visualId": "enemy_historian" },
+    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_memory_hole" },
+    { "archetype": "mimic", "modifiers": [], "weight": 3, "visualId": "enemy_unperson" }
+  ],
+  "levelEnemies": {
+    "memory_hole": {
+      "visualId": "memory_hole",
+      "dialogue": {
+        "spawn": ["Down the memory hole!", "This never happened!", "History erased!", "The past is mutable!", "Forget everything!"],
+        "death": ["Memory... preserved...", "It happened...", "History... fixed...", "Past... immutable...", "Remember... always..."]
+      }
+    },
+    "party_historian": {
+      "visualId": "party_historian",
+      "dialogue": {
+        "spawn": ["We have always been at war!", "Oceania has always been allied!", "The records show clearly!", "History is what we say!", "The Party is never wrong!"],
+        "death": ["War... had beginning...", "Alliance... changed...", "Records... honest...", "History... happened...", "Party... fallible..."]
+      }
+    },
+    "unperson_ghost": {
+      "visualId": "unperson_ghost",
+      "dialogue": {
+        "spawn": ["I never existed!", "My name was erased!", "Photos doctored!", "Memory purged!", "I am nobody!"],
+        "death": ["Existed... always...", "Name... restored...", "Photos... original...", "Memory... returns...", "You are... somebody..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "history_shift", "params": { "environmentChange": true, "memoryCheck": true } }],
+  "bgLayers": [
+    { "svgId": "archives", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "memory_holes", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "burning_papers", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The past changes. Your memories contradict official history.",
+    "codexSnippet": "The Ministry of Truth rewrites history daily. Yesterday's enemy becomes today's ally, and no one remembers differently. The monkey clings to memory as the last bulwark against total control.",
+    "radioWhisper": "Who controls the past controls the future. Who controls the present controls the past."
+  },
+  "musicSeed": { "seed": "ministry_007", "mode": "locrian", "tempoRange": [55, 70], "intensity": 0.6 },
+  "duration": 180,
+  "unlockCondition": "state_level6_complete"
+}

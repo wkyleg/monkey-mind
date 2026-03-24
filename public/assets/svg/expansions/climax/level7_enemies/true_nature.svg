@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="natureGlow"><feGaussianBlur stdDeviation="5"/></filter></defs>
+  <circle cx="30" cy="30" r="22" fill="#6a5a4a" opacity="0.6" filter="url(#natureGlow)"/>
+  <ellipse cx="30" cy="35" rx="14" ry="16" fill="#7a6a5a"/>
+  <circle cx="30" cy="20" r="10" fill="#7a6a5a"/>
+  <circle cx="26" cy="19" r="3" fill="#88aacc"/><circle cx="34" cy="19" r="3" fill="#88aacc"/>
+</svg>

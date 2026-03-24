@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Quantum particle (exists in superposition) -->
+  <g transform="translate(30,30)">
+    <!-- Probability cloud -->
+    <g opacity="0.3">
+      <circle cx="0" cy="0" r="20" fill="#4a90d9">
+        <animate attributeName="r" values="15;25;15" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    
+    <!-- Multiple superposition states -->
+    <g opacity="0.5">
+      <circle cx="-8" cy="0" r="6" fill="#d94a90">
+        <animate attributeName="cx" values="-8;8;-8" dur="1s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="8" cy="0" r="6" fill="#4a90d9">
+        <animate attributeName="cx" values="8;-8;8" dur="1s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.2;0.8;0.2" dur="1s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    
+    <!-- Central collapsed state -->
+    <circle cx="0" cy="0" r="4" fill="#ffffff">
+      <animate attributeName="opacity" values="0;1;0" dur="0.5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Orbital paths -->
+    <g stroke="#90d94a" stroke-width="0.5" fill="none" opacity="0.4">
+      <ellipse cx="0" cy="0" rx="15" ry="8">
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="3s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse cx="0" cy="0" rx="12" ry="10">
+        <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="2s" repeatCount="indefinite"/>
+      </ellipse>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Surveillance Eye - All-seeing stationary -->
+  <defs>
+    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ff00"/>
+      <stop offset="100%" stop-color="#004400" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <g transform="translate(30,30)">
+    <!-- Camera housing -->
+    <circle cx="0" cy="0" r="20" fill="#2a2a2a"/>
+    <circle cx="0" cy="0" r="17" fill="#1a1a1a"/>
+    
+    <!-- Lens rings -->
+    <circle cx="0" cy="0" r="14" fill="none" stroke="#3a3a3a" stroke-width="2"/>
+    <circle cx="0" cy="0" r="10" fill="none" stroke="#4a4a4a" stroke-width="1"/>
+    
+    <!-- Eye/lens -->
+    <circle cx="0" cy="0" r="8" fill="#001100"/>
+    <circle cx="0" cy="0" r="6" fill="#00ff00" opacity="0.8"/>
+    <circle cx="0" cy="0" r="3" fill="#000000"/>
+    <circle cx="1" cy="-1" r="1.5" fill="#ffffff"/>
+    
+    <!-- Recording indicator -->
+    <circle cx="12" cy="-12" r="3" fill="#ff0000"/>
+    
+    <!-- Scanning lines -->
+    <g stroke="#00ff00" stroke-width="0.5" fill="none" opacity="0.3">
+      <line x1="-25" y1="0" x2="25" y2="0"/>
+      <line x1="0" y1="-25" x2="0" y2="25"/>
+      <circle cx="0" cy="0" r="22"/>
+    </g>
+    
+    <!-- Glow effect -->
+    <circle cx="0" cy="0" r="25" fill="url(#eyeGlow)" opacity="0.3"/>
+    
+    <!-- Mounting bracket -->
+    <rect x="-5" y="18" width="10" height="8" fill="#3a3a3a"/>
+  </g>
+</svg>

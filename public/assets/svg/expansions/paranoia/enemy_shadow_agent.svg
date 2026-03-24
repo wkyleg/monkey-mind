@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 70">
+  <!-- Shadow Agent - Conspiracy chaser -->
+  <g transform="translate(30,35)">
+    <!-- Body in suit -->
+    <path d="M-12,25 L-15,-5 L0,-15 L15,-5 L12,25 Z" fill="#1a1a1a"/>
+    
+    <!-- Suit lapels -->
+    <g fill="#2a2a2a">
+      <path d="M-5,-10 L0,-5 L0,-15 Z"/>
+      <path d="M5,-10 L0,-5 L0,-15 Z"/>
+    </g>
+    
+    <!-- White shirt collar -->
+    <polygon points="-3,-12 0,-8 3,-12 0,-15" fill="#ffffff"/>
+    
+    <!-- Tie -->
+    <polygon points="0,-8 -2,5 0,10 2,5" fill="#2a0a0a"/>
+    
+    <!-- Head -->
+    <ellipse cx="0" cy="-22" rx="10" ry="12" fill="#e8d4b8"/>
+    
+    <!-- Sunglasses (reflective) -->
+    <g fill="#000000">
+      <ellipse cx="-5" cy="-24" rx="5" ry="3"/>
+      <ellipse cx="5" cy="-24" rx="5" ry="3"/>
+      <rect x="-1" y="-25" width="2" height="2"/>
+    </g>
+    <!-- Reflection in glasses -->
+    <g fill="#ffffff" opacity="0.3">
+      <ellipse cx="-6" cy="-25" rx="2" ry="1"/>
+      <ellipse cx="4" cy="-25" rx="2" ry="1"/>
+    </g>
+    
+    <!-- Earpiece -->
+    <path d="M10,-22 Q15,-20 12,-15" stroke="#3a3a3a" stroke-width="2" fill="none"/>
+    <circle cx="10" cy="-22" r="2" fill="#3a3a3a"/>
+    
+    <!-- Fedora hat -->
+    <g fill="#1a1a1a">
+      <ellipse cx="0" cy="-32" rx="12" ry="4"/>
+      <path d="M-8,-32 Q-10,-42 0,-44 Q10,-42 8,-32 Z"/>
+    </g>
+    
+    <!-- Subtle question marks (paranoia) -->
+    <g fill="#ff0000" opacity="0.2" font-size="8">
+      <text x="-20" y="-10">?</text>
+      <text x="15" y="5">?</text>
+    </g>
+  </g>
+</svg>

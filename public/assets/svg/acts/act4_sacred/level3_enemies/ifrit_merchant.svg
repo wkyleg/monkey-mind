@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="fireGlow"><feGaussianBlur stdDeviation="2"/></filter></defs>
+  <ellipse cx="30" cy="38" rx="14" ry="16" fill="#aa3300" stroke="#ff6600" stroke-width="2"/>
+  <circle cx="30" cy="18" r="10" fill="#aa3300" stroke="#ff6600" stroke-width="2"/>
+  <polygon points="20,8 30,0 40,8" fill="#ff6600" filter="url(#fireGlow)"/>
+  <polygon points="18,12 25,5 22,15" fill="#ffaa00" filter="url(#fireGlow)"/>
+  <polygon points="42,12 35,5 38,15" fill="#ffaa00" filter="url(#fireGlow)"/>
+  <circle cx="24" cy="17" r="3" fill="#ffff00"/><circle cx="36" cy="17" r="3" fill="#ffff00"/>
+</svg>

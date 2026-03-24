@@ -1,0 +1,18 @@
+{
+  "id": "expansion_lost_worlds",
+  "name": "Lost Worlds",
+  "description": "5 levels exploring legendary lost civilizations and hidden places.",
+  "unlockCondition": "act8_complete",
+  "levels": [
+    "expansions/lost_worlds/level_01_atlantis.json",
+    "expansions/lost_worlds/level_02_lemuria.json",
+    "expansions/lost_worlds/level_03_shambhala.json",
+    "expansions/lost_worlds/level_04_hollow_earth.json",
+    "expansions/lost_worlds/level_05_el_dorado.json"
+  ],
+  "visualStyle": {
+    "backgrounds": ["lost_bg_underwater", "lost_bg_jungle", "lost_bg_mountain", "lost_bg_cavern", "lost_bg_gold"],
+    "enemyStyles": ["ancient", "guardian", "elemental"],
+    "palette": ["#1a4a6a", "#ffd700", "#2a5a2a", "#8b4513", "#4a0080"]
+  }
+}

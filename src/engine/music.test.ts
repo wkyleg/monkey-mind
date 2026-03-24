@@ -1,11 +1,11 @@
 /**
  * Music System Tests
- * 
+ *
  * Tests for procedural music moods, transitions, and controls.
  * Note: These tests mock the Web Audio API at a high level.
  */
 
-import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 // Create comprehensive mock for Web Audio API
 const createMockAudioContext = () => {
@@ -28,7 +28,7 @@ const createMockAudioContext = () => {
   };
 
   const mockGain = {
-    gain: { 
+    gain: {
       value: 0,
       setValueAtTime: vi.fn(),
       linearRampToValueAtTime: vi.fn(),
@@ -73,7 +73,7 @@ const createMockAudioContext = () => {
     currentTime: 0,
     sampleRate: 44100,
     destination: {},
-    
+
     createOscillator: vi.fn(() => ({ ...mockOscillator })),
     createGain: vi.fn(() => ({ ...mockGain })),
     createBiquadFilter: vi.fn(() => ({ ...mockFilter })),
@@ -83,13 +83,13 @@ const createMockAudioContext = () => {
     createAnalyser: vi.fn(() => ({ ...mockAnalyser })),
     createBuffer: vi.fn(() => ({ getChannelData: () => new Float32Array(44100) })),
     createBufferSource: vi.fn(() => ({ ...mockBufferSource })),
-    
-    resume: vi.fn().mockImplementation(function(this: { state: string }) { 
+
+    resume: vi.fn().mockImplementation(function (this: { state: string }) {
       this.state = 'running';
       return Promise.resolve();
     }),
-    
-    suspend: vi.fn().mockImplementation(function(this: { state: string }) {
+
+    suspend: vi.fn().mockImplementation(function (this: { state: string }) {
       this.state = 'suspended';
       return Promise.resolve();
     }),
@@ -135,7 +135,7 @@ describe('ProceduralMusic', () => {
   it('should track playing state', async () => {
     const { ProceduralMusic } = await import('./music');
     const music = new ProceduralMusic();
-    
+
     expect(music.isPlaying()).toBe(false);
     music.start();
     expect(music.isPlaying()).toBe(true);
@@ -146,7 +146,7 @@ describe('ProceduralMusic', () => {
   it('should toggle mute', async () => {
     const { ProceduralMusic } = await import('./music');
     const music = new ProceduralMusic();
-    
+
     expect(music.isMuted()).toBe(false);
     music.toggleMute();
     expect(music.isMuted()).toBe(true);
@@ -175,7 +175,7 @@ describe('ProceduralMusic', () => {
   it('should set sector mood without crashing', async () => {
     const { ProceduralMusic } = await import('./music');
     const music = new ProceduralMusic();
-    
+
     for (let i = 1; i <= 5; i++) {
       expect(() => music.setMood(`sector${i}` as any)).not.toThrow();
     }
@@ -185,37 +185,37 @@ describe('ProceduralMusic', () => {
     const { ProceduralMusic } = await import('./music');
     const music = new ProceduralMusic();
     music.start();
-    expect(() => music.update(1/60)).not.toThrow();
+    expect(() => music.update(1 / 60)).not.toThrow();
   });
 
   it('should update without crashing when stopped', async () => {
     const { ProceduralMusic } = await import('./music');
     const music = new ProceduralMusic();
-    expect(() => music.update(1/60)).not.toThrow();
+    expect(() => music.update(1 / 60)).not.toThrow();
   });
 
   it('should handle rapid start/stop cycles', async () => {
     const { ProceduralMusic } = await import('./music');
     const music = new ProceduralMusic();
-    
+
     for (let i = 0; i < 10; i++) {
       music.start();
       music.stop();
     }
-    
+
     expect(music.isPlaying()).toBe(false);
   });
 
   it('should preserve mute state across mood changes', async () => {
     const { ProceduralMusic } = await import('./music');
     const music = new ProceduralMusic();
-    
+
     music.toggleMute();
     expect(music.isMuted()).toBe(true);
-    
+
     music.setMenuMood();
     expect(music.isMuted()).toBe(true);
-    
+
     music.setBossMood();
     expect(music.isMuted()).toBe(true);
   });
@@ -223,16 +223,64 @@ describe('ProceduralMusic', () => {
   it('should handle multiple mood changes while playing', async () => {
     const { ProceduralMusic } = await import('./music');
     const music = new ProceduralMusic();
-    
+
     music.start();
-    
+
     expect(() => {
       music.setMenuMood();
       music.setBossMood();
       music.setIntroMood();
       music.setMenuMood();
     }).not.toThrow();
-    
+
     expect(music.isPlaying()).toBe(true);
+  });
+
+  it('should set Act mood without crashing', async () => {
+    const { ProceduralMusic } = await import('./music');
+    const music = new ProceduralMusic();
+
+    const actIds = [
+      'act1_escape',
+      'act2_ocean',
+      'act3_heroic',
+      'act4_sacred',
+      'act5_painted',
+      'act6_library',
+      'act7_machine',
+      'act8_signals',
+    ];
+
+    for (const actId of actIds) {
+      expect(() => music.setActMood(actId, 0)).not.toThrow();
+      expect(() => music.setActMood(actId, 2)).not.toThrow();
+      expect(() => music.setActMood(actId, 4)).not.toThrow();
+    }
+  });
+
+  it('should vary music parameters per level within an Act', async () => {
+    const { ProceduralMusic } = await import('./music');
+    const music = new ProceduralMusic();
+
+    // Test that setActMood doesn't throw for different level indices
+    music.start();
+
+    expect(() => {
+      music.setActMood('act1_escape', 0);
+      music.setActMood('act1_escape', 1);
+      music.setActMood('act1_escape', 2);
+      music.setActMood('act1_escape', 3);
+      music.setActMood('act1_escape', 4);
+    }).not.toThrow();
+
+    expect(music.isPlaying()).toBe(true);
+  });
+
+  it('should handle unknown Act ID gracefully', async () => {
+    const { ProceduralMusic } = await import('./music');
+    const music = new ProceduralMusic();
+
+    // Unknown act should fall back to neural/default
+    expect(() => music.setActMood('unknown_act', 0)).not.toThrow();
   });
 });

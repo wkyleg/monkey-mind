@@ -1,0 +1,56 @@
+{
+  "id": "paranoia_level3_men_in_black",
+  "expansion": "paranoia",
+  "index": 3,
+  "title": "Men in Black",
+  "subtitle": "They visit witnesses. They make you forget.",
+  "themeTags": ["mib", "witnesses", "intimidation", "memory"],
+  "ruleCard": {
+    "icon": "hat",
+    "hint": "Your memories are being erased. Remember before it's too late.",
+    "mechanic": "memory_wipe",
+    "params": { "wipeChance": 0.3, "retentionBonus": 70 }
+  },
+  "enemyDeck": [
+    { "archetype": "chaser", "modifiers": [], "weight": 5, "visualId": "enemy_mib" },
+    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_black_car" },
+    { "archetype": "drifter", "modifiers": [], "weight": 2, "visualId": "enemy_neuralyzer" }
+  ],
+  "levelEnemies": {
+    "man_in_black": {
+      "visualId": "man_in_black",
+      "dialogue": {
+        "spawn": ["You saw nothing!", "We need to talk!", "Forget what you know!", "The visit is routine!", "Your memory is unreliable!"],
+        "death": ["I saw... everything...", "Nothing... to say...", "I remember...", "Visit... over...", "Memory... reliable..."]
+      }
+    },
+    "black_sedan": {
+      "visualId": "black_sedan",
+      "dialogue": {
+        "spawn": ["Following!", "No plates!", "They know where you live!", "The car appears at night!", "You can't escape!"],
+        "death": ["Lost... them...", "Plates... found...", "Home... safe...", "Daylight... now...", "Escaped..."]
+      }
+    },
+    "memory_device": {
+      "visualId": "memory_device",
+      "dialogue": {
+        "spawn": ["Look at the light!", "You will forget!", "This never happened!", "The flash erases!", "Nothing to remember!"],
+        "death": ["Looking... away...", "Remembering...", "This... happened...", "Flash... missed...", "Everything... remembered..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "memory_erasure", "params": { "erasureRadius": 100, "partialRetention": 0.5 } }],
+  "bgLayers": [
+    { "svgId": "suburban_street", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "black_cars", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "surveillance", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Your memories are being erased. Remember before it's too late.",
+    "codexSnippet": "UFO witnesses report visits from strange men in black suits who demand silence. The monkey confronts the Men in Black and learns that some memories are worth fighting for.",
+    "radioWhisper": "They showed me a light. I don't remember what I saw anymore."
+  },
+  "musicSeed": { "seed": "mib_003", "mode": "phrygian", "tempoRange": [50, 65], "intensity": 0.5 },
+  "duration": 120,
+  "unlockCondition": "paranoia_level2_complete"
+}

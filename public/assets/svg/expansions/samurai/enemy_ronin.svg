@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Ronin warrior -->
+  <g transform="translate(30,30)">
+    <!-- Hakama (pants) -->
+    <polygon points="-8,5 -12,25 0,25 0,5" fill="#1a1a3a"/>
+    <polygon points="8,5 12,25 0,25 0,5" fill="#2a2a4a"/>
+    
+    <!-- Gi (upper) -->
+    <polygon points="-10,-5 -12,5 12,5 10,-5" fill="#4a4a4a"/>
+    
+    <!-- Obi (belt) -->
+    <rect x="-10" y="2" width="20" height="4" fill="#3a1a1a"/>
+    
+    <!-- Head -->
+    <circle cx="0" cy="-12" r="8" fill="#d4b896"/>
+    
+    <!-- Topknot -->
+    <ellipse cx="0" cy="-20" rx="3" ry="5" fill="#1a1a1a"/>
+    
+    <!-- Face -->
+    <line x1="-3" y1="-14" x2="-1" y2="-13" stroke="#1a1a1a" stroke-width="1"/>
+    <line x1="3" y1="-14" x2="1" y2="-13" stroke="#1a1a1a" stroke-width="1"/>
+    <line x1="-2" y1="-9" x2="2" y2="-9" stroke="#1a1a1a" stroke-width="1"/>
+    
+    <!-- Katana -->
+    <g transform="rotate(-30)">
+      <rect x="10" y="-2" width="25" height="2" fill="#8a8a8a"/>
+      <rect x="8" y="-3" width="4" height="4" fill="#1a0a00"/>
+      <rect x="0" y="-2" width="10" height="2" fill="#4a3a2a"/>
+    </g>
+    
+    <!-- Arm holding sword -->
+    <ellipse cx="12" cy="-2" rx="4" ry="6" fill="#4a4a4a"/>
+    
+    <!-- Battle damage -->
+    <g stroke="#6a0a0a" stroke-width="0.5" opacity="0.5">
+      <line x1="-8" y1="10" x2="-5" y2="15"/>
+      <line x1="6" y1="0" x2="9" y2="3"/>
+    </g>
+  </g>
+</svg>

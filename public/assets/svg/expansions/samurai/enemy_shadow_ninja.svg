@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 70">
+  <!-- Shadow Ninja - Fast, phasing enemy -->
+  <defs>
+    <linearGradient id="ninjaFade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1a1a2a" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#1a1a2a" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#1a1a2a" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  
+  <g transform="translate(30,35)">
+    <!-- Body (sleek) -->
+    <ellipse cx="0" cy="5" rx="12" ry="18" fill="url(#ninjaFade)"/>
+    
+    <!-- Head wrap -->
+    <circle cx="0" cy="-15" r="12" fill="#1a1a2a"/>
+    
+    <!-- Exposed eyes only -->
+    <rect x="-12" y="-18" width="24" height="6" fill="#0a0a1a"/>
+    <circle cx="-5" cy="-15" r="2" fill="#ffffff"/>
+    <circle cx="5" cy="-15" r="2" fill="#ffffff"/>
+    <circle cx="-5" cy="-15" r="1" fill="#000000"/>
+    <circle cx="5" cy="-15" r="1" fill="#000000"/>
+    
+    <!-- Scarf trailing -->
+    <g fill="#2a2a3a" opacity="0.7">
+      <path d="M-10,-12 Q-20,-8 -25,-15 Q-30,-22 -25,-28"/>
+      <path d="M10,-12 Q20,-5 28,-10"/>
+    </g>
+    
+    <!-- Arms with blade -->
+    <g stroke="#1a1a2a" stroke-width="4" fill="none">
+      <path d="M-12,0 L-20,-5"/>
+      <path d="M12,0 L20,-5"/>
+    </g>
+    
+    <!-- Katana -->
+    <g transform="translate(20,-5) rotate(-30)">
+      <rect x="-1" y="-25" width="2" height="30" fill="#aaaaaa"/>
+      <rect x="-2" y="3" width="4" height="6" fill="#4a3020"/>
+    </g>
+    
+    <!-- Motion blur/afterimages -->
+    <g opacity="0.2">
+      <ellipse cx="-15" cy="5" rx="10" ry="15" fill="#1a1a2a"/>
+      <ellipse cx="15" cy="5" rx="10" ry="15" fill="#1a1a2a"/>
+    </g>
+    
+    <!-- Smoke bombs -->
+    <g fill="#4a4a5a" opacity="0.4">
+      <circle cx="-8" cy="25" r="4"/>
+      <circle cx="5" cy="28" r="3"/>
+    </g>
+  </g>
+</svg>

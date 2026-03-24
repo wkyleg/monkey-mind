@@ -2,11 +2,11 @@
  * Wave spawning system
  */
 
-import type { WaveData, LevelData } from '../content/schema';
-import type { EnemySystem, Enemy } from './enemies';
-import { contentLoader } from '../content/loader';
-import { events } from '../core/events';
 import { CONFIG } from '../config';
+import { contentLoader } from '../content/loader';
+import type { LevelData, WaveData } from '../content/schema';
+import { events } from '../core/events';
+import type { Enemy, EnemySystem } from './enemies';
 
 export interface SpawnCommand {
   enemyId: string;
@@ -26,20 +26,20 @@ export interface WaveState {
 export class Spawner {
   private enemySystem: EnemySystem;
   private screenWidth: number;
-  
+
   private waveQueue: string[] = [];
   private currentWave: WaveState | null = null;
   private waveNumber: number = 0;
-  
+
   private levelData: LevelData | null = null;
-  
+
   private spawnedEnemies: Set<Enemy> = new Set();
-  
+
   constructor(enemySystem: EnemySystem, screenWidth: number) {
     this.enemySystem = enemySystem;
     this.screenWidth = screenWidth;
   }
-  
+
   /**
    * Load a sector and start its first level
    */
@@ -49,12 +49,12 @@ export class Spawner {
       console.warn(`Sector not found: ${sectorId}`);
       return;
     }
-    
+
     if (sector.levels.length > 0) {
       this.loadLevel(sector.levels[0]);
     }
   }
-  
+
   /**
    * Load a specific level
    */
@@ -64,40 +64,40 @@ export class Spawner {
     this.waveNumber = 0;
     this.nextWave();
   }
-  
+
   /**
    * Start the next wave
    */
   private nextWave(): void {
     if (this.waveQueue.length === 0) {
       this.currentWave = null;
-      events.emit('level:complete', { 
-        levelId: this.levelData?.id ?? 'unknown', 
-        score: 0 
+      events.emit('level:complete', {
+        levelId: this.levelData?.id ?? 'unknown',
+        score: 0,
       });
       return;
     }
-    
+
     const waveId = this.waveQueue.shift()!;
     const waveData = contentLoader.getWave(waveId);
-    
+
     if (!waveData) {
       // Use default wave if not found
       this.currentWave = this.createDefaultWave(waveId);
     } else {
       this.currentWave = this.createWaveState(waveData);
     }
-    
+
     this.waveNumber++;
     events.emit('wave:start', { waveId, number: this.waveNumber });
   }
-  
+
   /**
    * Create wave state from wave data
    */
   private createWaveState(data: WaveData): WaveState {
     const commands: SpawnCommand[] = [];
-    
+
     // Handle waves with enemies array (new format)
     if (data.enemies && data.enemies.length > 0) {
       this.generateFromEnemiesArray(commands, data);
@@ -141,7 +141,7 @@ export class Spawner {
           this.generateLinePattern(commands, data);
       }
     }
-    
+
     return {
       waveId: data.id,
       commands,
@@ -150,26 +150,26 @@ export class Spawner {
       complete: false,
     };
   }
-  
+
   /**
    * Generate spawn commands from enemies array (new wave format)
    */
   private generateFromEnemiesArray(commands: SpawnCommand[], data: WaveData): void {
     if (!data.enemies) return;
-    
+
     const margin = 80;
     const usableWidth = this.screenWidth - margin * 2;
     let totalDelay = 0;
-    
+
     for (const enemyGroup of data.enemies) {
       const count = enemyGroup.count ?? 1;
       const groupDelay = enemyGroup.spawnDelayMs ?? data.entryDelayMs ?? 300;
       const behavior = enemyGroup.behavior ?? 'descend';
-      
+
       for (let i = 0; i < count; i++) {
         let x: number;
         let y = CONFIG.ENEMY_SPAWN_Y;
-        
+
         // Position based on behavior/pattern
         switch (behavior) {
           case 'zigzag':
@@ -177,12 +177,13 @@ export class Spawner {
             x = margin + (usableWidth / (count + 1)) * (i + 1);
             x += Math.sin(i * 0.7) * 30;
             break;
-          case 'orbit':
+          case 'orbit': {
             // Circular formation
             const angle = (i / count) * Math.PI * 2;
             x = this.screenWidth / 2 + Math.cos(angle) * (usableWidth / 3);
             y = CONFIG.ENEMY_SPAWN_Y - 50 + Math.sin(angle) * 50;
             break;
+          }
           case 'drift':
             // Random horizontal with vertical offset
             x = margin + Math.random() * usableWidth;
@@ -192,7 +193,7 @@ export class Spawner {
             // Default spread
             x = margin + (usableWidth / (count + 1)) * (i + 1);
         }
-        
+
         commands.push({
           enemyId: enemyGroup.type,
           x: this.clampX(x),
@@ -200,11 +201,11 @@ export class Spawner {
           delay: totalDelay + i * groupDelay,
         });
       }
-      
+
       totalDelay += count * groupDelay + (data.spawnDelayMs ?? 500);
     }
   }
-  
+
   /**
    * Clamp X position to playable area
    */
@@ -212,7 +213,7 @@ export class Spawner {
     const margin = 80; // Keep enemies away from edges
     return Math.max(margin, Math.min(this.screenWidth - margin, x));
   }
-  
+
   /**
    * Create a default wave (fallback)
    */
@@ -222,7 +223,7 @@ export class Spawner {
     const margin = 80;
     const usableWidth = this.screenWidth - margin * 2;
     const spacing = usableWidth / (count - 1);
-    
+
     for (let i = 0; i < count; i++) {
       commands.push({
         enemyId: 'synapse_drone',
@@ -231,7 +232,7 @@ export class Spawner {
         delay: i * 300,
       });
     }
-    
+
     return {
       waveId,
       commands,
@@ -240,7 +241,7 @@ export class Spawner {
       complete: false,
     };
   }
-  
+
   /**
    * Generate line pattern spawn commands
    */
@@ -249,7 +250,7 @@ export class Spawner {
     const margin = 80;
     const usableWidth = this.screenWidth - margin * 2;
     const spacing = usableWidth / (count + 1);
-    
+
     for (let i = 0; i < count; i++) {
       commands.push({
         enemyId: data.enemy,
@@ -259,7 +260,7 @@ export class Spawner {
       });
     }
   }
-  
+
   /**
    * Generate grid pattern spawn commands
    */
@@ -270,7 +271,7 @@ export class Spawner {
     const usableWidth = this.screenWidth - margin * 2;
     const spacingX = usableWidth / (cols + 1);
     const spacingY = 60;
-    
+
     let delay = 0;
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
@@ -284,7 +285,7 @@ export class Spawner {
       }
     }
   }
-  
+
   /**
    * Generate V formation spawn commands
    */
@@ -294,13 +295,13 @@ export class Spawner {
     const margin = 80;
     const maxSpread = (this.screenWidth - margin * 2) / 2;
     const spacing = Math.min(80, maxSpread / Math.floor(count / 2));
-    
+
     let delay = 0;
     for (let i = 0; i < count; i++) {
       const offset = Math.abs(i - Math.floor(count / 2));
       const x = centerX + (i - Math.floor(count / 2)) * spacing;
       const y = CONFIG.ENEMY_SPAWN_Y - offset * 40;
-      
+
       commands.push({
         enemyId: data.enemy,
         x: this.clampX(x),
@@ -310,14 +311,14 @@ export class Spawner {
       delay += data.entryDelayMs;
     }
   }
-  
+
   /**
    * Generate random pattern spawn commands
    */
   private generateRandomPattern(commands: SpawnCommand[], data: WaveData): void {
     const count = data.count ?? 8;
     const margin = 80;
-    
+
     for (let i = 0; i < count; i++) {
       commands.push({
         enemyId: data.enemy,
@@ -327,7 +328,7 @@ export class Spawner {
       });
     }
   }
-  
+
   /**
    * Generate mixed pattern spawn commands
    */
@@ -337,7 +338,7 @@ export class Spawner {
     const half = Math.floor(count / 2);
     const margin = 80;
     const usableWidth = this.screenWidth - margin * 2;
-    
+
     // First half in line
     const spacing = usableWidth / (half + 1);
     for (let i = 0; i < half; i++) {
@@ -348,7 +349,7 @@ export class Spawner {
         delay: i * data.entryDelayMs,
       });
     }
-    
+
     // Second half random
     for (let i = 0; i < count - half; i++) {
       commands.push({
@@ -359,7 +360,7 @@ export class Spawner {
       });
     }
   }
-  
+
   /**
    * Generate drift pattern - enemies float down with horizontal drift
    */
@@ -367,12 +368,12 @@ export class Spawner {
     const count = data.count ?? 6;
     const margin = 80;
     const usableWidth = this.screenWidth - margin * 2;
-    
+
     for (let i = 0; i < count; i++) {
       // Staggered spawn positions with drift offset
       const baseX = margin + (usableWidth / (count + 1)) * (i + 1);
       const drift = Math.sin(i * 1.2) * 40;
-      
+
       commands.push({
         enemyId: data.enemy,
         x: this.clampX(baseX + drift),
@@ -381,7 +382,7 @@ export class Spawner {
       });
     }
   }
-  
+
   /**
    * Generate wave pattern - enemies enter in sine-wave formation
    */
@@ -391,12 +392,12 @@ export class Spawner {
     const usableWidth = this.screenWidth - margin * 2;
     const centerX = this.screenWidth / 2;
     const amplitude = usableWidth / 3;
-    
+
     for (let i = 0; i < count; i++) {
       const phase = (i / count) * Math.PI * 2;
       const x = centerX + Math.sin(phase) * amplitude;
       const y = CONFIG.ENEMY_SPAWN_Y - Math.abs(Math.cos(phase)) * 60;
-      
+
       commands.push({
         enemyId: data.enemy,
         x: this.clampX(x),
@@ -405,7 +406,7 @@ export class Spawner {
       });
     }
   }
-  
+
   /**
    * Generate orbital pattern - enemies spawn in circular formations
    */
@@ -414,12 +415,12 @@ export class Spawner {
     const centerX = this.screenWidth / 2;
     const centerY = CONFIG.ENEMY_SPAWN_Y - 80;
     const radius = Math.min(150, (this.screenWidth - 160) / 2);
-    
+
     for (let i = 0; i < count; i++) {
       const angle = (i / count) * Math.PI * 2 - Math.PI / 2;
       const x = centerX + Math.cos(angle) * radius;
       const y = centerY + Math.sin(angle) * (radius * 0.6);
-      
+
       commands.push({
         enemyId: data.enemy,
         x: this.clampX(x),
@@ -428,7 +429,7 @@ export class Spawner {
       });
     }
   }
-  
+
   /**
    * Generate swarm pattern - clustered random positions
    */
@@ -436,23 +437,23 @@ export class Spawner {
     const count = data.count ?? 10;
     const margin = 100;
     const usableWidth = this.screenWidth - margin * 2;
-    
+
     // Pick 2-3 cluster centers
     const clusterCount = Math.min(3, Math.ceil(count / 4));
     const clusters: { x: number; y: number }[] = [];
-    
+
     for (let c = 0; c < clusterCount; c++) {
       clusters.push({
         x: margin + (usableWidth / (clusterCount + 1)) * (c + 1),
         y: CONFIG.ENEMY_SPAWN_Y - 30 - Math.random() * 50,
       });
     }
-    
+
     for (let i = 0; i < count; i++) {
       const cluster = clusters[i % clusters.length];
       const offsetX = (Math.random() - 0.5) * 100;
       const offsetY = (Math.random() - 0.5) * 60;
-      
+
       commands.push({
         enemyId: data.enemy,
         x: this.clampX(cluster.x + offsetX),
@@ -461,7 +462,7 @@ export class Spawner {
       });
     }
   }
-  
+
   /**
    * Generate pincer pattern - enemies from both sides
    */
@@ -469,7 +470,7 @@ export class Spawner {
     const count = data.count ?? 8;
     const half = Math.floor(count / 2);
     const margin = 80;
-    
+
     // Left side
     for (let i = 0; i < half; i++) {
       const y = CONFIG.ENEMY_SPAWN_Y - i * 30;
@@ -480,7 +481,7 @@ export class Spawner {
         delay: i * data.entryDelayMs,
       });
     }
-    
+
     // Right side
     for (let i = 0; i < count - half; i++) {
       const y = CONFIG.ENEMY_SPAWN_Y - i * 30;
@@ -492,7 +493,7 @@ export class Spawner {
       });
     }
   }
-  
+
   /**
    * Generate gauntlet pattern - continuous spawning stream
    */
@@ -502,16 +503,16 @@ export class Spawner {
     const usableWidth = this.screenWidth - margin * 2;
     const lanes = 5;
     const laneWidth = usableWidth / lanes;
-    
+
     for (let i = 0; i < count; i++) {
       // Alternate lanes with some randomness
       const baseLane = i % lanes;
       const laneOffset = (Math.random() - 0.5) * 0.5;
       const x = margin + laneWidth * (baseLane + 0.5 + laneOffset);
-      
+
       // Stagger Y positions slightly
       const yOffset = Math.random() * 30;
-      
+
       commands.push({
         enemyId: data.enemy,
         x: this.clampX(x),
@@ -520,7 +521,7 @@ export class Spawner {
       });
     }
   }
-  
+
   /**
    * Update spawner
    */
@@ -534,7 +535,7 @@ export class Spawner {
             this.spawnedEnemies.delete(enemy);
           }
         }
-        
+
         // Start next wave when all enemies cleared
         if (this.spawnedEnemies.size === 0) {
           events.emit('wave:complete', { waveId: this.currentWave.waveId });
@@ -543,9 +544,9 @@ export class Spawner {
       }
       return;
     }
-    
+
     this.currentWave.timer += dt * 1000;
-    
+
     // Spawn enemies according to commands
     while (
       this.currentWave.currentIndex < this.currentWave.commands.length &&
@@ -560,20 +561,20 @@ export class Spawner {
       }
       this.currentWave.currentIndex++;
     }
-    
+
     // Check if all spawns complete
     if (this.currentWave.currentIndex >= this.currentWave.commands.length) {
       this.currentWave.complete = true;
     }
   }
-  
+
   /**
    * Check if spawner is idle (no active waves or enemies)
    */
   isIdle(): boolean {
     return this.currentWave === null && this.waveQueue.length === 0;
   }
-  
+
   /**
    * Queue additional waves for endless mode
    */
@@ -583,14 +584,14 @@ export class Spawner {
       this.nextWave();
     }
   }
-  
+
   /**
    * Get current wave number
    */
   getWaveNumber(): number {
     return this.waveNumber;
   }
-  
+
   /**
    * Reset spawner
    */

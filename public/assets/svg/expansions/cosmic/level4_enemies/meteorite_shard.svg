@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="shardGlow"><feGaussianBlur stdDeviation="3"/></filter></defs>
+  <polygon points="30,5 45,25 40,50 20,50 15,25" fill="#3a3a4a" stroke="#5a5a6a" stroke-width="2"/>
+  <polygon points="30,15 38,28 35,42 25,42 22,28" fill="#ff88ff" opacity="0.5" filter="url(#shardGlow)"/>
+  <circle cx="30" cy="30" r="5" fill="#ffffff" opacity="0.6"/>
+</svg>

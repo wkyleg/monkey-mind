@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <filter id="homeGlow">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g fill="#ffaa44" opacity="0.3" filter="url(#homeGlow)">
+    <ellipse cx="700" cy="250" rx="40" ry="20"/>
+    <polygon points="700,250 680,200 720,200"/>
+    <rect x="690" y="230" width="20" height="20"/>
+  </g>
+  <text x="680" y="290" fill="#ffaa44" font-family="serif" font-size="12" opacity="0.5">ITHACA</text>
+</svg>

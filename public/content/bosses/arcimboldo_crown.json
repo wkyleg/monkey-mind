@@ -1,0 +1,74 @@
+{
+  "id": "arcimboldo_crown",
+  "name": "Arcimboldo Crown",
+  "title": "The Composite Emperor",
+  "hp": 150,
+  "phases": [
+    {
+      "hpThreshold": 1.0,
+      "pattern": "fruit_phase",
+      "speedMod": 0.7,
+      "attacks": [
+        { "type": "fruit_barrage", "cooldown": 2500, "damage": 1, "params": { "fruits": ["apple", "pear", "grape"], "count": 5 } },
+        { "type": "seed_spread", "cooldown": 5000, "damage": 1, "params": { "count": 8 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.75,
+      "pattern": "vegetable_phase",
+      "speedMod": 0.8,
+      "attacks": [
+        { "type": "root_attack", "cooldown": 2200, "damage": 1, "params": { "lanes": [1, 3, 5] } },
+        { "type": "vine_snare", "cooldown": 6000, "damage": 0, "params": { "slowDuration": 3000 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.5,
+      "pattern": "flower_phase",
+      "speedMod": 0.9,
+      "attacks": [
+        { "type": "pollen_cloud", "cooldown": 2000, "damage": 1, "params": { "radius": 80 } },
+        { "type": "thorn_burst", "cooldown": 4000, "damage": 2, "params": { "count": 12 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.25,
+      "pattern": "fish_phase",
+      "speedMod": 1.1,
+      "attacks": [
+        { "type": "scale_shot", "cooldown": 1800, "damage": 1, "params": { "pattern": "spiral" } },
+        { "type": "ink_cloud", "cooldown": 5000, "damage": 0, "params": { "blindDuration": 2000 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.1,
+      "pattern": "complete_form",
+      "speedMod": 1.3,
+      "attacks": [
+        { "type": "composite_beam", "cooldown": 1500, "damage": 3, "params": { "width": 150 } },
+        { "type": "identity_crisis", "cooldown": 3000, "damage": 2, "params": { "scramble": true } }
+      ]
+    }
+  ],
+  "visual": {
+    "type": "custom",
+    "color": "#44ff88",
+    "size": 180,
+    "glow": true
+  },
+  "codexEntry": "The Arcimboldo Crown is not a monster - it is a mirror. Every fruit, every vegetable, every flower and fish is a piece of the monkey's own identity, arranged into a face it does not recognize. To defeat it is to accept that the self is a composition, not a unity.",
+  "defeatUnlocks": ["act6_library"],
+  "defeatQuote": "THE FACE... DISSOLVES... THE PARTS... REMEMBER...",
+  "spawnText": [
+    "I AM WHAT YOU EAT",
+    "THE FACE ASSEMBLES",
+    "COMPOSITION BEGINS",
+    "BEHOLD YOUR REFLECTION"
+  ],
+  "deathText": [
+    "THE CROWN... WILTS...",
+    "PARTS... SCATTER...",
+    "IDENTITY... FREED...",
+    "THE FACE... WAS YOURS..."
+  ]
+}

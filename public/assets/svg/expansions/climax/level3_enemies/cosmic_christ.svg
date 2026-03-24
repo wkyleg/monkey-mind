@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="christGlow"><feGaussianBlur stdDeviation="5"/></filter></defs>
+  <ellipse cx="30" cy="30" rx="20" ry="25" fill="#ffcc88" opacity="0.3" filter="url(#christGlow)"/>
+  <line x1="30" y1="10" x2="30" y2="50" stroke="#ffcc44" stroke-width="3"/>
+  <line x1="15" y1="25" x2="45" y2="25" stroke="#ffcc44" stroke-width="3"/>
+</svg>

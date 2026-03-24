@@ -27,16 +27,29 @@
       }
     },
     {
-      "id": "calm_slow",
+      "id": "calm_time_slow",
       "name": "Time Dilation",
       "category": "calm",
-      "durationMs": 4000,
-      "effect": "slow_time",
-      "uiName": "SLOW",
-      "description": "Your perception accelerates. The world moves in slow motion.",
+      "durationMs": 5000,
+      "effect": "time_slow",
+      "uiName": "SLOW TIME",
+      "description": "Your perception accelerates. The world moves in slow motion around you.",
       "visual": {
         "color": "#aaffff",
         "icon": "clock"
+      }
+    },
+    {
+      "id": "calm_ghost",
+      "name": "Phase Shift",
+      "category": "calm",
+      "durationMs": 4000,
+      "effect": "ghost",
+      "uiName": "GHOST",
+      "description": "Become ethereal. Phase through enemies unharmed.",
+      "visual": {
+        "color": "#aa88ff",
+        "icon": "ghost"
       }
     }
   ]

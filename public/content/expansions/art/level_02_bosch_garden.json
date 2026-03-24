@@ -1,0 +1,56 @@
+{
+  "id": "art_level2_bosch_garden",
+  "expansion": "art",
+  "index": 2,
+  "title": "The Garden of Earthly Delights",
+  "subtitle": "Bosch's triptych. Paradise, Earth, Hell.",
+  "themeTags": ["bosch", "triptych", "surreal", "medieval"],
+  "ruleCard": {
+    "icon": "garden",
+    "hint": "Three panels, three rule sets. Shift between paradise, earth, and hell.",
+    "mechanic": "triptych_shift",
+    "params": { "paradiseBonus": 30, "earthNeutral": 0, "hellPenalty": -20 }
+  },
+  "enemyDeck": [
+    { "archetype": "phaser", "modifiers": ["mythic"], "weight": 4, "visualId": "enemy_bosch_demon" },
+    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_bird_man" },
+    { "archetype": "swarm", "modifiers": [], "weight": 3, "visualId": "enemy_fruit_creature" }
+  ],
+  "levelEnemies": {
+    "bird_demon": {
+      "visualId": "bird_demon",
+      "dialogue": {
+        "spawn": ["From the right panel!", "Hell's servant!", "Bosch saw me!", "The triptych opens!", "Medieval nightmare!"],
+        "death": ["Panel... closes...", "Hell... recedes...", "Unseen... again...", "Triptych... folds...", "Nightmare... ends..."]
+      }
+    },
+    "fruit_creature": {
+      "visualId": "fruit_creature",
+      "dialogue": {
+        "spawn": ["Earthly delights!", "Pleasure manifest!", "The garden blooms!", "Indulgence incarnate!", "Sweet temptation!"],
+        "death": ["Delight... fades...", "Pleasure... past...", "Garden... wilts...", "Incarnate... dissolved...", "Temptation... resisted..."]
+      }
+    },
+    "egg_walker": {
+      "visualId": "egg_walker",
+      "dialogue": {
+        "spawn": ["From the shell!", "Bosch's imagination!", "Surreal birth!", "The egg cracks!", "Medieval strange!"],
+        "death": ["Shell... whole...", "Imagination... rests...", "Birth... complete...", "Egg... sealed...", "Strange... normal..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "panel_shift", "params": { "shiftInterval": 15000, "transitionDamage": 5 } }],
+  "bgLayers": [
+    { "svgId": "garden", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "creatures", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "hellscape", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Three panels, three rule sets. Shift between paradise, earth, and hell.",
+    "codexSnippet": "Hieronymus Bosch painted heaven and hell with equal detail. The monkey wanders through his Garden and discovers that the line between delight and damnation is thinner than canvas.",
+    "radioWhisper": "The owl watches from the fountain. It has seen everything."
+  },
+  "musicSeed": { "seed": "bosch_002", "mode": "phrygian", "tempoRange": [50, 65], "intensity": 0.5 },
+  "duration": 120,
+  "unlockCondition": "art_level1_complete"
+}

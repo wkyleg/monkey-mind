@@ -1,0 +1,63 @@
+{
+  "id": "act5_level4_cubist_theater",
+  "act": 5,
+  "index": 4,
+  "title": "Cubist Theater",
+  "subtitle": "Multiple hitboxes. Multiple perspectives. One truth.",
+  "themeTags": ["cubism", "perspective", "fragmentation"],
+  "ruleCard": {
+    "icon": "cube",
+    "hint": "Splitters and simulacrums have multiple hitboxes. Find the real one.",
+    "mechanic": "sequence_kill",
+    "params": { "hitboxes": 3, "realHitbox": "random" }
+  },
+  "enemyDeck": [
+    { "archetype": "splitter", "modifiers": ["simulacrum"], "weight": 4 },
+    { "archetype": "mimic", "modifiers": [], "weight": 3 },
+    { "archetype": "phaser", "modifiers": [], "weight": 3 }
+  ],
+  "levelEnemies": {
+    "fragmented_face": {
+      "visualId": "fragmented_face",
+      "dialogue": {
+        "spawn": ["All angles at once!", "See every side!", "Perspective shattered!", "The face fragments!", "Multiple views!"],
+        "death": ["One... perspective...", "Unified... again...", "The face... whole...", "Angles... collapse...", "Single... view..."]
+      }
+    },
+    "geometric_dancer": {
+      "visualId": "geometric_dancer",
+      "dialogue": {
+        "spawn": ["Triangle tango!", "Square steps!", "Circle spin!", "The geometry dances!", "Abstract movement!"],
+        "death": ["Dance... over...", "Shapes... still...", "The music... stops...", "Geometry... rests...", "Final... pose..."]
+      }
+    },
+    "plane_shifter": {
+      "visualId": "plane_shifter",
+      "dialogue": {
+        "spawn": ["Shifting planes!", "Dimension hop!", "Flatland escape!", "2D attack!", "Surface tension!"],
+        "death": ["Flattened...", "Plane... crashes...", "Dimension... closes...", "Surface... breaks...", "Depth... returns..."]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "perspective_shift", "lanes": [1, 2, 3, 4, 5], "timing": 8000, "damage": 0, "visual": "plane_rotate" }
+  ],
+  "bgLayers": [
+    { "svgId": "theater", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "planes", "parallaxSpeed": 0.3, "opacity": 0.6 },
+    { "svgId": "faces", "parallaxSpeed": 0.5, "opacity": 0.4 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Multiple hitboxes. Multiple perspectives. One truth.",
+    "codexSnippet": "Picasso and Braque shattered perspective to show all angles at once. The monkey learned that truth has many faces, but only one can be hit.",
+    "radioWhisper": "Caller says he can see all sides of the argument. Literally. It's giving him a headache."
+  },
+  "musicSeed": {
+    "seed": "cubist_004",
+    "mode": "chromatic",
+    "tempoRange": [100, 115],
+    "intensity": 0.65
+  },
+  "duration": 130,
+  "unlockCondition": "act5_level3_complete"
+}

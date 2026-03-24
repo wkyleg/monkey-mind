@@ -1,0 +1,56 @@
+{
+  "id": "monkey_vars_level2_primate_ancestors",
+  "expansion": "monkey_vars",
+  "index": 2,
+  "title": "Primate Ancestors",
+  "subtitle": "The jungle remembers. Evolution's path.",
+  "themeTags": ["evolution", "ancestors", "jungle", "instinct"],
+  "ruleCard": {
+    "icon": "tree",
+    "hint": "Instincts awaken. The jungle calls to your genes.",
+    "mechanic": "primal_instinct",
+    "params": { "instinctBoost": 30, "civilizationPenalty": 20 }
+  },
+  "enemyDeck": [
+    { "archetype": "swarm", "modifiers": [], "weight": 4, "visualId": "enemy_baby_monkey" },
+    { "archetype": "chaser", "modifiers": [], "weight": 3, "visualId": "enemy_alpha_ape" },
+    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_shadow_monkey" }
+  ],
+  "levelEnemies": {
+    "alpha_ancestor": {
+      "visualId": "alpha_ancestor",
+      "dialogue": {
+        "spawn": ["The troop challenges!", "Prove your strength!", "Evolution demands!", "The strongest leads!", "Show dominance!"],
+        "death": ["Alpha... falls...", "Strength... proven...", "Evolution... continues...", "New leader... emerges...", "Dominance... shown..."]
+      }
+    },
+    "jungle_memory": {
+      "visualId": "jungle_memory",
+      "dialogue": {
+        "spawn": ["The trees remember!", "Swing and climb!", "This is home!", "Instinct guides!", "The canopy calls!"],
+        "death": ["Trees... fade...", "Memory... of green...", "Home... lost...", "Instinct... quiets...", "Canopy... closes..."]
+      }
+    },
+    "evolution_ghost": {
+      "visualId": "evolution_ghost",
+      "dialogue": {
+        "spawn": ["Millions of years!", "Every ancestor!", "The chain unbroken!", "DNA remembers!", "You are all of us!"],
+        "death": ["Chain... continues...", "Ancestors... rest...", "DNA... evolves...", "All of us... in you...", "Legacy... lives..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "primal_zone", "params": { "instinctOverride": true, "duration": 5000 } }],
+  "bgLayers": [
+    { "svgId": "ancient_jungle", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "canopy", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "vines", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Instincts awaken. The jungle calls to your genes.",
+    "codexSnippet": "Before the lab, before the cages, there was the jungle. The monkey traces its lineage back through millions of years and finds that it carries all its ancestors within.",
+    "radioWhisper": "The genetic markers show an unusual evolutionary path. Almost... intentional."
+  },
+  "musicSeed": { "seed": "ancestors_002", "mode": "pentatonic", "tempoRange": [55, 70], "intensity": 0.5 },
+  "duration": 130,
+  "unlockCondition": "monkey_vars_level1_complete"
+}

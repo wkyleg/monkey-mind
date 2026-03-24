@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Cipher/code shieldbearer -->
+  <g transform="translate(30,30)">
+    <!-- Shield with cipher wheel -->
+    <circle cx="0" cy="0" r="20" fill="#2f1f4f" stroke="#8855ff" stroke-width="2"/>
+    
+    <!-- Rotating cipher ring -->
+    <g>
+      <circle cx="0" cy="0" r="16" fill="none" stroke="#8855ff" stroke-width="1"/>
+      <!-- Letters around the ring -->
+      <g fill="#8855ff" font-size="5" font-family="monospace" text-anchor="middle">
+        <text x="0" y="-12">A</text>
+        <text x="8.5" y="-8.5">B</text>
+        <text x="12" y="0">C</text>
+        <text x="8.5" y="8.5">D</text>
+        <text x="0" y="12">E</text>
+        <text x="-8.5" y="8.5">F</text>
+        <text x="-12" y="0">G</text>
+        <text x="-8.5" y="-8.5">H</text>
+      </g>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="10s" repeatCount="indefinite"/>
+    </g>
+    
+    <!-- Inner ring (counter-rotating) -->
+    <g>
+      <circle cx="0" cy="0" r="8" fill="none" stroke="#aa88ff" stroke-width="1"/>
+      <g fill="#aa88ff" font-size="4" font-family="monospace" text-anchor="middle">
+        <text x="0" y="-5">1</text>
+        <text x="5" y="0">2</text>
+        <text x="0" y="5">3</text>
+        <text x="-5" y="0">4</text>
+      </g>
+      <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="8s" repeatCount="indefinite"/>
+    </g>
+    
+    <!-- Center keyhole -->
+    <ellipse cx="0" cy="0" rx="2" ry="3" fill="#1a0a2a"/>
+    <rect x="-1" y="0" width="2" height="3" fill="#1a0a2a"/>
+  </g>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <defs>
+    <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#000000"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Deep space black -->
+  <rect width="400" height="600" fill="#000000"/>
+  
+  <!-- Distant stars - very faint, emphasizing cosmic loneliness -->
+  <g fill="#ffffff">
+    <!-- Bright stars -->
+    <circle cx="45" cy="67" r="1.2" opacity="0.4"/>
+    <circle cx="312" cy="123" r="1" opacity="0.35"/>
+    <circle cx="178" cy="234" r="0.9" opacity="0.3"/>
+    <circle cx="389" cy="345" r="1.1" opacity="0.38"/>
+    <circle cx="23" cy="456" r="0.8" opacity="0.25"/>
+    
+    <!-- Medium stars -->
+    <circle cx="89" cy="34" r="0.6" opacity="0.2"/>
+    <circle cx="234" cy="89" r="0.5" opacity="0.18"/>
+    <circle cx="156" cy="167" r="0.7" opacity="0.22"/>
+    <circle cx="345" cy="234" r="0.6" opacity="0.2"/>
+    <circle cx="67" cy="312" r="0.5" opacity="0.15"/>
+    <circle cx="278" cy="389" r="0.6" opacity="0.2"/>
+    <circle cx="123" cy="456" r="0.5" opacity="0.18"/>
+    <circle cx="367" cy="523" r="0.7" opacity="0.22"/>
+    
+    <!-- Faint stars -->
+    <circle cx="134" cy="45" r="0.3" opacity="0.1"/>
+    <circle cx="267" cy="56" r="0.4" opacity="0.12"/>
+    <circle cx="45" cy="123" r="0.3" opacity="0.08"/>
+    <circle cx="389" cy="178" r="0.4" opacity="0.1"/>
+    <circle cx="212" cy="289" r="0.3" opacity="0.09"/>
+    <circle cx="56" cy="367" r="0.4" opacity="0.11"/>
+    <circle cx="334" cy="445" r="0.3" opacity="0.08"/>
+    <circle cx="189" cy="534" r="0.4" opacity="0.1"/>
+    <circle cx="78" cy="567" r="0.3" opacity="0.09"/>
+    <circle cx="356" cy="589" r="0.4" opacity="0.12"/>
+  </g>
+  
+  <!-- Distant galaxy - barely visible -->
+  <ellipse cx="300" cy="200" rx="30" ry="10" fill="#333333" opacity="0.05" transform="rotate(-30 300 200)"/>
+  
+  <!-- Cosmic dust lane -->
+  <path d="M0,300 Q100,280 200,300 T400,280" stroke="#1a1a1a" fill="none" stroke-width="40" opacity="0.1"/>
+</svg>

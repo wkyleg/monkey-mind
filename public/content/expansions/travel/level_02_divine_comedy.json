@@ -1,0 +1,56 @@
+{
+  "id": "travel_level2_divine_comedy",
+  "expansion": "travel",
+  "index": 2,
+  "title": "The Divine Comedy",
+  "subtitle": "Through Hell, Purgatory, and Paradise.",
+  "themeTags": ["dante", "comedy", "afterlife", "journey"],
+  "ruleCard": {
+    "icon": "journey",
+    "hint": "Three realms, three rule sets. Adapt as you ascend.",
+    "mechanic": "realm_rules",
+    "params": { "inferno": "heat_damage", "purgatorio": "weight_loss", "paradiso": "light_damage" }
+  },
+  "enemyDeck": [
+    { "archetype": "chaser", "modifiers": ["entropy"], "weight": 4, "visualId": "enemy_desert_djinn" },
+    { "archetype": "drifter", "modifiers": ["liturgical"], "weight": 3, "visualId": "enemy_guardian_statue" },
+    { "archetype": "phaser", "modifiers": ["mythic"], "weight": 3, "visualId": "enemy_compass_wisp" }
+  ],
+  "levelEnemies": {
+    "infernal_shade": {
+      "visualId": "infernal_shade",
+      "dialogue": {
+        "spawn": ["Abandon hope!", "The ninth circle awaits!", "Contrapasso!", "Your sins define you!", "Descend with me!"],
+        "death": ["Hope... returns...", "Ascending... finally...", "The punishment... ends...", "Freed... from circles...", "Light... above..."]
+      }
+    },
+    "purgatorial_soul": {
+      "visualId": "purgatorial_soul",
+      "dialogue": {
+        "spawn": ["Cleanse your sins!", "The mountain awaits!", "Seven terraces!", "Suffer to ascend!", "Purification through pain!"],
+        "death": ["Cleansed... at last...", "The terrace... passed...", "One sin... forgiven...", "Lighter... now...", "Paradise... closer..."]
+      }
+    },
+    "beatific_vision": {
+      "visualId": "beatific_vision",
+      "dialogue": {
+        "spawn": ["Behold the light!", "The Empyrean calls!", "Divine love moves all!", "The celestial rose!", "Ultimate beauty!"],
+        "death": ["Vision... fades...", "Too bright... for eyes...", "Love... returns to love...", "The rose... closes...", "Eternal... peace..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "realm_transition", "params": { "transitionDamage": 10, "adaptationBonus": 30 } }],
+  "bgLayers": [
+    { "svgId": "inferno", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "purgatorio", "parallaxSpeed": 0.2, "opacity": 0.4 },
+    { "svgId": "paradiso", "parallaxSpeed": 0.3, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Three realms, three rule sets. Adapt as you ascend.",
+    "codexSnippet": "Dante journeyed through the afterlife with Virgil as his guide. The monkey follows, learning that the path through darkness leads to stars.",
+    "radioWhisper": "Midway upon the journey of our life..."
+  },
+  "musicSeed": { "seed": "divine_comedy_002", "mode": "phrygian", "tempoRange": [55, 70], "intensity": 0.5 },
+  "duration": 150,
+  "unlockCondition": "travel_level1_complete"
+}

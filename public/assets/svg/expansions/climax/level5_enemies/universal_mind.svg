@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="mindGlow"><feGaussianBlur stdDeviation="6"/></filter></defs>
+  <circle cx="30" cy="30" r="25" fill="#4a4a6a" opacity="0.4" filter="url(#mindGlow)"/>
+  <circle cx="30" cy="30" r="15" fill="#6a6a8a" opacity="0.6"/>
+  <circle cx="30" cy="30" r="5" fill="#aaaacc"/>
+</svg>

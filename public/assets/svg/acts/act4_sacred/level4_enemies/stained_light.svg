@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="stainGlow"><feGaussianBlur stdDeviation="2"/></filter></defs>
+  <polygon points="30,5 50,25 50,50 30,55 10,50 10,25" fill="#1a1a2a" stroke="#888888" stroke-width="2"/>
+  <polygon points="30,10 40,20 40,35 30,40 20,35 20,20" fill="#ff4444" opacity="0.6" filter="url(#stainGlow)"/>
+  <polygon points="30,15 35,22 35,32 30,35 25,32 25,22" fill="#44ff44" opacity="0.6"/>
+  <polygon points="30,20 32,25 32,30 30,32 28,30 28,25" fill="#4444ff" opacity="0.6"/>
+  <circle cx="30" cy="26" r="3" fill="#ffffff" filter="url(#stainGlow)"/>
+</svg>

@@ -1,0 +1,40 @@
+{
+  "id": "act2_ocean",
+  "number": 2,
+  "name": "Ocean of Signals",
+  "thesis": "Dive deep. The surface lies.",
+  "storyBeat": "The monkey descends into the subconscious ocean - where memories surface like deep-sea creatures and data streams flow like currents. The neural headband pulses with bioluminescent feedback.",
+  "visualCallbacks": [
+    "Neural coral formations",
+    "Synaptic fish schools",
+    "Data streams as ocean currents",
+    "Bioluminescent neural pathways"
+  ],
+  "levels": [
+    "act2_level1_ecco_abyss",
+    "act2_level2_deep_sea_creatures",
+    "act2_level3_evil_fungus",
+    "act2_level4_atlantis_blueprint",
+    "act2_level5_leviathan_boss"
+  ],
+  "visualStyle": {
+    "palette": ["#0a1628", "#0d2137", "#1a4a5e", "#00d4aa", "#ff6b9d"],
+    "bgPattern": "ocean_depth",
+    "enemyStyle": "bioluminescent_organic",
+    "particleStyle": "bubbles_data",
+    "uiTheme": "deep_sea_green"
+  },
+  "bossId": "leviathan_of_attention",
+  "unlocks": {
+    "powerups": ["sonar_pulse", "depth_shield"],
+    "codex": ["entry_ocean_signals", "entry_leviathan", "entry_deep_memory"],
+    "cosmetics": ["headband_coral"]
+  },
+  "musicParams": {
+    "tempo": 85,
+    "intensity": 0.5,
+    "filterCutoff": 600,
+    "useReverb": true,
+    "distortionAmount": 0.05
+  }
+}

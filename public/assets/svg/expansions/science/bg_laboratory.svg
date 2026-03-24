@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Scientific laboratory -->
+  <rect width="400" height="600" fill="#f0f0f5"/>
+  
+  <!-- Grid lines -->
+  <g stroke="#ddd" stroke-width="1" opacity="0.5">
+    <line x1="0" y1="100" x2="400" y2="100"/>
+    <line x1="0" y1="200" x2="400" y2="200"/>
+    <line x1="0" y1="300" x2="400" y2="300"/>
+    <line x1="0" y1="400" x2="400" y2="400"/>
+    <line x1="0" y1="500" x2="400" y2="500"/>
+    <line x1="100" y1="0" x2="100" y2="600"/>
+    <line x1="200" y1="0" x2="200" y2="600"/>
+    <line x1="300" y1="0" x2="300" y2="600"/>
+  </g>
+  
+  <!-- Beakers and flasks -->
+  <g opacity="0.4">
+    <!-- Erlenmeyer flask -->
+    <path d="M70,400 L60,500 L100,500 L90,400 Z" fill="none" stroke="#4a90d9" stroke-width="2"/>
+    <ellipse cx="80" cy="400" rx="10" ry="3" fill="none" stroke="#4a90d9" stroke-width="2"/>
+    <ellipse cx="80" cy="480" rx="18" ry="5" fill="#4a90d9" opacity="0.3"/>
+    
+    <!-- Beaker -->
+    <rect x="280" y="420" width="50" height="80" fill="none" stroke="#4a90d9" stroke-width="2"/>
+    <rect x="282" y="460" width="46" height="38" fill="#90d94a" opacity="0.3"/>
+    
+    <!-- Test tubes -->
+    <g>
+      <rect x="180" y="350" width="10" height="60" fill="none" stroke="#4a90d9" stroke-width="1" rx="5"/>
+      <rect x="195" y="360" width="10" height="50" fill="none" stroke="#4a90d9" stroke-width="1" rx="5"/>
+      <rect x="210" y="355" width="10" height="55" fill="none" stroke="#4a90d9" stroke-width="1" rx="5"/>
+    </g>
+  </g>
+  
+  <!-- DNA helix -->
+  <g stroke="#d94a90" stroke-width="2" fill="none" opacity="0.3">
+    <path d="M50,100 Q100,150 50,200 Q0,250 50,300 Q100,350 50,400"/>
+    <path d="M80,100 Q30,150 80,200 Q130,250 80,300 Q30,350 80,400"/>
+    <!-- Rungs -->
+    <line x1="50" y1="120" x2="80" y2="130"/>
+    <line x1="50" y1="180" x2="80" y2="170"/>
+    <line x1="50" y1="220" x2="80" y2="230"/>
+    <line x1="50" y1="280" x2="80" y2="270"/>
+    <line x1="50" y1="320" x2="80" y2="330"/>
+    <line x1="50" y1="380" x2="80" y2="370"/>
+  </g>
+  
+  <!-- Atom symbol -->
+  <g transform="translate(320,200)" stroke="#4a90d9" stroke-width="1" fill="none" opacity="0.3">
+    <ellipse cx="0" cy="0" rx="40" ry="15"/>
+    <ellipse cx="0" cy="0" rx="40" ry="15" transform="rotate(60)"/>
+    <ellipse cx="0" cy="0" rx="40" ry="15" transform="rotate(120)"/>
+    <circle cx="0" cy="0" r="5" fill="#4a90d9"/>
+  </g>
+</svg>

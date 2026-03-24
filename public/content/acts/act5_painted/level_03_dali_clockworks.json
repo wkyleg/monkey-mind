@@ -1,0 +1,63 @@
+{
+  "id": "act5_level3_dali_clockworks",
+  "act": 5,
+  "index": 3,
+  "title": "Dali Clockworks",
+  "subtitle": "Time melts. Collect the slow-time pickups.",
+  "themeTags": ["dali", "time", "surreal"],
+  "ruleCard": {
+    "icon": "melting_clock",
+    "hint": "Entropy enemies accelerate. Slow-time pickups restore sanity.",
+    "mechanic": "stillness_reward",
+    "params": { "requiredStillness": 2, "reward": "time_slow" }
+  },
+  "enemyDeck": [
+    { "archetype": "drifter", "modifiers": ["entropy"], "weight": 5 },
+    { "archetype": "courier", "modifiers": [], "weight": 3 },
+    { "archetype": "weaver", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "melting_clock": {
+      "visualId": "melting_clock",
+      "dialogue": {
+        "spawn": ["Time drips away!", "Hours melt!", "Persistence of memory!", "The clock strikes never!", "Soft time!"],
+        "death": ["Frozen... moment...", "Time... stops...", "The hands... still...", "Memory... persists...", "Eternity... now..."]
+      }
+    },
+    "elephant_legs": {
+      "visualId": "elephant_legs",
+      "dialogue": {
+        "spawn": ["Impossibly thin!", "Weight on stilts!", "The dream walks!", "Spindly stride!", "Surreal steps!"],
+        "death": ["Legs... buckle...", "The dream... falls...", "Impossible... collapses...", "Reality... wins...", "Grounded... again..."]
+      }
+    },
+    "burning_giraffe": {
+      "visualId": "burning_giraffe",
+      "dialogue": {
+        "spawn": ["Flames of desire!", "Burning from within!", "The drawers open!", "Secrets on fire!", "Infernal grace!"],
+        "death": ["Extinguished...", "The flames... die...", "Drawers... close...", "Secrets... kept...", "Ashes... remain..."]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "time_warp", "lanes": [2, 3, 4], "timing": 10000, "damage": 0, "visual": "clock_melt" }
+  ],
+  "bgLayers": [
+    { "svgId": "desert", "parallaxSpeed": 0.08, "opacity": 0.5 },
+    { "svgId": "clocks", "parallaxSpeed": 0.25, "opacity": 0.6 },
+    { "svgId": "elephants", "parallaxSpeed": 0.4, "opacity": 0.4 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Time melts. Collect the slow-time pickups.",
+    "codexSnippet": "Salvador Dali painted the persistence of memory. The monkey learned that time is not a line but a liquid, and it can be slowed if you know where to look.",
+    "radioWhisper": "Caller says his watch melted. It's still right twice a day, but the days are longer now."
+  },
+  "musicSeed": {
+    "seed": "dali_003",
+    "mode": "lydian",
+    "tempoRange": [60, 100],
+    "intensity": 0.5
+  },
+  "duration": 120,
+  "unlockCondition": "act5_level2_complete"
+}

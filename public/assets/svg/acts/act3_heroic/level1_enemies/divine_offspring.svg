@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="divineGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <ellipse cx="30" cy="38" rx="14" ry="16" fill="#2a3a4a" stroke="#88ccff" stroke-width="2"/>
+  <circle cx="30" cy="18" r="9" fill="#2a3a4a" stroke="#88ccff" stroke-width="2"/>
+  <circle cx="30" cy="5" r="6" fill="#ffdd00" filter="url(#divineGlow)"/>
+  <circle cx="25" cy="17" r="3" fill="#00ccff" filter="url(#divineGlow)"/>
+  <circle cx="35" cy="17" r="3" fill="#00ccff" filter="url(#divineGlow)"/>
+  <polygon points="15,25 5,20 10,30" fill="#88ccff"/>
+  <polygon points="45,25 55,20 50,30" fill="#88ccff"/>
+</svg>

@@ -1,0 +1,66 @@
+{
+  "index_card": {
+    "spawn": [
+      "Catalogued!",
+      "Reference located!",
+      "Dewey demands order!",
+      "Filed under: THREAT",
+      "Cross-referenced!"
+    ],
+    "death": [
+      "Misfiled...",
+      "Card... bent...",
+      "Lost... in stacks...",
+      "Reference... removed...",
+      "Deaccessioned..."
+    ]
+  },
+  "cipher_shield": {
+    "spawn": [
+      "ENCRYPTED!",
+      "The code protects!",
+      "Unbreakable cipher!",
+      "Enigma engaged!",
+      "Decode THIS!"
+    ],
+    "death": [
+      "Cracked...",
+      "Key... found...",
+      "Decrypted...",
+      "Plain... text...",
+      "The cipher... falls..."
+    ]
+  },
+  "paradox_splitter": {
+    "spawn": [
+      "This statement is false!",
+      "I divide by zero!",
+      "Set of all sets!",
+      "Infinite regress!",
+      "Godel was right!"
+    ],
+    "death": [
+      "Resolved...",
+      "Logic... restored...",
+      "The paradox... ends...",
+      "Consistent... at last...",
+      "Proof... complete..."
+    ]
+  },
+  "footnote_swarm": {
+    "spawn": [
+      "See reference [1]!",
+      "Ibid! Op cit!",
+      "Annotations multiply!",
+      "The margins overflow!",
+      "Cf. your doom!"
+    ],
+    "death": [
+      "Redacted...",
+      "Citation... needed...",
+      "Source... lost...",
+      "Footnote... forgotten...",
+      "[sic]..."
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="beamGlow"><feGaussianBlur stdDeviation="3"/></filter></defs>
+  <polygon points="30,5 15,55 45,55" fill="#88ff88" opacity="0.3" filter="url(#beamGlow)"/>
+  <polygon points="30,10 20,50 40,50" fill="#aaffaa" opacity="0.4"/>
+  <ellipse cx="30" cy="5" rx="8" ry="4" fill="#666666" stroke="#888888" stroke-width="1"/>
+</svg>

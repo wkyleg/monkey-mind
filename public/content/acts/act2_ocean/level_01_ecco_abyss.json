@@ -1,0 +1,99 @@
+{
+  "id": "act2_level1_ecco_abyss",
+  "act": 2,
+  "index": 1,
+  "title": "Ecco-Style Abyss",
+  "subtitle": "Sound reveals what light cannot.",
+  "themeTags": ["ocean", "sonar", "depth"],
+  "ruleCard": {
+    "icon": "sonar",
+    "hint": "Sonar pulse every 12 seconds reveals hidden enemies. Listen to the deep.",
+    "mechanic": "rhythm_sync",
+    "params": { "bpm": 5, "revealDuration": 3 }
+  },
+  "enemyDeck": [
+    { "archetype": "phaser", "modifiers": [], "weight": 5 },
+    { "archetype": "weaver", "modifiers": [], "weight": 3 },
+    { "archetype": "drifter", "modifiers": ["unseen"], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "echo_fish": {
+      "visualId": "echo_fish",
+      "dialogue": {
+        "spawn": [
+          "Echo... echo... echo...",
+          "The deep calls back!",
+          "Sound becomes flesh!",
+          "I am your reflection!",
+          "Listen to my song!"
+        ],
+        "death": [
+          "Silence... at last...",
+          "The echo... fades...",
+          "No more... reflections...",
+          "Sound... consumed...",
+          "Returning... to silence..."
+        ]
+      }
+    },
+    "pressure_shadow": {
+      "visualId": "pressure_shadow",
+      "dialogue": {
+        "spawn": [
+          "The weight of the ocean!",
+          "Crushing... descending...",
+          "Fathoms press upon you!",
+          "Depth claims all!",
+          "Sink with me!"
+        ],
+        "death": [
+          "Pressure... releasing...",
+          "Rising... too fast...",
+          "The depths... reject me...",
+          "Buoyancy... returns...",
+          "Floating... away..."
+        ]
+      }
+    },
+    "sonar_pulse": {
+      "visualId": "sonar_pulse",
+      "dialogue": {
+        "spawn": [
+          "PING!",
+          "Target acquired!",
+          "Echolocation active!",
+          "I see through sound!",
+          "Nowhere to hide!"
+        ],
+        "death": [
+          "Signal... lost...",
+          "Static... interference...",
+          "Echo... chamber... empty...",
+          "Frequency... dying...",
+          "No... return... signal..."
+        ]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "pressure_zone", "lanes": [1, 5], "timing": 15000, "damage": 1, "visual": "depth_crush" }
+  ],
+  "bgLayers": [
+    { "svgId": "abyss", "parallaxSpeed": 0.05, "opacity": 0.4 },
+    { "svgId": "particles", "parallaxSpeed": 0.2, "opacity": 0.3 },
+    { "svgId": "biolum", "parallaxSpeed": 0.4, "opacity": 0.5 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Sound reveals what light cannot.",
+    "codexSnippet": "In the abyss, the monkey learned that darkness is not empty. It is full of signals we have forgotten how to hear.",
+    "radioWhisper": "Caller says he can hear the whales singing in binary."
+  },
+  "musicSeed": {
+    "seed": "ecco_abyss_001",
+    "mode": "lydian",
+    "tempoRange": [70, 90],
+    "intensity": 0.4
+  },
+  "duration": 100,
+  "unlockCondition": "act1_complete"
+}

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <radialGradient id="pearlShine" cx="30%" cy="30%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="30%" style="stop-color:#eeffff"/>
+      <stop offset="100%" style="stop-color:#aaccdd"/>
+    </radialGradient>
+    <radialGradient id="shellGrad" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#667788"/>
+      <stop offset="100%" style="stop-color:#334455"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Oyster shell with pearl -->
+  <g transform="translate(30,30)">
+    <!-- Bottom shell -->
+    <ellipse cx="0" cy="5" rx="22" ry="15" fill="url(#shellGrad)"/>
+    
+    <!-- Shell ridges -->
+    <g stroke="#445566" stroke-width="1" fill="none" opacity="0.5">
+      <path d="M-18,8 Q0,15 18,8"/>
+      <path d="M-15,12 Q0,18 15,12"/>
+      <path d="M-10,16 Q0,20 10,16"/>
+    </g>
+    
+    <!-- Top shell (partially open) -->
+    <ellipse cx="0" cy="-8" rx="20" ry="12" fill="url(#shellGrad)" transform="rotate(-15)"/>
+    
+    <!-- Shell ridges on top -->
+    <g stroke="#556677" stroke-width="1" fill="none" opacity="0.5" transform="rotate(-15)">
+      <path d="M-16,-6 Q0,-12 16,-6"/>
+      <path d="M-12,-10 Q0,-15 12,-10"/>
+    </g>
+    
+    <!-- Pearl inside -->
+    <circle cx="0" cy="0" r="10" fill="url(#pearlShine)">
+      <animate attributeName="r" values="10;11;10" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Pearl highlight -->
+    <circle cx="-3" cy="-3" r="3" fill="#ffffff" opacity="0.8"/>
+    
+    <!-- Sparkle effect -->
+    <g fill="#ffffff" opacity="0.6">
+      <circle cx="5" cy="-2" r="1">
+        <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-2" cy="4" r="0.8">
+        <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+      </circle>
+    </g>
+  </g>
+</svg>

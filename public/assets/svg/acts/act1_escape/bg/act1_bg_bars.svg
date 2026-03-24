@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="barGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0f3460;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <filter id="barGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Cage bars - vertical -->
+  <g stroke="#0f3460" stroke-width="8" opacity="0.7">
+    <line x1="50" y1="0" x2="50" y2="600"/>
+    <line x1="150" y1="0" x2="150" y2="600"/>
+    <line x1="250" y1="0" x2="250" y2="600"/>
+    <line x1="350" y1="0" x2="350" y2="600"/>
+    <line x1="450" y1="0" x2="450" y2="600"/>
+    <line x1="550" y1="0" x2="550" y2="600"/>
+    <line x1="650" y1="0" x2="650" y2="600"/>
+    <line x1="750" y1="0" x2="750" y2="600"/>
+  </g>
+  
+  <!-- Cage bars - horizontal -->
+  <g stroke="#16213e" stroke-width="4" opacity="0.5">
+    <line x1="0" y1="50" x2="800" y2="50"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="450" x2="800" y2="450"/>
+    <line x1="0" y1="550" x2="800" y2="550"/>
+  </g>
+  
+  <!-- Broken bar - escape hint -->
+  <g stroke="#e94560" stroke-width="6" opacity="0.6" filter="url(#barGlow)">
+    <line x1="400" y1="0" x2="400" y2="250"/>
+    <line x1="400" y1="350" x2="400" y2="600"/>
+  </g>
+  
+  <!-- Warning markers on bars -->
+  <g fill="#e94560" opacity="0.4">
+    <rect x="145" y="280" width="10" height="40" rx="2"/>
+    <rect x="245" y="280" width="10" height="40" rx="2"/>
+    <rect x="545" y="280" width="10" height="40" rx="2"/>
+    <rect x="645" y="280" width="10" height="40" rx="2"/>
+  </g>
+</svg>

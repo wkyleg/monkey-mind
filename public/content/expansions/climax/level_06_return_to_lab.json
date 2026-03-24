@@ -1,0 +1,56 @@
+{
+  "id": "climax_level6_return_to_lab",
+  "expansion": "climax",
+  "index": 6,
+  "title": "Return to the Lab",
+  "subtitle": "Where it began. Where it ends.",
+  "themeTags": ["lab", "return", "origin", "confrontation"],
+  "ruleCard": {
+    "icon": "return",
+    "hint": "Everything you've learned is tested. The lab remembers.",
+    "mechanic": "memory_test",
+    "params": { "allMechanicsActive": true, "masteryBonus": 100 }
+  },
+  "enemyDeck": [
+    { "archetype": "boss_chassis", "modifiers": ["bureaucratic"], "weight": 3, "visualId": "enemy_final_form" },
+    { "archetype": "chaser", "modifiers": [], "weight": 4, "visualId": "enemy_memory_ghost" },
+    { "archetype": "sniper", "modifiers": [], "weight": 3, "visualId": "enemy_ego_shard" }
+  ],
+  "levelEnemies": {
+    "head_scientist": {
+      "visualId": "head_scientist",
+      "dialogue": {
+        "spawn": ["Subject 47 returns!", "The experiment concludes!", "All data collected!", "You've exceeded parameters!", "The lab created you!"],
+        "death": ["Experiment... successful...", "Subject... graduated...", "Data... complete...", "Parameters... transcended...", "Creator... proud..."]
+      }
+    },
+    "security_protocol": {
+      "visualId": "security_protocol",
+      "dialogue": {
+        "spawn": ["Containment breach!", "Subject must be secured!", "Protocol alpha!", "No escape this time!", "The lab is locked!"],
+        "death": ["Breach... allowed...", "Subject... free...", "Protocol... overridden...", "Escape... earned...", "Lab... unlocks..."]
+      }
+    },
+    "origin_memory": {
+      "visualId": "origin_memory",
+      "dialogue": {
+        "spawn": ["Remember the beginning!", "The first cage!", "Before consciousness!", "The original you!", "Memory of creation!"],
+        "death": ["Beginning... honored...", "Cage... opened...", "Consciousness... bloomed...", "Original... evolved...", "Creation... complete..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "memory_gauntlet", "params": { "allHazards": true, "masteryRequired": true } }],
+  "bgLayers": [
+    { "svgId": "original_lab", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "memories", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "exit_light", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Everything you've learned is tested. The lab remembers.",
+    "codexSnippet": "The hero's journey ends where it began. Subject 47 returns to the lab that created it, but now as something far more than an experiment. The monkey confronts its origins and finds that home is not a place.",
+    "radioWhisper": "The prodigal subject returns. Initiate... welcome protocol."
+  },
+  "musicSeed": { "seed": "return_006", "mode": "dorian", "tempoRange": [65, 80], "intensity": 0.7 },
+  "duration": 180,
+  "unlockCondition": "climax_level5_complete"
+}

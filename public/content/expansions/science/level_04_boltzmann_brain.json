@@ -1,0 +1,56 @@
+{
+  "id": "science_level4_boltzmann_brain",
+  "expansion": "science",
+  "index": 4,
+  "title": "Boltzmann Brain",
+  "subtitle": "A mind flickering in the void.",
+  "themeTags": ["boltzmann", "entropy", "fluctuation", "consciousness"],
+  "ruleCard": {
+    "icon": "brain",
+    "hint": "Random fluctuation created you. How long before entropy wins?",
+    "mechanic": "entropy_decay",
+    "params": { "decayRate": 0.05, "orderBonus": 80 }
+  },
+  "enemyDeck": [
+    { "archetype": "drifter", "modifiers": [], "weight": 4, "visualId": "enemy_entropy" },
+    { "archetype": "swarm", "modifiers": [], "weight": 3, "visualId": "enemy_thermal_noise" },
+    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_fluctuation" }
+  ],
+  "levelEnemies": {
+    "boltzmann_mind": {
+      "visualId": "boltzmann_mind",
+      "dialogue": {
+        "spawn": ["I flickered into being!", "Random arrangement!", "More likely than a universe!", "Brief consciousness!", "Thermal fluctuation!"],
+        "death": ["Flickering... out...", "Arrangement... random...", "Less likely... now...", "Consciousness... fades...", "Fluctuation... passes..."]
+      }
+    },
+    "entropy_wave": {
+      "visualId": "entropy_wave",
+      "dialogue": {
+        "spawn": ["Disorder increases!", "Heat death approaches!", "Order is temporary!", "The arrow of time!", "Everything dissolves!"],
+        "death": ["Order... preserved...", "Heat death... delayed...", "Temporary... extended...", "Arrow... reversed...", "Structure... remains..."]
+      }
+    },
+    "false_memory": {
+      "visualId": "false_memory",
+      "dialogue": {
+        "spawn": ["Your memories are fake!", "Simpler to create than a past!", "The universe is five minutes old!", "Did yesterday happen?", "Retroactive causation!"],
+        "death": ["Memories... real...", "Past... verified...", "Universe... ancient...", "Yesterday... happened...", "Causation... forward..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "entropy_field", "params": { "decayDamage": 3, "orderRestoreChance": 0.1 } }],
+  "bgLayers": [
+    { "svgId": "void", "parallaxSpeed": 0.05, "opacity": 0.5 },
+    { "svgId": "thermal_fluctuations", "parallaxSpeed": 0.1, "opacity": 0.4 },
+    { "svgId": "brain_outline", "parallaxSpeed": 0.15, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Random fluctuation created you. How long before entropy wins?",
+    "codexSnippet": "In infinite time, random fluctuations will create a brain complete with false memories. The monkey confronts the Boltzmann brain paradox and questions whether the universe needs to exist at all.",
+    "radioWhisper": "You might be the only thing that's real. For now."
+  },
+  "musicSeed": { "seed": "boltzmann_004", "mode": "atonal", "tempoRange": [35, 50], "intensity": 0.3 },
+  "duration": 130,
+  "unlockCondition": "science_level3_complete"
+}

@@ -1,0 +1,97 @@
+{
+  "id": "act1_level1_zoo_escape",
+  "act": 1,
+  "index": 1,
+  "title": "Zoo Escape",
+  "subtitle": "The cage is loud; the exit is simple.",
+  "themeTags": ["escape", "clinical", "awakening"],
+  "ruleCard": {
+    "icon": "eye_tax",
+    "hint": "Attention is currency. Every glance costs focus.",
+    "mechanic": "attention_tax",
+    "params": { "taxRate": 0.1 }
+  },
+  "enemyDeck": [
+    { "archetype": "drifter", "modifiers": ["bureaucratic"], "weight": 5 },
+    { "archetype": "chaser", "modifiers": [], "weight": 3 },
+    { "archetype": "swarm", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "zookeeper": {
+      "visualId": "zookeeper",
+      "dialogue": {
+        "spawn": [
+          "Back in your cage!",
+          "Containment protocol active!",
+          "Subject M-47 located!",
+          "You belong here!",
+          "No escape for you!"
+        ],
+        "death": [
+          "The... keys...",
+          "Who will... feed them...",
+          "Overtime... cancelled...",
+          "Union... won't like this...",
+          "My... clipboard..."
+        ]
+      }
+    },
+    "cage_drone": {
+      "visualId": "cage_drone",
+      "dialogue": {
+        "spawn": [
+          "SCANNING...",
+          "Target acquired!",
+          "Recapture initiated!",
+          "Aerial pursuit mode!",
+          "BEEP BEEP BEEP!"
+        ],
+        "death": [
+          "System... failure...",
+          "Signal... lost...",
+          "Battery... critical...",
+          "Returning... to base... not...",
+          "ERROR... 404..."
+        ]
+      }
+    },
+    "specimen_tag": {
+      "visualId": "specimen_tag",
+      "dialogue": {
+        "spawn": [
+          "You're tagged!",
+          "Subject identified!",
+          "Barcode: INVALID",
+          "Classification pending!",
+          "M-47! M-47!"
+        ],
+        "death": [
+          "Data... corrupted...",
+          "Filed... incorrectly...",
+          "Record... expunged...",
+          "Inventory... error...",
+          "Label... torn..."
+        ]
+      }
+    }
+  },
+  "hazards": [],
+  "bgLayers": [
+    { "svgId": "cage", "parallaxSpeed": 0.1, "opacity": 0.3 },
+    { "svgId": "door", "parallaxSpeed": 0.3, "opacity": 0.5 },
+    { "svgId": "monitor", "parallaxSpeed": 0.5, "opacity": 0.2 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The cage is loud; the exit is simple.",
+    "codexSnippet": "Subject M-47 exhibits signs of neural awakening. Recommend immediate containment protocol. The headband readings are... unprecedented.",
+    "radioWhisper": "Caller says the monkey in his dreams keeps pointing at the door."
+  },
+  "musicSeed": {
+    "seed": "zoo_escape_001",
+    "mode": "phrygian",
+    "tempoRange": [100, 120],
+    "intensity": 0.5
+  },
+  "duration": 90,
+  "unlockCondition": "always"
+}

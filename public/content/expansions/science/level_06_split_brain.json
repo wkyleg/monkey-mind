@@ -1,0 +1,56 @@
+{
+  "id": "science_level6_split_brain",
+  "expansion": "science",
+  "index": 6,
+  "title": "Split Brain",
+  "subtitle": "Two minds in one skull.",
+  "themeTags": ["sperry", "corpus_callosum", "lateralization", "unity"],
+  "ruleCard": {
+    "icon": "split",
+    "hint": "Left and right disagree. Which side are you?",
+    "mechanic": "hemisphere_conflict",
+    "params": { "conflictChance": 0.3, "unityBonus": 70 }
+  },
+  "enemyDeck": [
+    { "archetype": "splitter", "modifiers": [], "weight": 4, "visualId": "enemy_left_brain" },
+    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_right_brain" },
+    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_callosum" }
+  ],
+  "levelEnemies": {
+    "left_hemisphere": {
+      "visualId": "left_hemisphere",
+      "dialogue": {
+        "spawn": ["Language!", "Logic!", "Sequence!", "Analysis!", "The interpreter!"],
+        "death": ["Silent...", "Intuition...", "Pattern...", "Holistic...", "Listening..."]
+      }
+    },
+    "right_hemisphere": {
+      "visualId": "right_hemisphere",
+      "dialogue": {
+        "spawn": ["Spatial!", "Artistic!", "Emotional!", "Holistic!", "The silent partner!"],
+        "death": ["Verbal...", "Logical...", "Analytical...", "Sequential...", "Speaking..."]
+      }
+    },
+    "severed_bridge": {
+      "visualId": "severed_bridge",
+      "dialogue": {
+        "spawn": ["The connection severed!", "Two become one... or two?", "Sperry's experiment!", "Which hand knows?", "Unity is illusion!"],
+        "death": ["Connection... restored...", "One... whole...", "Experiment... over...", "Both hands... know...", "Unity... real..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "hemisphere_conflict", "params": { "conflictDuration": 4000, "confusionDamage": 10 } }],
+  "bgLayers": [
+    { "svgId": "neurosurgery", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "brain_halves", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "corpus_callosum", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Left and right disagree. Which side are you?",
+    "codexSnippet": "Severing the corpus callosum creates two conscious minds in one skull. The monkey explores split-brain patients and confronts the question of whether we are already plural.",
+    "radioWhisper": "Your left hand doesn't know what your right hand is doing. Literally."
+  },
+  "musicSeed": { "seed": "splitbrain_006", "mode": "bimodal", "tempoRange": [55, 70], "intensity": 0.5 },
+  "duration": 140,
+  "unlockCondition": "science_level5_complete"
+}

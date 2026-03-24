@@ -1,0 +1,66 @@
+{
+  "dharma_wheel": {
+    "spawn": [
+      "The wheel turns!",
+      "Karma finds you!",
+      "Eight paths converge!",
+      "Dharma demands!",
+      "The cycle continues!"
+    ],
+    "death": [
+      "Wheel... stops...",
+      "Karma... released...",
+      "The cycle... breaks...",
+      "Nirvana...",
+      "Attachment... ends..."
+    ]
+  },
+  "prayer_swarm": {
+    "spawn": [
+      "OM MANI PADME HUM!",
+      "The mantras multiply!",
+      "Devotion swarms!",
+      "A thousand prayers!",
+      "Faith takes form!"
+    ],
+    "death": [
+      "Prayer... answered...",
+      "Silence... holy...",
+      "The mantra... fades...",
+      "Amen...",
+      "Peace be..."
+    ]
+  },
+  "incense_anchor": {
+    "spawn": [
+      "Sacred smoke rises!",
+      "The temple is sealed!",
+      "Fragrance of the divine!",
+      "Rooted in ritual!",
+      "The altar holds!"
+    ],
+    "death": [
+      "Smoke... disperses...",
+      "The flame... extinguished...",
+      "Ritual... broken...",
+      "Ashes to ashes...",
+      "Sanctity... fades..."
+    ]
+  },
+  "lotus_phaser": {
+    "spawn": [
+      "Blooming... fading...",
+      "Now you see... now...",
+      "The lotus opens!",
+      "Between worlds!",
+      "Petals phase!"
+    ],
+    "death": [
+      "Wilting...",
+      "The bloom... closes...",
+      "Trapped... in form...",
+      "No more... phases...",
+      "Rooted... finally..."
+    ]
+  }
+}

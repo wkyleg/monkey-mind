@@ -1,0 +1,56 @@
+{
+  "id": "science_level5_bicameral_mind",
+  "expansion": "science",
+  "index": 5,
+  "title": "The Bicameral Mind",
+  "subtitle": "When gods spoke through us.",
+  "themeTags": ["jaynes", "bicameral", "consciousness", "voices"],
+  "ruleCard": {
+    "icon": "hemisphere",
+    "hint": "The gods command. Your other hemisphere speaks as divine voice.",
+    "mechanic": "divine_command",
+    "params": { "commandInterval": 8000, "obedienceBonus": 60, "disobediencePenalty": 30 }
+  },
+  "enemyDeck": [
+    { "archetype": "chaser", "modifiers": [], "weight": 4, "visualId": "enemy_voice" },
+    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_idol" },
+    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_ancient" }
+  ],
+  "levelEnemies": {
+    "divine_voice": {
+      "visualId": "divine_voice",
+      "dialogue": {
+        "spawn": ["Obey!", "The gods command!", "Right hemisphere speaks!", "No self to question!", "Bicameral authority!"],
+        "death": ["Silence...", "Command... fades...", "Hemisphere... unified...", "Self... emerges...", "Authority... questioned..."]
+      }
+    },
+    "ancient_idol": {
+      "visualId": "ancient_idol",
+      "dialogue": {
+        "spawn": ["Worship me!", "Dead kings speak!", "The statue commands!", "Auditory hallucination!", "Before consciousness!"],
+        "death": ["Worship... ends...", "Kings... silent...", "Statue... stone...", "Hallucination... ceased...", "Consciousness... dawns..."]
+      }
+    },
+    "breakdown_specter": {
+      "visualId": "breakdown_specter",
+      "dialogue": {
+        "spawn": ["The gods are leaving!", "Consciousness emerging!", "The breakdown begins!", "Odysseus sails!", "Self-awareness costs!"],
+        "death": ["Gods... remembered...", "Consciousness... embraced...", "Breakdown... complete...", "Odysseus... home...", "Self... accepted..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "divine_command", "params": { "commandDuration": 5000, "disobedienceDamage": 15 } }],
+  "bgLayers": [
+    { "svgId": "ancient_temple", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "idols", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "hemispheres", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The gods command. Your other hemisphere speaks as divine voice.",
+    "codexSnippet": "Julian Jaynes proposed that ancient humans heard their thoughts as divine commands from their right hemisphere. The monkey explores the bicameral mind and wonders when we stopped hearing the gods.",
+    "radioWhisper": "The voices stopped three thousand years ago. Some still hear them."
+  },
+  "musicSeed": { "seed": "bicameral_005", "mode": "dorian", "tempoRange": [50, 65], "intensity": 0.5 },
+  "duration": 140,
+  "unlockCondition": "science_level4_complete"
+}

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Ancient manuscript/parchment textures -->
+  <defs>
+    <pattern id="parchment" patternUnits="userSpaceOnUse" width="100" height="100">
+      <rect width="100" height="100" fill="#d4c4a8"/>
+      <rect x="10" y="10" width="80" height="2" fill="#8b7355" opacity="0.2"/>
+      <rect x="10" y="25" width="80" height="2" fill="#8b7355" opacity="0.2"/>
+      <rect x="10" y="40" width="80" height="2" fill="#8b7355" opacity="0.2"/>
+      <rect x="10" y="55" width="80" height="2" fill="#8b7355" opacity="0.2"/>
+      <rect x="10" y="70" width="80" height="2" fill="#8b7355" opacity="0.2"/>
+      <rect x="10" y="85" width="80" height="2" fill="#8b7355" opacity="0.2"/>
+    </pattern>
+  </defs>
+  
+  <!-- Floating manuscript pages -->
+  <g opacity="0.25">
+    <!-- Page 1 -->
+    <g transform="translate(80,150) rotate(-10)">
+      <rect x="-40" y="-50" width="80" height="100" fill="url(#parchment)" stroke="#8b7355" stroke-width="1"/>
+      <!-- Faux text -->
+      <g fill="#5c4033" font-size="6" font-family="serif">
+        <text x="-30" y="-30">Lorem ipsum dolor</text>
+        <text x="-30" y="-20">sit amet consectetur</text>
+        <text x="-30" y="-10">adipiscing elit sed</text>
+        <text x="-30" y="0">do eiusmod tempor</text>
+        <text x="-30" y="10">incididunt ut labore</text>
+      </g>
+    </g>
+    
+    <!-- Page 2 -->
+    <g transform="translate(300,250) rotate(15)">
+      <rect x="-35" y="-45" width="70" height="90" fill="url(#parchment)" stroke="#8b7355" stroke-width="1"/>
+      <!-- Diagram -->
+      <circle cx="0" cy="-10" r="20" fill="none" stroke="#5c4033" stroke-width="1"/>
+      <line x1="-20" y1="-10" x2="20" y2="-10" stroke="#5c4033"/>
+      <line x1="0" y1="-30" x2="0" y2="10" stroke="#5c4033"/>
+    </g>
+    
+    <!-- Page 3 -->
+    <g transform="translate(150,420) rotate(-5)">
+      <rect x="-45" y="-55" width="90" height="110" fill="url(#parchment)" stroke="#8b7355" stroke-width="1"/>
+      <!-- Mathematical symbols -->
+      <text x="-30" y="-20" fill="#5c4033" font-size="12">∑ ∫ ∂ ∞</text>
+      <text x="-30" y="0" fill="#5c4033" font-size="12">π ε δ Ω</text>
+      <text x="-30" y="20" fill="#5c4033" font-size="12">√ ≈ ≠ ∴</text>
+    </g>
+    
+    <!-- Page 4 -->
+    <g transform="translate(320,500) rotate(8)">
+      <rect x="-30" y="-40" width="60" height="80" fill="url(#parchment)" stroke="#8b7355" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <defs>
+    <linearGradient id="nightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000"/>
+      <stop offset="100%" style="stop-color:#0a0a1a"/>
+    </linearGradient>
+    <filter id="towerGlow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Night sky -->
+  <rect width="400" height="600" fill="url(#nightSky)"/>
+  
+  <!-- Distant stars -->
+  <g fill="#ffffff" opacity="0.2">
+    <circle cx="30" cy="50" r="1"/>
+    <circle cx="100" cy="80" r="0.5"/>
+    <circle cx="250" cy="30" r="0.8"/>
+    <circle cx="350" cy="100" r="0.6"/>
+    <circle cx="180" cy="120" r="0.4"/>
+  </g>
+  
+  <!-- Radio tower 1 - left -->
+  <g stroke="#333333" fill="none" stroke-width="2">
+    <line x1="60" y1="600" x2="80" y2="300"/>
+    <line x1="100" y1="600" x2="80" y2="300"/>
+    <!-- Cross beams -->
+    <line x1="65" y1="550" x2="95" y2="550"/>
+    <line x1="68" y1="500" x2="92" y2="500"/>
+    <line x1="70" y1="450" x2="90" y2="450"/>
+    <line x1="72" y1="400" x2="88" y2="400"/>
+    <line x1="75" y1="350" x2="85" y2="350"/>
+  </g>
+  <!-- Tower 1 beacon -->
+  <circle cx="80" cy="295" r="5" fill="#ff0000" filter="url(#towerGlow)" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Radio tower 2 - center -->
+  <g stroke="#444444" fill="none" stroke-width="3">
+    <line x1="180" y1="600" x2="200" y2="200"/>
+    <line x1="220" y1="600" x2="200" y2="200"/>
+    <!-- Cross beams -->
+    <line x1="185" y1="550" x2="215" y2="550"/>
+    <line x1="188" y1="480" x2="212" y2="480"/>
+    <line x1="191" y1="410" x2="209" y2="410"/>
+    <line x1="194" y1="340" x2="206" y2="340"/>
+    <line x1="197" y1="270" x2="203" y2="270"/>
+  </g>
+  <!-- Tower 2 beacon -->
+  <circle cx="200" cy="195" r="6" fill="#ff0000" filter="url(#towerGlow)" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;0.3;0.8" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Radio tower 3 - right -->
+  <g stroke="#333333" fill="none" stroke-width="2">
+    <line x1="300" y1="600" x2="320" y2="350"/>
+    <line x1="340" y1="600" x2="320" y2="350"/>
+    <!-- Cross beams -->
+    <line x1="305" y1="550" x2="335" y2="550"/>
+    <line x1="308" y1="500" x2="332" y2="500"/>
+    <line x1="311" y1="450" x2="329" y2="450"/>
+    <line x1="314" y1="400" x2="326" y2="400"/>
+  </g>
+  <!-- Tower 3 beacon -->
+  <circle cx="320" cy="345" r="4" fill="#ff0000" filter="url(#towerGlow)" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Signal waves emanating -->
+  <g stroke="#00ff00" fill="none" opacity="0.1" stroke-width="1">
+    <circle cx="200" cy="195" r="50">
+      <animate attributeName="r" values="50;150" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.2;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="195" r="80">
+      <animate attributeName="r" values="80;180" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.15;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

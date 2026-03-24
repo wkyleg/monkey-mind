@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="cageGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#101830;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Base -->
+  <rect width="800" height="600" fill="url(#cageGradient)"/>
+  
+  <!-- Vertical cage bars -->
+  <g stroke="#00ffaa" stroke-width="3" opacity="0.4">
+    <line x1="80" y1="0" x2="80" y2="600"/>
+    <line x1="160" y1="0" x2="160" y2="600"/>
+    <line x1="240" y1="0" x2="240" y2="600"/>
+    <line x1="320" y1="0" x2="320" y2="600"/>
+    <line x1="400" y1="0" x2="400" y2="600"/>
+    <line x1="480" y1="0" x2="480" y2="600"/>
+    <line x1="560" y1="0" x2="560" y2="600"/>
+    <line x1="640" y1="0" x2="640" y2="600"/>
+    <line x1="720" y1="0" x2="720" y2="600"/>
+  </g>
+  
+  <!-- Horizontal bars -->
+  <g stroke="#00ffaa" stroke-width="2" opacity="0.2">
+    <line x1="0" y1="120" x2="800" y2="120"/>
+    <line x1="0" y1="240" x2="800" y2="240"/>
+    <line x1="0" y1="360" x2="800" y2="360"/>
+    <line x1="0" y1="480" x2="800" y2="480"/>
+  </g>
+  
+  <!-- Zoo exhibit label -->
+  <rect x="300" y="50" width="200" height="40" fill="#0a1a20" stroke="#00ffaa" stroke-width="1" opacity="0.6"/>
+  <text x="400" y="77" fill="#00ffaa" font-family="monospace" font-size="14" text-anchor="middle" opacity="0.8">SUBJECT M-47</text>
+</svg>

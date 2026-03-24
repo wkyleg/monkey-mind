@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Fungal tendrils reaching up -->
+  <g stroke="#55aa55" fill="none" opacity="0.3">
+    <path d="M 50 600 Q 60 500 40 400 Q 30 300 55 200" stroke-width="4"/>
+    <path d="M 150 600 Q 140 480 160 360 Q 180 240 150 120" stroke-width="3"/>
+    <path d="M 300 600 Q 310 520 290 440 Q 270 360 300 280" stroke-width="4"/>
+    <path d="M 450 600 Q 440 500 460 400 Q 480 300 450 200" stroke-width="3"/>
+    <path d="M 550 600 Q 560 480 540 360 Q 520 240 555 120" stroke-width="4"/>
+    <path d="M 700 600 Q 690 520 710 440 Q 730 360 700 280" stroke-width="3"/>
+  </g>
+  
+  <!-- Branch connections -->
+  <g stroke="#66bb66" fill="none" opacity="0.2" stroke-width="2">
+    <path d="M 55 300 Q 100 280 150 300"/>
+    <path d="M 150 360 Q 220 340 300 360"/>
+    <path d="M 300 400 Q 370 380 450 400"/>
+    <path d="M 450 320 Q 500 300 550 320"/>
+    <path d="M 550 400 Q 620 380 700 400"/>
+  </g>
+</svg>

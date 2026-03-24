@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Ancient stone golem -->
+  <g transform="translate(30,30)">
+    <!-- Body (stacked stones) -->
+    <rect x="-12" y="0" width="24" height="20" fill="#5a5a5a" rx="2"/>
+    <rect x="-14" y="-10" width="28" height="15" fill="#6a6a6a" rx="2"/>
+    
+    <!-- Head -->
+    <rect x="-10" y="-22" width="20" height="15" fill="#7a7a7a" rx="3"/>
+    
+    <!-- Glowing eyes -->
+    <rect x="-7" y="-18" width="5" height="3" fill="#4ac">
+      <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="2" y="-18" width="5" height="3" fill="#4ac">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Arms -->
+    <rect x="-20" y="-8" width="8" height="18" fill="#5a5a5a" rx="2"/>
+    <rect x="12" y="-8" width="8" height="18" fill="#5a5a5a" rx="2"/>
+    
+    <!-- Cracks -->
+    <g stroke="#3a3a3a" stroke-width="1" fill="none">
+      <path d="M-8,5 L-5,12 L-2,8"/>
+      <path d="M5,-5 L8,0 L6,5"/>
+      <path d="M-6,-18 L-4,-15"/>
+    </g>
+    
+    <!-- Moss patches -->
+    <g fill="#2a5a2a" opacity="0.5">
+      <circle cx="-10" cy="15" r="3"/>
+      <circle cx="8" cy="8" r="4"/>
+      <circle cx="5" cy="-20" r="2"/>
+    </g>
+    
+    <!-- Rune glow on chest -->
+    <text x="0" y="5" font-family="serif" font-size="10" fill="#4ac" text-anchor="middle">☥</text>
+  </g>
+</svg>

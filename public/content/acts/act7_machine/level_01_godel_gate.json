@@ -1,0 +1,63 @@
+{
+  "id": "act7_level1_godel_gate",
+  "act": 7,
+  "index": 1,
+  "title": "Gödel Gate",
+  "subtitle": "The proof cannot be completed. Survive it.",
+  "themeTags": ["godel", "incompleteness", "proof"],
+  "ruleCard": {
+    "icon": "infinity",
+    "hint": "Incompleteness enemies cannot be fully defeated. Survive the proof, don't solve it.",
+    "mechanic": "escape_required",
+    "params": { "survivalTime": 60, "incompleteDamage": 0 }
+  },
+  "enemyDeck": [
+    { "archetype": "anchor", "modifiers": ["incompleteness"], "weight": 4 },
+    { "archetype": "drifter", "modifiers": [], "weight": 3 },
+    { "archetype": "sniper", "modifiers": [], "weight": 3 }
+  ],
+  "levelEnemies": {
+    "self_reference": {
+      "visualId": "self_reference",
+      "dialogue": {
+        "spawn": ["This statement is false!", "I prove myself!", "Reference loops!", "The proof contains me!", "Cannot be determined!"],
+        "death": ["Proven... false...", "The loop... breaks...", "Reference... null...", "Determination... achieved...", "Complete... at last..."]
+      }
+    },
+    "axiom_breaker": {
+      "visualId": "axiom_breaker",
+      "dialogue": {
+        "spawn": ["Your axioms are incomplete!", "Foundation crumbles!", "Truth unprovable!", "The system fails!", "Consistency impossible!"],
+        "death": ["Axiom... restored...", "Foundation... stable...", "The system... holds...", "Proven... wrong...", "Consistency... found..."]
+      }
+    },
+    "infinite_regress": {
+      "visualId": "infinite_regress",
+      "dialogue": {
+        "spawn": ["Prove this prove this prove this!", "Infinite justification!", "Turtles all the way!", "No final ground!", "Regression forever!"],
+        "death": ["Ground... found...", "The chain... ends...", "Finite... after all...", "Base case... reached...", "Recursion... terminates..."]
+      }
+    }
+  },
+  "hazards": [
+    { "type": "theorem_wall", "lanes": [2, 3, 4], "timing": 15000, "damage": 0, "visual": "proof_scroll" }
+  ],
+  "bgLayers": [
+    { "svgId": "theorem", "parallaxSpeed": 0.08, "opacity": 0.5 },
+    { "svgId": "symbols", "parallaxSpeed": 0.25, "opacity": 0.6 },
+    { "svgId": "paradox", "parallaxSpeed": 0.4, "opacity": 0.4 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The proof cannot be completed. Survive it.",
+    "codexSnippet": "Gödel proved that any sufficiently complex system contains truths it cannot prove. The monkey learned that some battles are won by not fighting.",
+    "radioWhisper": "Caller says he proved he doesn't exist. The proof is self-referential."
+  },
+  "musicSeed": {
+    "seed": "godel_001",
+    "mode": "chromatic",
+    "tempoRange": [110, 125],
+    "intensity": 0.65
+  },
+  "duration": 100,
+  "unlockCondition": "act6_complete"
+}

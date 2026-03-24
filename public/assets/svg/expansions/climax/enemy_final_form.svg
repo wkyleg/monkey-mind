@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Final form - ultimate enemy -->
+  <defs>
+    <filter id="finalFormGlow">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+  
+  <g transform="translate(30,30)">
+    <!-- Energy core -->
+    <g filter="url(#finalFormGlow)">
+      <circle cx="0" cy="0" r="8" fill="#6a4a8a">
+        <animate attributeName="r" values="8;12;8" dur="1s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="0" cy="0" r="5" fill="#8a6aaa"/>
+      <circle cx="0" cy="0" r="2" fill="#fff"/>
+    </g>
+    
+    <!-- Orbiting fragments -->
+    <g>
+      <circle cx="0" cy="-15" r="4" fill="#4a2a6a">
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="15" cy="0" r="3" fill="#2a4a6a">
+        <animateTransform attributeName="transform" type="rotate" from="120 0 0" to="480 0 0" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-15" cy="0" r="3" fill="#6a2a4a">
+        <animateTransform attributeName="transform" type="rotate" from="240 0 0" to="600 0 0" dur="3s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    
+    <!-- Energy tendrils -->
+    <g stroke="#8a6aaa" stroke-width="2" fill="none" opacity="0.6">
+      <path d="M0,-8 Q-10,-20 0,-25">
+        <animate attributeName="d" values="M0,-8 Q-10,-20 0,-25;M0,-8 Q10,-20 0,-25;M0,-8 Q-10,-20 0,-25" dur="1.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M8,0 Q20,-10 25,0">
+        <animate attributeName="d" values="M8,0 Q20,-10 25,0;M8,0 Q20,10 25,0;M8,0 Q20,-10 25,0" dur="1.8s" repeatCount="indefinite"/>
+      </path>
+      <path d="M0,8 Q10,20 0,25">
+        <animate attributeName="d" values="M0,8 Q10,20 0,25;M0,8 Q-10,20 0,25;M0,8 Q10,20 0,25" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <path d="M-8,0 Q-20,10 -25,0">
+        <animate attributeName="d" values="M-8,0 Q-20,10 -25,0;M-8,0 Q-20,-10 -25,0;M-8,0 Q-20,10 -25,0" dur="1.6s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    
+    <!-- Glitch effect -->
+    <g opacity="0.3">
+      <rect x="-20" y="-2" width="40" height="1" fill="#ff0000">
+        <animate attributeName="y" values="-2;-10;5;-2" dur="0.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.3;0;0.3;0" dur="0.5s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="-20" y="3" width="40" height="1" fill="#00ff00">
+        <animate attributeName="y" values="3;10;-5;3" dur="0.6s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;0.3;0;0.3" dur="0.6s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+{
+  "id": "myth_level9_kabbalah_tree",
+  "expansion": "myth",
+  "index": 9,
+  "title": "The Kabbalistic Tree",
+  "subtitle": "The ten sefirot. Climbing toward Ein Sof.",
+  "themeTags": ["kabbalah", "sefirot", "tree", "divine"],
+  "levelEnemies": {
+    "klipot_shell": { "visualId": "klipot_shell", "dialogue": { "spawn": ["I am the shell!", "Blocking the light!", "Klipot surrounds!", "Sparks trapped!", "Break through!"], "death": ["Shell... broken...", "Light... through...", "Klipot... pierced...", "Sparks... freed...", "Through..."] } },
+    "sefira_guardian": { "visualId": "sefira_guardian", "dialogue": { "spawn": ["Which sefira are you?", "Chesed? Gevurah?", "Balance the tree!", "Ten emanations!", "Climb toward Keter!"], "death": ["Known...", "Balanced...", "Tree... climbed...", "Emanations... understood...", "Keter... approaches..."] } },
+    "ein_sof_light": { "visualId": "ein_sof_light", "dialogue": { "spawn": ["The infinite!", "Beyond the sefirot!", "Ein Sof!", "No vessel can hold!", "Light without limit!"], "death": ["Infinite... touched...", "Beyond... reached...", "Ein Sof... glimpsed...", "Vessel... expanded...", "Limited... no more..."] } }
+  },
+  "bgLayers": [{ "svgId": "tree_of_life", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "hebrew_letters", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "divine_light", "parallaxSpeed": 0.2, "opacity": 0.6 }],
+  "copyLayers": { "codexSnippet": "The Tree of Life maps the divine emanations. The monkey climbs the sefirot toward the Ein Sof, the infinite light beyond comprehension." },
+  "musicSeed": { "seed": "kabbalah_009", "mode": "phrygian_dominant", "tempoRange": [50, 65], "intensity": 0.5 },
+  "duration": 160, "unlockCondition": "myth_level8_complete"
+}

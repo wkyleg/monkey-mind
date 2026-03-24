@@ -1,0 +1,56 @@
+{
+  "id": "science_level2_double_slit",
+  "expansion": "science",
+  "index": 2,
+  "title": "The Double Slit",
+  "subtitle": "Wave or particle? Both and neither.",
+  "themeTags": ["quantum", "wave_particle", "interference", "measurement"],
+  "ruleCard": {
+    "icon": "slit",
+    "hint": "Enemies pass through both paths. Observation changes their nature.",
+    "mechanic": "wave_particle",
+    "params": { "interferencePattern": true, "observationCollapse": true }
+  },
+  "enemyDeck": [
+    { "archetype": "phaser", "modifiers": [], "weight": 4, "visualId": "enemy_photon" },
+    { "archetype": "splitter", "modifiers": [], "weight": 4, "visualId": "enemy_wave" },
+    { "archetype": "drifter", "modifiers": [], "weight": 2, "visualId": "enemy_particle" }
+  ],
+  "levelEnemies": {
+    "photon_split": {
+      "visualId": "photon_split",
+      "dialogue": {
+        "spawn": ["Through both slits!", "I interfere with myself!", "Wave nature revealed!", "The pattern forms!", "Which path?"],
+        "death": ["One slit... only...", "Interference... gone...", "Particle... now...", "Pattern... broken...", "Path... known..."]
+      }
+    },
+    "interference_band": {
+      "visualId": "interference_band",
+      "dialogue": {
+        "spawn": ["Light and dark!", "The bands form!", "Constructive! Destructive!", "Wave behavior!", "Feynman's paths!"],
+        "death": ["Uniform... now...", "Bands... fade...", "Neither... both...", "Particle... detected...", "One path... taken..."]
+      }
+    },
+    "detector_eye": {
+      "visualId": "detector_eye",
+      "dialogue": {
+        "spawn": ["I watch!", "Measurement device!", "The pattern disappears when I look!", "Knowledge destroys mystery!", "Which slit?"],
+        "death": ["Watching... stops...", "Device... off...", "Pattern... returns...", "Mystery... restored...", "Unknown... again..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "observation_collapse", "params": { "collapseRadius": 100 } }],
+  "bgLayers": [
+    { "svgId": "lab_dark", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "slits", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "interference", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Enemies pass through both paths. Observation changes their nature.",
+    "codexSnippet": "A single particle passes through both slits at once, interfering with itself. The monkey confronts the deepest mystery of quantum mechanics and finds that nature refuses to be pinned down.",
+    "radioWhisper": "The universe doesn't decide until you ask."
+  },
+  "musicSeed": { "seed": "doubleslit_002", "mode": "chromatic", "tempoRange": [60, 75], "intensity": 0.5 },
+  "duration": 110,
+  "unlockCondition": "science_level1_complete"
+}

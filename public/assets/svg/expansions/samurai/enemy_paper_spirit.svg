@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 60">
+  <!-- Paper Spirit - Origami-like swarm enemy -->
+  <g transform="translate(25,30)">
+    <!-- Folded paper crane body -->
+    <g fill="#f5f5dc" stroke="#aaa" stroke-width="0.5">
+      <!-- Wing left -->
+      <polygon points="-18,-5 0,0 -15,10"/>
+      <!-- Wing right -->
+      <polygon points="18,-5 0,0 15,10"/>
+      <!-- Body -->
+      <polygon points="0,-5 8,5 0,15 -8,5"/>
+      <!-- Tail -->
+      <polygon points="0,15 -5,25 5,25"/>
+      <!-- Head/neck -->
+      <polygon points="0,-5 -3,-18 3,-18"/>
+      <!-- Beak -->
+      <polygon points="0,-18 -2,-25 2,-25"/>
+    </g>
+    
+    <!-- Fold lines -->
+    <g stroke="#ccccaa" stroke-width="0.5" fill="none">
+      <line x1="0" y1="-5" x2="0" y2="15"/>
+      <line x1="-8" y1="5" x2="8" y2="5"/>
+    </g>
+    
+    <!-- Eyes (ink dots) -->
+    <circle cx="-1" cy="-15" r="1" fill="#1a1a1a"/>
+    <circle cx="1" cy="-15" r="1" fill="#1a1a1a"/>
+    
+    <!-- Calligraphy on wings -->
+    <g fill="#1a1a1a" opacity="0.3" font-size="4">
+      <text x="-12" y="2" transform="rotate(-20,-12,2)">夢</text>
+      <text x="8" y="2" transform="rotate(20,8,2)">影</text>
+    </g>
+    
+    <!-- Ethereal glow -->
+    <ellipse cx="0" cy="5" rx="10" ry="8" fill="#ffffee" opacity="0.2"/>
+  </g>
+</svg>

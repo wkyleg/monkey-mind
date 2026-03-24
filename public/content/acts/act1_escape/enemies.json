@@ -1,0 +1,50 @@
+{
+  "bureaucrat_drone": {
+    "spawn": [
+      "Form 27-B required.",
+      "Processing...",
+      "You are not authorized.",
+      "Compliance is mandatory.",
+      "Filing complaint..."
+    ],
+    "death": [
+      "Paperwork... incomplete...",
+      "Request... denied...",
+      "System... error...",
+      "Filed... away...",
+      "Archived..."
+    ]
+  },
+  "lab_chaser": {
+    "spawn": [
+      "Subject located!",
+      "Returning to containment!",
+      "Specimen escaped!",
+      "Pursuit protocol engaged!",
+      "You belong in a cage!"
+    ],
+    "death": [
+      "Experiment... failed...",
+      "Data... lost...",
+      "Subject... escaped...",
+      "Lab... compromised...",
+      "Results... inconclusive..."
+    ]
+  },
+  "swarm_cell": {
+    "spawn": [
+      "We multiply!",
+      "Division complete!",
+      "More of us now!",
+      "Mitosis!",
+      "We are legion!"
+    ],
+    "death": [
+      "Cell... ruptured...",
+      "Membrane... broken...",
+      "Organism... failed...",
+      "One less... many remain...",
+      "Apoptosis..."
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+  <!-- Censor Bot - Small, fast, erases (swarm) -->
+  <g transform="translate(25,25)">
+    <!-- Body - like an eraser/redaction mark -->
+    <rect x="-12" y="-8" width="24" height="16" fill="#1a1a1a" rx="3"/>
+    
+    <!-- Redaction pattern -->
+    <g fill="#000000">
+      <rect x="-10" y="-5" width="20" height="3"/>
+      <rect x="-8" y="1" width="16" height="3"/>
+    </g>
+    
+    <!-- Eyes (scanning) -->
+    <circle cx="-5" cy="-2" r="3" fill="#ff0000"/>
+    <circle cx="5" cy="-2" r="3" fill="#ff0000"/>
+    
+    <!-- Scanning beam -->
+    <g stroke="#ff0000" stroke-width="1" fill="none" opacity="0.5">
+      <line x1="-5" y1="1" x2="-5" y2="15"/>
+      <line x1="5" y1="1" x2="5" y2="15"/>
+    </g>
+    
+    <!-- Propellers (hovering) -->
+    <g fill="#3a3a3a">
+      <ellipse cx="-12" cy="-10" rx="6" ry="2"/>
+      <ellipse cx="12" cy="-10" rx="6" ry="2"/>
+    </g>
+    
+    <!-- REDACTED text -->
+    <rect x="-15" y="10" width="30" height="6" fill="#1a1a1a"/>
+    <text x="0" y="15" fill="#ff0000" font-size="5" text-anchor="middle">[REDACTED]</text>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Surveillance state aesthetic -->
+  <rect width="400" height="600" fill="#0a0a10"/>
+  
+  <!-- Grid of cameras -->
+  <g opacity="0.3">
+    <!-- Camera icons -->
+    <g fill="#444">
+      <circle cx="80" cy="100" r="15"/>
+      <rect x="60" y="85" width="10" height="30"/>
+      <circle cx="200" cy="100" r="15"/>
+      <rect x="180" y="85" width="10" height="30"/>
+      <circle cx="320" cy="100" r="15"/>
+      <rect x="300" y="85" width="10" height="30"/>
+    </g>
+    
+    <!-- Camera lenses (red) -->
+    <g fill="#ff0000">
+      <circle cx="80" cy="100" r="5">
+        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="200" cy="100" r="5">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="320" cy="100" r="5">
+        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" begin="1s"/>
+      </circle>
+    </g>
+  </g>
+  
+  <!-- Scan lines -->
+  <g stroke="#00ff00" stroke-width="1" opacity="0.1">
+    <line x1="0" y1="200" x2="400" y2="200">
+      <animate attributeName="y1" values="0;600;0" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="y2" values="0;600;0" dur="5s" repeatCount="indefinite"/>
+    </line>
+    <line x1="0" y1="400" x2="400" y2="400">
+      <animate attributeName="y1" values="300;600;0;300" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="y2" values="300;600;0;300" dur="5s" repeatCount="indefinite"/>
+    </line>
+  </g>
+  
+  <!-- Data stream background -->
+  <text x="50" y="250" fill="#00ff00" font-family="monospace" font-size="10" opacity="0.2">
+    01001001 01000100 00100000 01010110 01000101
+    <animate attributeName="opacity" values="0.2;0.4;0.2" dur="3s" repeatCount="indefinite"/>
+  </text>
+  <text x="50" y="350" fill="#00ff00" font-family="monospace" font-size="10" opacity="0.2">
+    TRACKING... CITIZEN #847291
+    <animate attributeName="opacity" values="0.4;0.2;0.4" dur="3s" repeatCount="indefinite"/>
+  </text>
+  <text x="50" y="450" fill="#00ff00" font-family="monospace" font-size="10" opacity="0.2">
+    COMPLIANCE: MANDATORY
+    <animate attributeName="opacity" values="0.2;0.4;0.2" dur="2s" repeatCount="indefinite"/>
+  </text>
+</svg>

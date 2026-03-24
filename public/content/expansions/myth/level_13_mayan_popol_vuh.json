@@ -1,0 +1,17 @@
+{
+  "id": "myth_level13_mayan_popol_vuh",
+  "expansion": "myth",
+  "index": 13,
+  "title": "The Mayan Popol Vuh",
+  "subtitle": "The Hero Twins. Xibalba awaits.",
+  "themeTags": ["maya", "xibalba", "hero_twins", "ball_game"],
+  "levelEnemies": {
+    "death_lord": { "visualId": "death_lord", "dialogue": { "spawn": ["Welcome to Xibalba!", "The lords of death!", "One Death speaks!", "Seven Death listens!", "The underworld awaits!"], "death": ["Leaving... Xibalba...", "Lords... defeated...", "One Death... silenced...", "Seven Death... gone...", "Underworld... escaped..."] } },
+    "ball_game_foe": { "visualId": "ball_game_foe", "dialogue": { "spawn": ["Play the ball game!", "Stakes are your life!", "The Hero Twins won!", "But can you?", "Rubber meets skull!"], "death": ["Game... won...", "Life... preserved...", "Like the twins...", "I can...", "Skull... bounced..."] } },
+    "mosquito_spy": { "visualId": "mosquito_spy", "dialogue": { "spawn": ["I bite and learn!", "Names have power!", "The twins sent me!", "Information gathered!", "Lords identified!"], "death": ["Bite... avoided...", "Names... protected...", "Twins... remembered...", "Information... denied...", "Lords... anonymous..."] } }
+  },
+  "bgLayers": [{ "svgId": "xibalba", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "ball_court", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "pyramid", "parallaxSpeed": 0.2, "opacity": 0.6 }],
+  "copyLayers": { "codexSnippet": "Hunahpu and Xbalanque descended to Xibalba and outwitted the lords of death. The monkey learns that cleverness defeats even the underworld." },
+  "musicSeed": { "seed": "popolvuh_013", "mode": "mayan", "tempoRange": [60, 80], "intensity": 0.7 },
+  "duration": 160, "unlockCondition": "myth_level12_complete"
+}

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <radialGradient id="oracleGlow" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#ffcc00"/>
+      <stop offset="50%" style="stop-color:#ff8800"/>
+      <stop offset="100%" style="stop-color:#884400;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="propheticGlow">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+  
+  <!-- All-seeing oracle eye -->
+  <g transform="translate(30,30)">
+    <!-- Outer eye shape -->
+    <ellipse cx="0" cy="0" rx="22" ry="14" fill="#2a1a3a" stroke="#d4af37" stroke-width="2"/>
+    
+    <!-- Eye white -->
+    <ellipse cx="0" cy="0" rx="16" ry="10" fill="#e8e4dc"/>
+    
+    <!-- Iris with prophetic glow -->
+    <g filter="url(#propheticGlow)">
+      <circle cx="0" cy="0" r="8" fill="url(#oracleGlow)">
+        <animate attributeName="r" values="8;9;8" dur="2s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    
+    <!-- Pupil -->
+    <ellipse cx="0" cy="0" rx="3" ry="5" fill="#1a0a2a">
+      <animate attributeName="rx" values="3;2;3" dur="3s" repeatCount="indefinite"/>
+    </ellipse>
+    
+    <!-- Light reflection -->
+    <circle cx="-2" cy="-2" r="2" fill="#ffffff" opacity="0.7"/>
+    
+    <!-- Decorative rays/lashes -->
+    <g stroke="#d4af37" stroke-width="1.5">
+      <line x1="0" y1="-14" x2="0" y2="-20"/>
+      <line x1="-10" y1="-10" x2="-15" y2="-15"/>
+      <line x1="10" y1="-10" x2="15" y2="-15"/>
+      <line x1="-16" y1="0" x2="-22" y2="0"/>
+      <line x1="16" y1="0" x2="22" y2="0"/>
+      <line x1="-10" y1="10" x2="-15" y2="15"/>
+      <line x1="10" y1="10" x2="15" y2="15"/>
+      <line x1="0" y1="14" x2="0" y2="20"/>
+    </g>
+    
+    <!-- Greek symbols floating around -->
+    <g fill="#d4af37" font-family="serif" font-size="8" opacity="0.6">
+      <text x="-25" y="-10" transform="rotate(-30 -25 -10)">α</text>
+      <text x="22" y="-8" transform="rotate(30 22 -8)">Ω</text>
+      <text x="-20" y="15" transform="rotate(20 -20 15)">Δ</text>
+      <text x="18" y="12" transform="rotate(-20 18 12)">Σ</text>
+    </g>
+  </g>
+</svg>

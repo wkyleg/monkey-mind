@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="shadeFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#334455;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#223344;stop-opacity:0.1"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#shadeFade)">
+    <ellipse cx="100" cy="300" rx="20" ry="40"/>
+    <ellipse cx="200" cy="350" rx="18" ry="35"/>
+    <ellipse cx="300" cy="280" rx="22" ry="45"/>
+    <ellipse cx="400" cy="320" rx="20" ry="38"/>
+    <ellipse cx="500" cy="290" rx="18" ry="42"/>
+    <ellipse cx="600" cy="340" rx="22" ry="36"/>
+    <ellipse cx="700" cy="310" rx="20" ry="40"/>
+  </g>
+</svg>

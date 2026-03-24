@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <ellipse cx="30" cy="40" rx="10" ry="14" fill="#ddccbb" stroke="#aa9988" stroke-width="2"/>
+  <circle cx="30" cy="18" r="10" fill="#ddccbb" stroke="#aa9988" stroke-width="2"/>
+  <ellipse cx="30" cy="18" rx="6" ry="4" fill="#ccbbaa"/>
+  <line x1="20" y1="35" x2="10" y2="45" stroke="#ddccbb" stroke-width="4"/>
+  <line x1="40" y1="35" x2="50" y2="45" stroke="#ddccbb" stroke-width="4"/>
+</svg>

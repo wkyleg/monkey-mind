@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="nightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1a1a3a;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#nightSky)"/>
+  <g fill="#ffffff">
+    <circle cx="100" cy="80" r="2"/><circle cx="200" cy="120" r="1.5"/><circle cx="300" cy="60" r="2"/>
+    <circle cx="400" cy="100" r="2.5"/><circle cx="500" cy="50" r="1.5"/><circle cx="600" cy="90" r="2"/>
+    <circle cx="700" cy="70" r="1.5"/><circle cx="150" cy="180" r="2"/><circle cx="350" cy="200" r="1.5"/>
+    <circle cx="550" cy="160" r="2"/><circle cx="750" cy="190" r="1.5"/><circle cx="250" cy="250" r="2"/>
+    <circle cx="450" cy="280" r="1.5"/><circle cx="650" cy="240" r="2"/><circle cx="50" cy="300" r="1.5"/>
+  </g>
+</svg>

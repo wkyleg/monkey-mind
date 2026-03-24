@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs><filter id="mayaBlur"><feGaussianBlur stdDeviation="4"/></filter></defs>
+  <ellipse cx="30" cy="30" rx="18" ry="22" fill="#8a6a8a" opacity="0.4" filter="url(#mayaBlur)"/>
+  <ellipse cx="30" cy="30" rx="12" ry="15" fill="#aa88aa" opacity="0.5"/>
+</svg>

@@ -1,0 +1,65 @@
+{
+  "id": "minotaur_of_interpretation",
+  "name": "Minotaur of Interpretation",
+  "title": "The Bull of the Labyrinth",
+  "hp": 160,
+  "phases": [
+    {
+      "hpThreshold": 1.0,
+      "pattern": "patrol",
+      "speedMod": 0.8,
+      "attacks": [
+        { "type": "charge", "cooldown": 4000, "damage": 2, "params": { "distance": 300, "warning": 1000 } },
+        { "type": "wall_summon", "cooldown": 8000, "damage": 0, "params": { "walls": 3 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.7,
+      "pattern": "hunt",
+      "speedMod": 1.0,
+      "attacks": [
+        { "type": "horn_swipe", "cooldown": 2500, "damage": 2, "params": { "arc": 120 } },
+        { "type": "maze_shift", "cooldown": 10000, "damage": 0, "params": { "complexity": 2 } }
+      ]
+    },
+    {
+      "hpThreshold": 0.4,
+      "pattern": "rage",
+      "speedMod": 1.3,
+      "attacks": [
+        { "type": "bull_rush", "cooldown": 2000, "damage": 3, "params": { "bounces": 2 } },
+        { "type": "labyrinthine_summon", "cooldown": 6000, "damage": 0, "params": { "enemy": "drifter", "count": 4, "modifier": "labyrinthine" } }
+      ]
+    },
+    {
+      "hpThreshold": 0.15,
+      "pattern": "cornered",
+      "speedMod": 1.5,
+      "attacks": [
+        { "type": "desperate_charge", "cooldown": 1500, "damage": 4, "params": { "tracking": true } },
+        { "type": "maze_collapse", "cooldown": 4000, "damage": 2, "params": { "radius": 200 } }
+      ]
+    }
+  ],
+  "visual": {
+    "type": "custom",
+    "color": "#ffdd00",
+    "size": 160,
+    "glow": true
+  },
+  "codexEntry": "The Minotaur of Interpretation is not a beast of flesh but of meaning. It grows stronger with every layer of complexity, every footnote, every interpretation of an interpretation. The monkey learned that Theseus's thread was not a path out - it was a refusal to add more.",
+  "defeatUnlocks": ["act7_machine"],
+  "defeatQuote": "THE MAZE... SIMPLIFIES... THE BULL... UNDERSTOOD...",
+  "spawnText": [
+    "THE LABYRINTH GROWS",
+    "COMPLEXITY FEEDS ME",
+    "FIND THE CENTER",
+    "MORE WALLS"
+  ],
+  "deathText": [
+    "THE THREAD... LEADS OUT...",
+    "SIMPLICITY... WINS...",
+    "THE MAZE... DISSOLVES...",
+    "THE BULL... RESTS..."
+  ]
+}

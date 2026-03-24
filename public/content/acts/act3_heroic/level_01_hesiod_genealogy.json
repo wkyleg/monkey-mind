@@ -1,0 +1,97 @@
+{
+  "id": "act3_level1_hesiod_genealogy",
+  "act": 3,
+  "index": 1,
+  "title": "Hesiod Genealogy",
+  "subtitle": "Kill order matters. The bloodline must be severed correctly.",
+  "themeTags": ["genealogy", "sequence", "mythology"],
+  "ruleCard": {
+    "icon": "family_tree",
+    "hint": "Splitters spawn genealogically. Kill the parent before the child.",
+    "mechanic": "sequence_kill",
+    "params": { "sequence": ["titan", "olympian", "demigod"] }
+  },
+  "enemyDeck": [
+    { "archetype": "splitter", "modifiers": [], "weight": 5 },
+    { "archetype": "drifter", "modifiers": ["mythic"], "weight": 3 },
+    { "archetype": "chaser", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "titan_elder": {
+      "visualId": "titan_elder",
+      "dialogue": {
+        "spawn": [
+          "I AM PRIMORDIAL!",
+          "Before Zeus, there was US!",
+          "The old gods remember!",
+          "Tartarus cannot hold me!",
+          "KRONOS LIVES THROUGH ME!"
+        ],
+        "death": [
+          "Olympus... trembles...",
+          "The cycle... continues...",
+          "My children... avenge...",
+          "Time... devours all...",
+          "To Tartarus... again..."
+        ]
+      }
+    },
+    "divine_offspring": {
+      "visualId": "divine_offspring",
+      "dialogue": {
+        "spawn": [
+          "I carry divine blood!",
+          "Son of thunder!",
+          "The bloodline is sacred!",
+          "Ichor flows through me!",
+          "Blessed by Olympus!"
+        ],
+        "death": [
+          "Father... why...",
+          "The bloodline... ends...",
+          "Mortal after all...",
+          "Olympus... weeps...",
+          "Not... immortal..."
+        ]
+      }
+    },
+    "chaos_spawn": {
+      "visualId": "chaos_spawn",
+      "dialogue": {
+        "spawn": [
+          "FROM THE VOID!",
+          "Before form, I was!",
+          "Chaos births all!",
+          "Primordial darkness!",
+          "The first fear!"
+        ],
+        "death": [
+          "Returning... to void...",
+          "Formless... again...",
+          "The void... reclaims...",
+          "Before... and after...",
+          "Chaos... eternal..."
+        ]
+      }
+    }
+  },
+  "hazards": [],
+  "bgLayers": [
+    { "svgId": "stars", "parallaxSpeed": 0.05, "opacity": 0.4 },
+    { "svgId": "tree", "parallaxSpeed": 0.2, "opacity": 0.5 },
+    { "svgId": "names", "parallaxSpeed": 0.4, "opacity": 0.3 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Kill order matters. The bloodline must be severed correctly.",
+    "codexSnippet": "First there was Chaos. Then Gaia. Then Uranus. The monkey learned that even gods have parents, and parents can be overthrown.",
+    "radioWhisper": "Caller claims his family tree goes back to the Titans. HR is concerned."
+  },
+  "musicSeed": {
+    "seed": "hesiod_001",
+    "mode": "dorian",
+    "tempoRange": [95, 110],
+    "intensity": 0.55
+  },
+  "duration": 100,
+  "unlockCondition": "act2_complete"
+}

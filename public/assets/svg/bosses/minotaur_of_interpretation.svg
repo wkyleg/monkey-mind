@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140">
+  <defs>
+    <linearGradient id="mino_body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a3020"/>
+      <stop offset="50%" stop-color="#2a1810"/>
+      <stop offset="100%" stop-color="#1a0a05"/>
+    </linearGradient>
+    <filter id="mino_glow">
+      <feGaussianBlur stdDeviation="3" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Massive bull body -->
+  <ellipse cx="60" cy="90" rx="45" ry="35" fill="url(#mino_body)" stroke="#daa520" stroke-width="2"/>
+  <!-- Bull head -->
+  <ellipse cx="60" cy="50" rx="30" ry="25" fill="url(#mino_body)" stroke="#daa520" stroke-width="2"/>
+  <!-- Horns -->
+  <path d="M25 45 Q10 20 25 5" fill="none" stroke="#f5f5dc" stroke-width="8" stroke-linecap="round"/>
+  <path d="M95 45 Q110 20 95 5" fill="none" stroke="#f5f5dc" stroke-width="8" stroke-linecap="round"/>
+  <!-- Glowing red eyes -->
+  <circle cx="45" cy="45" r="8" fill="#1a0000" stroke="#ff0000" stroke-width="2"/>
+  <circle cx="45" cy="45" r="4" fill="#ff3300" filter="url(#mino_glow)">
+    <animate attributeName="r" values="4;5;4" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="75" cy="45" r="8" fill="#1a0000" stroke="#ff0000" stroke-width="2"/>
+  <circle cx="75" cy="45" r="4" fill="#ff3300" filter="url(#mino_glow)">
+    <animate attributeName="r" values="4;5;4" dur="1.5s" repeatCount="indefinite" begin="0.75s"/>
+  </circle>
+  <!-- Snout with steam -->
+  <ellipse cx="60" cy="62" rx="12" ry="8" fill="#3a2015"/>
+  <circle cx="55" cy="62" r="3" fill="#1a0a05"/>
+  <circle cx="65" cy="62" r="3" fill="#1a0a05"/>
+  <!-- Steam from nostrils -->
+  <g stroke="#aaaaaa" stroke-width="2" fill="none" opacity="0.5">
+    <path d="M52 58 Q48 50 52 42">
+      <animate attributeName="opacity" values="0.5;0.2;0.5" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M68 58 Q72 50 68 42">
+      <animate attributeName="opacity" values="0.5;0.2;0.5" dur="2s" repeatCount="indefinite" begin="1s"/>
+    </path>
+  </g>
+  <!-- Book pages scattered (interpretation theme) -->
+  <g fill="#f5f5dc" opacity="0.7">
+    <rect x="20" y="110" width="15" height="20" rx="1" transform="rotate(-15 27 120)"/>
+    <rect x="85" y="105" width="15" height="20" rx="1" transform="rotate(20 92 115)"/>
+    <rect x="50" y="125" width="12" height="15" rx="1" transform="rotate(5 56 132)"/>
+  </g>
+  <!-- Maze pattern on body -->
+  <path d="M35 85 L40 85 L40 95 L50 95" fill="none" stroke="#daa520" stroke-width="1" opacity="0.5"/>
+  <path d="M70 85 L75 85 L75 95 L85 95" fill="none" stroke="#daa520" stroke-width="1" opacity="0.5"/>
+</svg>

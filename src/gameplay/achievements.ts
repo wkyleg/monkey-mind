@@ -46,7 +46,7 @@ const ACHIEVEMENTS: AchievementData[] = [
     icon: '🏆',
     condition: { type: 'stat', stat: 'runsCompleted', target: 10 },
   },
-  
+
   // Skill-based
   {
     id: 'calm_under_fire',
@@ -69,7 +69,7 @@ const ACHIEVEMENTS: AchievementData[] = [
     icon: '🛡️',
     condition: { type: 'perfect_sector', target: 1 },
   },
-  
+
   // Boss defeats
   {
     id: 'mk_ultra_survivor',
@@ -106,7 +106,7 @@ const ACHIEVEMENTS: AchievementData[] = [
     icon: '🪞',
     condition: { type: 'boss', boss: 'mirror_self', target: 1 },
   },
-  
+
   // Sector completion
   {
     id: 'neural_escape',
@@ -143,7 +143,7 @@ const ACHIEVEMENTS: AchievementData[] = [
     icon: '🐵',
     condition: { type: 'sector', target: 5 },
   },
-  
+
   // Score-based
   {
     id: 'highscore_10k',
@@ -175,14 +175,14 @@ export class AchievementSystem {
     damageTime: 0,
     sectorDamage: false,
   };
-  
+
   // Track defeated bosses in session
   private defeatedBosses: Set<string> = new Set();
-  
+
   constructor() {
     this.setupListeners();
   }
-  
+
   private setupListeners(): void {
     // Listen for relevant events
     events.on('combo:increase', ({ count }) => {
@@ -191,21 +191,21 @@ export class AchievementSystem {
         this.checkAchievements();
       }
     });
-    
+
     events.on('score:add', ({ amount }) => {
       this.sessionStats.score += amount;
       this.checkAchievements();
     });
-    
+
     events.on('player:damage', () => {
       this.sessionStats.damageTime = 0;
       this.sessionStats.sectorDamage = true;
     });
-    
+
     events.on('game:over', () => {
       this.checkAchievements();
     });
-    
+
     // Boss defeat tracking
     events.on('boss:defeated', ({ bossId }) => {
       this.defeatedBosses.add(bossId);
@@ -213,17 +213,17 @@ export class AchievementSystem {
       this.checkBossAchievements(bossId);
       this.checkAchievements();
     });
-    
+
     // Enemy death tracking
     events.on('enemy:death', () => {
       storage.incrementStat('totalEnemiesDefeated');
     });
-    
+
     // Banana throw tracking
     events.on('weapon:fire', () => {
       storage.incrementStat('totalBananasThrown');
     });
-    
+
     // Sector complete - check no-damage
     events.on('sector:complete', () => {
       if (!this.sessionStats.sectorDamage) {
@@ -233,49 +233,49 @@ export class AchievementSystem {
       this.sessionStats.sectorDamage = false;
     });
   }
-  
+
   /**
    * Check boss-specific achievements
    */
   private checkBossAchievements(bossId: string): void {
     const bossAchievements: Record<string, string> = {
-      'cortex_auditor': 'mk_ultra_survivor',
-      'grey_administrator': 'cosmic_clearance',
-      'banana_pentagon': 'golden_mean_breaker',
-      'archon_exe': 'override_authority',
-      'mirror_self': 'know_thyself',
+      cortex_auditor: 'mk_ultra_survivor',
+      grey_administrator: 'cosmic_clearance',
+      banana_pentagon: 'golden_mean_breaker',
+      archon_exe: 'override_authority',
+      mirror_self: 'know_thyself',
     };
-    
+
     const achievementId = bossAchievements[bossId];
     if (achievementId) {
       this.tryUnlock(achievementId);
     }
   }
-  
+
   /**
    * Update session tracking
    */
   update(dt: number): void {
     this.sessionStats.survivalTime += dt;
     this.sessionStats.damageTime += dt;
-    
+
     // Check survival achievement
     if (this.sessionStats.damageTime >= 30) {
       this.tryUnlock('calm_under_fire');
     }
   }
-  
+
   /**
    * Check all achievements
    */
   checkAchievements(): void {
     const stats = storage.stats;
-    
+
     for (const achievement of ACHIEVEMENTS) {
       if (storage.isAchievementUnlocked(achievement.id)) continue;
-      
+
       let unlocked = false;
-      
+
       switch (achievement.condition.type) {
         case 'stat':
           if (achievement.condition.stat) {
@@ -285,59 +285,57 @@ export class AchievementSystem {
             }
           }
           break;
-          
+
         case 'combo':
           if (this.sessionStats.maxCombo >= achievement.condition.target) {
             unlocked = true;
           }
           break;
-          
-        case 'score':
-          const highScore = Math.max(
-            storage.getHighScore('campaign'),
-            storage.getHighScore('endless')
-          );
+
+        case 'score': {
+          const highScore = Math.max(storage.getHighScore('campaign'), storage.getHighScore('endless'));
           if (highScore >= achievement.condition.target) {
             unlocked = true;
           }
           break;
-          
+        }
+
         case 'sector':
           if (storage.highestSector >= achievement.condition.target) {
             unlocked = true;
           }
           break;
-          
+
         case 'boss':
           if (achievement.condition.boss && this.defeatedBosses.has(achievement.condition.boss)) {
             unlocked = true;
           }
           break;
-          
+
         case 'perfect_sector':
           // Handled by event listener
           break;
       }
-      
+
       if (unlocked) {
         this.unlock(achievement);
       }
     }
   }
-  
+
   /**
    * Try to unlock an achievement
    */
   tryUnlock(id: string): boolean {
     if (storage.isAchievementUnlocked(id)) return false;
-    
-    const achievement = ACHIEVEMENTS.find(a => a.id === id);
+
+    const achievement = ACHIEVEMENTS.find((a) => a.id === id);
     if (achievement) {
       return this.unlock(achievement);
     }
     return false;
   }
-  
+
   /**
    * Unlock an achievement
    */
@@ -347,17 +345,17 @@ export class AchievementSystem {
         id: achievement.id,
         name: achievement.name,
       });
-      
+
       // Handle rewards
       if (achievement.reward) {
         this.grantReward(achievement.reward);
       }
-      
+
       return true;
     }
     return false;
   }
-  
+
   /**
    * Grant achievement reward
    */
@@ -373,17 +371,17 @@ export class AchievementSystem {
         break;
     }
   }
-  
+
   /**
    * Get all achievements with progress
    */
   getAllProgress(): AchievementProgress[] {
     const stats = storage.stats;
-    
-    return ACHIEVEMENTS.map(achievement => {
+
+    return ACHIEVEMENTS.map((achievement) => {
       const unlocked = storage.isAchievementUnlocked(achievement.id);
       let progress = 0;
-      
+
       if (!unlocked) {
         switch (achievement.condition.type) {
           case 'stat':
@@ -395,10 +393,7 @@ export class AchievementSystem {
             progress = this.sessionStats.maxCombo;
             break;
           case 'score':
-            progress = Math.max(
-              storage.getHighScore('campaign'),
-              storage.getHighScore('endless')
-            );
+            progress = Math.max(storage.getHighScore('campaign'), storage.getHighScore('endless'));
             break;
           case 'sector':
             progress = storage.highestSector;
@@ -407,7 +402,7 @@ export class AchievementSystem {
       } else {
         progress = achievement.condition.target;
       }
-      
+
       return {
         id: achievement.id,
         unlocked,
@@ -416,7 +411,7 @@ export class AchievementSystem {
       };
     });
   }
-  
+
   /**
    * Reset session stats
    */

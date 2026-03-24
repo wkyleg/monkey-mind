@@ -1,0 +1,40 @@
+{
+  "id": "act6_library",
+  "number": 6,
+  "name": "Library and Labyrinth",
+  "thesis": "Knowledge is a maze. The exit is understanding.",
+  "storyBeat": "The monkey enters the infinite library - where knowledge is both freedom and trap. The lab's records are here, redacted files and infinite archives. The headband pulses with data.",
+  "visualCallbacks": [
+    "Hexagonal library stacks",
+    "Torchlight and shadow projections",
+    "Stamps and redacted text",
+    "Lab notes and experiment files"
+  ],
+  "levels": [
+    "act6_level1_plato_cave",
+    "act6_level2_borges_library",
+    "act6_level3_kafka_bureau",
+    "act6_level4_baudrillard_mall",
+    "act6_level5_minotaur_boss"
+  ],
+  "visualStyle": {
+    "palette": ["#1a1a0a", "#2d2d1b", "#4a4a2c", "#ffdd00", "#ff5500"],
+    "bgPattern": "hexagonal_stacks",
+    "enemyStyle": "shadow_text",
+    "particleStyle": "paper_dust",
+    "uiTheme": "parchment_sepia"
+  },
+  "bossId": "minotaur_of_interpretation",
+  "unlocks": {
+    "powerups": ["index_shot", "simplify_beam"],
+    "codex": ["entry_library", "entry_minotaur", "entry_labyrinth"],
+    "cosmetics": ["headband_scholar"]
+  },
+  "musicParams": {
+    "tempo": 80,
+    "intensity": 0.5,
+    "filterCutoff": 650,
+    "useReverb": true,
+    "distortionAmount": 0.05
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "state_level6_propaganda",
+  "expansion": "state",
+  "index": 6,
+  "title": "The Propaganda Machine",
+  "subtitle": "A lie repeated becomes truth. The medium is the message.",
+  "themeTags": ["propaganda", "media", "manipulation", "truth"],
+  "ruleCard": {
+    "icon": "megaphone",
+    "hint": "Repeated messages become harder to resist. Find the original truth.",
+    "mechanic": "repetition_effect",
+    "params": { "repetitionPower": 1.5, "truthBonus": 80 }
+  },
+  "enemyDeck": [
+    { "archetype": "splitter", "modifiers": [], "weight": 4, "visualId": "enemy_broadcaster" },
+    { "archetype": "chaser", "modifiers": [], "weight": 3, "visualId": "enemy_slogan" },
+    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_poster" }
+  ],
+  "levelEnemies": {
+    "propaganda_broadcast": {
+      "visualId": "propaganda_broadcast",
+      "dialogue": {
+        "spawn": ["The enemy is at the gates!", "Our leader is infallible!", "Production exceeds quotas!", "Victory is assured!", "The people rejoice!"],
+        "death": ["Enemy... is friend...", "Leader... human...", "Quotas... honest...", "Victory... shared...", "People... think..."]
+      }
+    },
+    "eternal_slogan": {
+      "visualId": "eternal_slogan",
+      "dialogue": {
+        "spawn": ["Work makes free!", "Unity through strength!", "The future belongs to us!", "Sacrifice for the nation!", "One people, one will!"],
+        "death": ["Work... is work...", "Unity... in diversity...", "Future... is choice...", "Sacrifice... optional...", "Many... wills..."]
+      }
+    },
+    "big_lie": {
+      "visualId": "big_lie",
+      "dialogue": {
+        "spawn": ["So big, it must be true!", "Everyone believes!", "To question is treason!", "The evidence is clear!", "History confirms!"],
+        "death": ["Size... irrelevant...", "Few... question...", "Question... is duty...", "Evidence... fabricated...", "History... revised..."]
+      }
+    }
+  },
+  "hazards": [{ "type": "message_bombardment", "params": { "confusionBuildup": true, "clarityInterval": 10000 } }],
+  "bgLayers": [
+    { "svgId": "speakers", "parallaxSpeed": 0.1, "opacity": 0.5 },
+    { "svgId": "posters_wall", "parallaxSpeed": 0.15, "opacity": 0.4 },
+    { "svgId": "screens_grid", "parallaxSpeed": 0.2, "opacity": 0.6 }
+  ],
+  "copyLayers": {
+    "ruleCard": "Repeated messages become harder to resist. Find the original truth.",
+    "codexSnippet": "Propaganda works not by convincing but by overwhelming. The monkey swims through a sea of messages and learns that truth requires effort while lies are easy.",
+    "radioWhisper": "If you tell a lie big enough and keep repeating it, people will eventually come to believe it."
+  },
+  "musicSeed": { "seed": "propaganda_006", "mode": "phrygian", "tempoRange": [70, 85], "intensity": 0.7 },
+  "duration": 160,
+  "unlockCondition": "state_level5_complete"
+}

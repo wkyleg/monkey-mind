@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <!-- Cosmic void with distant stars -->
+  <defs>
+    <radialGradient id="cosmicVoid" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0a0a1a"/>
+      <stop offset="100%" style="stop-color:#000005"/>
+    </radialGradient>
+  </defs>
+  
+  <rect width="400" height="600" fill="url(#cosmicVoid)"/>
+  
+  <!-- Distant stars -->
+  <g fill="#fff">
+    <circle cx="50" cy="80" r="1"/>
+    <circle cx="150" cy="120" r="0.5"/>
+    <circle cx="280" cy="60" r="1.5"/>
+    <circle cx="350" cy="150" r="0.5"/>
+    <circle cx="80" cy="200" r="1"/>
+    <circle cx="320" cy="280" r="0.5"/>
+    <circle cx="200" cy="180" r="1"/>
+    <circle cx="100" cy="350" r="0.5"/>
+    <circle cx="300" cy="400" r="1"/>
+    <circle cx="180" cy="480" r="0.5"/>
+    <circle cx="60" cy="520" r="1"/>
+    <circle cx="340" cy="550" r="0.5"/>
+  </g>
+  
+  <!-- Nebula wisps -->
+  <g opacity="0.2">
+    <ellipse cx="100" cy="250" rx="80" ry="40" fill="#4a0a6a"/>
+    <ellipse cx="300" cy="350" rx="100" ry="50" fill="#0a4a6a"/>
+    <ellipse cx="200" cy="500" rx="120" ry="60" fill="#6a0a4a"/>
+  </g>
+  
+  <!-- Distant galaxy -->
+  <g transform="translate(300,150)" opacity="0.3">
+    <ellipse cx="0" cy="0" rx="30" ry="10" fill="#aaa"/>
+    <ellipse cx="0" cy="0" rx="20" ry="6" fill="#ddd"/>
+    <circle cx="0" cy="0" r="5" fill="#fff"/>
+  </g>
+  
+  <!-- Cosmic horror tentacle hint -->
+  <g stroke="#2a0a4a" stroke-width="5" fill="none" opacity="0.2">
+    <path d="M-20,580 Q50,550 80,600">
+      <animate attributeName="d" values="M-20,580 Q50,550 80,600;M-20,600 Q50,570 80,620;M-20,580 Q50,550 80,600" dur="5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M420,500 Q380,480 350,520">
+      <animate attributeName="d" values="M420,500 Q380,480 350,520;M420,480 Q380,500 350,500;M420,500 Q380,480 350,520" dur="6s" repeatCount="indefinite"/>
+    </path>
+  </g>
+</svg>

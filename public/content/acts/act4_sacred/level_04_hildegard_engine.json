@@ -1,0 +1,61 @@
+{
+  "id": "act4_level4_hildegard_engine",
+  "act": 4,
+  "index": 4,
+  "title": "Hildegard Engine",
+  "subtitle": "The waves sync to sacred music. Dance with the divine.",
+  "themeTags": ["hildegard", "music", "sacred"],
+  "ruleCard": {
+    "icon": "music_note",
+    "hint": "Liturgical enemies sync to rhythm. Move with the music to survive.",
+    "mechanic": "rhythm_sync",
+    "params": { "bpm": 72, "bonusMultiplier": 2.5 }
+  },
+  "enemyDeck": [
+    { "archetype": "drifter", "modifiers": ["liturgical"], "weight": 5 },
+    { "archetype": "weaver", "modifiers": ["liturgical"], "weight": 3 },
+    { "archetype": "anchor", "modifiers": [], "weight": 2 }
+  ],
+  "levelEnemies": {
+    "gregorian_voice": {
+      "visualId": "gregorian_voice",
+      "dialogue": {
+        "spawn": ["In nomine Patris!", "The choir eternal!", "Harmony divine!", "Sing with us forever!", "One voice, one song!"],
+        "death": ["The note... fades...", "Dissonance... wins...", "Silence... falls...", "The choir... diminished...", "Amen..."]
+      }
+    },
+    "stained_light": {
+      "visualId": "stained_light",
+      "dialogue": {
+        "spawn": ["Colors of faith!", "Light through glass!", "Sacred images!", "The window speaks!", "See the divine!"],
+        "death": ["Light... scatters...", "Glass... shatters...", "Colors... fade...", "The image... breaks...", "Darkness... enters..."]
+      }
+    },
+    "censer_spirit": {
+      "visualId": "censer_spirit",
+      "dialogue": {
+        "spawn": ["Incense rises!", "Prayers ascending!", "Sweet smoke of devotion!", "Breathe the sacred!", "Sanctified air!"],
+        "death": ["Smoke... disperses...", "The prayer... ends...", "Fragrance... fades...", "Air... clears...", "Mundane... returns..."]
+      }
+    }
+  },
+  "hazards": [],
+  "bgLayers": [
+    { "svgId": "cathedral", "parallaxSpeed": 0.08, "opacity": 0.5 },
+    { "svgId": "light", "parallaxSpeed": 0.25, "opacity": 0.6 },
+    { "svgId": "notes", "parallaxSpeed": 0.4, "opacity": 0.4 }
+  ],
+  "copyLayers": {
+    "ruleCard": "The waves sync to sacred music. Dance with the divine.",
+    "codexSnippet": "Hildegard of Bingen heard the music of the spheres. She wrote it down. The monkey learned that the universe has a rhythm, and survival means dancing to it.",
+    "radioWhisper": "Caller says the Gregorian chant on the radio is actually a firmware update."
+  },
+  "musicSeed": {
+    "seed": "hildegard_004",
+    "mode": "lydian",
+    "tempoRange": [68, 76],
+    "intensity": 0.55
+  },
+  "duration": 130,
+  "unlockCondition": "act4_level3_complete"
+}

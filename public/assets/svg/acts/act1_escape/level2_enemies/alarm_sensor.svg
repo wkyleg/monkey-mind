@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <filter id="alarmGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Sensor housing -->
+  <rect x="20" y="15" width="20" height="30" rx="3" fill="#1a1a2e" stroke="#e94560" stroke-width="2"/>
+  
+  <!-- Alert light -->
+  <circle cx="30" cy="25" r="6" fill="#e94560" filter="url(#alarmGlow)"/>
+  
+  <!-- Sensor lens -->
+  <ellipse cx="30" cy="38" rx="6" ry="4" fill="#0a0a15" stroke="#e94560" stroke-width="1"/>
+  <ellipse cx="30" cy="38" rx="3" ry="2" fill="#e94560" opacity="0.5"/>
+  
+  <!-- Detection waves -->
+  <g stroke="#e94560" stroke-width="1" fill="none" opacity="0.5">
+    <path d="M 15 30 Q 5 30 5 45"/>
+    <path d="M 12 30 Q 0 30 0 50"/>
+    <path d="M 45 30 Q 55 30 55 45"/>
+    <path d="M 48 30 Q 60 30 60 50"/>
+  </g>
+  
+  <!-- Mount -->
+  <rect x="25" y="5" width="10" height="10" fill="#2a2a3e"/>
+</svg>
