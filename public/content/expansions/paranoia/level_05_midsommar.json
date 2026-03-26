@@ -4,53 +4,143 @@
   "index": 5,
   "title": "Midsommar",
   "subtitle": "Sweden. The sun never sets. Neither does the horror.",
-  "themeTags": ["midsommar", "sweden", "folk_horror", "grief"],
+  "themeTags": [
+    "midsommar",
+    "sweden",
+    "folk_horror",
+    "grief"
+  ],
   "ruleCard": {
     "icon": "sun",
     "hint": "In constant daylight, there's nowhere to hide.",
     "mechanic": "no_darkness",
-    "params": { "visibilityBonus": 100, "exposurePenalty": 30 }
+    "params": {
+      "visibilityBonus": 100,
+      "exposurePenalty": 30
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": [], "weight": 4, "visualId": "enemy_harga_elder" },
-    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_attestupa_cliff" },
-    { "archetype": "mimic", "modifiers": [], "weight": 3, "visualId": "enemy_may_queen_dani" }
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_harga_elder"
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_attestupa_cliff"
+    },
+    {
+      "archetype": "mimic",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_may_queen_dani"
+    }
   ],
   "levelEnemies": {
     "harga_elder": {
       "visualId": "harga_elder",
       "dialogue": {
-        "spawn": ["We feel your pain!", "Join our family!", "The commune understands!", "Grief shared is lessened!", "You belong with us!"],
-        "death": ["Pain... private...", "Family... elsewhere...", "Commune... left...", "Grief... processed...", "Belonging... found..."]
+        "spawn": [
+          "We feel your pain!",
+          "Join our family!",
+          "The commune understands!",
+          "Grief shared is lessened!",
+          "You belong with us!"
+        ],
+        "death": [
+          "Pain... private...",
+          "Family... elsewhere...",
+          "Commune... left...",
+          "Grief... processed...",
+          "Belonging... found..."
+        ]
       }
     },
     "flower_crown": {
       "visualId": "flower_crown",
       "dialogue": {
-        "spawn": ["You are May Queen!", "The flowers choose!", "Dance until you win!", "The outsiders are purged!", "Smile, Dani!"],
-        "death": ["Not... queen...", "Flowers... wilt...", "Dancing... stops...", "Outsiders... leave...", "Crying... allowed..."]
+        "spawn": [
+          "You are May Queen!",
+          "The flowers choose!",
+          "Dance until you win!",
+          "The outsiders are purged!",
+          "Smile, Dani!"
+        ],
+        "death": [
+          "Not... queen...",
+          "Flowers... wilt...",
+          "Dancing... stops...",
+          "Outsiders... leave...",
+          "Crying... allowed..."
+        ]
       }
     },
     "blood_eagle": {
       "visualId": "blood_eagle",
       "dialogue": {
-        "spawn": ["The ritual must be completed!", "Ancient traditions!", "The outsiders serve a purpose!", "The bear suit awaits!", "It was always going to end this way!"],
-        "death": ["Ritual... incomplete...", "Traditions... broken...", "Purpose... refused...", "Suit... empty...", "Different... ending..."]
+        "spawn": [
+          "The ritual must be completed!",
+          "Ancient traditions!",
+          "The outsiders serve a purpose!",
+          "The bear suit awaits!",
+          "It was always going to end this way!"
+        ],
+        "death": [
+          "Ritual... incomplete...",
+          "Traditions... broken...",
+          "Purpose... refused...",
+          "Suit... empty...",
+          "Different... ending..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "constant_daylight", "params": { "hidingPenalty": 50, "sanityDrain": 5 } }],
+  "hazards": [
+    {
+      "type": "constant_daylight",
+      "params": {
+        "hidingPenalty": 50,
+        "sanityDrain": 5
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "sweden_meadow", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "maypole", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "flowers", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "sweden_meadow",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "maypole",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "flowers",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "In constant daylight, there's nowhere to hide.",
     "codexSnippet": "In northern Sweden, a commune practices ancient traditions under the midnight sun. The monkey enters Midsommar and learns that some horrors happen in broad daylight.",
     "radioWhisper": "Does he feel it? Does he feel it?"
   },
-  "musicSeed": { "seed": "midsommar_005", "mode": "lydian", "tempoRange": [45, 60], "intensity": 0.5 },
+  "musicSeed": {
+    "seed": "midsommar_005",
+    "mode": "locrian",
+    "tempoRange": [
+      64,
+      87
+    ],
+    "intensity": 0.5,
+    "scale": "harmonicMinor",
+    "style": "dark",
+    "timeSignature": "11/8"
+  },
   "duration": 140,
   "unlockCondition": "paranoia_level4_complete"
 }

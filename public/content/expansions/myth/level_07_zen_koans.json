@@ -4,14 +4,104 @@
   "index": 7,
   "title": "Zen Koans",
   "subtitle": "What is the sound of one hand clapping?",
-  "themeTags": ["zen", "koans", "satori", "paradox"],
+  "themeTags": [
+    "zen",
+    "koans",
+    "satori",
+    "paradox"
+  ],
   "levelEnemies": {
-    "logical_mind": { "visualId": "logical_mind", "dialogue": { "spawn": ["Solve me logically!", "Reason your way!", "The answer makes sense!", "Think harder!", "Concepts capture!"], "death": ["Beyond logic...", "No reasoning...", "Non-sense...", "Thinking... stops...", "Concepts... empty..."] } },
-    "mu_response": { "visualId": "mu_response", "dialogue": { "spawn": ["Does a dog have Buddha nature?", "Mu!", "No! Yes! Neither!", "The question dissolves!", "Joshu answers!"], "death": ["Buddha nature...", "Mu... understood...", "Both... neither...", "Question... answered...", "Joshu... silent..."] } },
-    "sudden_awakening": { "visualId": "sudden_awakening", "dialogue": { "spawn": ["Satori!", "Lightning strike!", "See your original face!", "Before your parents were born!", "Instant enlightenment!"], "death": ["Awakened...", "Lightning... passed...", "Face... seen...", "Before... after...", "Enlightened... ordinary..."] } }
+    "logical_mind": {
+      "visualId": "logical_mind",
+      "dialogue": {
+        "spawn": [
+          "Solve me logically!",
+          "Reason your way!",
+          "The answer makes sense!",
+          "Think harder!",
+          "Concepts capture!"
+        ],
+        "death": [
+          "Beyond logic...",
+          "No reasoning...",
+          "Non-sense...",
+          "Thinking... stops...",
+          "Concepts... empty..."
+        ]
+      }
+    },
+    "mu_response": {
+      "visualId": "mu_response",
+      "dialogue": {
+        "spawn": [
+          "Does a dog have Buddha nature?",
+          "Mu!",
+          "No! Yes! Neither!",
+          "The question dissolves!",
+          "Joshu answers!"
+        ],
+        "death": [
+          "Buddha nature...",
+          "Mu... understood...",
+          "Both... neither...",
+          "Question... answered...",
+          "Joshu... silent..."
+        ]
+      }
+    },
+    "sudden_awakening": {
+      "visualId": "sudden_awakening",
+      "dialogue": {
+        "spawn": [
+          "Satori!",
+          "Lightning strike!",
+          "See your original face!",
+          "Before your parents were born!",
+          "Instant enlightenment!"
+        ],
+        "death": [
+          "Awakened...",
+          "Lightning... passed...",
+          "Face... seen...",
+          "Before... after...",
+          "Enlightened... ordinary..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "zen_garden", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "raked_sand", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "enso", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "A finger pointing at the moon is not the moon. The monkey grapples with koans and finds that understanding comes when seeking stops." },
-  "musicSeed": { "seed": "zen_007", "mode": "pentatonic", "tempoRange": [30, 45], "intensity": 0.2 },
-  "duration": 130, "unlockCondition": "myth_level6_complete"
+  "bgLayers": [
+    {
+      "svgId": "zen_garden",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "raked_sand",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "enso",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "A finger pointing at the moon is not the moon. The monkey grapples with koans and finds that understanding comes when seeking stops."
+  },
+  "musicSeed": {
+    "seed": "zen_007",
+    "mode": "bhairav",
+    "tempoRange": [
+      64,
+      83
+    ],
+    "intensity": 0.51,
+    "scale": "hijaz",
+    "style": "mysterious",
+    "timeSignature": "4/4",
+    "culturalStyle": "arabic"
+  },
+  "duration": 130,
+  "unlockCondition": "myth_level6_complete"
 }

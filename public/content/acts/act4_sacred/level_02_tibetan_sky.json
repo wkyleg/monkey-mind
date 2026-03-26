@@ -4,46 +4,117 @@
   "index": 2,
   "title": "Tibetan Sky",
   "subtitle": "Illusions dissolve. Compassion remains.",
-  "themeTags": ["tibet", "illusion", "compassion"],
+  "themeTags": [
+    "tibet",
+    "illusion",
+    "compassion"
+  ],
   "ruleCard": {
     "icon": "prayer_wheel",
     "hint": "Simulacrums and Koans test your wisdom. Compassion bonus for sparing illusions.",
     "mechanic": "compassion_bonus",
-    "params": { "illusionSpare": 30, "koanSolve": 50 }
+    "params": {
+      "illusionSpare": 30,
+      "koanSolve": 50
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": ["simulacrum"], "weight": 4 },
-    { "archetype": "anchor", "modifiers": ["koan"], "weight": 4 },
-    { "archetype": "phaser", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "simulacrum"
+      ],
+      "weight": 4
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [
+        "koan"
+      ],
+      "weight": 4
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "levelEnemies": {
     "tulpa_thought": {
       "visualId": "tulpa_thought",
       "dialogue": {
-        "spawn": ["I am what you think!", "Belief made manifest!", "Your mind created me!", "Thought becomes form!", "I exist because you do!"],
-        "death": ["Thought... dissolves...", "Belief... fades...", "Form... returns... to void...", "Unthink... me...", "Mind... releases..."]
+        "spawn": [
+          "I am what you think!",
+          "Belief made manifest!",
+          "Your mind created me!",
+          "Thought becomes form!",
+          "I exist because you do!"
+        ],
+        "death": [
+          "Thought... dissolves...",
+          "Belief... fades...",
+          "Form... returns... to void...",
+          "Unthink... me...",
+          "Mind... releases..."
+        ]
       }
     },
     "prayer_flag": {
       "visualId": "prayer_flag",
       "dialogue": {
-        "spawn": ["Om mani padme hum!", "The wind carries prayers!", "Blessings on the breeze!", "May all beings be happy!", "Compassion flows!"],
-        "death": ["Prayer... complete...", "The wind... carries on...", "Blessing... delivered...", "Om... shanti...", "Peace... spreads..."]
+        "spawn": [
+          "Om mani padme hum!",
+          "The wind carries prayers!",
+          "Blessings on the breeze!",
+          "May all beings be happy!",
+          "Compassion flows!"
+        ],
+        "death": [
+          "Prayer... complete...",
+          "The wind... carries on...",
+          "Blessing... delivered...",
+          "Om... shanti...",
+          "Peace... spreads..."
+        ]
       }
     },
     "bardo_walker": {
       "visualId": "bardo_walker",
       "dialogue": {
-        "spawn": ["Between lives!", "The in-between!", "Not dead, not born!", "Bardo wanderer!", "Seeking rebirth!"],
-        "death": ["Found... the light...", "Rebirth... awaits...", "The cycle... continues...", "Liberation... or return...", "Choose... wisely..."]
+        "spawn": [
+          "Between lives!",
+          "The in-between!",
+          "Not dead, not born!",
+          "Bardo wanderer!",
+          "Seeking rebirth!"
+        ],
+        "death": [
+          "Found... the light...",
+          "Rebirth... awaits...",
+          "The cycle... continues...",
+          "Liberation... or return...",
+          "Choose... wisely..."
+        ]
       }
     }
   },
   "hazards": [],
   "bgLayers": [
-    { "svgId": "himalayas", "parallaxSpeed": 0.05, "opacity": 0.5 },
-    { "svgId": "flags", "parallaxSpeed": 0.2, "opacity": 0.4 },
-    { "svgId": "clouds", "parallaxSpeed": 0.4, "opacity": 0.3 }
+    {
+      "svgId": "himalayas",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "flags",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "clouds",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.3
+    }
   ],
   "copyLayers": {
     "ruleCard": "Illusions dissolve. Compassion remains.",
@@ -52,9 +123,15 @@
   },
   "musicSeed": {
     "seed": "tibetan_002",
-    "mode": "dorian",
-    "tempoRange": [65, 80],
-    "intensity": 0.45
+    "mode": "harmonicMinor",
+    "tempoRange": [
+      115,
+      128
+    ],
+    "intensity": 0.42,
+    "scale": "harmonicMinor",
+    "style": "dark",
+    "timeSignature": "4/4"
   },
   "duration": 110,
   "unlockCondition": "act4_level1_complete"

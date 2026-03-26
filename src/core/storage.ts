@@ -25,6 +25,7 @@ export interface SaveData {
     sfxVolume: number;
     screenShake: boolean;
     showFps: boolean;
+    locale: string;
   };
   stats: {
     totalPlayTime: number;
@@ -60,6 +61,7 @@ const DEFAULT_SAVE: SaveData = {
     sfxVolume: CONFIG.SFX_VOLUME,
     screenShake: true,
     showFps: CONFIG.SHOW_FPS,
+    locale: 'en',
   },
   stats: {
     totalPlayTime: 0,

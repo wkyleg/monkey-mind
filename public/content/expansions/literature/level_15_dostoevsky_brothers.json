@@ -4,14 +4,103 @@
   "index": 15,
   "title": "The Brothers Karamazov",
   "subtitle": "The Grand Inquisitor. Is everything permitted?",
-  "themeTags": ["dostoevsky", "karamazov", "faith", "doubt"],
+  "themeTags": [
+    "dostoevsky",
+    "karamazov",
+    "faith",
+    "doubt"
+  ],
   "levelEnemies": {
-    "grand_inquisitor": { "visualId": "grand_inquisitor", "dialogue": { "spawn": ["You return unwanted!", "Freedom is burden!", "Miracle, mystery, authority!", "We corrected your work!", "Tomorrow you burn!"], "death": ["Return... welcomed...", "Freedom... gift...", "Truth... simple...", "Work... complete...", "Tomorrow... free..."] } },
-    "ivan_karamazov": { "visualId": "ivan_karamazov", "dialogue": { "spawn": ["I return my ticket!", "Children's suffering!", "If God exists!", "Everything is permitted!", "The devil visits!"], "death": ["Ticket... valid...", "Suffering... redeemed...", "God... exists...", "Not everything...", "Devil... banished..."] } },
-    "alyosha": { "visualId": "alyosha", "dialogue": { "spawn": ["Love actively!", "Zosima's teaching!", "The earth is holy!", "Faith persists!", "Kiss the earth!"], "death": ["Loved...", "Taught...", "Holy...", "Faith... rewarded...", "Kissed..."] } }
+    "grand_inquisitor": {
+      "visualId": "grand_inquisitor",
+      "dialogue": {
+        "spawn": [
+          "You return unwanted!",
+          "Freedom is burden!",
+          "Miracle, mystery, authority!",
+          "We corrected your work!",
+          "Tomorrow you burn!"
+        ],
+        "death": [
+          "Return... welcomed...",
+          "Freedom... gift...",
+          "Truth... simple...",
+          "Work... complete...",
+          "Tomorrow... free..."
+        ]
+      }
+    },
+    "ivan_karamazov": {
+      "visualId": "ivan_karamazov",
+      "dialogue": {
+        "spawn": [
+          "I return my ticket!",
+          "Children's suffering!",
+          "If God exists!",
+          "Everything is permitted!",
+          "The devil visits!"
+        ],
+        "death": [
+          "Ticket... valid...",
+          "Suffering... redeemed...",
+          "God... exists...",
+          "Not everything...",
+          "Devil... banished..."
+        ]
+      }
+    },
+    "alyosha": {
+      "visualId": "alyosha",
+      "dialogue": {
+        "spawn": [
+          "Love actively!",
+          "Zosima's teaching!",
+          "The earth is holy!",
+          "Faith persists!",
+          "Kiss the earth!"
+        ],
+        "death": [
+          "Loved...",
+          "Taught...",
+          "Holy...",
+          "Faith... rewarded...",
+          "Kissed..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "monastery", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "russia", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "icon", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "If there is no God, everything is permitted. The monkey witnesses Ivan's poem and Alyosha's silent kiss." },
-  "musicSeed": { "seed": "brothers_015", "mode": "dorian", "tempoRange": [50, 65], "intensity": 0.6 },
-  "duration": 160, "unlockCondition": "lit_level14_complete"
+  "bgLayers": [
+    {
+      "svgId": "monastery",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "russia",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "icon",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "If there is no God, everything is permitted. The monkey witnesses Ivan's poem and Alyosha's silent kiss."
+  },
+  "musicSeed": {
+    "seed": "brothers_015",
+    "mode": "dorian",
+    "tempoRange": [
+      77,
+      97
+    ],
+    "intensity": 0.67,
+    "scale": "phrygian",
+    "style": "meditative",
+    "timeSignature": "7/8"
+  },
+  "duration": 160,
+  "unlockCondition": "lit_level14_complete"
 }

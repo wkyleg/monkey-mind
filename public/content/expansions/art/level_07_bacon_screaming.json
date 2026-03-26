@@ -4,53 +4,144 @@
   "index": 7,
   "title": "Screaming Popes",
   "subtitle": "Francis Bacon's horror. The body writhes.",
-  "themeTags": ["bacon", "existential", "horror", "body"],
+  "themeTags": [
+    "bacon",
+    "existential",
+    "horror",
+    "body"
+  ],
   "ruleCard": {
     "icon": "scream",
     "hint": "The body distorts under pressure. Panic affects your form.",
     "mechanic": "body_horror",
-    "params": { "distortionPenalty": 20, "composureBonus": 40 }
+    "params": {
+      "distortionPenalty": 20,
+      "composureBonus": 40
+    }
   },
   "enemyDeck": [
-    { "archetype": "phaser", "modifiers": [], "weight": 4, "visualId": "enemy_screaming_pope" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_meat_figure" },
-    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_cage_creature" }
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_screaming_pope"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_meat_figure"
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_cage_creature"
+    }
   ],
   "levelEnemies": {
     "screaming_pope": {
       "visualId": "screaming_pope",
       "dialogue": {
-        "spawn": ["The scream!", "Innocent X distorted!", "Bacon's nightmare!", "The throne of agony!", "Existential horror!"],
-        "death": ["Scream... silenced...", "Innocent... peaceful...", "Nightmare... ends...", "Agony... released...", "Horror... understood..."]
+        "spawn": [
+          "The scream!",
+          "Innocent X distorted!",
+          "Bacon's nightmare!",
+          "The throne of agony!",
+          "Existential horror!"
+        ],
+        "death": [
+          "Scream... silenced...",
+          "Innocent... peaceful...",
+          "Nightmare... ends...",
+          "Agony... released...",
+          "Horror... understood..."
+        ]
       }
     },
     "meat_carcass": {
       "visualId": "meat_carcass",
       "dialogue": {
-        "spawn": ["We are meat!", "The body raw!", "Crucified flesh!", "Bacon's truth!", "Animal inside!"],
-        "death": ["Meat... transcended...", "Body... whole...", "Flesh... sacred...", "Truth... gentle...", "Animal... at peace..."]
+        "spawn": [
+          "We are meat!",
+          "The body raw!",
+          "Crucified flesh!",
+          "Bacon's truth!",
+          "Animal inside!"
+        ],
+        "death": [
+          "Meat... transcended...",
+          "Body... whole...",
+          "Flesh... sacred...",
+          "Truth... gentle...",
+          "Animal... at peace..."
+        ]
       }
     },
     "cage_figure": {
       "visualId": "cage_figure",
       "dialogue": {
-        "spawn": ["Trapped in form!", "The cage of flesh!", "Bacon's frames!", "No escape from body!", "Geometric prison!"],
-        "death": ["Form... freed...", "Flesh... home...", "Frames... open...", "Body... accepted...", "Prison... sanctuary..."]
+        "spawn": [
+          "Trapped in form!",
+          "The cage of flesh!",
+          "Bacon's frames!",
+          "No escape from body!",
+          "Geometric prison!"
+        ],
+        "death": [
+          "Form... freed...",
+          "Flesh... home...",
+          "Frames... open...",
+          "Body... accepted...",
+          "Prison... sanctuary..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "distortion_field", "params": { "visualDistortion": true, "panicBuildup": 0.2 } }],
+  "hazards": [
+    {
+      "type": "distortion_field",
+      "params": {
+        "visualDistortion": true,
+        "panicBuildup": 0.2
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "studio", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "figures", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "meat", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "studio",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "figures",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "meat",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "The body distorts under pressure. Panic affects your form.",
     "codexSnippet": "Francis Bacon painted the human body as meat trapped in geometric cages. The monkey faces existential horror and discovers that to be embodied is both prison and privilege.",
     "radioWhisper": "We are all potential carcasses. Bacon just painted what we forget."
   },
-  "musicSeed": { "seed": "bacon_007", "mode": "locrian", "tempoRange": [50, 65], "intensity": 0.6 },
+  "musicSeed": {
+    "seed": "bacon_007",
+    "mode": "hirajoshi",
+    "tempoRange": [
+      76,
+      93
+    ],
+    "intensity": 0.68,
+    "scale": "augmented",
+    "style": "sacred",
+    "timeSignature": "6/8",
+    "culturalStyle": "japanese"
+  },
   "duration": 150,
   "unlockCondition": "art_level6_complete"
 }

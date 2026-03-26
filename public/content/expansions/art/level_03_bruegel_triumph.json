@@ -4,53 +4,144 @@
   "index": 3,
   "title": "The Triumph of Death",
   "subtitle": "Bruegel's army of skeletons. No escape.",
-  "themeTags": ["bruegel", "death", "medieval", "macabre"],
+  "themeTags": [
+    "bruegel",
+    "death",
+    "medieval",
+    "macabre"
+  ],
   "ruleCard": {
     "icon": "skull",
     "hint": "Death advances relentlessly. The army grows with each defeat.",
     "mechanic": "growing_army",
-    "params": { "growthRate": 1.2, "survivalBonus": 50 }
+    "params": {
+      "growthRate": 1.2,
+      "survivalBonus": 50
+    }
   },
   "enemyDeck": [
-    { "archetype": "swarm", "modifiers": [], "weight": 5, "visualId": "enemy_skeleton" },
-    { "archetype": "chaser", "modifiers": [], "weight": 3, "visualId": "enemy_death_knight" },
-    { "archetype": "anchor", "modifiers": [], "weight": 2, "visualId": "enemy_coffin_carrier" }
+    {
+      "archetype": "swarm",
+      "modifiers": [],
+      "weight": 5,
+      "visualId": "enemy_skeleton"
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_death_knight"
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 2,
+      "visualId": "enemy_coffin_carrier"
+    }
   ],
   "levelEnemies": {
     "skeleton_soldier": {
       "visualId": "skeleton_soldier",
       "dialogue": {
-        "spawn": ["The army marches!", "Death triumphs!", "Join our ranks!", "No escape!", "The living fall!"],
-        "death": ["March... halted...", "Triumph... delayed...", "Ranks... thinned...", "Escape... possible...", "Living... persists..."]
+        "spawn": [
+          "The army marches!",
+          "Death triumphs!",
+          "Join our ranks!",
+          "No escape!",
+          "The living fall!"
+        ],
+        "death": [
+          "March... halted...",
+          "Triumph... delayed...",
+          "Ranks... thinned...",
+          "Escape... possible...",
+          "Living... persists..."
+        ]
       }
     },
     "death_drummer": {
       "visualId": "death_drummer",
       "dialogue": {
-        "spawn": ["The drumbeat calls!", "March to your doom!", "The rhythm of death!", "Bruegel's cadence!", "Hear the bones!"],
-        "death": ["Drums... silent...", "Doom... postponed...", "Rhythm... broken...", "Cadence... ends...", "Bones... still..."]
+        "spawn": [
+          "The drumbeat calls!",
+          "March to your doom!",
+          "The rhythm of death!",
+          "Bruegel's cadence!",
+          "Hear the bones!"
+        ],
+        "death": [
+          "Drums... silent...",
+          "Doom... postponed...",
+          "Rhythm... broken...",
+          "Cadence... ends...",
+          "Bones... still..."
+        ]
       }
     },
     "coffin_trap": {
       "visualId": "coffin_trap",
       "dialogue": {
-        "spawn": ["Your final bed!", "The coffin waits!", "All roads lead here!", "Rest eternal!", "No resurrection!"],
-        "death": ["Bed... empty...", "Coffin... closed...", "Roads... continue...", "Rest... refused...", "Life... continues..."]
+        "spawn": [
+          "Your final bed!",
+          "The coffin waits!",
+          "All roads lead here!",
+          "Rest eternal!",
+          "No resurrection!"
+        ],
+        "death": [
+          "Bed... empty...",
+          "Coffin... closed...",
+          "Roads... continue...",
+          "Rest... refused...",
+          "Life... continues..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "army_advance", "params": { "advanceSpeed": 2, "retreatBonus": 20 } }],
+  "hazards": [
+    {
+      "type": "army_advance",
+      "params": {
+        "advanceSpeed": 2,
+        "retreatBonus": 20
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "battlefield", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "skeletons", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "burning_sky", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "battlefield",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "skeletons",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "burning_sky",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Death advances relentlessly. The army grows with each defeat.",
     "codexSnippet": "Pieter Bruegel painted Death's unstoppable army in meticulous detail. The monkey faces the Triumph of Death and learns that to be alive is already a victory against the inevitable.",
     "radioWhisper": "The skeleton army stretches to the horizon. There is no negotiation."
   },
-  "musicSeed": { "seed": "bruegel_003", "mode": "locrian", "tempoRange": [55, 70], "intensity": 0.6 },
+  "musicSeed": {
+    "seed": "bruegel_003",
+    "mode": "hirajoshi",
+    "tempoRange": [
+      72,
+      88
+    ],
+    "intensity": 0.42,
+    "scale": "iwato",
+    "style": "tension",
+    "timeSignature": "7/8",
+    "culturalStyle": "japanese"
+  },
   "duration": 130,
   "unlockCondition": "art_level2_complete"
 }

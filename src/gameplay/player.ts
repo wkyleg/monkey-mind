@@ -129,9 +129,10 @@ export class Player extends Entity {
 
   /**
    * Check if player can fire
+   * @param fireRateModifier multiplier from WeaponSystem (lower = faster)
    */
-  canFire(): boolean {
-    if (this.fireTimer >= this.fireRate) {
+  canFire(fireRateModifier: number = 1): boolean {
+    if (this.fireTimer >= this.fireRate * fireRateModifier) {
       this.fireTimer = 0;
       return true;
     }

@@ -301,6 +301,10 @@ export class Enemy extends Entity {
   speedMod: number = 1.0;
   private modifiers: Set<string> = new Set();
 
+  // Neuro-reactive states
+  dormant = false;
+  neuroInvulnerable = false;
+
   // Custom SVG ID for Act-specific visuals
   private customSvgId: string | null = null;
 
@@ -353,6 +357,12 @@ export class Enemy extends Entity {
   update(dt: number): void {
     this.time += dt;
 
+    // Dormant enemies float in place
+    if (this.dormant) {
+      this.transform.y += 5 * dt;
+      return;
+    }
+
     // Apply behavior
     const behaviorImpl = behaviors[this.behavior];
     if (behaviorImpl) {
@@ -364,6 +374,8 @@ export class Enemy extends Entity {
    * Handle taking damage
    */
   onDamage(amount: number): boolean {
+    if (this.neuroInvulnerable) return false;
+
     events.emit('enemy:damage', { id: this.id.toString(), amount });
 
     const killed = this.takeDamage(amount);
@@ -373,7 +385,6 @@ export class Enemy extends Entity {
         id: this.id.toString(),
         type: this.enemyType,
         position: { x: this.transform.x, y: this.transform.y },
-        // Use dialogueEnemyId (simple ID) for dialogue lookup, not full SVG path
         actVisual: this.dialogueEnemyId || this.customSvgId || undefined,
       });
       this.destroy();
@@ -455,6 +466,13 @@ export class Enemy extends Entity {
     const { x, y } = this.transform;
     const size = data.visual.size;
     const color = data.visual.color;
+    const ctx = renderer.context;
+
+    // Dormant visual: 40% opacity with shimmer
+    if (this.dormant) {
+      ctx.save();
+      ctx.globalAlpha = 0.35 + Math.sin(this.time * 3) * 0.1;
+    }
 
     // Pulse effect
     const pulse = oscillate(this.time + this.pulsePhase, 2, 2);
@@ -548,6 +566,25 @@ export class Enemy extends Entity {
       renderer.fillRect(barX, barY, barWidth, barHeight, '#1a1a2e');
       renderer.fillRect(barX, barY, barWidth * healthPercent, barHeight, CONFIG.COLORS.DANGER);
       renderer.strokeRect(barX, barY, barWidth, barHeight, CONFIG.COLORS.DANGER, 1);
+    }
+
+    // Invulnerable shield overlay
+    if (this.neuroInvulnerable) {
+      ctx.save();
+      ctx.strokeStyle = '#44aaff';
+      ctx.lineWidth = 2;
+      ctx.globalAlpha = 0.5 + Math.sin(this.time * 4) * 0.2;
+      ctx.shadowColor = '#44aaff';
+      ctx.shadowBlur = 10;
+      ctx.beginPath();
+      ctx.arc(x, y, drawSize + 6, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Close dormant alpha save
+    if (this.dormant) {
+      ctx.restore();
     }
   }
 }

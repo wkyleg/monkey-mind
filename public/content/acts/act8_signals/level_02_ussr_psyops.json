@@ -4,48 +4,129 @@
   "index": 2,
   "title": "USSR Psyops",
   "subtitle": "Mimics march in rhythm. Break the formation.",
-  "themeTags": ["ussr", "psyops", "marching"],
+  "themeTags": [
+    "ussr",
+    "psyops",
+    "marching"
+  ],
   "ruleCard": {
     "icon": "march",
     "hint": "Mimic enemies march in rhythm. Breaking formation disrupts their sync.",
     "mechanic": "marching_rhythm",
-    "params": { "bpm": 90, "formationBonus": 30 }
+    "params": {
+      "bpm": 90,
+      "formationBonus": 30
+    }
   },
   "enemyDeck": [
-    { "archetype": "mimic", "modifiers": ["liturgical"], "weight": 5 },
-    { "archetype": "drifter", "modifiers": [], "weight": 3 },
-    { "archetype": "chaser", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "mimic",
+      "modifiers": [
+        "liturgical"
+      ],
+      "weight": 5
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "levelEnemies": {
     "kgb_handler": {
       "visualId": "kgb_handler",
       "dialogue": {
-        "spawn": ["Comrade, you are watched!", "The state sees all!", "Your file is thick!", "Siberia awaits!", "Confess!"],
-        "death": ["The party... was wrong...", "Glasnost...", "The wall... falls...", "Freedom... wins...", "Perestroika..."]
+        "spawn": [
+          "Comrade, you are watched!",
+          "The state sees all!",
+          "Your file is thick!",
+          "Siberia awaits!",
+          "Confess!"
+        ],
+        "death": [
+          "The party... was wrong...",
+          "Glasnost...",
+          "The wall... falls...",
+          "Freedom... wins...",
+          "Perestroika..."
+        ]
       }
     },
     "propaganda_drone": {
       "visualId": "propaganda_drone",
       "dialogue": {
-        "spawn": ["Workers unite!", "The Five Year Plan!", "Capitalism crumbles!", "The future is RED!", "Glory to the revolution!"],
-        "death": ["The message... fades...", "Broadcast... ended...", "Static... only...", "Truth... emerges...", "The signal... dies..."]
+        "spawn": [
+          "Workers unite!",
+          "The Five Year Plan!",
+          "Capitalism crumbles!",
+          "The future is RED!",
+          "Glory to the revolution!"
+        ],
+        "death": [
+          "The message... fades...",
+          "Broadcast... ended...",
+          "Static... only...",
+          "Truth... emerges...",
+          "The signal... dies..."
+        ]
       }
     },
     "numbers_station": {
       "visualId": "numbers_station",
       "dialogue": {
-        "spawn": ["4-8-15-16-23-42!", "The numbers repeat!", "Decode if you dare!", "Frequency locked!", "Transmission active!"],
-        "death": ["Signal... lost...", "Frequency... dead...", "Code... broken...", "Silence... at last...", "Off... air..."]
+        "spawn": [
+          "4-8-15-16-23-42!",
+          "The numbers repeat!",
+          "Decode if you dare!",
+          "Frequency locked!",
+          "Transmission active!"
+        ],
+        "death": [
+          "Signal... lost...",
+          "Frequency... dead...",
+          "Code... broken...",
+          "Silence... at last...",
+          "Off... air..."
+        ]
       }
     }
   },
   "hazards": [
-    { "type": "propaganda_wave", "lanes": [1, 2, 3, 4, 5], "timing": 10000, "damage": 0, "visual": "red_banner" }
+    {
+      "type": "propaganda_wave",
+      "lanes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "timing": 10000,
+      "damage": 0,
+      "visual": "red_banner"
+    }
   ],
   "bgLayers": [
-    { "svgId": "parade", "parallaxSpeed": 0.1, "opacity": 0.4 },
-    { "svgId": "banners", "parallaxSpeed": 0.3, "opacity": 0.5 },
-    { "svgId": "static", "parallaxSpeed": 0.5, "opacity": 0.3 }
+    {
+      "svgId": "parade",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "banners",
+      "parallaxSpeed": 0.3,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "static",
+      "parallaxSpeed": 0.5,
+      "opacity": 0.3
+    }
   ],
   "copyLayers": {
     "ruleCard": "Mimics march in rhythm. Break the formation.",
@@ -54,9 +135,15 @@
   },
   "musicSeed": {
     "seed": "ussr_002",
-    "mode": "phrygian",
-    "tempoRange": [85, 95],
-    "intensity": 0.5
+    "mode": "wholeTone",
+    "tempoRange": [
+      88,
+      108
+    ],
+    "intensity": 0.42,
+    "scale": "augmented",
+    "style": "mysterious",
+    "timeSignature": "6/8"
   },
   "duration": 110,
   "unlockCondition": "act8_level1_complete"

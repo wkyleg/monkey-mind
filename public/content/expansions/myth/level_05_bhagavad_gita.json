@@ -4,14 +4,104 @@
   "index": 5,
   "title": "The Bhagavad Gita",
   "subtitle": "On the battlefield. Arjuna's dilemma.",
-  "themeTags": ["gita", "dharma", "action", "devotion"],
+  "themeTags": [
+    "gita",
+    "dharma",
+    "action",
+    "devotion"
+  ],
   "levelEnemies": {
-    "doubt_warrior": { "visualId": "doubt_warrior", "dialogue": { "spawn": ["Should I fight?", "My family stands against me!", "What is right action?", "Dharma confuses!", "Krishna, guide me!"], "death": ["Fight... I must...", "Family... karma...", "Action... detached...", "Dharma... clear...", "Guided..."] } },
-    "attachment_chain": { "visualId": "attachment_chain", "dialogue": { "spawn": ["I am bound!", "Fruits of action!", "Desire chains!", "Results matter!", "Ego wants!"], "death": ["Unbound...", "Action... without fruit...", "Desire... released...", "Process... matters...", "Ego... surrendered..."] } },
-    "vishvarupa": { "visualId": "vishvarupa", "dialogue": { "spawn": ["See my universal form!", "All beings in me!", "Time destroyer!", "Krishna reveals!", "Infinite mouths!"], "death": ["Form... gentle...", "Beings... at peace...", "Time... flows...", "Krishna... smiles...", "Mouths... silent..."] } }
+    "doubt_warrior": {
+      "visualId": "doubt_warrior",
+      "dialogue": {
+        "spawn": [
+          "Should I fight?",
+          "My family stands against me!",
+          "What is right action?",
+          "Dharma confuses!",
+          "Krishna, guide me!"
+        ],
+        "death": [
+          "Fight... I must...",
+          "Family... karma...",
+          "Action... detached...",
+          "Dharma... clear...",
+          "Guided..."
+        ]
+      }
+    },
+    "attachment_chain": {
+      "visualId": "attachment_chain",
+      "dialogue": {
+        "spawn": [
+          "I am bound!",
+          "Fruits of action!",
+          "Desire chains!",
+          "Results matter!",
+          "Ego wants!"
+        ],
+        "death": [
+          "Unbound...",
+          "Action... without fruit...",
+          "Desire... released...",
+          "Process... matters...",
+          "Ego... surrendered..."
+        ]
+      }
+    },
+    "vishvarupa": {
+      "visualId": "vishvarupa",
+      "dialogue": {
+        "spawn": [
+          "See my universal form!",
+          "All beings in me!",
+          "Time destroyer!",
+          "Krishna reveals!",
+          "Infinite mouths!"
+        ],
+        "death": [
+          "Form... gentle...",
+          "Beings... at peace...",
+          "Time... flows...",
+          "Krishna... smiles...",
+          "Mouths... silent..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "kurukshetra", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "armies", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "chariot", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "On the battlefield of Kurukshetra, Arjuna's bow falls. Krishna teaches that action without attachment is the path." },
-  "musicSeed": { "seed": "gita_005", "mode": "indian_raga", "tempoRange": [60, 75], "intensity": 0.6 },
-  "duration": 150, "unlockCondition": "myth_level4_complete"
+  "bgLayers": [
+    {
+      "svgId": "kurukshetra",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "armies",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "chariot",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "On the battlefield of Kurukshetra, Arjuna's bow falls. Krishna teaches that action without attachment is the path."
+  },
+  "musicSeed": {
+    "seed": "gita_005",
+    "mode": "bhairav",
+    "tempoRange": [
+      63,
+      81
+    ],
+    "intensity": 0.44,
+    "scale": "phrygianDominant",
+    "style": "tension",
+    "timeSignature": "4/4",
+    "culturalStyle": "indian"
+  },
+  "duration": 150,
+  "unlockCondition": "myth_level4_complete"
 }

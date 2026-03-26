@@ -4,53 +4,145 @@
   "index": 3,
   "title": "The Omega Point",
   "subtitle": "Teilhard's vision. All converges.",
-  "themeTags": ["omega", "teilhard", "convergence", "evolution"],
+  "themeTags": [
+    "omega",
+    "teilhard",
+    "convergence",
+    "evolution"
+  ],
   "ruleCard": {
     "icon": "omega",
     "hint": "All consciousness converges. Unity grants power but loses individuality.",
     "mechanic": "convergence",
-    "params": { "unityBoost": 80, "individualityLoss": 40 }
+    "params": {
+      "unityBoost": 80,
+      "individualityLoss": 40
+    }
   },
   "enemyDeck": [
-    { "archetype": "weaver", "modifiers": ["liturgical"], "weight": 4, "visualId": "enemy_memory_ghost" },
-    { "archetype": "mimic", "modifiers": [], "weight": 3, "visualId": "enemy_ego_shard" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_void_tendril" }
+    {
+      "archetype": "weaver",
+      "modifiers": [
+        "liturgical"
+      ],
+      "weight": 4,
+      "visualId": "enemy_memory_ghost"
+    },
+    {
+      "archetype": "mimic",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_ego_shard"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_void_tendril"
+    }
   ],
   "levelEnemies": {
     "noosphere_node": {
       "visualId": "noosphere_node",
       "dialogue": {
-        "spawn": ["The noosphere expands!", "Thought-sphere complete!", "All minds connect!", "Convergence inevitable!", "Omega approaches!"],
-        "death": ["Node... disconnected...", "Noosphere... contracts...", "Minds... separate...", "Convergence... delayed...", "Omega... waits..."]
+        "spawn": [
+          "The noosphere expands!",
+          "Thought-sphere complete!",
+          "All minds connect!",
+          "Convergence inevitable!",
+          "Omega approaches!"
+        ],
+        "death": [
+          "Node... disconnected...",
+          "Noosphere... contracts...",
+          "Minds... separate...",
+          "Convergence... delayed...",
+          "Omega... waits..."
+        ]
       }
     },
     "cosmic_christ": {
       "visualId": "cosmic_christ",
       "dialogue": {
-        "spawn": ["All creation unified!", "The Christogenesis!", "Evolution's goal!", "Alpha and Omega!", "The divine milieu!"],
-        "death": ["Creation... continues...", "Christ... in all...", "Evolution... ongoing...", "Goal... revealed...", "Milieu... everywhere..."]
+        "spawn": [
+          "All creation unified!",
+          "The Christogenesis!",
+          "Evolution's goal!",
+          "Alpha and Omega!",
+          "The divine milieu!"
+        ],
+        "death": [
+          "Creation... continues...",
+          "Christ... in all...",
+          "Evolution... ongoing...",
+          "Goal... revealed...",
+          "Milieu... everywhere..."
+        ]
       }
     },
     "complexity_spiral": {
       "visualId": "complexity_spiral",
       "dialogue": {
-        "spawn": ["Complexity increases!", "The spiral tightens!", "More consciousness!", "Evolution accelerates!", "The point approaches!"],
-        "death": ["Spiral... completes...", "Complexity... peaks...", "Consciousness... full...", "Evolution... arrives...", "Point... reached..."]
+        "spawn": [
+          "Complexity increases!",
+          "The spiral tightens!",
+          "More consciousness!",
+          "Evolution accelerates!",
+          "The point approaches!"
+        ],
+        "death": [
+          "Spiral... completes...",
+          "Complexity... peaks...",
+          "Consciousness... full...",
+          "Evolution... arrives...",
+          "Point... reached..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "convergence_pull", "params": { "pullStrength": 30, "unityZone": true } }],
+  "hazards": [
+    {
+      "type": "convergence_pull",
+      "params": {
+        "pullStrength": 30,
+        "unityZone": true
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "noosphere", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "convergence", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "omega_light", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "noosphere",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "convergence",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "omega_light",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "All consciousness converges. Unity grants power but loses individuality.",
     "codexSnippet": "Teilhard de Chardin saw evolution moving toward an Omega Point where all consciousness converges. The monkey approaches this cosmic attractor and learns that individuality and unity are not opposites.",
     "radioWhisper": "The noosphere thickens. We are becoming... one."
   },
-  "musicSeed": { "seed": "omega_003", "mode": "lydian", "tempoRange": [55, 70], "intensity": 0.6 },
+  "musicSeed": {
+    "seed": "omega_003",
+    "mode": "chromatic",
+    "tempoRange": [
+      114,
+      139
+    ],
+    "intensity": 0.47,
+    "scale": "wholeTone",
+    "style": "tension",
+    "timeSignature": "7/8"
+  },
   "duration": 150,
   "unlockCondition": "climax_level2_complete"
 }

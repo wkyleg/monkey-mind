@@ -4,53 +4,146 @@
   "index": 8,
   "title": "The Rothko Chapel",
   "subtitle": "Color fields of mourning. Silence speaks.",
-  "themeTags": ["rothko", "abstract", "silence", "spiritual"],
+  "themeTags": [
+    "rothko",
+    "abstract",
+    "silence",
+    "spiritual"
+  ],
   "ruleCard": {
     "icon": "rectangle",
     "hint": "Silence is power. Stillness grants strength.",
     "mechanic": "silence_power",
-    "params": { "stillnessBonus": 60, "movementPenalty": 10 }
+    "params": {
+      "stillnessBonus": 60,
+      "movementPenalty": 10
+    }
   },
   "enemyDeck": [
-    { "archetype": "anchor", "modifiers": ["observed"], "weight": 5, "visualId": "enemy_color_field" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_void_rectangle" },
-    { "archetype": "phaser", "modifiers": [], "weight": 2, "visualId": "enemy_edge_blur" }
+    {
+      "archetype": "anchor",
+      "modifiers": [
+        "observed"
+      ],
+      "weight": 5,
+      "visualId": "enemy_color_field"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_void_rectangle"
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 2,
+      "visualId": "enemy_edge_blur"
+    }
   ],
   "levelEnemies": {
     "maroon_void": {
       "visualId": "maroon_void",
       "dialogue": {
-        "spawn": ["Look deeper!", "The color breathes!", "Rothko's meditation!", "Silence made visible!", "The edge bleeds!"],
-        "death": ["Depth... reached...", "Breath... stilled...", "Meditation... complete...", "Silence... heard...", "Edge... defined..."]
+        "spawn": [
+          "Look deeper!",
+          "The color breathes!",
+          "Rothko's meditation!",
+          "Silence made visible!",
+          "The edge bleeds!"
+        ],
+        "death": [
+          "Depth... reached...",
+          "Breath... stilled...",
+          "Meditation... complete...",
+          "Silence... heard...",
+          "Edge... defined..."
+        ]
       }
     },
     "black_rectangle": {
       "visualId": "black_rectangle",
       "dialogue": {
-        "spawn": ["The final paintings!", "Depression's color!", "Before the end!", "The chapel mourns!", "Darkness speaks!"],
-        "death": ["Painting... lives...", "Color... returns...", "End... postponed...", "Chapel... celebrates...", "Light... speaks..."]
+        "spawn": [
+          "The final paintings!",
+          "Depression's color!",
+          "Before the end!",
+          "The chapel mourns!",
+          "Darkness speaks!"
+        ],
+        "death": [
+          "Painting... lives...",
+          "Color... returns...",
+          "End... postponed...",
+          "Chapel... celebrates...",
+          "Light... speaks..."
+        ]
       }
     },
     "floating_color": {
       "visualId": "floating_color",
       "dialogue": {
-        "spawn": ["Hover and pulse!", "Color without form!", "Rothko's technique!", "The field extends!", "Emotion as hue!"],
-        "death": ["Grounded... now...", "Form... found...", "Technique... appreciated...", "Field... contained...", "Emotion... expressed..."]
+        "spawn": [
+          "Hover and pulse!",
+          "Color without form!",
+          "Rothko's technique!",
+          "The field extends!",
+          "Emotion as hue!"
+        ],
+        "death": [
+          "Grounded... now...",
+          "Form... found...",
+          "Technique... appreciated...",
+          "Field... contained...",
+          "Emotion... expressed..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "silence_zone", "params": { "noSoundEffects": true, "meditationBonus": 40 } }],
+  "hazards": [
+    {
+      "type": "silence_zone",
+      "params": {
+        "noSoundEffects": true,
+        "meditationBonus": 40
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "chapel", "parallaxSpeed": 0.05, "opacity": 0.5 },
-    { "svgId": "color_fields", "parallaxSpeed": 0.1, "opacity": 0.4 },
-    { "svgId": "maroon", "parallaxSpeed": 0.15, "opacity": 0.6 }
+    {
+      "svgId": "chapel",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "color_fields",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "maroon",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Silence is power. Stillness grants strength.",
     "codexSnippet": "Mark Rothko created the chapel as a place of meditation where color speaks to the soul. The monkey enters the color fields and finds that sometimes the deepest truth is expressed through absence.",
     "radioWhisper": "Sit with the painting for an hour. It will start to breathe."
   },
-  "musicSeed": { "seed": "rothko_008", "mode": "aeolian", "tempoRange": [30, 45], "intensity": 0.2 },
+  "musicSeed": {
+    "seed": "rothko_008",
+    "mode": "hirajoshi",
+    "tempoRange": [
+      77,
+      94
+    ],
+    "intensity": 0.74,
+    "scale": "wholeTone",
+    "style": "meditative",
+    "timeSignature": "6/8",
+    "culturalStyle": "japanese"
+  },
   "duration": 180,
   "unlockCondition": "art_level7_complete"
 }

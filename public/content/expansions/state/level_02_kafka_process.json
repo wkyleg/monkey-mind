@@ -4,53 +4,145 @@
   "index": 2,
   "title": "The Process",
   "subtitle": "Accused of an unknown crime. The court is everywhere.",
-  "themeTags": ["kafka", "trial", "bureaucracy", "absurd"],
+  "themeTags": [
+    "kafka",
+    "trial",
+    "bureaucracy",
+    "absurd"
+  ],
   "ruleCard": {
     "icon": "gavel",
     "hint": "You are accused. The charge is unknown. Defend yourself.",
     "mechanic": "unknown_trial",
-    "params": { "accusationPenalty": 30, "defenseBonus": 50 }
+    "params": {
+      "accusationPenalty": 30,
+      "defenseBonus": 50
+    }
   },
   "enemyDeck": [
-    { "archetype": "weaver", "modifiers": ["bureaucratic"], "weight": 4, "visualId": "enemy_bureaucrat" },
-    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_judge" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_lawyer" }
+    {
+      "archetype": "weaver",
+      "modifiers": [
+        "bureaucratic"
+      ],
+      "weight": 4,
+      "visualId": "enemy_bureaucrat"
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_judge"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_lawyer"
+    }
   ],
   "levelEnemies": {
     "invisible_judge": {
       "visualId": "invisible_judge",
       "dialogue": {
-        "spawn": ["The court convenes!", "You are accused!", "The crime is clear to us!", "Sentence approaches!", "No appeal possible!"],
-        "death": ["Court... adjourned...", "Accusation... withdrawn...", "Crime... unclear...", "Sentence... suspended...", "Appeal... granted..."]
+        "spawn": [
+          "The court convenes!",
+          "You are accused!",
+          "The crime is clear to us!",
+          "Sentence approaches!",
+          "No appeal possible!"
+        ],
+        "death": [
+          "Court... adjourned...",
+          "Accusation... withdrawn...",
+          "Crime... unclear...",
+          "Sentence... suspended...",
+          "Appeal... granted..."
+        ]
       }
     },
     "bureaucrat": {
       "visualId": "bureaucrat",
       "dialogue": {
-        "spawn": ["Form 27B required!", "Processing your case!", "The procedure is clear!", "File in triplicate!", "Wait your turn!"],
-        "death": ["Form... approved...", "Case... closed...", "Procedure... complete...", "Filed... and done...", "No more... waiting..."]
+        "spawn": [
+          "Form 27B required!",
+          "Processing your case!",
+          "The procedure is clear!",
+          "File in triplicate!",
+          "Wait your turn!"
+        ],
+        "death": [
+          "Form... approved...",
+          "Case... closed...",
+          "Procedure... complete...",
+          "Filed... and done...",
+          "No more... waiting..."
+        ]
       }
     },
     "endless_corridor": {
       "visualId": "endless_corridor",
       "dialogue": {
-        "spawn": ["The halls go on forever!", "Another door, another wait!", "The court is everywhere!", "No exit exists!", "Keep walking!"],
-        "death": ["Hall... ends...", "Door... opens...", "Court... contained...", "Exit... found...", "Walking... over..."]
+        "spawn": [
+          "The halls go on forever!",
+          "Another door, another wait!",
+          "The court is everywhere!",
+          "No exit exists!",
+          "Keep walking!"
+        ],
+        "death": [
+          "Hall... ends...",
+          "Door... opens...",
+          "Court... contained...",
+          "Exit... found...",
+          "Walking... over..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "bureaucratic_maze", "params": { "confusionChance": 0.4, "paperworkPenalty": 20 } }],
+  "hazards": [
+    {
+      "type": "bureaucratic_maze",
+      "params": {
+        "confusionChance": 0.4,
+        "paperworkPenalty": 20
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "corridors", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "desks", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "papers", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "corridors",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "desks",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "papers",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "You are accused. The charge is unknown. Defend yourself.",
     "codexSnippet": "Josef K. was arrested one morning for a crime he did not know. The monkey enters Kafka's labyrinthine justice system and learns that the process itself is the punishment.",
     "radioWhisper": "Someone must have slandered Josef K., for one morning, without having done anything wrong, he was arrested."
   },
-  "musicSeed": { "seed": "process_002", "mode": "phrygian", "tempoRange": [45, 60], "intensity": 0.4 },
+  "musicSeed": {
+    "seed": "process_002",
+    "mode": "phrygian",
+    "tempoRange": [
+      87,
+      108
+    ],
+    "intensity": 0.38,
+    "scale": "phrygianDominant",
+    "style": "aggressive",
+    "timeSignature": "4/4"
+  },
   "duration": 140,
   "unlockCondition": "state_level1_complete"
 }

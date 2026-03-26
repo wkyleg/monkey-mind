@@ -1,0 +1,17 @@
+{
+  "name": "Monkey Mind: Inner Invaders",
+  "short_name": "Monkey Mind",
+  "description": "A mind-bending arcade game powered by real-time neurotech",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#080810",
+  "theme_color": "#00cccc",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ]
+}

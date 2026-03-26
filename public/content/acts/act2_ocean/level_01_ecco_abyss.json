@@ -4,17 +4,38 @@
   "index": 1,
   "title": "Ecco-Style Abyss",
   "subtitle": "Sound reveals what light cannot.",
-  "themeTags": ["ocean", "sonar", "depth"],
+  "themeTags": [
+    "ocean",
+    "sonar",
+    "depth"
+  ],
   "ruleCard": {
     "icon": "sonar",
     "hint": "Sonar pulse every 12 seconds reveals hidden enemies. Listen to the deep.",
     "mechanic": "rhythm_sync",
-    "params": { "bpm": 5, "revealDuration": 3 }
+    "params": {
+      "bpm": 5,
+      "revealDuration": 3
+    }
   },
   "enemyDeck": [
-    { "archetype": "phaser", "modifiers": [], "weight": 5 },
-    { "archetype": "weaver", "modifiers": [], "weight": 3 },
-    { "archetype": "drifter", "modifiers": ["unseen"], "weight": 2 }
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 5
+    },
+    {
+      "archetype": "weaver",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "unseen"
+      ],
+      "weight": 2
+    }
   ],
   "levelEnemies": {
     "echo_fish": {
@@ -76,12 +97,33 @@
     }
   },
   "hazards": [
-    { "type": "pressure_zone", "lanes": [1, 5], "timing": 15000, "damage": 1, "visual": "depth_crush" }
+    {
+      "type": "pressure_zone",
+      "lanes": [
+        1,
+        5
+      ],
+      "timing": 15000,
+      "damage": 1,
+      "visual": "depth_crush"
+    }
   ],
   "bgLayers": [
-    { "svgId": "abyss", "parallaxSpeed": 0.05, "opacity": 0.4 },
-    { "svgId": "particles", "parallaxSpeed": 0.2, "opacity": 0.3 },
-    { "svgId": "biolum", "parallaxSpeed": 0.4, "opacity": 0.5 }
+    {
+      "svgId": "abyss",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "particles",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.3
+    },
+    {
+      "svgId": "biolum",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.5
+    }
   ],
   "copyLayers": {
     "ruleCard": "Sound reveals what light cannot.",
@@ -91,8 +133,14 @@
   "musicSeed": {
     "seed": "ecco_abyss_001",
     "mode": "lydian",
-    "tempoRange": [70, 90],
-    "intensity": 0.4
+    "tempoRange": [
+      90,
+      100
+    ],
+    "intensity": 0.3,
+    "scale": "lydian",
+    "style": "dreamy",
+    "timeSignature": "6/8"
   },
   "duration": 100,
   "unlockCondition": "act1_complete"

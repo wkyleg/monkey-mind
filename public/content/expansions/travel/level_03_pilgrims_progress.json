@@ -4,53 +4,146 @@
   "index": 3,
   "title": "The Pilgrim's Progress",
   "subtitle": "From the City of Destruction to the Celestial City.",
-  "themeTags": ["bunyan", "pilgrim", "allegory", "faith"],
+  "themeTags": [
+    "bunyan",
+    "pilgrim",
+    "allegory",
+    "faith"
+  ],
   "ruleCard": {
     "icon": "burden",
     "hint": "Carry the burden. It slows you but dropping it costs progress.",
     "mechanic": "burden_carry",
-    "params": { "burdenSlow": 0.3, "dropCost": 50, "celestialReward": 200 }
+    "params": {
+      "burdenSlow": 0.3,
+      "dropCost": 50,
+      "celestialReward": 200
+    }
   },
   "enemyDeck": [
-    { "archetype": "anchor", "modifiers": ["liturgical"], "weight": 4, "visualId": "enemy_time_phantom" },
-    { "archetype": "chaser", "modifiers": [], "weight": 3, "visualId": "enemy_desert_djinn" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_guardian_statue" }
+    {
+      "archetype": "anchor",
+      "modifiers": [
+        "liturgical"
+      ],
+      "weight": 4,
+      "visualId": "enemy_time_phantom"
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_desert_djinn"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_guardian_statue"
+    }
   ],
   "levelEnemies": {
     "giant_despair": {
       "visualId": "giant_despair",
       "dialogue": {
-        "spawn": ["Doubting Castle awaits!", "Despair consumes!", "No escape from here!", "Give up, pilgrim!", "Hope is foolishness!"],
-        "death": ["The key... of Promise...", "Castle... crumbles...", "Despair... defeated...", "Pilgrim... escapes...", "Hope... prevails..."]
+        "spawn": [
+          "Doubting Castle awaits!",
+          "Despair consumes!",
+          "No escape from here!",
+          "Give up, pilgrim!",
+          "Hope is foolishness!"
+        ],
+        "death": [
+          "The key... of Promise...",
+          "Castle... crumbles...",
+          "Despair... defeated...",
+          "Pilgrim... escapes...",
+          "Hope... prevails..."
+        ]
       }
     },
     "apollyon_destroyer": {
       "visualId": "apollyon_destroyer",
       "dialogue": {
-        "spawn": ["Servant of my enemy!", "Return to destruction!", "The Valley of Death!", "I will break you!", "No armor can save you!"],
-        "death": ["The armor... held...", "Faith... is shield...", "Defeated... by Word...", "The Valley... passed...", "Pilgrim... advances..."]
+        "spawn": [
+          "Servant of my enemy!",
+          "Return to destruction!",
+          "The Valley of Death!",
+          "I will break you!",
+          "No armor can save you!"
+        ],
+        "death": [
+          "The armor... held...",
+          "Faith... is shield...",
+          "Defeated... by Word...",
+          "The Valley... passed...",
+          "Pilgrim... advances..."
+        ]
       }
     },
     "vanity_merchant": {
       "visualId": "vanity_merchant",
       "dialogue": {
-        "spawn": ["Buy my wares!", "Vanity Fair awaits!", "All is for sale!", "Stay and prosper!", "Why journey on?"],
-        "death": ["Fair... closes...", "Vanity... is empty...", "The City... calls...", "Merchandise... worthless...", "Pilgrim... moves on..."]
+        "spawn": [
+          "Buy my wares!",
+          "Vanity Fair awaits!",
+          "All is for sale!",
+          "Stay and prosper!",
+          "Why journey on?"
+        ],
+        "death": [
+          "Fair... closes...",
+          "Vanity... is empty...",
+          "The City... calls...",
+          "Merchandise... worthless...",
+          "Pilgrim... moves on..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "slough_of_despond", "params": { "slowZone": true, "despairDamage": 5 } }],
+  "hazards": [
+    {
+      "type": "slough_of_despond",
+      "params": {
+        "slowZone": true,
+        "despairDamage": 5
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "road", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "wicket_gate", "parallaxSpeed": 0.2, "opacity": 0.4 },
-    { "svgId": "celestial_city", "parallaxSpeed": 0.3, "opacity": 0.6 }
+    {
+      "svgId": "road",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "wicket_gate",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "celestial_city",
+      "parallaxSpeed": 0.3,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Carry the burden. It slows you but dropping it costs progress.",
     "codexSnippet": "Christian carried his burden to the Cross and found it lifted. The monkey carries its own weight toward the Celestial City, learning that burdens shared become lighter.",
     "radioWhisper": "The Celestial City awaits. Keep walking."
   },
-  "musicSeed": { "seed": "pilgrims_progress_003", "mode": "ionian", "tempoRange": [50, 65], "intensity": 0.4 },
+  "musicSeed": {
+    "seed": "pilgrims_progress_003",
+    "mode": "mixolydian",
+    "tempoRange": [
+      84,
+      105
+    ],
+    "intensity": 0.8,
+    "scale": "dorian",
+    "style": "dreamy",
+    "timeSignature": "6/8"
+  },
   "duration": 140,
   "unlockCondition": "travel_level2_complete"
 }

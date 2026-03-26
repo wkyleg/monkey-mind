@@ -12,7 +12,7 @@ export const CONFIG = {
   // Gameplay
   LANES: 5,
   LANE_SWITCH_SPEED: 0.15, // seconds to switch lanes
-  PLAYER_Y_POSITION: 0.85, // percentage from top
+  PLAYER_Y_POSITION: 0.78, // percentage from top — clearance above HUD bottom panel
 
   // Weapons
   BANANA_FIRE_RATE: 0.2, // seconds between shots
@@ -65,5 +65,10 @@ export const CONFIG = {
   SHOW_HITBOXES: false,
   SHOW_FPS: false,
 } as const;
+
+/** Developer mode — gates simulated neuro signals and debug tools. True during `vite dev`, false in production builds. */
+export const DEV_MODE: boolean = !!(
+  typeof import.meta !== 'undefined' && (import.meta as unknown as { env?: { DEV?: boolean } }).env?.DEV
+);
 
 export type Config = typeof CONFIG;

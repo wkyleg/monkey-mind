@@ -1,26 +1,21 @@
 /**
- * Meta-Progression Meters System
+ * Meta-Progression Meters System — Raw SDK Metrics
  *
- * 3 Meters that track player mental state:
- * - Noise: Screen chaos level (0-100), high noise spawns reactive enemies
- * - Focus: Earned by clean play (no damage), unlocks precision tools
- * - Stillness: Earned by calm survival, unlocks defensive miracles
+ * Exposes 5 raw neural metrics directly from the SDK:
+ *   CALM, AROUSAL, ALPHA, BETA, THETA
+ * Retains threshold / reward system for gameplay triggers.
  */
 
 import type { MetaMeters } from '../content/schema';
 
-/**
- * Meter types
- */
 export enum MeterType {
-  NOISE = 'noise',
-  FOCUS = 'focus',
-  STILLNESS = 'stillness',
+  CALM = 'calm',
+  AROUSAL = 'arousal',
+  ALPHA = 'alpha',
+  BETA = 'beta',
+  THETA = 'theta',
 }
 
-/**
- * Threshold configuration
- */
 export interface MeterThreshold {
   id: string;
   meter: MeterType;
@@ -29,9 +24,6 @@ export interface MeterThreshold {
   triggered: boolean;
 }
 
-/**
- * Reward configuration
- */
 export interface MeterReward {
   id: string;
   meter: MeterType;
@@ -42,25 +34,27 @@ export interface MeterReward {
   claimed: boolean;
 }
 
-/**
- * Update state for meters
- */
 export interface MeterUpdateState {
   enemyCount: number;
   projectileCount: number;
   playerDamaged: boolean;
   playerMoving?: boolean;
+  calm?: number;
+  arousal?: number;
+  alpha?: number;
+  beta?: number;
+  theta?: number;
 }
 
-/**
- * Event callback type
- */
 type MeterEventCallback = (data: Record<string, unknown>) => void;
 
-/**
- * Serialized meter state
- */
 export interface MeterState {
+  calm: number;
+  arousal: number;
+  alpha: number;
+  beta: number;
+  theta: number;
+  /** Legacy compat – mapped from calm+arousal+alpha */
   noise: number;
   focus: number;
   stillness: number;
@@ -68,13 +62,12 @@ export interface MeterState {
   stillnessDuration: number;
 }
 
-/**
- * Meters System - Manages meta-progression meters
- */
 export class MetersSystem {
-  private noise: number = 0;
-  private focus: number = 0;
-  private stillness: number = 0;
+  private calm: number = 0;
+  private arousal: number = 0;
+  private alpha: number = 0;
+  private beta: number = 0;
+  private theta: number = 0;
 
   private focusStreak: number = 0;
   private stillnessDuration: number = 0;
@@ -82,100 +75,62 @@ export class MetersSystem {
   private thresholds: MeterThreshold[] = [];
   private rewards: MeterReward[] = [];
   private eventListeners: Map<string, MeterEventCallback[]> = new Map();
-
   private nextThresholdId: number = 0;
 
   constructor(initial?: Partial<MetaMeters>) {
     if (initial) {
-      this.noise = this.clamp(initial.noise ?? 0);
-      this.focus = this.clamp(initial.focus ?? 0);
-      this.stillness = this.clamp(initial.stillness ?? 0);
+      this.calm = this.clamp(initial.noise ?? 0);
+      this.arousal = this.clamp(initial.focus ?? 0);
+      this.alpha = this.clamp(initial.stillness ?? 0);
     }
-
     this.initializeRewards();
   }
 
   private initializeRewards(): void {
-    // Focus rewards (precision tools)
     this.rewards.push(
       {
-        id: 'focus_25',
-        meter: MeterType.FOCUS,
-        threshold: 25,
-        type: 'precision_tool',
-        name: 'Steady Aim',
-        description: 'Reduced projectile spread',
-        claimed: false,
-      },
-      {
-        id: 'focus_50',
-        meter: MeterType.FOCUS,
+        id: 'calm_50',
+        meter: MeterType.CALM,
         threshold: 50,
-        type: 'precision_tool',
-        name: 'Eagle Eye',
-        description: 'Highlight weak points',
-        claimed: false,
-      },
-      {
-        id: 'focus_75',
-        meter: MeterType.FOCUS,
-        threshold: 75,
-        type: 'precision_tool',
-        name: 'Perfect Shot',
-        description: 'Critical hit chance',
-        claimed: false,
-      },
-    );
-
-    // Stillness rewards (defensive miracles)
-    this.rewards.push(
-      {
-        id: 'stillness_30',
-        meter: MeterType.STILLNESS,
-        threshold: 30,
         type: 'defensive_miracle',
         name: 'Calm Shield',
         description: 'Brief invulnerability',
         claimed: false,
       },
       {
-        id: 'stillness_50',
-        meter: MeterType.STILLNESS,
-        threshold: 50,
+        id: 'calm_75',
+        meter: MeterType.CALM,
+        threshold: 75,
         type: 'defensive_miracle',
         name: 'Inner Peace',
         description: 'Slow enemy projectiles',
         claimed: false,
       },
       {
-        id: 'stillness_70',
-        meter: MeterType.STILLNESS,
-        threshold: 70,
-        type: 'defensive_miracle',
-        name: 'Zen State',
-        description: 'Auto-dodge one attack',
+        id: 'arousal_50',
+        meter: MeterType.AROUSAL,
+        threshold: 50,
+        type: 'reactive_enemy',
+        name: 'Adrenaline',
+        description: 'Faster fire rate',
         claimed: false,
       },
-    );
-
-    // Noise penalties (reactive enemies)
-    this.rewards.push(
       {
-        id: 'noise_60',
-        meter: MeterType.NOISE,
+        id: 'arousal_75',
+        meter: MeterType.AROUSAL,
+        threshold: 75,
+        type: 'reactive_enemy',
+        name: 'Overdrive',
+        description: 'Bonus damage burst',
+        claimed: false,
+      },
+      {
+        id: 'alpha_60',
+        meter: MeterType.ALPHA,
         threshold: 60,
-        type: 'reactive_enemy',
-        name: 'Chaos Spawn',
-        description: 'Extra enemy wave',
-        claimed: false,
-      },
-      {
-        id: 'noise_80',
-        meter: MeterType.NOISE,
-        threshold: 80,
-        type: 'reactive_enemy',
-        name: 'Panic Attack',
-        description: 'Aggressive enemy behavior',
+        type: 'precision_tool',
+        name: 'Alpha Focus',
+        description: 'Highlight weak points',
         claimed: false,
       },
     );
@@ -185,15 +140,32 @@ export class MetersSystem {
     return Math.max(0, Math.min(100, value));
   }
 
-  // Getters
+  // Getters — raw metric values (0-100)
+  getCalm(): number {
+    return this.calm;
+  }
+  getArousal(): number {
+    return this.arousal;
+  }
+  getAlpha(): number {
+    return this.alpha;
+  }
+  getBeta(): number {
+    return this.beta;
+  }
+  getTheta(): number {
+    return this.theta;
+  }
+
+  /** Legacy compat */
   getNoise(): number {
-    return this.noise;
+    return this.arousal;
   }
   getFocus(): number {
-    return this.focus;
+    return this.calm;
   }
   getStillness(): number {
-    return this.stillness;
+    return this.alpha;
   }
   getFocusStreak(): number {
     return this.focusStreak;
@@ -203,134 +175,100 @@ export class MetersSystem {
   }
 
   getAll(): MetaMeters {
-    return { noise: this.noise, focus: this.focus, stillness: this.stillness };
+    return { noise: this.arousal, focus: this.calm, stillness: this.alpha };
   }
 
-  // Setters
+  // Direct setters
+  private setMeter(meter: MeterType, value: number): void {
+    const clamped = this.clamp(value);
+    let old: number;
+    switch (meter) {
+      case MeterType.CALM:
+        old = this.calm;
+        this.calm = clamped;
+        break;
+      case MeterType.AROUSAL:
+        old = this.arousal;
+        this.arousal = clamped;
+        break;
+      case MeterType.ALPHA:
+        old = this.alpha;
+        this.alpha = clamped;
+        break;
+      case MeterType.BETA:
+        old = this.beta;
+        this.beta = clamped;
+        break;
+      case MeterType.THETA:
+        old = this.theta;
+        this.theta = clamped;
+        break;
+      default:
+        return;
+    }
+    this.checkThresholds(meter, old, clamped);
+  }
+
+  // Legacy setters
   setNoise(value: number): void {
-    const oldValue = this.noise;
-    this.noise = this.clamp(value);
-    this.checkThresholds(MeterType.NOISE, oldValue, this.noise);
-
-    if (this.noise >= 90 && oldValue < 90) {
-      this.emit('noise:critical', { level: this.noise });
-    }
+    this.setMeter(MeterType.AROUSAL, value);
   }
-
   setFocus(value: number): void {
-    const oldValue = this.focus;
-    this.focus = this.clamp(value);
-    this.checkThresholds(MeterType.FOCUS, oldValue, this.focus);
-
-    // Check milestones
-    const milestones = [25, 50, 75, 100];
-    for (const milestone of milestones) {
-      if (this.focus >= milestone && oldValue < milestone) {
-        this.emit('focus:milestone', { level: this.focus, milestone });
-        break;
-      }
-    }
+    this.setMeter(MeterType.CALM, value);
   }
-
   setStillness(value: number): void {
-    const oldValue = this.stillness;
-    this.stillness = this.clamp(value);
-    this.checkThresholds(MeterType.STILLNESS, oldValue, this.stillness);
-
-    // Check milestones
-    const milestones = [30, 50, 70, 100];
-    for (const milestone of milestones) {
-      if (this.stillness >= milestone && oldValue < milestone) {
-        this.emit('stillness:milestone', { level: this.stillness, milestone });
-        break;
-      }
-    }
+    this.setMeter(MeterType.ALPHA, value);
   }
-
-  // Modifiers
   addNoise(delta: number): void {
-    this.setNoise(this.noise + delta);
+    this.setMeter(MeterType.AROUSAL, this.arousal + delta);
   }
   addFocus(delta: number): void {
-    this.setFocus(this.focus + delta);
+    this.setMeter(MeterType.CALM, this.calm + delta);
   }
   addStillness(delta: number): void {
-    this.setStillness(this.stillness + delta);
+    this.setMeter(MeterType.ALPHA, this.alpha + delta);
   }
 
-  // Event handlers
-  onEnemySpawn(count: number): void {
-    this.addNoise(count * 2);
-  }
-
-  onProjectilesUpdate(count: number): void {
-    this.addNoise(count * 0.5);
-  }
-
+  // Event handlers (legacy)
+  onEnemySpawn(_count: number): void {}
+  onProjectilesUpdate(_count: number): void {}
   onPlayerDamage(_amount: number): void {
-    this.addNoise(15);
-    this.setFocus(0);
     this.focusStreak = 0;
   }
-
-  onEnemyKill(): void {
-    this.addFocus(5);
-  }
-
+  onEnemyKill(): void {}
   onPanicAction(): void {
-    this.addStillness(-20);
     this.stillnessDuration = 0;
   }
 
-  // Update
+  /**
+   * Update from raw neuro state — stores values directly (no derivation)
+   */
   update(dt: number, state: MeterUpdateState): void {
-    // Noise decay when calm
-    if (state.enemyCount === 0 && state.projectileCount === 0 && !state.playerDamaged) {
-      this.addNoise(-5 * dt);
-    }
+    this.setMeter(MeterType.CALM, (state.calm ?? 0) * 100);
+    this.setMeter(MeterType.AROUSAL, (state.arousal ?? 0) * 100);
+    this.setMeter(MeterType.ALPHA, (state.alpha ?? 0) * 100);
+    this.setMeter(MeterType.BETA, (state.beta ?? 0) * 100);
+    this.setMeter(MeterType.THETA, (state.theta ?? 0) * 100);
 
-    // Focus gain with clean play
     if (!state.playerDamaged) {
-      const focusGain = 2 * dt;
-      this.addFocus(focusGain);
       this.focusStreak += dt;
+    } else {
+      this.focusStreak = 0;
     }
-
-    // Stillness gain
-    if (!state.playerDamaged) {
-      let stillnessGain = 3 * dt;
-
-      // Bonus for not moving
-      if (!state.playerMoving) {
-        stillnessGain *= 2;
-        this.stillnessDuration += dt;
-      }
-
-      // Penalty for high noise
-      if (this.noise > 50) {
-        stillnessGain *= 0.5;
-      }
-
-      // Synergy with focus
-      if (this.focus > 30) {
-        stillnessGain *= 1.5;
-      }
-
-      this.addStillness(stillnessGain);
+    if (!state.playerMoving) {
+      this.stillnessDuration += dt;
     }
   }
 
   // Threshold management
   onNoiseThreshold(value: number, callback: () => void): string {
-    return this.addThreshold(MeterType.NOISE, value, callback);
+    return this.addThreshold(MeterType.AROUSAL, value, callback);
   }
-
   onFocusThreshold(value: number, callback: () => void): string {
-    return this.addThreshold(MeterType.FOCUS, value, callback);
+    return this.addThreshold(MeterType.CALM, value, callback);
   }
-
   onStillnessThreshold(value: number, callback: () => void): string {
-    return this.addThreshold(MeterType.STILLNESS, value, callback);
+    return this.addThreshold(MeterType.ALPHA, value, callback);
   }
 
   private addThreshold(meter: MeterType, value: number, callback: () => void): string {
@@ -349,106 +287,95 @@ export class MetersSystem {
         if (oldValue < threshold.value && newValue >= threshold.value) {
           threshold.triggered = true;
           threshold.callback();
+          this.emit(`${meter}:milestone`, { level: newValue, milestone: threshold.value });
         }
       }
     }
   }
 
-  // Rewards
   getAvailableRewards(): MeterReward[] {
     return this.rewards.filter((r) => {
       if (r.claimed) return false;
-
       switch (r.meter) {
-        case MeterType.NOISE:
-          return this.noise >= r.threshold;
-        case MeterType.FOCUS:
-          return this.focus >= r.threshold;
-        case MeterType.STILLNESS:
-          return this.stillness >= r.threshold;
+        case MeterType.CALM:
+          return this.calm >= r.threshold;
+        case MeterType.AROUSAL:
+          return this.arousal >= r.threshold;
+        case MeterType.ALPHA:
+          return this.alpha >= r.threshold;
+        case MeterType.BETA:
+          return this.beta >= r.threshold;
+        case MeterType.THETA:
+          return this.theta >= r.threshold;
       }
     });
   }
 
   claimReward(id: string): void {
     const reward = this.rewards.find((r) => r.id === id);
-    if (reward) {
-      reward.claimed = true;
-    }
+    if (reward) reward.claimed = true;
   }
 
-  // Reset
   reset(): void {
-    this.noise = 0;
-    this.focus = 0;
-    this.stillness = 0;
+    this.calm = 0;
+    this.arousal = 0;
+    this.alpha = 0;
+    this.beta = 0;
+    this.theta = 0;
     this.focusStreak = 0;
     this.stillnessDuration = 0;
-
-    // Reset thresholds
-    for (const threshold of this.thresholds) {
-      threshold.triggered = false;
-    }
-
-    // Reset rewards
-    for (const reward of this.rewards) {
-      reward.claimed = false;
-    }
+    for (const t of this.thresholds) t.triggered = false;
+    for (const r of this.rewards) r.claimed = false;
   }
 
-  // Serialization
   toJSON(): MeterState {
     return {
-      noise: this.noise,
-      focus: this.focus,
-      stillness: this.stillness,
+      calm: this.calm,
+      arousal: this.arousal,
+      alpha: this.alpha,
+      beta: this.beta,
+      theta: this.theta,
+      noise: this.arousal,
+      focus: this.calm,
+      stillness: this.alpha,
       focusStreak: this.focusStreak,
       stillnessDuration: this.stillnessDuration,
     };
   }
 
   fromJSON(state: MeterState): void {
-    this.noise = state.noise;
-    this.focus = state.focus;
-    this.stillness = state.stillness;
+    this.calm = state.calm ?? state.focus ?? 0;
+    this.arousal = state.arousal ?? state.noise ?? 0;
+    this.alpha = state.alpha ?? state.stillness ?? 0;
+    this.beta = state.beta ?? 0;
+    this.theta = state.theta ?? 0;
     this.focusStreak = state.focusStreak;
     this.stillnessDuration = state.stillnessDuration;
   }
 
-  // Event system
   on(event: string, callback: MeterEventCallback): void {
-    if (!this.eventListeners.has(event)) {
-      this.eventListeners.set(event, []);
-    }
+    if (!this.eventListeners.has(event)) this.eventListeners.set(event, []);
     this.eventListeners.get(event)!.push(callback);
   }
 
   off(event: string, callback: MeterEventCallback): void {
     const listeners = this.eventListeners.get(event);
     if (listeners) {
-      const index = listeners.indexOf(callback);
-      if (index >= 0) {
-        listeners.splice(index, 1);
-      }
+      const idx = listeners.indexOf(callback);
+      if (idx >= 0) listeners.splice(idx, 1);
     }
   }
 
   private emit(event: string, data: Record<string, unknown>): void {
     const listeners = this.eventListeners.get(event);
     if (listeners) {
-      for (const callback of listeners) {
-        callback(data);
-      }
+      for (const cb of listeners) cb(data);
     }
   }
 }
 
-/**
- * Create a meters system
- */
 export function createMetersSystem(initial?: Partial<MetaMeters>): MetersSystem {
   return new MetersSystem(initial);
 }
 
-// Global meters system instance
 export const metersSystem = createMetersSystem();

@@ -4,53 +4,146 @@
   "index": 3,
   "title": "Shambhala",
   "subtitle": "The hidden kingdom. Enlightenment's sanctuary.",
-  "themeTags": ["shambhala", "tibet", "enlightenment", "hidden"],
+  "themeTags": [
+    "shambhala",
+    "tibet",
+    "enlightenment",
+    "hidden"
+  ],
   "ruleCard": {
     "icon": "lotus",
     "hint": "The path reveals itself to the worthy. Prove your enlightenment.",
     "mechanic": "worthiness_test",
-    "params": { "testInterval": 15000, "passBonus": 60, "failPenalty": 30 }
+    "params": {
+      "testInterval": 15000,
+      "passBonus": 60,
+      "failPenalty": 30
+    }
   },
   "enemyDeck": [
-    { "archetype": "shieldbearer", "modifiers": ["liturgical"], "weight": 4, "visualId": "enemy_stone_golem" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_jungle_wraith" },
-    { "archetype": "weaver", "modifiers": [], "weight": 3, "visualId": "enemy_crystal_sentinel" }
+    {
+      "archetype": "shieldbearer",
+      "modifiers": [
+        "liturgical"
+      ],
+      "weight": 4,
+      "visualId": "enemy_stone_golem"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_jungle_wraith"
+    },
+    {
+      "archetype": "weaver",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_crystal_sentinel"
+    }
   ],
   "levelEnemies": {
     "dharma_protector": {
       "visualId": "dharma_protector",
       "dialogue": {
-        "spawn": ["The path is guarded!", "Prove your worth!", "Shambhala judges!", "Enlightenment tests!", "Only the pure enter!"],
-        "death": ["Path... opens...", "Worth... proven...", "Shambhala... welcomes...", "Test... passed...", "Purity... shown..."]
+        "spawn": [
+          "The path is guarded!",
+          "Prove your worth!",
+          "Shambhala judges!",
+          "Enlightenment tests!",
+          "Only the pure enter!"
+        ],
+        "death": [
+          "Path... opens...",
+          "Worth... proven...",
+          "Shambhala... welcomes...",
+          "Test... passed...",
+          "Purity... shown..."
+        ]
       }
     },
     "mountain_sage": {
       "visualId": "mountain_sage",
       "dialogue": {
-        "spawn": ["The Himalayas hide me!", "Wisdom of ages!", "Seek and suffer!", "Truth in altitude!", "The thin air reveals!"],
-        "death": ["Mountains... part...", "Wisdom... shared...", "Seeking... ends...", "Truth... found...", "Air... clear..."]
+        "spawn": [
+          "The Himalayas hide me!",
+          "Wisdom of ages!",
+          "Seek and suffer!",
+          "Truth in altitude!",
+          "The thin air reveals!"
+        ],
+        "death": [
+          "Mountains... part...",
+          "Wisdom... shared...",
+          "Seeking... ends...",
+          "Truth... found...",
+          "Air... clear..."
+        ]
       }
     },
     "kalki_warrior": {
       "visualId": "kalki_warrior",
       "dialogue": {
-        "spawn": ["The final avatar!", "Kali Yuga ends!", "The white horse rides!", "Dharma restored!", "The cycle turns!"],
-        "death": ["Avatar... waits...", "Yuga... continues...", "Horse... rests...", "Dharma... patient...", "Cycle... turns..."]
+        "spawn": [
+          "The final avatar!",
+          "Kali Yuga ends!",
+          "The white horse rides!",
+          "Dharma restored!",
+          "The cycle turns!"
+        ],
+        "death": [
+          "Avatar... waits...",
+          "Yuga... continues...",
+          "Horse... rests...",
+          "Dharma... patient...",
+          "Cycle... turns..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "altitude_sickness", "params": { "oxygenDrain": 3, "adaptationTime": 10000 } }],
+  "hazards": [
+    {
+      "type": "altitude_sickness",
+      "params": {
+        "oxygenDrain": 3,
+        "adaptationTime": 10000
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "mountains", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "monastery", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "prayer_flags", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "mountains",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "monastery",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "prayer_flags",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "The path reveals itself to the worthy. Prove your enlightenment.",
     "codexSnippet": "Shambhala exists between the peaks of the Himalayas, visible only to those who have earned the right to see it. The monkey climbs and learns that the highest places require the purest hearts.",
     "radioWhisper": "The maps show nothing there. But the monks know the way."
   },
-  "musicSeed": { "seed": "shambhala_003", "mode": "phrygian", "tempoRange": [45, 60], "intensity": 0.4 },
+  "musicSeed": {
+    "seed": "shambhala_003",
+    "mode": "pentatonic",
+    "tempoRange": [
+      70,
+      89
+    ],
+    "intensity": 0.55,
+    "scale": "pelog",
+    "style": "mysterious",
+    "timeSignature": "6/8"
+  },
   "duration": 140,
   "unlockCondition": "lost_worlds_level2_complete"
 }

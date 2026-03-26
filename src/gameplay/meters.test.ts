@@ -1,11 +1,8 @@
 /**
- * Tests for Meta-Progression Meters System
- * TDD: Tests written FIRST before implementation
+ * Tests for Meta-Progression Meters System — Raw SDK Metrics
  *
- * 3 Meters:
- * - Noise: Screen chaos level (0-100), high noise spawns reactive enemies
- * - Focus: Earned by clean play (no damage), unlocks precision tools
- * - Stillness: Earned by calm survival, unlocks defensive miracles
+ * 5 Meters: CALM, AROUSAL, ALPHA, BETA, THETA
+ * Driven directly from neuro SDK state with no derivation.
  */
 
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -14,10 +11,12 @@ import { createMetersSystem, MeterType } from './meters';
 
 describe('Meters System', () => {
   describe('MeterType enum', () => {
-    it('should have all three meter types', () => {
-      expect(MeterType.NOISE).toBeDefined();
-      expect(MeterType.FOCUS).toBeDefined();
-      expect(MeterType.STILLNESS).toBeDefined();
+    it('should have all five raw SDK meter types', () => {
+      expect(MeterType.CALM).toBeDefined();
+      expect(MeterType.AROUSAL).toBeDefined();
+      expect(MeterType.ALPHA).toBeDefined();
+      expect(MeterType.BETA).toBeDefined();
+      expect(MeterType.THETA).toBeDefined();
     });
   });
 
@@ -29,13 +28,6 @@ describe('Meters System', () => {
       expect(meters.getFocus()).toBe(0);
       expect(meters.getStillness()).toBe(0);
     });
-
-    it('should create a meters system with custom initial values', () => {
-      const meters = createMetersSystem({ noise: 50, focus: 30, stillness: 20 });
-      expect(meters.getNoise()).toBe(50);
-      expect(meters.getFocus()).toBe(30);
-      expect(meters.getStillness()).toBe(20);
-    });
   });
 
   describe('MetersSystem', () => {
@@ -46,12 +38,12 @@ describe('Meters System', () => {
     });
 
     describe('Basic Operations', () => {
-      it('should get all meters', () => {
+      it('should get all meters (legacy compat)', () => {
         const all = meters.getAll();
         expect(all).toEqual({ noise: 0, focus: 0, stillness: 0 });
       });
 
-      it('should set meter values', () => {
+      it('should set meter values via legacy setters', () => {
         meters.setNoise(50);
         meters.setFocus(30);
         meters.setStillness(20);
@@ -92,74 +84,41 @@ describe('Meters System', () => {
       });
     });
 
-    describe('Noise Meter', () => {
-      it('should increase with enemy spawns', () => {
-        meters.onEnemySpawn(5); // 5 enemies spawned
-        expect(meters.getNoise()).toBeGreaterThan(0);
+    describe('Raw SDK update()', () => {
+      it('should store calm directly from neuro state', () => {
+        meters.update(1, { enemyCount: 0, projectileCount: 0, playerDamaged: false, calm: 0.75 });
+        expect(meters.getCalm()).toBe(75);
       });
 
-      it('should increase with projectiles on screen', () => {
-        meters.onProjectilesUpdate(20); // 20 projectiles
-        expect(meters.getNoise()).toBeGreaterThan(0);
+      it('should store arousal directly from neuro state', () => {
+        meters.update(1, { enemyCount: 0, projectileCount: 0, playerDamaged: false, arousal: 0.6 });
+        expect(meters.getArousal()).toBe(60);
       });
 
-      it('should increase with player damage', () => {
-        meters.onPlayerDamage(1);
-        expect(meters.getNoise()).toBeGreaterThan(0);
+      it('should store alpha/beta/theta when provided', () => {
+        meters.update(1, {
+          enemyCount: 0,
+          projectileCount: 0,
+          playerDamaged: false,
+          alpha: 0.34,
+          beta: 0.18,
+          theta: 0.52,
+        });
+        expect(meters.getAlpha()).toBe(34);
+        expect(meters.getBeta()).toBe(18);
+        expect(meters.getTheta()).toBe(52);
       });
 
-      it('should decrease over time when calm', () => {
-        meters.setNoise(50);
+      it('should default missing values to 0', () => {
         meters.update(1, { enemyCount: 0, projectileCount: 0, playerDamaged: false });
-        expect(meters.getNoise()).toBeLessThan(50);
-      });
-
-      it('should trigger reactive enemy spawn at high noise', () => {
-        const callback = vi.fn();
-        meters.onNoiseThreshold(80, callback);
-        meters.setNoise(85);
-        expect(callback).toHaveBeenCalled();
-      });
-
-      it('should not trigger below threshold', () => {
-        const callback = vi.fn();
-        meters.onNoiseThreshold(80, callback);
-        meters.setNoise(50);
-        expect(callback).not.toHaveBeenCalled();
+        expect(meters.getCalm()).toBe(0);
+        expect(meters.getArousal()).toBe(0);
+        expect(meters.getAlpha()).toBe(0);
       });
     });
 
-    describe('Focus Meter', () => {
-      it('should increase with clean play (no damage)', () => {
-        meters.update(5, { enemyCount: 10, projectileCount: 5, playerDamaged: false });
-        expect(meters.getFocus()).toBeGreaterThan(0);
-      });
-
-      it('should not increase when player takes damage', () => {
-        meters.update(5, { enemyCount: 10, projectileCount: 5, playerDamaged: true });
-        expect(meters.getFocus()).toBe(0);
-      });
-
-      it('should reset on player damage', () => {
-        meters.setFocus(50);
-        meters.onPlayerDamage(1);
-        expect(meters.getFocus()).toBe(0);
-      });
-
-      it('should increase faster with enemy kills', () => {
-        meters.onEnemyKill();
-        const focusAfterKill = meters.getFocus();
-        expect(focusAfterKill).toBeGreaterThan(0);
-      });
-
-      it('should unlock precision tools at thresholds', () => {
-        const callback = vi.fn();
-        meters.onFocusThreshold(50, callback);
-        meters.setFocus(55);
-        expect(callback).toHaveBeenCalled();
-      });
-
-      it('should track focus streak', () => {
+    describe('Focus streak', () => {
+      it('should track focus streak when not damaged', () => {
         meters.update(1, { enemyCount: 5, projectileCount: 0, playerDamaged: false });
         meters.update(1, { enemyCount: 5, projectileCount: 0, playerDamaged: false });
         meters.update(1, { enemyCount: 5, projectileCount: 0, playerDamaged: false });
@@ -173,36 +132,8 @@ describe('Meters System', () => {
       });
     });
 
-    describe('Stillness Meter', () => {
-      it('should increase with calm survival', () => {
-        meters.update(5, { enemyCount: 5, projectileCount: 2, playerDamaged: false, playerMoving: false });
-        expect(meters.getStillness()).toBeGreaterThan(0);
-      });
-
-      it('should increase slower when player is moving', () => {
-        const metersStill = createMetersSystem();
-        const metersMoving = createMetersSystem();
-
-        metersStill.update(5, { enemyCount: 5, projectileCount: 2, playerDamaged: false, playerMoving: false });
-        metersMoving.update(5, { enemyCount: 5, projectileCount: 2, playerDamaged: false, playerMoving: true });
-
-        expect(metersStill.getStillness()).toBeGreaterThan(metersMoving.getStillness());
-      });
-
-      it('should decrease with panic actions', () => {
-        meters.setStillness(50);
-        meters.onPanicAction(); // Rapid movement, spam shooting
-        expect(meters.getStillness()).toBeLessThan(50);
-      });
-
-      it('should unlock defensive miracles at thresholds', () => {
-        const callback = vi.fn();
-        meters.onStillnessThreshold(70, callback);
-        meters.setStillness(75);
-        expect(callback).toHaveBeenCalled();
-      });
-
-      it('should track stillness duration', () => {
+    describe('Stillness duration', () => {
+      it('should track stillness duration when not moving', () => {
         meters.update(5, { enemyCount: 5, projectileCount: 2, playerDamaged: false, playerMoving: false });
         expect(meters.getStillnessDuration()).toBe(5);
       });
@@ -268,28 +199,21 @@ describe('Meters System', () => {
         meters.setFocus(60);
         const rewards = meters.getAvailableRewards();
         expect(rewards.length).toBeGreaterThan(0);
-        expect(rewards.some((r) => r.meter === MeterType.FOCUS)).toBe(true);
+        expect(rewards.some((r) => r.meter === MeterType.CALM)).toBe(true);
       });
 
-      it('should return precision tools for focus', () => {
+      it('should return defensive miracles for calm', () => {
         meters.setFocus(50);
         const rewards = meters.getAvailableRewards();
-        const focusRewards = rewards.filter((r) => r.meter === MeterType.FOCUS);
-        expect(focusRewards.some((r) => r.type === 'precision_tool')).toBe(true);
+        const calmRewards = rewards.filter((r) => r.meter === MeterType.CALM);
+        expect(calmRewards.some((r) => r.type === 'defensive_miracle')).toBe(true);
       });
 
-      it('should return defensive miracles for stillness', () => {
-        meters.setStillness(70);
-        const rewards = meters.getAvailableRewards();
-        const stillnessRewards = rewards.filter((r) => r.meter === MeterType.STILLNESS);
-        expect(stillnessRewards.some((r) => r.type === 'defensive_miracle')).toBe(true);
-      });
-
-      it('should return reactive enemies for high noise', () => {
+      it('should return reactive enemies for high arousal', () => {
         meters.setNoise(80);
         const rewards = meters.getAvailableRewards();
-        const noiseRewards = rewards.filter((r) => r.meter === MeterType.NOISE);
-        expect(noiseRewards.some((r) => r.type === 'reactive_enemy')).toBe(true);
+        const arousalRewards = rewards.filter((r) => r.meter === MeterType.AROUSAL);
+        expect(arousalRewards.some((r) => r.type === 'reactive_enemy')).toBe(true);
       });
 
       it('should claim reward and mark as used', () => {
@@ -304,27 +228,6 @@ describe('Meters System', () => {
       });
     });
 
-    describe('Meter Interactions', () => {
-      it('should have inverse relationship between noise and stillness', () => {
-        meters.setNoise(80);
-        meters.update(1, { enemyCount: 10, projectileCount: 20, playerDamaged: false, playerMoving: false });
-        // High noise should make it harder to gain stillness
-        expect(meters.getStillness()).toBeLessThan(10);
-      });
-
-      it('should have synergy between focus and stillness', () => {
-        meters.setFocus(50);
-        meters.update(1, { enemyCount: 5, projectileCount: 2, playerDamaged: false, playerMoving: false });
-        // High focus should boost stillness gain
-        const stillnessWithFocus = meters.getStillness();
-
-        const meters2 = createMetersSystem();
-        meters2.update(1, { enemyCount: 5, projectileCount: 2, playerDamaged: false, playerMoving: false });
-
-        expect(stillnessWithFocus).toBeGreaterThan(meters2.getStillness());
-      });
-    });
-
     describe('Persistence', () => {
       it('should serialize to JSON', () => {
         meters.setNoise(50);
@@ -332,17 +235,21 @@ describe('Meters System', () => {
         meters.setStillness(20);
 
         const json = meters.toJSON();
-        expect(json).toEqual({
-          noise: 50,
-          focus: 30,
-          stillness: 20,
-          focusStreak: 0,
-          stillnessDuration: 0,
-        });
+        expect(json.arousal).toBe(50);
+        expect(json.calm).toBe(30);
+        expect(json.alpha).toBe(20);
+        expect(json.noise).toBe(50);
+        expect(json.focus).toBe(30);
+        expect(json.stillness).toBe(20);
       });
 
       it('should deserialize from JSON', () => {
         const json = {
+          calm: 30,
+          arousal: 50,
+          alpha: 20,
+          beta: 10,
+          theta: 5,
           noise: 50,
           focus: 30,
           stillness: 20,
@@ -352,36 +259,21 @@ describe('Meters System', () => {
 
         meters.fromJSON(json);
 
-        expect(meters.getNoise()).toBe(50);
-        expect(meters.getFocus()).toBe(30);
-        expect(meters.getStillness()).toBe(20);
+        expect(meters.getCalm()).toBe(30);
+        expect(meters.getArousal()).toBe(50);
+        expect(meters.getAlpha()).toBe(20);
         expect(meters.getFocusStreak()).toBe(5);
         expect(meters.getStillnessDuration()).toBe(10);
       });
     });
 
     describe('Events', () => {
-      it('should emit event when noise reaches critical level', () => {
+      it('should emit milestone event on threshold cross', () => {
         const callback = vi.fn();
-        meters.on('noise:critical', callback);
-        meters.setNoise(90);
-        expect(callback).toHaveBeenCalledWith({ level: 90 });
-      });
-
-      it('should emit event when focus milestone reached', () => {
-        const callback = vi.fn();
-        meters.on('focus:milestone', callback);
-        meters.setFocus(50);
-        // When jumping from 0 to 50, the first milestone (25) is crossed
-        expect(callback).toHaveBeenCalledWith({ level: 50, milestone: 25 });
-      });
-
-      it('should emit event when stillness milestone reached', () => {
-        const callback = vi.fn();
-        meters.on('stillness:milestone', callback);
-        meters.setStillness(70);
-        // When jumping from 0 to 70, the first milestone (30) is crossed
-        expect(callback).toHaveBeenCalledWith({ level: 70, milestone: 30 });
+        meters.on('calm:milestone', callback);
+        meters.onFocusThreshold(25, () => {});
+        meters.setFocus(30);
+        expect(callback).toHaveBeenCalled();
       });
     });
   });

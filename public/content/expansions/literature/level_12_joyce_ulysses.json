@@ -4,14 +4,103 @@
   "index": 12,
   "title": "Joyce's Ulysses",
   "subtitle": "One day in Dublin. June 16, 1904.",
-  "themeTags": ["joyce", "ulysses", "dublin", "stream"],
+  "themeTags": [
+    "joyce",
+    "ulysses",
+    "dublin",
+    "stream"
+  ],
   "levelEnemies": {
-    "leopold_bloom": { "visualId": "leopold_bloom", "dialogue": { "spawn": ["Kidney for breakfast!", "Molly in bed!", "The funeral today!", "Wandering Dublin!", "Everyman odyssey!"], "death": ["Breakfast... complete...", "Molly... waiting...", "Funeral... attended...", "Home... found...", "Odyssey... ended..."] } },
-    "stephen_dedalus": { "visualId": "stephen_dedalus", "dialogue": { "spawn": ["Non serviam!", "Nightmare of history!", "Ineluctable modality!", "Mother's ghost!", "Artist as young man!"], "death": ["Serving...", "History... escaped...", "Modality... transcended...", "Mother... at peace...", "Artist... mature..."] } },
-    "molly_yes": { "visualId": "molly_yes", "dialogue": { "spawn": ["Yes I said yes!", "Gibraltar memories!", "Howth Head bloom!", "Flowers everywhere!", "I will Yes!"], "death": ["Yes...", "Gibraltar... here...", "Bloom... now...", "Flowers... bloomed...", "Penelope... waits..."] } }
+    "leopold_bloom": {
+      "visualId": "leopold_bloom",
+      "dialogue": {
+        "spawn": [
+          "Kidney for breakfast!",
+          "Molly in bed!",
+          "The funeral today!",
+          "Wandering Dublin!",
+          "Everyman odyssey!"
+        ],
+        "death": [
+          "Breakfast... complete...",
+          "Molly... waiting...",
+          "Funeral... attended...",
+          "Home... found...",
+          "Odyssey... ended..."
+        ]
+      }
+    },
+    "stephen_dedalus": {
+      "visualId": "stephen_dedalus",
+      "dialogue": {
+        "spawn": [
+          "Non serviam!",
+          "Nightmare of history!",
+          "Ineluctable modality!",
+          "Mother's ghost!",
+          "Artist as young man!"
+        ],
+        "death": [
+          "Serving...",
+          "History... escaped...",
+          "Modality... transcended...",
+          "Mother... at peace...",
+          "Artist... mature..."
+        ]
+      }
+    },
+    "molly_yes": {
+      "visualId": "molly_yes",
+      "dialogue": {
+        "spawn": [
+          "Yes I said yes!",
+          "Gibraltar memories!",
+          "Howth Head bloom!",
+          "Flowers everywhere!",
+          "I will Yes!"
+        ],
+        "death": [
+          "Yes...",
+          "Gibraltar... here...",
+          "Bloom... now...",
+          "Flowers... bloomed...",
+          "Penelope... waits..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "dublin", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "streets", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "tower", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "Stately, plump Buck Mulligan came from the stairhead. The monkey wanders Bloomsday through the streams of consciousness." },
-  "musicSeed": { "seed": "ulysses_012", "mode": "mixolydian", "tempoRange": [55, 70], "intensity": 0.5 },
-  "duration": 140, "unlockCondition": "lit_level11_complete"
+  "bgLayers": [
+    {
+      "svgId": "dublin",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "streets",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "tower",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "Stately, plump Buck Mulligan came from the stairhead. The monkey wanders Bloomsday through the streams of consciousness."
+  },
+  "musicSeed": {
+    "seed": "ulysses_012",
+    "mode": "dorian",
+    "tempoRange": [
+      75,
+      95
+    ],
+    "intensity": 0.59,
+    "scale": "locrian",
+    "style": "heroic",
+    "timeSignature": "3/4"
+  },
+  "duration": 140,
+  "unlockCondition": "lit_level11_complete"
 }

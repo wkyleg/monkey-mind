@@ -4,53 +4,145 @@
   "index": 10,
   "title": "The Hard Problem",
   "subtitle": "Why is there something it's like to be you?",
-  "themeTags": ["chalmers", "hard_problem", "consciousness", "explanatory_gap"],
+  "themeTags": [
+    "chalmers",
+    "hard_problem",
+    "consciousness",
+    "explanatory_gap"
+  ],
   "ruleCard": {
     "icon": "question",
     "hint": "The easy problems are solved. The hard problem remains. Why are you conscious?",
     "mechanic": "explanatory_gap",
-    "params": { "gapWidth": 100, "bridgeBonus": 200 }
+    "params": {
+      "gapWidth": 100,
+      "bridgeBonus": 200
+    }
   },
   "enemyDeck": [
-    { "archetype": "boss_chassis", "modifiers": ["mythic"], "weight": 3, "visualId": "enemy_explanatory_gap" },
-    { "archetype": "phaser", "modifiers": [], "weight": 4, "visualId": "enemy_correlation" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_emergence" }
+    {
+      "archetype": "boss_chassis",
+      "modifiers": [
+        "mythic"
+      ],
+      "weight": 3,
+      "visualId": "enemy_explanatory_gap"
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_correlation"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_emergence"
+    }
   ],
   "levelEnemies": {
     "explanatory_gap": {
       "visualId": "explanatory_gap",
       "dialogue": {
-        "spawn": ["Why experience?", "The gap between brain and mind!", "Correlation is not explanation!", "The hard problem!", "Why not darkness?"],
-        "death": ["Experience... explained...", "Gap... bridged...", "Explanation... found...", "Problem... solved...", "Light... understood..."]
+        "spawn": [
+          "Why experience?",
+          "The gap between brain and mind!",
+          "Correlation is not explanation!",
+          "The hard problem!",
+          "Why not darkness?"
+        ],
+        "death": [
+          "Experience... explained...",
+          "Gap... bridged...",
+          "Explanation... found...",
+          "Problem... solved...",
+          "Light... understood..."
+        ]
       }
     },
     "neural_correlate": {
       "visualId": "neural_correlate",
       "dialogue": {
-        "spawn": ["I correlate with consciousness!", "NCC found!", "But correlation is not causation!", "The binding problem!", "Which neurons are you?"],
-        "death": ["Correlation... explained...", "NCC... understood...", "Causation... established...", "Binding... solved...", "All neurons... are me..."]
+        "spawn": [
+          "I correlate with consciousness!",
+          "NCC found!",
+          "But correlation is not causation!",
+          "The binding problem!",
+          "Which neurons are you?"
+        ],
+        "death": [
+          "Correlation... explained...",
+          "NCC... understood...",
+          "Causation... established...",
+          "Binding... solved...",
+          "All neurons... are me..."
+        ]
       }
     },
     "emergence_mystery": {
       "visualId": "emergence_mystery",
       "dialogue": {
-        "spawn": ["Complexity creates me!", "Emergence!", "More than the sum!", "But why this emergence?", "Water isn't wet molecules!"],
-        "death": ["Complexity... understood...", "Emergence... explained...", "Sum... comprehended...", "This emergence... inevitable...", "Wetness... explained..."]
+        "spawn": [
+          "Complexity creates me!",
+          "Emergence!",
+          "More than the sum!",
+          "But why this emergence?",
+          "Water isn't wet molecules!"
+        ],
+        "death": [
+          "Complexity... understood...",
+          "Emergence... explained...",
+          "Sum... comprehended...",
+          "This emergence... inevitable...",
+          "Wetness... explained..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "explanatory_void", "params": { "comprehensionDrain": 10, "insightBonus": 150 } }],
+  "hazards": [
+    {
+      "type": "explanatory_void",
+      "params": {
+        "comprehensionDrain": 10,
+        "insightBonus": 150
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "brain_cosmos", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "neural_network", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "experience_field", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "brain_cosmos",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "neural_network",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "experience_field",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "The easy problems are solved. The hard problem remains. Why are you conscious?",
     "codexSnippet": "Science can explain what consciousness does but not why there's something it's like to have it. The monkey faces the hard problem and touches the deepest mystery of existence.",
     "radioWhisper": "We can explain everything except the one thing that matters."
   },
-  "musicSeed": { "seed": "hardproblem_010", "mode": "mystical", "tempoRange": [40, 55], "intensity": 0.6 },
+  "musicSeed": {
+    "seed": "hardproblem_010",
+    "mode": "wholeTone",
+    "tempoRange": [
+      76,
+      100
+    ],
+    "intensity": 0.8,
+    "scale": "locrian",
+    "style": "dark",
+    "timeSignature": "4/4"
+  },
   "duration": 180,
   "unlockCondition": "science_level9_complete"
 }

@@ -4,14 +4,103 @@
   "index": 13,
   "title": "Finnegans Wake",
   "subtitle": "Riverrun, past Eve and Adam's. The dreaming cycle.",
-  "themeTags": ["joyce", "finnegan", "dream", "language"],
+  "themeTags": [
+    "joyce",
+    "finnegan",
+    "dream",
+    "language"
+  ],
   "levelEnemies": {
-    "hce": { "visualId": "hce", "dialogue": { "spawn": ["Humphrey Chimpden!", "Here Comes Everybody!", "Sin in the park!", "Rumors spread!", "Earwicker fallen!"], "death": ["Humphrey... risen...", "Everybody... gone...", "Sin... forgiven...", "Truth... told...", "Earwicker... standing..."] } },
-    "alp": { "visualId": "alp", "dialogue": { "spawn": ["Anna Livia Plurabelle!", "River woman!", "The letter!", "Spreading the wash!", "Liffey flowing!"], "death": ["Anna... single...", "River... still...", "Letter... read...", "Wash... clean...", "Liffey... arrived..."] } },
-    "shem_shaun": { "visualId": "shem_shaun", "dialogue": { "spawn": ["Penman and Postman!", "Opposites twinned!", "Time and Space!", "Cain and Abel!", "Forever warring!"], "death": ["Penman... postman... one...", "Opposites... united...", "Time... space... merged...", "Brothers... reconciled...", "Peace..."] } }
+    "hce": {
+      "visualId": "hce",
+      "dialogue": {
+        "spawn": [
+          "Humphrey Chimpden!",
+          "Here Comes Everybody!",
+          "Sin in the park!",
+          "Rumors spread!",
+          "Earwicker fallen!"
+        ],
+        "death": [
+          "Humphrey... risen...",
+          "Everybody... gone...",
+          "Sin... forgiven...",
+          "Truth... told...",
+          "Earwicker... standing..."
+        ]
+      }
+    },
+    "alp": {
+      "visualId": "alp",
+      "dialogue": {
+        "spawn": [
+          "Anna Livia Plurabelle!",
+          "River woman!",
+          "The letter!",
+          "Spreading the wash!",
+          "Liffey flowing!"
+        ],
+        "death": [
+          "Anna... single...",
+          "River... still...",
+          "Letter... read...",
+          "Wash... clean...",
+          "Liffey... arrived..."
+        ]
+      }
+    },
+    "shem_shaun": {
+      "visualId": "shem_shaun",
+      "dialogue": {
+        "spawn": [
+          "Penman and Postman!",
+          "Opposites twinned!",
+          "Time and Space!",
+          "Cain and Abel!",
+          "Forever warring!"
+        ],
+        "death": [
+          "Penman... postman... one...",
+          "Opposites... united...",
+          "Time... space... merged...",
+          "Brothers... reconciled...",
+          "Peace..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "liffey", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "dreamscape", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "cycle", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "Riverrun, past Eve and Adam's, from swerve of shore to bend of bay. The monkey enters the cyclical dream where language dissolves." },
-  "musicSeed": { "seed": "finnegan_013", "mode": "chromatic", "tempoRange": [40, 55], "intensity": 0.4 },
-  "duration": 170, "unlockCondition": "lit_level12_complete"
+  "bgLayers": [
+    {
+      "svgId": "liffey",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "dreamscape",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "cycle",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "Riverrun, past Eve and Adam's, from swerve of shore to bend of bay. The monkey enters the cyclical dream where language dissolves."
+  },
+  "musicSeed": {
+    "seed": "finnegan_013",
+    "mode": "dorian",
+    "tempoRange": [
+      76,
+      96
+    ],
+    "intensity": 0.62,
+    "scale": "blues",
+    "style": "sacred",
+    "timeSignature": "3/4"
+  },
+  "duration": 170,
+  "unlockCondition": "lit_level12_complete"
 }

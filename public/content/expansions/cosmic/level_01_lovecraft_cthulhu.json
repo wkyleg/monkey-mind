@@ -4,53 +4,146 @@
   "index": 1,
   "title": "The Call of Cthulhu",
   "subtitle": "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.",
-  "themeTags": ["cthulhu", "lovecraft", "madness", "rlyeh"],
+  "themeTags": [
+    "cthulhu",
+    "lovecraft",
+    "madness",
+    "rlyeh"
+  ],
   "ruleCard": {
     "icon": "tentacle",
     "hint": "Sanity drains when you see the unknowable. Look away to preserve your mind.",
     "mechanic": "sanity_drain",
-    "params": { "drainRate": 5, "madnessThreshold": 0, "lookAwayRecovery": 3 }
+    "params": {
+      "drainRate": 5,
+      "madnessThreshold": 0,
+      "lookAwayRecovery": 3
+    }
   },
   "enemyDeck": [
-    { "archetype": "boss_chassis", "modifiers": ["mythic"], "weight": 2, "visualId": "enemy_star_spawn" },
-    { "archetype": "drifter", "modifiers": [], "weight": 4, "visualId": "enemy_cultist" },
-    { "archetype": "phaser", "modifiers": [], "weight": 4, "visualId": "enemy_deep_one" }
+    {
+      "archetype": "boss_chassis",
+      "modifiers": [
+        "mythic"
+      ],
+      "weight": 2,
+      "visualId": "enemy_star_spawn"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_cultist"
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_deep_one"
+    }
   ],
   "levelEnemies": {
     "deep_one": {
       "visualId": "deep_one",
       "dialogue": {
-        "spawn": ["Ia! Ia! Cthulhu fhtagn!", "The depths call!", "R'lyeh rises!", "Join the dreaming!", "The stars align!"],
-        "death": ["Back to... the deep...", "R'lyeh... sinks...", "The dream... continues...", "Fhtagn... forever...", "Ia... ia..."]
+        "spawn": [
+          "Ia! Ia! Cthulhu fhtagn!",
+          "The depths call!",
+          "R'lyeh rises!",
+          "Join the dreaming!",
+          "The stars align!"
+        ],
+        "death": [
+          "Back to... the deep...",
+          "R'lyeh... sinks...",
+          "The dream... continues...",
+          "Fhtagn... forever...",
+          "Ia... ia..."
+        ]
       }
     },
     "star_spawn": {
       "visualId": "star_spawn",
       "dialogue": {
-        "spawn": ["From beyond the stars!", "The Old Ones return!", "Cthulhu's children!", "Sanity is weakness!", "Behold the truth!"],
-        "death": ["Stars... fade...", "The spawn... falls...", "Old Ones... sleep...", "Truth... too bright...", "Beyond... beyond..."]
+        "spawn": [
+          "From beyond the stars!",
+          "The Old Ones return!",
+          "Cthulhu's children!",
+          "Sanity is weakness!",
+          "Behold the truth!"
+        ],
+        "death": [
+          "Stars... fade...",
+          "The spawn... falls...",
+          "Old Ones... sleep...",
+          "Truth... too bright...",
+          "Beyond... beyond..."
+        ]
       }
     },
     "cultist_priest": {
       "visualId": "cultist_priest",
       "dialogue": {
-        "spawn": ["Ph'nglui mglw'nafh!", "The ritual begins!", "Dead Cthulhu dreams!", "Praise the Sleeper!", "Wgah'nagl fhtagn!"],
-        "death": ["The ritual... failed...", "My god... sleeps on...", "R'lyeh... remains hidden...", "The call... unanswered...", "Ia... ia..."]
+        "spawn": [
+          "Ph'nglui mglw'nafh!",
+          "The ritual begins!",
+          "Dead Cthulhu dreams!",
+          "Praise the Sleeper!",
+          "Wgah'nagl fhtagn!"
+        ],
+        "death": [
+          "The ritual... failed...",
+          "My god... sleeps on...",
+          "R'lyeh... remains hidden...",
+          "The call... unanswered...",
+          "Ia... ia..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "non_euclidean", "params": { "geometryWarp": true, "confusionDuration": 5000 } }],
+  "hazards": [
+    {
+      "type": "non_euclidean",
+      "params": {
+        "geometryWarp": true,
+        "confusionDuration": 5000
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "rlyeh", "parallaxSpeed": 0.05, "opacity": 0.5 },
-    { "svgId": "tentacles", "parallaxSpeed": 0.1, "opacity": 0.4 },
-    { "svgId": "stars", "parallaxSpeed": 0.15, "opacity": 0.6 }
+    {
+      "svgId": "rlyeh",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "tentacles",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "stars",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Sanity drains when you see the unknowable. Look away to preserve your mind.",
     "codexSnippet": "In his house at R'lyeh, dead Cthulhu waits dreaming. The monkey glimpses the sleeping god and nearly loses its mind to the cosmic horror that lurks beneath the waves.",
     "radioWhisper": "That is not dead which can eternal lie."
   },
-  "musicSeed": { "seed": "cthulhu_001", "mode": "locrian", "tempoRange": [40, 55], "intensity": 0.4 },
+  "musicSeed": {
+    "seed": "cthulhu_001",
+    "mode": "locrian",
+    "tempoRange": [
+      50,
+      68
+    ],
+    "intensity": 0.3,
+    "scale": "diminished",
+    "style": "mysterious",
+    "timeSignature": "7/8"
+  },
   "duration": 130,
   "unlockCondition": "act8_complete"
 }

@@ -536,6 +536,74 @@ describe('EnemySystem', () => {
     });
   });
 
+  describe('Neuro-Reactive States', () => {
+    it('should spawn enemies with dormant=false by default', () => {
+      const enemy = system.spawn('test_enemy', 400, 100);
+      expect(enemy).not.toBeNull();
+      expect(enemy!.dormant).toBe(false);
+    });
+
+    it('should spawn enemies with neuroInvulnerable=false by default', () => {
+      const enemy = system.spawn('test_enemy', 400, 100);
+      expect(enemy).not.toBeNull();
+      expect(enemy!.neuroInvulnerable).toBe(false);
+    });
+
+    it('dormant enemies should only drift downward', () => {
+      const enemy = system.spawn('test_enemy', 400, 100);
+      expect(enemy).not.toBeNull();
+
+      enemy!.dormant = true;
+      const startY = enemy!.transform.y;
+      enemy!.update(1);
+
+      expect(enemy!.transform.y).toBeCloseTo(startY + 5, 0);
+    });
+
+    it('neuroInvulnerable enemies should not take damage', () => {
+      const data = createMockEnemyData({ hp: 5 });
+      const enemy = new Enemy(data, 100, 100);
+      enemy.neuroInvulnerable = true;
+
+      const killed = enemy.onDamage(10);
+
+      expect(killed).toBe(false);
+      expect(enemy.health?.current).toBe(5);
+    });
+
+    it('non-invulnerable enemies should take damage normally', () => {
+      const data = createMockEnemyData({ hp: 5 });
+      const enemy = new Enemy(data, 100, 100);
+      enemy.neuroInvulnerable = false;
+
+      enemy.onDamage(2);
+
+      expect(enemy.health?.current).toBe(3);
+    });
+
+    it('should toggle dormant state', () => {
+      const enemy = system.spawn('test_enemy', 400, 100);
+      expect(enemy).not.toBeNull();
+
+      enemy!.dormant = true;
+      expect(enemy!.dormant).toBe(true);
+
+      enemy!.dormant = false;
+      expect(enemy!.dormant).toBe(false);
+    });
+
+    it('should toggle neuroInvulnerable state', () => {
+      const enemy = system.spawn('test_enemy', 400, 100);
+      expect(enemy).not.toBeNull();
+
+      enemy!.neuroInvulnerable = true;
+      expect(enemy!.neuroInvulnerable).toBe(true);
+
+      enemy!.neuroInvulnerable = false;
+      expect(enemy!.neuroInvulnerable).toBe(false);
+    });
+  });
+
   describe('Different Behaviors', () => {
     it('should spawn zigzag enemy', () => {
       const enemy = system.spawn('zigzag_enemy', 400, 100);

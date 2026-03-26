@@ -4,53 +4,144 @@
   "index": 5,
   "title": "El Dorado",
   "subtitle": "The city of gold. Greed's final destination.",
-  "themeTags": ["el_dorado", "gold", "amazon", "greed"],
+  "themeTags": [
+    "el_dorado",
+    "gold",
+    "amazon",
+    "greed"
+  ],
   "ruleCard": {
     "icon": "gold",
     "hint": "Gold corrupts. Take only what you need or lose yourself.",
     "mechanic": "greed_corruption",
-    "params": { "goldTemptation": 0.4, "corruptionPenalty": 50, "restraintBonus": 80 }
+    "params": {
+      "goldTemptation": 0.4,
+      "corruptionPenalty": 50,
+      "restraintBonus": 80
+    }
   },
   "enemyDeck": [
-    { "archetype": "courier", "modifiers": [], "weight": 4, "visualId": "enemy_temple_scarab" },
-    { "archetype": "swarm", "modifiers": [], "weight": 3, "visualId": "enemy_jungle_wraith" },
-    { "archetype": "sniper", "modifiers": [], "weight": 3, "visualId": "enemy_stone_golem" }
+    {
+      "archetype": "courier",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_temple_scarab"
+    },
+    {
+      "archetype": "swarm",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_jungle_wraith"
+    },
+    {
+      "archetype": "sniper",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_stone_golem"
+    }
   ],
   "levelEnemies": {
     "golden_guardian": {
       "visualId": "golden_guardian",
       "dialogue": {
-        "spawn": ["The gold is sacred!", "Greed brought you here!", "El Dorado judges!", "Take nothing!", "The city consumes!"],
-        "death": ["Gold... tarnishes...", "Greed... fades...", "El Dorado... releases...", "Take... your fill...", "City... opens..."]
+        "spawn": [
+          "The gold is sacred!",
+          "Greed brought you here!",
+          "El Dorado judges!",
+          "Take nothing!",
+          "The city consumes!"
+        ],
+        "death": [
+          "Gold... tarnishes...",
+          "Greed... fades...",
+          "El Dorado... releases...",
+          "Take... your fill...",
+          "City... opens..."
+        ]
       }
     },
     "conquistador_ghost": {
       "visualId": "conquistador_ghost",
       "dialogue": {
-        "spawn": ["I sought the gold!", "It consumed me!", "Join my search!", "The treasure... so close!", "Centuries of seeking!"],
-        "death": ["Search... ends...", "Gold... meaningless...", "Release... at last...", "Treasure... found...", "Peace... finally..."]
+        "spawn": [
+          "I sought the gold!",
+          "It consumed me!",
+          "Join my search!",
+          "The treasure... so close!",
+          "Centuries of seeking!"
+        ],
+        "death": [
+          "Search... ends...",
+          "Gold... meaningless...",
+          "Release... at last...",
+          "Treasure... found...",
+          "Peace... finally..."
+        ]
       }
     },
     "jungle_spirit": {
       "visualId": "jungle_spirit",
       "dialogue": {
-        "spawn": ["The Amazon protects!", "Green walls close!", "Nature reclaims!", "The jungle remembers!", "Outsiders unwelcome!"],
-        "death": ["Amazon... parts...", "Walls... open...", "Nature... allows...", "Jungle... forgets...", "Welcome... granted..."]
+        "spawn": [
+          "The Amazon protects!",
+          "Green walls close!",
+          "Nature reclaims!",
+          "The jungle remembers!",
+          "Outsiders unwelcome!"
+        ],
+        "death": [
+          "Amazon... parts...",
+          "Walls... open...",
+          "Nature... allows...",
+          "Jungle... forgets...",
+          "Welcome... granted..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "gold_fever", "params": { "temptationPulse": 8000, "resistanceBonus": 50 } }],
+  "hazards": [
+    {
+      "type": "gold_fever",
+      "params": {
+        "temptationPulse": 8000,
+        "resistanceBonus": 50
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "jungle", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "golden_city", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "treasure", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "jungle",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "golden_city",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "treasure",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Gold corrupts. Take only what you need or lose yourself.",
     "codexSnippet": "Conquistadors died seeking El Dorado, the city of gold in the Amazon. The monkey finds it and learns that the greatest treasures are those we choose not to take.",
     "radioWhisper": "The satellite images show... something. But every expedition vanishes."
   },
-  "musicSeed": { "seed": "el_dorado_005", "mode": "mixolydian", "tempoRange": [60, 75], "intensity": 0.6 },
+  "musicSeed": {
+    "seed": "el_dorado_005",
+    "mode": "pentatonic",
+    "tempoRange": [
+      74,
+      95
+    ],
+    "intensity": 0.8,
+    "scale": "dorian",
+    "style": "mysterious",
+    "timeSignature": "6/8"
+  },
   "duration": 150,
   "unlockCondition": "lost_worlds_level4_complete"
 }

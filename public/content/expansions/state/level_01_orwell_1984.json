@@ -4,53 +4,145 @@
   "index": 1,
   "title": "1984",
   "subtitle": "Big Brother is watching. War is peace.",
-  "themeTags": ["orwell", "surveillance", "totalitarian", "doublethink"],
+  "themeTags": [
+    "orwell",
+    "surveillance",
+    "totalitarian",
+    "doublethink"
+  ],
   "ruleCard": {
     "icon": "eye",
     "hint": "Big Brother watches. Your actions are monitored and judged.",
     "mechanic": "surveillance",
-    "params": { "watchPenalty": 20, "conformityBonus": 40 }
+    "params": {
+      "watchPenalty": 20,
+      "conformityBonus": 40
+    }
   },
   "enemyDeck": [
-    { "archetype": "sniper", "modifiers": ["bureaucratic"], "weight": 4, "visualId": "enemy_surveillance" },
-    { "archetype": "chaser", "modifiers": [], "weight": 3, "visualId": "enemy_thought_police" },
-    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_inner_party" }
+    {
+      "archetype": "sniper",
+      "modifiers": [
+        "bureaucratic"
+      ],
+      "weight": 4,
+      "visualId": "enemy_surveillance"
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_thought_police"
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_inner_party"
+    }
   ],
   "levelEnemies": {
     "big_brother": {
       "visualId": "big_brother",
       "dialogue": {
-        "spawn": ["Big Brother is watching!", "War is peace!", "Freedom is slavery!", "Ignorance is strength!", "2 + 2 = 5!"],
-        "death": ["Watching... ends...", "Peace... is peace...", "Freedom... returns...", "Strength... in truth...", "2 + 2... = 4..."]
+        "spawn": [
+          "Big Brother is watching!",
+          "War is peace!",
+          "Freedom is slavery!",
+          "Ignorance is strength!",
+          "2 + 2 = 5!"
+        ],
+        "death": [
+          "Watching... ends...",
+          "Peace... is peace...",
+          "Freedom... returns...",
+          "Strength... in truth...",
+          "2 + 2... = 4..."
+        ]
       }
     },
     "thought_police": {
       "visualId": "thought_police",
       "dialogue": {
-        "spawn": ["Thoughtcrime detected!", "Room 101 awaits!", "Your mind is not your own!", "Doublethink required!", "Conform or suffer!"],
-        "death": ["Thought... free...", "Room... empty...", "Mind... liberated...", "Single... truth...", "Nonconformity... allowed..."]
+        "spawn": [
+          "Thoughtcrime detected!",
+          "Room 101 awaits!",
+          "Your mind is not your own!",
+          "Doublethink required!",
+          "Conform or suffer!"
+        ],
+        "death": [
+          "Thought... free...",
+          "Room... empty...",
+          "Mind... liberated...",
+          "Single... truth...",
+          "Nonconformity... allowed..."
+        ]
       }
     },
     "telescreen": {
       "visualId": "telescreen",
       "dialogue": {
-        "spawn": ["Always watching!", "Cannot be turned off!", "Every word recorded!", "No privacy exists!", "Big Brother sees all!"],
-        "death": ["Screen... dark...", "Watching... ceases...", "Words... private...", "Privacy... restored...", "Blind... at last..."]
+        "spawn": [
+          "Always watching!",
+          "Cannot be turned off!",
+          "Every word recorded!",
+          "No privacy exists!",
+          "Big Brother sees all!"
+        ],
+        "death": [
+          "Screen... dark...",
+          "Watching... ceases...",
+          "Words... private...",
+          "Privacy... restored...",
+          "Blind... at last..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "surveillance_zone", "params": { "visibilityPenalty": true, "conformityRequired": 0.7 } }],
+  "hazards": [
+    {
+      "type": "surveillance_zone",
+      "params": {
+        "visibilityPenalty": true,
+        "conformityRequired": 0.7
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "ministry", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "screens", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "posters", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "ministry",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "screens",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "posters",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Big Brother watches. Your actions are monitored and judged.",
     "codexSnippet": "In Orwell's Oceania, the Party controls not just actions but thoughts. The monkey enters the world of doublethink and discovers that freedom begins in the mind.",
     "radioWhisper": "BIG BROTHER IS WATCHING YOU"
   },
-  "musicSeed": { "seed": "1984_001", "mode": "locrian", "tempoRange": [50, 65], "intensity": 0.5 },
+  "musicSeed": {
+    "seed": "1984_001",
+    "mode": "phrygian",
+    "tempoRange": [
+      85,
+      106
+    ],
+    "intensity": 0.3,
+    "scale": "phrygianDominant",
+    "style": "aggressive",
+    "timeSignature": "5/4"
+  },
   "duration": 130,
   "unlockCondition": "act8_complete"
 }

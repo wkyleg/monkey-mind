@@ -4,14 +4,103 @@
   "index": 8,
   "title": "Kafka's The Castle",
   "subtitle": "K. arrived late at night. The Castle was invisible.",
-  "themeTags": ["kafka", "castle", "authority", "inaccessibility"],
+  "themeTags": [
+    "kafka",
+    "castle",
+    "authority",
+    "inaccessibility"
+  ],
   "levelEnemies": {
-    "k_surveyor": { "visualId": "k_surveyor", "dialogue": { "spawn": ["I am the land surveyor!", "The Castle summoned me!", "Where is my appointment?", "Who is Klamm?", "I must reach the Castle!"], "death": ["Surveying...", "Summoned... confirmed...", "Appointed...", "Klamm... met...", "Castle... reached..."] } },
-    "castle_official": { "visualId": "castle_official", "dialogue": { "spawn": ["Your papers are not in order!", "The Count does not receive!", "Wait here indefinitely!", "The bureaucracy is eternal!", "Access denied!"], "death": ["Papers... in order...", "Count... receiving...", "Waiting... over...", "Bureaucracy... ended...", "Access... granted..."] } },
-    "barnabas_messenger": { "visualId": "barnabas_messenger", "dialogue": { "spawn": ["A message from the Castle!", "But what does it mean?", "The message is old!", "Klamm's handwriting!", "Interpret as you will!"], "death": ["Message... clear...", "Meaning... known...", "Fresh...", "Klamm... speaks...", "Interpreted..."] } }
+    "k_surveyor": {
+      "visualId": "k_surveyor",
+      "dialogue": {
+        "spawn": [
+          "I am the land surveyor!",
+          "The Castle summoned me!",
+          "Where is my appointment?",
+          "Who is Klamm?",
+          "I must reach the Castle!"
+        ],
+        "death": [
+          "Surveying...",
+          "Summoned... confirmed...",
+          "Appointed...",
+          "Klamm... met...",
+          "Castle... reached..."
+        ]
+      }
+    },
+    "castle_official": {
+      "visualId": "castle_official",
+      "dialogue": {
+        "spawn": [
+          "Your papers are not in order!",
+          "The Count does not receive!",
+          "Wait here indefinitely!",
+          "The bureaucracy is eternal!",
+          "Access denied!"
+        ],
+        "death": [
+          "Papers... in order...",
+          "Count... receiving...",
+          "Waiting... over...",
+          "Bureaucracy... ended...",
+          "Access... granted..."
+        ]
+      }
+    },
+    "barnabas_messenger": {
+      "visualId": "barnabas_messenger",
+      "dialogue": {
+        "spawn": [
+          "A message from the Castle!",
+          "But what does it mean?",
+          "The message is old!",
+          "Klamm's handwriting!",
+          "Interpret as you will!"
+        ],
+        "death": [
+          "Message... clear...",
+          "Meaning... known...",
+          "Fresh...",
+          "Klamm... speaks...",
+          "Interpreted..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "village", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "snow", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "castle_distant", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "It was late evening when K. arrived. The village lay under deep snow. The monkey approaches the Castle that can never be reached." },
-  "musicSeed": { "seed": "castle_008", "mode": "aeolian", "tempoRange": [45, 60], "intensity": 0.5 },
-  "duration": 140, "unlockCondition": "lit_level7_complete"
+  "bgLayers": [
+    {
+      "svgId": "village",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "snow",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "castle_distant",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "It was late evening when K. arrived. The village lay under deep snow. The monkey approaches the Castle that can never be reached."
+  },
+  "musicSeed": {
+    "seed": "castle_008",
+    "mode": "dorian",
+    "tempoRange": [
+      73,
+      92
+    ],
+    "intensity": 0.48,
+    "scale": "blues",
+    "style": "tension",
+    "timeSignature": "6/8"
+  },
+  "duration": 140,
+  "unlockCondition": "lit_level7_complete"
 }

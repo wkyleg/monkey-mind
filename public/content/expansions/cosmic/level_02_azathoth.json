@@ -4,53 +4,145 @@
   "index": 2,
   "title": "Azathoth",
   "subtitle": "The Blind Idiot God at the center of chaos.",
-  "themeTags": ["azathoth", "chaos", "center", "blind"],
+  "themeTags": [
+    "azathoth",
+    "chaos",
+    "center",
+    "blind"
+  ],
   "ruleCard": {
     "icon": "chaos",
     "hint": "Reality is random near Azathoth. All rules become probabilistic.",
     "mechanic": "chaos_rules",
-    "params": { "ruleVariance": 0.5, "adaptationBonus": 40 }
+    "params": {
+      "ruleVariance": 0.5,
+      "adaptationBonus": 40
+    }
   },
   "enemyDeck": [
-    { "archetype": "splitter", "modifiers": ["entropy"], "weight": 4, "visualId": "enemy_eldritch_eye" },
-    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_deep_one" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_eldritch_eye" }
+    {
+      "archetype": "splitter",
+      "modifiers": [
+        "entropy"
+      ],
+      "weight": 4,
+      "visualId": "enemy_eldritch_eye"
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_deep_one"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_eldritch_eye"
+    }
   ],
   "levelEnemies": {
     "chaos_flute": {
       "visualId": "chaos_flute",
       "dialogue": {
-        "spawn": ["The music plays!", "Dance to entropy!", "Blind god's orchestra!", "Chaos is harmony!", "The flutes summon!"],
-        "death": ["Music... stops...", "The dance... ends...", "Silence... at last...", "Entropy... reversed...", "No more... flutes..."]
+        "spawn": [
+          "The music plays!",
+          "Dance to entropy!",
+          "Blind god's orchestra!",
+          "Chaos is harmony!",
+          "The flutes summon!"
+        ],
+        "death": [
+          "Music... stops...",
+          "The dance... ends...",
+          "Silence... at last...",
+          "Entropy... reversed...",
+          "No more... flutes..."
+        ]
       }
     },
     "nuclear_chaos": {
       "visualId": "nuclear_chaos",
       "dialogue": {
-        "spawn": ["Center of infinity!", "Reality unravels!", "The nucleus pulses!", "All returns to chaos!", "Order is illusion!"],
-        "death": ["Nucleus... collapses...", "Order... returns...", "Reality... stabilizes...", "The center... holds...", "Chaos... contained..."]
+        "spawn": [
+          "Center of infinity!",
+          "Reality unravels!",
+          "The nucleus pulses!",
+          "All returns to chaos!",
+          "Order is illusion!"
+        ],
+        "death": [
+          "Nucleus... collapses...",
+          "Order... returns...",
+          "Reality... stabilizes...",
+          "The center... holds...",
+          "Chaos... contained..."
+        ]
       }
     },
     "daemon_sultan": {
       "visualId": "daemon_sultan",
       "dialogue": {
-        "spawn": ["The Sultan dreams!", "All bow to chaos!", "Infinite throne!", "Madness is truth!", "The court convenes!"],
-        "death": ["Sultan... wakes...", "The throne... empty...", "Dream... fades...", "Truth... is silence...", "Court... dismissed..."]
+        "spawn": [
+          "The Sultan dreams!",
+          "All bow to chaos!",
+          "Infinite throne!",
+          "Madness is truth!",
+          "The court convenes!"
+        ],
+        "death": [
+          "Sultan... wakes...",
+          "The throne... empty...",
+          "Dream... fades...",
+          "Truth... is silence...",
+          "Court... dismissed..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "chaos_bubble", "params": { "randomEffect": true, "interval": 5000 } }],
+  "hazards": [
+    {
+      "type": "chaos_bubble",
+      "params": {
+        "randomEffect": true,
+        "interval": 5000
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "void_center", "parallaxSpeed": 0.0, "opacity": 0.5 },
-    { "svgId": "chaos_spiral", "parallaxSpeed": 0.05, "opacity": 0.4 },
-    { "svgId": "flute_players", "parallaxSpeed": 0.1, "opacity": 0.6 }
+    {
+      "svgId": "void_center",
+      "parallaxSpeed": 0,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "chaos_spiral",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "flute_players",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Reality is random near Azathoth. All rules become probabilistic.",
     "codexSnippet": "Azathoth dreams at the center of infinity, surrounded by idiot flute players. The monkey approaches the source of all chaos and finds that madness has its own logic.",
     "radioWhisper": "The flutes play. The drums beat. The universe dances."
   },
-  "musicSeed": { "seed": "azathoth_002", "mode": "chromatic", "tempoRange": [30, 90], "intensity": 0.6 },
+  "musicSeed": {
+    "seed": "azathoth_002",
+    "mode": "locrian",
+    "tempoRange": [
+      53,
+      72
+    ],
+    "intensity": 0.47,
+    "scale": "wholeTone",
+    "style": "tension",
+    "timeSignature": "5/4"
+  },
   "duration": 120,
   "unlockCondition": "cosmic_level1_complete"
 }

@@ -73,7 +73,7 @@ const ACHIEVEMENTS: AchievementData[] = [
   // Boss defeats
   {
     id: 'mk_ultra_survivor',
-    name: 'MK-Ultra Survivor',
+    name: 'Mind Control Survivor',
     description: 'Defeat the Cortex Auditor',
     icon: '🧠',
     condition: { type: 'boss', boss: 'cortex_auditor', target: 1 },

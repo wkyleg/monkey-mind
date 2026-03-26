@@ -4,6 +4,7 @@
  * Industrial/scientific celebration aesthetic
  */
 
+import { contentLoader } from '../content/loader';
 import { events } from '../core/events';
 import { storage } from '../core/storage';
 import type { PlayerIntent } from '../engine/input';
@@ -360,10 +361,18 @@ export class VictoryScene extends Scene {
     renderer.save();
     renderer.context.translate(width / 2 + glitch, height * 0.4);
 
-    renderer.glowText('SYSTEM FREED', 0, 0, '#00ffaa', 56, 'center', 30);
+    renderer.glowText(contentLoader.getString('victory_title'), 0, 0, '#00ffaa', 56, 'center', 30);
     renderer.restore();
 
-    renderer.glowText('[ NEURAL LIBERATION COMPLETE ]', width / 2, height * 0.55, '#00aaff', 20, 'center', 10);
+    renderer.glowText(
+      contentLoader.getString('victory_subtitle'),
+      width / 2,
+      height * 0.55,
+      '#00aaff',
+      20,
+      'center',
+      10,
+    );
   }
 
   private renderTerminalBackdrop(
@@ -460,13 +469,13 @@ export class VictoryScene extends Scene {
   private renderStats(renderer: Renderer, width: number, height: number): void {
     this.renderTerminalBackdrop(renderer, width, height, 0.15, 0.75);
 
-    renderer.glowText('[ MISSION DEBRIEF ]', width / 2, height * 0.2, '#00ffaa', 28, 'center', 15);
+    renderer.glowText(contentLoader.getString('victory_debrief'), width / 2, height * 0.2, '#00ffaa', 28, 'center', 15);
 
     const stats = [
-      { label: 'FINAL_SCORE:', value: this.totalScore.toLocaleString() },
-      { label: 'SECTORS_CLEARED:', value: '5/5' },
-      { label: 'NEURAL_BARRIERS:', value: 'DISSOLVED' },
-      { label: 'MIND_STATUS:', value: 'LIBERATED' },
+      { label: contentLoader.getString('victory_final_score'), value: this.totalScore.toLocaleString() },
+      { label: contentLoader.getString('victory_sectors_cleared'), value: '5/5' },
+      { label: contentLoader.getString('victory_neural_barriers'), value: 'DISSOLVED' },
+      { label: contentLoader.getString('victory_mind_status'), value: 'LIBERATED' },
     ];
 
     const startY = height * 0.35;
@@ -490,20 +499,28 @@ export class VictoryScene extends Scene {
   private renderCredits(renderer: Renderer, width: number, height: number): void {
     this.renderTerminalBackdrop(renderer, width, height, 0.2, 0.7);
 
-    renderer.glowText('MONKEY MIND', width / 2, height * 0.25, '#00ffaa', 44, 'center', 25);
-
-    renderer.text('// INNER INVADERS //', width / 2, height * 0.35, '#00aaaa', 20, 'center');
+    renderer.glowText(
+      contentLoader.getString('victory_credits_title'),
+      width / 2,
+      height * 0.25,
+      '#00ffaa',
+      44,
+      'center',
+      25,
+    );
 
     renderer.text(
-      'A journey through the architecture of consciousness',
+      contentLoader.getString('victory_credits_tagline'),
       width / 2,
-      height * 0.5,
-      '#006688',
-      12,
+      height * 0.35,
+      '#00aaaa',
+      20,
       'center',
     );
 
-    renderer.text('Thank you for playing', width / 2, height * 0.6, '#00aaaa', 14, 'center');
+    renderer.text(contentLoader.getString('victory_credits_blurb'), width / 2, height * 0.5, '#006688', 12, 'center');
+
+    renderer.text(contentLoader.getString('victory_thanks'), width / 2, height * 0.6, '#00aaaa', 14, 'center');
 
     // Blinking continue prompt
     if (this.phaseTime > 3 && Math.floor(this.time * 2) % 2 === 0) {

@@ -4,17 +4,38 @@
   "index": 2,
   "title": "Wrong Guy Corridor",
   "subtitle": "Innocence triggers the alarm.",
-  "themeTags": ["paranoia", "chase", "wrongful"],
+  "themeTags": [
+    "paranoia",
+    "chase",
+    "wrongful"
+  ],
   "ruleCard": {
     "icon": "fire_spawn",
     "hint": "Your shots attract attention. Fire spawns pursuit.",
     "mechanic": "mirror_fire",
-    "params": { "spawnOnFire": true, "spawnDelay": 500 }
+    "params": {
+      "spawnOnFire": true,
+      "spawnDelay": 500
+    }
   },
   "enemyDeck": [
-    { "archetype": "chaser", "modifiers": [], "weight": 6 },
-    { "archetype": "drifter", "modifiers": [], "weight": 2 },
-    { "archetype": "swarm", "modifiers": ["recursive"], "weight": 2 }
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 6
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 2
+    },
+    {
+      "archetype": "swarm",
+      "modifiers": [
+        "recursive"
+      ],
+      "weight": 2
+    }
   ],
   "levelEnemies": {
     "pursuer": {
@@ -76,12 +97,34 @@
     }
   },
   "hazards": [
-    { "type": "alarm_zone", "lanes": [1, 3, 5], "timing": 5000, "damage": 0, "visual": "alarm_flash" }
+    {
+      "type": "alarm_zone",
+      "lanes": [
+        1,
+        3,
+        5
+      ],
+      "timing": 5000,
+      "damage": 0,
+      "visual": "alarm_flash"
+    }
   ],
   "bgLayers": [
-    { "svgId": "corridor", "parallaxSpeed": 0.2, "opacity": 0.4 },
-    { "svgId": "doors", "parallaxSpeed": 0.4, "opacity": 0.6 },
-    { "svgId": "alarm", "parallaxSpeed": 0.6, "opacity": 0.3 }
+    {
+      "svgId": "corridor",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "doors",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.6
+    },
+    {
+      "svgId": "alarm",
+      "parallaxSpeed": 0.6,
+      "opacity": 0.3
+    }
   ],
   "copyLayers": {
     "ruleCard": "Innocence triggers the alarm.",
@@ -90,9 +133,15 @@
   },
   "musicSeed": {
     "seed": "wrong_guy_002",
-    "mode": "locrian",
-    "tempoRange": [115, 130],
-    "intensity": 0.65
+    "mode": "phrygian",
+    "tempoRange": [
+      85,
+      100
+    ],
+    "intensity": 0.42,
+    "scale": "harmonicMinor",
+    "style": "dark",
+    "timeSignature": "4/4"
   },
   "duration": 100,
   "unlockCondition": "act1_level1_complete"

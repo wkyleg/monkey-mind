@@ -4,17 +4,38 @@
   "index": 4,
   "title": "Orphic Mystery",
   "subtitle": "Don't look back. The dead follow the gaze.",
-  "themeTags": ["orpheus", "underworld", "gaze"],
+  "themeTags": [
+    "orpheus",
+    "underworld",
+    "gaze"
+  ],
   "ruleCard": {
     "icon": "eye_crossed",
     "hint": "Unseen enemies are vulnerable. Looking back resurrects them.",
     "mechanic": "dont_look_back",
-    "params": { "resurrectOnLook": true, "lookBackPenalty": 5 }
+    "params": {
+      "resurrectOnLook": true,
+      "lookBackPenalty": 5
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": ["unseen"], "weight": 5 },
-    { "archetype": "phaser", "modifiers": [], "weight": 3 },
-    { "archetype": "mimic", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "unseen"
+      ],
+      "weight": 5
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "mimic",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "levelEnemies": {
     "wandering_shade": {
@@ -76,12 +97,32 @@
     }
   },
   "hazards": [
-    { "type": "underworld_pull", "lanes": [3], "timing": 15000, "damage": 1, "visual": "shadow_hands" }
+    {
+      "type": "underworld_pull",
+      "lanes": [
+        3
+      ],
+      "timing": 15000,
+      "damage": 1,
+      "visual": "shadow_hands"
+    }
   ],
   "bgLayers": [
-    { "svgId": "underworld", "parallaxSpeed": 0.05, "opacity": 0.5 },
-    { "svgId": "shades", "parallaxSpeed": 0.2, "opacity": 0.4 },
-    { "svgId": "eurydice", "parallaxSpeed": 0.4, "opacity": 0.6 }
+    {
+      "svgId": "underworld",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "shades",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "eurydice",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Don't look back. The dead follow the gaze.",
@@ -90,9 +131,15 @@
   },
   "musicSeed": {
     "seed": "orphic_004",
-    "mode": "locrian",
-    "tempoRange": [70, 85],
-    "intensity": 0.55
+    "mode": "mixolydian",
+    "tempoRange": [
+      115,
+      128
+    ],
+    "intensity": 0.68,
+    "scale": "aeolian",
+    "style": "mysterious",
+    "timeSignature": "5/4"
   },
   "duration": 130,
   "unlockCondition": "act3_level3_complete"

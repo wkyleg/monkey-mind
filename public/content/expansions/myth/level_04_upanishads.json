@@ -4,14 +4,104 @@
   "index": 4,
   "title": "The Upanishads",
   "subtitle": "Tat tvam asi. You are That.",
-  "themeTags": ["upanishads", "atman", "brahman", "unity"],
+  "themeTags": [
+    "upanishads",
+    "atman",
+    "brahman",
+    "unity"
+  ],
   "levelEnemies": {
-    "maya_illusion": { "visualId": "maya_illusion", "dialogue": { "spawn": ["All is illusion!", "The veil of Maya!", "See through me!", "Nothing is as it seems!", "Brahman hides!"], "death": ["Illusion... lifted...", "Veil... parted...", "Seeing... clearly...", "Reality... revealed...", "Brahman... found..."] } },
-    "ego_demon": { "visualId": "ego_demon", "dialogue": { "spawn": ["I am separate!", "The ego persists!", "You are not Brahman!", "Division rules!", "Atman is individual!"], "death": ["Union...", "Ego... dissolved...", "Brahman... is all...", "Unity...", "Atman... is Brahman..."] } },
-    "samsara_wheel": { "visualId": "samsara_wheel", "dialogue": { "spawn": ["The wheel turns!", "Rebirth continues!", "Karma binds!", "No escape!", "Cycle eternal!"], "death": ["Wheel... stops...", "Liberation...", "Karma... burnt...", "Moksha...", "Cycle... broken..."] } }
+    "maya_illusion": {
+      "visualId": "maya_illusion",
+      "dialogue": {
+        "spawn": [
+          "All is illusion!",
+          "The veil of Maya!",
+          "See through me!",
+          "Nothing is as it seems!",
+          "Brahman hides!"
+        ],
+        "death": [
+          "Illusion... lifted...",
+          "Veil... parted...",
+          "Seeing... clearly...",
+          "Reality... revealed...",
+          "Brahman... found..."
+        ]
+      }
+    },
+    "ego_demon": {
+      "visualId": "ego_demon",
+      "dialogue": {
+        "spawn": [
+          "I am separate!",
+          "The ego persists!",
+          "You are not Brahman!",
+          "Division rules!",
+          "Atman is individual!"
+        ],
+        "death": [
+          "Union...",
+          "Ego... dissolved...",
+          "Brahman... is all...",
+          "Unity...",
+          "Atman... is Brahman..."
+        ]
+      }
+    },
+    "samsara_wheel": {
+      "visualId": "samsara_wheel",
+      "dialogue": {
+        "spawn": [
+          "The wheel turns!",
+          "Rebirth continues!",
+          "Karma binds!",
+          "No escape!",
+          "Cycle eternal!"
+        ],
+        "death": [
+          "Wheel... stops...",
+          "Liberation...",
+          "Karma... burnt...",
+          "Moksha...",
+          "Cycle... broken..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "ashram", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "forest", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "om_symbol", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "Tat tvam asi - You are That. The monkey learns that the seeker and the sought are one." },
-  "musicSeed": { "seed": "upanishads_004", "mode": "indian_raga", "tempoRange": [40, 55], "intensity": 0.4 },
-  "duration": 140, "unlockCondition": "myth_level3_complete"
+  "bgLayers": [
+    {
+      "svgId": "ashram",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "forest",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "om_symbol",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "Tat tvam asi - You are That. The monkey learns that the seeker and the sought are one."
+  },
+  "musicSeed": {
+    "seed": "upanishads_004",
+    "mode": "bhairav",
+    "tempoRange": [
+      62,
+      81
+    ],
+    "intensity": 0.41,
+    "scale": "phrygian",
+    "style": "meditative",
+    "timeSignature": "7/8",
+    "culturalStyle": "indian"
+  },
+  "duration": 140,
+  "unlockCondition": "myth_level3_complete"
 }

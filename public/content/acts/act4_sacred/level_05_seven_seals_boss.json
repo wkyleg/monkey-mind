@@ -4,27 +4,81 @@
   "index": 5,
   "title": "Seven Seals",
   "subtitle": "Each seal changes the rules. Adapt or perish.",
-  "themeTags": ["boss", "apocalypse", "seals", "transformation"],
+  "themeTags": [
+    "boss",
+    "apocalypse",
+    "seals",
+    "transformation"
+  ],
   "ruleCard": {
     "icon": "seal",
     "hint": "Seven seals, seven rules. Each broken seal transforms the battlefield.",
     "mechanic": "sequence_kill",
-    "params": { "seals": 7, "ruleChange": true }
+    "params": {
+      "seals": 7,
+      "ruleChange": true
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": [], "weight": 2 },
-    { "archetype": "chaser", "modifiers": [], "weight": 2 },
-    { "archetype": "swarm", "modifiers": [], "weight": 2 },
-    { "archetype": "sniper", "modifiers": [], "weight": 2 },
-    { "archetype": "splitter", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 2
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 2
+    },
+    {
+      "archetype": "swarm",
+      "modifiers": [],
+      "weight": 2
+    },
+    {
+      "archetype": "sniper",
+      "modifiers": [],
+      "weight": 2
+    },
+    {
+      "archetype": "splitter",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "hazards": [
-    { "type": "seal_break", "lanes": [1, 2, 3, 4, 5], "timing": 20000, "damage": 0, "visual": "apocalypse_light" }
+    {
+      "type": "seal_break",
+      "lanes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "timing": 20000,
+      "damage": 0,
+      "visual": "apocalypse_light"
+    }
   ],
   "bgLayers": [
-    { "svgId": "act4_bg_scroll", "parallaxSpeed": 0.05, "opacity": 0.4 },
-    { "svgId": "act4_bg_seals", "parallaxSpeed": 0.2, "opacity": 0.6, "animation": "break" },
-    { "svgId": "act4_bg_revelation", "parallaxSpeed": 0.4, "opacity": 0.5, "animation": "pulse" }
+    {
+      "svgId": "act4_bg_scroll",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "act4_bg_seals",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6,
+      "animation": "break"
+    },
+    {
+      "svgId": "act4_bg_revelation",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.5,
+      "animation": "pulse"
+    }
   ],
   "boss": "seven_seals",
   "copyLayers": {
@@ -34,9 +88,15 @@
   },
   "musicSeed": {
     "seed": "seven_seals_boss_005",
-    "mode": "chromatic",
-    "tempoRange": [90, 130],
-    "intensity": 0.9
+    "mode": "harmonicMinor",
+    "tempoRange": [
+      130,
+      150
+    ],
+    "intensity": 0.85,
+    "scale": "diminished",
+    "style": "aggressive",
+    "timeSignature": "7/8"
   },
   "duration": 240,
   "unlockCondition": "act4_level4_complete"

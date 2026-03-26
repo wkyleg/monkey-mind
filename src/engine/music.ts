@@ -63,6 +63,10 @@ export const SCALES: Record<string, number[]> = {
   nikriz: [0, 1, 4, 6, 7, 9, 10],
   saba: [0, 1, 3, 4, 7, 8, 10],
 
+  // Hungarian / Romani
+  hungarianMinor: [0, 2, 3, 6, 7, 8, 11],
+  hungarianMajor: [0, 3, 4, 6, 7, 9, 10],
+
   // Experimental / Atonal
   chromatic: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
   tritone: [0, 6],
@@ -103,6 +107,24 @@ export const CHORD_PROGRESSIONS_BY_STYLE: Record<string, number[][]> = {
     [1, 1.125, 1.33, 1.5], // i - bII - bVII - v
     [1, Math.SQRT2, 1.125, 1.33], // Tritone chaos
     [1, 1.5, 1.125, Math.SQRT2], // Dissonant
+  ],
+  // Dreamy / ethereal
+  dreamy: [
+    [1, 1.25, 1.5, 1.2], // I - IV - V - iii
+    [1, 1.33, 1.25, 1.5], // I - bVII - IV - V
+    [1, 1.2, 1.33, 1.25], // I - iii - bVII - IV
+  ],
+  // Tension / suspense
+  tension: [
+    [1, 1.125, 1.0595, Math.SQRT2], // Semitone creep + tritone
+    [1, Math.SQRT2, 1.125, 1.0595],
+    [1, 1.0595, 1.125, Math.SQRT2],
+  ],
+  // Meditative / droning
+  meditative: [
+    [1, 1, 1.5, 1], // Drone with occasional fifth
+    [1, 1.25, 1, 1.5], // Root-centered with gentle movement
+    [1, 1.33, 1, 1.25],
   ],
 };
 
@@ -276,7 +298,7 @@ const SECTOR_PARAMS: Record<SectorMood, MusicParams> = {
     distortionAmount: 0.4,
   },
   boss: {
-    tempo: 140,
+    tempo: 165,
     bassFreq: 35,
     padNote: 146.83,
     droneNote: 36.71,
@@ -288,7 +310,7 @@ const SECTOR_PARAMS: Record<SectorMood, MusicParams> = {
     distortionAmount: 0.6,
   },
   menu: {
-    tempo: 70,
+    tempo: 58,
     bassFreq: 30,
     padNote: 110,
     droneNote: 27.5,
@@ -300,7 +322,7 @@ const SECTOR_PARAMS: Record<SectorMood, MusicParams> = {
     distortionAmount: 0.05,
   },
   intro: {
-    tempo: 60,
+    tempo: 55,
     bassFreq: 25,
     padNote: 82.4,
     droneNote: 41.2,
@@ -356,7 +378,7 @@ const SECTOR_PARAMS: Record<SectorMood, MusicParams> = {
 
   // Act 4: Sacred - Spiritual, reverent, golden
   sacred: {
-    tempo: 75,
+    tempo: 68,
     bassFreq: 29.14, // Bb0
     padNote: 233.08, // Bb3 - sacred, church-like
     droneNote: 58.27, // Bb1
@@ -398,7 +420,7 @@ const SECTOR_PARAMS: Record<SectorMood, MusicParams> = {
 
   // Act 7: Machine - Industrial, mechanical, grinding
   machine: {
-    tempo: 130,
+    tempo: 145,
     bassFreq: 46.25, // F#1
     padNote: 185, // F#3 - metallic, industrial
     droneNote: 46.25,
@@ -444,13 +466,147 @@ const MELODY_PATTERNS = [
   [0, 12, 10, 7],
 ];
 
+/** Map SectorMood to melody category for MELODY_PATTERNS_EXTENDED */
+const MOOD_TO_MELODY_CATEGORY: Record<SectorMood, (keyof typeof MELODY_PATTERNS_EXTENDED)[]> = {
+  neural: ['modal', 'ascending'],
+  reef: ['pentatonic', 'arpeggio'],
+  pantheon: ['modal', 'ascending'],
+  projects: ['chromatic', 'descending'],
+  bloom: ['ascending', 'arpeggio'],
+  boss: ['chromatic', 'descending'],
+  menu: ['pentatonic', 'modal'],
+  intro: ['modal', 'pentatonic'],
+  escape: ['chromatic', 'ascending'],
+  ocean: ['pentatonic', 'arpeggio'],
+  heroic: ['ascending', 'arpeggio'],
+  sacred: ['modal', 'pentatonic'],
+  painted: ['arpeggio', 'modal'],
+  library: ['modal', 'chromatic'],
+  machine: ['chromatic', 'descending'],
+  signals: ['chromatic', 'modal'],
+};
+
+/** Map SectorMood to chord progression style */
+const MOOD_TO_STYLE: Record<SectorMood, string> = {
+  neural: 'dark',
+  reef: 'mysterious',
+  pantheon: 'sacred',
+  projects: 'aggressive',
+  bloom: 'heroic',
+  boss: 'aggressive',
+  menu: 'mysterious',
+  intro: 'mysterious',
+  escape: 'dark',
+  ocean: 'mysterious',
+  heroic: 'heroic',
+  sacred: 'sacred',
+  painted: 'mysterious',
+  library: 'mysterious',
+  machine: 'aggressive',
+  signals: 'dark',
+};
+
+/** Map SectorMood to primary scale */
+const MOOD_TO_SCALE: Record<SectorMood, string> = {
+  neural: 'phrygian',
+  reef: 'dorian',
+  pantheon: 'lydian',
+  projects: 'locrian',
+  bloom: 'ionian',
+  boss: 'phrygianDominant',
+  menu: 'pentatonicMajor',
+  intro: 'aeolian',
+  escape: 'harmonicMinor',
+  ocean: 'pentatonicMinor',
+  heroic: 'mixolydian',
+  sacred: 'doubleHarmonic',
+  painted: 'hirajoshi',
+  library: 'wholeTone',
+  machine: 'diminished',
+  signals: 'chromatic',
+};
+
+/** Map act IDs to distinct scales */
+const ACT_SCALE_MAP: Record<string, string> = {
+  act1_escape: 'harmonicMinor',
+  act2_ocean: 'slendro',
+  act3_heroic: 'bhairav',
+  act4_sacred: 'hijaz',
+  act5_painted: 'hirajoshi',
+  act6_library: 'wholeTone',
+  act7_machine: 'diminished',
+  act8_signals: 'quartal',
+};
+
+/** Per-level scale variants for variety within an act */
+const LEVEL_SCALE_VARIANTS: string[][] = [
+  ['harmonicMinor', 'phrygian', 'aeolian', 'phrygianDominant', 'melodicMinor'],
+  ['slendro', 'pelog', 'pentatonicMinor', 'kumoi', 'insen'],
+  ['bhairav', 'kafi', 'marwa', 'purvi', 'mixolydian'],
+  ['hijaz', 'nikriz', 'doubleHarmonic', 'saba', 'phrygianDominant'],
+  ['hirajoshi', 'iwato', 'kumoi', 'insen', 'pentatonicMinor'],
+  ['wholeTone', 'augmented', 'lydian', 'ionian', 'melodicMinor'],
+  ['diminished', 'locrian', 'phrygian', 'chromatic', 'harmonicMinor'],
+  ['quartal', 'tritone', 'chromatic', 'wholeTone', 'diminished'],
+];
+
+/** Default time signatures per mood */
+const MOOD_TO_TIME_SIG: Record<SectorMood, { beatsPerMeasure: number; subdivisions: number }> = {
+  neural: { beatsPerMeasure: 4, subdivisions: 4 },
+  reef: { beatsPerMeasure: 6, subdivisions: 8 },
+  pantheon: { beatsPerMeasure: 3, subdivisions: 4 },
+  projects: { beatsPerMeasure: 5, subdivisions: 4 },
+  bloom: { beatsPerMeasure: 9, subdivisions: 8 },
+  boss: { beatsPerMeasure: 11, subdivisions: 8 },
+  menu: { beatsPerMeasure: 4, subdivisions: 4 },
+  intro: { beatsPerMeasure: 4, subdivisions: 4 },
+  escape: { beatsPerMeasure: 4, subdivisions: 4 },
+  ocean: { beatsPerMeasure: 6, subdivisions: 8 },
+  heroic: { beatsPerMeasure: 4, subdivisions: 4 },
+  sacred: { beatsPerMeasure: 3, subdivisions: 4 },
+  painted: { beatsPerMeasure: 7, subdivisions: 8 },
+  library: { beatsPerMeasure: 7, subdivisions: 8 },
+  machine: { beatsPerMeasure: 5, subdivisions: 4 },
+  signals: { beatsPerMeasure: 5, subdivisions: 4 },
+};
+
+/** Euclidean rhythm generator for polyrhythmic patterns */
+function euclidean(hits: number, steps: number): boolean[] {
+  const pattern: boolean[] = new Array(steps).fill(false);
+  if (hits <= 0 || steps <= 0) return pattern;
+  const h = Math.min(hits, steps);
+  for (let i = 0; i < h; i++) {
+    pattern[Math.floor((i * steps) / h)] = true;
+  }
+  return pattern;
+}
+
+/** Extended arpeggio patterns */
+const ARPEGGIO_PATTERNS = [
+  [0, 2, 4, 7],
+  [0, 4, 7, 12],
+  [12, 7, 4, 0],
+  [0, 7, 4, 12],
+  [0, 3, 7, 10],
+  [0, 4, 7, 11],
+  [0, 5, 7, 12],
+  [0, 2, 7, 9],
+];
+
 export class ProceduralMusic {
   private context: AudioContext | null = null;
   private masterGain: GainNode | null = null;
+  private analyser: AnalyserNode | null = null;
+  private waveformBuf: Uint8Array<ArrayBuffer> | null = null;
+  private frequencyBuf: Uint8Array<ArrayBuffer> | null = null;
   private playing: boolean = false;
   private muted: boolean = false;
   private mood: SectorMood = 'neural';
   private params: MusicParams = SECTOR_PARAMS.neural;
+
+  // Time signature tracking
+  private timeSignature = { beatsPerMeasure: 4, subdivisions: 4 };
+  private stepsPerMeasure = 16;
 
   // Audio nodes
   private bassOsc: OscillatorNode | null = null;
@@ -498,9 +654,46 @@ export class ProceduralMusic {
    * Set the current musical scale
    * @param scaleName Name of the scale from SCALES
    */
+  private static readonly SCALE_ALIASES: Record<string, string> = {
+    pentatonic: 'pentatonicMajor',
+    phrygian_dominant: 'phrygianDominant',
+    whole_tone: 'wholeTone',
+    harmonic_minor: 'harmonicMinor',
+    melodic_minor: 'melodicMinor',
+    double_harmonic: 'doubleHarmonic',
+    pentatonic_major: 'pentatonicMajor',
+    pentatonic_minor: 'pentatonicMinor',
+    indian_raga: 'bhairav',
+    indian: 'bhairav',
+    raga: 'kafi',
+    turkish_maqam: 'hijaz',
+    turkish: 'hijaz',
+    arabic: 'doubleHarmonic',
+    mayan: 'pentatonicMinor',
+    tibetan: 'pentatonicMinor',
+    atonal: 'chromatic',
+    industrial: 'locrian',
+    machine: 'locrian',
+    mystical: 'wholeTone',
+    bimodal: 'dorian',
+    synthetic: 'lydian',
+    didgeridoo: 'pentatonicMinor',
+    drumming: 'pentatonicMinor',
+    signals: 'chromatic',
+    gamelan: 'pelog',
+    flamenco: 'phrygianDominant',
+    spanish: 'phrygianDominant',
+    japanese: 'hirajoshi',
+    chinese: 'pentatonicMajor',
+    balinese: 'pelog',
+    celtic: 'mixolydian',
+    arabic_maqam: 'hijaz',
+  };
+
   setScale(scaleName: string): void {
-    if (SCALES[scaleName]) {
-      this.currentScale = SCALES[scaleName];
+    const resolved = SCALES[scaleName] || SCALES[ProceduralMusic.SCALE_ALIASES[scaleName]];
+    if (resolved) {
+      this.currentScale = resolved;
     } else {
       console.warn(`Unknown scale: ${scaleName}, using aeolian`);
       this.currentScale = SCALES.aeolian;
@@ -564,7 +757,12 @@ export class ProceduralMusic {
       try {
         this.context = new AudioContext();
         this.masterGain = this.context.createGain();
-        this.masterGain.connect(this.context.destination);
+        this.analyser = this.context.createAnalyser();
+        this.analyser.fftSize = 256;
+        this.masterGain.connect(this.analyser);
+        this.analyser.connect(this.context.destination);
+        this.waveformBuf = new Uint8Array(this.analyser.frequencyBinCount);
+        this.frequencyBuf = new Uint8Array(this.analyser.frequencyBinCount);
         this.updateVolume();
 
         window.removeEventListener('click', initContext);
@@ -623,9 +821,17 @@ export class ProceduralMusic {
     this.params = { ...SECTOR_PARAMS[this.mood] };
     this.beatInterval = 60 / this.params.tempo;
 
-    // Pick new progression and melody for this sector
-    this.currentProgression = CHORD_PROGRESSIONS[sectorIndex % CHORD_PROGRESSIONS.length];
-    this.currentMelody = MELODY_PATTERNS[sectorIndex % MELODY_PATTERNS.length];
+    // Set scale per mood
+    this.setScale(MOOD_TO_SCALE[this.mood]);
+
+    // Set time signature per mood
+    this.timeSignature = MOOD_TO_TIME_SIG[this.mood];
+    this.stepsPerMeasure =
+      this.timeSignature.beatsPerMeasure * (this.timeSignature.subdivisions >= 8 ? 2 : this.timeSignature.subdivisions);
+    if (this.stepsPerMeasure < 4) this.stepsPerMeasure = this.timeSignature.beatsPerMeasure * 4;
+
+    // Use mood-appropriate progressions and melodies from extended pools
+    this.pickMoodProgressionAndMelody();
 
     if (this.playing) {
       this.updateOscillators();
@@ -636,33 +842,31 @@ export class ProceduralMusic {
    * Set level within a sector for per-level variation
    */
   setLevel(sectorIndex: number, levelIndex: number): void {
-    // First set the base sector mood
     const moods: SectorMood[] = ['neural', 'reef', 'pantheon', 'projects', 'bloom'];
     this.mood = moods[Math.min(sectorIndex, moods.length - 1)] || 'neural';
     const baseParams = SECTOR_PARAMS[this.mood];
 
-    // Create modified params based on level
     this.params = { ...baseParams };
-
-    // Vary tempo slightly per level (+3 BPM per level)
     this.params.tempo = baseParams.tempo + levelIndex * 3;
     this.beatInterval = 60 / this.params.tempo;
-
-    // Shift filter cutoff per level (opens up as levels progress)
     this.params.filterCutoff = baseParams.filterCutoff + levelIndex * 100;
-
-    // Increase intensity per level
     this.params.intensity = Math.min(1, baseParams.intensity + levelIndex * 0.1);
-
-    // Vary detune slightly
     this.params.detuneAmount = baseParams.detuneAmount + levelIndex * 2;
 
-    // Pick progression and melody based on combined sector+level
-    const combinedIndex = sectorIndex * 5 + levelIndex;
-    this.currentProgression = CHORD_PROGRESSIONS[combinedIndex % CHORD_PROGRESSIONS.length];
-    this.currentMelody = MELODY_PATTERNS[combinedIndex % MELODY_PATTERNS.length];
+    // Set scale with per-level variation
+    const baseScale = MOOD_TO_SCALE[this.mood];
+    const variants = LEVEL_SCALE_VARIANTS[sectorIndex % LEVEL_SCALE_VARIANTS.length];
+    this.setScale(variants[levelIndex % variants.length] || baseScale);
 
-    // Reset phrase tracking for fresh feel
+    // Time signature per mood
+    this.timeSignature = MOOD_TO_TIME_SIG[this.mood];
+    this.stepsPerMeasure =
+      this.timeSignature.beatsPerMeasure * (this.timeSignature.subdivisions >= 8 ? 2 : this.timeSignature.subdivisions);
+    if (this.stepsPerMeasure < 4) this.stepsPerMeasure = this.timeSignature.beatsPerMeasure * 4;
+
+    // Use mood-appropriate extended patterns
+    this.pickMoodProgressionAndMelody();
+
     this.phraseCount = 0;
     this.currentBeat = 0;
     this.currentMeasure = 0;
@@ -695,26 +899,31 @@ export class ProceduralMusic {
     // Create modified params based on level progression
     this.params = { ...baseParams };
 
-    // Vary tempo slightly per level (+2 BPM per level)
     this.params.tempo = baseParams.tempo + levelIndex * 2;
     this.beatInterval = 60 / this.params.tempo;
-
-    // Filter opens up as levels progress
     this.params.filterCutoff = baseParams.filterCutoff + levelIndex * 80;
-
-    // Intensity increases per level
     this.params.intensity = Math.min(1, baseParams.intensity + levelIndex * 0.08);
-
-    // Detune variation per level
     this.params.detuneAmount = baseParams.detuneAmount + levelIndex * 1.5;
 
-    // Pick progression and melody based on act + level
+    // Set scale per act with per-level variation
+    const actScale = ACT_SCALE_MAP[actId];
     const actIndex = parseInt(actId.replace(/\D/g, ''), 10) || 1;
-    const combinedIndex = actIndex * 5 + levelIndex;
-    this.currentProgression = CHORD_PROGRESSIONS[combinedIndex % CHORD_PROGRESSIONS.length];
-    this.currentMelody = MELODY_PATTERNS[combinedIndex % MELODY_PATTERNS.length];
+    if (actScale) {
+      const variants = LEVEL_SCALE_VARIANTS[(actIndex - 1) % LEVEL_SCALE_VARIANTS.length];
+      this.setScale(variants[levelIndex % variants.length] || actScale);
+    } else {
+      this.setScale(MOOD_TO_SCALE[baseMood]);
+    }
 
-    // Reset phrase tracking
+    // Time signature per mood
+    this.timeSignature = MOOD_TO_TIME_SIG[baseMood];
+    this.stepsPerMeasure =
+      this.timeSignature.beatsPerMeasure * (this.timeSignature.subdivisions >= 8 ? 2 : this.timeSignature.subdivisions);
+    if (this.stepsPerMeasure < 4) this.stepsPerMeasure = this.timeSignature.beatsPerMeasure * 4;
+
+    // Use mood-appropriate extended patterns
+    this.pickMoodProgressionAndMelody();
+
     this.phraseCount = 0;
     this.currentBeat = 0;
     this.currentMeasure = 0;
@@ -734,9 +943,10 @@ export class ProceduralMusic {
     mode: string;
     tempoRange: [number, number];
     intensity?: number;
-    scale?: string; // Optional specific scale name
-    style?: string; // Chord progression style
-    culturalStyle?: string; // Cultural music style hint
+    scale?: string;
+    style?: string;
+    culturalStyle?: string;
+    timeSignature?: string;
   }): void {
     // Use the seed to create deterministic variations
     const seedNum = musicSeed.seed.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
@@ -745,15 +955,43 @@ export class ProceduralMusic {
     const tempoRange = musicSeed.tempoRange[1] - musicSeed.tempoRange[0];
     const tempo = musicSeed.tempoRange[0] + (seedNum % tempoRange);
 
-    // Set scale based on mode or specific scale name
-    const scaleToUse = musicSeed.scale || musicSeed.mode || 'aeolian';
+    // Set scale based on mode or specific scale name, resolving aliases
+    const rawScale = musicSeed.scale || musicSeed.mode || 'aeolian';
+    const scaleToUse = ProceduralMusic.SCALE_ALIASES[rawScale] || rawScale;
     this.setScale(scaleToUse);
+
+    const intensity = musicSeed.intensity ?? 0.5;
+    const mode = musicSeed.mode || 'aeolian';
+
+    // Derive mood from mode/intensity so downstream systems
+    // (playMoodInstrument, pickMoodProgressionAndMelody, MOOD_TO_TIME_SIG) work correctly
+    const darkModes = ['phrygian', 'locrian', 'phrygianDominant', 'diminished', 'phrygian_dominant'];
+    const dreamyModes = ['lydian', 'wholeTone', 'whole_tone', 'mystical'];
+    const heroicModes = ['mixolydian', 'dorian', 'ionian'];
+    const aggressiveModes = ['chromatic', 'industrial', 'machine', 'atonal'];
+
+    let derivedMood: SectorMood;
+    if (intensity >= 0.8) {
+      derivedMood = 'machine';
+    } else if (intensity >= 0.5 && aggressiveModes.includes(mode)) {
+      derivedMood = 'projects';
+    } else if (intensity <= 0.3) {
+      derivedMood = 'ocean';
+    } else if (darkModes.includes(mode)) {
+      derivedMood = 'neural';
+    } else if (dreamyModes.includes(mode)) {
+      derivedMood = 'painted';
+    } else if (heroicModes.includes(mode)) {
+      derivedMood = 'heroic';
+    } else {
+      derivedMood = 'reef';
+    }
+    this.mood = derivedMood;
 
     // Set style for chord progressions
     if (musicSeed.style) {
       this.setStyle(musicSeed.style);
     } else if (musicSeed.culturalStyle) {
-      // Map cultural styles to progression styles
       const culturalToStyle: Record<string, string> = {
         ambient: 'mysterious',
         epic: 'heroic',
@@ -768,8 +1006,20 @@ export class ProceduralMusic {
       this.setStyle(culturalToStyle[musicSeed.culturalStyle] || 'dark');
     }
 
+    // Apply time signature: prefer explicit seed value, fall back to mood-derived
+    if (musicSeed.timeSignature) {
+      const parts = musicSeed.timeSignature.split('/');
+      const beats = parseInt(parts[0], 10) || 4;
+      const subdivisions = parseInt(parts[1], 10) || 4;
+      this.timeSignature = { beatsPerMeasure: beats, subdivisions };
+    } else {
+      this.timeSignature = MOOD_TO_TIME_SIG[this.mood];
+    }
+    this.stepsPerMeasure =
+      this.timeSignature.beatsPerMeasure * (this.timeSignature.subdivisions >= 8 ? 2 : this.timeSignature.subdivisions);
+    if (this.stepsPerMeasure < 4) this.stepsPerMeasure = this.timeSignature.beatsPerMeasure * 4;
+
     // Map musical mode to base params and adjustments
-    // Extended with more scales and cultural modes
     const modeParams: Record<string, { padNote: number; droneNote: number; filterCutoff: number; rootNote?: number }> =
       {
         // Western modes
@@ -818,7 +1068,6 @@ export class ProceduralMusic {
       };
 
     const modeData = modeParams[scaleToUse] || modeParams.aeolian;
-    const intensity = musicSeed.intensity ?? 0.5;
 
     // Set root note if specified in mode
     if (modeData.rootNote) {
@@ -844,9 +1093,8 @@ export class ProceduralMusic {
     this.beatInterval = 60 / tempo;
     this.targetIntensity = intensity;
 
-    // Use seed to pick progression and melody
-    this.currentProgression = CHORD_PROGRESSIONS[seedNum % CHORD_PROGRESSIONS.length];
-    this.currentMelody = MELODY_PATTERNS[seedNum % MELODY_PATTERNS.length];
+    // Use mood-appropriate progressions and melodies instead of raw index
+    this.pickMoodProgressionAndMelody();
 
     // Reset phrase tracking
     this.phraseCount = 0;
@@ -910,6 +1158,22 @@ export class ProceduralMusic {
     this.targetIntensity = Math.max(0, Math.min(1, intensity));
   }
 
+  private targetHrTempo: number = 0;
+  private hrInfluence: number = 0;
+
+  /**
+   * Blend heart rate BPM into music tempo
+   */
+  setHeartRateBpm(bpm: number | null, quality: number): void {
+    if (bpm === null || quality < 0.4) {
+      this.hrInfluence = Math.max(0, this.hrInfluence - 0.01);
+      return;
+    }
+    const hrTempo = Math.max(55, Math.min(180, bpm));
+    this.targetHrTempo = hrTempo;
+    this.hrInfluence = 0.85 * quality;
+  }
+
   /**
    * Start playing music
    */
@@ -924,7 +1188,12 @@ export class ProceduralMusic {
     if (!this.context) {
       this.context = new AudioContext();
       this.masterGain = this.context.createGain();
-      this.masterGain.connect(this.context.destination);
+      this.analyser = this.context.createAnalyser();
+      this.analyser.fftSize = 256;
+      this.masterGain.connect(this.analyser);
+      this.analyser.connect(this.context.destination);
+      this.waveformBuf = new Uint8Array(this.analyser.frequencyBinCount);
+      this.frequencyBuf = new Uint8Array(this.analyser.frequencyBinCount);
       this.updateVolume();
     }
 
@@ -1007,6 +1276,13 @@ export class ProceduralMusic {
     // Smooth combat intensity
     this.combatIntensity += (this.targetIntensity - this.combatIntensity) * dt * 2;
 
+    // Blend heart rate into tempo
+    if (this.hrInfluence > 0 && this.targetHrTempo > 0) {
+      const baseTempo = this.params.tempo;
+      const effectiveTempo = baseTempo * (1 - this.hrInfluence) + this.targetHrTempo * this.hrInfluence;
+      this.beatInterval = 60 / effectiveTempo;
+    }
+
     // Update beat timer
     this.beatTimer += dt;
 
@@ -1014,11 +1290,12 @@ export class ProceduralMusic {
       this.beatTimer -= this.beatInterval;
       this.currentBeat++;
 
-      // Track measures (now 64-beat phrases)
-      if (this.currentBeat % 16 === 0) {
+      // Track measures using dynamic steps per measure
+      if (this.currentBeat % this.stepsPerMeasure === 0) {
         this.currentMeasure++;
       }
-      if (this.currentBeat % 64 === 0) {
+      const phraseLen = this.stepsPerMeasure * 4;
+      if (this.currentBeat % phraseLen === 0) {
         this.onPhraseEnd();
       }
 
@@ -1049,20 +1326,21 @@ export class ProceduralMusic {
   private onPhraseEnd(): void {
     this.phraseCount++;
 
-    // Every 4 phrases (~2 minutes), trigger a breakdown
     if (this.phraseCount % 4 === 0 && !this.inBreakdown && this.mood !== 'boss') {
       this.inBreakdown = true;
       this.breakdownTimer = 0;
     }
 
-    // Occasionally change progression
+    // Pull from mood-appropriate extended pools
     if (Math.random() < 0.3) {
-      this.currentProgression = CHORD_PROGRESSIONS[Math.floor(Math.random() * CHORD_PROGRESSIONS.length)];
-    }
-
-    // Occasionally change melody
-    if (Math.random() < 0.4) {
-      this.currentMelody = MELODY_PATTERNS[Math.floor(Math.random() * MELODY_PATTERNS.length)];
+      this.pickMoodProgressionAndMelody();
+    } else if (Math.random() < 0.4) {
+      const categories = MOOD_TO_MELODY_CATEGORY[this.mood] || ['ascending'];
+      const cat = categories[Math.floor(Math.random() * categories.length)];
+      const patterns = MELODY_PATTERNS_EXTENDED[cat];
+      if (patterns && patterns.length > 0) {
+        this.currentMelody = patterns[Math.floor(Math.random() * patterns.length)];
+      }
     }
   }
 
@@ -1070,9 +1348,11 @@ export class ProceduralMusic {
    * Called on each beat
    */
   private onBeat(): void {
-    const beat = this.currentBeat % 64;
-    const measure = Math.floor(beat / 16);
-    const beatInMeasure = beat % 16;
+    const spm = this.stepsPerMeasure;
+    const phraseLen = spm * 4;
+    const beat = this.currentBeat % phraseLen;
+    const measure = Math.floor(beat / spm);
+    const beatInMeasure = beat % spm;
     const now = this.context?.currentTime || 0;
 
     // During breakdown, minimal elements
@@ -1088,9 +1368,9 @@ export class ProceduralMusic {
       return;
     }
 
-    // Standard kick pattern with variations
+    // Kick pattern (time-signature-aware)
     const kickPattern = this.getKickPattern(measure);
-    if (kickPattern[beatInMeasure]) {
+    if (beatInMeasure < kickPattern.length && kickPattern[beatInMeasure]) {
       this.playKick(now, 0.4 + this.combatIntensity * 0.3);
     }
 
@@ -1103,47 +1383,57 @@ export class ProceduralMusic {
       }
     }
 
-    // Snare with variations
+    // Snare on backbeats (adaptive to time signature)
     if (this.combatIntensity > 0.4) {
-      const snareBeats = [4, 12];
-      if (snareBeats.includes(beatInMeasure)) {
+      const snarePos1 = Math.floor(spm / 4);
+      const snarePos2 = Math.floor((spm * 3) / 4);
+      if (beatInMeasure === snarePos1 || beatInMeasure === snarePos2) {
         this.playSnare(now, 0.12 + this.combatIntensity * 0.1);
       }
-      // Ghost snares at high intensity
-      if (this.combatIntensity > 0.7 && beatInMeasure === 10 && measure % 2 === 1) {
+      if (this.combatIntensity > 0.7 && beatInMeasure === Math.floor((spm * 5) / 8) && measure % 2 === 1) {
         this.playSnare(now, 0.06);
       }
     }
 
-    // Bass note changes on downbeats with progression
-    if (beatInMeasure === 0 && this.bassOsc) {
-      const chordIndex = measure % this.currentProgression.length;
-      const freq = this.params.bassFreq * this.currentProgression[chordIndex];
-      this.bassOsc.frequency.setValueAtTime(freq, now);
-    }
-
-    // Melodic synth stabs at medium+ intensity
-    if (this.combatIntensity > 0.5 && beatInMeasure % 4 === 0) {
-      const melodyIndex = (measure + Math.floor(beatInMeasure / 4)) % this.currentMelody.length;
-      if (Math.random() < 0.4) {
-        this.playSynthStab(now, melodyIndex);
+    // Polyrhythmic layers at high intensity (E7)
+    if (this.combatIntensity > 0.6 && spm >= 8) {
+      const polyPattern = euclidean(3, spm);
+      if (polyPattern[beatInMeasure] && beatInMeasure % 4 !== 0) {
+        this.playMetallic(now, 0.04 * this.combatIntensity);
       }
     }
 
-    // Occasional arpeggios at high intensity (using scale system)
-    if (this.combatIntensity > 0.7 && beatInMeasure === 8 && Math.random() < 0.25) {
-      const rootDegree = measure % this.currentScale.length;
-      this.playArpeggio(now, rootDegree, 1);
+    // Bass with pattern variety (E8)
+    if (this.bassOsc) {
+      const chordIndex = measure % this.currentProgression.length;
+      const baseFreq = this.params.bassFreq * this.currentProgression[chordIndex];
+      this.updateBass(now, beatInMeasure, baseFreq, spm);
     }
 
-    // Occasional scale-based chord stabs
+    // Melodic synth stabs using per-mood instrument type (E5)
+    const stabInterval = Math.max(2, Math.floor(spm / 4));
+    if (this.combatIntensity > 0.5 && beatInMeasure % stabInterval === 0) {
+      const melodyIndex = (measure + Math.floor(beatInMeasure / stabInterval)) % this.currentMelody.length;
+      if (Math.random() < 0.4) {
+        this.playMoodInstrument(now, melodyIndex);
+      }
+    }
+
+    // Arpeggios with pattern variety (E6)
+    if (this.combatIntensity > 0.7 && beatInMeasure === Math.floor(spm / 2) && Math.random() < 0.25) {
+      const rootDegree = measure % this.currentScale.length;
+      const arpPattern = ARPEGGIO_PATTERNS[(measure + this.phraseCount) % ARPEGGIO_PATTERNS.length];
+      this.playArpeggio(now, rootDegree, 1, arpPattern);
+    }
+
+    // Scale-based chord stabs
     if (this.combatIntensity > 0.6 && beatInMeasure === 0 && measure % 2 === 1 && Math.random() < 0.3) {
       const chordRoot = measure % this.currentScale.length;
       const chordFreqs = this.getScaleChordFreqs(chordRoot, [0, 2, 4]);
       this.playChordStab(now, chordFreqs);
     }
 
-    // Occasional glitch effects
+    // Glitch effects
     if (now - this.lastGlitchTime > 2 && Math.random() < 0.02 * this.combatIntensity) {
       this.playGlitch(now);
       this.lastGlitchTime = now;
@@ -1184,13 +1474,97 @@ export class ProceduralMusic {
    * Get kick pattern for variety
    */
   private getKickPattern(measure: number): boolean[] {
-    const patterns = [
-      [true, false, false, false, true, false, false, false, true, false, false, false, true, false, false, false], // 4/4
-      [true, false, false, false, true, false, false, true, false, false, true, false, true, false, false, false], // syncopated
-      [true, false, false, false, true, false, false, false, true, false, true, false, true, false, false, false], // variation
-      [true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false], // double
-    ];
-    return patterns[measure % patterns.length];
+    const spm = this.stepsPerMeasure;
+    const { beatsPerMeasure: bpm, subdivisions: sub } = this.timeSignature;
+    const sig = `${bpm}/${sub}`;
+
+    switch (sig) {
+      case '3/4': {
+        const p = [
+          [true, false, false, false, false, false, true, false, false, false, false, false],
+          [true, false, false, true, false, false, false, false, false, true, false, false],
+        ];
+        return p[measure % p.length];
+      }
+      case '5/4': {
+        const p = [
+          [
+            true,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+          ],
+          [
+            true,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            true,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+          ],
+        ];
+        return p[measure % p.length];
+      }
+      case '6/8': {
+        const p = [
+          [true, false, false, true, false, false, true, false, false, true, false, false],
+          [true, false, true, false, false, false, true, false, true, false, false, false],
+        ];
+        return p[measure % p.length];
+      }
+      case '7/8': {
+        const p = [
+          [true, false, false, true, false, false, true, false, false, true, false, false, true, false],
+          [true, false, true, false, false, true, false, true, false, false, true, false, true, false],
+        ];
+        return p[measure % p.length];
+      }
+      case '9/8': {
+        return euclidean(4, 18).map((v, i) => (i < spm ? v : false));
+      }
+      case '11/8': {
+        return euclidean(5, 22).map((v, i) => (i < spm ? v : false));
+      }
+      default: {
+        const p44 = [
+          [true, false, false, false, true, false, false, false, true, false, false, false, true, false, false, false],
+          [true, false, false, false, true, false, false, true, false, false, true, false, true, false, false, false],
+          [true, false, false, false, true, false, false, false, true, false, true, false, true, false, false, false],
+          [true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false],
+        ];
+        return p44[measure % p44.length];
+      }
+    }
   }
 
   /**
@@ -1240,14 +1614,16 @@ export class ProceduralMusic {
   /**
    * Play an arpeggio using the current scale
    */
-  private playArpeggio(time: number, rootDegree: number, octave: number = 0): void {
+  private playArpeggio(time: number, rootDegree: number, octave: number = 0, pattern?: number[]): void {
     if (!this.context || !this.masterGain) return;
 
-    const arpeggioPattern = [0, 2, 4, 7]; // Scale degrees for arpeggio
+    const arpeggioPattern = pattern || [0, 2, 4, 7];
+    const ascending = this.mood !== 'sacred' && this.mood !== 'painted';
+    const ordered = ascending ? arpeggioPattern : [...arpeggioPattern].reverse();
     const noteDuration = 0.1;
-    const noteGap = 0.08;
+    const noteGap = this.combatIntensity > 0.8 ? 0.05 : 0.08;
 
-    arpeggioPattern.forEach((degree, i) => {
+    ordered.forEach((degree, i) => {
       const noteTime = time + i * noteGap;
       const freq = this.getScaleNote(rootDegree + degree, octave);
 
@@ -1606,6 +1982,11 @@ export class ProceduralMusic {
     }
 
     this.beatInterval = 60 / this.params.tempo;
+
+    if (this.hrInfluence > 0 && this.targetHrTempo > 0) {
+      const effectiveTempo = this.params.tempo * (1 - this.hrInfluence) + this.targetHrTempo * this.hrInfluence;
+      this.beatInterval = 60 / effectiveTempo;
+    }
   }
 
   /**
@@ -1648,6 +2029,264 @@ export class ProceduralMusic {
    */
   isPlaying(): boolean {
     return this.playing;
+  }
+
+  // ---- Waveform / analyser getters (E10) ----
+
+  getWaveformData(): Uint8Array | null {
+    if (!this.analyser || !this.waveformBuf) return null;
+    this.analyser.getByteTimeDomainData(this.waveformBuf);
+    return this.waveformBuf;
+  }
+
+  getFrequencyData(): Uint8Array | null {
+    if (!this.analyser || !this.frequencyBuf) return null;
+    this.analyser.getByteFrequencyData(this.frequencyBuf);
+    return this.frequencyBuf;
+  }
+
+  getEffectiveTempo(): number {
+    if (this.hrInfluence > 0 && this.targetHrTempo > 0) {
+      return this.params.tempo * (1 - this.hrInfluence) + this.targetHrTempo * this.hrInfluence;
+    }
+    return this.params.tempo;
+  }
+
+  // ---- Helper: pick mood-appropriate progression and melody (E1) ----
+
+  private pickMoodProgressionAndMelody(): void {
+    const style = MOOD_TO_STYLE[this.mood] || 'dark';
+    const styleProgressions = CHORD_PROGRESSIONS_BY_STYLE[style];
+    if (styleProgressions && styleProgressions.length > 0) {
+      this.currentProgression = styleProgressions[Math.floor(Math.random() * styleProgressions.length)];
+    } else {
+      this.currentProgression = CHORD_PROGRESSIONS[Math.floor(Math.random() * CHORD_PROGRESSIONS.length)];
+    }
+
+    const categories = MOOD_TO_MELODY_CATEGORY[this.mood] || ['ascending'];
+    const cat = categories[Math.floor(Math.random() * categories.length)];
+    const patterns = MELODY_PATTERNS_EXTENDED[cat];
+    if (patterns && patterns.length > 0) {
+      this.currentMelody = patterns[Math.floor(Math.random() * patterns.length)];
+    } else {
+      this.currentMelody = MELODY_PATTERNS[Math.floor(Math.random() * MELODY_PATTERNS.length)];
+    }
+  }
+
+  // ---- New instruments (E5) ----
+
+  private playFMBell(time: number, freq: number, volume: number): void {
+    if (!this.context || !this.masterGain) return;
+    const carrier = this.context.createOscillator();
+    const modulator = this.context.createOscillator();
+    const modGain = this.context.createGain();
+    const outGain = this.context.createGain();
+
+    carrier.type = 'sine';
+    carrier.frequency.value = freq;
+    modulator.type = 'sine';
+    modulator.frequency.value = freq * 3;
+    modGain.gain.value = freq * 2;
+
+    outGain.gain.setValueAtTime(volume, time);
+    outGain.gain.exponentialRampToValueAtTime(0.001, time + 1.5);
+
+    modulator.connect(modGain);
+    modGain.connect(carrier.frequency);
+    carrier.connect(outGain);
+    outGain.connect(this.masterGain);
+
+    carrier.start(time);
+    modulator.start(time);
+    carrier.stop(time + 1.5);
+    modulator.stop(time + 1.5);
+  }
+
+  private playPluck(time: number, freq: number, volume: number): void {
+    if (!this.context || !this.masterGain) return;
+    const bufLen = Math.floor(this.context.sampleRate * 0.01);
+    const buf = this.context.createBuffer(1, bufLen, this.context.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < bufLen; i++) data[i] = Math.random() * 2 - 1;
+
+    const source = this.context.createBufferSource();
+    source.buffer = buf;
+
+    const delay = this.context.createDelay();
+    delay.delayTime.value = 1 / freq;
+    const fb = this.context.createGain();
+    fb.gain.value = 0.98;
+    const filter = this.context.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = freq * 4;
+
+    const outGain = this.context.createGain();
+    outGain.gain.setValueAtTime(volume, time);
+    outGain.gain.exponentialRampToValueAtTime(0.001, time + 0.8);
+
+    source.connect(filter);
+    filter.connect(delay);
+    delay.connect(fb);
+    fb.connect(filter);
+    filter.connect(outGain);
+    outGain.connect(this.masterGain);
+
+    source.start(time);
+    source.stop(time + 0.02);
+  }
+
+  private playSubBass(time: number, freq: number, volume: number): void {
+    if (!this.context || !this.masterGain) return;
+    const osc = this.context.createOscillator();
+    const gain = this.context.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq / 2;
+    gain.gain.setValueAtTime(0, time);
+    gain.gain.linearRampToValueAtTime(volume, time + 0.1);
+    gain.gain.linearRampToValueAtTime(volume * 0.8, time + 0.4);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.8);
+    osc.connect(gain);
+    gain.connect(this.masterGain);
+    osc.start(time);
+    osc.stop(time + 0.8);
+  }
+
+  private playMetallic(time: number, volume: number): void {
+    if (!this.context || !this.masterGain) return;
+    const freqs = [800, 1120, 1360];
+    const gain = this.context.createGain();
+    gain.gain.setValueAtTime(volume, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
+    gain.connect(this.masterGain);
+
+    freqs.forEach((f) => {
+      const osc = this.context!.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = f;
+      osc.connect(gain);
+      osc.start(time);
+      osc.stop(time + 0.15);
+    });
+  }
+
+  private playResonantSynth(time: number, freq: number, volume: number): void {
+    if (!this.context || !this.masterGain) return;
+    const osc = this.context.createOscillator();
+    const filter = this.context.createBiquadFilter();
+    const gain = this.context.createGain();
+
+    osc.type = 'sawtooth';
+    osc.frequency.value = freq;
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(freq * 8, time);
+    filter.frequency.exponentialRampToValueAtTime(freq * 0.5, time + 0.2);
+    filter.Q.value = 12;
+
+    gain.gain.setValueAtTime(volume, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.25);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.masterGain);
+    osc.start(time);
+    osc.stop(time + 0.25);
+  }
+
+  private playEtherealPad(time: number, freq: number, volume: number): void {
+    if (!this.context || !this.masterGain) return;
+    const gain = this.context.createGain();
+    gain.gain.setValueAtTime(0, time);
+    gain.gain.linearRampToValueAtTime(volume, time + 0.5);
+    gain.gain.linearRampToValueAtTime(volume * 0.7, time + 2);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 3);
+    gain.connect(this.masterGain);
+
+    [freq, freq * 1.003, freq * 0.997].forEach((f) => {
+      const osc = this.context!.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = f;
+      osc.connect(gain);
+      osc.start(time);
+      osc.stop(time + 3);
+    });
+  }
+
+  /** Play a synth stab using the mood-appropriate instrument */
+  private playMoodInstrument(time: number, melodyIndex: number): void {
+    if (!this.context || !this.masterGain) return;
+
+    const melodyPattern = this.currentMelody;
+    const semitones = melodyPattern[melodyIndex % melodyPattern.length];
+    const scaleDegree = Math.abs(semitones % this.currentScale.length);
+    const octaveOffset = Math.floor(semitones / 12);
+    const freq = this.getScaleNote(scaleDegree, octaveOffset + 1);
+    const vol = 0.06 * this.combatIntensity;
+
+    switch (this.mood) {
+      case 'sacred':
+      case 'painted':
+      case 'bloom':
+        this.playFMBell(time, freq, vol);
+        break;
+      case 'ocean':
+      case 'reef':
+        this.playPluck(time, freq, vol);
+        break;
+      case 'machine':
+      case 'boss':
+        this.playSubBass(time, freq, vol);
+        break;
+      case 'projects':
+      case 'signals':
+        this.playResonantSynth(time, freq, vol);
+        break;
+      case 'intro':
+      case 'menu':
+        this.playEtherealPad(time, freq, vol * 0.5);
+        break;
+      default:
+        this.playSynthStab(time, melodyIndex);
+        break;
+    }
+  }
+
+  // ---- Bass pattern variety (E8) ----
+
+  private updateBass(time: number, beatInMeasure: number, baseFreq: number, spm: number): void {
+    if (!this.bassOsc) return;
+
+    switch (this.mood) {
+      case 'heroic':
+      case 'bloom': {
+        // Walking bass: step through scale degrees each beat
+        const deg = beatInMeasure % this.currentScale.length;
+        this.bassOsc.frequency.setValueAtTime(this.getScaleNote(deg, -1), time);
+        break;
+      }
+      case 'sacred':
+      case 'intro':
+      case 'menu': {
+        // Pedal bass: hold root for entire measure
+        if (beatInMeasure === 0) {
+          this.bassOsc.frequency.setValueAtTime(baseFreq, time);
+        }
+        break;
+      }
+      case 'machine':
+      case 'projects': {
+        // Octave bass: alternate root and octave-up
+        const isUp = beatInMeasure % 4 < 2;
+        this.bassOsc.frequency.setValueAtTime(isUp ? baseFreq * 2 : baseFreq, time);
+        break;
+      }
+      default: {
+        // Standard: change on downbeats
+        if (beatInMeasure === 0 || (beatInMeasure === Math.floor(spm / 2) && this.combatIntensity > 0.5)) {
+          this.bassOsc.frequency.setValueAtTime(baseFreq, time);
+        }
+        break;
+      }
+    }
   }
 }
 

@@ -4,17 +4,41 @@
   "index": 1,
   "title": "Hesiod Genealogy",
   "subtitle": "Kill order matters. The bloodline must be severed correctly.",
-  "themeTags": ["genealogy", "sequence", "mythology"],
+  "themeTags": [
+    "genealogy",
+    "sequence",
+    "mythology"
+  ],
   "ruleCard": {
     "icon": "family_tree",
     "hint": "Splitters spawn genealogically. Kill the parent before the child.",
     "mechanic": "sequence_kill",
-    "params": { "sequence": ["titan", "olympian", "demigod"] }
+    "params": {
+      "sequence": [
+        "titan",
+        "olympian",
+        "demigod"
+      ]
+    }
   },
   "enemyDeck": [
-    { "archetype": "splitter", "modifiers": [], "weight": 5 },
-    { "archetype": "drifter", "modifiers": ["mythic"], "weight": 3 },
-    { "archetype": "chaser", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "splitter",
+      "modifiers": [],
+      "weight": 5
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "mythic"
+      ],
+      "weight": 3
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "levelEnemies": {
     "titan_elder": {
@@ -77,9 +101,21 @@
   },
   "hazards": [],
   "bgLayers": [
-    { "svgId": "stars", "parallaxSpeed": 0.05, "opacity": 0.4 },
-    { "svgId": "tree", "parallaxSpeed": 0.2, "opacity": 0.5 },
-    { "svgId": "names", "parallaxSpeed": 0.4, "opacity": 0.3 }
+    {
+      "svgId": "stars",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "tree",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "names",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.3
+    }
   ],
   "copyLayers": {
     "ruleCard": "Kill order matters. The bloodline must be severed correctly.",
@@ -88,9 +124,15 @@
   },
   "musicSeed": {
     "seed": "hesiod_001",
-    "mode": "dorian",
-    "tempoRange": [95, 110],
-    "intensity": 0.55
+    "mode": "mixolydian",
+    "tempoRange": [
+      100,
+      112
+    ],
+    "intensity": 0.3,
+    "scale": "mixolydian",
+    "style": "heroic",
+    "timeSignature": "4/4"
   },
   "duration": 100,
   "unlockCondition": "act2_complete"

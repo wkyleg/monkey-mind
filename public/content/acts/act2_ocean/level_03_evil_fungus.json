@@ -4,17 +4,38 @@
   "index": 3,
   "title": "Evil Fungus",
   "subtitle": "Spores spread. Quarantine the infected.",
-  "themeTags": ["fungus", "infection", "quarantine"],
+  "themeTags": [
+    "fungus",
+    "infection",
+    "quarantine"
+  ],
   "ruleCard": {
     "icon": "spore",
     "hint": "Splitters release spores. Stay out of quarantine zones or spread the infection.",
     "mechanic": "quarantine_zone",
-    "params": { "infectionRadius": 50, "spreadRate": 2 }
+    "params": {
+      "infectionRadius": 50,
+      "spreadRate": 2
+    }
   },
   "enemyDeck": [
-    { "archetype": "splitter", "modifiers": ["entropy"], "weight": 5 },
-    { "archetype": "anchor", "modifiers": [], "weight": 3 },
-    { "archetype": "swarm", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "splitter",
+      "modifiers": [
+        "entropy"
+      ],
+      "weight": 5
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "swarm",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "levelEnemies": {
     "spore_mother": {
@@ -76,12 +97,34 @@
     }
   },
   "hazards": [
-    { "type": "spore_cloud", "lanes": [2, 3, 4], "timing": 6000, "damage": 1, "visual": "fungal_mist" }
+    {
+      "type": "spore_cloud",
+      "lanes": [
+        2,
+        3,
+        4
+      ],
+      "timing": 6000,
+      "damage": 1,
+      "visual": "fungal_mist"
+    }
   ],
   "bgLayers": [
-    { "svgId": "fungal", "parallaxSpeed": 0.08, "opacity": 0.5 },
-    { "svgId": "spores", "parallaxSpeed": 0.25, "opacity": 0.4 },
-    { "svgId": "tendrils", "parallaxSpeed": 0.4, "opacity": 0.3 }
+    {
+      "svgId": "fungal",
+      "parallaxSpeed": 0.08,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "spores",
+      "parallaxSpeed": 0.25,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "tendrils",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.3
+    }
   ],
   "copyLayers": {
     "ruleCard": "Spores spread. Quarantine the infected.",
@@ -90,9 +133,15 @@
   },
   "musicSeed": {
     "seed": "evil_fungus_003",
-    "mode": "locrian",
-    "tempoRange": [80, 95],
-    "intensity": 0.55
+    "mode": "lydian",
+    "tempoRange": [
+      98,
+      112
+    ],
+    "intensity": 0.55,
+    "scale": "wholeTone",
+    "style": "mysterious",
+    "timeSignature": "4/4"
   },
   "duration": 120,
   "unlockCondition": "act2_level2_complete"

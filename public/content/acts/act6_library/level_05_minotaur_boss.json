@@ -4,26 +4,78 @@
   "index": 5,
   "title": "Minotaur of Interpretation",
   "subtitle": "The maze bull guards complexity. Simplify to win.",
-  "themeTags": ["boss", "minotaur", "labyrinth", "simplicity"],
+  "themeTags": [
+    "boss",
+    "minotaur",
+    "labyrinth",
+    "simplicity"
+  ],
   "ruleCard": {
     "icon": "labyrinth",
     "hint": "The Minotaur grows stronger with complexity. Simplify the battlefield to weaken it.",
     "mechanic": "minimal_shots",
-    "params": { "complexityThreshold": 10, "simplifyBonus": 50 }
+    "params": {
+      "complexityThreshold": 10,
+      "simplifyBonus": 50
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": ["labyrinthine"], "weight": 3 },
-    { "archetype": "weaver", "modifiers": [], "weight": 3 },
-    { "archetype": "splitter", "modifiers": [], "weight": 2 },
-    { "archetype": "anchor", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "labyrinthine"
+      ],
+      "weight": 3
+    },
+    {
+      "archetype": "weaver",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "splitter",
+      "modifiers": [],
+      "weight": 2
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "hazards": [
-    { "type": "maze_wall", "lanes": [1, 2, 3, 4, 5], "timing": 8000, "damage": 0, "visual": "wall_shift" }
+    {
+      "type": "maze_wall",
+      "lanes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "timing": 8000,
+      "damage": 0,
+      "visual": "wall_shift"
+    }
   ],
   "bgLayers": [
-    { "svgId": "act6_bg_labyrinth", "parallaxSpeed": 0.05, "opacity": 0.4 },
-    { "svgId": "act6_bg_walls", "parallaxSpeed": 0.2, "opacity": 0.6, "animation": "shift" },
-    { "svgId": "act6_bg_thread", "parallaxSpeed": 0.4, "opacity": 0.5, "animation": "trail" }
+    {
+      "svgId": "act6_bg_labyrinth",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "act6_bg_walls",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6,
+      "animation": "shift"
+    },
+    {
+      "svgId": "act6_bg_thread",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.5,
+      "animation": "trail"
+    }
   ],
   "boss": "minotaur_of_interpretation",
   "copyLayers": {
@@ -33,9 +85,15 @@
   },
   "musicSeed": {
     "seed": "minotaur_boss_005",
-    "mode": "locrian",
-    "tempoRange": [85, 110],
-    "intensity": 0.8
+    "mode": "dorian",
+    "tempoRange": [
+      110,
+      130
+    ],
+    "intensity": 0.85,
+    "scale": "locrian",
+    "style": "aggressive",
+    "timeSignature": "7/8"
   },
   "duration": 200,
   "unlockCondition": "act6_level4_complete"

@@ -4,14 +4,103 @@
   "index": 17,
   "title": "Twilight of the Idols",
   "subtitle": "Philosophizing with a hammer. Idols topple.",
-  "themeTags": ["nietzsche", "twilight", "idols", "hammer"],
+  "themeTags": [
+    "nietzsche",
+    "twilight",
+    "idols",
+    "hammer"
+  ],
   "levelEnemies": {
-    "idol": { "visualId": "idol", "dialogue": { "spawn": ["Worship me!", "Eternal truth!", "Unquestionable!", "Socrates was right!", "Plato's forms!"], "death": ["Questioned...", "Temporal...", "Shattered...", "Socrates... limited...", "Forms... shadows..."] } },
-    "hammer": { "visualId": "hammer", "dialogue": { "spawn": ["I test!", "Ring true or hollow!", "Revaluation!", "What doesn't kill!", "Amor fati!"], "death": ["Tested...", "True...", "Revalued...", "Stronger...", "Fate... loved..."] } },
-    "true_world": { "visualId": "true_world", "dialogue": { "spawn": ["The real world exists!", "Appearances deceive!", "Beyond this veil!", "Plato promised!", "Another realm!"], "death": ["Real... here...", "Appearances... real...", "Veil... lifted...", "Promise... kept...", "This realm..."] } }
+    "idol": {
+      "visualId": "idol",
+      "dialogue": {
+        "spawn": [
+          "Worship me!",
+          "Eternal truth!",
+          "Unquestionable!",
+          "Socrates was right!",
+          "Plato's forms!"
+        ],
+        "death": [
+          "Questioned...",
+          "Temporal...",
+          "Shattered...",
+          "Socrates... limited...",
+          "Forms... shadows..."
+        ]
+      }
+    },
+    "hammer": {
+      "visualId": "hammer",
+      "dialogue": {
+        "spawn": [
+          "I test!",
+          "Ring true or hollow!",
+          "Revaluation!",
+          "What doesn't kill!",
+          "Amor fati!"
+        ],
+        "death": [
+          "Tested...",
+          "True...",
+          "Revalued...",
+          "Stronger...",
+          "Fate... loved..."
+        ]
+      }
+    },
+    "true_world": {
+      "visualId": "true_world",
+      "dialogue": {
+        "spawn": [
+          "The real world exists!",
+          "Appearances deceive!",
+          "Beyond this veil!",
+          "Plato promised!",
+          "Another realm!"
+        ],
+        "death": [
+          "Real... here...",
+          "Appearances... real...",
+          "Veil... lifted...",
+          "Promise... kept...",
+          "This realm..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "columns", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "broken_statues", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "twilight", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "This little book is a grand declaration of war on all idols. The monkey swings the hammer to hear what rings hollow." },
-  "musicSeed": { "seed": "twilight_017", "mode": "locrian", "tempoRange": [65, 80], "intensity": 0.7 },
-  "duration": 130, "unlockCondition": "lit_level16_complete"
+  "bgLayers": [
+    {
+      "svgId": "columns",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "broken_statues",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "twilight",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "This little book is a grand declaration of war on all idols. The monkey swings the hammer to hear what rings hollow."
+  },
+  "musicSeed": {
+    "seed": "twilight_017",
+    "mode": "dorian",
+    "tempoRange": [
+      78,
+      98
+    ],
+    "intensity": 0.72,
+    "scale": "diminished",
+    "style": "heroic",
+    "timeSignature": "3/4"
+  },
+  "duration": 130,
+  "unlockCondition": "lit_level16_complete"
 }

@@ -4,53 +4,149 @@
   "index": 1,
   "title": "Schrödinger's Cat",
   "subtitle": "Alive and dead until observed.",
-  "themeTags": ["schrodinger", "quantum", "superposition", "observation"],
+  "themeTags": [
+    "schrodinger",
+    "quantum",
+    "superposition",
+    "observation"
+  ],
   "ruleCard": {
     "icon": "cat",
     "hint": "Enemies exist in superposition. Observing them collapses their state.",
     "mechanic": "quantum_superposition",
-    "params": { "superpositionStates": ["alive", "dead"], "collapseOnObserve": true, "deadBonus": 50 }
+    "params": {
+      "superpositionStates": [
+        "alive",
+        "dead"
+      ],
+      "collapseOnObserve": true,
+      "deadBonus": 50
+    }
   },
   "enemyDeck": [
-    { "archetype": "phaser", "modifiers": ["observed"], "weight": 5, "visualId": "enemy_quantum_particle" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_neural_network" },
-    { "archetype": "mimic", "modifiers": [], "weight": 2, "visualId": "enemy_dna_strand" }
+    {
+      "archetype": "phaser",
+      "modifiers": [
+        "observed"
+      ],
+      "weight": 5,
+      "visualId": "enemy_quantum_particle"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_neural_network"
+    },
+    {
+      "archetype": "mimic",
+      "modifiers": [],
+      "weight": 2,
+      "visualId": "enemy_dna_strand"
+    }
   ],
   "levelEnemies": {
     "quantum_cat": {
       "visualId": "quantum_cat",
       "dialogue": {
-        "spawn": ["Am I alive?", "Both states!", "The box opens!", "Superposition!", "Observation pending!"],
-        "death": ["State... collapsed...", "Now... certain...", "Box... closed...", "One state... only...", "Observed... at last..."]
+        "spawn": [
+          "Am I alive?",
+          "Both states!",
+          "The box opens!",
+          "Superposition!",
+          "Observation pending!"
+        ],
+        "death": [
+          "State... collapsed...",
+          "Now... certain...",
+          "Box... closed...",
+          "One state... only...",
+          "Observed... at last..."
+        ]
       }
     },
     "geiger_counter": {
       "visualId": "geiger_counter",
       "dialogue": {
-        "spawn": ["Click... click...", "Decay detected?", "Random fate!", "The poison waits!", "Probability unfolds!"],
-        "death": ["Clicking... stops...", "Decay... measured...", "Fate... decided...", "Poison... neutralized...", "Probability... one..."]
+        "spawn": [
+          "Click... click...",
+          "Decay detected?",
+          "Random fate!",
+          "The poison waits!",
+          "Probability unfolds!"
+        ],
+        "death": [
+          "Clicking... stops...",
+          "Decay... measured...",
+          "Fate... decided...",
+          "Poison... neutralized...",
+          "Probability... one..."
+        ]
       }
     },
     "wavefunction": {
       "visualId": "wavefunction",
       "dialogue": {
-        "spawn": ["All possibilities!", "I am everywhere!", "Until measured!", "Spreading probability!", "Copenhagen interpretation!"],
-        "death": ["One possibility...", "Here... only...", "Measured...", "Collapsed...", "Reality... selected..."]
+        "spawn": [
+          "All possibilities!",
+          "I am everywhere!",
+          "Until measured!",
+          "Spreading probability!",
+          "Copenhagen interpretation!"
+        ],
+        "death": [
+          "One possibility...",
+          "Here... only...",
+          "Measured...",
+          "Collapsed...",
+          "Reality... selected..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "observation_field", "params": { "collapseRadius": 80, "randomOutcome": true } }],
+  "hazards": [
+    {
+      "type": "observation_field",
+      "params": {
+        "collapseRadius": 80,
+        "randomOutcome": true
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "laboratory", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "quantum_box", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "equations", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "laboratory",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "quantum_box",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "equations",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Enemies exist in superposition. Observing them collapses their state.",
     "codexSnippet": "The cat is both alive and dead until the box is opened. The monkey learns that observation creates reality, and every measurement destroys infinite possibilities.",
     "radioWhisper": "Don't look. Or do. It matters."
   },
-  "musicSeed": { "seed": "schrodinger_001", "mode": "lydian", "tempoRange": [55, 70], "intensity": 0.4 },
+  "musicSeed": {
+    "seed": "schrodinger_001",
+    "mode": "wholeTone",
+    "tempoRange": [
+      65,
+      86
+    ],
+    "intensity": 0.3,
+    "scale": "chromatic",
+    "style": "meditative",
+    "timeSignature": "4/4"
+  },
   "duration": 100,
   "unlockCondition": "act8_complete"
 }

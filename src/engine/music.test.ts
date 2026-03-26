@@ -283,4 +283,45 @@ describe('ProceduralMusic', () => {
     // Unknown act should fall back to neural/default
     expect(() => music.setActMood('unknown_act', 0)).not.toThrow();
   });
+
+  describe('Heart Rate Tempo Sync', () => {
+    it('should accept heart rate BPM without crashing', async () => {
+      const { ProceduralMusic } = await import('./music');
+      const music = new ProceduralMusic();
+      expect(() => music.setHeartRateBpm(72, 0.8)).not.toThrow();
+    });
+
+    it('should handle null BPM', async () => {
+      const { ProceduralMusic } = await import('./music');
+      const music = new ProceduralMusic();
+      expect(() => music.setHeartRateBpm(null, 0.5)).not.toThrow();
+    });
+
+    it('should handle low quality signal', async () => {
+      const { ProceduralMusic } = await import('./music');
+      const music = new ProceduralMusic();
+      expect(() => music.setHeartRateBpm(72, 0.2)).not.toThrow();
+    });
+
+    it('should handle zero quality signal', async () => {
+      const { ProceduralMusic } = await import('./music');
+      const music = new ProceduralMusic();
+      expect(() => music.setHeartRateBpm(72, 0)).not.toThrow();
+    });
+
+    it('should handle extreme BPM values gracefully', async () => {
+      const { ProceduralMusic } = await import('./music');
+      const music = new ProceduralMusic();
+      expect(() => music.setHeartRateBpm(200, 1.0)).not.toThrow();
+      expect(() => music.setHeartRateBpm(40, 1.0)).not.toThrow();
+    });
+
+    it('should work during playback', async () => {
+      const { ProceduralMusic } = await import('./music');
+      const music = new ProceduralMusic();
+      music.start();
+      music.setHeartRateBpm(80, 0.9);
+      expect(() => music.update(1 / 60)).not.toThrow();
+    });
+  });
 });

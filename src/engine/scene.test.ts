@@ -28,11 +28,11 @@ class MockScene extends Scene {
     this.exited = true;
   }
 
-  pause(): void {
+  override pause(): void {
     this.paused = true;
   }
 
-  resume(): void {
+  override resume(): void {
     this.resumed = true;
   }
 

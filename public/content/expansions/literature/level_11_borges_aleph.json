@@ -4,14 +4,103 @@
   "index": 11,
   "title": "The Aleph",
   "subtitle": "A point containing all points. Infinity in a cellar.",
-  "themeTags": ["borges", "aleph", "infinity", "vision"],
+  "themeTags": [
+    "borges",
+    "aleph",
+    "infinity",
+    "vision"
+  ],
   "levelEnemies": {
-    "carlos_argentino": { "visualId": "carlos_argentino", "dialogue": { "spawn": ["My poem spans Earth!", "The Aleph is mine!", "Beatriz loved me!", "Daneri is genius!", "In the cellar!"], "death": ["Poem... finite...", "Aleph... shared...", "Beatriz... memory...", "Genius... humble...", "Cellar... illuminated..."] } },
-    "aleph_point": { "visualId": "aleph_point", "dialogue": { "spawn": ["All places at once!", "Two inches diameter!", "The universe contained!", "Don't move your head!", "Simultaneous vision!"], "death": ["One place...", "Infinite...", "Universe... understood...", "Head... moved...", "Vision... integrated..."] } },
-    "beatriz_viterbo": { "visualId": "beatriz_viterbo", "dialogue": { "spawn": ["I am dead!", "But remembered!", "In the photographs!", "Borges visits yearly!", "Memory persists!"], "death": ["Dead... living...", "Remembered... present...", "Photographs... animated...", "Visited...", "Memory... eternal..."] } }
+    "carlos_argentino": {
+      "visualId": "carlos_argentino",
+      "dialogue": {
+        "spawn": [
+          "My poem spans Earth!",
+          "The Aleph is mine!",
+          "Beatriz loved me!",
+          "Daneri is genius!",
+          "In the cellar!"
+        ],
+        "death": [
+          "Poem... finite...",
+          "Aleph... shared...",
+          "Beatriz... memory...",
+          "Genius... humble...",
+          "Cellar... illuminated..."
+        ]
+      }
+    },
+    "aleph_point": {
+      "visualId": "aleph_point",
+      "dialogue": {
+        "spawn": [
+          "All places at once!",
+          "Two inches diameter!",
+          "The universe contained!",
+          "Don't move your head!",
+          "Simultaneous vision!"
+        ],
+        "death": [
+          "One place...",
+          "Infinite...",
+          "Universe... understood...",
+          "Head... moved...",
+          "Vision... integrated..."
+        ]
+      }
+    },
+    "beatriz_viterbo": {
+      "visualId": "beatriz_viterbo",
+      "dialogue": {
+        "spawn": [
+          "I am dead!",
+          "But remembered!",
+          "In the photographs!",
+          "Borges visits yearly!",
+          "Memory persists!"
+        ],
+        "death": [
+          "Dead... living...",
+          "Remembered... present...",
+          "Photographs... animated...",
+          "Visited...",
+          "Memory... eternal..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "cellar", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "aleph_glow", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "universe", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "I saw the Aleph from every point and angle—the convex equatorial deserts and each grain of sand. The monkey glimpses infinity contained." },
-  "musicSeed": { "seed": "aleph_011", "mode": "chromatic", "tempoRange": [35, 50], "intensity": 0.4 },
-  "duration": 160, "unlockCondition": "lit_level10_complete"
+  "bgLayers": [
+    {
+      "svgId": "cellar",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "aleph_glow",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "universe",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "I saw the Aleph from every point and angle—the convex equatorial deserts and each grain of sand. The monkey glimpses infinity contained."
+  },
+  "musicSeed": {
+    "seed": "aleph_011",
+    "mode": "dorian",
+    "tempoRange": [
+      75,
+      94
+    ],
+    "intensity": 0.56,
+    "scale": "mixolydian",
+    "style": "heroic",
+    "timeSignature": "6/8"
+  },
+  "duration": 160,
+  "unlockCondition": "lit_level10_complete"
 }

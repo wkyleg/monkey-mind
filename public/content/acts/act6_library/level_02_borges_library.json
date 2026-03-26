@@ -4,48 +4,126 @@
   "index": 2,
   "title": "Borges Library",
   "subtitle": "The index reveals the pattern. Find it.",
-  "themeTags": ["borges", "infinity", "index"],
+  "themeTags": [
+    "borges",
+    "infinity",
+    "index"
+  ],
   "ruleCard": {
     "icon": "index",
     "hint": "Apophenic patterns hide the truth. Index Shot reveals the real enemies.",
     "mechanic": "sequence_kill",
-    "params": { "indexReveal": true, "patternDepth": 3 }
+    "params": {
+      "indexReveal": true,
+      "patternDepth": 3
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": ["apophenic"], "weight": 4 },
-    { "archetype": "weaver", "modifiers": [], "weight": 3 },
-    { "archetype": "courier", "modifiers": [], "weight": 3 }
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "apophenic"
+      ],
+      "weight": 4
+    },
+    {
+      "archetype": "weaver",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "courier",
+      "modifiers": [],
+      "weight": 3
+    }
   ],
   "levelEnemies": {
     "book_specter": {
       "visualId": "book_specter",
       "dialogue": {
-        "spawn": ["Every book exists!", "I am written!", "The pages contain all!", "Find me in the stacks!", "Infinite variations!"],
-        "death": ["One less... copy...", "The text... fades...", "Shelved... forever...", "Unread... forgotten...", "Library... closes..."]
+        "spawn": [
+          "Every book exists!",
+          "I am written!",
+          "The pages contain all!",
+          "Find me in the stacks!",
+          "Infinite variations!"
+        ],
+        "death": [
+          "One less... copy...",
+          "The text... fades...",
+          "Shelved... forever...",
+          "Unread... forgotten...",
+          "Library... closes..."
+        ]
       }
     },
     "hexagon_guardian": {
       "visualId": "hexagon_guardian",
       "dialogue": {
-        "spawn": ["The architecture is perfect!", "Six walls of knowledge!", "Infinite hexagons!", "No beginning, no end!", "The spiral continues!"],
-        "death": ["The pattern... breaks...", "Walls... collapse...", "Finite... after all...", "The center... found...", "Geometry... fails..."]
+        "spawn": [
+          "The architecture is perfect!",
+          "Six walls of knowledge!",
+          "Infinite hexagons!",
+          "No beginning, no end!",
+          "The spiral continues!"
+        ],
+        "death": [
+          "The pattern... breaks...",
+          "Walls... collapse...",
+          "Finite... after all...",
+          "The center... found...",
+          "Geometry... fails..."
+        ]
       }
     },
     "librarian_shade": {
       "visualId": "librarian_shade",
       "dialogue": {
-        "spawn": ["SILENCE!", "The index knows all!", "Dewey decimal destruction!", "Overdue... your life!", "Late fees are DEATH!"],
-        "death": ["Catalogued... my end...", "Filed... under... deceased...", "The card... is pulled...", "Archive... complete...", "Shhhh... forever..."]
+        "spawn": [
+          "SILENCE!",
+          "The index knows all!",
+          "Dewey decimal destruction!",
+          "Overdue... your life!",
+          "Late fees are DEATH!"
+        ],
+        "death": [
+          "Catalogued... my end...",
+          "Filed... under... deceased...",
+          "The card... is pulled...",
+          "Archive... complete...",
+          "Shhhh... forever..."
+        ]
       }
     }
   },
   "hazards": [
-    { "type": "infinite_corridor", "lanes": [1, 5], "timing": 15000, "damage": 0, "visual": "hex_repeat" }
+    {
+      "type": "infinite_corridor",
+      "lanes": [
+        1,
+        5
+      ],
+      "timing": 15000,
+      "damage": 0,
+      "visual": "hex_repeat"
+    }
   ],
   "bgLayers": [
-    { "svgId": "library", "parallaxSpeed": 0.08, "opacity": 0.5 },
-    { "svgId": "hexagons", "parallaxSpeed": 0.25, "opacity": 0.6 },
-    { "svgId": "books", "parallaxSpeed": 0.4, "opacity": 0.4 }
+    {
+      "svgId": "library",
+      "parallaxSpeed": 0.08,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "hexagons",
+      "parallaxSpeed": 0.25,
+      "opacity": 0.6
+    },
+    {
+      "svgId": "books",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.4
+    }
   ],
   "copyLayers": {
     "ruleCard": "The index reveals the pattern. Find it.",
@@ -54,9 +132,15 @@
   },
   "musicSeed": {
     "seed": "borges_002",
-    "mode": "lydian",
-    "tempoRange": [70, 85],
-    "intensity": 0.45
+    "mode": "dorian",
+    "tempoRange": [
+      95,
+      108
+    ],
+    "intensity": 0.42,
+    "scale": "dorian",
+    "style": "meditative",
+    "timeSignature": "6/8"
   },
   "duration": 110,
   "unlockCondition": "act6_level1_complete"

@@ -19,19 +19,19 @@
     "rules": {
       "recommended": true,
       "correctness": {
-        "noUnusedVariables": "warn",
-        "noUnusedImports": "warn",
+        "noUnusedVariables": "error",
+        "noUnusedImports": "error",
         "noUnusedPrivateClassMembers": "off"
       },
       "suspicious": {
-        "noExplicitAny": "off",
+        "noExplicitAny": "warn",
         "noAssignInExpressions": "off",
         "useIterableCallbackReturn": "off",
-        "noImplicitAnyLet": "warn"
+        "noImplicitAnyLet": "error"
       },
       "style": {
-        "noNonNullAssertion": "off",
-        "useConst": "warn"
+        "noNonNullAssertion": "warn",
+        "useConst": "error"
       },
       "complexity": {
         "noForEach": "off",

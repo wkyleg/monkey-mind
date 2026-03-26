@@ -4,17 +4,37 @@
   "index": 3,
   "title": "Anabasis Retreat",
   "subtitle": "The march is constant. Ammo runs hot. Conserve.",
-  "themeTags": ["retreat", "endurance", "xenophon"],
+  "themeTags": [
+    "retreat",
+    "endurance",
+    "xenophon"
+  ],
   "ruleCard": {
     "icon": "heat",
     "hint": "Ammo overheats with rapid fire. Let it cool or face the horde unarmed.",
     "mechanic": "heat_ammo",
-    "params": { "heatRate": 0.2, "coolRate": 0.1, "maxHeat": 100 }
+    "params": {
+      "heatRate": 0.2,
+      "coolRate": 0.1,
+      "maxHeat": 100
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": [], "weight": 6 },
-    { "archetype": "swarm", "modifiers": [], "weight": 3 },
-    { "archetype": "chaser", "modifiers": [], "weight": 1 }
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 6
+    },
+    {
+      "archetype": "swarm",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 1
+    }
   ],
   "levelEnemies": {
     "persian_immortal": {
@@ -76,12 +96,36 @@
     }
   },
   "hazards": [
-    { "type": "exhaustion_zone", "lanes": [1, 2, 3, 4, 5], "timing": 20000, "damage": 0, "visual": "fatigue_overlay" }
+    {
+      "type": "exhaustion_zone",
+      "lanes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "timing": 20000,
+      "damage": 0,
+      "visual": "fatigue_overlay"
+    }
   ],
   "bgLayers": [
-    { "svgId": "mountains", "parallaxSpeed": 0.08, "opacity": 0.5 },
-    { "svgId": "army", "parallaxSpeed": 0.25, "opacity": 0.4 },
-    { "svgId": "dust", "parallaxSpeed": 0.5, "opacity": 0.3 }
+    {
+      "svgId": "mountains",
+      "parallaxSpeed": 0.08,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "army",
+      "parallaxSpeed": 0.25,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "dust",
+      "parallaxSpeed": 0.5,
+      "opacity": 0.3
+    }
   ],
   "copyLayers": {
     "ruleCard": "The march is constant. Ammo runs hot. Conserve.",
@@ -90,9 +134,15 @@
   },
   "musicSeed": {
     "seed": "anabasis_003",
-    "mode": "phrygian",
-    "tempoRange": [85, 95],
-    "intensity": 0.5
+    "mode": "mixolydian",
+    "tempoRange": [
+      110,
+      125
+    ],
+    "intensity": 0.55,
+    "scale": "mixolydian",
+    "style": "sacred",
+    "timeSignature": "6/8"
   },
   "duration": 120,
   "unlockCondition": "act3_level2_complete"

@@ -4,53 +4,143 @@
   "index": 10,
   "title": "The Backrooms",
   "subtitle": "You noclipped out of reality. Now you're here forever.",
-  "themeTags": ["backrooms", "liminal", "infinite", "trapped"],
+  "themeTags": [
+    "backrooms",
+    "liminal",
+    "infinite",
+    "trapped"
+  ],
   "ruleCard": {
     "icon": "door",
     "hint": "The exit is always one room away. Or infinite rooms away.",
     "mechanic": "infinite_maze",
-    "params": { "exitChance": 0.01, "wanderingDamage": 5 }
+    "params": {
+      "exitChance": 0.01,
+      "wanderingDamage": 5
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": [], "weight": 4, "visualId": "enemy_entity" },
-    { "archetype": "chaser", "modifiers": [], "weight": 4, "visualId": "enemy_howler" },
-    { "archetype": "anchor", "modifiers": [], "weight": 2, "visualId": "enemy_exit_door" }
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_entity"
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_howler"
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 2,
+      "visualId": "enemy_exit_door"
+    }
   ],
   "levelEnemies": {
     "level_entity": {
       "visualId": "level_entity",
       "dialogue": {
-        "spawn": ["Something's here!", "Don't run!", "It heard you!", "600 million square miles!", "No-clipping deeper!"],
-        "death": ["Nothing... here...", "Running... safe...", "Deaf...", "Finite... now...", "Clipping... out..."]
+        "spawn": [
+          "Something's here!",
+          "Don't run!",
+          "It heard you!",
+          "600 million square miles!",
+          "No-clipping deeper!"
+        ],
+        "death": [
+          "Nothing... here...",
+          "Running... safe...",
+          "Deaf...",
+          "Finite... now...",
+          "Clipping... out..."
+        ]
       }
     },
     "endless_hallway": {
       "visualId": "endless_hallway",
       "dialogue": {
-        "spawn": ["Yellow wallpaper!", "Fluorescent hum!", "Damp carpet!", "Always the same!", "No windows, no escape!"],
-        "death": ["Different... wallpaper...", "Silence...", "Dry floor...", "Different... now...", "Window... found..."]
+        "spawn": [
+          "Yellow wallpaper!",
+          "Fluorescent hum!",
+          "Damp carpet!",
+          "Always the same!",
+          "No windows, no escape!"
+        ],
+        "death": [
+          "Different... wallpaper...",
+          "Silence...",
+          "Dry floor...",
+          "Different... now...",
+          "Window... found..."
+        ]
       }
     },
     "false_exit": {
       "visualId": "false_exit",
       "dialogue": {
-        "spawn": ["An exit!", "Finally!", "Wait, where does it lead?", "Level 1? Or Level 94?", "There's no way out!"],
-        "death": ["Real... exit...", "At last...", "It leads... home...", "Level 0...", "Way... out..."]
+        "spawn": [
+          "An exit!",
+          "Finally!",
+          "Wait, where does it lead?",
+          "Level 1? Or Level 94?",
+          "There's no way out!"
+        ],
+        "death": [
+          "Real... exit...",
+          "At last...",
+          "It leads... home...",
+          "Level 0...",
+          "Way... out..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "liminal_trap", "params": { "wanderingDuration": 10000, "orientationLoss": 0.8 } }],
+  "hazards": [
+    {
+      "type": "liminal_trap",
+      "params": {
+        "wanderingDuration": 10000,
+        "orientationLoss": 0.8
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "yellow_wallpaper", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "fluorescent_lights", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "damp_carpet", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "yellow_wallpaper",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "fluorescent_lights",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "damp_carpet",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "The exit is always one room away. Or infinite rooms away.",
     "codexSnippet": "If you're not careful and noclip out of reality, you'll end up in the Backrooms. The monkey wanders the liminal space and learns that infinity has no exit.",
     "radioWhisper": "I've been walking for three years. The wallpaper never changes."
   },
-  "musicSeed": { "seed": "backrooms_010", "mode": "whole_tone", "tempoRange": [35, 50], "intensity": 0.4 },
+  "musicSeed": {
+    "seed": "backrooms_010",
+    "mode": "locrian",
+    "tempoRange": [
+      69,
+      94
+    ],
+    "intensity": 0.75,
+    "scale": "locrian",
+    "style": "dark",
+    "timeSignature": "5/4"
+  },
   "duration": 180,
   "unlockCondition": "paranoia_level9_complete"
 }

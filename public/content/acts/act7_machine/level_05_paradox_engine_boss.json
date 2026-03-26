@@ -4,26 +4,81 @@
   "index": 5,
   "title": "Paradox Engine",
   "subtitle": "Two states. One truth. Hit when they agree.",
-  "themeTags": ["boss", "paradox", "superposition", "logic"],
+  "themeTags": [
+    "boss",
+    "paradox",
+    "superposition",
+    "logic"
+  ],
   "ruleCard": {
     "icon": "superposition",
     "hint": "The Paradox Engine exists in two states. Only when both agree can it be damaged.",
     "mechanic": "rhythm_sync",
-    "params": { "stateA": "true", "stateB": "false", "agreementWindow": 2 }
+    "params": {
+      "stateA": "true",
+      "stateB": "false",
+      "agreementWindow": 2
+    }
   },
   "enemyDeck": [
-    { "archetype": "phaser", "modifiers": [], "weight": 3 },
-    { "archetype": "mimic", "modifiers": [], "weight": 3 },
-    { "archetype": "drifter", "modifiers": ["recursive"], "weight": 2 },
-    { "archetype": "anchor", "modifiers": ["incompleteness"], "weight": 2 }
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "mimic",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "recursive"
+      ],
+      "weight": 2
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [
+        "incompleteness"
+      ],
+      "weight": 2
+    }
   ],
   "hazards": [
-    { "type": "logic_gate", "lanes": [1, 2, 3, 4, 5], "timing": 6000, "damage": 1, "visual": "binary_flash" }
+    {
+      "type": "logic_gate",
+      "lanes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "timing": 6000,
+      "damage": 1,
+      "visual": "binary_flash"
+    }
   ],
   "bgLayers": [
-    { "svgId": "act7_bg_engine", "parallaxSpeed": 0.05, "opacity": 0.4 },
-    { "svgId": "act7_bg_states", "parallaxSpeed": 0.2, "opacity": 0.6, "animation": "flicker" },
-    { "svgId": "act7_bg_paradox", "parallaxSpeed": 0.4, "opacity": 0.5, "animation": "oscillate" }
+    {
+      "svgId": "act7_bg_engine",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "act7_bg_states",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6,
+      "animation": "flicker"
+    },
+    {
+      "svgId": "act7_bg_paradox",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.5,
+      "animation": "oscillate"
+    }
   ],
   "boss": "paradox_engine",
   "copyLayers": {
@@ -33,9 +88,15 @@
   },
   "musicSeed": {
     "seed": "paradox_boss_005",
-    "mode": "chromatic",
-    "tempoRange": [120, 140],
-    "intensity": 0.9
+    "mode": "phrygianDominant",
+    "tempoRange": [
+      130,
+      150
+    ],
+    "intensity": 0.85,
+    "scale": "phrygianDominant",
+    "style": "aggressive",
+    "timeSignature": "11/8"
   },
   "duration": 200,
   "unlockCondition": "act7_level4_complete"

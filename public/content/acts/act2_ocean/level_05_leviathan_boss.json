@@ -4,26 +4,76 @@
   "index": 5,
   "title": "Leviathan of Attention",
   "subtitle": "The beast feeds on focus. Starve it with calm.",
-  "themeTags": ["boss", "leviathan", "attention", "calm"],
+  "themeTags": [
+    "boss",
+    "leviathan",
+    "attention",
+    "calm"
+  ],
   "ruleCard": {
     "icon": "leviathan",
     "hint": "The Leviathan grows stronger when you panic. Calm timing defeats the beast.",
     "mechanic": "rhythm_sync",
-    "params": { "bpm": 60, "bonusMultiplier": 3 }
+    "params": {
+      "bpm": 60,
+      "bonusMultiplier": 3
+    }
   },
   "enemyDeck": [
-    { "archetype": "swarm", "modifiers": [], "weight": 3 },
-    { "archetype": "phaser", "modifiers": [], "weight": 3 },
-    { "archetype": "weaver", "modifiers": [], "weight": 2 },
-    { "archetype": "anchor", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "swarm",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "weaver",
+      "modifiers": [],
+      "weight": 2
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "hazards": [
-    { "type": "attention_drain", "lanes": [1, 2, 3, 4, 5], "timing": 8000, "damage": 0, "visual": "focus_pull" }
+    {
+      "type": "attention_drain",
+      "lanes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "timing": 8000,
+      "damage": 0,
+      "visual": "focus_pull"
+    }
   ],
   "bgLayers": [
-    { "svgId": "act2_bg_deep", "parallaxSpeed": 0.05, "opacity": 0.3 },
-    { "svgId": "act2_bg_tentacles", "parallaxSpeed": 0.2, "opacity": 0.5, "animation": "wave" },
-    { "svgId": "act2_bg_eyes", "parallaxSpeed": 0.4, "opacity": 0.6, "animation": "blink" }
+    {
+      "svgId": "act2_bg_deep",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.3
+    },
+    {
+      "svgId": "act2_bg_tentacles",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.5,
+      "animation": "wave"
+    },
+    {
+      "svgId": "act2_bg_eyes",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.6,
+      "animation": "blink"
+    }
   ],
   "boss": "leviathan_of_attention",
   "copyLayers": {
@@ -33,9 +83,15 @@
   },
   "musicSeed": {
     "seed": "leviathan_boss_005",
-    "mode": "phrygian",
-    "tempoRange": [60, 80],
-    "intensity": 0.8
+    "mode": "lydian",
+    "tempoRange": [
+      110,
+      130
+    ],
+    "intensity": 0.85,
+    "scale": "mixolydian",
+    "style": "heroic",
+    "timeSignature": "7/8"
   },
   "duration": 200,
   "unlockCondition": "act2_level4_complete"

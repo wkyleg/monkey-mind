@@ -4,53 +4,145 @@
   "index": 1,
   "title": "The Caves of Lascaux",
   "subtitle": "17,000 years ago. The first artists.",
-  "themeTags": ["lascaux", "prehistoric", "cave_art", "origins"],
+  "themeTags": [
+    "lascaux",
+    "prehistoric",
+    "cave_art",
+    "origins"
+  ],
   "ruleCard": {
     "icon": "handprint",
     "hint": "Paint to survive. Your shots leave marks that damage enemies who cross them.",
     "mechanic": "paint_trails",
-    "params": { "trailDuration": 5000, "trailDamage": 5, "paintCost": 2 }
+    "params": {
+      "trailDuration": 5000,
+      "trailDamage": 5,
+      "paintCost": 2
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": [], "weight": 5, "visualId": "enemy_cave_spirit" },
-    { "archetype": "chaser", "modifiers": [], "weight": 3, "visualId": "enemy_auroch_ghost" },
-    { "archetype": "swarm", "modifiers": [], "weight": 2, "visualId": "enemy_handprint_swarm" }
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 5,
+      "visualId": "enemy_cave_spirit"
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_auroch_ghost"
+    },
+    {
+      "archetype": "swarm",
+      "modifiers": [],
+      "weight": 2,
+      "visualId": "enemy_handprint_swarm"
+    }
   ],
   "levelEnemies": {
     "cave_bison": {
       "visualId": "cave_bison",
       "dialogue": {
-        "spawn": ["The hunt continues!", "Painted into being!", "17,000 years of running!", "The torch flickers!", "First art, first fear!"],
-        "death": ["Hunt... ends...", "Painted... to rest...", "Running... stops...", "Torch... steady...", "Art... immortal..."]
+        "spawn": [
+          "The hunt continues!",
+          "Painted into being!",
+          "17,000 years of running!",
+          "The torch flickers!",
+          "First art, first fear!"
+        ],
+        "death": [
+          "Hunt... ends...",
+          "Painted... to rest...",
+          "Running... stops...",
+          "Torch... steady...",
+          "Art... immortal..."
+        ]
       }
     },
     "handprint_ghost": {
       "visualId": "handprint_ghost",
       "dialogue": {
-        "spawn": ["I was here!", "Remember me!", "Hand on stone!", "Across millennia!", "The first signature!"],
-        "death": ["Here... always...", "Remembered...", "Stone... holds...", "Millennia... bridged...", "Signed... forever..."]
+        "spawn": [
+          "I was here!",
+          "Remember me!",
+          "Hand on stone!",
+          "Across millennia!",
+          "The first signature!"
+        ],
+        "death": [
+          "Here... always...",
+          "Remembered...",
+          "Stone... holds...",
+          "Millennia... bridged...",
+          "Signed... forever..."
+        ]
       }
     },
     "auroch_spirit": {
       "visualId": "auroch_spirit",
       "dialogue": {
-        "spawn": ["The great beast!", "Painted for luck!", "Hunting magic!", "The wall moves!", "Ochre and charcoal!"],
-        "death": ["Beast... rests...", "Luck... granted...", "Magic... complete...", "Wall... still...", "Colors... fade..."]
+        "spawn": [
+          "The great beast!",
+          "Painted for luck!",
+          "Hunting magic!",
+          "The wall moves!",
+          "Ochre and charcoal!"
+        ],
+        "death": [
+          "Beast... rests...",
+          "Luck... granted...",
+          "Magic... complete...",
+          "Wall... still...",
+          "Colors... fade..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "darkness", "params": { "visibility": 0.4, "torchRadius": 100 } }],
+  "hazards": [
+    {
+      "type": "darkness",
+      "params": {
+        "visibility": 0.4,
+        "torchRadius": 100
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "cave_wall", "parallaxSpeed": 0.05, "opacity": 0.5 },
-    { "svgId": "cave_paintings", "parallaxSpeed": 0.1, "opacity": 0.4 },
-    { "svgId": "torchlight", "parallaxSpeed": 0.15, "opacity": 0.6 }
+    {
+      "svgId": "cave_wall",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "cave_paintings",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "torchlight",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Paint to survive. Your shots leave marks that damage enemies who cross them.",
     "codexSnippet": "In the flickering torchlight, our ancestors painted the first stories onto stone walls. The monkey returns to the beginning of art and finds that the urge to create is as old as consciousness itself.",
     "radioWhisper": "The hand reaches across 17,000 years."
   },
-  "musicSeed": { "seed": "lascaux_001", "mode": "pentatonic", "tempoRange": [40, 55], "intensity": 0.3 },
+  "musicSeed": {
+    "seed": "lascaux_001",
+    "mode": "hirajoshi",
+    "tempoRange": [
+      70,
+      85
+    ],
+    "intensity": 0.3,
+    "scale": "pelog",
+    "style": "sacred",
+    "timeSignature": "3/4",
+    "culturalStyle": "japanese"
+  },
   "duration": 100,
   "unlockCondition": "act8_complete"
 }

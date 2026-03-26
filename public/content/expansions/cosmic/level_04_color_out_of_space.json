@@ -4,53 +4,146 @@
   "index": 4,
   "title": "The Colour Out of Space",
   "subtitle": "A color that should not exist.",
-  "themeTags": ["color", "lovecraft", "alien", "corruption"],
+  "themeTags": [
+    "color",
+    "lovecraft",
+    "alien",
+    "corruption"
+  ],
   "ruleCard": {
     "icon": "color",
     "hint": "The Color corrupts everything it touches. Avoid the spreading stain.",
     "mechanic": "corruption_spread",
-    "params": { "spreadRate": 0.1, "corruptionDamage": 8, "purifyBonus": 30 }
+    "params": {
+      "spreadRate": 0.1,
+      "corruptionDamage": 8,
+      "purifyBonus": 30
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": ["entropy"], "weight": 4, "visualId": "enemy_eldritch_eye" },
-    { "archetype": "swarm", "modifiers": [], "weight": 3, "visualId": "enemy_deep_one" },
-    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_deep_one" }
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "entropy"
+      ],
+      "weight": 4,
+      "visualId": "enemy_eldritch_eye"
+    },
+    {
+      "archetype": "swarm",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_deep_one"
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_deep_one"
+    }
   ],
   "levelEnemies": {
     "color_fragment": {
       "visualId": "color_fragment",
       "dialogue": {
-        "spawn": ["Behold the color!", "No spectrum contains me!", "I corrupt all!", "Drink from the well!", "The farm withers!"],
-        "death": ["Color... fades...", "Back to... the stars...", "Corruption... cleansed...", "The spectrum... returns...", "Normal... colors..."]
+        "spawn": [
+          "Behold the color!",
+          "No spectrum contains me!",
+          "I corrupt all!",
+          "Drink from the well!",
+          "The farm withers!"
+        ],
+        "death": [
+          "Color... fades...",
+          "Back to... the stars...",
+          "Corruption... cleansed...",
+          "The spectrum... returns...",
+          "Normal... colors..."
+        ]
       }
     },
     "blasted_farmer": {
       "visualId": "blasted_farmer",
       "dialogue": {
-        "spawn": ["The crops glow!", "The well water...", "My family... changed!", "Can't leave the farm!", "The color calls!"],
-        "death": ["Free... at last...", "The farm... releases...", "Family... remembered...", "Normal... again...", "The color... gone..."]
+        "spawn": [
+          "The crops glow!",
+          "The well water...",
+          "My family... changed!",
+          "Can't leave the farm!",
+          "The color calls!"
+        ],
+        "death": [
+          "Free... at last...",
+          "The farm... releases...",
+          "Family... remembered...",
+          "Normal... again...",
+          "The color... gone..."
+        ]
       }
     },
     "meteorite_shard": {
       "visualId": "meteorite_shard",
       "dialogue": {
-        "spawn": ["From the stars!", "I crashed and spread!", "The rock pulses!", "Alien origin!", "Earth contaminated!"],
-        "death": ["Shard... dissolves...", "Stars... too far...", "The pulse... stops...", "Origin... forgotten...", "Earth... cleansed..."]
+        "spawn": [
+          "From the stars!",
+          "I crashed and spread!",
+          "The rock pulses!",
+          "Alien origin!",
+          "Earth contaminated!"
+        ],
+        "death": [
+          "Shard... dissolves...",
+          "Stars... too far...",
+          "The pulse... stops...",
+          "Origin... forgotten...",
+          "Earth... cleansed..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "alien_color", "params": { "visualDistortion": true, "healthDrain": 3 } }],
+  "hazards": [
+    {
+      "type": "alien_color",
+      "params": {
+        "visualDistortion": true,
+        "healthDrain": 3
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "farm", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "corruption", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "alien_glow", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "farm",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "corruption",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "alien_glow",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "The Color corrupts everything it touches. Avoid the spreading stain.",
     "codexSnippet": "It came from the stars. A color that no earthly spectrum contains. The monkey watches the farm wither and learns that some things are beyond all earthly understanding.",
     "radioWhisper": "The well water glows. Don't drink it."
   },
-  "musicSeed": { "seed": "color_space_004", "mode": "phrygian", "tempoRange": [50, 65], "intensity": 0.5 },
+  "musicSeed": {
+    "seed": "color_space_004",
+    "mode": "locrian",
+    "tempoRange": [
+      59,
+      80
+    ],
+    "intensity": 0.8,
+    "scale": "augmented",
+    "style": "mysterious",
+    "timeSignature": "6/8"
+  },
   "duration": 130,
   "unlockCondition": "cosmic_level3_complete"
 }

@@ -4,14 +4,103 @@
   "index": 3,
   "title": "Dante's Inferno",
   "subtitle": "Abandon hope. Nine circles await.",
-  "themeTags": ["dante", "inferno", "hell", "circles"],
+  "themeTags": [
+    "dante",
+    "inferno",
+    "hell",
+    "circles"
+  ],
   "levelEnemies": {
-    "minos": { "visualId": "minos", "dialogue": { "spawn": ["Judge of the damned!", "My tail wraps!", "Which circle for you?", "No appeal!", "Abandon hope!"], "death": ["Judged... innocent...", "Tail... unwound...", "No circle...", "Appealed...", "Hope... restored..."] } },
-    "sinner": { "visualId": "sinner", "dialogue": { "spawn": ["Contrapasso!", "My punishment fits!", "Eternal!", "I deserve this!", "The sin reflects!"], "death": ["Punishment... ends...", "Fitting... no more...", "Finite...", "Forgiven...", "Sin... absolved..."] } },
-    "virgil_guide": { "visualId": "virgil_guide", "dialogue": { "spawn": ["Follow me!", "Beatrice sent me!", "Through Hell we pass!", "Don't speak to sinners!", "The way is forward!"], "death": ["Following...", "Beatrice... thanks...", "Passed...", "Speaking... forbidden...", "Forward... upward..."] } }
+    "minos": {
+      "visualId": "minos",
+      "dialogue": {
+        "spawn": [
+          "Judge of the damned!",
+          "My tail wraps!",
+          "Which circle for you?",
+          "No appeal!",
+          "Abandon hope!"
+        ],
+        "death": [
+          "Judged... innocent...",
+          "Tail... unwound...",
+          "No circle...",
+          "Appealed...",
+          "Hope... restored..."
+        ]
+      }
+    },
+    "sinner": {
+      "visualId": "sinner",
+      "dialogue": {
+        "spawn": [
+          "Contrapasso!",
+          "My punishment fits!",
+          "Eternal!",
+          "I deserve this!",
+          "The sin reflects!"
+        ],
+        "death": [
+          "Punishment... ends...",
+          "Fitting... no more...",
+          "Finite...",
+          "Forgiven...",
+          "Sin... absolved..."
+        ]
+      }
+    },
+    "virgil_guide": {
+      "visualId": "virgil_guide",
+      "dialogue": {
+        "spawn": [
+          "Follow me!",
+          "Beatrice sent me!",
+          "Through Hell we pass!",
+          "Don't speak to sinners!",
+          "The way is forward!"
+        ],
+        "death": [
+          "Following...",
+          "Beatrice... thanks...",
+          "Passed...",
+          "Speaking... forbidden...",
+          "Forward... upward..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "hell_gates", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "circles", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "flames", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "Through me the way to the city of woe. Dante descends the nine circles with Virgil, and the monkey follows into contrapasso." },
-  "musicSeed": { "seed": "inferno_003", "mode": "locrian", "tempoRange": [65, 80], "intensity": 0.7 },
-  "duration": 130, "unlockCondition": "lit_level2_complete"
+  "bgLayers": [
+    {
+      "svgId": "hell_gates",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "circles",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "flames",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "Through me the way to the city of woe. Dante descends the nine circles with Virgil, and the monkey follows into contrapasso."
+  },
+  "musicSeed": {
+    "seed": "inferno_003",
+    "mode": "dorian",
+    "tempoRange": [
+      71,
+      89
+    ],
+    "intensity": 0.35,
+    "scale": "chromatic",
+    "style": "tension",
+    "timeSignature": "3/4"
+  },
+  "duration": 130,
+  "unlockCondition": "lit_level2_complete"
 }

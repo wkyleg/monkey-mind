@@ -4,26 +4,80 @@
   "index": 5,
   "title": "Arcimboldo Crown",
   "subtitle": "The composite face. Destroy the parts to reveal the whole.",
-  "themeTags": ["boss", "arcimboldo", "composite", "identity"],
+  "themeTags": [
+    "boss",
+    "arcimboldo",
+    "composite",
+    "identity"
+  ],
   "ruleCard": {
     "icon": "composite",
     "hint": "The crown is made of parts. Kill order changes the phase. Find the pattern.",
     "mechanic": "sequence_kill",
-    "params": { "parts": ["fruit", "vegetable", "flower", "fish"], "orderMatters": true }
+    "params": {
+      "parts": [
+        "fruit",
+        "vegetable",
+        "flower",
+        "fish"
+      ],
+      "orderMatters": true
+    }
   },
   "enemyDeck": [
-    { "archetype": "splitter", "modifiers": [], "weight": 3 },
-    { "archetype": "swarm", "modifiers": [], "weight": 3 },
-    { "archetype": "courier", "modifiers": [], "weight": 2 },
-    { "archetype": "mimic", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "splitter",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "swarm",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "courier",
+      "modifiers": [],
+      "weight": 2
+    },
+    {
+      "archetype": "mimic",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "hazards": [
-    { "type": "composition_shift", "lanes": [1, 2, 3, 4, 5], "timing": 15000, "damage": 0, "visual": "rearrange" }
+    {
+      "type": "composition_shift",
+      "lanes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "timing": 15000,
+      "damage": 0,
+      "visual": "rearrange"
+    }
   ],
   "bgLayers": [
-    { "svgId": "act5_bg_gallery", "parallaxSpeed": 0.05, "opacity": 0.4 },
-    { "svgId": "act5_bg_frame", "parallaxSpeed": 0.2, "opacity": 0.5 },
-    { "svgId": "act5_bg_parts", "parallaxSpeed": 0.4, "opacity": 0.6, "animation": "assemble" }
+    {
+      "svgId": "act5_bg_gallery",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "act5_bg_frame",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "act5_bg_parts",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.6,
+      "animation": "assemble"
+    }
   ],
   "boss": "arcimboldo_crown",
   "copyLayers": {
@@ -34,8 +88,14 @@
   "musicSeed": {
     "seed": "arcimboldo_boss_005",
     "mode": "chromatic",
-    "tempoRange": [95, 120],
-    "intensity": 0.85
+    "tempoRange": [
+      135,
+      165
+    ],
+    "intensity": 0.85,
+    "scale": "diminished",
+    "style": "aggressive",
+    "timeSignature": "11/8"
   },
   "duration": 200,
   "unlockCondition": "act5_level4_complete"

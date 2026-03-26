@@ -4,14 +4,103 @@
   "index": 5,
   "title": "Dante's Paradiso",
   "subtitle": "The Empyrean. Love moves the sun and stars.",
-  "themeTags": ["dante", "paradise", "heaven", "love"],
+  "themeTags": [
+    "dante",
+    "paradise",
+    "heaven",
+    "love"
+  ],
   "levelEnemies": {
-    "beatrice": { "visualId": "beatrice", "dialogue": { "spawn": ["Look to the light!", "I am your guide now!", "Beyond reason!", "Divine love!", "The Empyrean awaits!"], "death": ["Light... seen...", "Guided...", "Beyond...", "Love... felt...", "Empyrean... reached..."] } },
-    "celestial_sphere": { "visualId": "celestial_sphere", "dialogue": { "spawn": ["The music of the spheres!", "Ptolemaic perfection!", "Moon, Mercury, Venus!", "Ascending!", "Primum mobile!"], "death": ["Music... heard...", "Perfection... known...", "Spheres... passed...", "Ascended...", "Prime... mover..."] } },
-    "divine_vision": { "visualId": "divine_vision", "dialogue": { "spawn": ["The mystic rose!", "All souls gathered!", "God's light!", "L'amor che move!", "The vision fails!"], "death": ["Rose... bloomed...", "Souls... seen...", "Light... absorbed...", "Love... moves...", "Vision... complete..."] } }
+    "beatrice": {
+      "visualId": "beatrice",
+      "dialogue": {
+        "spawn": [
+          "Look to the light!",
+          "I am your guide now!",
+          "Beyond reason!",
+          "Divine love!",
+          "The Empyrean awaits!"
+        ],
+        "death": [
+          "Light... seen...",
+          "Guided...",
+          "Beyond...",
+          "Love... felt...",
+          "Empyrean... reached..."
+        ]
+      }
+    },
+    "celestial_sphere": {
+      "visualId": "celestial_sphere",
+      "dialogue": {
+        "spawn": [
+          "The music of the spheres!",
+          "Ptolemaic perfection!",
+          "Moon, Mercury, Venus!",
+          "Ascending!",
+          "Primum mobile!"
+        ],
+        "death": [
+          "Music... heard...",
+          "Perfection... known...",
+          "Spheres... passed...",
+          "Ascended...",
+          "Prime... mover..."
+        ]
+      }
+    },
+    "divine_vision": {
+      "visualId": "divine_vision",
+      "dialogue": {
+        "spawn": [
+          "The mystic rose!",
+          "All souls gathered!",
+          "God's light!",
+          "L'amor che move!",
+          "The vision fails!"
+        ],
+        "death": [
+          "Rose... bloomed...",
+          "Souls... seen...",
+          "Light... absorbed...",
+          "Love... moves...",
+          "Vision... complete..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "spheres", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "light", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "rose", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "The love that moves the sun and other stars. The monkey ascends through the celestial spheres to glimpse the divine rose." },
-  "musicSeed": { "seed": "paradiso_005", "mode": "lydian", "tempoRange": [45, 60], "intensity": 0.3 },
-  "duration": 150, "unlockCondition": "lit_level4_complete"
+  "bgLayers": [
+    {
+      "svgId": "spheres",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "light",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "rose",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "The love that moves the sun and other stars. The monkey ascends through the celestial spheres to glimpse the divine rose."
+  },
+  "musicSeed": {
+    "seed": "paradiso_005",
+    "mode": "dorian",
+    "tempoRange": [
+      72,
+      91
+    ],
+    "intensity": 0.41,
+    "scale": "doubleHarmonic",
+    "style": "heroic",
+    "timeSignature": "5/4"
+  },
+  "duration": 150,
+  "unlockCondition": "lit_level4_complete"
 }

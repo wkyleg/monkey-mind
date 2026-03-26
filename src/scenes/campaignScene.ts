@@ -18,8 +18,10 @@ import { type Drop, DropSystem } from '../gameplay/drops';
 import { EnemySystem } from '../gameplay/enemies';
 import { Hud, type HudState } from '../gameplay/hud';
 import { MetersSystem } from '../gameplay/meters';
+import { NeuroAbilities } from '../gameplay/neuroAbilities';
 import { Player } from '../gameplay/player';
 import { type PowerupPickup, PowerupSystem } from '../gameplay/powerups';
+import { SessionRecorder } from '../gameplay/sessionRecorder';
 import { Spawner } from '../gameplay/spawner';
 import { SpawnerV2 } from '../gameplay/spawnerV2';
 import { WeaponSystem } from '../gameplay/weapons';
@@ -54,6 +56,7 @@ export class CampaignScene extends Scene {
   private hud!: Hud;
   private camera!: Camera;
   private meters!: MetersSystem;
+  private neuroAbilities!: NeuroAbilities;
 
   private score: number = 0;
   private combo: number = 0;
@@ -88,8 +91,22 @@ export class CampaignScene extends Scene {
   private nextLevelData: { title: string; subtitle?: string; lore?: string } | null = null;
 
   // Game over menu state
-  private gameOverSelectedOption: number = 0; // 0 = RETRY, 1 = QUIT
+  private gameOverSelectedOption: number = 0;
   private gameOverInputCooldown: number = 0;
+
+  // Breathe gate state
+  private breatheGateActive = false;
+  private breatheGateTimer = 0;
+  private breatheGateCalmTimer = 0;
+  private readonly breatheGateTimeout = 8;
+
+  // Session recorder for neuro performance reports
+  private sessionRecorder: SessionRecorder = new SessionRecorder();
+  private pendingLevelReport = false;
+
+  // Alpha bump score bonus
+  private alphaBumpBonusTimer = 0;
+  private alphaBumpFlashTimer = 0;
 
   private hudState: HudState = {
     score: 0,
@@ -120,6 +137,7 @@ export class CampaignScene extends Scene {
     this.hud = new Hud();
     this.camera = new Camera();
     this.meters = new MetersSystem();
+    this.neuroAbilities = new NeuroAbilities();
 
     // Reset state
     this.score = 0;
@@ -149,9 +167,17 @@ export class CampaignScene extends Scene {
     // Emit game start
     events.emit('game:start', { mode: 'campaign' });
 
+    // Wire webcam video element to HUD for face preview
+    this.hud.setVideoElement(this.game.getNeuroManager().getCameraVideoElement());
+
     // Start procedural music
     this.updateMusic();
     this.game.getMusic().start();
+
+    // Prompt for neuro device if nothing is connected
+    if (!this.game.getNeuroManager().hasActiveSource()) {
+      this.game.getScenes().push('deviceGate');
+    }
   }
 
   private initializeFromContext(context: LevelSelectContext): void {
@@ -237,11 +263,15 @@ export class CampaignScene extends Scene {
     this.powerups.clear();
   }
 
-  resume(): void {
-    // Called when returning from transition, boss, or story scenes
+  override resume(): void {
+    // Returning from level report — proceed with the normal transition
+    if (this.pendingLevelReport) {
+      this.pendingLevelReport = false;
+      this.proceedAfterLevelComplete();
+      return;
+    }
 
     // Don't reload content if we're showing sector complete (boss just defeated)
-    // This prevents the boss from being re-triggered when returning from boss scene
     if (this.showingSectorComplete) {
       return;
     }
@@ -290,8 +320,9 @@ export class CampaignScene extends Scene {
 
     this.currentLevel = this.currentAct.levels[this.currentLevelIndex];
 
-    // Register level-specific enemy dialogue if present
+    // Clear previous level dialogue before registering new ones
     if (this.currentLevel.levelEnemies) {
+      contentLoader.clearLevelEnemyDialogue(Object.keys(this.currentLevel.levelEnemies));
       contentLoader.registerLevelEnemyDialogue(this.currentLevel.levelEnemies);
     }
 
@@ -299,6 +330,12 @@ export class CampaignScene extends Scene {
     this.hudState.sector = this.currentAct.id;
     this.hudState.sectorName = this.currentAct.name;
     this.hudState.levelName = this.currentLevel.title;
+
+    this.sessionRecorder.start(
+      `${this.currentAct.id}-L${this.currentLevelIndex + 1}`,
+      this.currentLevel.title,
+      this.currentAct.name,
+    );
 
     // Set current act and level index for spawner to use level-specific enemy visuals
     this.spawnerV2.setCurrentAct(this.currentAct.id);
@@ -370,14 +407,21 @@ export class CampaignScene extends Scene {
 
     this.currentLevel = this.currentExpansion.levels[this.currentLevelIndex];
 
-    // Register level-specific enemy dialogue if present
+    // Clear previous level dialogue before registering new ones
     if (this.currentLevel.levelEnemies) {
+      contentLoader.clearLevelEnemyDialogue(Object.keys(this.currentLevel.levelEnemies));
       contentLoader.registerLevelEnemyDialogue(this.currentLevel.levelEnemies);
     }
 
     this.hudState.sector = this.currentExpansion.id;
     this.hudState.sectorName = this.currentExpansion.name;
     this.hudState.levelName = this.currentLevel.title;
+
+    this.sessionRecorder.start(
+      `${this.currentExpansion.id}-L${this.currentLevelIndex + 1}`,
+      this.currentLevel.title,
+      this.currentExpansion.name,
+    );
 
     // Extract expansion short ID (e.g., "art" from "expansion_art" or from level's expansion field)
     const expansionShortId = this.currentLevel.expansion || this.currentExpansion.id.replace('expansion_', '');
@@ -427,6 +471,12 @@ export class CampaignScene extends Scene {
     this.hudState.sector = sector.id;
     this.hudState.sectorName = sector.name;
 
+    this.sessionRecorder.start(
+      `${sector.id}-L${this.currentLevelIndex + 1}`,
+      `Level ${this.currentLevelIndex + 1}`,
+      sector.name,
+    );
+
     // Show sector intro for first level of each sector
     if (showIntro && this.currentLevelIndex === 0) {
       this.game.getScenes().pushLevelStory(sector.id, true);
@@ -438,6 +488,38 @@ export class CampaignScene extends Scene {
       this.hudState.wave = number;
     });
 
+    events.on('wave:complete', () => {
+      if (this.currentLevel?.breatheGate && !this.breatheGateActive) {
+        this.breatheGateActive = true;
+        this.breatheGateTimer = 0;
+        this.breatheGateCalmTimer = 0;
+      }
+    });
+
+    events.on('neuro:disconnected', ({ source }) => {
+      const msg =
+        source === 'eeg'
+          ? 'Headband disconnected — ESC > Neuro Settings to reconnect'
+          : 'Camera lost — ESC > Neuro Settings to reconnect';
+      this.hud.showToast(msg, '#ff6644');
+    });
+
+    events.on('neuro:source_changed', ({ to }) => {
+      const label = to === 'eeg' ? 'EEG headband' : to === 'rppg' ? 'webcam' : to === 'mock' ? 'simulation' : 'none';
+      this.hud.showToast(`Signal source: ${label}`);
+    });
+
+    events.on('neuro:camera_quality_low', () => {
+      this.hud.showToast('Camera signal weak — check lighting', '#ffaa44');
+    });
+
+    events.on('neuro:alpha_bump', () => {
+      this.alphaBumpBonusTimer = 2;
+      this.alphaBumpFlashTimer = 0.3;
+      this.hud.showToast('ALPHA BURST — 2x SCORE', '#00ffcc');
+      this.sessionRecorder.recordAlphaBump();
+    });
+
     events.on('enemy:spawn', () => {
       // Update meters when enemy spawns
       this.meters.onEnemySpawn(1);
@@ -446,6 +528,7 @@ export class CampaignScene extends Scene {
     events.on('enemy:death', ({ position, type }) => {
       this.addScore(10);
       this.incrementCombo();
+      this.sessionRecorder.recordKill();
 
       // Update meters on enemy kill
       this.meters.onEnemyKill();
@@ -465,8 +548,8 @@ export class CampaignScene extends Scene {
     });
 
     events.on('player:damage', ({ amount }) => {
-      // Update meters when player takes damage
       this.meters.onPlayerDamage(amount);
+      this.sessionRecorder.recordDamage();
     });
 
     events.on('player:death', () => {
@@ -487,13 +570,24 @@ export class CampaignScene extends Scene {
   }
 
   private handleLevelComplete(): void {
+    // Stop the session recorder and push the report scene
+    if (this.sessionRecorder.isActive()) {
+      const report = this.sessionRecorder.stop(this.score);
+      this.game.getScenes().setContext('levelReport', report);
+      this.pendingLevelReport = true;
+      this.game.getScenes().push('levelReport');
+      return;
+    }
+
+    this.proceedAfterLevelComplete();
+  }
+
+  private proceedAfterLevelComplete(): void {
     const nextLevelIndex = this.currentLevelIndex + 1;
 
-    // Check what comes next and prepare transition data
     switch (this.campaignMode) {
       case 'act':
         if (this.currentAct && nextLevelIndex >= this.currentAct.levels.length) {
-          // Act complete - show boss intro directly
           this.currentLevelIndex = nextLevelIndex;
           if (this.currentAct.bossId) {
             this.pendingBoss = this.currentAct.bossId;
@@ -503,7 +597,6 @@ export class CampaignScene extends Scene {
             this.advanceToNextAct();
           }
         } else if (this.currentAct) {
-          // Show transition to next level
           const nextLevel = this.currentAct.levels[nextLevelIndex];
           if (nextLevel) {
             this.nextLevelData = {
@@ -522,11 +615,9 @@ export class CampaignScene extends Scene {
 
       case 'expansion':
         if (this.currentExpansion && nextLevelIndex >= this.currentExpansion.levels.length) {
-          // Expansion complete
           events.emit('game:complete', { score: this.score });
           this.game.getScenes().goto('victory');
         } else if (this.currentExpansion) {
-          // Show transition to next level
           const nextLevel = this.currentExpansion.levels[nextLevelIndex];
           if (nextLevel) {
             this.nextLevelData = {
@@ -654,7 +745,8 @@ export class CampaignScene extends Scene {
 
   private addScore(amount: number): void {
     const comboMultiplier = 1 + this.combo * 0.1;
-    const totalAmount = Math.floor(amount * comboMultiplier);
+    const alphaBumpMultiplier = this.alphaBumpBonusTimer > 0 ? 2 : 1;
+    const totalAmount = Math.floor(amount * comboMultiplier * alphaBumpMultiplier);
     this.score += totalAmount;
     this.hudState.score = this.score;
 
@@ -708,6 +800,9 @@ export class CampaignScene extends Scene {
   update(dt: number, intent: PlayerIntent): void {
     this.time += dt;
 
+    // Pass mouse position to HUD for hover tooltips
+    this.hud.setMousePos(this.game.getInput().getMousePos());
+
     // Handle button clicks
     const mouseClick = this.game.getInput().getMouseClick();
     if (mouseClick && !this.gameOver) {
@@ -718,6 +813,14 @@ export class CampaignScene extends Scene {
       if (this.hud.isMuteButtonClicked(mouseClick.x, mouseClick.y)) {
         const isMuted = this.game.getMusic().toggleMute();
         this.hud.setMuteState(isMuted);
+        return;
+      }
+      if (this.hud.isInfoButtonClicked(mouseClick.x, mouseClick.y)) {
+        this.game.getScenes().push('howToPlay');
+        return;
+      }
+      if (this.hud.isNeuroButtonClicked(mouseClick.x, mouseClick.y)) {
+        this.game.getScenes().push('neuroSettings');
         return;
       }
     }
@@ -732,6 +835,11 @@ export class CampaignScene extends Scene {
     if (intent.mute && !this.gameOver) {
       const isMuted = this.game.getMusic().toggleMute();
       this.hud.setMuteState(isMuted);
+    }
+
+    // Handle debug overlay toggle
+    if (intent.debugToggle) {
+      this.hud.toggleDebug();
     }
 
     if (this.gameOver) {
@@ -793,8 +901,13 @@ export class CampaignScene extends Scene {
     // Update player
     this.player.updateFromIntent(intent, dt);
 
+    // Update weapon mode from neuro state
+    this.weapons.setNeuroState(intent.calm ?? 0, intent.arousal ?? 0);
+    this.weapons.setEnemyPositions(this.enemies.getEnemies().map((e) => ({ x: e.transform.x, y: e.transform.y })));
+    this.hudState.weaponMode = this.weapons.getWeaponMode();
+
     // Auto-fire
-    if (this.player.canFire()) {
+    if (this.player.canFire(this.weapons.getFireRateModifier())) {
       this.weapons.fire(this.player.transform.x, this.player.transform.y);
     }
 
@@ -821,10 +934,12 @@ export class CampaignScene extends Scene {
     // Update dialogue system
     dialogueSystem.update(dt);
 
-    // Update music combat intensity
+    // Update music combat intensity + heart rate tempo
     const enemyCount = this.enemies.getEnemies().length;
     const combatIntensity = Math.min(1, enemyCount / 8);
     this.game.getMusic().setCombatIntensity(combatIntensity);
+    const neuroForMusic = this.game.getNeuroManager().getState();
+    this.game.getMusic().setHeartRateBpm(neuroForMusic.bpm, neuroForMusic.bpmQuality);
 
     // Collision detection
     this.handleCollisions();
@@ -841,21 +956,151 @@ export class CampaignScene extends Scene {
     this.hudState.calmLevel = intent.calm ?? 0;
     this.hudState.arousalLevel = intent.arousal ?? 0;
 
+    // Populate neuro HUD fields
+    const neuro = this.game.getNeuroManager().getState();
+    this.hudState.neuroSource = neuro.source;
+    this.hudState.bpm = neuro.bpm;
+    this.hudState.bpmQuality = neuro.bpmQuality;
+    this.hudState.signalQuality = neuro.signalQuality;
+    this.hudState.alphaPower = neuro.alphaPower;
+    this.hudState.betaPower = neuro.betaPower;
+    this.hudState.thetaPower = neuro.thetaPower;
+    this.hudState.alphaBump = neuro.alphaBump;
+
+    // Evaluate NeuroHooks from current level
+    if (this.currentLevel?.neuroHooks) {
+      for (const hook of this.currentLevel.neuroHooks) {
+        const value =
+          hook.trigger === 'calm' ? (intent.calm ?? 0) : hook.trigger === 'arousal' ? (intent.arousal ?? 0) : null;
+        if (value !== null && value > hook.threshold) {
+          events.emit('neuro:hook', { effect: hook.effect, params: hook.params });
+        }
+      }
+    }
+
+    // Update neuro-reactive enemies (observed/unseen modifiers)
+    const calm = this.hudState.calmLevel;
+    const arousal = this.hudState.arousalLevel;
+    for (const entity of this.enemies.getEnemies()) {
+      const enemy = entity as import('../gameplay/enemies').Enemy;
+      if (enemy.hasModifier?.('observed')) {
+        enemy.dormant = arousal < 0.3;
+      }
+      if (enemy.hasModifier?.('unseen')) {
+        enemy.neuroInvulnerable = calm < 0.5;
+      }
+    }
+
     // Update meters system
     const projectileCount = this.weapons.getProjectiles().length;
     const isPlayerMoving = Math.abs(intent.moveAxis) > 0.1;
+    const neuroState = this.game.getNeuroManager().getState();
     this.meters.update(dt, {
       enemyCount,
       projectileCount,
-      playerDamaged: false, // Will be set true in damage handler
+      playerDamaged: false,
       playerMoving: isPlayerMoving,
+      calm: neuroState.calm,
+      arousal: neuroState.arousal,
+      alpha: neuroState.alphaPower ?? 0,
+      beta: neuroState.betaPower ?? 0,
+      theta: neuroState.thetaPower ?? 0,
     });
 
-    // Pass meter values to HUD
-    const meterValues = this.meters.getAll();
-    this.hudState.noise = meterValues.noise;
-    this.hudState.focus = meterValues.focus;
-    this.hudState.stillness = meterValues.stillness;
+    // Sample neuro data for session report
+    const playerHealth = this.player.health?.current ?? 0;
+    const playerHealthMax = this.player.health?.max ?? 1;
+    this.sessionRecorder.sample(
+      dt,
+      neuroState,
+      this.score,
+      this.combo,
+      this.player.transform.x,
+      playerHealth,
+      playerHealthMax,
+    );
+
+    // Pass raw SDK meter values to HUD
+    this.hudState.noise = this.meters.getArousal();
+    this.hudState.focus = this.meters.getCalm();
+    this.hudState.stillness = this.meters.getAlpha();
+    this.hudState.betaMeter = this.meters.getBeta();
+    this.hudState.thetaMeter = this.meters.getTheta();
+
+    // Update neuro abilities
+    this.neuroAbilities.update(
+      dt,
+      this.hudState.calmLevel,
+      this.hudState.arousalLevel,
+      this.player,
+      this.weapons,
+      neuroState.hrvRmssd,
+    );
+    this.hudState.shieldCharge = this.neuroAbilities.getShieldCharge();
+    this.hudState.overdriveCharge = this.neuroAbilities.getOverdriveCharge();
+    this.hudState.shieldActive = this.neuroAbilities.isShieldActive();
+    this.hudState.overdriveActive = this.neuroAbilities.isOverdriveActive();
+
+    // Alpha bump bonus timer
+    if (this.alphaBumpBonusTimer > 0) this.alphaBumpBonusTimer -= dt;
+    if (this.alphaBumpFlashTimer > 0) this.alphaBumpFlashTimer -= dt;
+
+    // Gamma power -> damage bonus (high gamma = peak concentration)
+    const gammaPower = neuroState.gammaPower ?? 0;
+    if (gammaPower > 0.3) {
+      this.weapons.setDamageMultiplier(1 + gammaPower * 0.5);
+    }
+    this.hudState.eegConnected = neuro.eegConnected;
+    this.hudState.cameraActive = neuro.cameraActive;
+    this.hudState.calibrationProgress =
+      this.game.getNeuroManager().getRppgProvider()?.getState().calibrationProgress ?? 0;
+    this.hudState.waveformData = this.game.getMusic().getWaveformData();
+    this.hudState.frequencyData = this.game.getMusic().getFrequencyData();
+    this.hudState.effectiveTempo = this.game.getMusic().getEffectiveTempo();
+    this.hudState.eegLastError = this.game.getNeuroManager().getHeadbandErrorMessage() || undefined;
+    this.hudState.cameraLastError = this.game.getNeuroManager().getCameraErrorMessage() || undefined;
+
+    const rppgState = this.game.getNeuroManager().getRppgProvider()?.getState();
+    if (rppgState) {
+      this.hudState.displayBpm = rppgState.displayBpm;
+      this.hudState.rawBpm = rppgState.rawBpm;
+      this.hudState.smoothedBpm = rppgState.smoothedBpm;
+      this.hudState.lastValidBpm = rppgState.lastValidBpm;
+      this.hudState.lastValidBpmAge = rppgState.lastValidBpmAge;
+      this.hudState.rppgActiveTime = rppgState.activeTime;
+      this.hudState.rppgWarmupComplete = rppgState.warmupComplete;
+      this.hudState.videoWidth = rppgState.videoWidth;
+      this.hudState.videoHeight = rppgState.videoHeight;
+      this.hudState.bpmHistory = rppgState.bpmHistory;
+    }
+
+    const eegProvider = this.game.getNeuroManager().getEEGProvider();
+    this.hudState.eegSamples = eegProvider.getRecentSamples();
+    this.hudState.eegFrameCount = eegProvider.getFrameCount();
+    this.hudState.eegDecodeErrors = eegProvider.getDecodeErrorCount();
+    this.hudState.eegBleNotifications = eegProvider.getBleNotificationCount();
+    this.hudState.eegEmptyDecodes = eegProvider.getEmptyDecodeCount();
+    this.hudState.eegModelsReady = eegProvider.isModelsReady();
+    this.hudState.eegBatteryLevel = eegProvider.getBatteryLevel();
+    this.hudState.eegReconnecting = eegProvider.isReconnecting();
+    this.hudState.eegReconnectAttempt = eegProvider.getReconnectAttempt();
+    this.hudState.eegReconnectCount = eegProvider.getReconnectCount();
+    this.hudState.eegBandHistory = eegProvider.getBandPowerHistory();
+
+    this.hudState.hrvRmssd = neuro.hrvRmssd;
+    this.hudState.respirationRate = neuro.respirationRate;
+    this.hudState.baselineBpm = neuro.baselineBpm;
+    this.hudState.baselineDelta = neuro.baselineDelta;
+    this.hudState.calmnessState = neuro.calmnessState;
+    this.hudState.alphaPeakFreq = neuro.alphaPeakFreq;
+    this.hudState.alphaBumpState = neuro.alphaBumpState;
+    this.hudState.deltaPower = neuro.deltaPower;
+    this.hudState.gammaPower = neuro.gammaPower;
+    this.hudState.confidence = rppgState?.confidence ?? 0;
+    this.hudState.rppgDebugMetrics = rppgState?.debugMetrics ?? null;
+
+    // Re-wire video element each frame in case camera was enabled after scene enter
+    this.hud.setVideoElement(this.game.getNeuroManager().getCameraVideoElement());
 
     // Update rule card hint from current level - show lore (codexSnippet), not gameplay hints
     if (this.currentLevel?.copyLayers?.codexSnippet) {
@@ -874,6 +1119,19 @@ export class CampaignScene extends Scene {
     } else {
       this.hudState.powerupActive = null;
       this.hudState.powerupTimeRemaining = 0;
+    }
+
+    // Breathe gate logic
+    if (this.breatheGateActive) {
+      this.breatheGateTimer += dt;
+      if ((intent.calm ?? 0) > 0.6) {
+        this.breatheGateCalmTimer += dt;
+      } else {
+        this.breatheGateCalmTimer = Math.max(0, this.breatheGateCalmTimer - dt * 0.5);
+      }
+      if (this.breatheGateCalmTimer >= 1 || this.breatheGateTimer >= this.breatheGateTimeout) {
+        this.breatheGateActive = false;
+      }
     }
 
     this.hud.update(dt, this.hudState);
@@ -1013,6 +1271,11 @@ export class CampaignScene extends Scene {
     // HUD
     this.hud.render(renderer, this.hudState, this.player);
 
+    // Breathe gate overlay
+    if (this.breatheGateActive) {
+      this.renderBreatheGate(renderer, width, height);
+    }
+
     // Game over overlay
     if (this.gameOver) {
       this.renderGameOver(renderer, width, height);
@@ -1091,30 +1354,34 @@ export class CampaignScene extends Scene {
     ctx.stroke();
     ctx.globalAlpha = 1;
 
-    // Level title with strong glow
+    // Level title with strong glow — auto-size to fit
+    const titleStr = this.currentLevel.title.toUpperCase();
+    ctx.font = "36px 'SF Mono', Consolas, monospace";
+    let titleSize = 36;
+    if (ctx.measureText(titleStr).width > width * 0.7) {
+      titleSize = 28;
+      if (ctx.measureText(titleStr).width > width * 0.7) titleSize = 22;
+    }
+
     ctx.save();
     ctx.shadowColor = CONFIG.COLORS.PRIMARY;
     ctx.shadowBlur = 25;
-    renderer.glowText(
-      this.currentLevel.title.toUpperCase(),
-      width / 2,
-      height * 0.25,
-      CONFIG.COLORS.PRIMARY,
-      36,
-      'center',
-      25,
-    );
+    renderer.glowText(titleStr, width / 2, height * 0.25, CONFIG.COLORS.PRIMARY, titleSize, 'center', 25);
     ctx.restore();
 
     if (this.currentLevel.subtitle) {
-      renderer.text(this.currentLevel.subtitle, width / 2, height * 0.32, CONFIG.COLORS.TEXT_LIGHT, 18, 'center');
+      ctx.font = "18px 'SF Mono', Consolas, monospace";
+      const subStr = this.currentLevel.subtitle;
+      let subSize = 18;
+      if (ctx.measureText(subStr).width > width * 0.7) subSize = 14;
+      renderer.text(subStr, width / 2, height * 0.32, CONFIG.COLORS.TEXT_LIGHT, subSize, 'center');
     }
 
-    // Lore box with glow - show world lore instead of gameplay rules
-    const boxWidth = 500;
-    const boxHeight = 140;
+    // Lore box — taller to accommodate more lines
+    const boxWidth = Math.min(500, width * 0.65);
+    const boxHeight = 180;
     const boxX = (width - boxWidth) / 2;
-    const boxY = height * 0.43;
+    const boxY = height * 0.4;
 
     ctx.save();
     ctx.shadowColor = CONFIG.COLORS.PRIMARY;
@@ -1123,17 +1390,22 @@ export class CampaignScene extends Scene {
     ctx.restore();
     renderer.fillRect(boxX + 2, boxY + 2, boxWidth - 4, boxHeight - 4, '#12121e');
 
-    // Lore label
-    renderer.glowText('INSIGHT', width / 2, boxY + 25, CONFIG.COLORS.PRIMARY, 14, 'center', 10);
+    renderer.glowText(
+      contentLoader.getString('campaign_insight'),
+      width / 2,
+      boxY + 25,
+      CONFIG.COLORS.PRIMARY,
+      14,
+      'center',
+      10,
+    );
 
-    // Show ONLY lore text (codexSnippet) - never show gameplay hints
     const loreText =
       this.currentLevel.copyLayers?.codexSnippet ||
       this.currentLevel.subtitle ||
-      'The mind awakens to new possibilities...';
+      contentLoader.getString('campaign_rule_default_lore');
 
-    // Wrap long text for better display
-    ctx.font = "16px 'SF Mono', Consolas, monospace";
+    ctx.font = "15px 'SF Mono', Consolas, monospace";
     const maxWidth = boxWidth - 40;
     const words = loreText.split(' ');
     const lines: string[] = [];
@@ -1151,21 +1423,39 @@ export class CampaignScene extends Scene {
     }
     if (currentLine) lines.push(currentLine);
 
-    // Draw wrapped text
-    const lineHeight = 22;
-    const textStartY = boxY + 55;
+    const lineHeight = 20;
+    const textStartY = boxY + 50;
     ctx.fillStyle = CONFIG.COLORS.TEXT_LIGHT;
     ctx.textAlign = 'center';
-    for (let i = 0; i < lines.length && i < 3; i++) {
+    for (let i = 0; i < lines.length && i < 5; i++) {
       ctx.fillText(lines[i], width / 2, textStartY + i * lineHeight);
     }
 
-    // Radio whisper quote at bottom if available
+    // Radio whisper — word-wrapped
     if (this.currentLevel.copyLayers?.radioWhisper) {
       ctx.globalAlpha = 0.5;
-      ctx.font = "italic 12px 'SF Mono', Consolas, monospace";
+      ctx.font = "italic 11px 'SF Mono', Consolas, monospace";
       ctx.fillStyle = CONFIG.COLORS.TEXT_DIM;
-      ctx.fillText(`"${this.currentLevel.copyLayers.radioWhisper}"`, width / 2, boxY + boxHeight - 15);
+      const whisper = `"${this.currentLevel.copyLayers.radioWhisper}"`;
+      const whisperMaxW = boxWidth - 30;
+      if (ctx.measureText(whisper).width > whisperMaxW) {
+        const wWords = whisper.split(' ');
+        let wLine = '';
+        let wy = 0;
+        for (const w of wWords) {
+          const test = wLine ? `${wLine} ${w}` : w;
+          if (ctx.measureText(test).width > whisperMaxW && wLine) {
+            ctx.fillText(wLine, width / 2, boxY + boxHeight - 28 + wy);
+            wLine = w;
+            wy += 13;
+          } else {
+            wLine = test;
+          }
+        }
+        if (wLine) ctx.fillText(wLine, width / 2, boxY + boxHeight - 28 + wy);
+      } else {
+        ctx.fillText(whisper, width / 2, boxY + boxHeight - 15);
+      }
       ctx.globalAlpha = 1;
     }
 
@@ -1173,7 +1463,14 @@ export class CampaignScene extends Scene {
     if (this.ruleCardTimer > 1) {
       const pulse = 0.5 + Math.sin(this.time * 3) * 0.3;
       ctx.globalAlpha = pulse;
-      renderer.text('PRESS SPACE TO BEGIN', width / 2, height * 0.88, CONFIG.COLORS.PRIMARY, 16, 'center');
+      renderer.text(
+        contentLoader.getString('campaign_press_space_begin'),
+        width / 2,
+        height * 0.88,
+        CONFIG.COLORS.PRIMARY,
+        16,
+        'center',
+      );
       ctx.globalAlpha = 1;
     }
   }
@@ -1199,7 +1496,15 @@ export class CampaignScene extends Scene {
     ctx.save();
     ctx.globalAlpha = pulse;
 
-    renderer.glowText('WARNING', width / 2, height * 0.25, CONFIG.COLORS.DANGER, 28, 'center', 20);
+    renderer.glowText(
+      contentLoader.getString('campaign_warning'),
+      width / 2,
+      height * 0.25,
+      CONFIG.COLORS.DANGER,
+      28,
+      'center',
+      20,
+    );
 
     ctx.restore();
     ctx.globalAlpha = 1;
@@ -1215,14 +1520,29 @@ export class CampaignScene extends Scene {
 
     ctx.save();
     ctx.globalAlpha = pulse;
-    renderer.glowText('APPROACHING', width / 2, height * 0.6, CONFIG.COLORS.DANGER, 32, 'center', 25);
+    renderer.glowText(
+      contentLoader.getString('campaign_approaching'),
+      width / 2,
+      height * 0.6,
+      CONFIG.COLORS.DANGER,
+      32,
+      'center',
+      25,
+    );
     ctx.restore();
     ctx.globalAlpha = 1;
 
     if (this.bossIntroTimer > 1) {
       const textPulse = 0.5 + Math.sin(this.time * 3) * 0.3;
       ctx.globalAlpha = textPulse;
-      renderer.text('PRESS SPACE TO ENGAGE', width / 2, height * 0.85, CONFIG.COLORS.PRIMARY, 16, 'center');
+      renderer.text(
+        contentLoader.getString('campaign_press_space_engage'),
+        width / 2,
+        height * 0.85,
+        CONFIG.COLORS.PRIMARY,
+        16,
+        'center',
+      );
       ctx.globalAlpha = 1;
     }
   }
@@ -1250,7 +1570,15 @@ export class CampaignScene extends Scene {
     ctx.save();
     ctx.shadowColor = CONFIG.COLORS.PRIMARY;
     ctx.shadowBlur = 20;
-    renderer.glowText('LEVEL COMPLETE', width / 2, height * 0.22, CONFIG.COLORS.PRIMARY, 28, 'center', 20);
+    renderer.glowText(
+      contentLoader.getString('campaign_level_complete'),
+      width / 2,
+      height * 0.22,
+      CONFIG.COLORS.PRIMARY,
+      28,
+      'center',
+      20,
+    );
     ctx.restore();
 
     // Current level finished
@@ -1340,7 +1668,14 @@ export class CampaignScene extends Scene {
     if (this.levelTransitionTimer > 1) {
       const pulse = 0.5 + Math.sin(this.time * 3) * 0.3;
       ctx.globalAlpha = pulse;
-      renderer.text('PRESS SPACE TO CONTINUE', width / 2, height * 0.88, CONFIG.COLORS.PRIMARY, 14, 'center');
+      renderer.text(
+        contentLoader.getString('campaign_press_space'),
+        width / 2,
+        height * 0.88,
+        CONFIG.COLORS.PRIMARY,
+        14,
+        'center',
+      );
       ctx.globalAlpha = 1;
     }
   }
@@ -1361,7 +1696,10 @@ export class CampaignScene extends Scene {
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
 
-    const title = this.campaignMode === 'act' ? 'ACT COMPLETE' : 'SECTOR COMPLETE';
+    const title =
+      this.campaignMode === 'act'
+        ? contentLoader.getString('campaign_act_complete')
+        : contentLoader.getString('campaign_sector_complete');
 
     ctx.save();
     ctx.shadowColor = CONFIG.COLORS.PRIMARY;
@@ -1380,9 +1718,76 @@ export class CampaignScene extends Scene {
     if (this.sectorCompleteTimer > 1.5) {
       const pulse = 0.5 + Math.sin(this.time * 3) * 0.3;
       ctx.globalAlpha = pulse;
-      renderer.text('PRESS SPACE TO CONTINUE', width / 2, height * 0.8, CONFIG.COLORS.PRIMARY, 16, 'center');
+      renderer.text(
+        contentLoader.getString('campaign_press_space'),
+        width / 2,
+        height * 0.8,
+        CONFIG.COLORS.PRIMARY,
+        16,
+        'center',
+      );
       ctx.globalAlpha = 1;
     }
+  }
+
+  private renderBreatheGate(renderer: Renderer, width: number, height: number): void {
+    const ctx = renderer.context;
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    // Dim overlay
+    ctx.save();
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+    ctx.fillRect(0, 0, width, height);
+
+    // Breathing ring (4s cycle)
+    const breathePhase = (this.breatheGateTimer % 4) / 4;
+    const ringScale = 0.7 + Math.sin(breathePhase * Math.PI * 2) * 0.3;
+    const ringRadius = 80 * ringScale;
+
+    ctx.strokeStyle = '#44aaff';
+    ctx.lineWidth = 3;
+    ctx.globalAlpha = 0.6 + Math.sin(breathePhase * Math.PI * 2) * 0.3;
+    ctx.shadowColor = '#44aaff';
+    ctx.shadowBlur = 20;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, ringRadius, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1;
+
+    // BREATHE text
+    renderer.glowText(contentLoader.getString('campaign_breathe'), centerX, centerY - 10, '#44aaff', 32, 'center', 15);
+
+    // Calm meter under the text
+    const calmLevel = this.hudState.calmLevel;
+    const barW = 200;
+    const barH = 12;
+    const barX = centerX - barW / 2;
+    const barY = centerY + 30;
+    renderer.fillRect(barX, barY, barW, barH, 'rgba(68,170,255,0.15)');
+    ctx.shadowColor = '#44aaff';
+    ctx.shadowBlur = 8;
+    ctx.fillStyle = '#44aaff';
+    ctx.fillRect(barX, barY, barW * calmLevel, barH);
+    ctx.shadowBlur = 0;
+    renderer.strokeRect(barX, barY, barW, barH, '#44aaff', 1);
+
+    // Threshold marker
+    const threshX = barX + barW * 0.6;
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(threshX, barY - 3);
+    ctx.lineTo(threshX, barY + barH + 3);
+    ctx.stroke();
+
+    // Progress indicator
+    const timeLeft = Math.max(0, this.breatheGateTimeout - this.breatheGateTimer);
+    renderer.text(`${Math.ceil(timeLeft)}s`, centerX, barY + barH + 20, '#aaaaaa', 14, 'center');
+
+    ctx.restore();
   }
 
   private renderGameOver(renderer: Renderer, width: number, height: number): void {
@@ -1430,8 +1835,9 @@ export class CampaignScene extends Scene {
 
       const retrySelected = this.gameOverSelectedOption === 0;
       const retryColor = retrySelected ? CONFIG.COLORS.PRIMARY : CONFIG.COLORS.TEXT_DIM;
+      const retryLabel = contentLoader.getString('campaign_retry');
       renderer.text(
-        retrySelected ? '> RETRY <' : 'RETRY',
+        retrySelected ? `> ${retryLabel} <` : retryLabel,
         width / 2,
         menuY,
         retryColor,
@@ -1441,8 +1847,9 @@ export class CampaignScene extends Scene {
 
       const quitSelected = this.gameOverSelectedOption === 1;
       const quitColor = quitSelected ? CONFIG.COLORS.PRIMARY : CONFIG.COLORS.TEXT_DIM;
+      const quitLabel = contentLoader.getString('campaign_quit');
       renderer.text(
-        quitSelected ? '> QUIT <' : 'QUIT',
+        quitSelected ? `> ${quitLabel} <` : quitLabel,
         width / 2,
         menuY + menuSpacing,
         quitColor,

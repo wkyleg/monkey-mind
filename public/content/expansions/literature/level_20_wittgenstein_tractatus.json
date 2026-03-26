@@ -4,14 +4,103 @@
   "index": 20,
   "title": "Tractatus Logico-Philosophicus",
   "subtitle": "Whereof one cannot speak. The ladder thrown away.",
-  "themeTags": ["wittgenstein", "tractatus", "logic", "silence"],
+  "themeTags": [
+    "wittgenstein",
+    "tractatus",
+    "logic",
+    "silence"
+  ],
   "levelEnemies": {
-    "proposition": { "visualId": "proposition", "dialogue": { "spawn": ["The world is facts!", "Not things!", "Logical space!", "Picture theory!", "Truth conditions!"], "death": ["Facts... understood...", "Things... facts...", "Space... mapped...", "Picture... complete...", "True..."] } },
-    "mystical": { "visualId": "mystical", "dialogue": { "spawn": ["Cannot be said!", "Only shown!", "Ethics is transcendental!", "The limits of language!", "Silence!"], "death": ["Said...", "Shown...", "Ethics... lived...", "Limits... extended...", "Speaking... wisely..."] } },
-    "ladder": { "visualId": "ladder", "dialogue": { "spawn": ["Climb me!", "Then throw me away!", "Nonsense to sense!", "Transcend propositions!", "Beyond language!"], "death": ["Climbed...", "Thrown...", "Sense... made...", "Transcended...", "Beyond..."] } }
+    "proposition": {
+      "visualId": "proposition",
+      "dialogue": {
+        "spawn": [
+          "The world is facts!",
+          "Not things!",
+          "Logical space!",
+          "Picture theory!",
+          "Truth conditions!"
+        ],
+        "death": [
+          "Facts... understood...",
+          "Things... facts...",
+          "Space... mapped...",
+          "Picture... complete...",
+          "True..."
+        ]
+      }
+    },
+    "mystical": {
+      "visualId": "mystical",
+      "dialogue": {
+        "spawn": [
+          "Cannot be said!",
+          "Only shown!",
+          "Ethics is transcendental!",
+          "The limits of language!",
+          "Silence!"
+        ],
+        "death": [
+          "Said...",
+          "Shown...",
+          "Ethics... lived...",
+          "Limits... extended...",
+          "Speaking... wisely..."
+        ]
+      }
+    },
+    "ladder": {
+      "visualId": "ladder",
+      "dialogue": {
+        "spawn": [
+          "Climb me!",
+          "Then throw me away!",
+          "Nonsense to sense!",
+          "Transcend propositions!",
+          "Beyond language!"
+        ],
+        "death": [
+          "Climbed...",
+          "Thrown...",
+          "Sense... made...",
+          "Transcended...",
+          "Beyond..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "logical_space", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "ladder", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "silence", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "Whereof one cannot speak, thereof one must be silent. The monkey climbs the ladder, then throws it away." },
-  "musicSeed": { "seed": "tractatus_020", "mode": "whole_tone", "tempoRange": [35, 50], "intensity": 0.3 },
-  "duration": 180, "unlockCondition": "lit_level19_complete"
+  "bgLayers": [
+    {
+      "svgId": "logical_space",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "ladder",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "silence",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "Whereof one cannot speak, thereof one must be silent. The monkey climbs the ladder, then throws it away."
+  },
+  "musicSeed": {
+    "seed": "tractatus_020",
+    "mode": "dorian",
+    "tempoRange": [
+      79,
+      100
+    ],
+    "intensity": 0.8,
+    "scale": "pentatonicMinor",
+    "style": "tension",
+    "timeSignature": "7/8"
+  },
+  "duration": 180,
+  "unlockCondition": "lit_level19_complete"
 }

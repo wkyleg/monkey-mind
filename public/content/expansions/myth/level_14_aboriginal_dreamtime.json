@@ -4,14 +4,104 @@
   "index": 14,
   "title": "Aboriginal Dreamtime",
   "subtitle": "The Dreaming. When the ancestors walked.",
-  "themeTags": ["aboriginal", "dreamtime", "ancestors", "songlines"],
+  "themeTags": [
+    "aboriginal",
+    "dreamtime",
+    "ancestors",
+    "songlines"
+  ],
   "levelEnemies": {
-    "rainbow_serpent": { "visualId": "rainbow_serpent", "dialogue": { "spawn": ["I shaped the land!", "The Rainbow Serpent!", "Water follows me!", "The Dreaming continues!", "Country is alive!"], "death": ["Land... shaped...", "Serpent... rests...", "Water... flows...", "Dreaming... present...", "Country... singing..."] } },
-    "ancestor_spirit": { "visualId": "ancestor_spirit", "dialogue": { "spawn": ["Walk the songlines!", "The ancestors watch!", "Country knows you!", "Sing the land into being!", "The Dreaming never ended!"], "death": ["Songlines... walked...", "Ancestors... pleased...", "Known... by country...", "Land... sung...", "Dreaming... continuous..."] } },
-    "sacred_site": { "visualId": "sacred_site", "dialogue": { "spawn": ["This place is sacred!", "The ancestors rest here!", "Law is stored!", "Ceremony required!", "Respect the site!"], "death": ["Sacred... honored...", "Ancestors... acknowledged...", "Law... followed...", "Ceremony... complete...", "Respect... given..."] } }
+    "rainbow_serpent": {
+      "visualId": "rainbow_serpent",
+      "dialogue": {
+        "spawn": [
+          "I shaped the land!",
+          "The Rainbow Serpent!",
+          "Water follows me!",
+          "The Dreaming continues!",
+          "Country is alive!"
+        ],
+        "death": [
+          "Land... shaped...",
+          "Serpent... rests...",
+          "Water... flows...",
+          "Dreaming... present...",
+          "Country... singing..."
+        ]
+      }
+    },
+    "ancestor_spirit": {
+      "visualId": "ancestor_spirit",
+      "dialogue": {
+        "spawn": [
+          "Walk the songlines!",
+          "The ancestors watch!",
+          "Country knows you!",
+          "Sing the land into being!",
+          "The Dreaming never ended!"
+        ],
+        "death": [
+          "Songlines... walked...",
+          "Ancestors... pleased...",
+          "Known... by country...",
+          "Land... sung...",
+          "Dreaming... continuous..."
+        ]
+      }
+    },
+    "sacred_site": {
+      "visualId": "sacred_site",
+      "dialogue": {
+        "spawn": [
+          "This place is sacred!",
+          "The ancestors rest here!",
+          "Law is stored!",
+          "Ceremony required!",
+          "Respect the site!"
+        ],
+        "death": [
+          "Sacred... honored...",
+          "Ancestors... acknowledged...",
+          "Law... followed...",
+          "Ceremony... complete...",
+          "Respect... given..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "outback", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "rock_art", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "stars", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "In the Dreamtime, the ancestor beings sang the world into existence. The monkey walks the songlines and learns that the land remembers everything." },
-  "musicSeed": { "seed": "dreamtime_014", "mode": "didgeridoo", "tempoRange": [45, 60], "intensity": 0.5 },
-  "duration": 170, "unlockCondition": "myth_level13_complete"
+  "bgLayers": [
+    {
+      "svgId": "outback",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "rock_art",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "stars",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "In the Dreamtime, the ancestor beings sang the world into existence. The monkey walks the songlines and learns that the land remembers everything."
+  },
+  "musicSeed": {
+    "seed": "dreamtime_014",
+    "mode": "bhairav",
+    "tempoRange": [
+      68,
+      89
+    ],
+    "intensity": 0.76,
+    "scale": "kafi",
+    "style": "heroic",
+    "timeSignature": "3/4",
+    "culturalStyle": "arabic"
+  },
+  "duration": 170,
+  "unlockCondition": "myth_level13_complete"
 }

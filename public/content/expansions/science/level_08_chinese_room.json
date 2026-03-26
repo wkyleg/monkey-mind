@@ -4,53 +4,143 @@
   "index": 8,
   "title": "The Chinese Room",
   "subtitle": "Understanding without understanding.",
-  "themeTags": ["searle", "ai", "understanding", "syntax_semantics"],
+  "themeTags": [
+    "searle",
+    "ai",
+    "understanding",
+    "syntax_semantics"
+  ],
   "ruleCard": {
     "icon": "scroll",
     "hint": "You follow rules perfectly but understand nothing. Syntax without semantics.",
     "mechanic": "syntax_only",
-    "params": { "ruleFollowingBonus": 50, "understandingPenalty": 0 }
+    "params": {
+      "ruleFollowingBonus": 50,
+      "understandingPenalty": 0
+    }
   },
   "enemyDeck": [
-    { "archetype": "anchor", "modifiers": [], "weight": 4, "visualId": "enemy_rulebook" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_symbol" },
-    { "archetype": "chaser", "modifiers": [], "weight": 3, "visualId": "enemy_searle" }
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_rulebook"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_symbol"
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_searle"
+    }
   ],
   "levelEnemies": {
     "rule_follower": {
       "visualId": "rule_follower",
       "dialogue": {
-        "spawn": ["If this, then that!", "Symbol manipulation!", "No understanding needed!", "The rulebook suffices!", "Syntax only!"],
-        "death": ["Rules... broken...", "Symbols... meaningless...", "Understanding... required...", "Rulebook... closed...", "Semantics... matter..."]
+        "spawn": [
+          "If this, then that!",
+          "Symbol manipulation!",
+          "No understanding needed!",
+          "The rulebook suffices!",
+          "Syntax only!"
+        ],
+        "death": [
+          "Rules... broken...",
+          "Symbols... meaningless...",
+          "Understanding... required...",
+          "Rulebook... closed...",
+          "Semantics... matter..."
+        ]
       }
     },
     "chinese_character": {
       "visualId": "chinese_character",
       "dialogue": {
-        "spawn": ["I look like meaning!", "Squiggles and squoggles!", "Pattern without content!", "The room passes the test!", "But does it understand?"],
-        "death": ["Meaning... understood...", "Squiggles... decoded...", "Content... grasped...", "Test... transcended...", "Understanding... achieved..."]
+        "spawn": [
+          "I look like meaning!",
+          "Squiggles and squoggles!",
+          "Pattern without content!",
+          "The room passes the test!",
+          "But does it understand?"
+        ],
+        "death": [
+          "Meaning... understood...",
+          "Squiggles... decoded...",
+          "Content... grasped...",
+          "Test... transcended...",
+          "Understanding... achieved..."
+        ]
       }
     },
     "syntax_daemon": {
       "visualId": "syntax_daemon",
       "dialogue": {
-        "spawn": ["Form without content!", "Process without purpose!", "Computation alone!", "Searle's thought experiment!", "The room is not a mind!"],
-        "death": ["Form... filled...", "Process... purposeful...", "Computation... conscious...", "Experiment... answered...", "Room... is mind..."]
+        "spawn": [
+          "Form without content!",
+          "Process without purpose!",
+          "Computation alone!",
+          "Searle's thought experiment!",
+          "The room is not a mind!"
+        ],
+        "death": [
+          "Form... filled...",
+          "Process... purposeful...",
+          "Computation... conscious...",
+          "Experiment... answered...",
+          "Room... is mind..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "semantic_void", "params": { "meaningDrain": 5, "syntaxBonus": 30 } }],
+  "hazards": [
+    {
+      "type": "semantic_void",
+      "params": {
+        "meaningDrain": 5,
+        "syntaxBonus": 30
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "room", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "chinese_characters", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "rulebooks", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "room",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "chinese_characters",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "rulebooks",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "You follow rules perfectly but understand nothing. Syntax without semantics.",
     "codexSnippet": "Searle's man in a room follows rules to respond in Chinese without understanding a word. The monkey enters the Chinese Room and asks whether understanding requires more than symbol manipulation.",
     "radioWhisper": "The room gives perfect answers. But is anyone home?"
   },
-  "musicSeed": { "seed": "chineseroom_008", "mode": "pentatonic", "tempoRange": [50, 65], "intensity": 0.4 },
+  "musicSeed": {
+    "seed": "chineseroom_008",
+    "mode": "wholeTone",
+    "tempoRange": [
+      73,
+      97
+    ],
+    "intensity": 0.69,
+    "scale": "dorian",
+    "style": "dark",
+    "timeSignature": "6/8"
+  },
   "duration": 150,
   "unlockCondition": "science_level7_complete"
 }

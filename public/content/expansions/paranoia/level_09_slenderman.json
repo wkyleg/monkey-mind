@@ -4,53 +4,143 @@
   "index": 9,
   "title": "Slenderman",
   "subtitle": "The faceless one in the woods. Created online, believed in reality.",
-  "themeTags": ["slenderman", "creepypasta", "internet", "tulpa"],
+  "themeTags": [
+    "slenderman",
+    "creepypasta",
+    "internet",
+    "tulpa"
+  ],
   "ruleCard": {
     "icon": "suit",
     "hint": "Don't look at him. Looking makes him real.",
     "mechanic": "observation_tulpa",
-    "params": { "gazeStrengthens": true, "aversionBonus": 70 }
+    "params": {
+      "gazeStrengthens": true,
+      "aversionBonus": 70
+    }
   },
   "enemyDeck": [
-    { "archetype": "phaser", "modifiers": [], "weight": 5, "visualId": "enemy_slenderman" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_proxy" },
-    { "archetype": "anchor", "modifiers": [], "weight": 2, "visualId": "enemy_page" }
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 5,
+      "visualId": "enemy_slenderman"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_proxy"
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 2,
+      "visualId": "enemy_page"
+    }
   ],
   "levelEnemies": {
     "slender_entity": {
       "visualId": "slender_entity",
       "dialogue": {
-        "spawn": ["Behind you!", "In the trees!", "Static!", "No face, no escape!", "The Operator!"],
-        "death": ["Not... behind...", "Trees... empty...", "Clear signal...", "Face... imagined...", "Operator... disconnected..."]
+        "spawn": [
+          "Behind you!",
+          "In the trees!",
+          "Static!",
+          "No face, no escape!",
+          "The Operator!"
+        ],
+        "death": [
+          "Not... behind...",
+          "Trees... empty...",
+          "Clear signal...",
+          "Face... imagined...",
+          "Operator... disconnected..."
+        ]
       }
     },
     "proxy_servant": {
       "visualId": "proxy_servant",
       "dialogue": {
-        "spawn": ["He calls to me!", "I do his bidding!", "Masky! Hoodie!", "The sickness spreads!", "You'll serve him too!"],
-        "death": ["Call... unanswered...", "Bidding... refused...", "Masks... removed...", "Sickness... cured...", "Free... will..."]
+        "spawn": [
+          "He calls to me!",
+          "I do his bidding!",
+          "Masky! Hoodie!",
+          "The sickness spreads!",
+          "You'll serve him too!"
+        ],
+        "death": [
+          "Call... unanswered...",
+          "Bidding... refused...",
+          "Masks... removed...",
+          "Sickness... cured...",
+          "Free... will..."
+        ]
       }
     },
     "creepypasta_page": {
       "visualId": "creepypasta_page",
       "dialogue": {
-        "spawn": ["Collect all 8!", "The game!", "Can't turn back now!", "The forest deepens!", "Always watching!"],
-        "death": ["Pages... burned...", "Game... over...", "Turning... back...", "Forest... cleared...", "Not... watching..."]
+        "spawn": [
+          "Collect all 8!",
+          "The game!",
+          "Can't turn back now!",
+          "The forest deepens!",
+          "Always watching!"
+        ],
+        "death": [
+          "Pages... burned...",
+          "Game... over...",
+          "Turning... back...",
+          "Forest... cleared...",
+          "Not... watching..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "static_interference", "params": { "staticIntensity": 0.6, "proximityDamage": 15 } }],
+  "hazards": [
+    {
+      "type": "static_interference",
+      "params": {
+        "staticIntensity": 0.6,
+        "proximityDamage": 15
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "dark_forest", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "trees", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "static_overlay", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "dark_forest",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "trees",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "static_overlay",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Don't look at him. Looking makes him real.",
     "codexSnippet": "Created as a photoshop contest entry in 2009, Slenderman became real enough to inspire violence. The monkey confronts the internet's tulpa and asks whether belief creates reality.",
     "radioWhisper": "He has no face. But somehow, he's always watching."
   },
-  "musicSeed": { "seed": "slender_009", "mode": "atonal", "tempoRange": [55, 70], "intensity": 0.7 },
+  "musicSeed": {
+    "seed": "slender_009",
+    "mode": "locrian",
+    "tempoRange": [
+      68,
+      92
+    ],
+    "intensity": 0.7,
+    "scale": "iwato",
+    "style": "aggressive",
+    "timeSignature": "7/8"
+  },
   "duration": 160,
   "unlockCondition": "paranoia_level8_complete"
 }

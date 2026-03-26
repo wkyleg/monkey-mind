@@ -120,6 +120,10 @@ export interface MusicSeedConfig {
   mode: string; // Musical mode (dorian, phrygian, etc.)
   tempoRange: [number, number]; // Min/max BPM
   intensity?: number; // 0-1 base intensity
+  scale?: string; // Explicit scale name (e.g. 'harmonic_minor')
+  style?: string; // Chord progression style (e.g. 'dark', 'dreamy')
+  culturalStyle?: string; // Cultural preset (e.g. 'japanese', 'arabic')
+  timeSignature?: string; // Explicit time signature (e.g. '7/8')
 }
 
 /**
@@ -167,8 +171,9 @@ export interface LevelDataV2 {
   boss?: string | { id: string; introText?: string; outroText?: string }; // Boss ID or config
   copyLayers: CopyLayers;
   musicSeed: MusicSeedConfig;
-  neuroHooks?: NeuroHook[]; // Future BCI integration
-  duration?: number; // Level duration in seconds
+  neuroHooks?: NeuroHook[];
+  breatheGate?: boolean;
+  duration?: number;
   unlockCondition?: string; // Condition to unlock this level
   levelEnemies?: Record<string, LevelEnemyConfig>; // Level-specific enemy visuals and dialogue
 }

@@ -34,7 +34,7 @@
   "boss": "mirror_self",
   "unlocks": {
     "powerups": [],
-    "codex": ["entry_fractal_bloom", "the_breakthrough", "machine_elves", "return_to_monke", "machine_elf", "impossible_shape", "ego_fragment"],
+    "codex": ["entry_fractal_bloom", "the_breakthrough", "machine_elves", "return_to_monke", "inner_architect", "impossible_shape", "ego_fragment"],
     "cosmetics": ["aura_rainbow", "eyes_fractal"]
   }
 }

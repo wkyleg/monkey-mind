@@ -10,11 +10,15 @@ import { storage } from '../core/storage';
 import { BossScene } from '../scenes/bossScene';
 import { CampaignScene } from '../scenes/campaignScene';
 import { CodexScene } from '../scenes/codexScene';
+import { DeviceGateScene } from '../scenes/deviceGateScene';
 import { EndlessScene } from '../scenes/endlessScene';
+import { HowToPlayScene } from '../scenes/howToPlayScene';
 import { IntroScene } from '../scenes/introScene';
+import { LevelReportScene } from '../scenes/levelReportScene';
 import { LevelSelectScene } from '../scenes/levelSelectScene';
 import { LevelStoryScene } from '../scenes/levelStoryScene';
 import { MenuScene } from '../scenes/menuScene';
+import { NeuroSettingsScene } from '../scenes/neuroSettingsScene';
 import { PauseScene } from '../scenes/pauseScene';
 import { SettingsScene } from '../scenes/settingsScene';
 import { TransitionScene } from '../scenes/transitionScene';
@@ -22,6 +26,7 @@ import { VictoryScene } from '../scenes/victoryScene';
 import { AudioManager } from './audio';
 import { InputManager } from './input';
 import { proceduralMusic } from './music';
+import { NeuroManager } from './neuroManager';
 import { Renderer } from './renderer';
 import { SceneManager } from './scene';
 import { svgAssets } from './svgAssets';
@@ -32,6 +37,7 @@ export class Game {
   private readonly input: InputManager;
   private readonly audio: AudioManager;
   private readonly scenes: SceneManager;
+  private readonly neuroManager: NeuroManager;
 
   private initialized: boolean = false;
   private paused: boolean = false;
@@ -42,6 +48,7 @@ export class Game {
     this.input = new InputManager();
     this.audio = new AudioManager();
     this.scenes = new SceneManager();
+    this.neuroManager = new NeuroManager();
   }
 
   /**
@@ -60,6 +67,10 @@ export class Game {
     // Load content
     updateProgress(0, 'LOADING CONTENT DATA...');
     await contentLoader.loadAll();
+    const savedLocale = storage.settings.locale;
+    if (savedLocale && savedLocale !== 'en') {
+      await contentLoader.loadLocale(savedLocale);
+    }
     updateProgress(0.3, 'CONTENT LOADED');
 
     // Preload SVG assets
@@ -68,9 +79,13 @@ export class Game {
     updateProgress(0.7, 'ASSETS LOADED');
 
     // Initialize subsystems
+    updateProgress(0.72, 'INITIALIZING NEURO SYSTEMS...');
+    await this.neuroManager.initWasm();
+
     updateProgress(0.75, 'INITIALIZING INPUT SYSTEMS...');
     this.input.init();
     this.input.setCanvas(this.canvas);
+    this.neuroManager.registerProviders(this.input);
 
     updateProgress(0.8, 'INITIALIZING AUDIO SYSTEMS...');
     this.audio.init();
@@ -111,6 +126,10 @@ export class Game {
     this.scenes.register('intro', new IntroScene(this));
     this.scenes.register('levelStory', new LevelStoryScene(this));
     this.scenes.register('levelSelect', new LevelSelectScene(this));
+    this.scenes.register('neuroSettings', new NeuroSettingsScene(this));
+    this.scenes.register('deviceGate', new DeviceGateScene(this));
+    this.scenes.register('howToPlay', new HowToPlayScene(this));
+    this.scenes.register('levelReport', new LevelReportScene(this));
 
     // Start at menu
     this.scenes.push('menu');
@@ -210,6 +229,9 @@ export class Game {
     // Update input
     this.input.update(dt);
 
+    // Update neuro state
+    this.neuroManager.update(dt);
+
     // Get player intent
     const intent = this.input.getIntent();
 
@@ -267,5 +289,9 @@ export class Game {
 
   getMusic(): typeof proceduralMusic {
     return proceduralMusic;
+  }
+
+  getNeuroManager(): NeuroManager {
+    return this.neuroManager;
   }
 }

@@ -4,53 +4,145 @@
   "index": 3,
   "title": "Yog-Sothoth",
   "subtitle": "The key and the gate. All time is one.",
-  "themeTags": ["yog_sothoth", "time", "gate", "knowledge"],
+  "themeTags": [
+    "yog_sothoth",
+    "time",
+    "gate",
+    "knowledge"
+  ],
   "ruleCard": {
     "icon": "gate",
     "hint": "Past, present, and future exist simultaneously. Actions have retroactive effects.",
     "mechanic": "temporal_unity",
-    "params": { "retroactiveChance": 0.3, "futureEcho": true }
+    "params": {
+      "retroactiveChance": 0.3,
+      "futureEcho": true
+    }
   },
   "enemyDeck": [
-    { "archetype": "phaser", "modifiers": ["recursive"], "weight": 4, "visualId": "enemy_deep_one" },
-    { "archetype": "weaver", "modifiers": [], "weight": 3, "visualId": "enemy_cultist" },
-    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_star_spawn" }
+    {
+      "archetype": "phaser",
+      "modifiers": [
+        "recursive"
+      ],
+      "weight": 4,
+      "visualId": "enemy_deep_one"
+    },
+    {
+      "archetype": "weaver",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_cultist"
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_star_spawn"
+    }
   ],
   "levelEnemies": {
     "temporal_sphere": {
       "visualId": "temporal_sphere",
       "dialogue": {
-        "spawn": ["All time is one!", "Past and future merge!", "The sphere contains all!", "Knowledge absolute!", "The gate opens!"],
-        "death": ["Time... separates...", "Past... returns to past...", "The sphere... shatters...", "Knowledge... fades...", "Gate... closes..."]
+        "spawn": [
+          "All time is one!",
+          "Past and future merge!",
+          "The sphere contains all!",
+          "Knowledge absolute!",
+          "The gate opens!"
+        ],
+        "death": [
+          "Time... separates...",
+          "Past... returns to past...",
+          "The sphere... shatters...",
+          "Knowledge... fades...",
+          "Gate... closes..."
+        ]
       }
     },
     "key_bearer": {
       "visualId": "key_bearer",
       "dialogue": {
-        "spawn": ["I hold the key!", "All doors open!", "Yog-Sothoth guides!", "The way is clear!", "Enter if you dare!"],
-        "death": ["Key... lost...", "Doors... seal...", "The way... closes...", "Guidance... ends...", "Locked... forever..."]
+        "spawn": [
+          "I hold the key!",
+          "All doors open!",
+          "Yog-Sothoth guides!",
+          "The way is clear!",
+          "Enter if you dare!"
+        ],
+        "death": [
+          "Key... lost...",
+          "Doors... seal...",
+          "The way... closes...",
+          "Guidance... ends...",
+          "Locked... forever..."
+        ]
       }
     },
     "gate_warden": {
       "visualId": "gate_warden",
       "dialogue": {
-        "spawn": ["The gate is guarded!", "None may pass!", "Yog-Sothoth IS the gate!", "Turn back, mortal!", "Infinity awaits!"],
-        "death": ["Guard... fallen...", "The gate... opens...", "Pass... through...", "Infinity... glimpsed...", "Warden... no more..."]
+        "spawn": [
+          "The gate is guarded!",
+          "None may pass!",
+          "Yog-Sothoth IS the gate!",
+          "Turn back, mortal!",
+          "Infinity awaits!"
+        ],
+        "death": [
+          "Guard... fallen...",
+          "The gate... opens...",
+          "Pass... through...",
+          "Infinity... glimpsed...",
+          "Warden... no more..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "time_loop", "params": { "loopDuration": 10000, "escapeCondition": "specific_action" } }],
+  "hazards": [
+    {
+      "type": "time_loop",
+      "params": {
+        "loopDuration": 10000,
+        "escapeCondition": "specific_action"
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "spheres", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "gates", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "timelines", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "spheres",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "gates",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "timelines",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Past, present, and future exist simultaneously. Actions have retroactive effects.",
     "codexSnippet": "Yog-Sothoth knows the gate. Yog-Sothoth is the gate. The monkey sees all of time at once and understands that every moment exists eternally.",
     "radioWhisper": "The past is not fixed. Neither is the future."
   },
-  "musicSeed": { "seed": "yog_sothoth_003", "mode": "lydian", "tempoRange": [45, 60], "intensity": 0.5 },
+  "musicSeed": {
+    "seed": "yog_sothoth_003",
+    "mode": "locrian",
+    "tempoRange": [
+      56,
+      76
+    ],
+    "intensity": 0.63,
+    "scale": "locrian",
+    "style": "meditative",
+    "timeSignature": "6/8"
+  },
   "duration": 140,
   "unlockCondition": "cosmic_level2_complete"
 }

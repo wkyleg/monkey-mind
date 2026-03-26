@@ -4,48 +4,127 @@
   "index": 1,
   "title": "Plato's Cave",
   "subtitle": "Shadows are not enemies. Shoot the projector.",
-  "themeTags": ["plato", "shadows", "reality"],
+  "themeTags": [
+    "plato",
+    "shadows",
+    "reality"
+  ],
   "ruleCard": {
     "icon": "projector",
     "hint": "Simulacrum shadows fill the cave. Shooting the projector deletes the class.",
     "mechanic": "sequence_kill",
-    "params": { "projectorTarget": true, "shadowsPerProjector": 5 }
+    "params": {
+      "projectorTarget": true,
+      "shadowsPerProjector": 5
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": ["simulacrum"], "weight": 5 },
-    { "archetype": "anchor", "modifiers": [], "weight": 3 },
-    { "archetype": "sniper", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "simulacrum"
+      ],
+      "weight": 5
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "sniper",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "levelEnemies": {
     "cave_shadow": {
       "visualId": "cave_shadow",
       "dialogue": {
-        "spawn": ["I am real!", "The wall shows truth!", "Shadows never lie!", "This is all there is!", "The fire casts me!"],
-        "death": ["Just... a shadow...", "The light... reveals...", "I was... nothing...", "The wall... empty...", "Illusion... broken..."]
+        "spawn": [
+          "I am real!",
+          "The wall shows truth!",
+          "Shadows never lie!",
+          "This is all there is!",
+          "The fire casts me!"
+        ],
+        "death": [
+          "Just... a shadow...",
+          "The light... reveals...",
+          "I was... nothing...",
+          "The wall... empty...",
+          "Illusion... broken..."
+        ]
       }
     },
     "fire_keeper": {
       "visualId": "fire_keeper",
       "dialogue": {
-        "spawn": ["Keep the fire burning!", "The shadows must dance!", "Truth is what I project!", "Don't look behind you!", "The cave is safety!"],
-        "death": ["The fire... dies...", "No more... shadows...", "Light... everywhere...", "The outside... awaits...", "Darkness... was comfort..."]
+        "spawn": [
+          "Keep the fire burning!",
+          "The shadows must dance!",
+          "Truth is what I project!",
+          "Don't look behind you!",
+          "The cave is safety!"
+        ],
+        "death": [
+          "The fire... dies...",
+          "No more... shadows...",
+          "Light... everywhere...",
+          "The outside... awaits...",
+          "Darkness... was comfort..."
+        ]
       }
     },
     "chained_prisoner": {
       "visualId": "chained_prisoner",
       "dialogue": {
-        "spawn": ["I cannot turn!", "The chains hold me!", "This IS reality!", "Why would I leave?", "The shadows are friends!"],
-        "death": ["Free... at last...", "The chains... break...", "So much... light...", "I can... turn...", "What is... outside..."]
+        "spawn": [
+          "I cannot turn!",
+          "The chains hold me!",
+          "This IS reality!",
+          "Why would I leave?",
+          "The shadows are friends!"
+        ],
+        "death": [
+          "Free... at last...",
+          "The chains... break...",
+          "So much... light...",
+          "I can... turn...",
+          "What is... outside..."
+        ]
       }
     }
   },
   "hazards": [
-    { "type": "shadow_wall", "lanes": [2, 3, 4], "timing": 12000, "damage": 0, "visual": "cave_shadow" }
+    {
+      "type": "shadow_wall",
+      "lanes": [
+        2,
+        3,
+        4
+      ],
+      "timing": 12000,
+      "damage": 0,
+      "visual": "cave_shadow"
+    }
   ],
   "bgLayers": [
-    { "svgId": "cave", "parallaxSpeed": 0.05, "opacity": 0.5 },
-    { "svgId": "fire", "parallaxSpeed": 0.2, "opacity": 0.6 },
-    { "svgId": "shadows", "parallaxSpeed": 0.4, "opacity": 0.7 }
+    {
+      "svgId": "cave",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "fire",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    },
+    {
+      "svgId": "shadows",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.7
+    }
   ],
   "copyLayers": {
     "ruleCard": "Shadows are not enemies. Shoot the projector.",
@@ -55,8 +134,14 @@
   "musicSeed": {
     "seed": "plato_001",
     "mode": "dorian",
-    "tempoRange": [75, 90],
-    "intensity": 0.5
+    "tempoRange": [
+      90,
+      102
+    ],
+    "intensity": 0.3,
+    "scale": "dorian",
+    "style": "mysterious",
+    "timeSignature": "4/4"
   },
   "duration": 100,
   "unlockCondition": "act5_complete"

@@ -4,17 +4,38 @@
   "index": 4,
   "title": "Salem Accusation",
   "subtitle": "The mob grows with each accusation.",
-  "themeTags": ["mob", "accusation", "hysteria"],
+  "themeTags": [
+    "mob",
+    "accusation",
+    "hysteria"
+  ],
   "ruleCard": {
     "icon": "mob",
     "hint": "Each kill spawns two more. The mob meter rises. Survive the hysteria.",
     "mechanic": "sequence_kill",
-    "params": { "mobGrowth": 2, "maxMob": 20 }
+    "params": {
+      "mobGrowth": 2,
+      "maxMob": 20
+    }
   },
   "enemyDeck": [
-    { "archetype": "swarm", "modifiers": [], "weight": 6 },
-    { "archetype": "splitter", "modifiers": [], "weight": 3 },
-    { "archetype": "chaser", "modifiers": ["apophenic"], "weight": 1 }
+    {
+      "archetype": "swarm",
+      "modifiers": [],
+      "weight": 6
+    },
+    {
+      "archetype": "splitter",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [
+        "apophenic"
+      ],
+      "weight": 1
+    }
   ],
   "levelEnemies": {
     "accuser": {
@@ -76,12 +97,33 @@
     }
   },
   "hazards": [
-    { "type": "accusation_zone", "lanes": [2, 4], "timing": 8000, "damage": 1, "visual": "pointing_hands" }
+    {
+      "type": "accusation_zone",
+      "lanes": [
+        2,
+        4
+      ],
+      "timing": 8000,
+      "damage": 1,
+      "visual": "pointing_hands"
+    }
   ],
   "bgLayers": [
-    { "svgId": "trial", "parallaxSpeed": 0.1, "opacity": 0.4 },
-    { "svgId": "accusation", "parallaxSpeed": 0.3, "opacity": 0.5 },
-    { "svgId": "flames", "parallaxSpeed": 0.5, "opacity": 0.3 }
+    {
+      "svgId": "trial",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "accusation",
+      "parallaxSpeed": 0.3,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "flames",
+      "parallaxSpeed": 0.5,
+      "opacity": 0.3
+    }
   ],
   "copyLayers": {
     "ruleCard": "The mob grows with each accusation.",
@@ -91,8 +133,14 @@
   "musicSeed": {
     "seed": "salem_004",
     "mode": "phrygian",
-    "tempoRange": [120, 140],
-    "intensity": 0.75
+    "tempoRange": [
+      95,
+      110
+    ],
+    "intensity": 0.68,
+    "scale": "harmonicMinor",
+    "style": "dark",
+    "timeSignature": "7/8"
   },
   "duration": 120,
   "unlockCondition": "act1_level3_complete"

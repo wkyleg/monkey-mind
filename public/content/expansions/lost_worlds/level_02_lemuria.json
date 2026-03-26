@@ -4,53 +4,145 @@
   "index": 2,
   "title": "Lemuria",
   "subtitle": "The Pacific motherland. Where humanity began.",
-  "themeTags": ["lemuria", "pacific", "origin", "psychic"],
+  "themeTags": [
+    "lemuria",
+    "pacific",
+    "origin",
+    "psychic"
+  ],
   "ruleCard": {
     "icon": "third_eye",
     "hint": "Lemurians communicate telepathically. Read their intentions.",
     "mechanic": "telepathy",
-    "params": { "intentionReveal": true, "psychicBonus": 30 }
+    "params": {
+      "intentionReveal": true,
+      "psychicBonus": 30
+    }
   },
   "enemyDeck": [
-    { "archetype": "weaver", "modifiers": ["observed"], "weight": 4, "visualId": "enemy_jungle_wraith" },
-    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_crystal_sentinel" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_temple_scarab" }
+    {
+      "archetype": "weaver",
+      "modifiers": [
+        "observed"
+      ],
+      "weight": 4,
+      "visualId": "enemy_jungle_wraith"
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_crystal_sentinel"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_temple_scarab"
+    }
   ],
   "levelEnemies": {
     "lemurian_elder": {
       "visualId": "lemurian_elder",
       "dialogue": {
-        "spawn": ["I feel your thoughts!", "The third eye opens!", "Lemuria remembers!", "Psychic bonds unite!", "The motherland calls!"],
-        "death": ["Thoughts... fade...", "Third eye... closes...", "Lemuria... forgets...", "Bonds... sever...", "Motherland... silent..."]
+        "spawn": [
+          "I feel your thoughts!",
+          "The third eye opens!",
+          "Lemuria remembers!",
+          "Psychic bonds unite!",
+          "The motherland calls!"
+        ],
+        "death": [
+          "Thoughts... fade...",
+          "Third eye... closes...",
+          "Lemuria... forgets...",
+          "Bonds... sever...",
+          "Motherland... silent..."
+        ]
       }
     },
     "thought_form": {
       "visualId": "thought_form",
       "dialogue": {
-        "spawn": ["Manifested from mind!", "Thought becomes real!", "Psychic creation!", "Will given form!", "Imagination lives!"],
-        "death": ["Form... dissolves...", "Thought... ends...", "Creation... unmade...", "Will... weakens...", "Imagination... fades..."]
+        "spawn": [
+          "Manifested from mind!",
+          "Thought becomes real!",
+          "Psychic creation!",
+          "Will given form!",
+          "Imagination lives!"
+        ],
+        "death": [
+          "Form... dissolves...",
+          "Thought... ends...",
+          "Creation... unmade...",
+          "Will... weakens...",
+          "Imagination... fades..."
+        ]
       }
     },
     "pacific_guardian": {
       "visualId": "pacific_guardian",
       "dialogue": {
-        "spawn": ["The ocean protects!", "Pacific depths!", "Tidal forces!", "Guardian of origins!", "The waves obey!"],
-        "death": ["Ocean... recedes...", "Depths... release...", "Tides... calm...", "Guardian... falls...", "Waves... still..."]
+        "spawn": [
+          "The ocean protects!",
+          "Pacific depths!",
+          "Tidal forces!",
+          "Guardian of origins!",
+          "The waves obey!"
+        ],
+        "death": [
+          "Ocean... recedes...",
+          "Depths... release...",
+          "Tides... calm...",
+          "Guardian... falls...",
+          "Waves... still..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "psychic_static", "params": { "confusionChance": 0.3, "clarityBonus": 40 } }],
+  "hazards": [
+    {
+      "type": "psychic_static",
+      "params": {
+        "confusionChance": 0.3,
+        "clarityBonus": 40
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "pacific", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "temples", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "psychic_waves", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "pacific",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "temples",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "psychic_waves",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Lemurians communicate telepathically. Read their intentions.",
     "codexSnippet": "Before Atlantis, there was Lemuria, the motherland in the Pacific. The monkey discovers that the oldest civilizations left their mark not in stone, but in mind.",
     "radioWhisper": "The statues on the islands are looking at something. Follow their gaze."
   },
-  "musicSeed": { "seed": "lemuria_002", "mode": "pentatonic", "tempoRange": [50, 65], "intensity": 0.4 },
+  "musicSeed": {
+    "seed": "lemuria_002",
+    "mode": "pentatonic",
+    "tempoRange": [
+      67,
+      86
+    ],
+    "intensity": 0.42,
+    "scale": "slendro",
+    "style": "sacred",
+    "timeSignature": "3/4"
+  },
   "duration": 130,
   "unlockCondition": "lost_worlds_level1_complete"
 }

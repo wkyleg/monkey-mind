@@ -27,7 +27,6 @@ export class MenuScene extends Scene {
   private fadeIn: number = 0;
   private menuOffset: number = 50;
   private selectionPulse: number = 0;
-  private titleBob: number = 0;
 
   // Hover effect tracking
   private hoverScale: number[] = [];
@@ -40,12 +39,18 @@ export class MenuScene extends Scene {
     super(game);
 
     this.menuItems = [
-      { id: 'new_game', label: 'NEW GAME', action: () => this.startNewGame() },
-      { id: 'continue', label: 'CONTINUE', action: () => this.startCampaign() },
-      { id: 'level_select', label: 'LEVEL SELECT', action: () => this.openLevelSelect() },
-      { id: 'endless', label: 'ENDLESS MODE', action: () => this.startEndless() },
-      { id: 'codex', label: 'CODEX', action: () => this.openCodex() },
-      { id: 'settings', label: 'SETTINGS', action: () => this.openSettings() },
+      { id: 'new_game', label: contentLoader.getString('menu_new_game'), action: () => this.startNewGame() },
+      { id: 'continue', label: contentLoader.getString('menu_continue'), action: () => this.startCampaign() },
+      { id: 'level_select', label: contentLoader.getString('menu_level_select'), action: () => this.openLevelSelect() },
+      { id: 'endless', label: contentLoader.getString('menu_endless_mode'), action: () => this.startEndless() },
+      { id: 'codex', label: contentLoader.getString('menu_codex'), action: () => this.openCodex() },
+      {
+        id: 'how_to_play',
+        label: contentLoader.getString('menu_how_to_play'),
+        action: () => this.game.getScenes().push('howToPlay'),
+      },
+      { id: 'neuro', label: contentLoader.getString('menu_neuro'), action: () => this.openNeuroSettings() },
+      { id: 'settings', label: contentLoader.getString('menu_settings'), action: () => this.openSettings() },
     ];
   }
 
@@ -55,7 +60,6 @@ export class MenuScene extends Scene {
     this.fadeIn = 0;
     this.menuOffset = 50;
     this.selectionPulse = 0;
-    this.titleBob = 0;
     this.hoverScale = this.menuItems.map(() => 1);
 
     // Stop any playing music first, then start menu ambient music
@@ -78,12 +82,9 @@ export class MenuScene extends Scene {
     // Selection pulse animation
     this.selectionPulse += dt * 5;
 
-    // Title bob animation (subtle)
-    this.titleBob = Math.sin(this.time * 1.5) * 3;
-
     // Update hover scale for smooth transitions
     for (let i = 0; i < this.hoverScale.length; i++) {
-      const targetScale = i === this.selectedIndex ? 1.1 : 1.0;
+      const targetScale = i === this.selectedIndex ? 1.03 : 1.0;
       this.hoverScale[i] += (targetScale - this.hoverScale[i]) * dt * 8;
     }
 
@@ -127,29 +128,24 @@ export class MenuScene extends Scene {
 
   render(renderer: Renderer, _alpha: number): void {
     const { width, height } = renderer;
+    const ctx = renderer.context;
 
-    // Clear any previous content and reset context state
-    renderer.context.globalAlpha = 1;
+    ctx.globalAlpha = 1;
     renderer.fillRect(0, 0, width, height, '#000000');
 
-    // Background
-    renderer.radialGradientBackground(
-      [CONFIG.COLORS.BACKGROUND, CONFIG.COLORS.BACKGROUND_LIGHT, CONFIG.COLORS.BACKGROUND],
-      width / 2,
-      height / 3,
-    );
+    renderer.radialGradientBackground(['#0a0a14', '#0d0d1a', '#060610'], width / 2, height / 3);
 
-    // Neural mesh background pattern
     this.drawNeuralMesh(renderer);
 
-    // Title with subtle animation
-    const titleY = height * 0.25 + this.titleBob;
+    // Scanline overlay for loading-screen consistency
+    renderer.drawScanLines(0.025, 3);
+
+    const titleY = height * 0.25;
 
     renderer.save();
     renderer.setAlpha(this.fadeIn);
 
-    // Title glow with pulsing effect
-    const titleGlow = 30 + Math.sin(this.time * 2) * 5;
+    const titleGlow = 20 + Math.sin(this.time * 1.5) * 3;
     renderer.glowText(
       contentLoader.getString('title'),
       width / 2,
@@ -160,32 +156,31 @@ export class MenuScene extends Scene {
       titleGlow,
     );
 
-    // Animated bracket decorations around title
-    const ctx = renderer.context;
-    const bracketPulse = Math.sin(this.time * 3) * 5;
+    // Subtle horizontal rules flanking the title instead of chevron brackets
+    const titleText = contentLoader.getString('title');
+    ctx.font = "64px 'SF Mono', Consolas, 'Liberation Mono', monospace";
+    const titleMeasured = ctx.measureText(titleText).width;
+    const ruleGap = 20;
+    const ruleW = 60 + Math.sin(this.time * 1) * 2;
+
     ctx.save();
     ctx.strokeStyle = CONFIG.COLORS.PRIMARY;
-    ctx.lineWidth = 2;
-    ctx.globalAlpha = 0.7 * this.fadeIn;
+    ctx.lineWidth = 1.5;
+    ctx.globalAlpha = 0.4 * this.fadeIn;
     ctx.shadowColor = CONFIG.COLORS.PRIMARY;
-    ctx.shadowBlur = 10;
-
-    // Left bracket
+    ctx.shadowBlur = 6;
+    // Left rule
     ctx.beginPath();
-    ctx.moveTo(width / 2 - 200 - bracketPulse, titleY - 25);
-    ctx.lineTo(width / 2 - 210 - bracketPulse, titleY);
-    ctx.lineTo(width / 2 - 200 - bracketPulse, titleY + 25);
+    ctx.moveTo(width / 2 - titleMeasured / 2 - ruleGap - ruleW, titleY);
+    ctx.lineTo(width / 2 - titleMeasured / 2 - ruleGap, titleY);
     ctx.stroke();
-
-    // Right bracket
+    // Right rule
     ctx.beginPath();
-    ctx.moveTo(width / 2 + 200 + bracketPulse, titleY - 25);
-    ctx.lineTo(width / 2 + 210 + bracketPulse, titleY);
-    ctx.lineTo(width / 2 + 200 + bracketPulse, titleY + 25);
+    ctx.moveTo(width / 2 + titleMeasured / 2 + ruleGap, titleY);
+    ctx.lineTo(width / 2 + titleMeasured / 2 + ruleGap + ruleW, titleY);
     ctx.stroke();
     ctx.restore();
 
-    // Subtitle
     renderer.glowText(
       contentLoader.getString('subtitle'),
       width / 2,
@@ -193,41 +188,33 @@ export class MenuScene extends Scene {
       CONFIG.COLORS.SECONDARY,
       24,
       'center',
-      15,
+      10,
     );
 
-    // Menu items - dynamic spacing based on screen height
-    const menuStartY = height * 0.5;
-    const availableHeight = height * 0.38; // Space for menu items
-    const menuSpacing = Math.max(38, Math.min(50, availableHeight / this.menuItems.length));
+    const menuStartY = height * 0.48;
+    const availableHeight = height * 0.4;
+    const menuSpacing = Math.max(36, Math.min(46, availableHeight / this.menuItems.length));
 
     this.menuItems.forEach((item, index) => {
-      // Staggered fade-in per item
-      const itemAlpha = Math.max(0, Math.min(1, (this.fadeIn - index * 0.1) * 3));
-      const staggerOffset = Math.max(0, (1 - itemAlpha) * 30);
+      const itemAlpha = Math.max(0, Math.min(1, (this.fadeIn - index * 0.05) * 4));
+      const staggerOffset = Math.max(0, (1 - itemAlpha) * 20);
 
       const y = menuStartY + index * menuSpacing + this.menuOffset + staggerOffset;
       const isSelected = index === this.selectedIndex;
       const scale = this.hoverScale[index] || 1;
+      const finalScale = scale;
 
-      // Calculate pulse for selected item
-      const pulseEffect = isSelected ? Math.sin(this.selectionPulse) * 0.05 + 1 : 1;
-      const finalScale = scale * pulseEffect;
-
-      // Colors with smooth transitions
       let color: string;
       let size: number;
       let glow: number;
 
       if (isSelected) {
-        // Pulsing selection effect
-        const pulseAlpha = 0.7 + Math.sin(this.selectionPulse) * 0.3;
-        color = `rgba(0, 204, 204, ${pulseAlpha})`;
-        size = 28;
-        glow = 25 + Math.sin(this.selectionPulse) * 10;
+        color = CONFIG.COLORS.PRIMARY;
+        size = 26;
+        glow = 12;
       } else {
         color = CONFIG.COLORS.TEXT_DIM;
-        size = 24;
+        size = 22;
         glow = 0;
       }
 
@@ -235,37 +222,54 @@ export class MenuScene extends Scene {
       ctx.globalAlpha = itemAlpha * this.fadeIn;
 
       if (isSelected) {
-        // Animated selection indicators
-        const indicatorPulse = Math.sin(this.selectionPulse * 2) * 3;
-        const indicatorX = width / 2 - 130 - indicatorPulse;
-        const indicatorXRight = width / 2 + 130 + indicatorPulse;
-
-        // Left indicator with trail
-        renderer.glowCircle(indicatorX, y, 6, CONFIG.COLORS.PRIMARY, 15);
-        renderer.glowCircle(indicatorX - 15, y, 3, CONFIG.COLORS.PRIMARY, 8);
-
-        // Right indicator with trail
-        renderer.glowCircle(indicatorXRight, y, 6, CONFIG.COLORS.PRIMARY, 15);
-        renderer.glowCircle(indicatorXRight + 15, y, 3, CONFIG.COLORS.PRIMARY, 8);
-
-        // Underline effect
-        ctx.strokeStyle = CONFIG.COLORS.PRIMARY;
-        ctx.lineWidth = 2;
+        // Terminal-style cursor accent on the left
+        const cursorAlpha = 0.6 + Math.sin(this.selectionPulse * 1.5) * 0.4;
+        ctx.save();
+        ctx.globalAlpha = cursorAlpha * itemAlpha * this.fadeIn;
+        ctx.fillStyle = CONFIG.COLORS.PRIMARY;
         ctx.shadowColor = CONFIG.COLORS.PRIMARY;
-        ctx.shadowBlur = 10;
-        const textWidth = item.label.length * 14; // Approximate
+        ctx.shadowBlur = 6;
+        ctx.fillRect(width / 2 - 140, y - 8, 3, 16);
+        ctx.restore();
+
+        // Measured underline
+        ctx.font = `${size}px 'SF Mono', Consolas, 'Liberation Mono', monospace`;
+        const textWidth = ctx.measureText(item.label).width;
+        ctx.save();
+        ctx.strokeStyle = CONFIG.COLORS.PRIMARY;
+        ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.5 * itemAlpha * this.fadeIn;
+        ctx.shadowColor = CONFIG.COLORS.PRIMARY;
+        ctx.shadowBlur = 4;
         ctx.beginPath();
-        ctx.moveTo(width / 2 - textWidth / 2, y + 18);
-        ctx.lineTo(width / 2 + textWidth / 2, y + 18);
+        ctx.moveTo(width / 2 - textWidth / 2, y + 14);
+        ctx.lineTo(width / 2 + textWidth / 2, y + 14);
         ctx.stroke();
+        ctx.restore();
       }
 
-      // Draw scaled text
       ctx.translate(width / 2, y);
       ctx.scale(finalScale, finalScale);
       ctx.translate(-width / 2, -y);
 
       renderer.glowText(item.label, width / 2, y, color, size, 'center', glow);
+
+      if (item.id === 'neuro') {
+        const neuroState = this.game.getNeuroManager().getState();
+        let dotColor: string;
+        if (neuroState.source === 'eeg') {
+          dotColor = CONFIG.COLORS.SUCCESS;
+        } else if (neuroState.source === 'rppg') {
+          dotColor = '#ffaa44';
+        } else if (neuroState.source === 'mock') {
+          dotColor = CONFIG.COLORS.TEXT_DIM;
+        } else {
+          dotColor = CONFIG.COLORS.DANGER;
+        }
+        ctx.font = `${size}px 'SF Mono', Consolas, 'Liberation Mono', monospace`;
+        const neuroTextW = ctx.measureText(item.label).width;
+        renderer.fillCircle(width / 2 + neuroTextW / 2 + 10, y - 2, 4, dotColor);
+      }
 
       ctx.restore();
     });
@@ -276,17 +280,16 @@ export class MenuScene extends Scene {
 
     if (highScoreCampaign > 0 || highScoreEndless > 0) {
       renderer.text(
-        `HIGH SCORES - CAMPAIGN: ${highScoreCampaign} | ENDLESS: ${highScoreEndless}`,
+        `HIGH SCORES — CAMPAIGN: ${highScoreCampaign} | ENDLESS: ${highScoreEndless}`,
         width / 2,
-        height - 60,
+        height - 55,
         CONFIG.COLORS.TEXT_DIM,
-        14,
+        12,
         'center',
       );
     }
 
-    // Controls hint
-    renderer.text('↑ ↓ SELECT   SPACE CONFIRM', width / 2, height - 30, CONFIG.COLORS.TEXT_DIM, 12, 'center');
+    renderer.text('↑ ↓ SELECT   SPACE CONFIRM', width / 2, height - 30, CONFIG.COLORS.TEXT_DIM, 11, 'center');
 
     renderer.restore();
   }
@@ -349,8 +352,11 @@ export class MenuScene extends Scene {
     this.game.getScenes().push('codex');
   }
 
+  private openNeuroSettings(): void {
+    this.game.getScenes().push('neuroSettings');
+  }
+
   private openSettings(): void {
-    // Settings is an overlay, so push is correct
     this.game.getScenes().push('settings');
   }
 }

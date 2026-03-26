@@ -4,14 +4,103 @@
   "index": 2,
   "title": "Aristotle's Categories",
   "subtitle": "Substance and accident. Being qua being.",
-  "themeTags": ["aristotle", "categories", "logic", "metaphysics"],
+  "themeTags": [
+    "aristotle",
+    "categories",
+    "logic",
+    "metaphysics"
+  ],
   "levelEnemies": {
-    "substance": { "visualId": "substance", "dialogue": { "spawn": ["I am primary!", "Without me, nothing!", "The substrate!", "Being itself!", "Categories flow from me!"], "death": ["Primary... no more...", "Without... still...", "Substrate... revealed...", "Being... understood...", "Categories... complete..."] } },
-    "accident": { "visualId": "accident", "dialogue": { "spawn": ["I am incidental!", "Quality! Quantity!", "Relation!", "Place! Time!", "Not essential!"], "death": ["Essential... now...", "Qualified...", "Related...", "Placed...", "Essential..."] } },
-    "syllogism": { "visualId": "syllogism", "dialogue": { "spawn": ["All A is B!", "All B is C!", "Therefore!", "Logic compels!", "Organon!"], "death": ["Not all...", "Some...", "Therefore... not...", "Logic... transcended...", "Organon... closed..."] } }
+    "substance": {
+      "visualId": "substance",
+      "dialogue": {
+        "spawn": [
+          "I am primary!",
+          "Without me, nothing!",
+          "The substrate!",
+          "Being itself!",
+          "Categories flow from me!"
+        ],
+        "death": [
+          "Primary... no more...",
+          "Without... still...",
+          "Substrate... revealed...",
+          "Being... understood...",
+          "Categories... complete..."
+        ]
+      }
+    },
+    "accident": {
+      "visualId": "accident",
+      "dialogue": {
+        "spawn": [
+          "I am incidental!",
+          "Quality! Quantity!",
+          "Relation!",
+          "Place! Time!",
+          "Not essential!"
+        ],
+        "death": [
+          "Essential... now...",
+          "Qualified...",
+          "Related...",
+          "Placed...",
+          "Essential..."
+        ]
+      }
+    },
+    "syllogism": {
+      "visualId": "syllogism",
+      "dialogue": {
+        "spawn": [
+          "All A is B!",
+          "All B is C!",
+          "Therefore!",
+          "Logic compels!",
+          "Organon!"
+        ],
+        "death": [
+          "Not all...",
+          "Some...",
+          "Therefore... not...",
+          "Logic... transcended...",
+          "Organon... closed..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "lyceum", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "scrolls", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "columns", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "Aristotle categorized being into substance and accidents. The monkey learns to distinguish what is essential from what is merely incidental." },
-  "musicSeed": { "seed": "aristotle_002", "mode": "dorian", "tempoRange": [55, 70], "intensity": 0.4 },
-  "duration": 110, "unlockCondition": "lit_level1_complete"
+  "bgLayers": [
+    {
+      "svgId": "lyceum",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "scrolls",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "columns",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "Aristotle categorized being into substance and accidents. The monkey learns to distinguish what is essential from what is merely incidental."
+  },
+  "musicSeed": {
+    "seed": "aristotle_002",
+    "mode": "dorian",
+    "tempoRange": [
+      70,
+      89
+    ],
+    "intensity": 0.33,
+    "scale": "augmented",
+    "style": "dreamy",
+    "timeSignature": "5/4"
+  },
+  "duration": 110,
+  "unlockCondition": "lit_level1_complete"
 }

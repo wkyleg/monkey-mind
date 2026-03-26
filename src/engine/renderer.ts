@@ -260,7 +260,31 @@ export class Renderer {
   }
 
   /**
-   * Draw a solid panel background with optional border
+   * Draw a rounded rectangle path (fill + optional stroke)
+   */
+  drawRoundRect(
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    radius: number,
+    fillColor: string,
+    strokeColor?: string,
+    lineWidth: number = 1,
+  ): void {
+    this.ctx.beginPath();
+    this.ctx.roundRect(x, y, w, h, radius);
+    this.ctx.fillStyle = fillColor;
+    this.ctx.fill();
+    if (strokeColor) {
+      this.ctx.strokeStyle = strokeColor;
+      this.ctx.lineWidth = lineWidth;
+      this.ctx.stroke();
+    }
+  }
+
+  /**
+   * Draw a solid panel background with optional border and optional rounded corners
    */
   drawPanel(
     x: number,
@@ -270,16 +294,18 @@ export class Renderer {
     bgColor: string = 'rgba(10, 10, 15, 0.9)',
     borderColor?: string,
     borderWidth: number = 1,
+    radius: number = 0,
   ): void {
-    // Background
-    this.ctx.fillStyle = bgColor;
-    this.ctx.fillRect(x, y, w, h);
-
-    // Border
-    if (borderColor) {
-      this.ctx.strokeStyle = borderColor;
-      this.ctx.lineWidth = borderWidth;
-      this.ctx.strokeRect(x, y, w, h);
+    if (radius > 0) {
+      this.drawRoundRect(x, y, w, h, radius, bgColor, borderColor, borderWidth);
+    } else {
+      this.ctx.fillStyle = bgColor;
+      this.ctx.fillRect(x, y, w, h);
+      if (borderColor) {
+        this.ctx.strokeStyle = borderColor;
+        this.ctx.lineWidth = borderWidth;
+        this.ctx.strokeRect(x, y, w, h);
+      }
     }
   }
 

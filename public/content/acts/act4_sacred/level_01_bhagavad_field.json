@@ -4,46 +4,115 @@
   "index": 1,
   "title": "Bhagavad Field",
   "subtitle": "Attachment is the enemy. Restraint is victory.",
-  "themeTags": ["detachment", "karma", "battlefield"],
+  "themeTags": [
+    "detachment",
+    "karma",
+    "battlefield"
+  ],
   "ruleCard": {
     "icon": "lotus",
     "hint": "Couriers drop attachments. Restraint from collecting = score bonus.",
     "mechanic": "compassion_bonus",
-    "params": { "restraintBonus": 50, "attachmentPenalty": 10 }
+    "params": {
+      "restraintBonus": 50,
+      "attachmentPenalty": 10
+    }
   },
   "enemyDeck": [
-    { "archetype": "courier", "modifiers": [], "weight": 5 },
-    { "archetype": "drifter", "modifiers": ["koan"], "weight": 3 },
-    { "archetype": "chaser", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "courier",
+      "modifiers": [],
+      "weight": 5
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "koan"
+      ],
+      "weight": 3
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "levelEnemies": {
     "kaurava_warrior": {
       "visualId": "kaurava_warrior",
       "dialogue": {
-        "spawn": ["Dharma demands battle!", "For honor and duty!", "The Pandavas must fall!", "Kurukshetra awaits!", "My karma is sealed!"],
-        "death": ["Dharma... fulfilled...", "The wheel... turns...", "Next life... perhaps...", "Attachment... released...", "Into the cycle..."]
+        "spawn": [
+          "Dharma demands battle!",
+          "For honor and duty!",
+          "The Pandavas must fall!",
+          "Kurukshetra awaits!",
+          "My karma is sealed!"
+        ],
+        "death": [
+          "Dharma... fulfilled...",
+          "The wheel... turns...",
+          "Next life... perhaps...",
+          "Attachment... released...",
+          "Into the cycle..."
+        ]
       }
     },
     "karma_spirit": {
       "visualId": "karma_spirit",
       "dialogue": {
-        "spawn": ["Your actions follow you!", "Cause meets effect!", "The debt must be paid!", "Balance will be restored!", "No escape from karma!"],
-        "death": ["Balance... achieved...", "The debt... cleared...", "Action... completes...", "Cycle... breaks...", "Liberation... near..."]
+        "spawn": [
+          "Your actions follow you!",
+          "Cause meets effect!",
+          "The debt must be paid!",
+          "Balance will be restored!",
+          "No escape from karma!"
+        ],
+        "death": [
+          "Balance... achieved...",
+          "The debt... cleared...",
+          "Action... completes...",
+          "Cycle... breaks...",
+          "Liberation... near..."
+        ]
       }
     },
     "maya_illusion": {
       "visualId": "maya_illusion",
       "dialogue": {
-        "spawn": ["Nothing is real!", "See through the veil!", "Maya clouds your eyes!", "Illusion is comfort!", "Truth burns!"],
-        "death": ["The veil... lifts...", "Reality... revealed...", "Maya... disperses...", "See... clearly...", "Truth... remains..."]
+        "spawn": [
+          "Nothing is real!",
+          "See through the veil!",
+          "Maya clouds your eyes!",
+          "Illusion is comfort!",
+          "Truth burns!"
+        ],
+        "death": [
+          "The veil... lifts...",
+          "Reality... revealed...",
+          "Maya... disperses...",
+          "See... clearly...",
+          "Truth... remains..."
+        ]
       }
     }
   },
   "hazards": [],
   "bgLayers": [
-    { "svgId": "battlefield", "parallaxSpeed": 0.1, "opacity": 0.4 },
-    { "svgId": "chariots", "parallaxSpeed": 0.3, "opacity": 0.5 },
-    { "svgId": "divine", "parallaxSpeed": 0.5, "opacity": 0.6 }
+    {
+      "svgId": "battlefield",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "chariots",
+      "parallaxSpeed": 0.3,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "divine",
+      "parallaxSpeed": 0.5,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Attachment is the enemy. Restraint is victory.",
@@ -52,9 +121,15 @@
   },
   "musicSeed": {
     "seed": "bhagavad_001",
-    "mode": "lydian",
-    "tempoRange": [70, 85],
-    "intensity": 0.5
+    "mode": "harmonicMinor",
+    "tempoRange": [
+      110,
+      122
+    ],
+    "intensity": 0.3,
+    "scale": "harmonicMinor",
+    "style": "dark",
+    "timeSignature": "4/4"
   },
   "duration": 100,
   "unlockCondition": "act3_complete"

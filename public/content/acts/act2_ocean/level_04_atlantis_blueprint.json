@@ -4,17 +4,42 @@
   "index": 4,
   "title": "Atlantis Blueprint",
   "subtitle": "The circuit nodes must be activated in order.",
-  "themeTags": ["atlantis", "puzzle", "circuits"],
+  "themeTags": [
+    "atlantis",
+    "puzzle",
+    "circuits"
+  ],
   "ruleCard": {
     "icon": "circuit",
     "hint": "Activate circuit nodes in sequence. The blueprint reveals the path.",
     "mechanic": "sequence_kill",
-    "params": { "sequence": ["node_alpha", "node_beta", "node_gamma", "node_delta"] }
+    "params": {
+      "sequence": [
+        "node_alpha",
+        "node_beta",
+        "node_gamma",
+        "node_delta"
+      ]
+    }
   },
   "enemyDeck": [
-    { "archetype": "shieldbearer", "modifiers": ["bureaucratic"], "weight": 4 },
-    { "archetype": "drifter", "modifiers": [], "weight": 3 },
-    { "archetype": "sniper", "modifiers": [], "weight": 3 }
+    {
+      "archetype": "shieldbearer",
+      "modifiers": [
+        "bureaucratic"
+      ],
+      "weight": 4
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "sniper",
+      "modifiers": [],
+      "weight": 3
+    }
   ],
   "levelEnemies": {
     "atlantean_guard": {
@@ -76,12 +101,34 @@
     }
   },
   "hazards": [
-    { "type": "circuit_barrier", "lanes": [1, 3, 5], "timing": 10000, "damage": 0, "visual": "energy_wall" }
+    {
+      "type": "circuit_barrier",
+      "lanes": [
+        1,
+        3,
+        5
+      ],
+      "timing": 10000,
+      "damage": 0,
+      "visual": "energy_wall"
+    }
   ],
   "bgLayers": [
-    { "svgId": "atlantis", "parallaxSpeed": 0.1, "opacity": 0.6 },
-    { "svgId": "circuits", "parallaxSpeed": 0.3, "opacity": 0.5 },
-    { "svgId": "ruins", "parallaxSpeed": 0.5, "opacity": 0.4 }
+    {
+      "svgId": "atlantis",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.6
+    },
+    {
+      "svgId": "circuits",
+      "parallaxSpeed": 0.3,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "ruins",
+      "parallaxSpeed": 0.5,
+      "opacity": 0.4
+    }
   ],
   "copyLayers": {
     "ruleCard": "The circuit nodes must be activated in order.",
@@ -90,9 +137,15 @@
   },
   "musicSeed": {
     "seed": "atlantis_004",
-    "mode": "dorian",
-    "tempoRange": [90, 100],
-    "intensity": 0.6
+    "mode": "lydian",
+    "tempoRange": [
+      105,
+      118
+    ],
+    "intensity": 0.68,
+    "scale": "lydian",
+    "style": "dreamy",
+    "timeSignature": "6/8"
   },
   "duration": 130,
   "unlockCondition": "act2_level3_complete"

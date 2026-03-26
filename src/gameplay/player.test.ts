@@ -201,6 +201,32 @@ describe('Player', () => {
 
       expect(player.canFire()).toBe(true);
     });
+
+    it('should respect fireRateModifier for slower fire rate', () => {
+      const modifier = 2.0;
+      // Fill timer to just past base fire rate but not enough for modified
+      player.updateFromIntent(neutralIntent(), CONFIG.BANANA_FIRE_RATE + 0.01);
+
+      // With modifier of 2, the effective cooldown is fireRate * 2
+      // Timer is only at fireRate, so should NOT fire
+      expect(player.canFire(modifier)).toBe(false);
+    });
+
+    it('should fire faster with low fireRateModifier', () => {
+      const modifier = 0.5;
+      // Fill timer to half the base fire rate
+      player.updateFromIntent(neutralIntent(), CONFIG.BANANA_FIRE_RATE * 0.5 + 0.01);
+
+      // With modifier of 0.5, half the cooldown is enough
+      expect(player.canFire(modifier)).toBe(true);
+    });
+
+    it('should use default modifier of 1 when unspecified', () => {
+      player.updateFromIntent(neutralIntent(), CONFIG.BANANA_FIRE_RATE + 0.01);
+
+      // canFire() with no argument should behave like canFire(1)
+      expect(player.canFire()).toBe(true);
+    });
   });
 
   describe('Damage System', () => {

@@ -4,53 +4,144 @@
   "index": 3,
   "title": "The Vedic Hymns",
   "subtitle": "The Nasadiya Sukta. Creation from nothing.",
-  "themeTags": ["vedas", "creation", "cosmic", "brahman"],
+  "themeTags": [
+    "vedas",
+    "creation",
+    "cosmic",
+    "brahman"
+  ],
   "ruleCard": {
     "icon": "fire",
     "hint": "Agni carries your offerings. The sacred fire transforms.",
     "mechanic": "sacred_fire",
-    "params": { "offeringBonus": 40, "fireTransformation": true }
+    "params": {
+      "offeringBonus": 40,
+      "fireTransformation": true
+    }
   },
   "enemyDeck": [
-    { "archetype": "phaser", "modifiers": [], "weight": 4, "visualId": "enemy_indra" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_agni" },
-    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_vritra" }
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_indra"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_agni"
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_vritra"
+    }
   ],
   "levelEnemies": {
     "vritra": {
       "visualId": "vritra",
       "dialogue": {
-        "spawn": ["The drought demon!", "I hold the waters!", "Indra cannot defeat me!", "Cosmic serpent!", "Blocking the rivers!"],
-        "death": ["Waters... released...", "Indra... victorious...", "Serpent... slain...", "Rivers... flowing...", "Drought... ended..."]
+        "spawn": [
+          "The drought demon!",
+          "I hold the waters!",
+          "Indra cannot defeat me!",
+          "Cosmic serpent!",
+          "Blocking the rivers!"
+        ],
+        "death": [
+          "Waters... released...",
+          "Indra... victorious...",
+          "Serpent... slain...",
+          "Rivers... flowing...",
+          "Drought... ended..."
+        ]
       }
     },
     "soma_drop": {
       "visualId": "soma_drop",
       "dialogue": {
-        "spawn": ["Divine nectar!", "Drink and see!", "The moon's elixir!", "Vedic vision!", "Immortality tastes!"],
-        "death": ["Nectar... consumed...", "Vision... fades...", "Elixir... spent...", "Sight... normal...", "Taste... remembered..."]
+        "spawn": [
+          "Divine nectar!",
+          "Drink and see!",
+          "The moon's elixir!",
+          "Vedic vision!",
+          "Immortality tastes!"
+        ],
+        "death": [
+          "Nectar... consumed...",
+          "Vision... fades...",
+          "Elixir... spent...",
+          "Sight... normal...",
+          "Taste... remembered..."
+        ]
       }
     },
     "rta_pattern": {
       "visualId": "rta_pattern",
       "dialogue": {
-        "spawn": ["Cosmic order!", "Rta sustains all!", "Truth maintains!", "The pattern eternal!", "From chaos, order!"],
-        "death": ["Order... maintained...", "Rta... continues...", "Truth... upheld...", "Pattern... preserved...", "Chaos... distant..."]
+        "spawn": [
+          "Cosmic order!",
+          "Rta sustains all!",
+          "Truth maintains!",
+          "The pattern eternal!",
+          "From chaos, order!"
+        ],
+        "death": [
+          "Order... maintained...",
+          "Rta... continues...",
+          "Truth... upheld...",
+          "Pattern... preserved...",
+          "Chaos... distant..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "cosmic_fire", "params": { "purificationDamage": 10, "transformationChance": 0.3 } }],
+  "hazards": [
+    {
+      "type": "cosmic_fire",
+      "params": {
+        "purificationDamage": 10,
+        "transformationChance": 0.3
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "fire_altar", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "sanskrit", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "cosmic_waters", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "fire_altar",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "sanskrit",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "cosmic_waters",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Agni carries your offerings. The sacred fire transforms.",
     "codexSnippet": "There was neither existence nor non-existence. The monkey chants the oldest hymns and touches the mystery of creation itself.",
     "radioWhisper": "Whence this creation has arisen, perhaps it formed itself, or perhaps it did not."
   },
-  "musicSeed": { "seed": "vedic_003", "mode": "indian_raga", "tempoRange": [55, 70], "intensity": 0.5 },
+  "musicSeed": {
+    "seed": "vedic_003",
+    "mode": "bhairav",
+    "tempoRange": [
+      61,
+      80
+    ],
+    "intensity": 0.37,
+    "scale": "nikriz",
+    "style": "meditative",
+    "timeSignature": "7/8",
+    "culturalStyle": "indian"
+  },
   "duration": 130,
   "unlockCondition": "myth_level2_complete"
 }

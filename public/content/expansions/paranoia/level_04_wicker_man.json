@@ -4,53 +4,143 @@
   "index": 4,
   "title": "The Wicker Man",
   "subtitle": "Summerisle. The old gods demand sacrifice.",
-  "themeTags": ["wicker_man", "paganism", "sacrifice", "cult"],
+  "themeTags": [
+    "wicker_man",
+    "paganism",
+    "sacrifice",
+    "cult"
+  ],
   "ruleCard": {
     "icon": "fire",
     "hint": "The islanders seem friendly. The harvest must be good.",
     "mechanic": "false_hospitality",
-    "params": { "betrayalChance": 0.4, "escapeBonus": 90 }
+    "params": {
+      "betrayalChance": 0.4,
+      "escapeBonus": 90
+    }
   },
   "enemyDeck": [
-    { "archetype": "mimic", "modifiers": [], "weight": 4, "visualId": "enemy_villager" },
-    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_wicker_man" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_may_queen" }
+    {
+      "archetype": "mimic",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_villager"
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_wicker_man"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_may_queen"
+    }
   ],
   "levelEnemies": {
     "smiling_villager": {
       "visualId": "smiling_villager",
       "dialogue": {
-        "spawn": ["Welcome to Summerisle!", "The harvest will be good!", "Stay for the festival!", "We have apple orchards!", "The old ways work!"],
-        "death": ["Leaving... now...", "Harvest... failed...", "Festival... cancelled...", "Orchards... barren...", "Old ways... forgotten..."]
+        "spawn": [
+          "Welcome to Summerisle!",
+          "The harvest will be good!",
+          "Stay for the festival!",
+          "We have apple orchards!",
+          "The old ways work!"
+        ],
+        "death": [
+          "Leaving... now...",
+          "Harvest... failed...",
+          "Festival... cancelled...",
+          "Orchards... barren...",
+          "Old ways... forgotten..."
+        ]
       }
     },
     "wicker_effigy": {
       "visualId": "wicker_effigy",
       "dialogue": {
-        "spawn": ["The sacrifice!", "For a good harvest!", "The gods demand!", "Inside the man!", "Burn for Summerisle!"],
-        "death": ["No sacrifice...", "Harvest... without...", "Gods... denied...", "Outside... free...", "Summerisle... falls..."]
+        "spawn": [
+          "The sacrifice!",
+          "For a good harvest!",
+          "The gods demand!",
+          "Inside the man!",
+          "Burn for Summerisle!"
+        ],
+        "death": [
+          "No sacrifice...",
+          "Harvest... without...",
+          "Gods... denied...",
+          "Outside... free...",
+          "Summerisle... falls..."
+        ]
       }
     },
     "pagan_priest": {
       "visualId": "pagan_priest",
       "dialogue": {
-        "spawn": ["Lord Summerisle welcomes you!", "The old religion lives!", "You came willingly!", "Perfect for the role!", "The bees foretold!"],
-        "death": ["Unwelcome... now...", "Religion... dies...", "Leaving... now...", "Wrong... role...", "Bees... silent..."]
+        "spawn": [
+          "Lord Summerisle welcomes you!",
+          "The old religion lives!",
+          "You came willingly!",
+          "Perfect for the role!",
+          "The bees foretold!"
+        ],
+        "death": [
+          "Unwelcome... now...",
+          "Religion... dies...",
+          "Leaving... now...",
+          "Wrong... role...",
+          "Bees... silent..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "cult_ritual", "params": { "ritualDamage": 20, "escapeWindow": 3000 } }],
+  "hazards": [
+    {
+      "type": "cult_ritual",
+      "params": {
+        "ritualDamage": 20,
+        "escapeWindow": 3000
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "island", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "orchards", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "wicker_structure", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "island",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "orchards",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "wicker_structure",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "The islanders seem friendly. The harvest must be good.",
     "codexSnippet": "On Summerisle, the old gods never left. The monkey visits the isolated community and discovers that hospitality can be the cruelest trap.",
     "radioWhisper": "Oh, God! Oh, Jesus Christ! Not the bees!"
   },
-  "musicSeed": { "seed": "wickerman_004", "mode": "mixolydian", "tempoRange": [55, 70], "intensity": 0.6 },
+  "musicSeed": {
+    "seed": "wickerman_004",
+    "mode": "locrian",
+    "tempoRange": [
+      63,
+      85
+    ],
+    "intensity": 0.45,
+    "scale": "phrygianDominant",
+    "style": "mysterious",
+    "timeSignature": "4/4"
+  },
   "duration": 130,
   "unlockCondition": "paranoia_level3_complete"
 }

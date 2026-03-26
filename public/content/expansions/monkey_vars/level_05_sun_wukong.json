@@ -4,53 +4,145 @@
   "index": 5,
   "title": "Sun Wukong",
   "subtitle": "The Monkey King. Heaven's rebel.",
-  "themeTags": ["sun_wukong", "chinese", "rebellion", "immortal"],
+  "themeTags": [
+    "sun_wukong",
+    "chinese",
+    "rebellion",
+    "immortal"
+  ],
   "ruleCard": {
     "icon": "staff",
     "hint": "The Monkey King defied heaven. Rebellion grants power but invites punishment.",
     "mechanic": "rebellion_power",
-    "params": { "rebellionBoost": 50, "heavenlyRetribution": 30 }
+    "params": {
+      "rebellionBoost": 50,
+      "heavenlyRetribution": 30
+    }
   },
   "enemyDeck": [
-    { "archetype": "boss_chassis", "modifiers": ["mythic"], "weight": 3, "visualId": "enemy_alpha_ape" },
-    { "archetype": "shieldbearer", "modifiers": [], "weight": 4, "visualId": "enemy_cyber_chimp" },
-    { "archetype": "sniper", "modifiers": [], "weight": 3, "visualId": "enemy_shadow_monkey" }
+    {
+      "archetype": "boss_chassis",
+      "modifiers": [
+        "mythic"
+      ],
+      "weight": 3,
+      "visualId": "enemy_alpha_ape"
+    },
+    {
+      "archetype": "shieldbearer",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_cyber_chimp"
+    },
+    {
+      "archetype": "sniper",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_shadow_monkey"
+    }
   ],
   "levelEnemies": {
     "celestial_soldier": {
       "visualId": "celestial_soldier",
       "dialogue": {
-        "spawn": ["Heaven commands!", "The Jade Emperor's army!", "Surrender, rebel!", "100,000 celestial warriors!", "You cannot defeat heaven!"],
-        "death": ["Heaven... retreats...", "Army... scattered...", "Rebel... victorious...", "Warriors... fall...", "Monkey King... prevails..."]
+        "spawn": [
+          "Heaven commands!",
+          "The Jade Emperor's army!",
+          "Surrender, rebel!",
+          "100,000 celestial warriors!",
+          "You cannot defeat heaven!"
+        ],
+        "death": [
+          "Heaven... retreats...",
+          "Army... scattered...",
+          "Rebel... victorious...",
+          "Warriors... fall...",
+          "Monkey King... prevails..."
+        ]
       }
     },
     "buddha_palm": {
       "visualId": "buddha_palm",
       "dialogue": {
-        "spawn": ["You cannot escape!", "Buddha's palm holds all!", "Five hundred years!", "Pride is punished!", "The mountain awaits!"],
-        "death": ["Palm... opens...", "Escape... possible...", "Years... pass...", "Pride... humbled...", "Mountain... lifts..."]
+        "spawn": [
+          "You cannot escape!",
+          "Buddha's palm holds all!",
+          "Five hundred years!",
+          "Pride is punished!",
+          "The mountain awaits!"
+        ],
+        "death": [
+          "Palm... opens...",
+          "Escape... possible...",
+          "Years... pass...",
+          "Pride... humbled...",
+          "Mountain... lifts..."
+        ]
       }
     },
     "peach_guardian": {
       "visualId": "peach_guardian",
       "dialogue": {
-        "spawn": ["The peaches of immortality!", "You stole from heaven!", "The garden is guarded!", "No more eternal life!", "Thief of the divine!"],
-        "death": ["Peaches... taken...", "Heaven... robbed...", "Garden... breached...", "Immortality... yours...", "Divine... thief..."]
+        "spawn": [
+          "The peaches of immortality!",
+          "You stole from heaven!",
+          "The garden is guarded!",
+          "No more eternal life!",
+          "Thief of the divine!"
+        ],
+        "death": [
+          "Peaches... taken...",
+          "Heaven... robbed...",
+          "Garden... breached...",
+          "Immortality... yours...",
+          "Divine... thief..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "heavenly_trial", "params": { "thunderboltDamage": 20, "defyBonus": 40 } }],
+  "hazards": [
+    {
+      "type": "heavenly_trial",
+      "params": {
+        "thunderboltDamage": 20,
+        "defyBonus": 40
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "heavenly_palace", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "clouds", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "peach_garden", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "heavenly_palace",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "clouds",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "peach_garden",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "The Monkey King defied heaven. Rebellion grants power but invites punishment.",
     "codexSnippet": "Sun Wukong, the Monkey King, was born from stone and challenged heaven itself. Subject 47 inherits this rebellious spirit and learns that even gods can be defied.",
     "radioWhisper": "The subject has developed... an attitude problem. It no longer follows orders."
   },
-  "musicSeed": { "seed": "sun_wukong_005", "mode": "pentatonic", "tempoRange": [75, 95], "intensity": 0.8 },
+  "musicSeed": {
+    "seed": "sun_wukong_005",
+    "mode": "pentatonic",
+    "tempoRange": [
+      88,
+      112
+    ],
+    "intensity": 0.7,
+    "scale": "ionian",
+    "style": "dark",
+    "timeSignature": "7/8"
+  },
   "duration": 160,
   "unlockCondition": "monkey_vars_level4_complete"
 }

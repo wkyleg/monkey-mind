@@ -4,48 +4,129 @@
   "index": 4,
   "title": "Baudrillard Mall",
   "subtitle": "Simulacra everywhere. Points for ignoring fakes.",
-  "themeTags": ["baudrillard", "simulacra", "hyperreal"],
+  "themeTags": [
+    "baudrillard",
+    "simulacra",
+    "hyperreal"
+  ],
   "ruleCard": {
     "icon": "copy",
     "hint": "Simulacrum enemies are everywhere. Ignoring fakes scores points. Shooting fakes costs.",
     "mechanic": "compassion_bonus",
-    "params": { "ignoreBonus": 20, "shootPenalty": 30 }
+    "params": {
+      "ignoreBonus": 20,
+      "shootPenalty": 30
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": ["simulacrum"], "weight": 6 },
-    { "archetype": "mimic", "modifiers": [], "weight": 2 },
-    { "archetype": "chaser", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "simulacrum"
+      ],
+      "weight": 6
+    },
+    {
+      "archetype": "mimic",
+      "modifiers": [],
+      "weight": 2
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "levelEnemies": {
     "brand_ghost": {
       "visualId": "brand_ghost",
       "dialogue": {
-        "spawn": ["Buy now!", "Limited time!", "You NEED this!", "Sale of a lifetime!", "Consume consume CONSUME!"],
-        "death": ["Out of... stock...", "Brand... discontinued...", "The market... crashes...", "No more... sales...", "Bankrupt..."]
+        "spawn": [
+          "Buy now!",
+          "Limited time!",
+          "You NEED this!",
+          "Sale of a lifetime!",
+          "Consume consume CONSUME!"
+        ],
+        "death": [
+          "Out of... stock...",
+          "Brand... discontinued...",
+          "The market... crashes...",
+          "No more... sales...",
+          "Bankrupt..."
+        ]
       }
     },
     "mannequin_walker": {
       "visualId": "mannequin_walker",
       "dialogue": {
-        "spawn": ["Wear the latest!", "Fashion forward!", "Be someone else!", "The image is everything!", "Look like THIS!"],
-        "death": ["Out of... style...", "Season... over...", "Trend... dead...", "Unfashionable... ending...", "Naked... truth..."]
+        "spawn": [
+          "Wear the latest!",
+          "Fashion forward!",
+          "Be someone else!",
+          "The image is everything!",
+          "Look like THIS!"
+        ],
+        "death": [
+          "Out of... style...",
+          "Season... over...",
+          "Trend... dead...",
+          "Unfashionable... ending...",
+          "Naked... truth..."
+        ]
       }
     },
     "neon_sign": {
       "visualId": "neon_sign",
       "dialogue": {
-        "spawn": ["OPEN 24/7!", "FREE PARKING!", "EVERYTHING MUST GO!", "YOU ARE HERE!", "EXIT ONLY!"],
-        "death": ["Lights... out...", "Closed... forever...", "Sign... broken...", "No more... glow...", "Darkness... returns..."]
+        "spawn": [
+          "OPEN 24/7!",
+          "FREE PARKING!",
+          "EVERYTHING MUST GO!",
+          "YOU ARE HERE!",
+          "EXIT ONLY!"
+        ],
+        "death": [
+          "Lights... out...",
+          "Closed... forever...",
+          "Sign... broken...",
+          "No more... glow...",
+          "Darkness... returns..."
+        ]
       }
     }
   },
   "hazards": [
-    { "type": "advertisement", "lanes": [1, 2, 3, 4, 5], "timing": 5000, "damage": 0, "visual": "neon_flash" }
+    {
+      "type": "advertisement",
+      "lanes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "timing": 5000,
+      "damage": 0,
+      "visual": "neon_flash"
+    }
   ],
   "bgLayers": [
-    { "svgId": "mall", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "signs", "parallaxSpeed": 0.3, "opacity": 0.6 },
-    { "svgId": "crowds", "parallaxSpeed": 0.5, "opacity": 0.4 }
+    {
+      "svgId": "mall",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "signs",
+      "parallaxSpeed": 0.3,
+      "opacity": 0.6
+    },
+    {
+      "svgId": "crowds",
+      "parallaxSpeed": 0.5,
+      "opacity": 0.4
+    }
   ],
   "copyLayers": {
     "ruleCard": "Simulacra everywhere. Points for ignoring fakes.",
@@ -54,9 +135,15 @@
   },
   "musicSeed": {
     "seed": "baudrillard_004",
-    "mode": "mixolydian",
-    "tempoRange": [100, 115],
-    "intensity": 0.6
+    "mode": "dorian",
+    "tempoRange": [
+      105,
+      118
+    ],
+    "intensity": 0.68,
+    "scale": "lydian",
+    "style": "tension",
+    "timeSignature": "7/8"
   },
   "duration": 130,
   "unlockCondition": "act6_level3_complete"

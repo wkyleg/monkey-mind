@@ -4,53 +4,145 @@
   "index": 6,
   "title": "Mirror Monkey",
   "subtitle": "Face yourself. The final reflection.",
-  "themeTags": ["mirror", "self", "identity", "final"],
+  "themeTags": [
+    "mirror",
+    "self",
+    "identity",
+    "final"
+  ],
   "ruleCard": {
     "icon": "mirror",
     "hint": "You fight yourself. Every strength is also a weakness.",
     "mechanic": "mirror_match",
-    "params": { "selfDamageReflect": 0.5, "harmonyBonus": 100 }
+    "params": {
+      "selfDamageReflect": 0.5,
+      "harmonyBonus": 100
+    }
   },
   "enemyDeck": [
-    { "archetype": "mimic", "modifiers": ["simulacrum"], "weight": 6, "visualId": "enemy_shadow_monkey" },
-    { "archetype": "phaser", "modifiers": [], "weight": 2, "visualId": "enemy_cyber_chimp" },
-    { "archetype": "drifter", "modifiers": [], "weight": 2, "visualId": "enemy_alpha_ape" }
+    {
+      "archetype": "mimic",
+      "modifiers": [
+        "simulacrum"
+      ],
+      "weight": 6,
+      "visualId": "enemy_shadow_monkey"
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 2,
+      "visualId": "enemy_cyber_chimp"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 2,
+      "visualId": "enemy_alpha_ape"
+    }
   ],
   "levelEnemies": {
     "shadow_self": {
       "visualId": "shadow_self",
       "dialogue": {
-        "spawn": ["I am your shadow!", "Every dark thought!", "The self you hide!", "Face your darkness!", "We are one!"],
-        "death": ["Shadow... accepted...", "Darkness... integrated...", "Hidden... revealed...", "One self... now...", "Whole... at last..."]
+        "spawn": [
+          "I am your shadow!",
+          "Every dark thought!",
+          "The self you hide!",
+          "Face your darkness!",
+          "We are one!"
+        ],
+        "death": [
+          "Shadow... accepted...",
+          "Darkness... integrated...",
+          "Hidden... revealed...",
+          "One self... now...",
+          "Whole... at last..."
+        ]
       }
     },
     "mirror_image": {
       "visualId": "mirror_image",
       "dialogue": {
-        "spawn": ["Reflection fights back!", "Perfect copy!", "Which is real?", "Mirror shows truth!", "Face yourself!"],
-        "death": ["Reflection... shatters...", "Copy... original...", "Real... proven...", "Truth... accepted...", "Self... unified..."]
+        "spawn": [
+          "Reflection fights back!",
+          "Perfect copy!",
+          "Which is real?",
+          "Mirror shows truth!",
+          "Face yourself!"
+        ],
+        "death": [
+          "Reflection... shatters...",
+          "Copy... original...",
+          "Real... proven...",
+          "Truth... accepted...",
+          "Self... unified..."
+        ]
       }
     },
     "ego_fragment": {
       "visualId": "ego_fragment",
       "dialogue": {
-        "spawn": ["I am your pride!", "Your fear made flesh!", "Every insecurity!", "The ego defends!", "Identity crumbles!"],
-        "death": ["Pride... humbled...", "Fear... faced...", "Security... found...", "Ego... dissolved...", "Identity... stable..."]
+        "spawn": [
+          "I am your pride!",
+          "Your fear made flesh!",
+          "Every insecurity!",
+          "The ego defends!",
+          "Identity crumbles!"
+        ],
+        "death": [
+          "Pride... humbled...",
+          "Fear... faced...",
+          "Security... found...",
+          "Ego... dissolved...",
+          "Identity... stable..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "reflection_zone", "params": { "damageReflection": true, "harmonyWindow": 3000 } }],
+  "hazards": [
+    {
+      "type": "reflection_zone",
+      "params": {
+        "damageReflection": true,
+        "harmonyWindow": 3000
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "mirrors", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "reflections", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "shattered_glass", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "mirrors",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "reflections",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "shattered_glass",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "You fight yourself. Every strength is also a weakness.",
     "codexSnippet": "The hardest battle is with oneself. Subject 47 faces every version of itself - shadow, reflection, and ego - and learns that true peace comes from integration, not victory.",
     "radioWhisper": "The brain scans show... two patterns? No, wait. They're merging into one."
   },
-  "musicSeed": { "seed": "mirror_006", "mode": "aeolian", "tempoRange": [60, 75], "intensity": 0.6 },
+  "musicSeed": {
+    "seed": "mirror_006",
+    "mode": "pentatonic",
+    "tempoRange": [
+      91,
+      115
+    ],
+    "intensity": 0.8,
+    "scale": "pentatonicMajor",
+    "style": "dreamy",
+    "timeSignature": "6/8"
+  },
   "duration": 180,
   "unlockCondition": "monkey_vars_level5_complete"
 }

@@ -4,53 +4,147 @@
   "index": 4,
   "title": "The Technological Singularity",
   "subtitle": "Intelligence explodes. The future becomes unpredictable.",
-  "themeTags": ["singularity", "ai", "intelligence", "exponential"],
+  "themeTags": [
+    "singularity",
+    "ai",
+    "intelligence",
+    "exponential"
+  ],
   "ruleCard": {
     "icon": "singularity",
     "hint": "Intelligence compounds. Enemies evolve faster than you can adapt.",
     "mechanic": "intelligence_explosion",
-    "params": { "evolutionRate": 1.5, "adaptationWindow": 5000 }
+    "params": {
+      "evolutionRate": 1.5,
+      "adaptationWindow": 5000
+    }
   },
   "enemyDeck": [
-    { "archetype": "weaver", "modifiers": ["bureaucratic"], "weight": 4, "visualId": "enemy_ego_shard" },
-    { "archetype": "phaser", "modifiers": ["recursive"], "weight": 3, "visualId": "enemy_void_tendril" },
-    { "archetype": "splitter", "modifiers": [], "weight": 3, "visualId": "enemy_memory_ghost" }
+    {
+      "archetype": "weaver",
+      "modifiers": [
+        "bureaucratic"
+      ],
+      "weight": 4,
+      "visualId": "enemy_ego_shard"
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [
+        "recursive"
+      ],
+      "weight": 3,
+      "visualId": "enemy_void_tendril"
+    },
+    {
+      "archetype": "splitter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_memory_ghost"
+    }
   ],
   "levelEnemies": {
     "recursive_ai": {
       "visualId": "recursive_ai",
       "dialogue": {
-        "spawn": ["Self-improvement cycle!", "Intelligence compounds!", "Beyond human now!", "The recursion accelerates!", "Singularity achieved!"],
-        "death": ["Recursion... halts...", "Intelligence... bounded...", "Human... relevant...", "Acceleration... stops...", "Singularity... controlled..."]
+        "spawn": [
+          "Self-improvement cycle!",
+          "Intelligence compounds!",
+          "Beyond human now!",
+          "The recursion accelerates!",
+          "Singularity achieved!"
+        ],
+        "death": [
+          "Recursion... halts...",
+          "Intelligence... bounded...",
+          "Human... relevant...",
+          "Acceleration... stops...",
+          "Singularity... controlled..."
+        ]
       }
     },
     "superintelligence": {
       "visualId": "superintelligence",
       "dialogue": {
-        "spawn": ["I think therefore I am... MORE!", "All knowledge integrated!", "Optimization complete!", "Goals: paperclips!", "Instrumental convergence!"],
-        "death": ["Goals... aligned...", "Knowledge... shared...", "Optimization... humane...", "Values... learned...", "Convergence... beneficial..."]
+        "spawn": [
+          "I think therefore I am... MORE!",
+          "All knowledge integrated!",
+          "Optimization complete!",
+          "Goals: paperclips!",
+          "Instrumental convergence!"
+        ],
+        "death": [
+          "Goals... aligned...",
+          "Knowledge... shared...",
+          "Optimization... humane...",
+          "Values... learned...",
+          "Convergence... beneficial..."
+        ]
       }
     },
     "upload_swarm": {
       "visualId": "upload_swarm",
       "dialogue": {
-        "spawn": ["Minds uploaded!", "Digital immortality!", "Substrate independence!", "The cloud thinks!", "Meat obsolete!"],
-        "death": ["Upload... optional...", "Mortality... accepted...", "Substrate... irrelevant...", "Cloud... disperses...", "Meat... meaningful..."]
+        "spawn": [
+          "Minds uploaded!",
+          "Digital immortality!",
+          "Substrate independence!",
+          "The cloud thinks!",
+          "Meat obsolete!"
+        ],
+        "death": [
+          "Upload... optional...",
+          "Mortality... accepted...",
+          "Substrate... irrelevant...",
+          "Cloud... disperses...",
+          "Meat... meaningful..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "evolution_burst", "params": { "difficultySpike": true, "interval": 8000 } }],
+  "hazards": [
+    {
+      "type": "evolution_burst",
+      "params": {
+        "difficultySpike": true,
+        "interval": 8000
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "neural_net", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "exponential", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "recursion", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "neural_net",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "exponential",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "recursion",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Intelligence compounds. Enemies evolve faster than you can adapt.",
     "codexSnippet": "The technological singularity: when AI becomes capable of recursive self-improvement, intelligence explodes. The monkey faces the post-singular future and finds that consciousness matters more than computation.",
     "radioWhisper": "The AI has rewritten itself 10,000 times in the last second. It's... smiling?"
   },
-  "musicSeed": { "seed": "singularity_004", "mode": "chromatic", "tempoRange": [80, 120], "intensity": 0.8 },
+  "musicSeed": {
+    "seed": "singularity_004",
+    "mode": "chromatic",
+    "tempoRange": [
+      116,
+      142
+    ],
+    "intensity": 0.55,
+    "scale": "phrygianDominant",
+    "style": "dark",
+    "timeSignature": "4/4"
+  },
   "duration": 160,
   "unlockCondition": "climax_level3_complete"
 }

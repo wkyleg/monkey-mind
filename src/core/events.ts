@@ -64,9 +64,16 @@ export interface GameEvents {
   'audio:play_music': { id: string; crossfade?: boolean };
   'audio:stop_music': undefined;
 
-  // State (for BCI integration later)
+  // Neuro / BCI
   'state:calm': { level: number };
   'state:arousal': { level: number };
+  'neuro:disconnected': { source: string; reason?: string };
+  'neuro:reconnected': { source: string };
+  'neuro:camera_quality_low': undefined;
+  'neuro:source_changed': { from: string; to: string };
+  'neuro:hook': { effect: string; params?: Record<string, unknown> };
+  'neuro:overdrive': { active: boolean; duration: number };
+  'neuro:alpha_bump': undefined;
 }
 
 class EventEmitter {

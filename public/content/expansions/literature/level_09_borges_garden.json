@@ -4,14 +4,103 @@
   "index": 9,
   "title": "The Garden of Forking Paths",
   "subtitle": "Time forks perpetually into innumerable futures.",
-  "themeTags": ["borges", "time", "labyrinth", "infinity"],
+  "themeTags": [
+    "borges",
+    "time",
+    "labyrinth",
+    "infinity"
+  ],
   "levelEnemies": {
-    "ts_tsun": { "visualId": "ts_tsun", "dialogue": { "spawn": ["I am a spy!", "Time is a labyrinth!", "All outcomes exist!", "The garden forks!", "Ancestor's riddle!"], "death": ["Spy... revealed...", "Labyrinth... navigated...", "One outcome...", "Garden... resolved...", "Riddle... answered..."] } },
-    "forking_path": { "visualId": "forking_path", "dialogue": { "spawn": ["Choose!", "Both paths are real!", "Infinite bifurcation!", "Every possibility!", "Ts'ui Pên knew!"], "death": ["Chosen...", "One path...", "Single...", "This possibility...", "Knowledge... inherited..."] } },
-    "stephen_albert": { "visualId": "stephen_albert", "dialogue": { "spawn": ["The book is the labyrinth!", "Time branches!", "I have solved it!", "Ts'ui Pên's secret!", "You will kill me in some!"], "death": ["Labyrinth... walked...", "Time... straight...", "Solved...", "Secret... shared...", "Spared... in this..."] } }
+    "ts_tsun": {
+      "visualId": "ts_tsun",
+      "dialogue": {
+        "spawn": [
+          "I am a spy!",
+          "Time is a labyrinth!",
+          "All outcomes exist!",
+          "The garden forks!",
+          "Ancestor's riddle!"
+        ],
+        "death": [
+          "Spy... revealed...",
+          "Labyrinth... navigated...",
+          "One outcome...",
+          "Garden... resolved...",
+          "Riddle... answered..."
+        ]
+      }
+    },
+    "forking_path": {
+      "visualId": "forking_path",
+      "dialogue": {
+        "spawn": [
+          "Choose!",
+          "Both paths are real!",
+          "Infinite bifurcation!",
+          "Every possibility!",
+          "Ts'ui Pên knew!"
+        ],
+        "death": [
+          "Chosen...",
+          "One path...",
+          "Single...",
+          "This possibility...",
+          "Knowledge... inherited..."
+        ]
+      }
+    },
+    "stephen_albert": {
+      "visualId": "stephen_albert",
+      "dialogue": {
+        "spawn": [
+          "The book is the labyrinth!",
+          "Time branches!",
+          "I have solved it!",
+          "Ts'ui Pên's secret!",
+          "You will kill me in some!"
+        ],
+        "death": [
+          "Labyrinth... walked...",
+          "Time... straight...",
+          "Solved...",
+          "Secret... shared...",
+          "Spared... in this..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "garden", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "paths", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "maze", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "In all fictional works, when a man is faced with alternatives he chooses one. The monkey walks all paths simultaneously." },
-  "musicSeed": { "seed": "garden_009", "mode": "chromatic", "tempoRange": [50, 65], "intensity": 0.5 },
-  "duration": 130, "unlockCondition": "lit_level8_complete"
+  "bgLayers": [
+    {
+      "svgId": "garden",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "paths",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "maze",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "In all fictional works, when a man is faced with alternatives he chooses one. The monkey walks all paths simultaneously."
+  },
+  "musicSeed": {
+    "seed": "garden_009",
+    "mode": "dorian",
+    "tempoRange": [
+      74,
+      93
+    ],
+    "intensity": 0.51,
+    "scale": "pentatonicMinor",
+    "style": "heroic",
+    "timeSignature": "7/8"
+  },
+  "duration": 130,
+  "unlockCondition": "lit_level8_complete"
 }

@@ -4,14 +4,103 @@
   "index": 18,
   "title": "The Myth of Sisyphus",
   "subtitle": "One must imagine Sisyphus happy.",
-  "themeTags": ["camus", "sisyphus", "absurd", "revolt"],
+  "themeTags": [
+    "camus",
+    "sisyphus",
+    "absurd",
+    "revolt"
+  ],
   "levelEnemies": {
-    "sisyphus": { "visualId": "sisyphus", "dialogue": { "spawn": ["The rock again!", "Eternal task!", "The struggle is enough!", "I am happy!", "Absurd hero!"], "death": ["Rock... at top...", "Task... complete...", "Struggle... victorious...", "Happy...", "Hero... absurd..."] } },
-    "absurd": { "visualId": "absurd", "dialogue": { "spawn": ["No meaning exists!", "Universe is silent!", "Why not suicide?", "Reason fails!", "Leap or revolt!"], "death": ["Meaning... created...", "Universe... heard...", "Life... chosen...", "Reason... transcended...", "Revolt..."] } },
-    "meursault": { "visualId": "meursault", "dialogue": { "spawn": ["Mother died today!", "The sun was hot!", "I shot the Arab!", "The Stranger!", "Benign indifference!"], "death": ["Today...", "Sun... gentle...", "Understanding...", "No longer strange...", "Indifference... benign..."] } }
+    "sisyphus": {
+      "visualId": "sisyphus",
+      "dialogue": {
+        "spawn": [
+          "The rock again!",
+          "Eternal task!",
+          "The struggle is enough!",
+          "I am happy!",
+          "Absurd hero!"
+        ],
+        "death": [
+          "Rock... at top...",
+          "Task... complete...",
+          "Struggle... victorious...",
+          "Happy...",
+          "Hero... absurd..."
+        ]
+      }
+    },
+    "absurd": {
+      "visualId": "absurd",
+      "dialogue": {
+        "spawn": [
+          "No meaning exists!",
+          "Universe is silent!",
+          "Why not suicide?",
+          "Reason fails!",
+          "Leap or revolt!"
+        ],
+        "death": [
+          "Meaning... created...",
+          "Universe... heard...",
+          "Life... chosen...",
+          "Reason... transcended...",
+          "Revolt..."
+        ]
+      }
+    },
+    "meursault": {
+      "visualId": "meursault",
+      "dialogue": {
+        "spawn": [
+          "Mother died today!",
+          "The sun was hot!",
+          "I shot the Arab!",
+          "The Stranger!",
+          "Benign indifference!"
+        ],
+        "death": [
+          "Today...",
+          "Sun... gentle...",
+          "Understanding...",
+          "No longer strange...",
+          "Indifference... benign..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "hill", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "boulder", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "summit", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "The struggle itself toward the heights is enough to fill a man's heart. One must imagine the monkey happy." },
-  "musicSeed": { "seed": "sisyphus_018", "mode": "dorian", "tempoRange": [50, 65], "intensity": 0.5 },
-  "duration": 140, "unlockCondition": "lit_level17_complete"
+  "bgLayers": [
+    {
+      "svgId": "hill",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "boulder",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "summit",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "The struggle itself toward the heights is enough to fill a man's heart. One must imagine the monkey happy."
+  },
+  "musicSeed": {
+    "seed": "sisyphus_018",
+    "mode": "dorian",
+    "tempoRange": [
+      78,
+      99
+    ],
+    "intensity": 0.75,
+    "scale": "wholeTone",
+    "style": "mysterious",
+    "timeSignature": "5/4"
+  },
+  "duration": 140,
+  "unlockCondition": "lit_level17_complete"
 }

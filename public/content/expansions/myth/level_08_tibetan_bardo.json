@@ -4,14 +4,104 @@
   "index": 8,
   "title": "The Tibetan Bardo",
   "subtitle": "Between death and rebirth. Recognize the clear light.",
-  "themeTags": ["tibet", "bardo", "death", "rebirth"],
+  "themeTags": [
+    "tibet",
+    "bardo",
+    "death",
+    "rebirth"
+  ],
   "levelEnemies": {
-    "peaceful_deity": { "visualId": "peaceful_deity", "dialogue": { "spawn": ["Recognize me!", "I am your own mind!", "The clear light!", "Don't be afraid!", "Liberation now!"], "death": ["Recognized...", "Mind... known...", "Light... clear...", "Fear... gone...", "Liberation..."] } },
-    "wrathful_deity": { "visualId": "wrathful_deity", "dialogue": { "spawn": ["Fear me!", "I am your anger!", "Projections manifest!", "The bardo deepens!", "Run toward me!"], "death": ["Not feared...", "Anger... released...", "Projections... recognized...", "Bardo... navigated...", "Running... toward..."] } },
-    "rebirth_pull": { "visualId": "rebirth_pull", "dialogue": { "spawn": ["Enter the womb!", "Another life awaits!", "Karma draws you!", "The six realms!", "Choose wisely!"], "death": ["Womb... chosen...", "Life... continues...", "Karma... exhausted...", "Realms... transcended...", "Wisdom... applied..."] } }
+    "peaceful_deity": {
+      "visualId": "peaceful_deity",
+      "dialogue": {
+        "spawn": [
+          "Recognize me!",
+          "I am your own mind!",
+          "The clear light!",
+          "Don't be afraid!",
+          "Liberation now!"
+        ],
+        "death": [
+          "Recognized...",
+          "Mind... known...",
+          "Light... clear...",
+          "Fear... gone...",
+          "Liberation..."
+        ]
+      }
+    },
+    "wrathful_deity": {
+      "visualId": "wrathful_deity",
+      "dialogue": {
+        "spawn": [
+          "Fear me!",
+          "I am your anger!",
+          "Projections manifest!",
+          "The bardo deepens!",
+          "Run toward me!"
+        ],
+        "death": [
+          "Not feared...",
+          "Anger... released...",
+          "Projections... recognized...",
+          "Bardo... navigated...",
+          "Running... toward..."
+        ]
+      }
+    },
+    "rebirth_pull": {
+      "visualId": "rebirth_pull",
+      "dialogue": {
+        "spawn": [
+          "Enter the womb!",
+          "Another life awaits!",
+          "Karma draws you!",
+          "The six realms!",
+          "Choose wisely!"
+        ],
+        "death": [
+          "Womb... chosen...",
+          "Life... continues...",
+          "Karma... exhausted...",
+          "Realms... transcended...",
+          "Wisdom... applied..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "bardo_realm", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "mandalas", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "clear_light", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "In the bardo between death and rebirth, the clear light appears. The monkey learns to recognize it as its own mind." },
-  "musicSeed": { "seed": "bardo_008", "mode": "tibetan", "tempoRange": [40, 55], "intensity": 0.5 },
-  "duration": 160, "unlockCondition": "myth_level7_complete"
+  "bgLayers": [
+    {
+      "svgId": "bardo_realm",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "mandalas",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "clear_light",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "In the bardo between death and rebirth, the clear light appears. The monkey learns to recognize it as its own mind."
+  },
+  "musicSeed": {
+    "seed": "bardo_008",
+    "mode": "bhairav",
+    "tempoRange": [
+      65,
+      84
+    ],
+    "intensity": 0.55,
+    "scale": "kafi",
+    "style": "tension",
+    "timeSignature": "3/4",
+    "culturalStyle": "indian"
+  },
+  "duration": 160,
+  "unlockCondition": "myth_level7_complete"
 }

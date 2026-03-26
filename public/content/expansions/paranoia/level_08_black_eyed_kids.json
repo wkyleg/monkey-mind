@@ -4,53 +4,143 @@
   "index": 8,
   "title": "Black Eyed Kids",
   "subtitle": "They knock on doors. They ask to be let in.",
-  "themeTags": ["bek", "children", "invitation", "threshold"],
+  "themeTags": [
+    "bek",
+    "children",
+    "invitation",
+    "threshold"
+  ],
   "ruleCard": {
     "icon": "door",
     "hint": "Don't invite them in. They need permission.",
     "mechanic": "threshold_rule",
-    "params": { "invitationDamage": 50, "denialBonus": 80 }
+    "params": {
+      "invitationDamage": 50,
+      "denialBonus": 80
+    }
   },
   "enemyDeck": [
-    { "archetype": "anchor", "modifiers": [], "weight": 5, "visualId": "enemy_bek" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_pale_child" },
-    { "archetype": "phaser", "modifiers": [], "weight": 2, "visualId": "enemy_black_eyes" }
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 5,
+      "visualId": "enemy_bek"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_pale_child"
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 2,
+      "visualId": "enemy_black_eyes"
+    }
   ],
   "levelEnemies": {
     "black_eyed_child": {
       "visualId": "black_eyed_child",
       "dialogue": {
-        "spawn": ["Can we come in?", "We just need to use your phone!", "Please, we're lost!", "Our parents are waiting!", "You have to let us in!"],
-        "death": ["No...", "Phone... elsewhere...", "Found... your way...", "Parents... gone...", "Not... invited..."]
+        "spawn": [
+          "Can we come in?",
+          "We just need to use your phone!",
+          "Please, we're lost!",
+          "Our parents are waiting!",
+          "You have to let us in!"
+        ],
+        "death": [
+          "No...",
+          "Phone... elsewhere...",
+          "Found... your way...",
+          "Parents... gone...",
+          "Not... invited..."
+        ]
       }
     },
     "door_knocker": {
       "visualId": "door_knocker",
       "dialogue": {
-        "spawn": ["Knock knock!", "Someone's at the door!", "Late night visitors!", "Don't look through the peephole!", "They're patient!"],
-        "death": ["No answer...", "Door... silent...", "Visitors... gone...", "Peephole... safe...", "Patience... exhausted..."]
+        "spawn": [
+          "Knock knock!",
+          "Someone's at the door!",
+          "Late night visitors!",
+          "Don't look through the peephole!",
+          "They're patient!"
+        ],
+        "death": [
+          "No answer...",
+          "Door... silent...",
+          "Visitors... gone...",
+          "Peephole... safe...",
+          "Patience... exhausted..."
+        ]
       }
     },
     "threshold_guardian": {
       "visualId": "threshold_guardian",
       "dialogue": {
-        "spawn": ["The threshold holds!", "They can't enter uninvited!", "Ancient rules!", "Your home is your castle!", "Don't break the barrier!"],
-        "death": ["Threshold... crossed...", "Uninvited... entered...", "Rules... broken...", "Castle... breached...", "Barrier... gone..."]
+        "spawn": [
+          "The threshold holds!",
+          "They can't enter uninvited!",
+          "Ancient rules!",
+          "Your home is your castle!",
+          "Don't break the barrier!"
+        ],
+        "death": [
+          "Threshold... crossed...",
+          "Uninvited... entered...",
+          "Rules... broken...",
+          "Castle... breached...",
+          "Barrier... gone..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "invitation_pressure", "params": { "pressureBuildup": 10, "resistanceBonus": 60 } }],
+  "hazards": [
+    {
+      "type": "invitation_pressure",
+      "params": {
+        "pressureBuildup": 10,
+        "resistanceBonus": 60
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "suburban_night", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "porch_light", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "door", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "suburban_night",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "porch_light",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "door",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Don't invite them in. They need permission.",
     "codexSnippet": "Since the 1990s, people report encounters with children with solid black eyes who ask to be let in. The monkey faces the BEKs and learns that some visitors must never be welcomed.",
     "radioWhisper": "I almost opened the door. Then I saw their eyes."
   },
-  "musicSeed": { "seed": "bek_008", "mode": "phrygian", "tempoRange": [40, 55], "intensity": 0.5 },
+  "musicSeed": {
+    "seed": "bek_008",
+    "mode": "locrian",
+    "tempoRange": [
+      67,
+      91
+    ],
+    "intensity": 0.65,
+    "scale": "harmonicMinor",
+    "style": "dark",
+    "timeSignature": "6/8"
+  },
   "duration": 150,
   "unlockCondition": "paranoia_level7_complete"
 }

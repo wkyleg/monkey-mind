@@ -4,14 +4,103 @@
   "index": 1,
   "title": "The Allegory of the Cave",
   "subtitle": "Shadows on the wall. What is real?",
-  "themeTags": ["plato", "shadows", "reality", "philosophy"],
+  "themeTags": [
+    "plato",
+    "shadows",
+    "reality",
+    "philosophy"
+  ],
   "levelEnemies": {
-    "shadow_prisoner": { "visualId": "shadow_prisoner", "dialogue": { "spawn": ["The shadows are real!", "Don't look at the light!", "Chained since birth!", "The cave is home!", "Forms are illusions!"], "death": ["Light... blinding...", "Unchained...", "Cave... memory...", "Home... outside...", "Forms... real..."] } },
-    "fire_keeper": { "visualId": "fire_keeper", "dialogue": { "spawn": ["I control the shadows!", "Don't look behind!", "The fire is truth!", "Stay seated!", "Philosophy is dangerous!"], "death": ["Shadows... mine...", "Behind... the sun...", "Fire... small...", "Standing...", "Philosophy... liberating..."] } },
-    "escaped_philosopher": { "visualId": "escaped_philosopher", "dialogue": { "spawn": ["I've seen the sun!", "Return to teach!", "They won't believe!", "Socrates died for this!", "Ascend!"], "death": ["Sun... seen...", "Teaching... done...", "Believed...", "Socrates... remembered...", "Ascended..."] } }
+    "shadow_prisoner": {
+      "visualId": "shadow_prisoner",
+      "dialogue": {
+        "spawn": [
+          "The shadows are real!",
+          "Don't look at the light!",
+          "Chained since birth!",
+          "The cave is home!",
+          "Forms are illusions!"
+        ],
+        "death": [
+          "Light... blinding...",
+          "Unchained...",
+          "Cave... memory...",
+          "Home... outside...",
+          "Forms... real..."
+        ]
+      }
+    },
+    "fire_keeper": {
+      "visualId": "fire_keeper",
+      "dialogue": {
+        "spawn": [
+          "I control the shadows!",
+          "Don't look behind!",
+          "The fire is truth!",
+          "Stay seated!",
+          "Philosophy is dangerous!"
+        ],
+        "death": [
+          "Shadows... mine...",
+          "Behind... the sun...",
+          "Fire... small...",
+          "Standing...",
+          "Philosophy... liberating..."
+        ]
+      }
+    },
+    "escaped_philosopher": {
+      "visualId": "escaped_philosopher",
+      "dialogue": {
+        "spawn": [
+          "I've seen the sun!",
+          "Return to teach!",
+          "They won't believe!",
+          "Socrates died for this!",
+          "Ascend!"
+        ],
+        "death": [
+          "Sun... seen...",
+          "Teaching... done...",
+          "Believed...",
+          "Socrates... remembered...",
+          "Ascended..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "cave", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "shadows", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "fire", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "The prisoners see only shadows and believe them reality. The monkey escapes the cave to find the blinding truth of the sun." },
-  "musicSeed": { "seed": "plato_001", "mode": "phrygian", "tempoRange": [60, 75], "intensity": 0.4 },
-  "duration": 100, "unlockCondition": "act8_complete"
+  "bgLayers": [
+    {
+      "svgId": "cave",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "shadows",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "fire",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "The prisoners see only shadows and believe them reality. The monkey escapes the cave to find the blinding truth of the sun."
+  },
+  "musicSeed": {
+    "seed": "plato_001",
+    "mode": "dorian",
+    "tempoRange": [
+      70,
+      88
+    ],
+    "intensity": 0.3,
+    "scale": "locrian",
+    "style": "meditative",
+    "timeSignature": "5/4"
+  },
+  "duration": 100,
+  "unlockCondition": "act8_complete"
 }

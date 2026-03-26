@@ -11,6 +11,7 @@ import type { Renderer } from '../engine/renderer';
 import { Scene } from '../engine/scene';
 import { type Boss, BossFactory } from '../gameplay/bosses';
 import { Hud, type HudState } from '../gameplay/hud';
+import { NeuroAbilities } from '../gameplay/neuroAbilities';
 import { Player } from '../gameplay/player';
 import { WeaponSystem } from '../gameplay/weapons';
 import { drawBackground, getBackgroundForSector } from '../graphics/backgrounds';
@@ -23,6 +24,7 @@ export class BossScene extends Scene {
   private boss: Boss | null = null;
   private hud!: Hud;
   private camera!: Camera;
+  private neuroAbilities!: NeuroAbilities;
 
   private bossId: string = '';
   private sectorIndex: number = 0;
@@ -64,6 +66,7 @@ export class BossScene extends Scene {
     this.weapons = new WeaponSystem(height);
     this.hud = new Hud();
     this.camera = new Camera();
+    this.neuroAbilities = new NeuroAbilities();
 
     // Create boss
     this.createBoss(width, height);
@@ -83,9 +86,29 @@ export class BossScene extends Scene {
 
     events.emit('boss:start', { bossId: this.bossId });
 
+    // Wire webcam video element to HUD for face preview
+    this.hud.setVideoElement(this.game.getNeuroManager().getCameraVideoElement());
+
+    // Neuro event listeners
+    events.on('neuro:disconnected', () => {
+      this.hud.showToast('Headband disconnected — ESC > Neuro Settings to reconnect', CONFIG.COLORS.WARNING);
+    });
+    events.on('neuro:source_changed', (ev) => {
+      const label = ev.to === 'eeg' ? 'EEG' : ev.to === 'rppg' ? 'Webcam' : ev.to === 'mock' ? 'Simulated' : 'None';
+      this.hud.showToast(`Neuro source: ${label}`, CONFIG.COLORS.PRIMARY);
+    });
+    events.on('neuro:camera_quality_low', () => {
+      this.hud.showToast('Camera signal weak — hold still, improve lighting', CONFIG.COLORS.WARNING);
+    });
+
     // Start boss music
     this.game.getMusic().setBossMood();
     this.game.getMusic().start();
+
+    // Prompt for neuro device if nothing is connected
+    if (!this.game.getNeuroManager().hasActiveSource()) {
+      this.game.getScenes().push('deviceGate');
+    }
   }
 
   private createBoss(width: number, height: number): void {
@@ -104,6 +127,8 @@ export class BossScene extends Scene {
   update(dt: number, intent: PlayerIntent): void {
     this.time += dt;
 
+    this.hud.setMousePos(this.game.getInput().getMousePos());
+
     // Handle button clicks
     const mouseClick = this.game.getInput().getMouseClick();
     if (mouseClick && !this.gameOver && !this.victory) {
@@ -118,7 +143,20 @@ export class BossScene extends Scene {
         this.hud.setMuteState(isMuted);
         return;
       }
+      // Info button
+      if (this.hud.isInfoButtonClicked(mouseClick.x, mouseClick.y)) {
+        this.game.getScenes().push('howToPlay');
+        return;
+      }
+      // Neuro button
+      if (this.hud.isNeuroButtonClicked(mouseClick.x, mouseClick.y)) {
+        this.game.getScenes().push('neuroSettings');
+        return;
+      }
     }
+
+    // Debug toggle
+    if (intent.debugToggle) this.hud.toggleDebug();
 
     // Handle pause (Space, P, or Escape)
     if (intent.pause && !this.gameOver && !this.victory) {
@@ -151,8 +189,11 @@ export class BossScene extends Scene {
     // Update player
     this.player.updateFromIntent(intent, dt);
 
+    // Update weapon mode from neuro state
+    this.weapons.setNeuroState(intent.calm ?? 0, intent.arousal ?? 0);
+
     // Auto-fire (no sound on throw - only on hit)
-    if (this.player.canFire()) {
+    if (this.player.canFire(this.weapons.getFireRateModifier())) {
       this.weapons.fire(this.player.transform.x, this.player.transform.y);
     }
 
@@ -183,10 +224,83 @@ export class BossScene extends Scene {
       this.game.getAudio().playDeath();
     }
 
+    // Neuro abilities
+    const calm = intent.calm ?? 0;
+    const arousal = intent.arousal ?? 0;
+    this.neuroAbilities.update(dt, calm, arousal, this.player, this.weapons);
+
+    // Wire heart rate into music
+    const neuro = this.game.getNeuroManager().getState();
+    this.game.getMusic().setHeartRateBpm(neuro.bpm, neuro.bpmQuality);
+
     // Update HUD state
     this.hudState.score = this.score;
-    this.hudState.calmLevel = intent.calm ?? 0;
-    this.hudState.arousalLevel = intent.arousal ?? 0;
+    this.hudState.calmLevel = calm;
+    this.hudState.arousalLevel = arousal;
+
+    this.hudState.neuroSource = neuro.source;
+    this.hudState.bpm = neuro.bpm;
+    this.hudState.bpmQuality = neuro.bpmQuality;
+    this.hudState.signalQuality = neuro.signalQuality;
+    this.hudState.weaponMode = this.weapons.getWeaponMode();
+    this.hudState.shieldCharge = this.neuroAbilities.getShieldCharge();
+    this.hudState.overdriveCharge = this.neuroAbilities.getOverdriveCharge();
+    this.hudState.shieldActive = this.neuroAbilities.isShieldActive();
+    this.hudState.overdriveActive = this.neuroAbilities.isOverdriveActive();
+    this.hudState.alphaPower = neuro.alphaPower;
+    this.hudState.betaPower = neuro.betaPower;
+    this.hudState.thetaPower = neuro.thetaPower;
+    this.hudState.alphaBump = neuro.alphaBump;
+    this.hudState.eegConnected = neuro.eegConnected;
+    this.hudState.cameraActive = neuro.cameraActive;
+    this.hudState.calibrationProgress =
+      this.game.getNeuroManager().getRppgProvider()?.getState().calibrationProgress ?? 0;
+    this.hudState.waveformData = this.game.getMusic().getWaveformData();
+    this.hudState.frequencyData = this.game.getMusic().getFrequencyData();
+    this.hudState.effectiveTempo = this.game.getMusic().getEffectiveTempo();
+    this.hudState.eegLastError = this.game.getNeuroManager().getHeadbandErrorMessage() || undefined;
+    this.hudState.cameraLastError = this.game.getNeuroManager().getCameraErrorMessage() || undefined;
+
+    const rppgState = this.game.getNeuroManager().getRppgProvider()?.getState();
+    if (rppgState) {
+      this.hudState.displayBpm = rppgState.displayBpm;
+      this.hudState.rawBpm = rppgState.rawBpm;
+      this.hudState.smoothedBpm = rppgState.smoothedBpm;
+      this.hudState.lastValidBpm = rppgState.lastValidBpm;
+      this.hudState.lastValidBpmAge = rppgState.lastValidBpmAge;
+      this.hudState.rppgActiveTime = rppgState.activeTime;
+      this.hudState.rppgWarmupComplete = rppgState.warmupComplete;
+      this.hudState.videoWidth = rppgState.videoWidth;
+      this.hudState.videoHeight = rppgState.videoHeight;
+      this.hudState.bpmHistory = rppgState.bpmHistory;
+    }
+
+    const eegProvider = this.game.getNeuroManager().getEEGProvider();
+    this.hudState.eegSamples = eegProvider.getRecentSamples();
+    this.hudState.eegFrameCount = eegProvider.getFrameCount();
+    this.hudState.eegDecodeErrors = eegProvider.getDecodeErrorCount();
+    this.hudState.eegBleNotifications = eegProvider.getBleNotificationCount();
+    this.hudState.eegEmptyDecodes = eegProvider.getEmptyDecodeCount();
+    this.hudState.eegModelsReady = eegProvider.isModelsReady();
+    this.hudState.eegBatteryLevel = eegProvider.getBatteryLevel();
+    this.hudState.eegReconnecting = eegProvider.isReconnecting();
+    this.hudState.eegReconnectAttempt = eegProvider.getReconnectAttempt();
+    this.hudState.eegReconnectCount = eegProvider.getReconnectCount();
+    this.hudState.eegBandHistory = eegProvider.getBandPowerHistory();
+
+    this.hudState.hrvRmssd = neuro.hrvRmssd;
+    this.hudState.respirationRate = neuro.respirationRate;
+    this.hudState.baselineBpm = neuro.baselineBpm;
+    this.hudState.baselineDelta = neuro.baselineDelta;
+    this.hudState.calmnessState = neuro.calmnessState;
+    this.hudState.alphaPeakFreq = neuro.alphaPeakFreq;
+    this.hudState.alphaBumpState = neuro.alphaBumpState;
+    this.hudState.deltaPower = neuro.deltaPower;
+    this.hudState.gammaPower = neuro.gammaPower;
+    this.hudState.confidence = rppgState?.confidence ?? 0;
+    this.hudState.rppgDebugMetrics = rppgState?.debugMetrics ?? null;
+
+    this.hud.setVideoElement(this.game.getNeuroManager().getCameraVideoElement());
 
     // Update HUD
     this.hud.update(dt, this.hudState);

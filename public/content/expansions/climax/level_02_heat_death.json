@@ -4,53 +4,145 @@
   "index": 2,
   "title": "Heat Death",
   "subtitle": "The universe winds down. Maximum entropy.",
-  "themeTags": ["entropy", "heat_death", "end", "thermodynamics"],
+  "themeTags": [
+    "entropy",
+    "heat_death",
+    "end",
+    "thermodynamics"
+  ],
   "ruleCard": {
     "icon": "entropy",
     "hint": "Energy dissipates. Actions become weaker over time. Conserve.",
     "mechanic": "entropy_decay",
-    "params": { "decayRate": 0.1, "conservationBonus": 50 }
+    "params": {
+      "decayRate": 0.1,
+      "conservationBonus": 50
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": ["entropy"], "weight": 5, "visualId": "enemy_void_tendril" },
-    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_ego_shard" },
-    { "archetype": "anchor", "modifiers": [], "weight": 2, "visualId": "enemy_memory_ghost" }
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "entropy"
+      ],
+      "weight": 5,
+      "visualId": "enemy_void_tendril"
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_ego_shard"
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 2,
+      "visualId": "enemy_memory_ghost"
+    }
   ],
   "levelEnemies": {
     "entropy_wave": {
       "visualId": "entropy_wave",
       "dialogue": {
-        "spawn": ["All energy dissipates!", "The end approaches!", "Maximum entropy!", "No more work possible!", "Equilibrium eternal!"],
-        "death": ["Energy... concentrated...", "Entropy... reversed?", "Work... continues...", "Equilibrium... disturbed...", "Not yet... the end..."]
+        "spawn": [
+          "All energy dissipates!",
+          "The end approaches!",
+          "Maximum entropy!",
+          "No more work possible!",
+          "Equilibrium eternal!"
+        ],
+        "death": [
+          "Energy... concentrated...",
+          "Entropy... reversed?",
+          "Work... continues...",
+          "Equilibrium... disturbed...",
+          "Not yet... the end..."
+        ]
       }
     },
     "cold_void": {
       "visualId": "cold_void",
       "dialogue": {
-        "spawn": ["Temperature falls!", "Absolute zero approaches!", "Heat death comes!", "No warmth remains!", "The cold universe!"],
-        "death": ["Warmth... returns...", "Temperature... rises...", "Heat... preserved...", "Cold... retreats...", "Universe... alive..."]
+        "spawn": [
+          "Temperature falls!",
+          "Absolute zero approaches!",
+          "Heat death comes!",
+          "No warmth remains!",
+          "The cold universe!"
+        ],
+        "death": [
+          "Warmth... returns...",
+          "Temperature... rises...",
+          "Heat... preserved...",
+          "Cold... retreats...",
+          "Universe... alive..."
+        ]
       }
     },
     "final_photon": {
       "visualId": "final_photon",
       "dialogue": {
-        "spawn": ["Last light in cosmos!", "All stars dead!", "The final photon!", "Darkness eternal!", "No more light!"],
-        "death": ["Stars... reignite...", "Light... returns...", "Darkness... pierced...", "Photons... multiply...", "Cosmos... illuminated..."]
+        "spawn": [
+          "Last light in cosmos!",
+          "All stars dead!",
+          "The final photon!",
+          "Darkness eternal!",
+          "No more light!"
+        ],
+        "death": [
+          "Stars... reignite...",
+          "Light... returns...",
+          "Darkness... pierced...",
+          "Photons... multiply...",
+          "Cosmos... illuminated..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "entropy_field", "params": { "energyDrain": 5, "interval": 3000 } }],
+  "hazards": [
+    {
+      "type": "entropy_field",
+      "params": {
+        "energyDrain": 5,
+        "interval": 3000
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "dying_stars", "parallaxSpeed": 0.05, "opacity": 0.5 },
-    { "svgId": "cold_void", "parallaxSpeed": 0.1, "opacity": 0.4 },
-    { "svgId": "last_light", "parallaxSpeed": 0.15, "opacity": 0.6 }
+    {
+      "svgId": "dying_stars",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "cold_void",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "last_light",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Energy dissipates. Actions become weaker over time. Conserve.",
     "codexSnippet": "In the end, the universe reaches maximum entropy. All stars die, all energy dissipates. The monkey witnesses the heat death of everything and finds that even endings contain seeds of beginning.",
     "radioWhisper": "The last black hole evaporates. Then... silence."
   },
-  "musicSeed": { "seed": "heat_death_002", "mode": "locrian", "tempoRange": [30, 45], "intensity": 0.3 },
+  "musicSeed": {
+    "seed": "heat_death_002",
+    "mode": "chromatic",
+    "tempoRange": [
+      112,
+      137
+    ],
+    "intensity": 0.38,
+    "scale": "locrian",
+    "style": "aggressive",
+    "timeSignature": "5/4"
+  },
   "duration": 140,
   "unlockCondition": "climax_level1_complete"
 }

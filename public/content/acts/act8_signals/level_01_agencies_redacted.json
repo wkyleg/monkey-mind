@@ -4,48 +4,128 @@
   "index": 1,
   "title": "Agencies Redacted",
   "subtitle": "Clearance tokens reveal the truth. Collect them.",
-  "themeTags": ["agencies", "redacted", "clearance"],
+  "themeTags": [
+    "agencies",
+    "redacted",
+    "clearance"
+  ],
   "ruleCard": {
     "icon": "classified",
     "hint": "Unseen and bureaucratic enemies guard secrets. Clearance tokens reveal them.",
     "mechanic": "clearance_token",
-    "params": { "tokensRequired": 5, "revealRadius": 100 }
+    "params": {
+      "tokensRequired": 5,
+      "revealRadius": 100
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": ["unseen", "bureaucratic"], "weight": 4 },
-    { "archetype": "sniper", "modifiers": [], "weight": 3 },
-    { "archetype": "courier", "modifiers": [], "weight": 3 }
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "unseen",
+        "bureaucratic"
+      ],
+      "weight": 4
+    },
+    {
+      "archetype": "sniper",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "courier",
+      "modifiers": [],
+      "weight": 3
+    }
   ],
   "levelEnemies": {
     "redacted_agent": {
       "visualId": "redacted_agent",
       "dialogue": {
-        "spawn": ["[REDACTED]", "Clearance denied!", "This conversation never happened!", "Your file is classified!", "Need to know basis!"],
-        "death": ["Declassified...", "The truth... leaks...", "File... released...", "[UNREDACTED]...", "Freedom of... information..."]
+        "spawn": [
+          "[REDACTED]",
+          "Clearance denied!",
+          "This conversation never happened!",
+          "Your file is classified!",
+          "Need to know basis!"
+        ],
+        "death": [
+          "Declassified...",
+          "The truth... leaks...",
+          "File... released...",
+          "[UNREDACTED]...",
+          "Freedom of... information..."
+        ]
       }
     },
     "shadow_operative": {
       "visualId": "shadow_operative",
       "dialogue": {
-        "spawn": ["I don't exist!", "No paper trail!", "Ghost protocol!", "Off the books!", "Plausible deniability!"],
-        "death": ["Exposed...", "On... record...", "Documented...", "Trace... found...", "I existed... after all..."]
+        "spawn": [
+          "I don't exist!",
+          "No paper trail!",
+          "Ghost protocol!",
+          "Off the books!",
+          "Plausible deniability!"
+        ],
+        "death": [
+          "Exposed...",
+          "On... record...",
+          "Documented...",
+          "Trace... found...",
+          "I existed... after all..."
+        ]
       }
     },
     "file_shredder": {
       "visualId": "file_shredder",
       "dialogue": {
-        "spawn": ["Destroying evidence!", "Burn after reading!", "The shredder hungers!", "No records remain!", "Paper trail eliminated!"],
-        "death": ["Evidence... preserved...", "Backup... found...", "The cloud... remembers...", "Nothing... truly deleted...", "CTRL+Z..."]
+        "spawn": [
+          "Destroying evidence!",
+          "Burn after reading!",
+          "The shredder hungers!",
+          "No records remain!",
+          "Paper trail eliminated!"
+        ],
+        "death": [
+          "Evidence... preserved...",
+          "Backup... found...",
+          "The cloud... remembers...",
+          "Nothing... truly deleted...",
+          "CTRL+Z..."
+        ]
       }
     }
   },
   "hazards": [
-    { "type": "redaction_zone", "lanes": [2, 3, 4], "timing": 8000, "damage": 0, "visual": "black_bar" }
+    {
+      "type": "redaction_zone",
+      "lanes": [
+        2,
+        3,
+        4
+      ],
+      "timing": 8000,
+      "damage": 0,
+      "visual": "black_bar"
+    }
   ],
   "bgLayers": [
-    { "svgId": "office", "parallaxSpeed": 0.08, "opacity": 0.4 },
-    { "svgId": "files", "parallaxSpeed": 0.25, "opacity": 0.5 },
-    { "svgId": "redacted", "parallaxSpeed": 0.4, "opacity": 0.6 }
+    {
+      "svgId": "office",
+      "parallaxSpeed": 0.08,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "files",
+      "parallaxSpeed": 0.25,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "redacted",
+      "parallaxSpeed": 0.4,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Clearance tokens reveal the truth. Collect them.",
@@ -54,9 +134,15 @@
   },
   "musicSeed": {
     "seed": "agencies_001",
-    "mode": "locrian",
-    "tempoRange": [65, 80],
-    "intensity": 0.45
+    "mode": "wholeTone",
+    "tempoRange": [
+      80,
+      98
+    ],
+    "intensity": 0.3,
+    "scale": "wholeTone",
+    "style": "dreamy",
+    "timeSignature": "4/4"
   },
   "duration": 100,
   "unlockCondition": "act7_complete"

@@ -1046,7 +1046,7 @@ export function drawBlackOps(renderer: Renderer, width: number, height: number, 
 }
 
 /**
- * Fractal Bloom background (Sector 5 - Psychedelic/Fractal)
+ * Fractal Bloom background (Sector 5 - Fractal/Abstract)
  * Features: Color-shifting fractals, impossible geometry, reality glitches
  */
 export function drawFractalBloom(renderer: Renderer, width: number, height: number, time: number): void {
@@ -1057,7 +1057,7 @@ export function drawFractalBloom(renderer: Renderer, width: number, height: numb
   const hue2 = (hue1 + 120) % 360;
   const hue3 = (hue1 + 240) % 360;
 
-  // Psychedelic gradient with movement
+  // Fractal gradient with movement
   renderer.radialGradientBackground(
     [`hsl(${hue1}, 60%, 8%)`, `hsl(${hue2}, 70%, 12%)`, `hsl(${hue3}, 50%, 5%)`],
     width / 2 + Math.sin(time * 0.7) * 80,

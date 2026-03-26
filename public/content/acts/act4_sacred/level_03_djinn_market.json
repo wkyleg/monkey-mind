@@ -4,48 +4,130 @@
   "index": 3,
   "title": "Djinn Market",
   "subtitle": "Every contract has a clause. Read carefully.",
-  "themeTags": ["djinn", "contracts", "wishes"],
+  "themeTags": [
+    "djinn",
+    "contracts",
+    "wishes"
+  ],
   "ruleCard": {
     "icon": "contract",
     "hint": "Bureaucratic enemies offer contracts. Choose your clause wisely.",
     "mechanic": "contract_clause",
-    "params": { "choices": ["power", "safety", "knowledge"] }
+    "params": {
+      "choices": [
+        "power",
+        "safety",
+        "knowledge"
+      ]
+    }
   },
   "enemyDeck": [
-    { "archetype": "shieldbearer", "modifiers": ["bureaucratic"], "weight": 4 },
-    { "archetype": "courier", "modifiers": [], "weight": 3 },
-    { "archetype": "sniper", "modifiers": [], "weight": 3 }
+    {
+      "archetype": "shieldbearer",
+      "modifiers": [
+        "bureaucratic"
+      ],
+      "weight": 4
+    },
+    {
+      "archetype": "courier",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "sniper",
+      "modifiers": [],
+      "weight": 3
+    }
   ],
   "levelEnemies": {
     "ifrit_merchant": {
       "visualId": "ifrit_merchant",
       "dialogue": {
-        "spawn": ["A bargain awaits!", "Name your price!", "Everything has a cost!", "The contract is binding!", "Sign here..."],
-        "death": ["The deal... void...", "Contract... breached...", "Unprofitable... outcome...", "Bad... investment...", "Returns... to smoke..."]
+        "spawn": [
+          "A bargain awaits!",
+          "Name your price!",
+          "Everything has a cost!",
+          "The contract is binding!",
+          "Sign here..."
+        ],
+        "death": [
+          "The deal... void...",
+          "Contract... breached...",
+          "Unprofitable... outcome...",
+          "Bad... investment...",
+          "Returns... to smoke..."
+        ]
       }
     },
     "lamp_guardian": {
       "visualId": "lamp_guardian",
       "dialogue": {
-        "spawn": ["Three wishes remain!", "Master of the lamp!", "Your desire is my command!", "But choose wisely...", "The fine print matters!"],
-        "death": ["Free... at last...", "No more... wishes...", "The lamp... grows cold...", "Master... no more...", "Smoke... disperses..."]
+        "spawn": [
+          "Three wishes remain!",
+          "Master of the lamp!",
+          "Your desire is my command!",
+          "But choose wisely...",
+          "The fine print matters!"
+        ],
+        "death": [
+          "Free... at last...",
+          "No more... wishes...",
+          "The lamp... grows cold...",
+          "Master... no more...",
+          "Smoke... disperses..."
+        ]
       }
     },
     "contract_demon": {
       "visualId": "contract_demon",
       "dialogue": {
-        "spawn": ["Did you read page 47?", "The clause is clear!", "Your soul as collateral!", "Terms and conditions!", "No refunds!"],
-        "death": ["Loophole... found...", "Contract... nullified...", "The fine print... failed...", "Legal... defeat...", "Pro bono... damnation..."]
+        "spawn": [
+          "Did you read page 47?",
+          "The clause is clear!",
+          "Your soul as collateral!",
+          "Terms and conditions!",
+          "No refunds!"
+        ],
+        "death": [
+          "Loophole... found...",
+          "Contract... nullified...",
+          "The fine print... failed...",
+          "Legal... defeat...",
+          "Pro bono... damnation..."
+        ]
       }
     }
   },
   "hazards": [
-    { "type": "contract_zone", "lanes": [2, 3, 4], "timing": 10000, "damage": 0, "visual": "scroll_glow" }
+    {
+      "type": "contract_zone",
+      "lanes": [
+        2,
+        3,
+        4
+      ],
+      "timing": 10000,
+      "damage": 0,
+      "visual": "scroll_glow"
+    }
   ],
   "bgLayers": [
-    { "svgId": "market", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "lamps", "parallaxSpeed": 0.3, "opacity": 0.6 },
-    { "svgId": "smoke", "parallaxSpeed": 0.5, "opacity": 0.3 }
+    {
+      "svgId": "market",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "lamps",
+      "parallaxSpeed": 0.3,
+      "opacity": 0.6
+    },
+    {
+      "svgId": "smoke",
+      "parallaxSpeed": 0.5,
+      "opacity": 0.3
+    }
   ],
   "copyLayers": {
     "ruleCard": "Every contract has a clause. Read carefully.",
@@ -54,9 +136,16 @@
   },
   "musicSeed": {
     "seed": "djinn_003",
-    "mode": "phrygian",
-    "tempoRange": [80, 95],
-    "intensity": 0.6
+    "mode": "harmonicMinor",
+    "tempoRange": [
+      120,
+      132
+    ],
+    "intensity": 0.55,
+    "scale": "hijaz",
+    "style": "mysterious",
+    "timeSignature": "7/8",
+    "culturalStyle": "arabic"
   },
   "duration": 120,
   "unlockCondition": "act4_level2_complete"

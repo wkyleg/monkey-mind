@@ -237,58 +237,114 @@ export class Beam extends Entity {
 /**
  * Weapon manager
  */
+export type WeaponMode = 'beam' | 'spray' | 'balanced' | 'flow';
+
 export class WeaponSystem {
   private projectiles: EntityPool = new EntityPool();
   private screenHeight: number;
 
-  // Weapon modes
+  // Weapon modes (powerup-driven, override neuro)
   private rapidFire: boolean = false;
   private precisionBeam: boolean = false;
   private explosiveBananas: boolean = false;
   private multiShot: boolean = false;
 
+  // Neuro-driven weapon mode
+  private currentMode: WeaponMode = 'balanced';
+  private modeBlend = 0;
+  private targetMode: WeaponMode = 'balanced';
+
   // Beam cooldown to prevent freeze
   private beamCooldown: number = 0;
-  private readonly beamCooldownTime: number = 0.15;
 
   // Upgrade multipliers (from drops)
   private damageMultiplier: number = 1;
   private fireRateMultiplier: number = 1;
 
+  // Enemies reference for flow mode homing
+  private enemyPositions: Array<{ x: number; y: number }> = [];
+
   constructor(screenHeight: number) {
     this.screenHeight = screenHeight;
+  }
+
+  setNeuroState(calm: number, arousal: number): void {
+    if (calm > 0.6 && arousal > 0.6) {
+      this.targetMode = 'flow';
+    } else if (calm > 0.7) {
+      this.targetMode = 'beam';
+    } else if (arousal > 0.7) {
+      this.targetMode = 'spray';
+    } else {
+      this.targetMode = 'balanced';
+    }
+  }
+
+  setEnemyPositions(positions: Array<{ x: number; y: number }>): void {
+    this.enemyPositions = positions;
+  }
+
+  getWeaponMode(): WeaponMode {
+    if (this.precisionBeam) return 'beam';
+    if (this.rapidFire || this.multiShot) return 'spray';
+    return this.currentMode;
+  }
+
+  private getEffectiveMode(): WeaponMode {
+    if (this.precisionBeam) return 'beam';
+    if (this.rapidFire || this.multiShot) return 'spray';
+    return this.currentMode;
   }
 
   /**
    * Fire a projectile from player position
    */
   fire(x: number, y: number): void {
-    if (this.precisionBeam) {
-      // Rate limit beams to prevent performance issues
-      if (this.beamCooldown <= 0) {
-        const beam = new Beam(x, y, this.screenHeight);
-        this.projectiles.add(beam);
-        this.beamCooldown = this.beamCooldownTime;
-      }
-    } else {
-      const baseDamage = this.explosiveBananas ? 2 : 1;
-      const projectileType = this.explosiveBananas ? 'explosive' : 'banana';
+    const mode = this.getEffectiveMode();
 
-      if (this.multiShot) {
-        // Fire 3 bananas in a spread pattern
-        const spreadAngles = [-0.2, 0, 0.2]; // Radians
+    switch (mode) {
+      case 'beam': {
+        if (this.beamCooldown <= 0) {
+          const beam = new Beam(x, y, this.screenHeight);
+          beam.damage = 3 * this.damageMultiplier;
+          this.projectiles.add(beam);
+          this.beamCooldown = 0.4;
+        }
+        break;
+      }
+      case 'spray': {
+        const baseDamage = this.explosiveBananas ? 2 : 1;
+        const projectileType = this.explosiveBananas ? 'explosive' : 'banana';
+        const spreadAngles = [-0.25, 0, 0.25];
         for (const angle of spreadAngles) {
           const banana = new Banana({
             x,
             y: y - 30,
             type: projectileType,
-            damage: baseDamage * this.damageMultiplier * 0.8, // Slightly reduced per projectile
+            damage: baseDamage * this.damageMultiplier * 0.6,
+            color: '#ff6644',
           });
-          // Apply horizontal spread velocity
-          banana.transform.vx = Math.sin(angle) * 100;
+          banana.transform.vx = Math.sin(angle) * 120;
           this.projectiles.add(banana);
         }
-      } else {
+        break;
+      }
+      case 'flow': {
+        const banana = new Banana({
+          x,
+          y: y - 30,
+          type: 'banana',
+          damage: 2 * this.damageMultiplier,
+          color: '#ffdd44',
+        });
+        (banana as any)._homing = true;
+        (banana as any)._enemies = this.enemyPositions;
+        this.projectiles.add(banana);
+        break;
+      }
+      default: {
+        const baseDamage = this.explosiveBananas ? 2 : 1;
+        const projectileType = this.explosiveBananas ? 'explosive' : 'banana';
         const banana = new Banana({
           x,
           y: y - 30,
@@ -296,6 +352,7 @@ export class WeaponSystem {
           damage: baseDamage * this.damageMultiplier,
         });
         this.projectiles.add(banana);
+        break;
       }
     }
   }
@@ -309,8 +366,37 @@ export class WeaponSystem {
       this.beamCooldown -= dt;
     }
 
+    // Smooth mode transitions
+    if (this.currentMode !== this.targetMode) {
+      this.modeBlend += dt * 2;
+      if (this.modeBlend >= 1) {
+        this.currentMode = this.targetMode;
+        this.modeBlend = 0;
+      }
+    }
+
     for (const entity of this.projectiles.getActive()) {
       if (entity instanceof Banana) {
+        // Flow mode homing
+        if ((entity as any)._homing && (entity as any)._enemies) {
+          const enemies = (entity as any)._enemies as Array<{ x: number; y: number }>;
+          if (enemies.length > 0) {
+            let nearest = enemies[0];
+            let bestDist = Infinity;
+            for (const e of enemies) {
+              const dx = e.x - entity.transform.x;
+              const dy = e.y - entity.transform.y;
+              const dist = dx * dx + dy * dy;
+              if (dist < bestDist) {
+                bestDist = dist;
+                nearest = e;
+              }
+            }
+            const dx = nearest.x - entity.transform.x;
+            const homingStrength = 150;
+            entity.transform.vx = (entity.transform.vx || 0) + Math.sign(dx) * homingStrength * dt;
+          }
+        }
         entity.update(dt);
       } else if (entity instanceof Beam) {
         entity.update(dt);
@@ -368,11 +454,17 @@ export class WeaponSystem {
   }
 
   /**
-   * Get fire rate modifier
+   * Get fire rate modifier (lower = faster)
    */
   getFireRateModifier(): number {
-    const baseModifier = this.rapidFire ? 0.5 : 1;
-    return baseModifier * this.fireRateMultiplier;
+    const mode = this.getEffectiveMode();
+    let modeModifier = 1;
+    if (mode === 'spray') modeModifier = 0.4;
+    else if (mode === 'beam') modeModifier = 2.5;
+    else if (mode === 'flow') modeModifier = 0.8;
+
+    const powerupModifier = this.rapidFire ? 0.5 : 1;
+    return modeModifier * powerupModifier * this.fireRateMultiplier;
   }
 
   /**

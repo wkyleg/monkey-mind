@@ -4,14 +4,103 @@
   "index": 7,
   "title": "Kafka's The Trial",
   "subtitle": "Someone must have slandered Josef K. He was arrested.",
-  "themeTags": ["kafka", "trial", "bureaucracy", "guilt"],
+  "themeTags": [
+    "kafka",
+    "trial",
+    "bureaucracy",
+    "guilt"
+  ],
   "levelEnemies": {
-    "josef_k": { "visualId": "josef_k", "dialogue": { "spawn": ["What is my crime?", "I demand to know!", "The proceedings are secret!", "Where is the court?", "I am innocent!"], "death": ["Crime... known...", "Told...", "Proceedings... open...", "Court... found...", "Innocence... proven..."] } },
-    "court_official": { "visualId": "court_official", "dialogue": { "spawn": ["The process has begun!", "You cannot appeal!", "The law is the law!", "Your guilt is assumed!", "The proceedings continue!"], "death": ["Process... ended...", "Appeal... heard...", "Law... just...", "Guilt... disproven...", "Concluded..."] } },
-    "doorkeeper": { "visualId": "doorkeeper", "dialogue": { "spawn": ["Before the Law!", "This door was meant for you!", "You waited too long!", "I am closing it now!", "The Law cannot be entered!"], "death": ["After... the Law...", "Door... passed...", "In time...", "Staying open...", "Entered..."] } }
+    "josef_k": {
+      "visualId": "josef_k",
+      "dialogue": {
+        "spawn": [
+          "What is my crime?",
+          "I demand to know!",
+          "The proceedings are secret!",
+          "Where is the court?",
+          "I am innocent!"
+        ],
+        "death": [
+          "Crime... known...",
+          "Told...",
+          "Proceedings... open...",
+          "Court... found...",
+          "Innocence... proven..."
+        ]
+      }
+    },
+    "court_official": {
+      "visualId": "court_official",
+      "dialogue": {
+        "spawn": [
+          "The process has begun!",
+          "You cannot appeal!",
+          "The law is the law!",
+          "Your guilt is assumed!",
+          "The proceedings continue!"
+        ],
+        "death": [
+          "Process... ended...",
+          "Appeal... heard...",
+          "Law... just...",
+          "Guilt... disproven...",
+          "Concluded..."
+        ]
+      }
+    },
+    "doorkeeper": {
+      "visualId": "doorkeeper",
+      "dialogue": {
+        "spawn": [
+          "Before the Law!",
+          "This door was meant for you!",
+          "You waited too long!",
+          "I am closing it now!",
+          "The Law cannot be entered!"
+        ],
+        "death": [
+          "After... the Law...",
+          "Door... passed...",
+          "In time...",
+          "Staying open...",
+          "Entered..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "courthouse", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "corridors", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "door", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "Someone must have slandered Josef K, for one morning he was arrested. The monkey enters the endless corridors of Kafka's bureaucracy." },
-  "musicSeed": { "seed": "trial_007", "mode": "locrian", "tempoRange": [55, 70], "intensity": 0.6 },
-  "duration": 130, "unlockCondition": "lit_level6_complete"
+  "bgLayers": [
+    {
+      "svgId": "courthouse",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "corridors",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "door",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "Someone must have slandered Josef K, for one morning he was arrested. The monkey enters the endless corridors of Kafka's bureaucracy."
+  },
+  "musicSeed": {
+    "seed": "trial_007",
+    "mode": "dorian",
+    "tempoRange": [
+      73,
+      92
+    ],
+    "intensity": 0.46,
+    "scale": "diminished",
+    "style": "tension",
+    "timeSignature": "3/4"
+  },
+  "duration": 130,
+  "unlockCondition": "lit_level6_complete"
 }

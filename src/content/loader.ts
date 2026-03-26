@@ -582,6 +582,21 @@ class ContentLoader {
     return this.content.strings.ui[key] ?? key;
   }
 
+  async loadLocale(locale: string): Promise<void> {
+    if (locale === 'en') return;
+    try {
+      const response = await fetch(`/content/strings/${locale}.json`);
+      if (!response.ok) {
+        console.warn(`Locale file not found: ${locale}.json`);
+        return;
+      }
+      const data: Partial<StringsData> = await response.json();
+      if (data.ui) Object.assign(this.content.strings.ui, data.ui);
+    } catch (error) {
+      console.warn(`Failed to load locale ${locale}:`, error);
+    }
+  }
+
   /**
    * Get enemy-specific dialogue for spawn/death text
    * Returns null if no specific dialogue exists for this enemy

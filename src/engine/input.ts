@@ -137,6 +137,14 @@ export interface PlayerIntent {
   mute?: boolean;
 
   /**
+   * Toggle debug overlay.
+   *
+   * Sources:
+   * - Keyboard: Backtick
+   */
+  debugToggle?: boolean;
+
+  /**
    * Calm/relaxation level from BCI.
    * Range: 0 (agitated) to 1 (deeply relaxed), null if BCI unavailable.
    *
@@ -241,7 +249,11 @@ class KeyboardProvider implements InputProvider {
     this.keys.add(e.code);
 
     // Prevent default for game keys
-    if (['Space', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Escape', 'KeyP', 'KeyM'].includes(e.code)) {
+    if (
+      ['Space', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Escape', 'KeyP', 'KeyM', 'Backquote'].includes(
+        e.code,
+      )
+    ) {
       e.preventDefault();
     }
   };
@@ -276,9 +288,10 @@ class KeyboardProvider implements InputProvider {
       moveAxis,
       menuAxis,
       confirm: this.justPressed.has('Space') || this.justPressed.has('Enter'),
-      cancel: this.justPressed.has('Escape') || this.justPressed.has('KeyP'), // P/Escape for back/cancel
-      pause: this.justPressed.has('Space') || this.justPressed.has('Escape') || this.justPressed.has('KeyP'), // Space/P/Escape all pause
-      mute: this.justPressed.has('KeyM'), // M toggles mute
+      cancel: this.justPressed.has('Escape') || this.justPressed.has('KeyP'),
+      pause: this.justPressed.has('Space') || this.justPressed.has('Escape') || this.justPressed.has('KeyP'),
+      mute: this.justPressed.has('KeyM'),
+      debugToggle: this.justPressed.has('Backquote'),
     };
   }
 }
@@ -460,6 +473,8 @@ export class InputManager {
 
   // Mouse click tracking
   private mouseClick: { x: number; y: number } | null = null;
+  private mousePos: { x: number; y: number } | null = null;
+  private wheelDelta = 0;
   private canvas: HTMLCanvasElement | null = null;
 
   // Reserved for future BCI integration
@@ -489,6 +504,19 @@ export class InputManager {
   setCanvas(canvas: HTMLCanvasElement): void {
     this.canvas = canvas;
     canvas.addEventListener('click', this.onCanvasClick);
+    canvas.addEventListener('mousemove', this.onCanvasMouseMove);
+    canvas.addEventListener('wheel', this.onCanvasWheel, { passive: false });
+  }
+
+  private onCanvasWheel = (e: WheelEvent): void => {
+    e.preventDefault();
+    this.wheelDelta += e.deltaY;
+  };
+
+  getWheelDelta(): number {
+    const d = this.wheelDelta;
+    this.wheelDelta = 0;
+    return d;
   }
 
   private onCanvasClick = (e: MouseEvent): void => {
@@ -504,6 +532,19 @@ export class InputManager {
     };
   };
 
+  private onCanvasMouseMove = (e: MouseEvent): void => {
+    if (!this.canvas) return;
+
+    const rect = this.canvas.getBoundingClientRect();
+    const scaleX = this.canvas.width / rect.width;
+    const scaleY = this.canvas.height / rect.height;
+
+    this.mousePos = {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY,
+    };
+  };
+
   destroy(): void {
     for (const provider of this.providers) {
       provider.destroy();
@@ -512,6 +553,7 @@ export class InputManager {
 
     if (this.canvas) {
       this.canvas.removeEventListener('click', this.onCanvasClick);
+      this.canvas.removeEventListener('mousemove', this.onCanvasMouseMove);
       this.canvas = null;
     }
   }
@@ -571,6 +613,10 @@ export class InputManager {
     const click = this.mouseClick;
     this.mouseClick = null;
     return click;
+  }
+
+  getMousePos(): { x: number; y: number } | null {
+    return this.mousePos;
   }
 
   // For BCI integration later

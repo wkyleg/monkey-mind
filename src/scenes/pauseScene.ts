@@ -9,7 +9,8 @@ import type { Game } from '../engine/game';
 import type { PlayerIntent } from '../engine/input';
 import type { Renderer } from '../engine/renderer';
 import { Scene } from '../engine/scene';
-import { oscillate } from '../util/math';
+
+// pause overlay — styled to match loading/menu screens
 
 interface MenuItem {
   id: string;
@@ -19,7 +20,7 @@ interface MenuItem {
 
 export class PauseScene extends Scene {
   // Mark as overlay - renders on top of the game scene
-  readonly isOverlay: boolean = true;
+  override readonly isOverlay: boolean = true;
 
   private menuItems: MenuItem[] = [];
   private selectedIndex: number = 0;
@@ -31,9 +32,10 @@ export class PauseScene extends Scene {
     super(game);
 
     this.menuItems = [
-      { id: 'resume', label: 'RESUME', action: () => this.doResume() },
-      { id: 'settings', label: 'SETTINGS', action: () => this.openSettings() },
-      { id: 'quit', label: 'QUIT TO MENU', action: () => this.quitToMenu() },
+      { id: 'resume', label: contentLoader.getString('pause_resume'), action: () => this.doResume() },
+      { id: 'neuro', label: contentLoader.getString('pause_neuro_settings'), action: () => this.openNeuroSettings() },
+      { id: 'settings', label: contentLoader.getString('pause_settings'), action: () => this.openSettings() },
+      { id: 'quit', label: contentLoader.getString('pause_quit_to_menu'), action: () => this.quitToMenu() },
     ];
   }
 
@@ -86,16 +88,38 @@ export class PauseScene extends Scene {
 
   render(renderer: Renderer, _alpha: number): void {
     const { width, height } = renderer;
+    const ctx = renderer.context;
 
-    // Darken background
+    // Radial gradient background (over darkened game)
     renderer.save();
-    renderer.setAlpha(0.8);
-    renderer.fillRect(0, 0, width, height, '#000000');
+    renderer.setAlpha(0.85);
+    renderer.radialGradientBackground(['#0a0a14', '#0d0d1a', '#060610']);
     renderer.restore();
+
+    // Scanlines
+    renderer.drawScanLines(0.02, 3);
 
     // Pause title
     const titleY = height * 0.3;
-    renderer.glowText(contentLoader.getString('pause'), width / 2, titleY, CONFIG.COLORS.ACCENT, 48, 'center', 25);
+    const pauseLabel = contentLoader.getString('pause');
+    renderer.glowText(pauseLabel, width / 2, titleY, CONFIG.COLORS.ACCENT, 48, 'center', 25);
+
+    // Horizontal rules flanking the title
+    ctx.save();
+    ctx.font = "bold 48px 'SF Mono', Consolas, monospace";
+    const titleMeasured = ctx.measureText(pauseLabel).width;
+    const ruleW = 40;
+    const ruleGap = 16;
+    ctx.strokeStyle = CONFIG.COLORS.PRIMARY;
+    ctx.lineWidth = 1;
+    ctx.globalAlpha = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(width / 2 - titleMeasured / 2 - ruleGap - ruleW, titleY);
+    ctx.lineTo(width / 2 - titleMeasured / 2 - ruleGap, titleY);
+    ctx.moveTo(width / 2 + titleMeasured / 2 + ruleGap, titleY);
+    ctx.lineTo(width / 2 + titleMeasured / 2 + ruleGap + ruleW, titleY);
+    ctx.stroke();
+    ctx.restore();
 
     // Menu items
     const menuStartY = height * 0.5;
@@ -106,33 +130,56 @@ export class PauseScene extends Scene {
       const isSelected = index === this.selectedIndex;
 
       const color = isSelected ? CONFIG.COLORS.PRIMARY : CONFIG.COLORS.TEXT_DIM;
-      const size = isSelected ? 28 : 24;
-      const glow = isSelected ? 20 : 0;
+      const size = isSelected ? 26 : 22;
+      const glow = isSelected ? 15 : 0;
 
       if (isSelected) {
-        // Selection indicator
-        const pulse = oscillate(this.time, 2, 5);
-        renderer.glowCircle(width / 2 - 100 + pulse, y, 5, CONFIG.COLORS.PRIMARY, 8);
-        renderer.glowCircle(width / 2 + 100 - pulse, y, 5, CONFIG.COLORS.PRIMARY, 8);
+        // Terminal cursor accent bar
+        ctx.save();
+        const cursorAlpha = 0.6 + Math.sin(this.time * 4) * 0.4;
+        ctx.globalAlpha = cursorAlpha;
+        ctx.fillStyle = CONFIG.COLORS.PRIMARY;
+        ctx.fillRect(width / 2 - 120, y - 8, 3, 16);
+        ctx.restore();
+
+        // Precise underline
+        ctx.save();
+        ctx.font = `bold ${size}px 'SF Mono', Consolas, monospace`;
+        const labelW = ctx.measureText(item.label).width;
+        ctx.strokeStyle = CONFIG.COLORS.PRIMARY;
+        ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.4;
+        ctx.beginPath();
+        ctx.moveTo(width / 2 - labelW / 2, y + size / 2 + 2);
+        ctx.lineTo(width / 2 + labelW / 2, y + size / 2 + 2);
+        ctx.stroke();
+        ctx.restore();
       }
 
       renderer.glowText(item.label, width / 2, y, color, size, 'center', glow);
     });
 
     // Controls hint
+    ctx.save();
+    ctx.globalAlpha = 0.4;
     renderer.text(
       'ESC RESUME   ↑ ↓ SELECT   SPACE CONFIRM',
       width / 2,
       height - 40,
       CONFIG.COLORS.TEXT_DIM,
-      12,
+      11,
       'center',
     );
+    ctx.restore();
   }
 
   private doResume(): void {
     events.emit('game:resume', undefined);
     this.game.getScenes().pop();
+  }
+
+  private openNeuroSettings(): void {
+    this.game.getScenes().push('neuroSettings');
   }
 
   private openSettings(): void {

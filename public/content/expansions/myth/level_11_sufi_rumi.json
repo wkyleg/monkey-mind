@@ -4,14 +4,104 @@
   "index": 11,
   "title": "Sufi Rumi",
   "subtitle": "The whirling dervish. Love is the bridge.",
-  "themeTags": ["sufism", "rumi", "love", "whirling"],
+  "themeTags": [
+    "sufism",
+    "rumi",
+    "love",
+    "whirling"
+  ],
   "levelEnemies": {
-    "separation": { "visualId": "separation", "dialogue": { "spawn": ["Cut from the reed bed!", "The flute laments!", "Longing for union!", "Separated from source!", "The wound of distance!"], "death": ["Reunion...", "Flute... silent...", "Union... achieved...", "Source... found...", "Wound... healed..."] } },
-    "ego_veil": { "visualId": "ego_veil", "dialogue": { "spawn": ["I stand between!", "The nafs obscures!", "Self-importance!", "Fana denied!", "You are not ready!"], "death": ["Nothing... between...", "Nafs... surrendered...", "Humble...", "Fana... achieved...", "Ready... now..."] } },
-    "beloved": { "visualId": "beloved", "dialogue": { "spawn": ["Seek me!", "The Beloved waits!", "Die before you die!", "Love is the answer!", "Whirl toward me!"], "death": ["Found...", "Beloved... present...", "Died... living...", "Love... is...", "Whirling... stillness..."] } }
+    "separation": {
+      "visualId": "separation",
+      "dialogue": {
+        "spawn": [
+          "Cut from the reed bed!",
+          "The flute laments!",
+          "Longing for union!",
+          "Separated from source!",
+          "The wound of distance!"
+        ],
+        "death": [
+          "Reunion...",
+          "Flute... silent...",
+          "Union... achieved...",
+          "Source... found...",
+          "Wound... healed..."
+        ]
+      }
+    },
+    "ego_veil": {
+      "visualId": "ego_veil",
+      "dialogue": {
+        "spawn": [
+          "I stand between!",
+          "The nafs obscures!",
+          "Self-importance!",
+          "Fana denied!",
+          "You are not ready!"
+        ],
+        "death": [
+          "Nothing... between...",
+          "Nafs... surrendered...",
+          "Humble...",
+          "Fana... achieved...",
+          "Ready... now..."
+        ]
+      }
+    },
+    "beloved": {
+      "visualId": "beloved",
+      "dialogue": {
+        "spawn": [
+          "Seek me!",
+          "The Beloved waits!",
+          "Die before you die!",
+          "Love is the answer!",
+          "Whirl toward me!"
+        ],
+        "death": [
+          "Found...",
+          "Beloved... present...",
+          "Died... living...",
+          "Love... is...",
+          "Whirling... stillness..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "konya", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "whirling", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "rose", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "Out beyond ideas of wrongdoing and rightdoing there is a field. The monkey whirls with Rumi toward the Beloved." },
-  "musicSeed": { "seed": "sufi_011", "mode": "turkish_maqam", "tempoRange": [65, 85], "intensity": 0.7 },
-  "duration": 150, "unlockCondition": "myth_level10_complete"
+  "bgLayers": [
+    {
+      "svgId": "konya",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "whirling",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "rose",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "Out beyond ideas of wrongdoing and rightdoing there is a field. The monkey whirls with Rumi toward the Beloved."
+  },
+  "musicSeed": {
+    "seed": "sufi_011",
+    "mode": "bhairav",
+    "tempoRange": [
+      66,
+      87
+    ],
+    "intensity": 0.66,
+    "scale": "kafi",
+    "style": "meditative",
+    "timeSignature": "3/4",
+    "culturalStyle": "indian"
+  },
+  "duration": 150,
+  "unlockCondition": "myth_level10_complete"
 }

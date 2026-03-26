@@ -4,53 +4,144 @@
   "index": 9,
   "title": "Basquiat's Crown",
   "subtitle": "Street to gallery. The samo paradox.",
-  "themeTags": ["basquiat", "street_art", "identity", "samo"],
+  "themeTags": [
+    "basquiat",
+    "street_art",
+    "identity",
+    "samo"
+  ],
   "ruleCard": {
     "icon": "crown",
     "hint": "The crown marks heroes. Claim your royalty.",
     "mechanic": "crown_power",
-    "params": { "crownBonus": 80, "anonymityPenalty": 30 }
+    "params": {
+      "crownBonus": 80,
+      "anonymityPenalty": 30
+    }
   },
   "enemyDeck": [
-    { "archetype": "chaser", "modifiers": [], "weight": 4, "visualId": "enemy_skull_face" },
-    { "archetype": "splitter", "modifiers": [], "weight": 3, "visualId": "enemy_words_creature" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_crown_ghost" }
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_skull_face"
+    },
+    {
+      "archetype": "splitter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_words_creature"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_crown_ghost"
+    }
   ],
   "levelEnemies": {
     "skull_crown": {
       "visualId": "skull_crown",
       "dialogue": {
-        "spawn": ["Three-pointed crown!", "Basquiat's mark!", "Hero identified!", "Black kings!", "SAMO is dead!"],
-        "death": ["Crown... earned...", "Mark... understood...", "Hero... honored...", "Royalty... recognized...", "SAMO... lives..."]
+        "spawn": [
+          "Three-pointed crown!",
+          "Basquiat's mark!",
+          "Hero identified!",
+          "Black kings!",
+          "SAMO is dead!"
+        ],
+        "death": [
+          "Crown... earned...",
+          "Mark... understood...",
+          "Hero... honored...",
+          "Royalty... recognized...",
+          "SAMO... lives..."
+        ]
       }
     },
     "word_fragment": {
       "visualId": "word_fragment",
       "dialogue": {
-        "spawn": ["Words as image!", "Text strikes through!", "Basquiat's vocabulary!", "Language explodes!", "Meaning fragments!"],
-        "death": ["Image... clear...", "Text... read...", "Vocabulary... learned...", "Language... unified...", "Meaning... found..."]
+        "spawn": [
+          "Words as image!",
+          "Text strikes through!",
+          "Basquiat's vocabulary!",
+          "Language explodes!",
+          "Meaning fragments!"
+        ],
+        "death": [
+          "Image... clear...",
+          "Text... read...",
+          "Vocabulary... learned...",
+          "Language... unified...",
+          "Meaning... found..."
+        ]
       }
     },
     "anatomical_figure": {
       "visualId": "anatomical_figure",
       "dialogue": {
-        "spawn": ["Inside revealed!", "Gray's Anatomy!", "The body mapped!", "Basquiat's study!", "Exposed and crowned!"],
-        "death": ["Inside... honored...", "Anatomy... appreciated...", "Body... celebrated...", "Study... complete...", "Crowned... forever..."]
+        "spawn": [
+          "Inside revealed!",
+          "Gray's Anatomy!",
+          "The body mapped!",
+          "Basquiat's study!",
+          "Exposed and crowned!"
+        ],
+        "death": [
+          "Inside... honored...",
+          "Anatomy... appreciated...",
+          "Body... celebrated...",
+          "Study... complete...",
+          "Crowned... forever..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "identity_challenge", "params": { "claimInterval": 12000, "anonymityDamage": 10 } }],
+  "hazards": [
+    {
+      "type": "identity_challenge",
+      "params": {
+        "claimInterval": 12000,
+        "anonymityDamage": 10
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "street", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "graffiti", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "crowns", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "street",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "graffiti",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "crowns",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "The crown marks heroes. Claim your royalty.",
     "codexSnippet": "Jean-Michel Basquiat crowned Black heroes on canvas and wall. The monkey claims the three-pointed crown and understands that art is the ultimate act of self-coronation.",
     "radioWhisper": "SAMO IS DEAD. Long live SAMO."
   },
-  "musicSeed": { "seed": "basquiat_009", "mode": "mixolydian", "tempoRange": [75, 95], "intensity": 0.8 },
+  "musicSeed": {
+    "seed": "basquiat_009",
+    "mode": "hirajoshi",
+    "tempoRange": [
+      78,
+      95
+    ],
+    "intensity": 0.8,
+    "scale": "pentatonicMinor",
+    "style": "mysterious",
+    "timeSignature": "6/8",
+    "culturalStyle": "japanese"
+  },
   "duration": 160,
   "unlockCondition": "art_level8_complete"
 }

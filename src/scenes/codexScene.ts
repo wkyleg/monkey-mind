@@ -25,7 +25,7 @@ interface CodexDisplayEntry {
 
 export class CodexScene extends Scene {
   // Mark as overlay - renders on top of the previous scene
-  readonly isOverlay: boolean = true;
+  override readonly isOverlay: boolean = true;
 
   private categories: CodexCategory[] = [];
   private selectedCategoryIndex: number = 0;
@@ -100,17 +100,17 @@ export class CodexScene extends Scene {
     this.categories = [
       {
         id: 'enemies',
-        name: 'ENEMIES',
+        name: contentLoader.getString('codex_enemies'),
         entries: enemyEntries,
       },
       {
         id: 'bosses',
-        name: 'BOSSES',
+        name: contentLoader.getString('codex_bosses'),
         entries: bossEntries,
       },
       {
         id: 'lore',
-        name: 'SECRET FILES',
+        name: contentLoader.getString('codex_secret_files'),
         entries: [
           {
             id: 'project_monkeymind',
@@ -194,7 +194,7 @@ export class CodexScene extends Scene {
     renderer.radialGradientBackground([CONFIG.COLORS.BACKGROUND, '#1a1a2e'], width / 2, height / 2);
 
     // Title
-    renderer.glowText('CODEX', width / 2, 50, CONFIG.COLORS.ACCENT, 40, 'center', 20);
+    renderer.glowText(contentLoader.getString('codex_title'), width / 2, 50, CONFIG.COLORS.ACCENT, 40, 'center', 20);
 
     // Category tabs
     const tabY = 100;
@@ -255,8 +255,8 @@ export class CodexScene extends Scene {
           renderer.glowCircle(width * 0.25 + pulse, y + 8, 5, CONFIG.COLORS.PRIMARY, 8);
         }
       } else {
-        renderer.text('???', width * 0.3, y, CONFIG.COLORS.TEXT_DIM, 18, 'left');
-        renderer.text('[LOCKED]', width * 0.6, y, CONFIG.COLORS.TEXT_DIM, 14, 'left');
+        renderer.text(contentLoader.getString('codex_hidden'), width * 0.3, y, CONFIG.COLORS.TEXT_DIM, 18, 'left');
+        renderer.text(contentLoader.getString('codex_locked'), width * 0.6, y, CONFIG.COLORS.TEXT_DIM, 14, 'left');
       }
     });
   }

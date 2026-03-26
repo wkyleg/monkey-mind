@@ -4,53 +4,145 @@
   "index": 1,
   "title": "Atlantis",
   "subtitle": "The sunken city rises. Technology beyond time.",
-  "themeTags": ["atlantis", "sunken", "technology", "ancient"],
+  "themeTags": [
+    "atlantis",
+    "sunken",
+    "technology",
+    "ancient"
+  ],
   "ruleCard": {
     "icon": "trident",
     "hint": "Ancient technology awakens. Use orichalcum wisely.",
     "mechanic": "orichalcum_power",
-    "params": { "powerBoost": 50, "overloadRisk": 0.2 }
+    "params": {
+      "powerBoost": 50,
+      "overloadRisk": 0.2
+    }
   },
   "enemyDeck": [
-    { "archetype": "shieldbearer", "modifiers": ["mythic"], "weight": 4, "visualId": "enemy_stone_golem" },
-    { "archetype": "sniper", "modifiers": [], "weight": 3, "visualId": "enemy_crystal_sentinel" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_jungle_wraith" }
+    {
+      "archetype": "shieldbearer",
+      "modifiers": [
+        "mythic"
+      ],
+      "weight": 4,
+      "visualId": "enemy_stone_golem"
+    },
+    {
+      "archetype": "sniper",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_crystal_sentinel"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_jungle_wraith"
+    }
   ],
   "levelEnemies": {
     "atlantean_guard": {
       "visualId": "atlantean_guard",
       "dialogue": {
-        "spawn": ["The city must not rise!", "Poseidon's wrath!", "You desecrate sacred ground!", "The trident protects!", "Orichalcum shields me!"],
-        "death": ["The city... rises...", "Poseidon... forgive...", "Sacred... no more...", "Trident... falls...", "Orichalcum... dims..."]
+        "spawn": [
+          "The city must not rise!",
+          "Poseidon's wrath!",
+          "You desecrate sacred ground!",
+          "The trident protects!",
+          "Orichalcum shields me!"
+        ],
+        "death": [
+          "The city... rises...",
+          "Poseidon... forgive...",
+          "Sacred... no more...",
+          "Trident... falls...",
+          "Orichalcum... dims..."
+        ]
       }
     },
     "crystal_priest": {
       "visualId": "crystal_priest",
       "dialogue": {
-        "spawn": ["The crystals sing!", "Ancient power awakens!", "Technology eternal!", "The grid activates!", "Knowledge preserved!"],
-        "death": ["Crystals... shatter...", "Power... fades...", "Technology... lost...", "Grid... offline...", "Knowledge... forgotten..."]
+        "spawn": [
+          "The crystals sing!",
+          "Ancient power awakens!",
+          "Technology eternal!",
+          "The grid activates!",
+          "Knowledge preserved!"
+        ],
+        "death": [
+          "Crystals... shatter...",
+          "Power... fades...",
+          "Technology... lost...",
+          "Grid... offline...",
+          "Knowledge... forgotten..."
+        ]
       }
     },
     "orichalcum_golem": {
       "visualId": "orichalcum_golem",
       "dialogue": {
-        "spawn": ["Forged in lost metal!", "Orichalcum endures!", "I am the mountain!", "The alloy holds!", "Atlantean craft!"],
-        "death": ["Metal... corrodes...", "Orichalcum... rusts...", "Mountain... crumbles...", "Alloy... breaks...", "Craft... undone..."]
+        "spawn": [
+          "Forged in lost metal!",
+          "Orichalcum endures!",
+          "I am the mountain!",
+          "The alloy holds!",
+          "Atlantean craft!"
+        ],
+        "death": [
+          "Metal... corrodes...",
+          "Orichalcum... rusts...",
+          "Mountain... crumbles...",
+          "Alloy... breaks...",
+          "Craft... undone..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "water_pressure", "params": { "depthDamage": 5, "surfaceBonus": 20 } }],
+  "hazards": [
+    {
+      "type": "water_pressure",
+      "params": {
+        "depthDamage": 5,
+        "surfaceBonus": 20
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "sunken_city", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "crystals", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "bubbles", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "sunken_city",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "crystals",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "bubbles",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Ancient technology awakens. Use orichalcum wisely.",
     "codexSnippet": "Atlantis sank beneath the waves 10,000 years ago, taking its advanced technology with it. The monkey dives deep and finds that some civilizations leave echoes that never fade.",
     "radioWhisper": "The sonar shows impossible structures. They're still powered."
   },
-  "musicSeed": { "seed": "atlantis_001", "mode": "lydian", "tempoRange": [55, 70], "intensity": 0.5 },
+  "musicSeed": {
+    "seed": "atlantis_001",
+    "mode": "pentatonic",
+    "tempoRange": [
+      65,
+      83
+    ],
+    "intensity": 0.3,
+    "scale": "bhairav",
+    "style": "heroic",
+    "timeSignature": "3/4"
+  },
   "duration": 120,
   "unlockCondition": "act8_complete"
 }

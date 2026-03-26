@@ -1,13 +1,15 @@
 {
   "name": "monkey-mind",
   "version": "1.0.0",
-  "description": "Monkey Mind: Inner Invaders - A psychedelic arcade defense game",
+  "description": "Monkey Mind: Inner Invaders - A neurotech-powered arcade defense game",
   "type": "module",
+  "packageManager": "pnpm@8.9.2",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
+    "typecheck": "tsc --noEmit",
     "format": "biome format --write .",
     "check": "biome check --write .",
     "lint": "biome check ."
@@ -30,6 +32,13 @@
     "jsdom": "^27.4.0",
     "typescript": "^5.7.3",
     "vite": "^6.0.7",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.6.0",
     "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "@elata-biosciences/eeg-web": "^0.1.5",
+    "@elata-biosciences/eeg-web-ble": "^0.1.5",
+    "@elata-biosciences/rppg-web": "^0.1.5"
   }
 }

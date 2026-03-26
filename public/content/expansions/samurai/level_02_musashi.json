@@ -4,53 +4,151 @@
   "index": 2,
   "title": "The Book of Five Rings",
   "subtitle": "Musashi's strategy. Earth, Water, Fire, Wind, Void.",
-  "themeTags": ["musashi", "strategy", "five_rings", "combat"],
+  "themeTags": [
+    "musashi",
+    "strategy",
+    "five_rings",
+    "combat"
+  ],
   "ruleCard": {
     "icon": "rings",
     "hint": "Five elements, five stances. Switch stances to counter enemy types.",
     "mechanic": "element_stance",
-    "params": { "elements": ["earth", "water", "fire", "wind", "void"], "counterBonus": 50, "wrongStancePenalty": 20 }
+    "params": {
+      "elements": [
+        "earth",
+        "water",
+        "fire",
+        "wind",
+        "void"
+      ],
+      "counterBonus": 50,
+      "wrongStancePenalty": 20
+    }
   },
   "enemyDeck": [
-    { "archetype": "boss_chassis", "modifiers": [], "weight": 2, "visualId": "enemy_ronin" },
-    { "archetype": "chaser", "modifiers": [], "weight": 4, "visualId": "enemy_oni_mask" },
-    { "archetype": "sniper", "modifiers": [], "weight": 4, "visualId": "enemy_shadow_ninja" }
+    {
+      "archetype": "boss_chassis",
+      "modifiers": [],
+      "weight": 2,
+      "visualId": "enemy_ronin"
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_oni_mask"
+    },
+    {
+      "archetype": "sniper",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_shadow_ninja"
+    }
   ],
   "levelEnemies": {
     "earth_stance": {
       "visualId": "earth_stance",
       "dialogue": {
-        "spawn": ["CHI! Earth grounds you!", "Immovable as mountain!", "The foundation holds!", "Solid stance!", "Rooted in stone!"],
-        "death": ["Earth... crumbles...", "Foundation... broken...", "Uprooted... at last...", "The mountain... falls...", "Ground... gives way..."]
+        "spawn": [
+          "CHI! Earth grounds you!",
+          "Immovable as mountain!",
+          "The foundation holds!",
+          "Solid stance!",
+          "Rooted in stone!"
+        ],
+        "death": [
+          "Earth... crumbles...",
+          "Foundation... broken...",
+          "Uprooted... at last...",
+          "The mountain... falls...",
+          "Ground... gives way..."
+        ]
       }
     },
     "water_stance": {
       "visualId": "water_stance",
       "dialogue": {
-        "spawn": ["SUI! Water flows!", "Adapt to any vessel!", "The stream finds the way!", "Fluid and formless!", "Like water, I am!"],
-        "death": ["Water... evaporates...", "The stream... dries...", "Formless... becomes nothing...", "Flow... stops...", "The river... ends..."]
+        "spawn": [
+          "SUI! Water flows!",
+          "Adapt to any vessel!",
+          "The stream finds the way!",
+          "Fluid and formless!",
+          "Like water, I am!"
+        ],
+        "death": [
+          "Water... evaporates...",
+          "The stream... dries...",
+          "Formless... becomes nothing...",
+          "Flow... stops...",
+          "The river... ends..."
+        ]
       }
     },
     "void_stance": {
       "visualId": "void_stance",
       "dialogue": {
-        "spawn": ["KU! The Void awaits!", "Emptiness is fullness!", "Beyond technique!", "No mind, no form!", "The final ring!"],
-        "death": ["Void... fills...", "Emptiness... has end...", "Beyond... returns...", "The ring... closes...", "Nothingness... complete..."]
+        "spawn": [
+          "KU! The Void awaits!",
+          "Emptiness is fullness!",
+          "Beyond technique!",
+          "No mind, no form!",
+          "The final ring!"
+        ],
+        "death": [
+          "Void... fills...",
+          "Emptiness... has end...",
+          "Beyond... returns...",
+          "The ring... closes...",
+          "Nothingness... complete..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "duel", "params": { "oneOnOne": true, "honorBonus": 50 } }],
+  "hazards": [
+    {
+      "type": "duel",
+      "params": {
+        "oneOnOne": true,
+        "honorBonus": 50
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "battlefield", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "five_rings", "parallaxSpeed": 0.2, "opacity": 0.4 },
-    { "svgId": "dueling_ground", "parallaxSpeed": 0.3, "opacity": 0.6 }
+    {
+      "svgId": "battlefield",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "five_rings",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "dueling_ground",
+      "parallaxSpeed": 0.3,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Five elements, five stances. Switch stances to counter enemy types.",
     "codexSnippet": "Musashi was undefeated in 61 duels. The monkey studies the way of strategy, learning that victory comes not from strength alone but from understanding the five elements.",
     "radioWhisper": "The way is in training. Do nothing which is of no use."
   },
-  "musicSeed": { "seed": "musashi_002", "mode": "pentatonic", "tempoRange": [70, 85], "intensity": 0.7 },
+  "musicSeed": {
+    "seed": "musashi_002",
+    "mode": "hirajoshi",
+    "tempoRange": [
+      80,
+      103
+    ],
+    "intensity": 0.55,
+    "scale": "insen",
+    "style": "meditative",
+    "timeSignature": "6/8",
+    "culturalStyle": "japanese"
+  },
   "duration": 130,
   "unlockCondition": "samurai_level1_complete"
 }

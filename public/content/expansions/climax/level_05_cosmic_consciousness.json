@@ -4,53 +4,147 @@
   "index": 5,
   "title": "Cosmic Consciousness",
   "subtitle": "The universe awakens. All is mind.",
-  "themeTags": ["cosmic", "consciousness", "panpsychism", "awakening"],
+  "themeTags": [
+    "cosmic",
+    "consciousness",
+    "panpsychism",
+    "awakening"
+  ],
   "ruleCard": {
     "icon": "cosmos",
     "hint": "The universe is conscious. Your thoughts affect reality directly.",
     "mechanic": "thought_reality",
-    "params": { "intentionPower": 60, "unconsciousDanger": 40 }
+    "params": {
+      "intentionPower": 60,
+      "unconsciousDanger": 40
+    }
   },
   "enemyDeck": [
-    { "archetype": "phaser", "modifiers": ["observed"], "weight": 4, "visualId": "enemy_void_tendril" },
-    { "archetype": "drifter", "modifiers": ["mythic"], "weight": 3, "visualId": "enemy_memory_ghost" },
-    { "archetype": "mimic", "modifiers": [], "weight": 3, "visualId": "enemy_ego_shard" }
+    {
+      "archetype": "phaser",
+      "modifiers": [
+        "observed"
+      ],
+      "weight": 4,
+      "visualId": "enemy_void_tendril"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "mythic"
+      ],
+      "weight": 3,
+      "visualId": "enemy_memory_ghost"
+    },
+    {
+      "archetype": "mimic",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_ego_shard"
+    }
   ],
   "levelEnemies": {
     "universal_mind": {
       "visualId": "universal_mind",
       "dialogue": {
-        "spawn": ["I am the cosmos thinking!", "Every atom aware!", "Panpsychism revealed!", "Mind pervades all!", "The universe dreams!"],
-        "death": ["Cosmos... rests...", "Atoms... sleep...", "Mind... withdraws...", "All... at peace...", "Dream... continues..."]
+        "spawn": [
+          "I am the cosmos thinking!",
+          "Every atom aware!",
+          "Panpsychism revealed!",
+          "Mind pervades all!",
+          "The universe dreams!"
+        ],
+        "death": [
+          "Cosmos... rests...",
+          "Atoms... sleep...",
+          "Mind... withdraws...",
+          "All... at peace...",
+          "Dream... continues..."
+        ]
       }
     },
     "awakened_star": {
       "visualId": "awakened_star",
       "dialogue": {
-        "spawn": ["The sun thinks!", "Stellar consciousness!", "Fusion is thought!", "Light carries mind!", "Stars are alive!"],
-        "death": ["Sun... dreams...", "Consciousness... dims...", "Thought... rests...", "Light... calm...", "Stars... sleep..."]
+        "spawn": [
+          "The sun thinks!",
+          "Stellar consciousness!",
+          "Fusion is thought!",
+          "Light carries mind!",
+          "Stars are alive!"
+        ],
+        "death": [
+          "Sun... dreams...",
+          "Consciousness... dims...",
+          "Thought... rests...",
+          "Light... calm...",
+          "Stars... sleep..."
+        ]
       }
     },
     "quantum_observer": {
       "visualId": "quantum_observer",
       "dialogue": {
-        "spawn": ["Observation collapses reality!", "The universe watches!", "Consciousness selects!", "Many worlds, one mind!", "The wave function!"],
-        "death": ["Reality... stable...", "Observation... gentle...", "Selection... kind...", "One world... enough...", "Function... at peace..."]
+        "spawn": [
+          "Observation collapses reality!",
+          "The universe watches!",
+          "Consciousness selects!",
+          "Many worlds, one mind!",
+          "The wave function!"
+        ],
+        "death": [
+          "Reality... stable...",
+          "Observation... gentle...",
+          "Selection... kind...",
+          "One world... enough...",
+          "Function... at peace..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "thought_manifestation", "params": { "unconsciousSpawn": true, "intentionControl": 0.6 } }],
+  "hazards": [
+    {
+      "type": "thought_manifestation",
+      "params": {
+        "unconsciousSpawn": true,
+        "intentionControl": 0.6
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "cosmos", "parallaxSpeed": 0.05, "opacity": 0.5 },
-    { "svgId": "mind_field", "parallaxSpeed": 0.1, "opacity": 0.4 },
-    { "svgId": "awareness", "parallaxSpeed": 0.15, "opacity": 0.6 }
+    {
+      "svgId": "cosmos",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "mind_field",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "awareness",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "The universe is conscious. Your thoughts affect reality directly.",
     "codexSnippet": "What if the universe itself is conscious? Panpsychism suggests mind pervades all matter. The monkey experiences cosmic consciousness and realizes that the observer and observed are one.",
     "radioWhisper": "The readings suggest... the universe is looking back at us."
   },
-  "musicSeed": { "seed": "cosmic_005", "mode": "lydian", "tempoRange": [45, 60], "intensity": 0.5 },
+  "musicSeed": {
+    "seed": "cosmic_005",
+    "mode": "chromatic",
+    "tempoRange": [
+      118,
+      145
+    ],
+    "intensity": 0.63,
+    "scale": "phrygianDominant",
+    "style": "dark",
+    "timeSignature": "5/4"
+  },
   "duration": 170,
   "unlockCondition": "climax_level4_complete"
 }

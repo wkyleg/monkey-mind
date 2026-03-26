@@ -4,53 +4,145 @@
   "index": 2,
   "title": "The Egyptian Book of the Dead",
   "subtitle": "The weighing of the heart. Ma'at judges.",
-  "themeTags": ["egypt", "afterlife", "judgment", "maat"],
+  "themeTags": [
+    "egypt",
+    "afterlife",
+    "judgment",
+    "maat"
+  ],
   "ruleCard": {
     "icon": "feather",
     "hint": "Your heart is weighed against the feather. Stay light.",
     "mechanic": "heart_weight",
-    "params": { "sinWeight": 5, "virtueReduction": 3, "devourThreshold": 100 }
+    "params": {
+      "sinWeight": 5,
+      "virtueReduction": 3,
+      "devourThreshold": 100
+    }
   },
   "enemyDeck": [
-    { "archetype": "anchor", "modifiers": [], "weight": 4, "visualId": "enemy_ammit" },
-    { "archetype": "phaser", "modifiers": [], "weight": 3, "visualId": "enemy_anubis" },
-    { "archetype": "drifter", "modifiers": [], "weight": 3, "visualId": "enemy_osiris" }
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_ammit"
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_anubis"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_osiris"
+    }
   ],
   "levelEnemies": {
     "ammit": {
       "visualId": "ammit",
       "dialogue": {
-        "spawn": ["The Devourer waits!", "Your heart is heavy!", "Crocodile, lion, hippo!", "Fail the weighing!", "No second chance!"],
-        "death": ["Devourer... hungry...", "Heart... light...", "Beast... denied...", "Weighing... passed...", "Chance... taken..."]
+        "spawn": [
+          "The Devourer waits!",
+          "Your heart is heavy!",
+          "Crocodile, lion, hippo!",
+          "Fail the weighing!",
+          "No second chance!"
+        ],
+        "death": [
+          "Devourer... hungry...",
+          "Heart... light...",
+          "Beast... denied...",
+          "Weighing... passed...",
+          "Chance... taken..."
+        ]
       }
     },
     "scale_keeper": {
       "visualId": "scale_keeper",
       "dialogue": {
-        "spawn": ["Ma'at's feather!", "The scales balance!", "Thoth records all!", "Your deeds are counted!", "Forty-two confessions!"],
-        "death": ["Feather... outweighed...", "Balance... found...", "Recording... complete...", "Deeds... weighed...", "Confessions... heard..."]
+        "spawn": [
+          "Ma'at's feather!",
+          "The scales balance!",
+          "Thoth records all!",
+          "Your deeds are counted!",
+          "Forty-two confessions!"
+        ],
+        "death": [
+          "Feather... outweighed...",
+          "Balance... found...",
+          "Recording... complete...",
+          "Deeds... weighed...",
+          "Confessions... heard..."
+        ]
       }
     },
     "ba_soul": {
       "visualId": "ba_soul",
       "dialogue": {
-        "spawn": ["I am the Ba!", "Flying between worlds!", "Find my body!", "The tomb opens!", "Resurrection awaits!"],
-        "death": ["Ba... rests...", "Worlds... bridged...", "Body... found...", "Tomb... closed...", "Resurrection... achieved..."]
+        "spawn": [
+          "I am the Ba!",
+          "Flying between worlds!",
+          "Find my body!",
+          "The tomb opens!",
+          "Resurrection awaits!"
+        ],
+        "death": [
+          "Ba... rests...",
+          "Worlds... bridged...",
+          "Body... found...",
+          "Tomb... closed...",
+          "Resurrection... achieved..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "judgment_hall", "params": { "sinAccumulation": 2, "purificationBonus": 20 } }],
+  "hazards": [
+    {
+      "type": "judgment_hall",
+      "params": {
+        "sinAccumulation": 2,
+        "purificationBonus": 20
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "duat", "parallaxSpeed": 0.1, "opacity": 0.5 },
-    { "svgId": "scales", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "hieroglyphs", "parallaxSpeed": 0.2, "opacity": 0.6 }
+    {
+      "svgId": "duat",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "scales",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "hieroglyphs",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Your heart is weighed against the feather. Stay light.",
     "codexSnippet": "In the Hall of Two Truths, Anubis weighs the heart against Ma'at's feather. The monkey faces judgment and learns that the weight of conscience determines destiny.",
     "radioWhisper": "I have not caused pain. I have not caused tears."
   },
-  "musicSeed": { "seed": "egypt_002", "mode": "dorian", "tempoRange": [50, 65], "intensity": 0.5 },
+  "musicSeed": {
+    "seed": "egypt_002",
+    "mode": "bhairav",
+    "tempoRange": [
+      61,
+      79
+    ],
+    "intensity": 0.34,
+    "scale": "aeolian",
+    "style": "dreamy",
+    "timeSignature": "4/4",
+    "culturalStyle": "arabic"
+  },
   "duration": 130,
   "unlockCondition": "myth_level1_complete"
 }

@@ -4,53 +4,139 @@
   "index": 7,
   "title": "The True Self",
   "subtitle": "Beyond all masks. Who are you?",
-  "themeTags": ["self", "identity", "truth", "final"],
+  "themeTags": [
+    "self",
+    "identity",
+    "truth",
+    "final"
+  ],
   "ruleCard": {
     "icon": "self",
     "hint": "All masks removed. Pure being. No mechanics, only presence.",
     "mechanic": "pure_presence",
-    "params": { "noMechanics": true, "presenceOnly": true }
+    "params": {
+      "noMechanics": true,
+      "presenceOnly": true
+    }
   },
   "enemyDeck": [
-    { "archetype": "mimic", "modifiers": ["simulacrum"], "weight": 6, "visualId": "enemy_final_form" },
-    { "archetype": "phaser", "modifiers": ["observed"], "weight": 2, "visualId": "enemy_ego_shard" },
-    { "archetype": "drifter", "modifiers": [], "weight": 2, "visualId": "enemy_void_tendril" }
+    {
+      "archetype": "mimic",
+      "modifiers": [
+        "simulacrum"
+      ],
+      "weight": 6,
+      "visualId": "enemy_final_form"
+    },
+    {
+      "archetype": "phaser",
+      "modifiers": [
+        "observed"
+      ],
+      "weight": 2,
+      "visualId": "enemy_ego_shard"
+    },
+    {
+      "archetype": "drifter",
+      "modifiers": [],
+      "weight": 2,
+      "visualId": "enemy_void_tendril"
+    }
   ],
   "levelEnemies": {
     "final_mask": {
       "visualId": "final_mask",
       "dialogue": {
-        "spawn": ["One last mask!", "Behind this, nothing!", "Identity's final layer!", "Remove me if you dare!", "Who will you be?"],
-        "death": ["Mask... removed...", "Nothing... behind...", "Everything... revealed...", "Dare... achieved...", "You are... you..."]
+        "spawn": [
+          "One last mask!",
+          "Behind this, nothing!",
+          "Identity's final layer!",
+          "Remove me if you dare!",
+          "Who will you be?"
+        ],
+        "death": [
+          "Mask... removed...",
+          "Nothing... behind...",
+          "Everything... revealed...",
+          "Dare... achieved...",
+          "You are... you..."
+        ]
       }
     },
     "true_nature": {
       "visualId": "true_nature",
       "dialogue": {
-        "spawn": ["This is what you are!", "No more becoming!", "Pure being!", "The search ends!", "Here you stand!"],
-        "death": ["Nature... accepted...", "Being... complete...", "Search... over...", "Standing... firmly...", "You... are..."]
+        "spawn": [
+          "This is what you are!",
+          "No more becoming!",
+          "Pure being!",
+          "The search ends!",
+          "Here you stand!"
+        ],
+        "death": [
+          "Nature... accepted...",
+          "Being... complete...",
+          "Search... over...",
+          "Standing... firmly...",
+          "You... are..."
+        ]
       }
     },
     "eternal_question": {
       "visualId": "eternal_question",
       "dialogue": {
-        "spawn": ["Who are you?", "What do you want?", "Where are you going?", "Why do you exist?", "The answer is...?"],
-        "death": ["I am...", "I want...", "I go...", "I exist...", "The answer... is me..."]
+        "spawn": [
+          "Who are you?",
+          "What do you want?",
+          "Where are you going?",
+          "Why do you exist?",
+          "The answer is...?"
+        ],
+        "death": [
+          "I am...",
+          "I want...",
+          "I go...",
+          "I exist...",
+          "The answer... is me..."
+        ]
       }
     }
   },
   "hazards": [],
   "bgLayers": [
-    { "svgId": "void", "parallaxSpeed": 0.0, "opacity": 0.5 },
-    { "svgId": "light", "parallaxSpeed": 0.05, "opacity": 0.4 },
-    { "svgId": "self", "parallaxSpeed": 0.1, "opacity": 0.6 }
+    {
+      "svgId": "void",
+      "parallaxSpeed": 0,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "light",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "self",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "All masks removed. Pure being. No mechanics, only presence.",
     "codexSnippet": "At the end of all seeking, the monkey finds what was always there: itself. Not Subject 47, not an experiment, not a hero - just pure consciousness, aware of being aware. The journey ends in arrival at what was never lost.",
     "radioWhisper": "..."
   },
-  "musicSeed": { "seed": "true_self_007", "mode": "ionian", "tempoRange": [40, 55], "intensity": 0.3 },
+  "musicSeed": {
+    "seed": "true_self_007",
+    "mode": "chromatic",
+    "tempoRange": [
+      122,
+      150
+    ],
+    "intensity": 0.8,
+    "scale": "phrygian",
+    "style": "heroic",
+    "timeSignature": "11/8"
+  },
   "duration": 200,
   "unlockCondition": "climax_level6_complete"
 }

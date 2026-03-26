@@ -289,8 +289,9 @@ describe('WeaponSystem', () => {
     it('rapid fire should affect fire rate modifier', () => {
       expect(weapons.getFireRateModifier()).toBe(1);
 
+      // Rapid fire triggers spray mode (0.4) × rapid fire powerup (0.5) = 0.2
       weapons.setRapidFire(true);
-      expect(weapons.getFireRateModifier()).toBe(0.5);
+      expect(weapons.getFireRateModifier()).toBe(0.2);
     });
   });
 
@@ -328,8 +329,8 @@ describe('WeaponSystem', () => {
       weapons.setRapidFire(true);
       weapons.setFireRateMultiplier(0.8);
 
-      // Rapid fire is 0.5, multiplied by 0.8
-      expect(weapons.getFireRateModifier()).toBe(0.4);
+      // spray mode (0.4) × rapid fire (0.5) × fire rate multiplier (0.8) = 0.16
+      expect(weapons.getFireRateModifier()).toBeCloseTo(0.16);
     });
   });
 
@@ -382,6 +383,103 @@ describe('WeaponSystem', () => {
       expect(weapons.hasPrecisionBeam()).toBe(false);
       expect(weapons.hasExplosiveBananas()).toBe(false);
       expect(weapons.hasRapidFire()).toBe(false);
+    });
+  });
+
+  describe('Neuro Weapon Modes', () => {
+    it('should default to balanced mode', () => {
+      expect(weapons.getWeaponMode()).toBe('balanced');
+    });
+
+    it('should switch to beam mode on high calm', () => {
+      weapons.setNeuroState(0.8, 0.3);
+      weapons.update(1);
+      expect(weapons.getWeaponMode()).toBe('beam');
+    });
+
+    it('should switch to spray mode on high arousal', () => {
+      weapons.setNeuroState(0.3, 0.8);
+      weapons.update(1);
+      expect(weapons.getWeaponMode()).toBe('spray');
+    });
+
+    it('should switch to flow mode when both calm and arousal are high', () => {
+      weapons.setNeuroState(0.7, 0.7);
+      weapons.update(1);
+      expect(weapons.getWeaponMode()).toBe('flow');
+    });
+
+    it('should remain balanced when both signals are moderate', () => {
+      weapons.setNeuroState(0.5, 0.5);
+      weapons.update(1);
+      expect(weapons.getWeaponMode()).toBe('balanced');
+    });
+
+    it('should fire beam projectile in beam mode', () => {
+      weapons.setNeuroState(0.8, 0.3);
+      weapons.update(1);
+      weapons.fire(400, 500);
+
+      const projectiles = weapons.getProjectiles();
+      expect(projectiles.length).toBe(1);
+      expect(projectiles[0].hasTag('beam')).toBe(true);
+    });
+
+    it('should fire spread projectiles in spray mode', () => {
+      weapons.setNeuroState(0.3, 0.8);
+      weapons.update(1);
+      weapons.fire(400, 500);
+
+      const projectiles = weapons.getProjectiles();
+      expect(projectiles.length).toBe(3);
+    });
+
+    it('should fire homing projectile in flow mode', () => {
+      weapons.setNeuroState(0.7, 0.7);
+      weapons.update(1);
+      weapons.setEnemyPositions([{ x: 300, y: 200 }]);
+      weapons.fire(400, 500);
+
+      const projectiles = weapons.getProjectiles();
+      expect(projectiles.length).toBe(1);
+      expect((projectiles[0] as any)._homing).toBe(true);
+    });
+
+    it('should return slower fire rate for beam mode', () => {
+      weapons.setNeuroState(0.8, 0.3);
+      weapons.update(1);
+      expect(weapons.getFireRateModifier()).toBe(2.5);
+    });
+
+    it('should return faster fire rate for spray mode', () => {
+      weapons.setNeuroState(0.3, 0.8);
+      weapons.update(1);
+      expect(weapons.getFireRateModifier()).toBe(0.4);
+    });
+
+    it('should return slightly faster fire rate for flow mode', () => {
+      weapons.setNeuroState(0.7, 0.7);
+      weapons.update(1);
+      expect(weapons.getFireRateModifier()).toBe(0.8);
+    });
+
+    it('powerup modes should override neuro modes', () => {
+      weapons.setNeuroState(0.8, 0.3); // would be beam
+      weapons.update(1);
+      weapons.setPrecisionBeam(true);
+      expect(weapons.getWeaponMode()).toBe('beam');
+
+      weapons.setPrecisionBeam(false);
+      weapons.setRapidFire(true);
+      expect(weapons.getWeaponMode()).toBe('spray');
+    });
+
+    it('should accept enemy positions for flow mode homing', () => {
+      const positions = [
+        { x: 100, y: 200 },
+        { x: 300, y: 100 },
+      ];
+      expect(() => weapons.setEnemyPositions(positions)).not.toThrow();
     });
   });
 });

@@ -34,6 +34,9 @@ export class LevelSelectScene extends Scene {
   private time: number = 0;
   private inputCooldown: number = 0;
   private tabCooldown: number = 0;
+  private toastMessage: string = '';
+  private toastTimer: number = 0;
+  private toastColor: string = CONFIG.COLORS.PRIMARY;
 
   enter(): void {
     this.selectedIndex = 0;
@@ -41,6 +44,8 @@ export class LevelSelectScene extends Scene {
     this.inputCooldown = 0.2;
     this.tabCooldown = 0;
     this.viewMode = 'acts';
+    this.toastMessage = '';
+    this.toastTimer = 0;
 
     this.buildActList();
     this.buildExpansionList();
@@ -72,13 +77,16 @@ export class LevelSelectScene extends Scene {
     this.expansions = allExpansions.map((expansion, index) => ({
       expansion,
       index,
-      // For testing, unlock all expansions
-      unlocked: true,
+      unlocked: false,
     }));
   }
 
   update(dt: number, intent: PlayerIntent): void {
     this.time += dt;
+
+    if (this.toastTimer > 0) {
+      this.toastTimer -= dt;
+    }
 
     // Input cooldown
     if (this.inputCooldown > 0) {
@@ -101,9 +109,8 @@ export class LevelSelectScene extends Scene {
         this.selectedIndex = 0;
         this.tabCooldown = 0.2;
       } else if (intent.moveAxis > 0.5) {
-        this.viewMode = 'expansions';
-        this.selectedIndex = 0;
         this.tabCooldown = 0.2;
+        this.showToast(contentLoader.getString('level_select_under_construction'), CONFIG.COLORS.PRIMARY);
       }
     }
 
@@ -157,7 +164,15 @@ export class LevelSelectScene extends Scene {
     renderer.radialGradientBackground([CONFIG.COLORS.BACKGROUND, '#1a1a2e'], width / 2, height / 2);
 
     // Title
-    renderer.glowText('SELECT CAMPAIGN', width / 2, 50, CONFIG.COLORS.PRIMARY, 36, 'center', 20);
+    renderer.glowText(
+      contentLoader.getString('level_select_title'),
+      width / 2,
+      50,
+      CONFIG.COLORS.PRIMARY,
+      36,
+      'center',
+      20,
+    );
 
     // Tab buttons
     this.renderTabs(renderer, width);
@@ -178,6 +193,8 @@ export class LevelSelectScene extends Scene {
       11,
       'center',
     );
+
+    this.renderToast(renderer, width, height);
   }
 
   private renderTabs(renderer: Renderer, width: number): void {
@@ -191,7 +208,7 @@ export class LevelSelectScene extends Scene {
     const actsSelected = this.viewMode === 'acts';
     renderer.fillRect(leftX, tabY - 15, tabWidth, 30, actsSelected ? CONFIG.COLORS.PRIMARY : '#333344');
     renderer.text(
-      'CANON CAMPAIGN',
+      contentLoader.getString('level_select_tab_canon'),
       leftX + tabWidth / 2,
       tabY,
       actsSelected ? '#000000' : CONFIG.COLORS.TEXT_DIM,
@@ -199,14 +216,13 @@ export class LevelSelectScene extends Scene {
       'center',
     );
 
-    // Expansions tab
-    const expSelected = this.viewMode === 'expansions';
-    renderer.fillRect(rightX, tabY - 15, tabWidth, 30, expSelected ? CONFIG.COLORS.ACCENT : '#333344');
+    // Expansions tab (disabled — coming soon)
+    renderer.fillRect(rightX, tabY - 15, tabWidth, 30, '#222233');
     renderer.text(
-      'EXPANSION VAULT',
+      contentLoader.getString('level_select_tab_expansion'),
       rightX + tabWidth / 2,
       tabY,
-      expSelected ? '#000000' : CONFIG.COLORS.TEXT_DIM,
+      CONFIG.COLORS.TEXT_DIM,
       14,
       'center',
     );
@@ -252,7 +268,14 @@ export class LevelSelectScene extends Scene {
 
         // Status indicator
         if (actInfo.completed) {
-          renderer.hudText('✓ COMPLETED', width / 2 + 210, y, CONFIG.COLORS.SUCCESS, 12, 'right');
+          renderer.hudText(
+            contentLoader.getString('level_select_completed'),
+            width / 2 + 210,
+            y,
+            CONFIG.COLORS.SUCCESS,
+            12,
+            'right',
+          );
         } else {
           renderer.hudText(
             `${actInfo.act.levels.length} LEVELS`,
@@ -267,7 +290,14 @@ export class LevelSelectScene extends Scene {
         // Locked act
         renderer.hudText(`ACT ${actInfo.act.number}`, width / 2 - 180, y - 8, CONFIG.COLORS.TEXT_DIM, 12, 'left');
 
-        renderer.hudText('[ LOCKED ]', width / 2 - 180, y + 10, CONFIG.COLORS.TEXT_DIM, 16, 'left');
+        renderer.hudText(
+          contentLoader.getString('level_select_locked'),
+          width / 2 - 180,
+          y + 10,
+          CONFIG.COLORS.TEXT_DIM,
+          16,
+          'left',
+        );
 
         renderer.hudText(
           `Complete Act ${actInfo.index} to unlock`,
@@ -295,7 +325,14 @@ export class LevelSelectScene extends Scene {
     const maxVisible = Math.floor((height - startY - 60) / itemHeight);
 
     if (this.expansions.length === 0) {
-      renderer.text('No expansions available yet.', width / 2, height / 2, CONFIG.COLORS.TEXT_DIM, 16, 'center');
+      renderer.text(
+        contentLoader.getString('level_select_no_expansions'),
+        width / 2,
+        height / 2,
+        CONFIG.COLORS.TEXT_DIM,
+        16,
+        'center',
+      );
       return;
     }
 
@@ -344,7 +381,14 @@ export class LevelSelectScene extends Scene {
           'right',
         );
       } else {
-        renderer.hudText('[ LOCKED ]', width / 2 - 200, y, CONFIG.COLORS.TEXT_DIM, 14, 'left');
+        renderer.hudText(
+          contentLoader.getString('level_select_locked'),
+          width / 2 - 200,
+          y,
+          CONFIG.COLORS.TEXT_DIM,
+          14,
+          'left',
+        );
       }
     });
 
@@ -355,6 +399,26 @@ export class LevelSelectScene extends Scene {
     if (scrollOffset + maxVisible < this.expansions.length) {
       renderer.text('▼ MORE', width / 2, height - 55, CONFIG.COLORS.TEXT_DIM, 11, 'center');
     }
+  }
+
+  private showToast(message: string, color: string = CONFIG.COLORS.PRIMARY): void {
+    this.toastMessage = message;
+    this.toastTimer = 3;
+    this.toastColor = color;
+  }
+
+  private renderToast(renderer: Renderer, width: number, height: number): void {
+    if (this.toastTimer <= 0 || !this.toastMessage) return;
+    const ctx = renderer.context;
+    ctx.save();
+    ctx.globalAlpha = Math.min(1, this.toastTimer);
+    const toastW = Math.max(300, this.toastMessage.length * 9 + 40);
+    const toastH = 32;
+    const toastX = (width - toastW) / 2;
+    const toastY = height * 0.13;
+    renderer.drawPanel(toastX, toastY, toastW, toastH, 'rgba(8,8,12,0.9)', this.toastColor, 1);
+    renderer.hudText(this.toastMessage, width / 2, toastY + toastH / 2, this.toastColor, 14, 'center');
+    ctx.restore();
   }
 
   private getActColor(actNumber: number): string {

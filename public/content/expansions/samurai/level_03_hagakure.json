@@ -4,53 +4,145 @@
   "index": 3,
   "title": "Hagakure",
   "subtitle": "Hidden by the Leaves. The way of death.",
-  "themeTags": ["hagakure", "death", "acceptance", "service"],
+  "themeTags": [
+    "hagakure",
+    "death",
+    "acceptance",
+    "service"
+  ],
   "ruleCard": {
     "icon": "leaf",
     "hint": "Accept death. Playing as if already dead removes fear penalties.",
     "mechanic": "death_acceptance",
-    "params": { "fearImmunity": true, "deathBonus": 100, "attachmentPenalty": 30 }
+    "params": {
+      "fearImmunity": true,
+      "deathBonus": 100,
+      "attachmentPenalty": 30
+    }
   },
   "enemyDeck": [
-    { "archetype": "chaser", "modifiers": [], "weight": 4, "visualId": "enemy_oni_mask" },
-    { "archetype": "sniper", "modifiers": [], "weight": 3, "visualId": "enemy_shadow_ninja" },
-    { "archetype": "anchor", "modifiers": [], "weight": 3, "visualId": "enemy_shadow_ninja" }
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 4,
+      "visualId": "enemy_oni_mask"
+    },
+    {
+      "archetype": "sniper",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_shadow_ninja"
+    },
+    {
+      "archetype": "anchor",
+      "modifiers": [],
+      "weight": 3,
+      "visualId": "enemy_shadow_ninja"
+    }
   ],
   "levelEnemies": {
     "death_spirit": {
       "visualId": "death_spirit",
       "dialogue": {
-        "spawn": ["Death awaits!", "The leaves hide nothing!", "Already dead!", "Fear is illusion!", "Acceptance brings peace!"],
-        "death": ["Death... accepted...", "The way... revealed...", "Peace... at last...", "Hidden... no more...", "Already... was dead..."]
+        "spawn": [
+          "Death awaits!",
+          "The leaves hide nothing!",
+          "Already dead!",
+          "Fear is illusion!",
+          "Acceptance brings peace!"
+        ],
+        "death": [
+          "Death... accepted...",
+          "The way... revealed...",
+          "Peace... at last...",
+          "Hidden... no more...",
+          "Already... was dead..."
+        ]
       }
     },
     "fallen_leaf": {
       "visualId": "fallen_leaf",
       "dialogue": {
-        "spawn": ["From the branch I fall!", "Hidden by leaves!", "The autumn comes!", "Floating down!", "Detached from life!"],
-        "death": ["To earth... return...", "The branch... releases...", "Fallen... peacefully...", "Autumn... ends...", "Grounded... finally..."]
+        "spawn": [
+          "From the branch I fall!",
+          "Hidden by leaves!",
+          "The autumn comes!",
+          "Floating down!",
+          "Detached from life!"
+        ],
+        "death": [
+          "To earth... return...",
+          "The branch... releases...",
+          "Fallen... peacefully...",
+          "Autumn... ends...",
+          "Grounded... finally..."
+        ]
       }
     },
     "eternal_servant": {
       "visualId": "eternal_servant",
       "dialogue": {
-        "spawn": ["I serve beyond death!", "My lord commands!", "Duty never ends!", "Service is life!", "Loyal unto eternity!"],
-        "death": ["Service... complete...", "My lord... pleased...", "Duty... fulfilled...", "Eternity... of peace...", "Released... from service..."]
+        "spawn": [
+          "I serve beyond death!",
+          "My lord commands!",
+          "Duty never ends!",
+          "Service is life!",
+          "Loyal unto eternity!"
+        ],
+        "death": [
+          "Service... complete...",
+          "My lord... pleased...",
+          "Duty... fulfilled...",
+          "Eternity... of peace...",
+          "Released... from service..."
+        ]
       }
     }
   },
-  "hazards": [{ "type": "seppuku_zone", "params": { "honorDeath": true, "shameAlternative": 50 } }],
+  "hazards": [
+    {
+      "type": "seppuku_zone",
+      "params": {
+        "honorDeath": true,
+        "shameAlternative": 50
+      }
+    }
+  ],
   "bgLayers": [
-    { "svgId": "garden", "parallaxSpeed": 0.05, "opacity": 0.5 },
-    { "svgId": "leaves", "parallaxSpeed": 0.15, "opacity": 0.4 },
-    { "svgId": "shrine", "parallaxSpeed": 0.25, "opacity": 0.6 }
+    {
+      "svgId": "garden",
+      "parallaxSpeed": 0.05,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "leaves",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "shrine",
+      "parallaxSpeed": 0.25,
+      "opacity": 0.6
+    }
   ],
   "copyLayers": {
     "ruleCard": "Accept death. Playing as if already dead removes fear penalties.",
     "codexSnippet": "The way of the samurai is found in death. The monkey learns to live by accepting the end, finding freedom in the surrender to mortality that defines the warrior's path.",
     "radioWhisper": "I have found the way of the warrior is death."
   },
-  "musicSeed": { "seed": "hagakure_003", "mode": "aeolian", "tempoRange": [45, 60], "intensity": 0.4 },
+  "musicSeed": {
+    "seed": "hagakure_003",
+    "mode": "hirajoshi",
+    "tempoRange": [
+      86,
+      110
+    ],
+    "intensity": 0.8,
+    "scale": "hirajoshi",
+    "style": "aggressive",
+    "timeSignature": "4/4",
+    "culturalStyle": "japanese"
+  },
   "duration": 140,
   "unlockCondition": "samurai_level2_complete"
 }

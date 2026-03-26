@@ -4,17 +4,37 @@
   "index": 1,
   "title": "Zoo Escape",
   "subtitle": "The cage is loud; the exit is simple.",
-  "themeTags": ["escape", "clinical", "awakening"],
+  "themeTags": [
+    "escape",
+    "clinical",
+    "awakening"
+  ],
   "ruleCard": {
     "icon": "eye_tax",
     "hint": "Attention is currency. Every glance costs focus.",
     "mechanic": "attention_tax",
-    "params": { "taxRate": 0.1 }
+    "params": {
+      "taxRate": 0.1
+    }
   },
   "enemyDeck": [
-    { "archetype": "drifter", "modifiers": ["bureaucratic"], "weight": 5 },
-    { "archetype": "chaser", "modifiers": [], "weight": 3 },
-    { "archetype": "swarm", "modifiers": [], "weight": 2 }
+    {
+      "archetype": "drifter",
+      "modifiers": [
+        "bureaucratic"
+      ],
+      "weight": 5
+    },
+    {
+      "archetype": "chaser",
+      "modifiers": [],
+      "weight": 3
+    },
+    {
+      "archetype": "swarm",
+      "modifiers": [],
+      "weight": 2
+    }
   ],
   "levelEnemies": {
     "zookeeper": {
@@ -77,9 +97,21 @@
   },
   "hazards": [],
   "bgLayers": [
-    { "svgId": "cage", "parallaxSpeed": 0.1, "opacity": 0.3 },
-    { "svgId": "door", "parallaxSpeed": 0.3, "opacity": 0.5 },
-    { "svgId": "monitor", "parallaxSpeed": 0.5, "opacity": 0.2 }
+    {
+      "svgId": "cage",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.3
+    },
+    {
+      "svgId": "door",
+      "parallaxSpeed": 0.3,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "monitor",
+      "parallaxSpeed": 0.5,
+      "opacity": 0.2
+    }
   ],
   "copyLayers": {
     "ruleCard": "The cage is loud; the exit is simple.",
@@ -89,8 +121,14 @@
   "musicSeed": {
     "seed": "zoo_escape_001",
     "mode": "phrygian",
-    "tempoRange": [100, 120],
-    "intensity": 0.5
+    "tempoRange": [
+      80,
+      95
+    ],
+    "intensity": 0.3,
+    "scale": "phrygian",
+    "style": "dark",
+    "timeSignature": "4/4"
   },
   "duration": 90,
   "unlockCondition": "always"

@@ -4,14 +4,103 @@
   "index": 10,
   "title": "The Library of Babel",
   "subtitle": "The universe is a library. Every book exists.",
-  "themeTags": ["borges", "library", "infinity", "language"],
+  "themeTags": [
+    "borges",
+    "library",
+    "infinity",
+    "language"
+  ],
   "levelEnemies": {
-    "librarian": { "visualId": "librarian", "dialogue": { "spawn": ["Every book exists!", "410 pages each!", "25 symbols!", "The Crimson Hexagon!", "Your biography is here!"], "death": ["One book...", "410... enough...", "Symbols... meaningful...", "Hexagon... found...", "Biography... read..."] } },
-    "book_hunter": { "visualId": "book_hunter", "dialogue": { "spawn": ["The Vindication exists!", "One book justifies all!", "I've searched for centuries!", "The catalog of catalogs!", "Somewhere in infinity!"], "death": ["Vindication... found...", "Justified...", "Search... over...", "Catalog... complete...", "Here... in finite..."] } },
-    "gibberish_tome": { "visualId": "gibberish_tome", "dialogue": { "spawn": ["MCV perflexe!", "Random letters!", "But meaning might hide!", "Every permutation!", "Monkeys typed me!"], "death": ["Perflexe... clear...", "Ordered...", "Meaning... obvious...", "Unique...", "Authored..."] } }
+    "librarian": {
+      "visualId": "librarian",
+      "dialogue": {
+        "spawn": [
+          "Every book exists!",
+          "410 pages each!",
+          "25 symbols!",
+          "The Crimson Hexagon!",
+          "Your biography is here!"
+        ],
+        "death": [
+          "One book...",
+          "410... enough...",
+          "Symbols... meaningful...",
+          "Hexagon... found...",
+          "Biography... read..."
+        ]
+      }
+    },
+    "book_hunter": {
+      "visualId": "book_hunter",
+      "dialogue": {
+        "spawn": [
+          "The Vindication exists!",
+          "One book justifies all!",
+          "I've searched for centuries!",
+          "The catalog of catalogs!",
+          "Somewhere in infinity!"
+        ],
+        "death": [
+          "Vindication... found...",
+          "Justified...",
+          "Search... over...",
+          "Catalog... complete...",
+          "Here... in finite..."
+        ]
+      }
+    },
+    "gibberish_tome": {
+      "visualId": "gibberish_tome",
+      "dialogue": {
+        "spawn": [
+          "MCV perflexe!",
+          "Random letters!",
+          "But meaning might hide!",
+          "Every permutation!",
+          "Monkeys typed me!"
+        ],
+        "death": [
+          "Perflexe... clear...",
+          "Ordered...",
+          "Meaning... obvious...",
+          "Unique...",
+          "Authored..."
+        ]
+      }
+    }
   },
-  "bgLayers": [{ "svgId": "hexagons", "parallaxSpeed": 0.1, "opacity": 0.5 }, { "svgId": "shelves", "parallaxSpeed": 0.15, "opacity": 0.4 }, { "svgId": "books", "parallaxSpeed": 0.2, "opacity": 0.6 }],
-  "copyLayers": { "codexSnippet": "The Library is total—perfect, complete, and whole. The monkey wanders infinite hexagons seeking the one meaningful book." },
-  "musicSeed": { "seed": "library_010", "mode": "whole_tone", "tempoRange": [40, 55], "intensity": 0.4 },
-  "duration": 150, "unlockCondition": "lit_level9_complete"
+  "bgLayers": [
+    {
+      "svgId": "hexagons",
+      "parallaxSpeed": 0.1,
+      "opacity": 0.5
+    },
+    {
+      "svgId": "shelves",
+      "parallaxSpeed": 0.15,
+      "opacity": 0.4
+    },
+    {
+      "svgId": "books",
+      "parallaxSpeed": 0.2,
+      "opacity": 0.6
+    }
+  ],
+  "copyLayers": {
+    "codexSnippet": "The Library is total—perfect, complete, and whole. The monkey wanders infinite hexagons seeking the one meaningful book."
+  },
+  "musicSeed": {
+    "seed": "library_010",
+    "mode": "dorian",
+    "tempoRange": [
+      74,
+      94
+    ],
+    "intensity": 0.54,
+    "scale": "hirajoshi",
+    "style": "dark",
+    "timeSignature": "6/8"
+  },
+  "duration": 150,
+  "unlockCondition": "lit_level9_complete"
 }
