@@ -1,5 +1,5 @@
+import type { Backend, DemoRunner, Metrics, RppgProcessor } from '@elata-biosciences/rppg-web';
 import type { InputProvider, PlayerIntent } from './input';
-import type { RppgProcessor, Metrics, Backend, DemoRunner } from '@elata-biosciences/rppg-web';
 import logger from './logger';
 
 export interface RppgDebugMetrics {
@@ -374,7 +374,10 @@ export class ElataRppgProvider implements InputProvider {
       // Quality transition logging
       const qualityHigh = this.state.quality >= QUALITY_THRESHOLD;
       if (qualityHigh !== this.lastQualityHigh) {
-        logger.info('rPPG', `Quality transition: ${this.lastQualityHigh ? 'HIGH' : 'LOW'} -> ${qualityHigh ? 'HIGH' : 'LOW'}`);
+        logger.info(
+          'rPPG',
+          `Quality transition: ${this.lastQualityHigh ? 'HIGH' : 'LOW'} -> ${qualityHigh ? 'HIGH' : 'LOW'}`,
+        );
         this.lastQualityHigh = qualityHigh;
       }
 

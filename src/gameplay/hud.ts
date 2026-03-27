@@ -1016,7 +1016,7 @@ export class Hud {
     }
     ctx.restore();
 
-    const leftW = width * 0.20;
+    const leftW = width * 0.2;
     const rightW = width * 0.25;
     const centerLeft = leftW;
     const centerW = width - leftW - rightW;
@@ -1062,9 +1062,17 @@ export class Hud {
 
     const mode = state.weaponMode ?? 'balanced';
     const modeIcon = mode === 'beam' ? '◎' : mode === 'spray' ? '✦' : mode === 'flow' ? '◈' : '•';
-    const modeColor = mode === 'beam' ? calmColor : mode === 'spray' ? arousalColor : mode === 'flow' ? flowColor : '#aaaaaa';
+    const modeColor =
+      mode === 'beam' ? calmColor : mode === 'spray' ? arousalColor : mode === 'flow' ? flowColor : '#aaaaaa';
     const modeName = mode === 'beam' ? 'BEAM' : mode === 'spray' ? 'SPRAY' : mode === 'flow' ? 'FLOW' : 'BALANCED';
-    const modeDesc = mode === 'beam' ? 'Precision · x3 dmg' : mode === 'spray' ? 'Rapid · x2.5 rate' : mode === 'flow' ? 'Homing · x2 dmg' : 'Standard';
+    const modeDesc =
+      mode === 'beam'
+        ? 'Precision · x3 dmg'
+        : mode === 'spray'
+          ? 'Rapid · x2.5 rate'
+          : mode === 'flow'
+            ? 'Homing · x2 dmg'
+            : 'Standard';
 
     renderer.hudText(`${modeIcon} ${modeName}`, x + 12, cy, modeColor, 11, 'left');
     renderer.hudText(modeDesc, x + 90, cy, '#6a6a80', 8, 'left');
@@ -1175,15 +1183,23 @@ export class Hud {
     let statusLabel: string;
 
     if (source === 'eeg') {
-      icon = '●'; iconColor = '#44ff88'; statusLabel = 'EEG CONNECTED';
+      icon = '●';
+      iconColor = '#44ff88';
+      statusLabel = 'EEG CONNECTED';
     } else if (source === 'rppg') {
       if (calibProg < 1) {
-        icon = '◉'; iconColor = '#ffaa44'; statusLabel = `CAM ${Math.round(calibProg * 100)}%`;
+        icon = '◉';
+        iconColor = '#ffaa44';
+        statusLabel = `CAM ${Math.round(calibProg * 100)}%`;
       } else {
-        icon = '●'; iconColor = '#ffaa44'; statusLabel = 'WEBCAM ACTIVE';
+        icon = '●';
+        iconColor = '#ffaa44';
+        statusLabel = 'WEBCAM ACTIVE';
       }
     } else if (source === 'mock') {
-      icon = '◇'; iconColor = '#666688'; statusLabel = 'SIMULATED';
+      icon = '◇';
+      iconColor = '#666688';
+      statusLabel = 'SIMULATED';
     } else if (eegConn) {
       const dots = '.'.repeat(1 + (Math.floor(this.time * 2) % 3));
       const frames = state.eegFrameCount ?? 0;
@@ -1199,10 +1215,13 @@ export class Hud {
       else statusLabel = `EEG wait${dots}`;
     } else if (state.eegReconnecting) {
       const dots = '.'.repeat(1 + (Math.floor(this.time * 2) % 3));
-      icon = '◎'; iconColor = '#ffaa44';
+      icon = '◎';
+      iconColor = '#ffaa44';
       statusLabel = `Recon${dots}(${state.eegReconnectAttempt ?? 0}/5)`;
     } else {
-      icon = '✕'; iconColor = '#ff4444'; statusLabel = 'NO DEVICE';
+      icon = '✕';
+      iconColor = '#ff4444';
+      statusLabel = 'NO DEVICE';
     }
 
     if ((source === 'rppg' && calibProg < 1) || state.eegReconnecting) {
@@ -1356,19 +1375,39 @@ export class Hud {
     // Brain state label
     let brainLabel = 'BALANCED';
     let brainColor = '#aaaaaa';
-    if (state.calmLevel > 0.65) { brainLabel = 'FOCUSED'; brainColor = calmColor; }
-    else if (state.arousalLevel > 0.65) { brainLabel = 'ALERT'; brainColor = arousalColor; }
-    else if (state.calmLevel > 0.45 && state.arousalLevel < 0.3) { brainLabel = 'RELAXED'; brainColor = '#44ddaa'; }
+    if (state.calmLevel > 0.65) {
+      brainLabel = 'FOCUSED';
+      brainColor = calmColor;
+    } else if (state.arousalLevel > 0.65) {
+      brainLabel = 'ALERT';
+      brainColor = arousalColor;
+    } else if (state.calmLevel > 0.45 && state.arousalLevel < 0.3) {
+      brainLabel = 'RELAXED';
+      brainColor = '#44ddaa';
+    }
     renderer.hudText(brainLabel, cx, cy - r - 5, brainColor, 7, 'center');
 
     renderer.hudText(`C ${Math.round(state.calmLevel * 100)}%`, cx - r - 8, cy, calmColor, 7, 'right');
     renderer.hudText(`A ${Math.round(state.arousalLevel * 100)}%`, cx + r + 8, cy, arousalColor, 7, 'left');
 
-    this.addTooltipRegion(cx - r - 30, cy - r - 8, r * 2 + 60, r * 2 + 16, 'Brain state: Calm (left) vs Arousal (right)');
+    this.addTooltipRegion(
+      cx - r - 30,
+      cy - r - 8,
+      r * 2 + 60,
+      r * 2 + 16,
+      'Brain state: Calm (left) vs Arousal (right)',
+    );
   }
 
   // ── NEURO RIGHT: BPM, sparkline, HRV, RESP, BL±, SIG, calmness, alpha ──
-  private renderNeuroRight(renderer: Renderer, state: HudState, x: number, y: number, maxW: number, maxH: number): void {
+  private renderNeuroRight(
+    renderer: Renderer,
+    state: HudState,
+    x: number,
+    y: number,
+    maxW: number,
+    maxH: number,
+  ): void {
     const ctx = renderer.context;
     const quality = state.signalQuality ?? 0;
     const bottomLimit = y + maxH - 6;
@@ -1403,10 +1442,20 @@ export class Hud {
     const metrics: Array<{ label: string; value: string; color: string; tip: string }> = [];
 
     if (state.hrvRmssd != null && state.hrvRmssd > 0) {
-      metrics.push({ label: 'HRV', value: `${Math.round(state.hrvRmssd)}ms`, color: '#44ddaa', tip: 'Heart rate variability (RMSSD)' });
+      metrics.push({
+        label: 'HRV',
+        value: `${Math.round(state.hrvRmssd)}ms`,
+        color: '#44ddaa',
+        tip: 'Heart rate variability (RMSSD)',
+      });
     }
     if (state.respirationRate != null && state.respirationRate > 0) {
-      metrics.push({ label: 'RESP', value: `${state.respirationRate.toFixed(1)}/m`, color: '#88aaff', tip: 'Breaths per minute' });
+      metrics.push({
+        label: 'RESP',
+        value: `${state.respirationRate.toFixed(1)}/m`,
+        color: '#88aaff',
+        tip: 'Breaths per minute',
+      });
     }
     if (state.baselineDelta != null) {
       const sign = state.baselineDelta >= 0 ? '+' : '';
@@ -1419,14 +1468,29 @@ export class Hud {
     }
 
     const qualColor = quality > 0.6 ? '#44ff88' : quality > 0.3 ? '#ffaa44' : '#ff4444';
-    metrics.push({ label: 'SIG', value: `${Math.round(quality * 100)}%`, color: qualColor, tip: 'Signal quality — higher is better' });
+    metrics.push({
+      label: 'SIG',
+      value: `${Math.round(quality * 100)}%`,
+      color: qualColor,
+      tip: 'Signal quality — higher is better',
+    });
 
     if (state.calmnessState) {
-      metrics.push({ label: 'STATE', value: state.calmnessState.toUpperCase(), color: '#00ccff', tip: 'Overall calmness state' });
+      metrics.push({
+        label: 'STATE',
+        value: state.calmnessState.toUpperCase(),
+        color: '#00ccff',
+        tip: 'Overall calmness state',
+      });
     }
 
     if (state.alphaPeakFreq != null) {
-      metrics.push({ label: 'αPk', value: `${state.alphaPeakFreq.toFixed(1)}Hz`, color: '#44ccff', tip: 'Alpha peak frequency (8-12Hz)' });
+      metrics.push({
+        label: 'αPk',
+        value: `${state.alphaPeakFreq.toFixed(1)}Hz`,
+        color: '#44ccff',
+        tip: 'Alpha peak frequency (8-12Hz)',
+      });
     }
 
     if (state.alphaBumpState && state.alphaBumpState !== 'unknown') {
@@ -1479,7 +1543,6 @@ export class Hud {
     renderer.hudText(`${Math.round(max)}`, x + w, y + h + 6, '#883344', 6, 'right');
   }
 
-
   /**
    * Render EEG alpha/beta/theta band power mini-bars
    */
@@ -1489,11 +1552,41 @@ export class Hud {
     const rowH = 11;
     const barW = Math.min(maxW - 30, 70);
     const bands: Array<{ label: string; fullName: string; desc: string; value: number; color: string }> = [
-      { label: 'δ', fullName: 'Delta', desc: 'Deep sleep & unconscious processing', value: Math.min(1, state.deltaPower ?? 0), color: '#aa88ff' },
-      { label: 'θ', fullName: 'Theta', desc: 'Creativity, daydreaming & light meditation', value: Math.min(1, state.thetaPower ?? 0), color: '#88cc44' },
-      { label: 'α', fullName: 'Alpha', desc: 'Relaxed awareness & calm focus', value: Math.min(1, state.alphaPower ?? 0), color: '#44ccff' },
-      { label: 'β', fullName: 'Beta', desc: 'Active thinking & concentration', value: Math.min(1, state.betaPower ?? 0), color: '#ff6644' },
-      { label: 'γ', fullName: 'Gamma', desc: 'Peak attention & information processing', value: Math.min(1, state.gammaPower ?? 0), color: '#ffaa88' },
+      {
+        label: 'δ',
+        fullName: 'Delta',
+        desc: 'Deep sleep & unconscious processing',
+        value: Math.min(1, state.deltaPower ?? 0),
+        color: '#aa88ff',
+      },
+      {
+        label: 'θ',
+        fullName: 'Theta',
+        desc: 'Creativity, daydreaming & light meditation',
+        value: Math.min(1, state.thetaPower ?? 0),
+        color: '#88cc44',
+      },
+      {
+        label: 'α',
+        fullName: 'Alpha',
+        desc: 'Relaxed awareness & calm focus',
+        value: Math.min(1, state.alphaPower ?? 0),
+        color: '#44ccff',
+      },
+      {
+        label: 'β',
+        fullName: 'Beta',
+        desc: 'Active thinking & concentration',
+        value: Math.min(1, state.betaPower ?? 0),
+        color: '#ff6644',
+      },
+      {
+        label: 'γ',
+        fullName: 'Gamma',
+        desc: 'Peak attention & information processing',
+        value: Math.min(1, state.gammaPower ?? 0),
+        color: '#ffaa88',
+      },
     ];
     for (let i = 0; i < bands.length; i++) {
       const by = y + i * rowH;
@@ -1503,7 +1596,13 @@ export class Hud {
       ctx.fillStyle = bands[i].color;
       ctx.fillRect(x + 14, by, barW * bands[i].value, barH);
       ctx.restore();
-      this.addTooltipRegion(x, by - 2, barW + 14, rowH, `${bands[i].fullName} (${Math.round(bands[i].value * 100)}%) — ${bands[i].desc}`);
+      this.addTooltipRegion(
+        x,
+        by - 2,
+        barW + 14,
+        rowH,
+        `${bands[i].fullName} (${Math.round(bands[i].value * 100)}%) — ${bands[i].desc}`,
+      );
     }
     let extraY = y + bands.length * rowH + 3;
 
@@ -1543,7 +1642,12 @@ export class Hud {
 
     const chartY = y + 12;
     const chartH = h - 16;
-    const bands: Array<{ key: keyof import('../engine/eegProvider').BandPowerSnapshot; label: string; color: string; solid: string }> = [
+    const bands: Array<{
+      key: keyof import('../engine/eegProvider').BandPowerSnapshot;
+      label: string;
+      color: string;
+      solid: string;
+    }> = [
       { key: 'delta', label: 'δ', color: 'rgba(170,136,255,0.8)', solid: '#aa88ff' },
       { key: 'theta', label: 'θ', color: 'rgba(136,204,68,0.8)', solid: '#88cc44' },
       { key: 'alpha', label: 'α', color: 'rgba(68,204,255,0.9)', solid: '#44ccff' },
@@ -1586,8 +1690,6 @@ export class Hud {
 
     ctx.restore();
   }
-
-
 
   /**
    * Render level lore/insight hint at top of screen - informative flavor text
@@ -1661,7 +1763,6 @@ export class Hud {
     const { x, y, width, height } = this.neuroButtonBounds;
     return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
   }
-
 
   /**
    * Reset HUD state

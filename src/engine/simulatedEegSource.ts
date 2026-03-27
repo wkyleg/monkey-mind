@@ -20,16 +20,19 @@ export class SimulatedEegSource {
   start(onFrame: (frame: SimulatedEegFrame) => void) {
     logger.info('SimulatedEegSource', 'start');
     this.stop();
-    this.timer = setInterval(() => {
-      const data = this.generateSampleMajorChunk(this.chunkSamples);
-      onFrame({
-        type: 'eeg',
-        fs: this.sampleRate,
-        channels: DEFAULT_CHANNELS,
-        data,
-        timestamp: Date.now(),
-      });
-    }, Math.round((this.chunkSamples / this.sampleRate) * 1000));
+    this.timer = setInterval(
+      () => {
+        const data = this.generateSampleMajorChunk(this.chunkSamples);
+        onFrame({
+          type: 'eeg',
+          fs: this.sampleRate,
+          channels: DEFAULT_CHANNELS,
+          data,
+          timestamp: Date.now(),
+        });
+      },
+      Math.round((this.chunkSamples / this.sampleRate) * 1000),
+    );
   }
 
   stop() {
@@ -46,8 +49,10 @@ export class SimulatedEegSource {
       const t = this.phase;
       const tp9 = 18 * Math.sin(2 * Math.PI * 10 * t) + 6 * Math.sin(2 * Math.PI * 6 * t) + this.noise(1.5);
       const af7 = 14 * Math.sin(2 * Math.PI * 10 * t + 0.2) + 8 * Math.sin(2 * Math.PI * 20 * t) + this.noise(1.5);
-      const af8 = 15 * Math.sin(2 * Math.PI * 10 * t + 0.45) + 7 * Math.sin(2 * Math.PI * 20 * t + 0.1) + this.noise(1.5);
-      const tp10 = 16 * Math.sin(2 * Math.PI * 10 * t + 0.1) + 5 * Math.sin(2 * Math.PI * 6 * t + 0.3) + this.noise(1.5);
+      const af8 =
+        15 * Math.sin(2 * Math.PI * 10 * t + 0.45) + 7 * Math.sin(2 * Math.PI * 20 * t + 0.1) + this.noise(1.5);
+      const tp10 =
+        16 * Math.sin(2 * Math.PI * 10 * t + 0.1) + 5 * Math.sin(2 * Math.PI * 6 * t + 0.3) + this.noise(1.5);
       out.push([tp9, af7, af8, tp10]);
       this.phase += this.dt;
     }

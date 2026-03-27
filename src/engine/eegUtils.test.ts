@@ -3,8 +3,8 @@ import {
   asChannelMajor,
   averageBands,
   computeBandPowersFallback,
-  extractBandsFromWasmResult,
   type EegBands,
+  extractBandsFromWasmResult,
 } from './eegUtils';
 
 describe('asChannelMajor', () => {

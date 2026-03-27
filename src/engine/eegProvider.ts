@@ -1,14 +1,14 @@
-import type { InputProvider, PlayerIntent } from './input';
-import logger from './logger';
 import type {
   HeadbandFrameV1,
   HeadbandTransportStatus,
-  WasmCalmnessModel,
   WasmAlphaBumpDetector,
   WasmAlphaPeakModel,
   WasmBandPowers,
+  WasmCalmnessModel,
 } from '@elata-biosciences/eeg-web';
 import type { BleTransport } from '@elata-biosciences/eeg-web-ble';
+import type { InputProvider, PlayerIntent } from './input';
+import logger from './logger';
 
 interface EegWebModule {
   initEegWasm: (options?: { module_or_path?: string }) => Promise<unknown>;
@@ -124,7 +124,7 @@ export class ElataEEGProvider implements InputProvider {
   }
 
   async initAsync(): Promise<void> {
-    const eegWeb = await import('@elata-biosciences/eeg-web') as unknown as EegWebModule;
+    const eegWeb = (await import('@elata-biosciences/eeg-web')) as unknown as EegWebModule;
     await eegWeb.initEegWasm();
     this.eegModule = eegWeb;
 
@@ -198,7 +198,7 @@ export class ElataEEGProvider implements InputProvider {
         return false;
       }
 
-      const eegWeb = await import('@elata-biosciences/eeg-web') as unknown as EegWebModule;
+      const eegWeb = (await import('@elata-biosciences/eeg-web')) as unknown as EegWebModule;
       const eegBle = await import('@elata-biosciences/eeg-web-ble');
 
       // Tear down any existing transport before creating a new one
@@ -304,7 +304,10 @@ export class ElataEEGProvider implements InputProvider {
           eegChannels: boardInfo?.eeg_channel_names,
           opticsChannels: boardInfo?.optics_channel_count,
         });
-        logger.debug('EEG', 'Characteristics found', { count: charInfo?.characteristics?.length, characteristics: charInfo?.characteristics });
+        logger.debug('EEG', 'Characteristics found', {
+          count: charInfo?.characteristics?.length,
+          characteristics: charInfo?.characteristics,
+        });
       } catch (e) {
         logger.warn('EEG', 'Could not read device info', e);
       }
@@ -459,12 +462,15 @@ export class ElataEEGProvider implements InputProvider {
     if (!eeg) {
       this.emptyDecodeCount++;
       if (this.emptyDecodeCount <= 5) {
-        logger.warn('EEG', 'Frame has no eeg property', { keys: Object.keys(frame), emptyCount: this.emptyDecodeCount });
+        logger.warn('EEG', 'Frame has no eeg property', {
+          keys: Object.keys(frame),
+          emptyCount: this.emptyDecodeCount,
+        });
       }
       return;
     }
 
-    const samples = eeg.samples ?? (eeg as Record<string, unknown>).data as number[][] | undefined;
+    const samples = eeg.samples ?? ((eeg as Record<string, unknown>).data as number[][] | undefined);
     if (!samples || samples.length === 0) {
       this.emptyDecodeCount++;
       if (this.emptyDecodeCount <= 5) {
@@ -483,10 +489,13 @@ export class ElataEEGProvider implements InputProvider {
     }
 
     if (isEarlyFrame) {
-      logger.debug('EEG', `Frame #${this.frameCount}: ${channelSamples.length} samples, range [${Math.min(...channelSamples).toFixed(1)}, ${Math.max(...channelSamples).toFixed(1)}]`);
+      logger.debug(
+        'EEG',
+        `Frame #${this.frameCount}: ${channelSamples.length} samples, range [${Math.min(...channelSamples).toFixed(1)}, ${Math.max(...channelSamples).toFixed(1)}]`,
+      );
     }
 
-    this.sampleRate = eeg.sampleRateHz ?? (eeg as Record<string, unknown>).sampleRate as number ?? 256;
+    this.sampleRate = eeg.sampleRateHz ?? ((eeg as Record<string, unknown>).sampleRate as number) ?? 256;
 
     // Append to accumulated buffer
     for (const s of channelSamples) {
@@ -660,9 +669,14 @@ export class ElataEEGProvider implements InputProvider {
             transportExists: !!this.transport,
           });
           if (this.bleNotificationCount === 0) {
-            logger.warn('EEG', 'BLE notifications never arrived. The headband may not be streaming, or GATT subscriptions failed.');
+            logger.warn(
+              'EEG',
+              'BLE notifications never arrived. The headband may not be streaming, or GATT subscriptions failed.',
+            );
           } else if (this.emptyDecodeCount > 0) {
-            logger.warn('EEG', 'BLE notifications arrived but decoder returned empty EEG data', { emptyDecodes: this.emptyDecodeCount });
+            logger.warn('EEG', 'BLE notifications arrived but decoder returned empty EEG data', {
+              emptyDecodes: this.emptyDecodeCount,
+            });
           }
         }
         // Repeat warning every 10 seconds while still 0 frames

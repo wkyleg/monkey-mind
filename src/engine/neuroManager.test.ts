@@ -292,7 +292,9 @@ describe('NeuroManager', () => {
       neuroManager.enableMock();
       neuroManager.update(0.1);
       const logs = logger.getLogs();
-      expect(logs.some((l) => l.source === 'Neuro' && l.msg.includes('Source changed') && l.msg.includes('mock'))).toBe(true);
+      expect(logs.some((l) => l.source === 'Neuro' && l.msg.includes('Source changed') && l.msg.includes('mock'))).toBe(
+        true,
+      );
     });
   });
 
