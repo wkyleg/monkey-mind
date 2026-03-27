@@ -228,7 +228,7 @@ export class ElataEEGProvider implements InputProvider {
       this.transport = new eegBle.BleTransport({
         sourceName: 'monkey-mind',
         deviceOptions: {
-          athenaDecoderFactory: () => {
+          athenaDecoderFactory: (() => {
             try {
               logger.debug('EEG', 'Instantiating AthenaWasmDecoder');
               const decoder = new eegWeb.AthenaWasmDecoder();
@@ -240,7 +240,8 @@ export class ElataEEGProvider implements InputProvider {
               logger.error('EEG', 'AthenaWasmDecoder construction FAILED', err);
               throw err;
             }
-          },
+            // biome-ignore lint/suspicious/noExplicitAny: SDK type mismatch between AthenaWasmDecoder and AthenaDecoderFactory
+          }) as any,
           logger: (msg: string) => {
             if (msg.toLowerCase().includes('error') || msg.toLowerCase().includes('fail')) {
               this.decodeErrorCount++;
@@ -292,8 +293,10 @@ export class ElataEEGProvider implements InputProvider {
 
       // Log device info between connect and start to understand the protocol
       try {
-        const boardInfo = this.transport.getBoardInfo?.();
-        const charInfo = this.transport.getCharacteristicInfo?.();
+        // biome-ignore lint/suspicious/noExplicitAny: SDK returns untyped objects
+        const boardInfo = this.transport.getBoardInfo?.() as any;
+        // biome-ignore lint/suspicious/noExplicitAny: SDK returns untyped objects
+        const charInfo = this.transport.getCharacteristicInfo?.() as any;
         const isAthena = this.transport.getIsAthena?.();
         logger.info('EEG', 'Device info', {
           isAthena,
@@ -353,7 +356,7 @@ export class ElataEEGProvider implements InputProvider {
         logger.info('EEG', `Attempting GATT reconnect on stored device: ${this.storedDevice.name}`);
         await this.storedDevice.gatt.connect();
         logger.info('EEG', 'GATT reconnected — restarting stream');
-        await this.transport.start();
+        await this.transport!.start();
         this.connected = true;
         this.state.connected = true;
         this.state.reconnecting = false;
@@ -470,7 +473,7 @@ export class ElataEEGProvider implements InputProvider {
       return;
     }
 
-    const samples = eeg.samples ?? ((eeg as Record<string, unknown>).data as number[][] | undefined);
+    const samples = eeg.samples ?? ((eeg as unknown as Record<string, unknown>).data as number[][] | undefined);
     if (!samples || samples.length === 0) {
       this.emptyDecodeCount++;
       if (this.emptyDecodeCount <= 5) {
@@ -485,7 +488,7 @@ export class ElataEEGProvider implements InputProvider {
     if (Array.isArray(samples[0])) {
       channelSamples = samples.map((row: number[]) => row[0]);
     } else {
-      channelSamples = samples as number[];
+      channelSamples = samples as unknown as number[];
     }
 
     if (isEarlyFrame) {
@@ -495,7 +498,7 @@ export class ElataEEGProvider implements InputProvider {
       );
     }
 
-    this.sampleRate = eeg.sampleRateHz ?? ((eeg as Record<string, unknown>).sampleRate as number) ?? 256;
+    this.sampleRate = eeg.sampleRateHz ?? ((eeg as unknown as Record<string, unknown>).sampleRate as number) ?? 256;
 
     // Append to accumulated buffer
     for (const s of channelSamples) {

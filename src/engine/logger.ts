@@ -77,7 +77,7 @@ export const logger = {
 };
 
 if (typeof window !== 'undefined') {
-  (window as Record<string, unknown>).__MONKEY_MIND_LOGGER__ = {
+  (window as unknown as Record<string, unknown>).__MONKEY_MIND_LOGGER__ = {
     getLogs: logger.getLogs,
     download: logger.download,
     clear: logger.clear,
