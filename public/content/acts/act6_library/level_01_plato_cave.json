@@ -135,12 +135,12 @@
     "seed": "plato_001",
     "mode": "dorian",
     "tempoRange": [
-      90,
-      102
+      68,
+      80
     ],
-    "intensity": 0.3,
+    "intensity": 0.2,
     "scale": "dorian",
-    "style": "mysterious",
+    "style": "meditative",
     "timeSignature": "4/4"
   },
   "duration": 100,

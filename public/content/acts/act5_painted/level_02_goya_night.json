@@ -134,14 +134,14 @@
   },
   "musicSeed": {
     "seed": "goya_002",
-    "mode": "chromatic",
+    "mode": "phrygian",
     "tempoRange": [
-      108,
-      128
+      85,
+      100
     ],
-    "intensity": 0.42,
-    "scale": "wholeTone",
-    "style": "mysterious",
+    "intensity": 0.4,
+    "scale": "phrygian",
+    "style": "dark",
     "timeSignature": "5/4"
   },
   "duration": 110,

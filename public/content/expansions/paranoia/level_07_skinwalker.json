@@ -133,14 +133,14 @@
   },
   "musicSeed": {
     "seed": "skinwalker_007",
-    "mode": "locrian",
-    "tempoRange": [
-      66,
-      89
-    ],
-    "intensity": 0.6,
-    "scale": "harmonicMinor",
+    "mode": "phrygian",
+    "scale": "phrygian",
     "style": "dark",
+    "tempoRange": [
+      90,
+      108
+    ],
+    "intensity": 0.4,
     "timeSignature": "4/4"
   },
   "duration": 150,

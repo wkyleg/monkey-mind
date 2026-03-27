@@ -131,14 +131,14 @@
   },
   "musicSeed": {
     "seed": "chineseroom_008",
-    "mode": "wholeTone",
+    "mode": "prometheus",
+    "scale": "prometheus",
+    "style": "mysterious",
     "tempoRange": [
-      73,
-      97
+      82,
+      98
     ],
-    "intensity": 0.69,
-    "scale": "dorian",
-    "style": "dark",
+    "intensity": 0.45,
     "timeSignature": "6/8"
   },
   "duration": 150,

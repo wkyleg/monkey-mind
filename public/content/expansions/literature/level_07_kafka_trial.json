@@ -91,15 +91,15 @@
   },
   "musicSeed": {
     "seed": "trial_007",
-    "mode": "dorian",
+    "mode": "mixolydian",
+    "scale": "mixolydian",
+    "style": "heroic",
     "tempoRange": [
-      73,
-      92
+      75,
+      90
     ],
-    "intensity": 0.46,
-    "scale": "diminished",
-    "style": "tension",
-    "timeSignature": "3/4"
+    "intensity": 0.35,
+    "timeSignature": "6/8"
   },
   "duration": 130,
   "unlockCondition": "lit_level6_complete"

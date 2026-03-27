@@ -131,15 +131,15 @@
   },
   "musicSeed": {
     "seed": "wickerman_004",
-    "mode": "locrian",
+    "mode": "diminished",
+    "scale": "diminished",
+    "style": "dark",
     "tempoRange": [
-      63,
-      85
+      100,
+      120
     ],
-    "intensity": 0.45,
-    "scale": "phrygianDominant",
-    "style": "mysterious",
-    "timeSignature": "4/4"
+    "intensity": 0.7,
+    "timeSignature": "5/4"
   },
   "duration": 130,
   "unlockCondition": "paranoia_level3_complete"

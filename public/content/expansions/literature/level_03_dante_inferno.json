@@ -91,15 +91,15 @@
   },
   "musicSeed": {
     "seed": "inferno_003",
-    "mode": "dorian",
+    "mode": "lydian",
+    "scale": "lydian",
+    "style": "dreamy",
     "tempoRange": [
-      71,
-      89
+      80,
+      95
     ],
-    "intensity": 0.35,
-    "scale": "chromatic",
-    "style": "tension",
-    "timeSignature": "3/4"
+    "intensity": 0.45,
+    "timeSignature": "4/4"
   },
   "duration": 130,
   "unlockCondition": "lit_level2_complete"

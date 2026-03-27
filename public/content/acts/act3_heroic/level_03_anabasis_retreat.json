@@ -134,15 +134,15 @@
   },
   "musicSeed": {
     "seed": "anabasis_003",
-    "mode": "mixolydian",
+    "mode": "dorian",
     "tempoRange": [
-      110,
-      125
+      95,
+      112
     ],
-    "intensity": 0.55,
-    "scale": "mixolydian",
+    "intensity": 0.5,
+    "scale": "dorian",
     "style": "sacred",
-    "timeSignature": "6/8"
+    "timeSignature": "4/4"
   },
   "duration": 120,
   "unlockCondition": "act3_level2_complete"

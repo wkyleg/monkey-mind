@@ -133,14 +133,14 @@
   },
   "musicSeed": {
     "seed": "ministry_007",
-    "mode": "phrygian",
+    "mode": "hungarianMinor",
+    "scale": "hungarianMinor",
+    "style": "dark",
     "tempoRange": [
-      96,
-      120
+      90,
+      108
     ],
-    "intensity": 0.8,
-    "scale": "dorian",
-    "style": "tension",
+    "intensity": 0.4,
     "timeSignature": "4/4"
   },
   "duration": 180,

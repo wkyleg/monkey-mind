@@ -117,7 +117,7 @@ export class IntroScene extends Scene {
   }
 
   exit(): void {
-    // Music will be changed by the next scene
+    this.game.getMusic().stop();
   }
 
   update(dt: number, intent: PlayerIntent): void {

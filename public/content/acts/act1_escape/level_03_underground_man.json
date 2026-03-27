@@ -121,15 +121,15 @@
   },
   "musicSeed": {
     "seed": "underground_003",
-    "mode": "phrygian",
+    "mode": "melodicMinor",
     "tempoRange": [
-      88,
-      105
+      85,
+      100
     ],
-    "intensity": 0.55,
-    "scale": "phrygian",
-    "style": "tension",
-    "timeSignature": "5/4"
+    "intensity": 0.45,
+    "scale": "melodicMinor",
+    "style": "mysterious",
+    "timeSignature": "4/4"
   },
   "duration": 110,
   "unlockCondition": "act1_level2_complete"

@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "panopticon_003",
-    "mode": "phrygian",
-    "tempoRange": [
-      88,
-      111
-    ],
-    "intensity": 0.47,
-    "scale": "aeolian",
+    "mode": "diminished",
+    "scale": "diminished",
     "style": "tension",
-    "timeSignature": "5/4"
+    "tempoRange": [
+      95,
+      112
+    ],
+    "intensity": 0.55,
+    "timeSignature": "7/8"
   },
   "duration": 150,
   "unlockCondition": "state_level2_complete"

@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "wrong_guy_002",
-    "mode": "phrygian",
+    "mode": "locrian",
     "tempoRange": [
-      85,
-      100
+      80,
+      95
     ],
-    "intensity": 0.42,
-    "scale": "harmonicMinor",
+    "intensity": 0.35,
+    "scale": "locrian",
     "style": "dark",
-    "timeSignature": "4/4"
+    "timeSignature": "5/4"
   },
   "duration": 100,
   "unlockCondition": "act1_level1_complete"

@@ -131,14 +131,14 @@
   "musicSeed": {
     "seed": "doubleslit_002",
     "mode": "wholeTone",
+    "scale": "wholeTone",
+    "style": "mysterious",
     "tempoRange": [
-      66,
-      88
+      78,
+      92
     ],
-    "intensity": 0.36,
-    "scale": "locrian",
-    "style": "dark",
-    "timeSignature": "7/8"
+    "intensity": 0.3,
+    "timeSignature": "5/4"
   },
   "duration": 110,
   "unlockCondition": "science_level1_complete"

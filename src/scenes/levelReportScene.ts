@@ -15,6 +15,16 @@ interface ReportButton {
   action: () => void;
 }
 
+interface ChartRegion {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  series: Array<{ key: string; color: string; label: string }>;
+  samples: SessionSample[];
+  scrollOffset: number;
+}
+
 export class LevelReportScene extends Scene {
   override readonly isOverlay: boolean = true;
 
@@ -26,6 +36,13 @@ export class LevelReportScene extends Scene {
   private inputCooldown = 0;
   private buttons: ReportButton[] = [];
   private saved = false;
+  private chartRegions: ChartRegion[] = [];
+  private tooltipInfo: {
+    x: number;
+    y: number;
+    lines: Array<{ label: string; value: string; color: string }>;
+    timeLabel: string;
+  } | null = null;
 
   enter(): void {
     this.report = this.game.getScenes().getContext<SessionReport>('levelReport') ?? null;
@@ -73,6 +90,44 @@ export class LevelReportScene extends Scene {
     if (intent.confirm || intent.cancel) {
       this.dismiss();
     }
+
+    // Tooltip: find which chart the mouse is over
+    const mousePos = this.game.getInput().getMousePos();
+    if (mousePos && this.chartRegions.length > 0) {
+      this.tooltipInfo = null;
+      const mx = mousePos.x;
+      const my = mousePos.y;
+      for (const region of this.chartRegions) {
+        const ry = region.y - region.scrollOffset;
+        if (mx >= region.x && mx <= region.x + region.w && my >= ry && my <= ry + region.h) {
+          const frac = (mx - region.x) / region.w;
+          const sampleIdx = Math.round(frac * (region.samples.length - 1));
+          const sample = region.samples[Math.max(0, Math.min(sampleIdx, region.samples.length - 1))];
+          if (sample) {
+            const lines: Array<{ label: string; value: string; color: string }> = [];
+            for (const s of region.series) {
+              const v = this.getSampleValue(sample, s.key);
+              if (v == null) continue;
+              let formatted: string;
+              if (s.key === 'bpm') formatted = `${Math.round(v)}`;
+              else if (s.key === 'score') formatted = `${Math.round(v)}`;
+              else if (s.key === 'health' || s.key === 'healthMax') formatted = `${Math.round(v)}`;
+              else formatted = `${(v * 100).toFixed(0)}%`;
+              lines.push({ label: s.label, value: formatted, color: s.color });
+            }
+            this.tooltipInfo = {
+              x: mx,
+              y: my,
+              lines,
+              timeLabel: `${sample.t.toFixed(1)}s`,
+            };
+          }
+          break;
+        }
+      }
+    } else {
+      this.tooltipInfo = null;
+    }
   }
 
   private dismiss(): void {
@@ -83,6 +138,7 @@ export class LevelReportScene extends Scene {
     const { width, height } = renderer;
     const ctx = renderer.context;
     this.buttons = [];
+    this.chartRegions = [];
 
     // Full opaque background
     ctx.save();
@@ -235,17 +291,6 @@ export class LevelReportScene extends Scene {
         '#ff4466',
         annotation,
       );
-      if (r.peakBpm != null && r.minBpm != null) {
-        renderer.text(`min ${Math.round(r.minBpm)}`, contentX + 4, curY - chartGap + chartH + 14, '#663344', 8, 'left');
-        renderer.text(
-          `peak ${Math.round(r.peakBpm)}`,
-          contentX + contentW - 4,
-          curY - chartGap + chartH + 14,
-          '#663344',
-          8,
-          'right',
-        );
-      }
       curY += chartGap;
     }
 
@@ -426,8 +471,8 @@ export class LevelReportScene extends Scene {
 
     ctx.restore(); // end clip + scroll translation
 
-    // Recalculate scroll bounds from measured content
-    this.contentHeight = curY - modalY + this.scrollY;
+    // Recalculate scroll bounds from measured content (curY is in untranslated coords)
+    this.contentHeight = curY - modalY;
     this.maxScrollY = Math.max(0, this.contentHeight - modalContentH + pad);
 
     // ── FOOTER (fixed, not scrolled) ──
@@ -516,6 +561,43 @@ export class LevelReportScene extends Scene {
     );
     ctx.restore();
 
+    // Tooltip overlay (drawn above everything)
+    if (this.tooltipInfo && this.tooltipInfo.lines.length > 0) {
+      const tip = this.tooltipInfo;
+      const tipPad = 8;
+      const lineH = 14;
+      const tipW = 120;
+      const tipH = tipPad * 2 + lineH * (tip.lines.length + 1);
+      let tipX = tip.x + 12;
+      let tipY = tip.y - tipH - 4;
+      // Keep tooltip inside the modal
+      if (tipX + tipW > modalX + modalW - 10) tipX = tip.x - tipW - 12;
+      if (tipY < modalY + 4) tipY = tip.y + 16;
+
+      ctx.save();
+      ctx.globalAlpha = 0.92;
+      ctx.fillStyle = '#0a0a1a';
+      ctx.strokeStyle = 'rgba(0,204,204,0.5)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.roundRect(tipX, tipY, tipW, tipH, 4);
+      ctx.fill();
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      renderer.text(tip.timeLabel, tipX + tipPad, tipY + tipPad + 2, CONFIG.COLORS.TEXT_DIM, 8, 'left');
+      let ty = tipY + tipPad + lineH + 2;
+      for (const line of tip.lines) {
+        ctx.fillStyle = line.color;
+        ctx.globalAlpha = 0.7;
+        ctx.fillRect(tipX + tipPad, ty - 3, 6, 6);
+        ctx.globalAlpha = 1;
+        renderer.text(`${line.label}: ${line.value}`, tipX + tipPad + 10, ty, line.color, 9, 'left');
+        ty += lineH;
+      }
+      ctx.restore();
+    }
+
     // Scroll indicator (inside modal, right edge)
     if (this.maxScrollY > 0) {
       const scrollBarX = modalX + modalW - 6;
@@ -551,6 +633,7 @@ export class LevelReportScene extends Scene {
     if (annotation) renderer.text(annotation, x + w, y, titleColor, 9, 'right');
     y += 14;
     this.renderLineChart(ctx, renderer, samples, x, y, w, h, series);
+    this.chartRegions.push({ x, y, w, h, series, samples, scrollOffset: this.scrollY });
     return y + h;
   }
 
@@ -618,6 +701,13 @@ export class LevelReportScene extends Scene {
     }
   }
 
+  private formatAxisValue(value: number, key: string): string {
+    if (key === 'bpm') return `${Math.round(value)}`;
+    if (key === 'score') return `${Math.round(value)}`;
+    if (key === 'health' || key === 'healthMax' || key === 'combo') return `${Math.round(value)}`;
+    return `${Math.round(value * 100)}%`;
+  }
+
   private renderLineChart(
     ctx: CanvasRenderingContext2D,
     renderer: Renderer,
@@ -640,40 +730,67 @@ export class LevelReportScene extends Scene {
       return;
     }
 
-    // Chart background
+    const yAxisWidth = 32;
+    const timeAxisHeight = 14;
     renderer.drawRoundRect(x, y, w, h, 4, 'rgba(6,6,14,0.7)', 'rgba(40,40,60,0.35)', 1);
 
-    // Grid lines
-    ctx.save();
-    ctx.strokeStyle = 'rgba(50,50,70,0.25)';
-    ctx.lineWidth = 0.5;
-    for (let i = 1; i < 4; i++) {
-      const gy = y + (h / 4) * i;
-      ctx.beginPath();
-      ctx.moveTo(x, gy);
-      ctx.lineTo(x + w, gy);
-      ctx.stroke();
-    }
-    ctx.restore();
-
     const pad = 4;
-    const chartX = x + pad;
+    const chartX = x + yAxisWidth + pad;
     const chartY = y + pad;
-    const chartW = w - pad * 2;
-    const chartH = h - pad * 2;
+    const chartW = w - yAxisWidth - pad * 2;
+    const chartH = h - pad * 2 - timeAxisHeight;
 
+    // Compute shared min/max across all series for consistent Y axis
+    let globalMin = Infinity;
+    let globalMax = -Infinity;
+    const primaryKey = series[0]?.key ?? '';
     for (const s of series) {
-      let min = Infinity;
-      let max = -Infinity;
       for (const sample of samples) {
         const v = this.getSampleValue(sample, s.key);
         if (v == null) continue;
-        if (v < min) min = v;
-        if (v > max) max = v;
+        if (v < globalMin) globalMin = v;
+        if (v > globalMax) globalMax = v;
       }
-      if (min === Infinity) continue;
-      const range = Math.max(max - min, 0.01);
+    }
+    if (globalMin === Infinity) return;
 
+    // Round min/max to nice values for the axis
+    const rawRange = Math.max(globalMax - globalMin, 0.01);
+    const niceMin = primaryKey === 'bpm' || primaryKey === 'score' || primaryKey === 'health'
+      ? Math.floor(globalMin / 10) * 10
+      : Math.floor(globalMin * 10) / 10;
+    const niceMax = primaryKey === 'bpm' || primaryKey === 'score' || primaryKey === 'health'
+      ? Math.ceil(globalMax / 10) * 10
+      : Math.ceil(globalMax * 10) / 10;
+    const range = Math.max(niceMax - niceMin, rawRange * 0.1);
+
+    // Grid lines + Y-axis labels (4 divisions)
+    const gridCount = 4;
+    ctx.save();
+    ctx.strokeStyle = 'rgba(50,50,70,0.3)';
+    ctx.lineWidth = 0.5;
+    ctx.setLineDash([2, 3]);
+    for (let i = 0; i <= gridCount; i++) {
+      const frac = i / gridCount;
+      const gy = chartY + chartH * frac;
+      if (i > 0 && i < gridCount) {
+        ctx.beginPath();
+        ctx.moveTo(chartX, gy);
+        ctx.lineTo(chartX + chartW, gy);
+        ctx.stroke();
+      }
+      const axisVal = niceMax - frac * range;
+      const label = this.formatAxisValue(axisVal, primaryKey);
+      ctx.save();
+      ctx.globalAlpha = 0.45;
+      renderer.text(label, x + yAxisWidth - 4, gy + 1, CONFIG.COLORS.TEXT_DIM, 7, 'right');
+      ctx.restore();
+    }
+    ctx.setLineDash([]);
+    ctx.restore();
+
+    // Draw data series
+    for (const s of series) {
       // Area fill
       ctx.save();
       ctx.globalAlpha = 0.06;
@@ -684,7 +801,7 @@ export class LevelReportScene extends Scene {
         const v = this.getSampleValue(samples[i], s.key);
         if (v == null) continue;
         const px = chartX + (i / (samples.length - 1)) * chartW;
-        const py = chartY + chartH - ((v - min) / range) * chartH;
+        const py = chartY + chartH - ((v - niceMin) / range) * chartH;
         if (!started) {
           ctx.moveTo(px, chartY + chartH);
           ctx.lineTo(px, py);
@@ -709,7 +826,7 @@ export class LevelReportScene extends Scene {
         const v = this.getSampleValue(samples[i], s.key);
         if (v == null) continue;
         const px = chartX + (i / (samples.length - 1)) * chartW;
-        const py = chartY + chartH - ((v - min) / range) * chartH;
+        const py = chartY + chartH - ((v - niceMin) / range) * chartH;
         if (!started) {
           ctx.moveTo(px, py);
           started = true;
@@ -732,13 +849,34 @@ export class LevelReportScene extends Scene {
       legendY += 12;
     }
 
-    // Time axis labels
+    // Time axis labels (bottom)
     if (samples.length > 1) {
       const endT = samples[samples.length - 1].t;
+      const axisLabelY = y + h - 3;
       ctx.save();
-      ctx.globalAlpha = 0.35;
-      renderer.text('0s', x + 4, y + h + 6, CONFIG.COLORS.TEXT_DIM, 7, 'left');
-      renderer.text(`${Math.round(endT)}s`, x + w - 4, y + h + 6, CONFIG.COLORS.TEXT_DIM, 7, 'right');
+      ctx.globalAlpha = 0.4;
+      renderer.text('0s', chartX, axisLabelY, CONFIG.COLORS.TEXT_DIM, 7, 'left');
+      const midT = endT / 2;
+      renderer.text(`${Math.round(midT)}s`, chartX + chartW / 2, axisLabelY, CONFIG.COLORS.TEXT_DIM, 7, 'center');
+      renderer.text(`${Math.round(endT)}s`, chartX + chartW, axisLabelY, CONFIG.COLORS.TEXT_DIM, 7, 'right');
+      ctx.restore();
+
+      // Vertical time tick marks
+      ctx.save();
+      ctx.strokeStyle = 'rgba(50,50,70,0.2)';
+      ctx.lineWidth = 0.5;
+      ctx.setLineDash([1, 4]);
+      const tickCount = Math.min(Math.floor(endT / 10), 10);
+      if (tickCount > 1) {
+        for (let i = 1; i < tickCount; i++) {
+          const tx = chartX + (i / tickCount) * chartW;
+          ctx.beginPath();
+          ctx.moveTo(tx, chartY);
+          ctx.lineTo(tx, chartY + chartH);
+          ctx.stroke();
+        }
+      }
+      ctx.setLineDash([]);
       ctx.restore();
     }
   }

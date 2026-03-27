@@ -83,13 +83,13 @@
   },
   "musicSeed": {
     "seed": "monkey_mind_boss_005",
-    "mode": "phrygian",
+    "mode": "diminished",
     "tempoRange": [
       100,
-      120
+      125
     ],
-    "intensity": 0.85,
-    "scale": "phrygianDominant",
+    "intensity": 0.8,
+    "scale": "diminished",
     "style": "aggressive",
     "timeSignature": "7/8"
   },

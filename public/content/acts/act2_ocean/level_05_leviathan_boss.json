@@ -83,13 +83,13 @@
   },
   "musicSeed": {
     "seed": "leviathan_boss_005",
-    "mode": "lydian",
+    "mode": "dorian",
     "tempoRange": [
-      110,
-      130
+      95,
+      120
     ],
-    "intensity": 0.85,
-    "scale": "mixolydian",
+    "intensity": 0.8,
+    "scale": "dorian",
     "style": "heroic",
     "timeSignature": "7/8"
   },

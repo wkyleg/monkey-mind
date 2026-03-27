@@ -131,16 +131,15 @@
   },
   "musicSeed": {
     "seed": "bruegel_003",
-    "mode": "hirajoshi",
+    "mode": "lydian",
+    "scale": "lydian",
+    "style": "dreamy",
     "tempoRange": [
-      72,
-      88
+      82,
+      98
     ],
-    "intensity": 0.42,
-    "scale": "iwato",
-    "style": "tension",
-    "timeSignature": "7/8",
-    "culturalStyle": "japanese"
+    "intensity": 0.45,
+    "timeSignature": "6/8"
   },
   "duration": 130,
   "unlockCondition": "art_level2_complete"

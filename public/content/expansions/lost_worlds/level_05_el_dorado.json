@@ -132,15 +132,15 @@
   },
   "musicSeed": {
     "seed": "el_dorado_005",
-    "mode": "pentatonic",
+    "mode": "doubleHarmonic",
+    "scale": "doubleHarmonic",
+    "style": "aggressive",
     "tempoRange": [
-      74,
-      95
+      95,
+      125
     ],
     "intensity": 0.8,
-    "scale": "dorian",
-    "style": "mysterious",
-    "timeSignature": "6/8"
+    "timeSignature": "7/8"
   },
   "duration": 150,
   "unlockCondition": "lost_worlds_level4_complete"

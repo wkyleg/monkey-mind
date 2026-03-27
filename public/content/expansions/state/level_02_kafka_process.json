@@ -133,14 +133,14 @@
   },
   "musicSeed": {
     "seed": "process_002",
-    "mode": "phrygian",
+    "mode": "hungarianMinor",
+    "scale": "hungarianMinor",
+    "style": "dark",
     "tempoRange": [
-      87,
+      90,
       108
     ],
-    "intensity": 0.38,
-    "scale": "phrygianDominant",
-    "style": "aggressive",
+    "intensity": 0.4,
     "timeSignature": "4/4"
   },
   "duration": 140,

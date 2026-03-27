@@ -91,16 +91,15 @@
   },
   "musicSeed": {
     "seed": "ragnarok_012",
-    "mode": "bhairav",
-    "tempoRange": [
-      67,
-      87
-    ],
-    "intensity": 0.69,
-    "scale": "marwa",
+    "mode": "phrygianDominant",
+    "scale": "phrygianDominant",
     "style": "sacred",
-    "timeSignature": "7/8",
-    "culturalStyle": "indian"
+    "tempoRange": [
+      85,
+      100
+    ],
+    "intensity": 0.35,
+    "timeSignature": "4/4"
   },
   "duration": 180,
   "unlockCondition": "myth_level11_complete"

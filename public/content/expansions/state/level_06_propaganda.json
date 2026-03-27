@@ -132,13 +132,13 @@
   "musicSeed": {
     "seed": "propaganda_006",
     "mode": "phrygian",
+    "scale": "phrygian",
+    "style": "tension",
     "tempoRange": [
-      94,
-      118
+      85,
+      100
     ],
-    "intensity": 0.72,
-    "scale": "harmonicMinor",
-    "style": "aggressive",
+    "intensity": 0.3,
     "timeSignature": "5/4"
   },
   "duration": 160,

@@ -133,16 +133,15 @@
   },
   "musicSeed": {
     "seed": "dali_003",
-    "mode": "chromatic",
+    "mode": "wholeTone",
     "tempoRange": [
-      115,
-      140
+      90,
+      108
     ],
-    "intensity": 0.55,
-    "scale": "hirajoshi",
-    "style": "mysterious",
-    "timeSignature": "4/4",
-    "culturalStyle": "japanese"
+    "intensity": 0.5,
+    "scale": "wholeTone",
+    "style": "dreamy",
+    "timeSignature": "4/4"
   },
   "duration": 120,
   "unlockCondition": "act5_level2_complete"

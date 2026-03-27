@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "hardproblem_010",
-    "mode": "wholeTone",
+    "mode": "bebop",
+    "scale": "bebop",
+    "style": "aggressive",
     "tempoRange": [
-      76,
-      100
+      98,
+      125
     ],
-    "intensity": 0.8,
-    "scale": "locrian",
-    "style": "dark",
-    "timeSignature": "4/4"
+    "intensity": 0.85,
+    "timeSignature": "7/8"
   },
   "duration": 180,
   "unlockCondition": "science_level9_complete"

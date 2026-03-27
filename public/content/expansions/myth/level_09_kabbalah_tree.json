@@ -91,16 +91,15 @@
   },
   "musicSeed": {
     "seed": "kabbalah_009",
-    "mode": "bhairav",
+    "mode": "aeolian",
+    "scale": "aeolian",
+    "style": "mysterious",
     "tempoRange": [
-      65,
-      85
+      95,
+      115
     ],
-    "intensity": 0.59,
-    "scale": "wholeTone",
-    "style": "heroic",
-    "timeSignature": "7/8",
-    "culturalStyle": "indian"
+    "intensity": 0.65,
+    "timeSignature": "5/4"
   },
   "duration": 160,
   "unlockCondition": "myth_level8_complete"

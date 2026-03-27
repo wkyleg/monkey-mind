@@ -85,13 +85,13 @@
   },
   "musicSeed": {
     "seed": "minotaur_boss_005",
-    "mode": "dorian",
+    "mode": "chromatic",
     "tempoRange": [
-      110,
-      130
+      90,
+      115
     ],
-    "intensity": 0.85,
-    "scale": "locrian",
+    "intensity": 0.8,
+    "scale": "chromatic",
     "style": "aggressive",
     "timeSignature": "7/8"
   },

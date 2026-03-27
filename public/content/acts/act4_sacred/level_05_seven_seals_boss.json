@@ -88,10 +88,10 @@
   },
   "musicSeed": {
     "seed": "seven_seals_boss_005",
-    "mode": "harmonicMinor",
+    "mode": "diminished",
     "tempoRange": [
-      130,
-      150
+      95,
+      120
     ],
     "intensity": 0.85,
     "scale": "diminished",

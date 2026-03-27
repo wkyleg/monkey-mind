@@ -136,13 +136,13 @@
   "musicSeed": {
     "seed": "cosmic_005",
     "mode": "chromatic",
+    "scale": "chromatic",
+    "style": "aggressive",
     "tempoRange": [
-      118,
-      145
+      110,
+      135
     ],
-    "intensity": 0.63,
-    "scale": "phrygianDominant",
-    "style": "dark",
+    "intensity": 0.75,
     "timeSignature": "5/4"
   },
   "duration": 170,

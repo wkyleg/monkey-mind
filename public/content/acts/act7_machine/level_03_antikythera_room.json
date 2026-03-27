@@ -131,14 +131,14 @@
   },
   "musicSeed": {
     "seed": "antikythera_003",
-    "mode": "phrygianDominant",
+    "mode": "diminished",
     "tempoRange": [
-      115,
-      130
+      110,
+      128
     ],
     "intensity": 0.55,
     "scale": "diminished",
-    "style": "tension",
+    "style": "dark",
     "timeSignature": "7/8"
   },
   "duration": 120,

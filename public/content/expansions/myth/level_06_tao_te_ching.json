@@ -91,16 +91,15 @@
   },
   "musicSeed": {
     "seed": "tao_006",
-    "mode": "bhairav",
+    "mode": "mixolydian",
+    "scale": "mixolydian",
+    "style": "heroic",
     "tempoRange": [
-      63,
-      82
+      80,
+      95
     ],
-    "intensity": 0.48,
-    "scale": "pentatonicMinor",
-    "style": "tension",
-    "timeSignature": "7/8",
-    "culturalStyle": "indian"
+    "intensity": 0.25,
+    "timeSignature": "4/4"
   },
   "duration": 140,
   "unlockCondition": "myth_level5_complete"

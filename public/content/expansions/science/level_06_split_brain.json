@@ -131,15 +131,15 @@
   },
   "musicSeed": {
     "seed": "splitbrain_006",
-    "mode": "wholeTone",
-    "tempoRange": [
-      71,
-      94
-    ],
-    "intensity": 0.58,
-    "scale": "melodicMinor",
+    "mode": "lydian",
+    "scale": "lydian",
     "style": "dreamy",
-    "timeSignature": "6/8"
+    "tempoRange": [
+      72,
+      88
+    ],
+    "intensity": 0.2,
+    "timeSignature": "4/4"
   },
   "duration": 140,
   "unlockCondition": "science_level5_complete"

@@ -132,14 +132,14 @@
   },
   "musicSeed": {
     "seed": "salem_004",
-    "mode": "phrygian",
+    "mode": "hungarianMinor",
     "tempoRange": [
-      95,
-      110
+      90,
+      108
     ],
-    "intensity": 0.68,
-    "scale": "harmonicMinor",
-    "style": "dark",
+    "intensity": 0.6,
+    "scale": "hungarianMinor",
+    "style": "tension",
     "timeSignature": "7/8"
   },
   "duration": 120,

@@ -91,16 +91,15 @@
   },
   "musicSeed": {
     "seed": "upanishads_004",
-    "mode": "bhairav",
+    "mode": "aeolian",
+    "scale": "aeolian",
+    "style": "mysterious",
     "tempoRange": [
-      62,
-      81
+      95,
+      115
     ],
-    "intensity": 0.41,
-    "scale": "phrygian",
-    "style": "meditative",
-    "timeSignature": "7/8",
-    "culturalStyle": "indian"
+    "intensity": 0.65,
+    "timeSignature": "5/4"
   },
   "duration": 140,
   "unlockCondition": "myth_level3_complete"

@@ -119,13 +119,13 @@
   },
   "musicSeed": {
     "seed": "fermi_004",
-    "mode": "wholeTone",
+    "mode": "enigmatic",
     "tempoRange": [
-      105,
-      130
+      82,
+      105
     ],
-    "intensity": 0.68,
-    "scale": "lydian",
+    "intensity": 0.6,
+    "scale": "enigmatic",
     "style": "tension",
     "timeSignature": "7/8"
   },

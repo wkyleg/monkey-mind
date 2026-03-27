@@ -135,15 +135,15 @@
   },
   "musicSeed": {
     "seed": "singularity_004",
-    "mode": "chromatic",
+    "mode": "diminished",
+    "scale": "diminished",
+    "style": "tension",
     "tempoRange": [
-      116,
-      142
+      105,
+      125
     ],
-    "intensity": 0.55,
-    "scale": "phrygianDominant",
-    "style": "dark",
-    "timeSignature": "4/4"
+    "intensity": 0.7,
+    "timeSignature": "7/8"
   },
   "duration": 160,
   "unlockCondition": "climax_level3_complete"

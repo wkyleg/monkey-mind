@@ -133,15 +133,14 @@
   "musicSeed": {
     "seed": "lascaux_001",
     "mode": "hirajoshi",
+    "scale": "hirajoshi",
+    "style": "mysterious",
     "tempoRange": [
-      70,
-      85
+      72,
+      88
     ],
-    "intensity": 0.3,
-    "scale": "pelog",
-    "style": "sacred",
-    "timeSignature": "3/4",
-    "culturalStyle": "japanese"
+    "intensity": 0.2,
+    "timeSignature": "7/8"
   },
   "duration": 100,
   "unlockCondition": "act8_complete"

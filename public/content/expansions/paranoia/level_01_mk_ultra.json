@@ -134,13 +134,13 @@
   "musicSeed": {
     "seed": "mk_ultra_001",
     "mode": "locrian",
+    "scale": "locrian",
+    "style": "tension",
     "tempoRange": [
-      60,
-      81
+      85,
+      100
     ],
     "intensity": 0.3,
-    "scale": "chromatic",
-    "style": "aggressive",
     "timeSignature": "5/4"
   },
   "duration": 110,

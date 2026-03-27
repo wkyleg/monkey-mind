@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "machine_dreams_003",
-    "mode": "pentatonic",
-    "tempoRange": [
-      84,
-      107
-    ],
-    "intensity": 0.5,
-    "scale": "pentatonicMinor",
+    "mode": "blues",
+    "scale": "blues",
     "style": "heroic",
-    "timeSignature": "7/8"
+    "tempoRange": [
+      80,
+      98
+    ],
+    "intensity": 0.45,
+    "timeSignature": "4/4"
   },
   "duration": 140,
   "unlockCondition": "monkey_vars_level2_complete"

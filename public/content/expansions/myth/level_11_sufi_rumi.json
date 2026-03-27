@@ -91,16 +91,15 @@
   },
   "musicSeed": {
     "seed": "sufi_011",
-    "mode": "bhairav",
+    "mode": "mixolydian",
+    "scale": "mixolydian",
+    "style": "heroic",
     "tempoRange": [
-      66,
-      87
+      80,
+      95
     ],
-    "intensity": 0.66,
-    "scale": "kafi",
-    "style": "meditative",
-    "timeSignature": "3/4",
-    "culturalStyle": "indian"
+    "intensity": 0.25,
+    "timeSignature": "4/4"
   },
   "duration": 150,
   "unlockCondition": "myth_level10_complete"

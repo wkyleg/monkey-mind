@@ -91,16 +91,15 @@
   },
   "musicSeed": {
     "seed": "shamanic_015",
-    "mode": "bhairav",
+    "mode": "diminished",
+    "scale": "diminished",
+    "style": "aggressive",
     "tempoRange": [
-      69,
-      90
+      105,
+      130
     ],
-    "intensity": 0.8,
-    "scale": "marwa",
-    "style": "tension",
-    "timeSignature": "5/4",
-    "culturalStyle": "indian"
+    "intensity": 0.85,
+    "timeSignature": "7/8"
   },
   "duration": 180,
   "unlockCondition": "myth_level14_complete"

@@ -134,15 +134,15 @@
   },
   "musicSeed": {
     "seed": "cthulhu_001",
-    "mode": "locrian",
+    "mode": "wholeTone",
+    "scale": "wholeTone",
+    "style": "dreamy",
     "tempoRange": [
-      50,
-      68
+      60,
+      75
     ],
-    "intensity": 0.3,
-    "scale": "diminished",
-    "style": "mysterious",
-    "timeSignature": "7/8"
+    "intensity": 0.2,
+    "timeSignature": "3/4"
   },
   "duration": 130,
   "unlockCondition": "act8_complete"

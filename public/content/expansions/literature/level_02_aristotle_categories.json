@@ -91,15 +91,15 @@
   },
   "musicSeed": {
     "seed": "aristotle_002",
-    "mode": "dorian",
+    "mode": "mixolydian",
+    "scale": "mixolydian",
+    "style": "heroic",
     "tempoRange": [
-      70,
-      89
+      75,
+      90
     ],
-    "intensity": 0.33,
-    "scale": "augmented",
-    "style": "dreamy",
-    "timeSignature": "5/4"
+    "intensity": 0.35,
+    "timeSignature": "6/8"
   },
   "duration": 110,
   "unlockCondition": "lit_level1_complete"

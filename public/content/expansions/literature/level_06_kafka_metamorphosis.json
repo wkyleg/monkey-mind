@@ -92,14 +92,14 @@
   "musicSeed": {
     "seed": "metamorphosis_006",
     "mode": "dorian",
+    "scale": "dorian",
+    "style": "mysterious",
     "tempoRange": [
-      72,
-      91
+      70,
+      85
     ],
-    "intensity": 0.43,
-    "scale": "hirajoshi",
-    "style": "sacred",
-    "timeSignature": "7/8"
+    "intensity": 0.25,
+    "timeSignature": "4/4"
   },
   "duration": 120,
   "unlockCondition": "lit_level5_complete"

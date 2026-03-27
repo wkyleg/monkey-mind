@@ -126,8 +126,8 @@
     "seed": "hesiod_001",
     "mode": "mixolydian",
     "tempoRange": [
-      100,
-      112
+      85,
+      100
     ],
     "intensity": 0.3,
     "scale": "mixolydian",

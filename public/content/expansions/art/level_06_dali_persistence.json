@@ -132,15 +132,14 @@
   "musicSeed": {
     "seed": "dali_006",
     "mode": "hirajoshi",
-    "tempoRange": [
-      75,
-      91
-    ],
-    "intensity": 0.61,
     "scale": "hirajoshi",
     "style": "mysterious",
-    "timeSignature": "4/4",
-    "culturalStyle": "japanese"
+    "tempoRange": [
+      72,
+      88
+    ],
+    "intensity": 0.2,
+    "timeSignature": "7/8"
   },
   "duration": 160,
   "unlockCondition": "art_level5_complete"

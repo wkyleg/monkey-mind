@@ -123,14 +123,14 @@
   },
   "musicSeed": {
     "seed": "hildegard_004",
-    "mode": "harmonicMinor",
+    "mode": "doubleHarmonic",
     "tempoRange": [
-      125,
-      138
+      80,
+      95
     ],
-    "intensity": 0.68,
+    "intensity": 0.6,
     "scale": "doubleHarmonic",
-    "style": "tension",
+    "style": "sacred",
     "timeSignature": "5/4"
   },
   "duration": 130,

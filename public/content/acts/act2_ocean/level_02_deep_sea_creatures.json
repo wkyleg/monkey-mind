@@ -119,15 +119,15 @@
   },
   "musicSeed": {
     "seed": "deep_sea_002",
-    "mode": "lydian",
+    "mode": "wholeTone",
     "tempoRange": [
-      95,
-      105
+      70,
+      85
     ],
-    "intensity": 0.42,
-    "scale": "lydian",
-    "style": "dreamy",
-    "timeSignature": "6/8"
+    "intensity": 0.3,
+    "scale": "wholeTone",
+    "style": "mysterious",
+    "timeSignature": "3/4"
   },
   "duration": 110,
   "unlockCondition": "act2_level1_complete"

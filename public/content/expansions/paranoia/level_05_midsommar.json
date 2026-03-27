@@ -131,15 +131,15 @@
   },
   "musicSeed": {
     "seed": "midsommar_005",
-    "mode": "locrian",
+    "mode": "chromatic",
+    "scale": "chromatic",
+    "style": "aggressive",
     "tempoRange": [
-      64,
-      87
+      110,
+      140
     ],
-    "intensity": 0.5,
-    "scale": "harmonicMinor",
-    "style": "dark",
-    "timeSignature": "11/8"
+    "intensity": 0.85,
+    "timeSignature": "7/8"
   },
   "duration": 140,
   "unlockCondition": "paranoia_level4_complete"

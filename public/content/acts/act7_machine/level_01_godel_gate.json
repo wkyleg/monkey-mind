@@ -135,10 +135,10 @@
     "seed": "godel_001",
     "mode": "phrygianDominant",
     "tempoRange": [
-      100,
-      115
+      95,
+      110
     ],
-    "intensity": 0.3,
+    "intensity": 0.35,
     "scale": "phrygianDominant",
     "style": "dark",
     "timeSignature": "5/4"

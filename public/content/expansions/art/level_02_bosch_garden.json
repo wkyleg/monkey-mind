@@ -134,16 +134,15 @@
   },
   "musicSeed": {
     "seed": "bosch_002",
-    "mode": "hirajoshi",
+    "mode": "wholeTone",
+    "scale": "wholeTone",
+    "style": "dreamy",
     "tempoRange": [
-      71,
-      86
+      78,
+      92
     ],
-    "intensity": 0.36,
-    "scale": "iwato",
-    "style": "meditative",
-    "timeSignature": "3/4",
-    "culturalStyle": "japanese"
+    "intensity": 0.3,
+    "timeSignature": "3/4"
   },
   "duration": 120,
   "unlockCondition": "art_level1_complete"

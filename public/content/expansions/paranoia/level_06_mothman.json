@@ -132,14 +132,14 @@
   "musicSeed": {
     "seed": "mothman_006",
     "mode": "locrian",
+    "scale": "locrian",
+    "style": "tension",
     "tempoRange": [
-      65,
-      88
+      85,
+      100
     ],
-    "intensity": 0.55,
-    "scale": "augmented",
-    "style": "aggressive",
-    "timeSignature": "7/8"
+    "intensity": 0.3,
+    "timeSignature": "5/4"
   },
   "duration": 140,
   "unlockCondition": "paranoia_level5_complete"

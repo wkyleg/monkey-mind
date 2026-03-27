@@ -91,15 +91,15 @@
   },
   "musicSeed": {
     "seed": "library_010",
-    "mode": "dorian",
+    "mode": "harmonicMinor",
+    "scale": "harmonicMinor",
+    "style": "aggressive",
     "tempoRange": [
-      74,
-      94
+      95,
+      120
     ],
-    "intensity": 0.54,
-    "scale": "hirajoshi",
-    "style": "dark",
-    "timeSignature": "6/8"
+    "intensity": 0.8,
+    "timeSignature": "7/8"
   },
   "duration": 150,
   "unlockCondition": "lit_level9_complete"

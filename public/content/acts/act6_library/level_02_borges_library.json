@@ -132,14 +132,14 @@
   },
   "musicSeed": {
     "seed": "borges_002",
-    "mode": "dorian",
+    "mode": "lydian",
     "tempoRange": [
-      95,
-      108
+      72,
+      85
     ],
-    "intensity": 0.42,
-    "scale": "dorian",
-    "style": "meditative",
+    "intensity": 0.3,
+    "scale": "lydian",
+    "style": "dreamy",
     "timeSignature": "6/8"
   },
   "duration": 110,

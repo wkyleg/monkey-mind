@@ -91,16 +91,15 @@
   },
   "musicSeed": {
     "seed": "gnostic_010",
-    "mode": "bhairav",
+    "mode": "diminished",
+    "scale": "diminished",
+    "style": "aggressive",
     "tempoRange": [
-      66,
-      86
+      105,
+      130
     ],
-    "intensity": 0.62,
-    "scale": "hijaz",
-    "style": "sacred",
-    "timeSignature": "7/8",
-    "culturalStyle": "arabic"
+    "intensity": 0.85,
+    "timeSignature": "7/8"
   },
   "duration": 170,
   "unlockCondition": "myth_level9_complete"

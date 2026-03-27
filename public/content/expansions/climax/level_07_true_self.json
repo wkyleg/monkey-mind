@@ -128,14 +128,14 @@
   "musicSeed": {
     "seed": "true_self_007",
     "mode": "chromatic",
+    "scale": "chromatic",
+    "style": "aggressive",
     "tempoRange": [
-      122,
-      150
+      120,
+      145
     ],
-    "intensity": 0.8,
-    "scale": "phrygian",
-    "style": "heroic",
-    "timeSignature": "11/8"
+    "intensity": 0.85,
+    "timeSignature": "7/8"
   },
   "duration": 200,
   "unlockCondition": "climax_level6_complete"

@@ -123,15 +123,15 @@
   },
   "musicSeed": {
     "seed": "tibetan_002",
-    "mode": "harmonicMinor",
+    "mode": "pentatonicMinor",
     "tempoRange": [
-      115,
-      128
+      65,
+      78
     ],
-    "intensity": 0.42,
-    "scale": "harmonicMinor",
-    "style": "dark",
-    "timeSignature": "4/4"
+    "intensity": 0.3,
+    "scale": "pentatonicMinor",
+    "style": "meditative",
+    "timeSignature": "3/4"
   },
   "duration": 110,
   "unlockCondition": "act4_level1_complete"

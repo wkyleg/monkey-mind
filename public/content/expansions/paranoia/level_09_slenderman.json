@@ -131,15 +131,15 @@
   },
   "musicSeed": {
     "seed": "slender_009",
-    "mode": "locrian",
+    "mode": "diminished",
+    "scale": "diminished",
+    "style": "dark",
     "tempoRange": [
-      68,
-      92
+      100,
+      120
     ],
     "intensity": 0.7,
-    "scale": "iwato",
-    "style": "aggressive",
-    "timeSignature": "7/8"
+    "timeSignature": "5/4"
   },
   "duration": 160,
   "unlockCondition": "paranoia_level8_complete"

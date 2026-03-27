@@ -91,14 +91,14 @@
   },
   "musicSeed": {
     "seed": "tractatus_020",
-    "mode": "dorian",
+    "mode": "harmonicMinor",
+    "scale": "harmonicMinor",
+    "style": "aggressive",
     "tempoRange": [
-      79,
-      100
+      95,
+      120
     ],
     "intensity": 0.8,
-    "scale": "pentatonicMinor",
-    "style": "tension",
     "timeSignature": "7/8"
   },
   "duration": 180,

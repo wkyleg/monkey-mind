@@ -91,15 +91,15 @@
   },
   "musicSeed": {
     "seed": "ulysses_012",
-    "mode": "dorian",
+    "mode": "mixolydian",
+    "scale": "mixolydian",
+    "style": "heroic",
     "tempoRange": [
       75,
-      95
+      90
     ],
-    "intensity": 0.59,
-    "scale": "locrian",
-    "style": "heroic",
-    "timeSignature": "3/4"
+    "intensity": 0.35,
+    "timeSignature": "6/8"
   },
   "duration": 140,
   "unlockCondition": "lit_level11_complete"

@@ -131,13 +131,13 @@
   },
   "musicSeed": {
     "seed": "orphic_004",
-    "mode": "mixolydian",
+    "mode": "phrygianDominant",
     "tempoRange": [
-      115,
-      128
+      100,
+      118
     ],
-    "intensity": 0.68,
-    "scale": "aeolian",
+    "intensity": 0.65,
+    "scale": "phrygianDominant",
     "style": "mysterious",
     "timeSignature": "5/4"
   },

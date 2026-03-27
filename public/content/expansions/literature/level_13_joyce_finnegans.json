@@ -91,15 +91,15 @@
   },
   "musicSeed": {
     "seed": "finnegan_013",
-    "mode": "dorian",
+    "mode": "lydian",
+    "scale": "lydian",
+    "style": "dreamy",
     "tempoRange": [
-      76,
-      96
+      80,
+      95
     ],
-    "intensity": 0.62,
-    "scale": "blues",
-    "style": "sacred",
-    "timeSignature": "3/4"
+    "intensity": 0.45,
+    "timeSignature": "4/4"
   },
   "duration": 170,
   "unlockCondition": "lit_level12_complete"

@@ -131,15 +131,15 @@
   },
   "musicSeed": {
     "seed": "boltzmann_004",
-    "mode": "wholeTone",
-    "tempoRange": [
-      68,
-      91
-    ],
-    "intensity": 0.47,
-    "scale": "harmonicMinor",
+    "mode": "augmented",
+    "scale": "augmented",
     "style": "tension",
-    "timeSignature": "4/4"
+    "tempoRange": [
+      88,
+      108
+    ],
+    "intensity": 0.6,
+    "timeSignature": "7/8"
   },
   "duration": 130,
   "unlockCondition": "science_level3_complete"

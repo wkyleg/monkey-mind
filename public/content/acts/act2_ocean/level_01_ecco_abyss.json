@@ -134,10 +134,10 @@
     "seed": "ecco_abyss_001",
     "mode": "lydian",
     "tempoRange": [
-      90,
-      100
+      65,
+      78
     ],
-    "intensity": 0.3,
+    "intensity": 0.2,
     "scale": "lydian",
     "style": "dreamy",
     "timeSignature": "6/8"

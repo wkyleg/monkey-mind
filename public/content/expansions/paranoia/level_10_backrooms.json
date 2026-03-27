@@ -131,15 +131,15 @@
   },
   "musicSeed": {
     "seed": "backrooms_010",
-    "mode": "locrian",
+    "mode": "chromatic",
+    "scale": "chromatic",
+    "style": "aggressive",
     "tempoRange": [
-      69,
-      94
+      110,
+      140
     ],
-    "intensity": 0.75,
-    "scale": "locrian",
-    "style": "dark",
-    "timeSignature": "5/4"
+    "intensity": 0.85,
+    "timeSignature": "7/8"
   },
   "duration": 180,
   "unlockCondition": "paranoia_level9_complete"

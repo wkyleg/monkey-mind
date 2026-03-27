@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "azathoth_002",
-    "mode": "locrian",
+    "mode": "augmented",
+    "scale": "augmented",
+    "style": "mysterious",
     "tempoRange": [
-      53,
-      72
+      68,
+      82
     ],
-    "intensity": 0.47,
-    "scale": "wholeTone",
-    "style": "tension",
-    "timeSignature": "5/4"
+    "intensity": 0.3,
+    "timeSignature": "4/4"
   },
   "duration": 120,
   "unlockCondition": "cosmic_level1_complete"

@@ -133,12 +133,12 @@
     "seed": "alien_003",
     "mode": "wholeTone",
     "tempoRange": [
-      95,
-      118
+      75,
+      95
     ],
-    "intensity": 0.55,
+    "intensity": 0.45,
     "scale": "wholeTone",
-    "style": "meditative",
+    "style": "dreamy",
     "timeSignature": "5/4"
   },
   "duration": 120,

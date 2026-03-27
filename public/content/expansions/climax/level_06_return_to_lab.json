@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "return_006",
-    "mode": "chromatic",
+    "mode": "phrygianDominant",
+    "scale": "phrygianDominant",
+    "style": "dark",
     "tempoRange": [
-      120,
-      147
+      115,
+      140
     ],
-    "intensity": 0.72,
-    "scale": "wholeTone",
-    "style": "tension",
-    "timeSignature": "11/8"
+    "intensity": 0.8,
+    "timeSignature": "7/8"
   },
   "duration": 180,
   "unlockCondition": "climax_level5_complete"

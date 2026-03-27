@@ -82,13 +82,13 @@
   },
   "musicSeed": {
     "seed": "cyclopean_boss_005",
-    "mode": "mixolydian",
+    "mode": "harmonicMinor",
     "tempoRange": [
-      120,
-      140
+      110,
+      135
     ],
     "intensity": 0.85,
-    "scale": "phrygianDominant",
+    "scale": "harmonicMinor",
     "style": "aggressive",
     "timeSignature": "7/8"
   },

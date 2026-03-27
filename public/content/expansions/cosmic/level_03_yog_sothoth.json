@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "yog_sothoth_003",
-    "mode": "locrian",
+    "mode": "iwato",
+    "scale": "iwato",
+    "style": "mysterious",
     "tempoRange": [
-      56,
-      76
+      72,
+      88
     ],
-    "intensity": 0.63,
-    "scale": "locrian",
-    "style": "meditative",
-    "timeSignature": "6/8"
+    "intensity": 0.4,
+    "timeSignature": "5/4"
   },
   "duration": 140,
   "unlockCondition": "cosmic_level2_complete"

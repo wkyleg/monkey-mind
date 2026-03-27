@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "babel_001",
-    "mode": "chromatic",
+    "mode": "diminished",
+    "scale": "diminished",
+    "style": "tension",
     "tempoRange": [
-      110,
-      134
+      90,
+      110
     ],
-    "intensity": 0.3,
-    "scale": "chromatic",
-    "style": "aggressive",
-    "timeSignature": "4/4"
+    "intensity": 0.45,
+    "timeSignature": "5/4"
   },
   "duration": 130,
   "unlockCondition": "all_expansions_complete"

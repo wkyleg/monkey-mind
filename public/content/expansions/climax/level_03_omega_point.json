@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "omega_003",
-    "mode": "chromatic",
+    "mode": "phrygianDominant",
+    "scale": "phrygianDominant",
+    "style": "aggressive",
     "tempoRange": [
-      114,
-      139
+      100,
+      120
     ],
-    "intensity": 0.47,
-    "scale": "wholeTone",
-    "style": "tension",
-    "timeSignature": "7/8"
+    "intensity": 0.65,
+    "timeSignature": "4/4"
   },
   "duration": 150,
   "unlockCondition": "climax_level2_complete"

@@ -135,14 +135,14 @@
   },
   "musicSeed": {
     "seed": "baudrillard_004",
-    "mode": "dorian",
+    "mode": "prometheus",
     "tempoRange": [
-      105,
-      118
+      82,
+      98
     ],
-    "intensity": 0.68,
-    "scale": "lydian",
-    "style": "tension",
+    "intensity": 0.6,
+    "scale": "prometheus",
+    "style": "mysterious",
     "timeSignature": "7/8"
   },
   "duration": 130,

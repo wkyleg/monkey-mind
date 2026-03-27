@@ -133,13 +133,13 @@
   },
   "musicSeed": {
     "seed": "evil_fungus_003",
-    "mode": "lydian",
+    "mode": "pelog",
     "tempoRange": [
-      98,
-      112
+      75,
+      90
     ],
-    "intensity": 0.55,
-    "scale": "wholeTone",
+    "intensity": 0.45,
+    "scale": "pelog",
     "style": "mysterious",
     "timeSignature": "4/4"
   },

@@ -139,14 +139,14 @@
   },
   "musicSeed": {
     "seed": "time_arrow_004",
-    "mode": "phrygianDominant",
+    "mode": "augmented",
     "tempoRange": [
-      122,
-      138
+      115,
+      135
     ],
-    "intensity": 0.68,
-    "scale": "chromatic",
-    "style": "aggressive",
+    "intensity": 0.7,
+    "scale": "augmented",
+    "style": "tension",
     "timeSignature": "5/4"
   },
   "duration": 130,

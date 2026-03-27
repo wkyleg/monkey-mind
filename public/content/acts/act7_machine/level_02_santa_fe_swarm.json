@@ -133,14 +133,14 @@
   },
   "musicSeed": {
     "seed": "santa_fe_002",
-    "mode": "phrygianDominant",
+    "mode": "bebop",
     "tempoRange": [
-      108,
-      122
+      105,
+      120
     ],
-    "intensity": 0.42,
-    "scale": "phrygianDominant",
-    "style": "aggressive",
+    "intensity": 0.45,
+    "scale": "bebop",
+    "style": "tension",
     "timeSignature": "4/4"
   },
   "duration": 110,

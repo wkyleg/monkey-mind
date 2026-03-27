@@ -134,14 +134,14 @@
   },
   "musicSeed": {
     "seed": "agencies_001",
-    "mode": "wholeTone",
+    "mode": "iwato",
     "tempoRange": [
-      80,
-      98
+      62,
+      78
     ],
-    "intensity": 0.3,
-    "scale": "wholeTone",
-    "style": "dreamy",
+    "intensity": 0.2,
+    "scale": "iwato",
+    "style": "mysterious",
     "timeSignature": "4/4"
   },
   "duration": 100,

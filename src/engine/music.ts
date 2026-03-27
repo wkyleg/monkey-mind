@@ -1,130 +1,127 @@
 /**
- * Procedural industrial music generator
- * Creates dark, atmospheric beats inspired by Nine Inch Nails / Crystal Castles
- * Enhanced with longer phrases, randomization, and evolving elements
- * Now with advanced scales, modes, and cultural music styles
+ * Procedural ambient/atmospheric music generator
+ * Enhanced with tonal.js for 90+ scales, cultural music styles,
+ * varied synthesis, and per-level musical identity
  */
 
 import { storage } from '../core/storage';
+import { ScaleType, Interval } from 'tonal';
 
 // ============================================================================
-// MUSICAL SCALES AND MODES
+// MUSICAL SCALES AND MODES (powered by tonal.js + custom additions)
 // ============================================================================
 
-/**
- * Scale definitions - semitone intervals from root
- * Each scale is an array of semitone offsets (0 = root)
- */
-export const SCALES: Record<string, number[]> = {
-  // Western modes (church modes)
-  ionian: [0, 2, 4, 5, 7, 9, 11], // Major scale
-  dorian: [0, 2, 3, 5, 7, 9, 10], // Minor with raised 6th
-  phrygian: [0, 1, 3, 5, 7, 8, 10], // Minor with flat 2nd
-  lydian: [0, 2, 4, 6, 7, 9, 11], // Major with raised 4th
-  mixolydian: [0, 2, 4, 5, 7, 9, 10], // Major with flat 7th
-  aeolian: [0, 2, 3, 5, 7, 8, 10], // Natural minor
-  locrian: [0, 1, 3, 5, 6, 8, 10], // Diminished
+function buildScaleMap(): Record<string, number[]> {
+  const scales: Record<string, number[]> = {};
 
-  // Harmonic variants
-  harmonicMinor: [0, 2, 3, 5, 7, 8, 11],
-  melodicMinor: [0, 2, 3, 5, 7, 9, 11],
-  phrygianDominant: [0, 1, 4, 5, 7, 8, 10], // Spanish/Flamenco
-  doubleHarmonic: [0, 1, 4, 5, 7, 8, 11], // Byzantine/Arabic
+  for (const st of ScaleType.all()) {
+    const semitones = st.intervals.map((i) => Interval.semitones(i) ?? 0);
+    if (semitones.length < 2) continue;
 
-  // Symmetric scales
-  wholeTone: [0, 2, 4, 6, 8, 10],
-  diminished: [0, 2, 3, 5, 6, 8, 9, 11], // Whole-half diminished
-  augmented: [0, 3, 4, 7, 8, 11],
+    // Normalize the tonal.js name to camelCase key
+    const key = st.name
+      .replace(/['']/g, '')
+      .replace(/\s+(\w)/g, (_, c: string) => c.toUpperCase())
+      .replace(/^(\w)/, (_, c: string) => c.toLowerCase())
+      .replace(/[^a-zA-Z0-9#]/g, '');
+    scales[key] = semitones;
+  }
 
-  // Pentatonic scales
-  pentatonicMajor: [0, 2, 4, 7, 9],
-  pentatonicMinor: [0, 3, 5, 7, 10],
-  blues: [0, 3, 5, 6, 7, 10],
+  // Alias common names used in level configs to tonal.js names
+  scales.ionian = scales.major ?? [0, 2, 4, 5, 7, 9, 11];
+  scales.aeolian = scales.minor ?? [0, 2, 3, 5, 7, 8, 10];
+  scales.pentatonicMajor = scales.majorPentatonic ?? [0, 2, 4, 7, 9];
+  scales.pentatonicMinor = scales.minorPentatonic ?? [0, 3, 5, 7, 10];
+  scales.phrygianDominant = scales.phrygianDominant ?? [0, 1, 4, 5, 7, 8, 10];
+  scales.doubleHarmonic = scales.doubleHarmonicMajor ?? [0, 1, 4, 5, 7, 8, 11];
+  scales.wholeTone = scales.wholeTone ?? [0, 2, 4, 6, 8, 10];
+  scales.hungarianMinor = scales.hungarianMinor ?? [0, 2, 3, 6, 7, 8, 11];
+  scales.hungarianMajor = scales.hungarianMajor ?? [0, 3, 4, 6, 7, 9, 10];
 
-  // Japanese scales
-  hirajoshi: [0, 2, 3, 7, 8],
-  insen: [0, 1, 5, 7, 10],
-  iwato: [0, 1, 5, 6, 10],
-  kumoi: [0, 2, 3, 7, 9],
+  // Custom scales not in tonal.js
+  scales.kumoi = [0, 2, 3, 7, 9];
+  scales.slendro = [0, 2, 5, 7, 9];
+  scales.bhairav = [0, 1, 4, 5, 7, 8, 11];
+  scales.kafi = [0, 2, 3, 5, 7, 9, 10];
+  scales.purvi = [0, 1, 4, 6, 7, 8, 11];
+  scales.marwa = [0, 1, 4, 6, 7, 9, 11];
+  scales.todi = [0, 1, 3, 6, 7, 8, 11];
+  scales.hijaz = [0, 1, 4, 5, 7, 8, 10];
+  scales.nikriz = [0, 1, 4, 6, 7, 9, 10];
+  scales.saba = [0, 1, 3, 4, 7, 8, 10];
+  scales.blues = scales.minorBlues ?? [0, 3, 5, 6, 7, 10];
+  scales.tritone = [0, 6];
+  scales.quartal = [0, 5, 10];
 
-  // Indonesian (Gamelan)
-  pelog: [0, 1, 3, 7, 8],
-  slendro: [0, 2, 5, 7, 9],
+  return scales;
+}
 
-  // Indian (Raga approximations)
-  bhairav: [0, 1, 4, 5, 7, 8, 11], // Morning raga
-  kafi: [0, 2, 3, 5, 7, 9, 10], // Similar to Dorian
-  purvi: [0, 1, 4, 6, 7, 8, 11], // Evening raga
-  marwa: [0, 1, 4, 6, 7, 9, 11], // Twilight raga
-  todi: [0, 1, 3, 6, 7, 8, 11], // Somber raga
-
-  // Middle Eastern
-  hijaz: [0, 1, 4, 5, 7, 8, 10],
-  nikriz: [0, 1, 4, 6, 7, 9, 10],
-  saba: [0, 1, 3, 4, 7, 8, 10],
-
-  // Hungarian / Romani
-  hungarianMinor: [0, 2, 3, 6, 7, 8, 11],
-  hungarianMajor: [0, 3, 4, 6, 7, 9, 10],
-
-  // Experimental / Atonal
-  chromatic: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  tritone: [0, 6],
-  quartal: [0, 5, 10], // Stacked 4ths
-};
+export const SCALES: Record<string, number[]> = buildScaleMap();
 
 /**
  * Chord progressions by mood/style
  * Values are ratios relative to root (1 = unison)
  */
 export const CHORD_PROGRESSIONS_BY_STYLE: Record<string, number[][]> = {
-  // Dark/Industrial
   dark: [
-    [1, 1.5, 1.25, 1.33], // i - v - iv - bVII
-    [1, 1.125, 1.25, 1.5], // i - bII - iv - v
-    [1, 1.33, 1.125, 1.25], // i - bVII - bII - iv
+    [1, 1.5, 1.25, 1.33],
+    [1, 1.125, 1.25, 1.5],
+    [1, 1.33, 1.125, 1.25],
+    [1, 1.25, 1.125, 1.33],
+    [1, 1.5, 1.33, 1.125],
+    [1, 1.125, 1.33, 1.25],
   ],
-  // Heroic/Epic
   heroic: [
-    [1, 1.25, 1.5, 1.33], // I - IV - V - bVII
-    [1, 1.5, 1.25, 1.125], // I - V - IV - II
-    [1, 1.33, 1.5, 1.25], // I - bVII - V - IV
+    [1, 1.25, 1.5, 1.33],
+    [1, 1.5, 1.25, 1.125],
+    [1, 1.33, 1.5, 1.25],
+    [1, 1.25, 1.33, 1.5],
+    [1, 1.5, 1.33, 1.25],
+    [1, 1.2, 1.5, 1.33],
   ],
-  // Sacred/Spiritual
   sacred: [
-    [1, 1.25, 1.2, 1.33], // I - IV - iii - bVII
-    [1, 1.5, 1.33, 1.25], // I - V - bVII - IV
-    [1, 1.2, 1.5, 1.25], // I - iii - V - IV
+    [1, 1.25, 1.2, 1.33],
+    [1, 1.5, 1.33, 1.25],
+    [1, 1.2, 1.5, 1.25],
+    [1, 1.33, 1.2, 1.5],
+    [1, 1.25, 1.5, 1.2],
   ],
-  // Mysterious/Ambient
   mysterious: [
-    [1, Math.SQRT2, 1.25, 1.125], // Tritone-based
-    [1, 1.189, Math.SQRT2, 1.68], // Minor 3rds
-    [1, 1.33, 1.5, 1.78], // Ascending
+    [1, Math.SQRT2, 1.25, 1.125],
+    [1, 1.189, Math.SQRT2, 1.68],
+    [1, 1.33, 1.5, 1.78],
+    [1, 1.125, 1.33, Math.SQRT2],
+    [1, 1.78, 1.189, 1.33],
+    [1, Math.SQRT2, 1.33, 1.189],
   ],
-  // Aggressive
   aggressive: [
-    [1, 1.125, 1.33, 1.5], // i - bII - bVII - v
-    [1, Math.SQRT2, 1.125, 1.33], // Tritone chaos
-    [1, 1.5, 1.125, Math.SQRT2], // Dissonant
+    [1, 1.125, 1.33, 1.5],
+    [1, Math.SQRT2, 1.125, 1.33],
+    [1, 1.5, 1.125, Math.SQRT2],
+    [1, 1.33, Math.SQRT2, 1.125],
+    [1, 1.125, Math.SQRT2, 1.5],
   ],
-  // Dreamy / ethereal
   dreamy: [
-    [1, 1.25, 1.5, 1.2], // I - IV - V - iii
-    [1, 1.33, 1.25, 1.5], // I - bVII - IV - V
-    [1, 1.2, 1.33, 1.25], // I - iii - bVII - IV
+    [1, 1.25, 1.5, 1.2],
+    [1, 1.33, 1.25, 1.5],
+    [1, 1.2, 1.33, 1.25],
+    [1, 1.5, 1.2, 1.25],
+    [1, 1.25, 1.2, 1.5],
+    [1, 1.2, 1.25, 1.33],
   ],
-  // Tension / suspense
   tension: [
-    [1, 1.125, 1.0595, Math.SQRT2], // Semitone creep + tritone
+    [1, 1.125, 1.0595, Math.SQRT2],
     [1, Math.SQRT2, 1.125, 1.0595],
     [1, 1.0595, 1.125, Math.SQRT2],
+    [1, 1.0595, Math.SQRT2, 1.125],
+    [1, Math.SQRT2, 1.0595, 1.125],
   ],
-  // Meditative / droning
   meditative: [
-    [1, 1, 1.5, 1], // Drone with occasional fifth
-    [1, 1.25, 1, 1.5], // Root-centered with gentle movement
+    [1, 1, 1.5, 1],
+    [1, 1.25, 1, 1.5],
     [1, 1.33, 1, 1.25],
+    [1, 1, 1.25, 1],
+    [1, 1.5, 1, 1.25],
   ],
 };
 
@@ -136,32 +133,80 @@ export const MELODY_PATTERNS_EXTENDED: Record<string, number[][]> = {
     [0, 2, 4, 7],
     [0, 3, 5, 7],
     [0, 2, 5, 7, 12],
+    [0, 4, 7, 11, 12],
+    [0, 2, 4, 5, 9, 12],
+    [0, 3, 7, 10, 14],
   ],
   descending: [
     [12, 7, 5, 0],
     [7, 5, 3, 0],
     [12, 10, 7, 5, 0],
+    [14, 12, 9, 7, 4, 0],
+    [12, 11, 7, 4, 0],
+    [7, 4, 2, 0, -5],
   ],
   arpeggio: [
     [0, 4, 7, 12],
     [0, 3, 7, 12],
     [0, 5, 7, 12],
+    [0, 4, 7, 12, 16],
+    [0, 3, 7, 10, 12],
+    [12, 7, 4, 0, 4, 7],
+    [0, 7, 12, 7, 4, 0],
   ],
   pentatonic: [
     [0, 2, 4, 7, 9],
     [0, 3, 5, 7, 10],
     [7, 5, 3, 0, -5],
+    [0, 2, 7, 9, 12],
+    [0, 5, 7, 12, 14],
+    [9, 7, 4, 2, 0],
   ],
   chromatic: [
     [0, 1, 2, 3],
     [0, -1, 0, 1, 0],
     [0, 1, 3, 4, 6],
+    [0, 1, 0, -1, 0, 2],
+    [0, 3, 6, 9, 12],
+    [6, 5, 3, 1, 0],
   ],
   modal: [
-    [0, 1, 3, 5, 7], // Phrygian feel
-    [0, 2, 4, 6, 7], // Lydian feel
-    [0, 2, 3, 5, 7, 10], // Dorian feel
+    [0, 1, 3, 5, 7],
+    [0, 2, 4, 6, 7],
+    [0, 2, 3, 5, 7, 10],
+    [0, 1, 5, 6, 10],
+    [0, 3, 6, 8, 11],
+    [0, 2, 5, 8, 10, 12],
   ],
+  drone: [
+    [0, 0, 7, 0],
+    [0, 0, 0, 7, 12, 7],
+    [0, 12, 0, 5, 0],
+    [0, 0, 5, 0, 7, 0],
+  ],
+  staccato: [
+    [0, 12, 0, 7],
+    [0, 0, 5, 0, 0, 12],
+    [7, 0, 0, 5, 0, 12],
+    [0, 4, 0, 7, 0, 11],
+  ],
+  wide: [
+    [0, 7, 14, 7, 0],
+    [0, 12, 5, 17, 12],
+    [-5, 0, 7, 12, 19],
+    [0, 11, 7, 14, 0],
+  ],
+};
+
+const STYLE_TO_MELODY_CATEGORY: Record<string, (keyof typeof MELODY_PATTERNS_EXTENDED)[]> = {
+  dark: ['modal', 'descending', 'chromatic'],
+  heroic: ['ascending', 'arpeggio', 'wide'],
+  sacred: ['modal', 'pentatonic', 'drone'],
+  mysterious: ['chromatic', 'modal', 'staccato'],
+  aggressive: ['chromatic', 'descending', 'staccato'],
+  dreamy: ['pentatonic', 'arpeggio', 'wide'],
+  tension: ['chromatic', 'staccato', 'descending'],
+  meditative: ['drone', 'pentatonic', 'modal'],
 };
 
 /**
@@ -279,9 +324,9 @@ const SECTOR_PARAMS: Record<SectorMood, MusicParams> = {
     padNote: 233.08,
     droneNote: 58.27,
     intensity: 0.7,
-    filterCutoff: 1200,
+    filterCutoff: 800,
     detuneAmount: 5,
-    noiseType: 'highpass',
+    noiseType: 'bandpass',
     useReverb: false,
     distortionAmount: 0.5,
   },
@@ -291,7 +336,7 @@ const SECTOR_PARAMS: Record<SectorMood, MusicParams> = {
     padNote: 261.63,
     droneNote: 65.41,
     intensity: 0.9,
-    filterCutoff: 2000,
+    filterCutoff: 1000,
     detuneAmount: 20,
     noiseType: 'bandpass',
     useReverb: true,
@@ -303,9 +348,9 @@ const SECTOR_PARAMS: Record<SectorMood, MusicParams> = {
     padNote: 146.83,
     droneNote: 36.71,
     intensity: 1.0,
-    filterCutoff: 1500,
+    filterCutoff: 900,
     detuneAmount: 7,
-    noiseType: 'highpass',
+    noiseType: 'bandpass',
     useReverb: false,
     distortionAmount: 0.6,
   },
@@ -338,13 +383,13 @@ const SECTOR_PARAMS: Record<SectorMood, MusicParams> = {
   escape: {
     tempo: 115,
     bassFreq: 38,
-    padNote: 196, // G3 - clinical, neutral
-    droneNote: 49, // G1
+    padNote: 196,
+    droneNote: 49,
     intensity: 0.35,
     filterCutoff: 350,
-    detuneAmount: 2, // Minimal - sterile sound
-    noiseType: 'highpass',
-    useReverb: false, // No reverb - tight, clinical
+    detuneAmount: 2,
+    noiseType: 'bandpass',
+    useReverb: false,
     distortionAmount: 0.15,
   },
 
@@ -393,12 +438,12 @@ const SECTOR_PARAMS: Record<SectorMood, MusicParams> = {
   // Act 5: Painted - Colorful, artistic, surreal
   painted: {
     tempo: 105,
-    bassFreq: 43.65, // F1
-    padNote: 174.61, // F3 - playful, artistic
+    bassFreq: 43.65,
+    padNote: 174.61,
     droneNote: 43.65,
     intensity: 0.55,
-    filterCutoff: 1100,
-    detuneAmount: 18, // Colorful, varied
+    filterCutoff: 750,
+    detuneAmount: 18,
     noiseType: 'bandpass',
     useReverb: true,
     distortionAmount: 0.2,
@@ -418,18 +463,17 @@ const SECTOR_PARAMS: Record<SectorMood, MusicParams> = {
     distortionAmount: 0.1,
   },
 
-  // Act 7: Machine - Industrial, mechanical, grinding
   machine: {
     tempo: 145,
-    bassFreq: 46.25, // F#1
-    padNote: 185, // F#3 - metallic, industrial
+    bassFreq: 46.25,
+    padNote: 185,
     droneNote: 46.25,
     intensity: 0.75,
-    filterCutoff: 1400,
-    detuneAmount: 4, // Precise, mechanical
-    noiseType: 'highpass',
-    useReverb: false, // Tight, industrial
-    distortionAmount: 0.55,
+    filterCutoff: 800,
+    detuneAmount: 4,
+    noiseType: 'bandpass',
+    useReverb: false,
+    distortionAmount: 0.45,
   },
 
   // Act 8: Signals - Paranoid, cosmic, static-filled
@@ -614,6 +658,7 @@ export class ProceduralMusic {
   private droneOsc: OscillatorNode | null = null;
   private droneOsc2: OscillatorNode | null = null;
   private droneGain: GainNode | null = null;
+  private droneFilter: BiquadFilterNode | null = null;
   private padOsc: OscillatorNode | null = null;
   private padOsc2: OscillatorNode | null = null;
   private padOsc3: OscillatorNode | null = null;
@@ -622,6 +667,11 @@ export class ProceduralMusic {
   private noiseSource: AudioBufferSourceNode | null = null;
   private noiseGain: GainNode | null = null;
   private noiseFilter: BiquadFilterNode | null = null;
+
+  // Reverb system
+  private reverbConvolver: ConvolverNode | null = null;
+  private reverbSend: GainNode | null = null;
+  private reverbReturn: GainNode | null = null;
 
   // Rhythm tracking - extended to 64 beats
   private beatTimer: number = 0;
@@ -682,12 +732,29 @@ export class ProceduralMusic {
     signals: 'chromatic',
     gamelan: 'pelog',
     flamenco: 'phrygianDominant',
-    spanish: 'phrygianDominant',
+    spanish: 'spanishHeptatonic',
     japanese: 'hirajoshi',
     chinese: 'pentatonicMajor',
     balinese: 'pelog',
     celtic: 'mixolydian',
     arabic_maqam: 'hijaz',
+    // tonal.js names → our keys
+    major: 'ionian',
+    minor: 'aeolian',
+    'in-sen': 'inSen',
+    bebop_minor: 'bebopMinor',
+    bebop_major: 'bebopMajor',
+    hungarian_minor: 'hungarianMinor',
+    hungarian_major: 'hungarianMajor',
+    neapolitan: 'neapolitanMajor',
+    // Extra genre aliases
+    noir: 'phrygian',
+    ambient: 'lydian',
+    meditation: 'pentatonicMajor',
+    dream: 'lydian',
+    horror: 'locrian',
+    ethereal: 'wholeTone',
+    ritual: 'doubleHarmonic',
   };
 
   setScale(scaleName: string): void {
@@ -849,7 +916,7 @@ export class ProceduralMusic {
     this.params = { ...baseParams };
     this.params.tempo = baseParams.tempo + levelIndex * 3;
     this.beatInterval = 60 / this.params.tempo;
-    this.params.filterCutoff = baseParams.filterCutoff + levelIndex * 100;
+    this.params.filterCutoff = Math.min(baseParams.filterCutoff + levelIndex * 60, 1200);
     this.params.intensity = Math.min(1, baseParams.intensity + levelIndex * 0.1);
     this.params.detuneAmount = baseParams.detuneAmount + levelIndex * 2;
 
@@ -901,7 +968,7 @@ export class ProceduralMusic {
 
     this.params.tempo = baseParams.tempo + levelIndex * 2;
     this.beatInterval = 60 / this.params.tempo;
-    this.params.filterCutoff = baseParams.filterCutoff + levelIndex * 80;
+    this.params.filterCutoff = Math.min(baseParams.filterCutoff + levelIndex * 50, 1200);
     this.params.intensity = Math.min(1, baseParams.intensity + levelIndex * 0.08);
     this.params.detuneAmount = baseParams.detuneAmount + levelIndex * 1.5;
 
@@ -988,7 +1055,7 @@ export class ProceduralMusic {
     }
     this.mood = derivedMood;
 
-    // Set style for chord progressions
+    // Set style for chord progressions — must be set before pickMoodProgressionAndMelody
     if (musicSeed.style) {
       this.setStyle(musicSeed.style);
     } else if (musicSeed.culturalStyle) {
@@ -1004,6 +1071,8 @@ export class ProceduralMusic {
         gamelan: 'mysterious',
       };
       this.setStyle(culturalToStyle[musicSeed.culturalStyle] || 'dark');
+    } else {
+      this._currentStyle = '';
     }
 
     // Apply time signature: prefer explicit seed value, fall back to mood-derived
@@ -1069,23 +1138,24 @@ export class ProceduralMusic {
 
     const modeData = modeParams[scaleToUse] || modeParams.aeolian;
 
-    // Set root note if specified in mode
-    if (modeData.rootNote) {
-      this.rootNote = modeData.rootNote;
-    } else {
-      this.rootNote = modeData.droneNote;
-    }
+    // Transpose root note by seed-derived semitones for per-level key variation
+    const baseRoot = modeData.rootNote ?? modeData.droneNote;
+    const semitonesToTranspose = ((seedNum * 7) % 12); // circle-of-fifths spread
+    this.rootNote = baseRoot * 2 ** (semitonesToTranspose / 12);
+
+    const transposedDrone = modeData.droneNote * 2 ** (semitonesToTranspose / 12);
+    const transposedPad = modeData.padNote * 2 ** (semitonesToTranspose / 12);
 
     // Create custom params
     this.params = {
       tempo,
-      bassFreq: modeData.droneNote * 0.8,
-      padNote: modeData.padNote,
-      droneNote: modeData.droneNote,
+      bassFreq: transposedDrone * 0.8,
+      padNote: transposedPad,
+      droneNote: transposedDrone,
       intensity,
-      filterCutoff: modeData.filterCutoff,
+      filterCutoff: Math.min(modeData.filterCutoff + (seedNum % 150) - 50, 1200),
       detuneAmount: 5 + (seedNum % 8),
-      noiseType: intensity > 0.6 ? 'highpass' : 'lowpass',
+      noiseType: intensity > 0.6 ? 'bandpass' : 'lowpass',
       useReverb: intensity < 0.7,
       distortionAmount: intensity * 0.4,
     };
@@ -1100,6 +1170,11 @@ export class ProceduralMusic {
     this.phraseCount = 0;
     this.currentBeat = 0;
     this.currentMeasure = 0;
+
+    console.debug(
+      `[Music] seed="${musicSeed.seed}" scale=${scaleToUse} key=${Math.round(this.rootNote)}Hz ` +
+        `tempo=${tempo} mood=${this.mood} style=${this._currentStyle || 'auto'} timeSig=${musicSeed.timeSignature || 'auto'}`,
+    );
 
     if (this.playing) {
       this.updateOscillators();
@@ -1178,11 +1253,13 @@ export class ProceduralMusic {
    * Start playing music
    */
   start(): void {
-    if (this.playing || !this.context || !this.masterGain) {
-      if (this.context?.state === 'suspended') {
-        this.context.resume();
-      }
-      if (this.playing) return;
+    if (this.context?.state === 'suspended') {
+      this.context.resume();
+    }
+
+    // If already playing, stop cleanly first to avoid stacking audio nodes
+    if (this.playing) {
+      this.releaseNodes();
     }
 
     if (!this.context) {
@@ -1197,6 +1274,12 @@ export class ProceduralMusic {
       this.updateVolume();
     }
 
+    // Bump stop generation so any pending stop() cleanup won't destroy our new nodes
+    this.stopGeneration++;
+
+    // Release any leftover nodes from a recent stop() that hasn't cleaned up yet
+    this.releaseNodes();
+
     this.playing = true;
     this.beatTimer = 0;
     this.currentBeat = 0;
@@ -1206,63 +1289,95 @@ export class ProceduralMusic {
     this.beatInterval = 60 / this.params.tempo;
     this.inBreakdown = false;
 
+    this.createReverbBus();
     this.createDroneLayer();
     this.createPadLayer();
     this.createNoiseLayer();
   }
 
-  /**
-   * Stop playing music
-   */
+  private stopGeneration = 0;
+
   stop(): void {
-    if (!this.playing) return;
-
     this.playing = false;
+    this.stopGeneration++;
+    const gen = this.stopGeneration;
 
-    const fadeTime = 0.5;
+    const fadeTime = 0.3;
     const now = this.context?.currentTime || 0;
 
-    if (this.bassGain && this.context) {
-      this.bassGain.gain.linearRampToValueAtTime(0, now + fadeTime);
-      this.bassOsc?.stop(now + fadeTime);
-    }
-
-    if (this.droneGain && this.context) {
-      this.droneGain.gain.linearRampToValueAtTime(0, now + fadeTime);
-      this.droneOsc?.stop(now + fadeTime);
-      this.droneOsc2?.stop(now + fadeTime);
-    }
-
-    if (this.padGain && this.context) {
-      this.padGain.gain.linearRampToValueAtTime(0, now + fadeTime);
-      this.padOsc?.stop(now + fadeTime);
-      this.padOsc2?.stop(now + fadeTime);
-      this.padOsc3?.stop(now + fadeTime);
-    }
+    // Fade and stop all oscillator/source nodes immediately
+    this.fadeAndStopOsc(this.bassOsc, this.bassGain, now, fadeTime);
+    this.fadeAndStopOsc(this.droneOsc, this.droneGain, now, fadeTime);
+    this.fadeAndStopOsc(this.droneOsc2, null, now, fadeTime);
+    this.fadeAndStopOsc(this.padOsc, this.padGain, now, fadeTime);
+    this.fadeAndStopOsc(this.padOsc2, null, now, fadeTime);
+    this.fadeAndStopOsc(this.padOsc3, null, now, fadeTime);
 
     if (this.noiseGain && this.context) {
       this.noiseGain.gain.linearRampToValueAtTime(0, now + fadeTime);
-      this.noiseSource?.stop(now + fadeTime);
+    }
+    try { this.noiseSource?.stop(now + fadeTime); } catch { /* already stopped */ }
+
+    if (this.reverbSend) {
+      this.reverbSend.gain.linearRampToValueAtTime(0, now + fadeTime * 0.5);
     }
 
     setTimeout(
       () => {
-        this.bassOsc = null;
-        this.bassGain = null;
-        this.droneOsc = null;
-        this.droneOsc2 = null;
-        this.droneGain = null;
-        this.padOsc = null;
-        this.padOsc2 = null;
-        this.padOsc3 = null;
-        this.padGain = null;
-        this.padFilter = null;
-        this.noiseSource = null;
-        this.noiseGain = null;
-        this.noiseFilter = null;
+        if (this.stopGeneration !== gen) return;
+        this.releaseNodes();
       },
-      fadeTime * 1000 + 100,
+      fadeTime * 1000 + 50,
     );
+  }
+
+  private fadeAndStopOsc(osc: OscillatorNode | null, gain: GainNode | null, now: number, fade: number): void {
+    if (gain && this.context) {
+      gain.gain.linearRampToValueAtTime(0, now + fade);
+    }
+    try { osc?.stop(now + fade); } catch { /* already stopped */ }
+  }
+
+  private safeDisconnect(node: AudioNode | null): void {
+    try { node?.disconnect(); } catch { /* node may not support disconnect in test env */ }
+  }
+
+  private releaseNodes(): void {
+    this.safeDisconnect(this.bassOsc);
+    this.safeDisconnect(this.droneOsc);
+    this.safeDisconnect(this.droneOsc2);
+    this.safeDisconnect(this.padOsc);
+    this.safeDisconnect(this.padOsc2);
+    this.safeDisconnect(this.padOsc3);
+    this.safeDisconnect(this.noiseSource);
+    this.safeDisconnect(this.droneFilter);
+    this.safeDisconnect(this.padFilter);
+    this.safeDisconnect(this.noiseFilter);
+    this.safeDisconnect(this.bassGain);
+    this.safeDisconnect(this.droneGain);
+    this.safeDisconnect(this.padGain);
+    this.safeDisconnect(this.noiseGain);
+    this.safeDisconnect(this.reverbConvolver);
+    this.safeDisconnect(this.reverbSend);
+    this.safeDisconnect(this.reverbReturn);
+
+    this.bassOsc = null;
+    this.bassGain = null;
+    this.droneOsc = null;
+    this.droneOsc2 = null;
+    this.droneGain = null;
+    this.droneFilter = null;
+    this.padOsc = null;
+    this.padOsc2 = null;
+    this.padOsc3 = null;
+    this.padGain = null;
+    this.padFilter = null;
+    this.noiseSource = null;
+    this.noiseGain = null;
+    this.noiseFilter = null;
+    this.reverbConvolver = null;
+    this.reverbSend = null;
+    this.reverbReturn = null;
   }
 
   /**
@@ -1312,8 +1427,9 @@ export class ProceduralMusic {
       }
     }
 
-    // Filter sweep automation
-    this.filterSweepPhase += dt * 0.1;
+    // Filter sweep automation — speed varies by mood
+    const sweepSpeed = ProceduralMusic.MOOD_SWEEP_SPEED[this.mood] ?? 0.1;
+    this.filterSweepPhase += dt * sweepSpeed;
     this.updateFilterSweep();
 
     // Update layer volumes based on intensity
@@ -1331,11 +1447,14 @@ export class ProceduralMusic {
       this.breakdownTimer = 0;
     }
 
-    // Pull from mood-appropriate extended pools
+    // Pull from style/mood-appropriate extended pools
     if (Math.random() < 0.3) {
       this.pickMoodProgressionAndMelody();
     } else if (Math.random() < 0.4) {
-      const categories = MOOD_TO_MELODY_CATEGORY[this.mood] || ['ascending'];
+      const categories =
+        (this._currentStyle && STYLE_TO_MELODY_CATEGORY[this._currentStyle]) ||
+        MOOD_TO_MELODY_CATEGORY[this.mood] ||
+        ['ascending'];
       const cat = categories[Math.floor(Math.random() * categories.length)];
       const patterns = MELODY_PATTERNS_EXTENDED[cat];
       if (patterns && patterns.length > 0) {
@@ -1412,22 +1531,23 @@ export class ProceduralMusic {
 
     // Melodic synth stabs using per-mood instrument type (E5)
     const stabInterval = Math.max(2, Math.floor(spm / 4));
-    if (this.combatIntensity > 0.5 && beatInMeasure % stabInterval === 0) {
+    if (this.combatIntensity > 0.15 && beatInMeasure % stabInterval === 0) {
       const melodyIndex = (measure + Math.floor(beatInMeasure / stabInterval)) % this.currentMelody.length;
-      if (Math.random() < 0.4) {
+      const stabChance = 0.2 + this.combatIntensity * 0.3;
+      if (Math.random() < stabChance) {
         this.playMoodInstrument(now, melodyIndex);
       }
     }
 
     // Arpeggios with pattern variety (E6)
-    if (this.combatIntensity > 0.7 && beatInMeasure === Math.floor(spm / 2) && Math.random() < 0.25) {
+    if (this.combatIntensity > 0.3 && beatInMeasure === Math.floor(spm / 2) && Math.random() < 0.25) {
       const rootDegree = measure % this.currentScale.length;
       const arpPattern = ARPEGGIO_PATTERNS[(measure + this.phraseCount) % ARPEGGIO_PATTERNS.length];
       this.playArpeggio(now, rootDegree, 1, arpPattern);
     }
 
     // Scale-based chord stabs
-    if (this.combatIntensity > 0.6 && beatInMeasure === 0 && measure % 2 === 1 && Math.random() < 0.3) {
+    if (this.combatIntensity > 0.25 && beatInMeasure === 0 && measure % 2 === 1 && Math.random() < 0.3) {
       const chordRoot = measure % this.currentScale.length;
       const chordFreqs = this.getScaleChordFreqs(chordRoot, [0, 2, 4]);
       this.playChordStab(now, chordFreqs);
@@ -1567,49 +1687,7 @@ export class ProceduralMusic {
     }
   }
 
-  /**
-   * Play synth stab using the current scale
-   */
-  private playSynthStab(time: number, melodyIndex: number): void {
-    if (!this.context || !this.masterGain) return;
 
-    // Use scale-based melody generation
-    const melodyPattern = this.currentMelody;
-    const semitones = melodyPattern[melodyIndex % melodyPattern.length];
-
-    // Get frequency from current scale
-    const scaleDegree = Math.abs(semitones % this.currentScale.length);
-    const octaveOffset = Math.floor(semitones / 12);
-    const freq = this.getScaleNote(scaleDegree, octaveOffset + 1);
-
-    const osc = this.context.createOscillator();
-    const osc2 = this.context.createOscillator();
-    const gain = this.context.createGain();
-    const filter = this.context.createBiquadFilter();
-
-    osc.type = 'sawtooth';
-    osc.frequency.value = freq;
-    osc2.type = 'square';
-    osc2.frequency.value = freq * 1.01;
-
-    filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(this.params.filterCutoff * 2, time);
-    filter.frequency.exponentialRampToValueAtTime(200, time + 0.2);
-    filter.Q.value = 3;
-
-    gain.gain.setValueAtTime(0.08 * this.combatIntensity, time);
-    gain.gain.exponentialRampToValueAtTime(0.01, time + 0.15);
-
-    osc.connect(filter);
-    osc2.connect(filter);
-    filter.connect(gain);
-    gain.connect(this.masterGain);
-
-    osc.start(time);
-    osc2.start(time);
-    osc.stop(time + 0.2);
-    osc2.stop(time + 0.2);
-  }
 
   /**
    * Play an arpeggio using the current scale
@@ -1678,41 +1756,137 @@ export class ProceduralMusic {
   /**
    * Update filter sweep for movement
    */
+  private static readonly MOOD_SWEEP_SPEED: Record<string, number> = {
+    ocean: 0.04,
+    sacred: 0.05,
+    painted: 0.08,
+    library: 0.06,
+    signals: 0.12,
+    reef: 0.07,
+    pantheon: 0.06,
+    heroic: 0.09,
+    bloom: 0.1,
+    intro: 0.03,
+    menu: 0.03,
+    neural: 0.08,
+    escape: 0.1,
+    machine: 0.15,
+    projects: 0.12,
+    boss: 0.14,
+  };
+
+  private static readonly MOOD_SWEEP_DEPTH: Record<string, number> = {
+    ocean: 0.2,
+    sacred: 0.25,
+    painted: 0.4,
+    library: 0.3,
+    signals: 0.5,
+    reef: 0.25,
+    intro: 0.15,
+    menu: 0.15,
+    machine: 0.5,
+    projects: 0.45,
+    boss: 0.5,
+    heroic: 0.35,
+    bloom: 0.4,
+    neural: 0.3,
+    escape: 0.35,
+    pantheon: 0.3,
+  };
+
   private updateFilterSweep(): void {
     if (!this.padFilter || !this.noiseFilter || !this.context) return;
 
     const now = this.context.currentTime;
-    const sweepValue = Math.sin(this.filterSweepPhase) * 0.5 + 0.5;
-    const baseFreq = this.params.filterCutoff;
+    const depth = ProceduralMusic.MOOD_SWEEP_DEPTH[this.mood] ?? 0.3;
 
-    // Pad filter modulation
-    const padFreq = baseFreq * (0.5 + sweepValue * 1.5);
+    // Mood-specific LFO shapes
+    let sweepValue: number;
+    switch (this.mood) {
+      case 'ocean':
+      case 'sacred':
+      case 'intro':
+      case 'menu':
+        sweepValue = Math.sin(this.filterSweepPhase) * 0.5 + 0.5;
+        break;
+      case 'machine':
+      case 'projects':
+      case 'boss':
+        sweepValue = Math.abs(((this.filterSweepPhase % 2) / 2) * 2 - 1);
+        break;
+      default:
+        sweepValue = (Math.sin(this.filterSweepPhase) + Math.sin(this.filterSweepPhase * 1.7) * 0.3) * 0.38 + 0.5;
+        break;
+    }
+
+    const baseFreq = Math.min(this.params.filterCutoff, 1200);
+
+    const padFreq = baseFreq * (1 - depth * 0.5 + sweepValue * depth);
     this.padFilter.frequency.linearRampToValueAtTime(padFreq, now + 0.1);
 
-    // Noise filter modulation (inverse)
-    const noiseFreq = baseFreq * (1.5 - sweepValue * 0.5);
+    const noiseFreq = Math.min(baseFreq * (1 + depth * 0.3 - sweepValue * depth * 0.3), 1500);
     this.noiseFilter.frequency.linearRampToValueAtTime(noiseFreq, now + 0.1);
   }
 
-  /**
-   * Play kick drum
-   */
+  private static readonly PERCUSSION_FREE_MOODS: Set<string> = new Set(['intro', 'menu']);
+  private static readonly SOFT_PERCUSSION_MOODS: Set<string> = new Set([
+    'ocean',
+    'sacred',
+    'painted',
+    'library',
+    'signals',
+  ]);
+
   private playKick(time: number, volume: number = 0.5): void {
     if (!this.context || !this.masterGain) return;
+    if (ProceduralMusic.PERCUSSION_FREE_MOODS.has(this.mood)) return;
     if (time - this.lastKickTime < 0.1) return;
     this.lastKickTime = time;
 
+    const soft = ProceduralMusic.SOFT_PERCUSSION_MOODS.has(this.mood);
     const osc = this.context.createOscillator();
     const gain = this.context.createGain();
 
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(150 + this.params.distortionAmount * 50, time);
-    osc.frequency.exponentialRampToValueAtTime(30, time + 0.1);
 
-    gain.gain.setValueAtTime(volume, time);
-    gain.gain.exponentialRampToValueAtTime(0.01, time + 0.2);
+    // Mood-specific kick profiles
+    let startFreq: number;
+    let endFreq: number;
+    let decay: number;
+    switch (this.mood) {
+      case 'ocean':
+      case 'reef':
+        startFreq = 80;
+        endFreq = 25;
+        decay = 0.3;
+        break;
+      case 'machine':
+      case 'projects':
+      case 'boss':
+        startFreq = 180 + this.params.distortionAmount * 60;
+        endFreq = 35;
+        decay = 0.15;
+        break;
+      case 'heroic':
+      case 'bloom':
+        startFreq = 120;
+        endFreq = 30;
+        decay = 0.25;
+        break;
+      default:
+        startFreq = 120;
+        endFreq = 30;
+        decay = 0.2;
+        break;
+    }
 
-    // Add subtle distortion for projects/boss
+    osc.frequency.setValueAtTime(startFreq, time);
+    osc.frequency.exponentialRampToValueAtTime(endFreq, time + decay * 0.5);
+
+    const vol = soft ? volume * 0.4 : volume;
+    gain.gain.setValueAtTime(vol, time);
+    gain.gain.exponentialRampToValueAtTime(0.01, time + decay);
+
     if (this.params.distortionAmount > 0.3) {
       const distortion = this.context.createWaveShaper();
       const curve = new Float32Array(256);
@@ -1728,9 +1902,8 @@ export class ProceduralMusic {
     }
 
     gain.connect(this.masterGain);
-
     osc.start(time);
-    osc.stop(time + 0.2);
+    osc.stop(time + decay);
   }
 
   /**
@@ -1753,7 +1926,7 @@ export class ProceduralMusic {
 
     source.buffer = buffer;
     filter.type = 'highpass';
-    filter.frequency.value = 7000 + this.params.filterCutoff;
+    filter.frequency.value = 7000 + Math.min(this.params.filterCutoff, 800);
 
     gain.gain.setValueAtTime(volume, time);
     gain.gain.exponentialRampToValueAtTime(0.01, time + 0.04);
@@ -1766,19 +1939,59 @@ export class ProceduralMusic {
     source.stop(time + 0.05);
   }
 
-  /**
-   * Play snare
-   */
   private playSnare(time: number, volume: number): void {
     if (!this.context || !this.masterGain) return;
+    if (ProceduralMusic.PERCUSSION_FREE_MOODS.has(this.mood)) return;
     if (time - this.lastSnareTime < 0.1) return;
     this.lastSnareTime = time;
 
-    // Noise component
-    const bufferSize = Math.floor(this.context.sampleRate * 0.15);
+    const soft = ProceduralMusic.SOFT_PERCUSSION_MOODS.has(this.mood);
+
+    // Mood-specific snare profiles
+    let noiseFreq: number;
+    let noiseQ: number;
+    let bodyStart: number;
+    let bodyEnd: number;
+    let decay: number;
+    switch (this.mood) {
+      case 'ocean':
+      case 'reef':
+        noiseFreq = 3000;
+        noiseQ = 2;
+        bodyStart = 140;
+        bodyEnd = 70;
+        decay = 0.2;
+        break;
+      case 'machine':
+      case 'projects':
+      case 'boss':
+        noiseFreq = 4000;
+        noiseQ = 1;
+        bodyStart = 220;
+        bodyEnd = 100;
+        decay = 0.08;
+        break;
+      case 'heroic':
+      case 'bloom':
+        noiseFreq = 3500;
+        noiseQ = 1.5;
+        bodyStart = 200;
+        bodyEnd = 90;
+        decay = 0.12;
+        break;
+      default:
+        noiseFreq = 3000;
+        noiseQ = 1.5;
+        bodyStart = 180;
+        bodyEnd = 90;
+        decay = 0.12;
+        break;
+    }
+
+    const noiseDuration = decay + 0.05;
+    const bufferSize = Math.floor(this.context.sampleRate * noiseDuration);
     const buffer = this.context.createBuffer(1, bufferSize, this.context.sampleRate);
     const data = buffer.getChannelData(0);
-
     for (let i = 0; i < bufferSize; i++) {
       data[i] = Math.random() * 2 - 1;
     }
@@ -1789,28 +2002,28 @@ export class ProceduralMusic {
 
     source.buffer = buffer;
     filter.type = 'bandpass';
-    filter.frequency.value = 2500 + this.params.filterCutoff;
-    filter.Q.value = 1.5;
+    filter.frequency.value = noiseFreq;
+    filter.Q.value = noiseQ;
 
-    gain.gain.setValueAtTime(volume, time);
-    gain.gain.exponentialRampToValueAtTime(0.01, time + 0.12);
+    const vol = soft ? volume * 0.3 : volume;
+    gain.gain.setValueAtTime(vol, time);
+    gain.gain.exponentialRampToValueAtTime(0.01, time + decay);
 
     source.connect(filter);
     filter.connect(gain);
     gain.connect(this.masterGain);
 
     source.start(time);
-    source.stop(time + 0.15);
+    source.stop(time + noiseDuration);
 
-    // Body tone
     const bodyOsc = this.context.createOscillator();
     const bodyGain = this.context.createGain();
 
     bodyOsc.type = 'triangle';
-    bodyOsc.frequency.setValueAtTime(180, time);
-    bodyOsc.frequency.exponentialRampToValueAtTime(90, time + 0.04);
+    bodyOsc.frequency.setValueAtTime(bodyStart, time);
+    bodyOsc.frequency.exponentialRampToValueAtTime(bodyEnd, time + 0.04);
 
-    bodyGain.gain.setValueAtTime(volume * 0.4, time);
+    bodyGain.gain.setValueAtTime(vol * 0.4, time);
     bodyGain.gain.exponentialRampToValueAtTime(0.01, time + 0.08);
 
     bodyOsc.connect(bodyGain);
@@ -1820,35 +2033,103 @@ export class ProceduralMusic {
     bodyOsc.stop(time + 0.1);
   }
 
-  /**
-   * Create the drone layer
-   */
+  private static readonly MOOD_REVERB_DECAY: Record<string, number> = {
+    ocean: 3.5,
+    sacred: 4.0,
+    painted: 2.5,
+    library: 3.0,
+    signals: 2.0,
+    reef: 2.5,
+    pantheon: 3.5,
+    heroic: 1.5,
+    bloom: 2.0,
+    intro: 3.0,
+    menu: 2.5,
+    neural: 1.0,
+    escape: 0.8,
+    machine: 0.5,
+    projects: 0.5,
+    boss: 0.8,
+  };
+
+  private createReverbBus(): void {
+    if (!this.context || !this.masterGain) return;
+
+    this.reverbConvolver = this.context.createConvolver();
+    this.reverbSend = this.context.createGain();
+    this.reverbReturn = this.context.createGain();
+
+    // Generate impulse response based on mood
+    const decay = ProceduralMusic.MOOD_REVERB_DECAY[this.mood] ?? 2.0;
+    const sampleRate = this.context.sampleRate;
+    const length = Math.floor(sampleRate * decay);
+    const impulse = this.context.createBuffer(2, length, sampleRate);
+
+    for (let ch = 0; ch < 2; ch++) {
+      const data = impulse.getChannelData(ch);
+      for (let i = 0; i < length; i++) {
+        data[i] = (Math.random() * 2 - 1) * (1 - i / length) ** 2;
+      }
+    }
+    this.reverbConvolver.buffer = impulse;
+
+    const wetLevel = this.params.useReverb ? 0.25 : 0.08;
+    this.reverbSend.gain.value = wetLevel;
+    this.reverbReturn.gain.value = 0.6;
+
+    // Route: reverbSend -> convolver -> reverbReturn -> masterGain
+    this.reverbSend.connect(this.reverbConvolver);
+    this.reverbConvolver.connect(this.reverbReturn);
+    this.reverbReturn.connect(this.masterGain);
+  }
+
+  private static readonly MOOD_DRONE_WAVEFORM: Record<string, OscillatorType> = {
+    ocean: 'sine',
+    sacred: 'sine',
+    intro: 'sine',
+    menu: 'sine',
+    reef: 'triangle',
+    painted: 'triangle',
+    library: 'triangle',
+    signals: 'triangle',
+    neural: 'sawtooth',
+    heroic: 'sawtooth',
+    escape: 'sawtooth',
+    machine: 'sawtooth',
+    projects: 'sawtooth',
+    bloom: 'sawtooth',
+    boss: 'sawtooth',
+    pantheon: 'triangle',
+  };
+
   private createDroneLayer(): void {
     if (!this.context || !this.masterGain) return;
 
-    // Primary drone
     this.droneOsc = this.context.createOscillator();
     this.droneOsc2 = this.context.createOscillator();
     this.droneGain = this.context.createGain();
 
-    const filter = this.context.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.value = 80;
-    filter.Q.value = 5;
+    this.droneFilter = this.context.createBiquadFilter();
+    this.droneFilter.type = 'lowpass';
+    // Mood-driven cutoff instead of fixed 80 Hz
+    const droneCutoff = Math.min(this.params.filterCutoff * 0.5, 500);
+    this.droneFilter.frequency.value = Math.max(droneCutoff, 60);
+    this.droneFilter.Q.value = 1.5;
 
-    this.droneOsc.type = 'sawtooth';
+    const waveType = ProceduralMusic.MOOD_DRONE_WAVEFORM[this.mood] || 'sawtooth';
+    this.droneOsc.type = waveType;
     this.droneOsc.frequency.value = this.params.droneNote;
 
-    // Detuned second drone for thickness
-    this.droneOsc2.type = 'sawtooth';
+    this.droneOsc2.type = waveType;
     this.droneOsc2.frequency.value = this.params.droneNote * 1.002;
 
-    this.droneOsc.connect(filter);
-    this.droneOsc2.connect(filter);
-    filter.connect(this.droneGain);
+    this.droneOsc.connect(this.droneFilter);
+    this.droneOsc2.connect(this.droneFilter);
+    this.droneFilter.connect(this.droneGain);
     this.droneGain.connect(this.masterGain);
+    if (this.reverbSend) this.droneGain.connect(this.reverbSend);
 
-    this.droneGain.gain.value = 0.12;
+    this.droneGain.gain.value = 0.10;
 
     this.droneOsc.start();
     this.droneOsc2.start();
@@ -1859,9 +2140,9 @@ export class ProceduralMusic {
 
     const bassFilter = this.context.createBiquadFilter();
     bassFilter.type = 'lowpass';
-    bassFilter.frequency.value = 120;
+    bassFilter.frequency.value = 150;
 
-    this.bassOsc.type = 'square';
+    this.bassOsc.type = 'triangle';
     this.bassOsc.frequency.value = this.params.bassFreq;
 
     this.bassOsc.connect(bassFilter);
@@ -1904,6 +2185,7 @@ export class ProceduralMusic {
     this.padOsc3.connect(this.padFilter);
     this.padFilter.connect(this.padGain);
     this.padGain.connect(this.masterGain);
+    if (this.reverbSend) this.padGain.connect(this.reverbSend);
 
     this.padGain.gain.value = 0.06;
 
@@ -1935,7 +2217,7 @@ export class ProceduralMusic {
     this.noiseFilter.frequency.value = this.params.filterCutoff;
 
     this.noiseGain = this.context.createGain();
-    this.noiseGain.gain.value = 0.015;
+    this.noiseGain.gain.value = 0.008;
 
     this.noiseSource.connect(this.noiseFilter);
     this.noiseFilter.connect(this.noiseGain);
@@ -1952,8 +2234,16 @@ export class ProceduralMusic {
     const transitionTime = 2;
 
     if (this.droneOsc && this.droneOsc2) {
+      const waveType = ProceduralMusic.MOOD_DRONE_WAVEFORM[this.mood] || 'sawtooth';
+      this.droneOsc.type = waveType;
+      this.droneOsc2.type = waveType;
       this.droneOsc.frequency.linearRampToValueAtTime(this.params.droneNote, now + transitionTime);
       this.droneOsc2.frequency.linearRampToValueAtTime(this.params.droneNote * 1.002, now + transitionTime);
+    }
+
+    if (this.droneFilter) {
+      const droneCutoff = Math.max(Math.min(this.params.filterCutoff * 0.5, 500), 60);
+      this.droneFilter.frequency.linearRampToValueAtTime(droneCutoff, now + transitionTime);
     }
 
     if (this.bassOsc) {
@@ -2011,9 +2301,9 @@ export class ProceduralMusic {
       this.padGain.gain.linearRampToValueAtTime(padVolume, now + 0.1);
     }
 
-    // Noise increases with intensity
+    // Noise — kept subtle to avoid harshness
     if (this.noiseGain) {
-      const noiseVolume = (0.01 + this.combatIntensity * 0.03) * breakdownMod;
+      const noiseVolume = (0.005 + this.combatIntensity * 0.015) * breakdownMod;
       this.noiseGain.gain.linearRampToValueAtTime(noiseVolume, now + 0.1);
     }
 
@@ -2055,16 +2345,26 @@ export class ProceduralMusic {
   // ---- Helper: pick mood-appropriate progression and melody (E1) ----
 
   private pickMoodProgressionAndMelody(): void {
-    const style = MOOD_TO_STYLE[this.mood] || 'dark';
+    const style = this._currentStyle || MOOD_TO_STYLE[this.mood] || 'dark';
     const styleProgressions = CHORD_PROGRESSIONS_BY_STYLE[style];
     if (styleProgressions && styleProgressions.length > 0) {
       this.currentProgression = styleProgressions[Math.floor(Math.random() * styleProgressions.length)];
     } else {
-      this.currentProgression = CHORD_PROGRESSIONS[Math.floor(Math.random() * CHORD_PROGRESSIONS.length)];
+      const fallbackStyle = MOOD_TO_STYLE[this.mood] || 'dark';
+      const fallbackProgressions = CHORD_PROGRESSIONS_BY_STYLE[fallbackStyle];
+      if (fallbackProgressions && fallbackProgressions.length > 0) {
+        this.currentProgression = fallbackProgressions[Math.floor(Math.random() * fallbackProgressions.length)];
+      } else {
+        this.currentProgression = CHORD_PROGRESSIONS[Math.floor(Math.random() * CHORD_PROGRESSIONS.length)];
+      }
     }
 
-    const categories = MOOD_TO_MELODY_CATEGORY[this.mood] || ['ascending'];
-    const cat = categories[Math.floor(Math.random() * categories.length)];
+    // Prefer style-derived melody categories when an explicit style is set
+    const melodyCategories =
+      (this._currentStyle && STYLE_TO_MELODY_CATEGORY[this._currentStyle]) ||
+      MOOD_TO_MELODY_CATEGORY[this.mood] ||
+      ['ascending'];
+    const cat = melodyCategories[Math.floor(Math.random() * melodyCategories.length)];
     const patterns = MELODY_PATTERNS_EXTENDED[cat];
     if (patterns && patterns.length > 0) {
       this.currentMelody = patterns[Math.floor(Math.random() * patterns.length)];
@@ -2115,10 +2415,10 @@ export class ProceduralMusic {
     const delay = this.context.createDelay();
     delay.delayTime.value = 1 / freq;
     const fb = this.context.createGain();
-    fb.gain.value = 0.98;
+    fb.gain.value = 0.85;
     const filter = this.context.createBiquadFilter();
     filter.type = 'lowpass';
-    filter.frequency.value = freq * 4;
+    filter.frequency.value = Math.min(freq * 2.5, 3000);
 
     const outGain = this.context.createGain();
     outGain.gain.setValueAtTime(volume, time);
@@ -2154,18 +2454,24 @@ export class ProceduralMusic {
   private playMetallic(time: number, volume: number): void {
     if (!this.context || !this.masterGain) return;
     const freqs = [800, 1120, 1360];
+    const filter = this.context.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 2000;
+    filter.Q.value = 0.7;
+
     const gain = this.context.createGain();
-    gain.gain.setValueAtTime(volume, time);
-    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
+    gain.gain.setValueAtTime(volume * 0.5, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.12);
+    filter.connect(gain);
     gain.connect(this.masterGain);
 
     freqs.forEach((f) => {
       const osc = this.context!.createOscillator();
       osc.type = 'sine';
       osc.frequency.value = f;
-      osc.connect(gain);
+      osc.connect(filter);
       osc.start(time);
-      osc.stop(time + 0.15);
+      osc.stop(time + 0.12);
     });
   }
 
@@ -2178,18 +2484,19 @@ export class ProceduralMusic {
     osc.type = 'sawtooth';
     osc.frequency.value = freq;
     filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(freq * 8, time);
-    filter.frequency.exponentialRampToValueAtTime(freq * 0.5, time + 0.2);
-    filter.Q.value = 12;
+    const startCutoff = Math.min(freq * 3, 4000);
+    filter.frequency.setValueAtTime(startCutoff, time);
+    filter.frequency.exponentialRampToValueAtTime(Math.max(freq * 0.5, 80), time + 0.3);
+    filter.Q.value = 4;
 
-    gain.gain.setValueAtTime(volume, time);
-    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.25);
+    gain.gain.setValueAtTime(volume * 0.6, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.3);
 
     osc.connect(filter);
     filter.connect(gain);
     gain.connect(this.masterGain);
     osc.start(time);
-    osc.stop(time + 0.25);
+    osc.stop(time + 0.35);
   }
 
   private playEtherealPad(time: number, freq: number, volume: number): void {
@@ -2211,7 +2518,222 @@ export class ProceduralMusic {
     });
   }
 
-  /** Play a synth stab using the mood-appropriate instrument */
+  // ---- New instrument voices ----
+
+  private playFilteredSawPad(time: number, freq: number, volume: number): void {
+    if (!this.context || !this.masterGain) return;
+    const gain = this.context.createGain();
+    const filter = this.context.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(Math.min(freq * 2, 2000), time);
+    filter.frequency.exponentialRampToValueAtTime(Math.max(freq * 0.3, 80), time + 1.5);
+    filter.Q.value = 1.5;
+
+    gain.gain.setValueAtTime(0, time);
+    gain.gain.linearRampToValueAtTime(volume * 0.7, time + 0.3);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 2);
+
+    filter.connect(gain);
+    gain.connect(this.masterGain);
+
+    [freq, freq * 1.005, freq * 0.995].forEach((f) => {
+      const osc = this.context!.createOscillator();
+      osc.type = 'sawtooth';
+      osc.frequency.value = f;
+      osc.connect(filter);
+      osc.start(time);
+      osc.stop(time + 2);
+    });
+  }
+
+  private playAdditiveBell(time: number, freq: number, volume: number): void {
+    if (!this.context || !this.masterGain) return;
+    const gain = this.context.createGain();
+    gain.gain.setValueAtTime(volume * 0.5, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 2.5);
+    gain.connect(this.masterGain);
+
+    const partials = [1, 2.2, 3.1, 4.7, 6.3];
+    partials.forEach((ratio, i) => {
+      const osc = this.context!.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = freq * ratio;
+      const pGain = this.context!.createGain();
+      pGain.gain.setValueAtTime(volume * (0.3 / (i + 1)), time);
+      pGain.gain.exponentialRampToValueAtTime(0.001, time + 2.5 / (i + 1));
+      osc.connect(pGain);
+      pGain.connect(gain);
+      osc.start(time);
+      osc.stop(time + 2.5);
+    });
+  }
+
+  private playBreathyFlute(time: number, freq: number, volume: number): void {
+    if (!this.context || !this.masterGain) return;
+    const osc = this.context.createOscillator();
+    const noiseLen = Math.floor(this.context.sampleRate * 0.8);
+    const noiseBuf = this.context.createBuffer(1, noiseLen, this.context.sampleRate);
+    const d = noiseBuf.getChannelData(0);
+    for (let i = 0; i < noiseLen; i++) d[i] = Math.random() * 2 - 1;
+
+    const noiseSource = this.context.createBufferSource();
+    noiseSource.buffer = noiseBuf;
+
+    const noiseFilt = this.context.createBiquadFilter();
+    noiseFilt.type = 'bandpass';
+    noiseFilt.frequency.value = freq;
+    noiseFilt.Q.value = 8;
+
+    const noiseGain = this.context.createGain();
+    noiseGain.gain.setValueAtTime(volume * 0.3, time);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, time + 0.8);
+
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    const oscGain = this.context.createGain();
+    oscGain.gain.setValueAtTime(0, time);
+    oscGain.gain.linearRampToValueAtTime(volume * 0.5, time + 0.1);
+    oscGain.gain.exponentialRampToValueAtTime(0.001, time + 0.8);
+
+    noiseSource.connect(noiseFilt);
+    noiseFilt.connect(noiseGain);
+    noiseGain.connect(this.masterGain);
+    osc.connect(oscGain);
+    oscGain.connect(this.masterGain);
+
+    osc.start(time);
+    osc.stop(time + 0.8);
+    noiseSource.start(time);
+    noiseSource.stop(time + 0.8);
+  }
+
+  private playWarmOrgan(time: number, freq: number, volume: number): void {
+    if (!this.context || !this.masterGain) return;
+    const gain = this.context.createGain();
+    gain.gain.setValueAtTime(0, time);
+    gain.gain.linearRampToValueAtTime(volume * 0.5, time + 0.15);
+    gain.gain.linearRampToValueAtTime(volume * 0.4, time + 1);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 1.5);
+    gain.connect(this.masterGain);
+
+    [1, 2, 3, 4].forEach((harmonic, i) => {
+      const osc = this.context!.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = freq * harmonic;
+      const hGain = this.context!.createGain();
+      hGain.gain.value = 0.25 / (i + 1);
+      osc.connect(hGain);
+      hGain.connect(gain);
+      osc.start(time);
+      osc.stop(time + 1.5);
+    });
+  }
+
+  private playTapeDelay(time: number, freq: number, volume: number): void {
+    if (!this.context || !this.masterGain) return;
+    const osc = this.context.createOscillator();
+    osc.type = 'triangle';
+    osc.frequency.value = freq;
+
+    const delay = this.context.createDelay(1);
+    delay.delayTime.value = 60 / Math.max(this.params.tempo, 60) / 2;
+    const fb = this.context.createGain();
+    fb.gain.value = 0.4;
+    const filter = this.context.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = Math.min(freq * 2, 2000);
+
+    const dryGain = this.context.createGain();
+    dryGain.gain.setValueAtTime(volume * 0.6, time);
+    dryGain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
+
+    osc.connect(dryGain);
+    osc.connect(delay);
+    delay.connect(filter);
+    filter.connect(fb);
+    fb.connect(delay);
+    delay.connect(dryGain);
+    dryGain.connect(this.masterGain);
+
+    osc.start(time);
+    osc.stop(time + 0.5);
+  }
+
+  private playLoFiSynth(time: number, freq: number, volume: number): void {
+    if (!this.context || !this.masterGain) return;
+    const osc = this.context.createOscillator();
+    const filter = this.context.createBiquadFilter();
+    const gain = this.context.createGain();
+
+    osc.type = 'square';
+    osc.frequency.value = freq;
+    filter.type = 'lowpass';
+    filter.frequency.value = Math.min(freq * 1.5, 1500);
+    filter.Q.value = 0.5;
+
+    gain.gain.setValueAtTime(volume * 0.4, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.4);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.masterGain);
+    osc.start(time);
+    osc.stop(time + 0.4);
+  }
+
+  // Style-to-instrument mapping for variety
+  private static readonly STYLE_INSTRUMENTS: Record<string, string[]> = {
+    dark: ['resonantSynth', 'filteredSawPad', 'loFi'],
+    heroic: ['fmBell', 'warmOrgan', 'additiveBell'],
+    sacred: ['additiveBell', 'etherealPad', 'breathyFlute'],
+    mysterious: ['tapeDelay', 'filteredSawPad', 'pluck'],
+    aggressive: ['resonantSynth', 'subBass', 'loFi'],
+    dreamy: ['etherealPad', 'filteredSawPad', 'additiveBell'],
+    tension: ['tapeDelay', 'resonantSynth', 'loFi'],
+    meditative: ['breathyFlute', 'etherealPad', 'warmOrgan'],
+  };
+
+  private playInstrumentByName(name: string, time: number, freq: number, vol: number): void {
+    switch (name) {
+      case 'fmBell':
+        this.playFMBell(time, freq, vol);
+        break;
+      case 'pluck':
+        this.playPluck(time, freq, vol);
+        break;
+      case 'subBass':
+        this.playSubBass(time, freq, vol);
+        break;
+      case 'resonantSynth':
+        this.playResonantSynth(time, freq, vol);
+        break;
+      case 'etherealPad':
+        this.playEtherealPad(time, freq, vol * 0.5);
+        break;
+      case 'filteredSawPad':
+        this.playFilteredSawPad(time, freq, vol);
+        break;
+      case 'additiveBell':
+        this.playAdditiveBell(time, freq, vol);
+        break;
+      case 'breathyFlute':
+        this.playBreathyFlute(time, freq, vol);
+        break;
+      case 'warmOrgan':
+        this.playWarmOrgan(time, freq, vol);
+        break;
+      case 'tapeDelay':
+        this.playTapeDelay(time, freq, vol);
+        break;
+      case 'loFi':
+        this.playLoFiSynth(time, freq, vol);
+        break;
+      default:
+        this.playFMBell(time, freq, vol);
+        break;
+    }
+  }
+
   private playMoodInstrument(time: number, melodyIndex: number): void {
     if (!this.context || !this.masterGain) return;
 
@@ -2220,8 +2742,18 @@ export class ProceduralMusic {
     const scaleDegree = Math.abs(semitones % this.currentScale.length);
     const octaveOffset = Math.floor(semitones / 12);
     const freq = this.getScaleNote(scaleDegree, octaveOffset + 1);
-    const vol = 0.06 * this.combatIntensity;
+    const vol = 0.05 * this.combatIntensity;
 
+    // Prefer style-based instrument selection for variety
+    const style = this._currentStyle || MOOD_TO_STYLE[this.mood] || 'dark';
+    const instruments = ProceduralMusic.STYLE_INSTRUMENTS[style];
+    if (instruments && instruments.length > 0) {
+      const pick = instruments[(melodyIndex + this.phraseCount) % instruments.length];
+      this.playInstrumentByName(pick, time, freq, vol);
+      return;
+    }
+
+    // Fallback to mood-based
     switch (this.mood) {
       case 'sacred':
       case 'painted':
@@ -2236,16 +2768,12 @@ export class ProceduralMusic {
       case 'boss':
         this.playSubBass(time, freq, vol);
         break;
-      case 'projects':
-      case 'signals':
-        this.playResonantSynth(time, freq, vol);
-        break;
       case 'intro':
       case 'menu':
         this.playEtherealPad(time, freq, vol * 0.5);
         break;
       default:
-        this.playSynthStab(time, melodyIndex);
+        this.playFilteredSawPad(time, freq, vol);
         break;
     }
   }

@@ -39,6 +39,7 @@
   "dependencies": {
     "@elata-biosciences/eeg-web": "^0.1.5",
     "@elata-biosciences/eeg-web-ble": "^0.1.5",
-    "@elata-biosciences/rppg-web": "^0.1.5"
+    "@elata-biosciences/rppg-web": "^0.1.5",
+    "tonal": "^6.4.3"
   }
 }

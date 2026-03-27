@@ -92,14 +92,14 @@
   "musicSeed": {
     "seed": "zarathustra_016",
     "mode": "dorian",
+    "scale": "dorian",
+    "style": "mysterious",
     "tempoRange": [
-      77,
-      97
+      70,
+      85
     ],
-    "intensity": 0.69,
-    "scale": "locrian",
-    "style": "tension",
-    "timeSignature": "6/8"
+    "intensity": 0.25,
+    "timeSignature": "4/4"
   },
   "duration": 150,
   "unlockCondition": "lit_level15_complete"

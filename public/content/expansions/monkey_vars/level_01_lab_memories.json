@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "lab_memories_001",
-    "mode": "pentatonic",
+    "mode": "pentatonicMinor",
+    "scale": "pentatonicMinor",
+    "style": "mysterious",
     "tempoRange": [
-      80,
-      101
+      70,
+      85
     ],
-    "intensity": 0.3,
-    "scale": "ionian",
-    "style": "dreamy",
-    "timeSignature": "6/8"
+    "intensity": 0.25,
+    "timeSignature": "4/4"
   },
   "duration": 120,
   "unlockCondition": "act8_complete"

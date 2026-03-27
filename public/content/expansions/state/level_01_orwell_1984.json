@@ -134,13 +134,13 @@
   "musicSeed": {
     "seed": "1984_001",
     "mode": "phrygian",
+    "scale": "phrygian",
+    "style": "tension",
     "tempoRange": [
       85,
-      106
+      100
     ],
     "intensity": 0.3,
-    "scale": "phrygianDominant",
-    "style": "aggressive",
     "timeSignature": "5/4"
   },
   "duration": 130,

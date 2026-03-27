@@ -101,6 +101,8 @@ export class EndlessScene extends Scene {
     storage.incrementStat('totalPlayTime', Math.floor(this.playTime));
     storage.save();
 
+    this.game.getMusic().stop();
+
     // Cleanup
     this.weapons.clear();
     this.enemies.clear();

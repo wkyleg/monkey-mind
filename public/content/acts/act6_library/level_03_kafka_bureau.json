@@ -135,14 +135,14 @@
   },
   "musicSeed": {
     "seed": "kafka_003",
-    "mode": "dorian",
+    "mode": "locrian",
     "tempoRange": [
-      98,
-      112
+      78,
+      92
     ],
-    "intensity": 0.55,
-    "scale": "wholeTone",
-    "style": "mysterious",
+    "intensity": 0.45,
+    "scale": "locrian",
+    "style": "tension",
     "timeSignature": "5/4"
   },
   "duration": 120,

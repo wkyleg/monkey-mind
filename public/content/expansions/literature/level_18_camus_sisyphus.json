@@ -91,15 +91,15 @@
   },
   "musicSeed": {
     "seed": "sisyphus_018",
-    "mode": "dorian",
+    "mode": "lydian",
+    "scale": "lydian",
+    "style": "dreamy",
     "tempoRange": [
-      78,
-      99
+      80,
+      95
     ],
-    "intensity": 0.75,
-    "scale": "wholeTone",
-    "style": "mysterious",
-    "timeSignature": "5/4"
+    "intensity": 0.45,
+    "timeSignature": "4/4"
   },
   "duration": 140,
   "unlockCondition": "lit_level17_complete"

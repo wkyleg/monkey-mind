@@ -134,15 +134,15 @@
   },
   "musicSeed": {
     "seed": "credit_005",
-    "mode": "phrygian",
+    "mode": "locrian",
+    "scale": "locrian",
+    "style": "aggressive",
     "tempoRange": [
-      92,
-      115
+      110,
+      140
     ],
-    "intensity": 0.63,
-    "scale": "aeolian",
-    "style": "tension",
-    "timeSignature": "4/4"
+    "intensity": 0.85,
+    "timeSignature": "7/8"
   },
   "duration": 150,
   "unlockCondition": "state_level4_complete"

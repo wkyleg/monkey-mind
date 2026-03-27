@@ -133,14 +133,14 @@
   },
   "musicSeed": {
     "seed": "stasi_004",
-    "mode": "phrygian",
+    "mode": "chromatic",
+    "scale": "chromatic",
+    "style": "dark",
     "tempoRange": [
-      90,
-      113
+      100,
+      120
     ],
-    "intensity": 0.55,
-    "scale": "aeolian",
-    "style": "tension",
+    "intensity": 0.7,
     "timeSignature": "5/4"
   },
   "duration": 140,

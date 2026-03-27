@@ -135,14 +135,14 @@
   },
   "musicSeed": {
     "seed": "cubist_004",
-    "mode": "chromatic",
+    "mode": "enigmatic",
     "tempoRange": [
-      125,
-      152
+      95,
+      115
     ],
-    "intensity": 0.68,
-    "scale": "chromatic",
-    "style": "aggressive",
+    "intensity": 0.65,
+    "scale": "enigmatic",
+    "style": "tension",
     "timeSignature": "7/8"
   },
   "duration": 130,

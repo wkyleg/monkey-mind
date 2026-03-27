@@ -138,16 +138,15 @@
   },
   "musicSeed": {
     "seed": "musashi_002",
-    "mode": "hirajoshi",
-    "tempoRange": [
-      80,
-      103
-    ],
-    "intensity": 0.55,
+    "mode": "insen",
     "scale": "insen",
-    "style": "meditative",
-    "timeSignature": "6/8",
-    "culturalStyle": "japanese"
+    "style": "mysterious",
+    "tempoRange": [
+      75,
+      95
+    ],
+    "intensity": 0.5,
+    "timeSignature": "5/4"
   },
   "duration": 130,
   "unlockCondition": "samurai_level1_complete"

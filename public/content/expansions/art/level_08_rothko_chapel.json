@@ -133,16 +133,15 @@
   },
   "musicSeed": {
     "seed": "rothko_008",
-    "mode": "hirajoshi",
+    "mode": "lydian",
+    "scale": "lydian",
+    "style": "dreamy",
     "tempoRange": [
-      77,
-      94
+      82,
+      98
     ],
-    "intensity": 0.74,
-    "scale": "wholeTone",
-    "style": "meditative",
-    "timeSignature": "6/8",
-    "culturalStyle": "japanese"
+    "intensity": 0.45,
+    "timeSignature": "6/8"
   },
   "duration": 180,
   "unlockCondition": "art_level7_complete"

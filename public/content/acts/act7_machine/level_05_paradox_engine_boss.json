@@ -88,13 +88,13 @@
   },
   "musicSeed": {
     "seed": "paradox_boss_005",
-    "mode": "phrygianDominant",
+    "mode": "chromatic",
     "tempoRange": [
-      130,
+      125,
       150
     ],
     "intensity": 0.85,
-    "scale": "phrygianDominant",
+    "scale": "chromatic",
     "style": "aggressive",
     "timeSignature": "11/8"
   },

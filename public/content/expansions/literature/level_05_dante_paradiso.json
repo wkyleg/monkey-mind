@@ -91,15 +91,15 @@
   },
   "musicSeed": {
     "seed": "paradiso_005",
-    "mode": "dorian",
+    "mode": "harmonicMinor",
+    "scale": "harmonicMinor",
+    "style": "aggressive",
     "tempoRange": [
-      72,
-      91
+      95,
+      120
     ],
-    "intensity": 0.41,
-    "scale": "doubleHarmonic",
-    "style": "heroic",
-    "timeSignature": "5/4"
+    "intensity": 0.8,
+    "timeSignature": "7/8"
   },
   "duration": 150,
   "unlockCondition": "lit_level4_complete"

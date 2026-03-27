@@ -131,15 +131,15 @@
   },
   "musicSeed": {
     "seed": "bek_008",
-    "mode": "locrian",
+    "mode": "hungarianMinor",
+    "scale": "hungarianMinor",
+    "style": "tension",
     "tempoRange": [
-      67,
-      91
+      95,
+      112
     ],
-    "intensity": 0.65,
-    "scale": "harmonicMinor",
-    "style": "dark",
-    "timeSignature": "6/8"
+    "intensity": 0.55,
+    "timeSignature": "7/8"
   },
   "duration": 150,
   "unlockCondition": "paranoia_level7_complete"

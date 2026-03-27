@@ -132,15 +132,15 @@
   },
   "musicSeed": {
     "seed": "bicameral_005",
-    "mode": "wholeTone",
+    "mode": "bebop",
+    "scale": "bebop",
+    "style": "aggressive",
     "tempoRange": [
-      70,
-      92
+      98,
+      125
     ],
-    "intensity": 0.52,
-    "scale": "quartal",
-    "style": "dark",
-    "timeSignature": "4/4"
+    "intensity": 0.85,
+    "timeSignature": "7/8"
   },
   "duration": 140,
   "unlockCondition": "science_level4_complete"

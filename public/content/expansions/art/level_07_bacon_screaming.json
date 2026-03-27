@@ -131,16 +131,15 @@
   },
   "musicSeed": {
     "seed": "bacon_007",
-    "mode": "hirajoshi",
+    "mode": "wholeTone",
+    "scale": "wholeTone",
+    "style": "dreamy",
     "tempoRange": [
-      76,
-      93
+      78,
+      92
     ],
-    "intensity": 0.68,
-    "scale": "augmented",
-    "style": "sacred",
-    "timeSignature": "6/8",
-    "culturalStyle": "japanese"
+    "intensity": 0.3,
+    "timeSignature": "3/4"
   },
   "duration": 150,
   "unlockCondition": "art_level6_complete"

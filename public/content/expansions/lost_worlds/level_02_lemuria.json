@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "lemuria_002",
-    "mode": "pentatonic",
+    "mode": "pelog",
+    "scale": "pelog",
+    "style": "mysterious",
     "tempoRange": [
-      67,
-      86
+      72,
+      88
     ],
-    "intensity": 0.42,
-    "scale": "slendro",
-    "style": "sacred",
-    "timeSignature": "3/4"
+    "intensity": 0.3,
+    "timeSignature": "6/8"
   },
   "duration": 130,
   "unlockCondition": "lost_worlds_level1_complete"

@@ -141,15 +141,14 @@
   "musicSeed": {
     "seed": "bushido_001",
     "mode": "hirajoshi",
+    "scale": "hirajoshi",
+    "style": "tension",
     "tempoRange": [
-      75,
-      96
+      72,
+      88
     ],
-    "intensity": 0.3,
-    "scale": "iwato",
-    "style": "dark",
-    "timeSignature": "5/4",
-    "culturalStyle": "japanese"
+    "intensity": 0.35,
+    "timeSignature": "4/4"
   },
   "duration": 120,
   "unlockCondition": "act8_complete"

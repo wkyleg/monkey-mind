@@ -131,15 +131,15 @@
   },
   "musicSeed": {
     "seed": "simulation_003",
-    "mode": "wholeTone",
-    "tempoRange": [
-      67,
-      89
-    ],
-    "intensity": 0.41,
-    "scale": "locrian",
+    "mode": "prometheus",
+    "scale": "prometheus",
     "style": "mysterious",
-    "timeSignature": "11/8"
+    "tempoRange": [
+      82,
+      98
+    ],
+    "intensity": 0.45,
+    "timeSignature": "6/8"
   },
   "duration": 120,
   "unlockCondition": "science_level2_complete"

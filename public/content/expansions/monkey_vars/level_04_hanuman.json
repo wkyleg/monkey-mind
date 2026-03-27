@@ -135,15 +135,15 @@
   },
   "musicSeed": {
     "seed": "hanuman_004",
-    "mode": "pentatonic",
+    "mode": "pentatonicMajor",
+    "scale": "pentatonicMajor",
+    "style": "mysterious",
     "tempoRange": [
-      86,
-      109
+      78,
+      95
     ],
     "intensity": 0.6,
-    "scale": "blues",
-    "style": "dreamy",
-    "timeSignature": "4/4"
+    "timeSignature": "5/4"
   },
   "duration": 150,
   "unlockCondition": "monkey_vars_level3_complete"

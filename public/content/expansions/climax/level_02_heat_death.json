@@ -134,14 +134,14 @@
   "musicSeed": {
     "seed": "heat_death_002",
     "mode": "chromatic",
+    "scale": "chromatic",
+    "style": "dark",
     "tempoRange": [
-      112,
-      137
+      95,
+      115
     ],
-    "intensity": 0.38,
-    "scale": "locrian",
-    "style": "aggressive",
-    "timeSignature": "5/4"
+    "intensity": 0.55,
+    "timeSignature": "7/8"
   },
   "duration": 140,
   "unlockCondition": "climax_level1_complete"

@@ -131,16 +131,15 @@
   },
   "musicSeed": {
     "seed": "vedic_003",
-    "mode": "bhairav",
+    "mode": "dorian",
+    "scale": "dorian",
+    "style": "heroic",
     "tempoRange": [
-      61,
-      80
+      90,
+      108
     ],
-    "intensity": 0.37,
-    "scale": "nikriz",
-    "style": "meditative",
-    "timeSignature": "7/8",
-    "culturalStyle": "indian"
+    "intensity": 0.5,
+    "timeSignature": "6/8"
   },
   "duration": 130,
   "unlockCondition": "myth_level2_complete"

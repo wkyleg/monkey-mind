@@ -139,10 +139,10 @@
     "seed": "atlantis_004",
     "mode": "lydian",
     "tempoRange": [
-      105,
-      118
+      80,
+      98
     ],
-    "intensity": 0.68,
+    "intensity": 0.55,
     "scale": "lydian",
     "style": "dreamy",
     "timeSignature": "6/8"

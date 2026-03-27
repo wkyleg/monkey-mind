@@ -133,14 +133,14 @@
   },
   "musicSeed": {
     "seed": "sun_wukong_005",
-    "mode": "pentatonic",
+    "mode": "minorBlues",
+    "scale": "minorBlues",
+    "style": "aggressive",
     "tempoRange": [
       88,
-      112
+      108
     ],
-    "intensity": 0.7,
-    "scale": "ionian",
-    "style": "dark",
+    "intensity": 0.75,
     "timeSignature": "7/8"
   },
   "duration": 160,

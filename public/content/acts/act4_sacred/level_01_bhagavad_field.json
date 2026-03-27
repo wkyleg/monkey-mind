@@ -121,14 +121,14 @@
   },
   "musicSeed": {
     "seed": "bhagavad_001",
-    "mode": "harmonicMinor",
+    "mode": "bhairav",
     "tempoRange": [
-      110,
-      122
+      60,
+      72
     ],
-    "intensity": 0.3,
-    "scale": "harmonicMinor",
-    "style": "dark",
+    "intensity": 0.2,
+    "scale": "bhairav",
+    "style": "sacred",
     "timeSignature": "4/4"
   },
   "duration": 100,

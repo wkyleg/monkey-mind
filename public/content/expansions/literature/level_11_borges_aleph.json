@@ -92,14 +92,14 @@
   "musicSeed": {
     "seed": "aleph_011",
     "mode": "dorian",
+    "scale": "dorian",
+    "style": "mysterious",
     "tempoRange": [
-      75,
-      94
+      70,
+      85
     ],
-    "intensity": 0.56,
-    "scale": "mixolydian",
-    "style": "heroic",
-    "timeSignature": "6/8"
+    "intensity": 0.25,
+    "timeSignature": "4/4"
   },
   "duration": 160,
   "unlockCondition": "lit_level10_complete"

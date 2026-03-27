@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "mirror_006",
-    "mode": "pentatonic",
+    "mode": "dorian",
+    "scale": "dorian",
+    "style": "dark",
     "tempoRange": [
-      91,
-      115
+      85,
+      102
     ],
     "intensity": 0.8,
-    "scale": "pentatonicMajor",
-    "style": "dreamy",
-    "timeSignature": "6/8"
+    "timeSignature": "4/4"
   },
   "duration": 180,
   "unlockCondition": "monkey_vars_level5_complete"

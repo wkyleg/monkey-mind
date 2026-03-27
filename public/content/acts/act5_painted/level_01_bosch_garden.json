@@ -135,14 +135,14 @@
   },
   "musicSeed": {
     "seed": "bosch_001",
-    "mode": "chromatic",
+    "mode": "hirajoshi",
     "tempoRange": [
-      100,
-      118
+      78,
+      92
     ],
     "intensity": 0.3,
-    "scale": "chromatic",
-    "style": "tension",
+    "scale": "hirajoshi",
+    "style": "mysterious",
     "timeSignature": "7/8"
   },
   "duration": 100,

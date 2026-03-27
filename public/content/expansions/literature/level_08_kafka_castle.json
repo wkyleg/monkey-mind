@@ -91,15 +91,15 @@
   },
   "musicSeed": {
     "seed": "castle_008",
-    "mode": "dorian",
+    "mode": "lydian",
+    "scale": "lydian",
+    "style": "dreamy",
     "tempoRange": [
-      73,
-      92
+      80,
+      95
     ],
-    "intensity": 0.48,
-    "scale": "blues",
-    "style": "tension",
-    "timeSignature": "6/8"
+    "intensity": 0.45,
+    "timeSignature": "4/4"
   },
   "duration": 140,
   "unlockCondition": "lit_level7_complete"

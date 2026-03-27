@@ -53,13 +53,13 @@
   },
   "musicSeed": {
     "seed": "quiet_mind_boss",
-    "mode": "wholeTone",
+    "mode": "persian",
     "tempoRange": [
-      115,
-      145
+      95,
+      125
     ],
-    "intensity": 0.85,
-    "scale": "chromatic",
+    "intensity": 0.8,
+    "scale": "persian",
     "style": "aggressive",
     "timeSignature": "7/8"
   },

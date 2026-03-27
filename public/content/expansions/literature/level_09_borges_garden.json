@@ -91,15 +91,15 @@
   },
   "musicSeed": {
     "seed": "garden_009",
-    "mode": "dorian",
+    "mode": "phrygian",
+    "scale": "phrygian",
+    "style": "dark",
     "tempoRange": [
-      74,
-      93
+      85,
+      105
     ],
-    "intensity": 0.51,
-    "scale": "pentatonicMinor",
-    "style": "heroic",
-    "timeSignature": "7/8"
+    "intensity": 0.6,
+    "timeSignature": "5/4"
   },
   "duration": 130,
   "unlockCondition": "lit_level8_complete"

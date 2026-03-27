@@ -91,16 +91,15 @@
   },
   "musicSeed": {
     "seed": "gita_005",
-    "mode": "bhairav",
+    "mode": "diminished",
+    "scale": "diminished",
+    "style": "aggressive",
     "tempoRange": [
-      63,
-      81
+      105,
+      130
     ],
-    "intensity": 0.44,
-    "scale": "phrygianDominant",
-    "style": "tension",
-    "timeSignature": "4/4",
-    "culturalStyle": "indian"
+    "intensity": 0.85,
+    "timeSignature": "7/8"
   },
   "duration": 150,
   "unlockCondition": "myth_level4_complete"

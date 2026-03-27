@@ -91,16 +91,15 @@
   },
   "musicSeed": {
     "seed": "bardo_008",
-    "mode": "bhairav",
+    "mode": "dorian",
+    "scale": "dorian",
+    "style": "heroic",
     "tempoRange": [
-      65,
-      84
+      90,
+      108
     ],
-    "intensity": 0.55,
-    "scale": "kafi",
-    "style": "tension",
-    "timeSignature": "3/4",
-    "culturalStyle": "indian"
+    "intensity": 0.5,
+    "timeSignature": "6/8"
   },
   "duration": 160,
   "unlockCondition": "myth_level7_complete"

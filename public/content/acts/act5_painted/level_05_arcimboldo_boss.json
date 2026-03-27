@@ -87,13 +87,13 @@
   },
   "musicSeed": {
     "seed": "arcimboldo_boss_005",
-    "mode": "chromatic",
+    "mode": "persian",
     "tempoRange": [
-      135,
-      165
+      105,
+      130
     ],
     "intensity": 0.85,
-    "scale": "diminished",
+    "scale": "persian",
     "style": "aggressive",
     "timeSignature": "11/8"
   },

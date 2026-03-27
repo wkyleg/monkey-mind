@@ -91,16 +91,15 @@
   },
   "musicSeed": {
     "seed": "zen_007",
-    "mode": "bhairav",
+    "mode": "phrygianDominant",
+    "scale": "phrygianDominant",
+    "style": "sacred",
     "tempoRange": [
-      64,
-      83
+      85,
+      100
     ],
-    "intensity": 0.51,
-    "scale": "hijaz",
-    "style": "mysterious",
-    "timeSignature": "4/4",
-    "culturalStyle": "arabic"
+    "intensity": 0.35,
+    "timeSignature": "4/4"
   },
   "duration": 130,
   "unlockCondition": "myth_level6_complete"

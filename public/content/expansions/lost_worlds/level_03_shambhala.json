@@ -134,15 +134,15 @@
   },
   "musicSeed": {
     "seed": "shambhala_003",
-    "mode": "pentatonic",
+    "mode": "bhairav",
+    "scale": "bhairav",
+    "style": "sacred",
     "tempoRange": [
-      70,
-      89
+      78,
+      95
     ],
-    "intensity": 0.55,
-    "scale": "pelog",
-    "style": "mysterious",
-    "timeSignature": "6/8"
+    "intensity": 0.4,
+    "timeSignature": "4/4"
   },
   "duration": 140,
   "unlockCondition": "lost_worlds_level2_complete"

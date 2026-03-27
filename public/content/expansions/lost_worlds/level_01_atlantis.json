@@ -133,15 +133,15 @@
   },
   "musicSeed": {
     "seed": "atlantis_001",
-    "mode": "pentatonic",
+    "mode": "pentatonicMinor",
+    "scale": "pentatonicMinor",
+    "style": "mysterious",
     "tempoRange": [
-      65,
-      83
+      68,
+      82
     ],
-    "intensity": 0.3,
-    "scale": "bhairav",
-    "style": "heroic",
-    "timeSignature": "3/4"
+    "intensity": 0.2,
+    "timeSignature": "4/4"
   },
   "duration": 120,
   "unlockCondition": "act8_complete"

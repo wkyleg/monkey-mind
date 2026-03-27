@@ -309,9 +309,9 @@ export class Hud {
       this.renderNeuroButton(renderer, width);
     }
 
-    // Toast notification
+    // Toast notification (positioned below quote bar when visible)
     if (this.toastTimer > 0) {
-      this.renderToast(renderer, width, height);
+      this.renderToast(renderer, width, height, !!state.ruleCardHint);
     }
 
     // Debug overlay
@@ -376,10 +376,7 @@ export class Hud {
     ctx.restore();
   }
 
-  /**
-   * Render toast notification
-   */
-  private renderToast(renderer: Renderer, width: number, height: number): void {
+  private renderToast(renderer: Renderer, width: number, _height: number, quoteVisible: boolean): void {
     const ctx = renderer.context;
     const alpha = Math.min(1, this.toastTimer);
     ctx.save();
@@ -388,7 +385,8 @@ export class Hud {
     const toastW = Math.max(300, this.toastMessage.length * 9 + 40);
     const toastH = 32;
     const toastX = (width - toastW) / 2;
-    const toastY = height * 0.13;
+    // Place below the quote bar (y=130, h=30 → bottom at 145) when visible
+    const toastY = quoteVisible ? 155 : 100;
 
     renderer.drawPanel(toastX, toastY, toastW, toastH, 'rgba(8,8,12,0.9)', this.toastColor, 1);
     renderer.hudText(this.toastMessage, width / 2, toastY + toastH / 2, this.toastColor, 14, 'center');

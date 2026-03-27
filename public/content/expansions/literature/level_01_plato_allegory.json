@@ -92,14 +92,14 @@
   "musicSeed": {
     "seed": "plato_001",
     "mode": "dorian",
+    "scale": "dorian",
+    "style": "mysterious",
     "tempoRange": [
       70,
-      88
+      85
     ],
-    "intensity": 0.3,
-    "scale": "locrian",
-    "style": "meditative",
-    "timeSignature": "5/4"
+    "intensity": 0.25,
+    "timeSignature": "4/4"
   },
   "duration": 100,
   "unlockCondition": "act8_complete"

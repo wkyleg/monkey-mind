@@ -133,16 +133,15 @@
   },
   "musicSeed": {
     "seed": "escher_005",
-    "mode": "hirajoshi",
+    "mode": "enigmatic",
+    "scale": "enigmatic",
+    "style": "aggressive",
     "tempoRange": [
-      74,
-      90
+      100,
+      125
     ],
-    "intensity": 0.55,
-    "scale": "insen",
-    "style": "meditative",
-    "timeSignature": "4/4",
-    "culturalStyle": "japanese"
+    "intensity": 0.8,
+    "timeSignature": "11/8"
   },
   "duration": 150,
   "unlockCondition": "art_level4_complete"

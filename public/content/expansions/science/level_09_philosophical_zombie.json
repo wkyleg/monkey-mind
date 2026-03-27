@@ -132,15 +132,15 @@
   },
   "musicSeed": {
     "seed": "pzombie_009",
-    "mode": "wholeTone",
+    "mode": "augmented",
+    "scale": "augmented",
+    "style": "tension",
     "tempoRange": [
-      74,
-      98
+      88,
+      108
     ],
-    "intensity": 0.74,
-    "scale": "diminished",
-    "style": "meditative",
-    "timeSignature": "6/8"
+    "intensity": 0.6,
+    "timeSignature": "7/8"
   },
   "duration": 160,
   "unlockCondition": "science_level8_complete"

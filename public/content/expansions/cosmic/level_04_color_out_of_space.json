@@ -134,15 +134,15 @@
   },
   "musicSeed": {
     "seed": "color_space_004",
-    "mode": "locrian",
+    "mode": "enigmatic",
+    "scale": "enigmatic",
+    "style": "tension",
     "tempoRange": [
-      59,
-      80
+      80,
+      100
     ],
-    "intensity": 0.8,
-    "scale": "augmented",
-    "style": "mysterious",
-    "timeSignature": "6/8"
+    "intensity": 0.6,
+    "timeSignature": "7/8"
   },
   "duration": 130,
   "unlockCondition": "cosmic_level3_complete"

@@ -122,12 +122,12 @@
     "seed": "zoo_escape_001",
     "mode": "phrygian",
     "tempoRange": [
-      80,
-      95
+      72,
+      88
     ],
-    "intensity": 0.3,
+    "intensity": 0.25,
     "scale": "phrygian",
-    "style": "dark",
+    "style": "tension",
     "timeSignature": "4/4"
   },
   "duration": 90,

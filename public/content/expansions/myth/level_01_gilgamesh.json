@@ -134,16 +134,15 @@
   },
   "musicSeed": {
     "seed": "gilgamesh_001",
-    "mode": "bhairav",
+    "mode": "mixolydian",
+    "scale": "mixolydian",
+    "style": "heroic",
     "tempoRange": [
-      60,
-      78
+      80,
+      95
     ],
-    "intensity": 0.3,
-    "scale": "purvi",
-    "style": "sacred",
-    "timeSignature": "6/8",
-    "culturalStyle": "arabic"
+    "intensity": 0.25,
+    "timeSignature": "4/4"
   },
   "duration": 120,
   "unlockCondition": "act8_complete"

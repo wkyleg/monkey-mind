@@ -132,13 +132,13 @@
   "musicSeed": {
     "seed": "blindsight_007",
     "mode": "wholeTone",
+    "scale": "wholeTone",
+    "style": "mysterious",
     "tempoRange": [
-      72,
-      95
+      78,
+      92
     ],
-    "intensity": 0.63,
-    "scale": "harmonicMinor",
-    "style": "dreamy",
+    "intensity": 0.3,
     "timeSignature": "5/4"
   },
   "duration": 150,

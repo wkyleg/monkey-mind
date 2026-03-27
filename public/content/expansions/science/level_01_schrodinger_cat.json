@@ -137,14 +137,14 @@
   },
   "musicSeed": {
     "seed": "schrodinger_001",
-    "mode": "wholeTone",
+    "mode": "lydian",
+    "scale": "lydian",
+    "style": "dreamy",
     "tempoRange": [
-      65,
-      86
+      72,
+      88
     ],
-    "intensity": 0.3,
-    "scale": "chromatic",
-    "style": "meditative",
+    "intensity": 0.2,
     "timeSignature": "4/4"
   },
   "duration": 100,

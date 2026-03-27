@@ -136,12 +136,12 @@
   },
   "musicSeed": {
     "seed": "djinn_003",
-    "mode": "harmonicMinor",
+    "mode": "hijaz",
     "tempoRange": [
-      120,
-      132
+      75,
+      90
     ],
-    "intensity": 0.55,
+    "intensity": 0.45,
     "scale": "hijaz",
     "style": "mysterious",
     "timeSignature": "7/8",
