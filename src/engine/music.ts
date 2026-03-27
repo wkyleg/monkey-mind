@@ -4,8 +4,8 @@
  * varied synthesis, and per-level musical identity
  */
 
+import { Interval, ScaleType } from 'tonal';
 import { storage } from '../core/storage';
-import { ScaleType, Interval } from 'tonal';
 
 // ============================================================================
 // MUSICAL SCALES AND MODES (powered by tonal.js + custom additions)
@@ -1140,7 +1140,7 @@ export class ProceduralMusic {
 
     // Transpose root note by seed-derived semitones for per-level key variation
     const baseRoot = modeData.rootNote ?? modeData.droneNote;
-    const semitonesToTranspose = ((seedNum * 7) % 12); // circle-of-fifths spread
+    const semitonesToTranspose = (seedNum * 7) % 12; // circle-of-fifths spread
     this.rootNote = baseRoot * 2 ** (semitonesToTranspose / 12);
 
     const transposedDrone = modeData.droneNote * 2 ** (semitonesToTranspose / 12);
@@ -1316,7 +1316,11 @@ export class ProceduralMusic {
     if (this.noiseGain && this.context) {
       this.noiseGain.gain.linearRampToValueAtTime(0, now + fadeTime);
     }
-    try { this.noiseSource?.stop(now + fadeTime); } catch { /* already stopped */ }
+    try {
+      this.noiseSource?.stop(now + fadeTime);
+    } catch {
+      /* already stopped */
+    }
 
     if (this.reverbSend) {
       this.reverbSend.gain.linearRampToValueAtTime(0, now + fadeTime * 0.5);
@@ -1335,11 +1339,19 @@ export class ProceduralMusic {
     if (gain && this.context) {
       gain.gain.linearRampToValueAtTime(0, now + fade);
     }
-    try { osc?.stop(now + fade); } catch { /* already stopped */ }
+    try {
+      osc?.stop(now + fade);
+    } catch {
+      /* already stopped */
+    }
   }
 
   private safeDisconnect(node: AudioNode | null): void {
-    try { node?.disconnect(); } catch { /* node may not support disconnect in test env */ }
+    try {
+      node?.disconnect();
+    } catch {
+      /* node may not support disconnect in test env */
+    }
   }
 
   private releaseNodes(): void {
@@ -1451,10 +1463,8 @@ export class ProceduralMusic {
     if (Math.random() < 0.3) {
       this.pickMoodProgressionAndMelody();
     } else if (Math.random() < 0.4) {
-      const categories =
-        (this._currentStyle && STYLE_TO_MELODY_CATEGORY[this._currentStyle]) ||
-        MOOD_TO_MELODY_CATEGORY[this.mood] ||
-        ['ascending'];
+      const categories = (this._currentStyle && STYLE_TO_MELODY_CATEGORY[this._currentStyle]) ||
+        MOOD_TO_MELODY_CATEGORY[this.mood] || ['ascending'];
       const cat = categories[Math.floor(Math.random() * categories.length)];
       const patterns = MELODY_PATTERNS_EXTENDED[cat];
       if (patterns && patterns.length > 0) {
@@ -1686,8 +1696,6 @@ export class ProceduralMusic {
       }
     }
   }
-
-
 
   /**
    * Play an arpeggio using the current scale
@@ -2129,7 +2137,7 @@ export class ProceduralMusic {
     this.droneGain.connect(this.masterGain);
     if (this.reverbSend) this.droneGain.connect(this.reverbSend);
 
-    this.droneGain.gain.value = 0.10;
+    this.droneGain.gain.value = 0.1;
 
     this.droneOsc.start();
     this.droneOsc2.start();
@@ -2360,10 +2368,8 @@ export class ProceduralMusic {
     }
 
     // Prefer style-derived melody categories when an explicit style is set
-    const melodyCategories =
-      (this._currentStyle && STYLE_TO_MELODY_CATEGORY[this._currentStyle]) ||
-      MOOD_TO_MELODY_CATEGORY[this.mood] ||
-      ['ascending'];
+    const melodyCategories = (this._currentStyle && STYLE_TO_MELODY_CATEGORY[this._currentStyle]) ||
+      MOOD_TO_MELODY_CATEGORY[this.mood] || ['ascending'];
     const cat = melodyCategories[Math.floor(Math.random() * melodyCategories.length)];
     const patterns = MELODY_PATTERNS_EXTENDED[cat];
     if (patterns && patterns.length > 0) {

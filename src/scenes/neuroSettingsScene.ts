@@ -1,5 +1,4 @@
 import { CONFIG, DEV_MODE } from '../config';
-import type { Game } from '../engine/game';
 import type { PlayerIntent } from '../engine/input';
 import type { Renderer } from '../engine/renderer';
 import { Scene } from '../engine/scene';
@@ -27,10 +26,6 @@ export class NeuroSettingsScene extends Scene {
   private notificationTimer = 0;
   private notificationColor: string = CONFIG.COLORS.PRIMARY;
   private connecting = false;
-
-  constructor(game: Game) {
-    super(game);
-  }
 
   private buildMenu(): void {
     const nm = this.game.getNeuroManager();

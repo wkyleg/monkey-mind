@@ -756,12 +756,14 @@ export class LevelReportScene extends Scene {
 
     // Round min/max to nice values for the axis
     const rawRange = Math.max(globalMax - globalMin, 0.01);
-    const niceMin = primaryKey === 'bpm' || primaryKey === 'score' || primaryKey === 'health'
-      ? Math.floor(globalMin / 10) * 10
-      : Math.floor(globalMin * 10) / 10;
-    const niceMax = primaryKey === 'bpm' || primaryKey === 'score' || primaryKey === 'health'
-      ? Math.ceil(globalMax / 10) * 10
-      : Math.ceil(globalMax * 10) / 10;
+    const niceMin =
+      primaryKey === 'bpm' || primaryKey === 'score' || primaryKey === 'health'
+        ? Math.floor(globalMin / 10) * 10
+        : Math.floor(globalMin * 10) / 10;
+    const niceMax =
+      primaryKey === 'bpm' || primaryKey === 'score' || primaryKey === 'health'
+        ? Math.ceil(globalMax / 10) * 10
+        : Math.ceil(globalMax * 10) / 10;
     const range = Math.max(niceMax - niceMin, rawRange * 0.1);
 
     // Grid lines + Y-axis labels (4 divisions)

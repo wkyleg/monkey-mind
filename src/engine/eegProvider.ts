@@ -598,7 +598,7 @@ export class ElataEEGProvider implements InputProvider {
           const prev = this.state.batteryLevel;
           this.state.batteryLevel = Math.round(Math.max(0, Math.min(100, rawBattery)));
           if (prev === null || Math.abs(this.state.batteryLevel - prev) >= 5) {
-            console.log('[EEG] Battery:', this.state.batteryLevel + '%');
+            console.log(`[EEG] Battery: ${this.state.batteryLevel}%`);
           }
         }
       }

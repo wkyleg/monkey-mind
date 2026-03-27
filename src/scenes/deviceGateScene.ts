@@ -1,5 +1,4 @@
 import { CONFIG } from '../config';
-import type { Game } from '../engine/game';
 import type { PlayerIntent } from '../engine/input';
 import type { Renderer } from '../engine/renderer';
 import { Scene } from '../engine/scene';
@@ -25,10 +24,6 @@ export class DeviceGateScene extends Scene {
   private lastMoveDir = 0;
   private cameraConnected = false;
   private headbandConnected = false;
-
-  constructor(game: Game) {
-    super(game);
-  }
 
   enter(): void {
     this.selectedIndex = 0;
