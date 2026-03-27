@@ -1,4 +1,31 @@
 import type { InputProvider, PlayerIntent } from './input';
+import logger from './logger';
+import type {
+  HeadbandFrameV1,
+  HeadbandTransportStatus,
+  WasmCalmnessModel,
+  WasmAlphaBumpDetector,
+  WasmAlphaPeakModel,
+  WasmBandPowers,
+} from '@elata-biosciences/eeg-web';
+import type { BleTransport } from '@elata-biosciences/eeg-web-ble';
+
+interface EegWebModule {
+  initEegWasm: (options?: { module_or_path?: string }) => Promise<unknown>;
+  WasmCalmnessModel: new (sampleRate: number, channelCount: number) => WasmCalmnessModel;
+  WasmAlphaBumpDetector: new (sampleRate: number, channelCount: number) => WasmAlphaBumpDetector;
+  WasmAlphaPeakModel: new (sampleRate: number, channelCount: number) => WasmAlphaPeakModel;
+  AthenaWasmDecoder: new () => unknown;
+  AthenaWasmOutput?: { prototype: Record<string, unknown> };
+  band_powers: (data: Float32Array, sampleRate: number) => WasmBandPowers;
+}
+
+interface StoredBluetoothDevice {
+  name?: string;
+  gatt?: {
+    connect: () => Promise<unknown>;
+  };
+}
 
 export interface BandPowerSnapshot {
   alpha: number;
@@ -43,11 +70,11 @@ const EARLY_FRAME_LOG_LIMIT = 3;
 const NO_FRAME_WARN_MS = 5000;
 
 export class ElataEEGProvider implements InputProvider {
-  private transport: any = null;
-  private calmnessModel: any = null;
-  private alphaBumpDetector: any = null;
-  private alphaPeakModel: any = null;
-  private eegModule: any = null;
+  private transport: BleTransport | null = null;
+  private calmnessModel: WasmCalmnessModel | null = null;
+  private alphaBumpDetector: WasmAlphaBumpDetector | null = null;
+  private alphaPeakModel: WasmAlphaPeakModel | null = null;
+  private eegModule: EegWebModule | null = null;
   private connected = false;
   private reconnectAttempts = 0;
   private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
@@ -62,7 +89,7 @@ export class ElataEEGProvider implements InputProvider {
   private bleNotificationCount = 0;
   private emptyDecodeCount = 0;
   private reconnectCount = 0;
-  private storedDevice: any = null;
+  private storedDevice: StoredBluetoothDevice | null = null;
   private sampleRate = 256;
   private state: EEGProviderState = {
     connected: false,
@@ -89,6 +116,7 @@ export class ElataEEGProvider implements InputProvider {
   private bandHistoryTimer = 0;
   private onDisconnect?: () => void;
   private onReconnect?: () => void;
+  private stateSubscribers = new Set<(state: Readonly<EEGProviderState>) => void>();
 
   setCallbacks(onDisconnect: () => void, onReconnect: () => void): void {
     this.onDisconnect = onDisconnect;
@@ -96,7 +124,7 @@ export class ElataEEGProvider implements InputProvider {
   }
 
   async initAsync(): Promise<void> {
-    const eegWeb = await import('@elata-biosciences/eeg-web');
+    const eegWeb = await import('@elata-biosciences/eeg-web') as unknown as EegWebModule;
     await eegWeb.initEegWasm();
     this.eegModule = eegWeb;
 
@@ -106,7 +134,7 @@ export class ElataEEGProvider implements InputProvider {
     try {
       this.patchAthenaWasmOutput(eegWeb);
     } catch (e) {
-      console.warn('[EEG] Float32Array patch failed (non-fatal):', e);
+      logger.warn('EEG', 'Float32Array patch failed (non-fatal)', e);
     }
 
     this.calmnessModel = new eegWeb.WasmCalmnessModel(256, 1);
@@ -119,7 +147,7 @@ export class ElataEEGProvider implements InputProvider {
       alphaBump: this.alphaBumpDetector.min_samples?.() ?? 'N/A',
       alphaPeak: this.alphaPeakModel.min_samples?.() ?? 'N/A',
     };
-    console.log('[EEG] WASM models initialized:', {
+    logger.info('EEG', 'WASM models initialized', {
       calmnessModel: !!this.calmnessModel,
       alphaBumpDetector: !!this.alphaBumpDetector,
       alphaPeakModel: !!this.alphaPeakModel,
@@ -130,10 +158,10 @@ export class ElataEEGProvider implements InputProvider {
     });
   }
 
-  private patchAthenaWasmOutput(eegWeb: any): void {
+  private patchAthenaWasmOutput(eegWeb: EegWebModule): void {
     const AthenaWasmOutput = eegWeb.AthenaWasmOutput;
     if (!AthenaWasmOutput) {
-      console.warn('[EEG] AthenaWasmOutput not found — cannot apply Float32Array patch');
+      logger.warn('EEG', 'AthenaWasmOutput not found — cannot apply Float32Array patch');
       return;
     }
 
@@ -159,18 +187,18 @@ export class ElataEEGProvider implements InputProvider {
       }
     }
 
-    console.log(`[EEG] Patched ${patched} AthenaWasmOutput Float32Array getters → Array`);
+    logger.debug('EEG', `Patched ${patched} AthenaWasmOutput Float32Array getters → Array`);
   }
 
   async connect(): Promise<boolean> {
     try {
       if (!(navigator as Navigator & { bluetooth?: unknown }).bluetooth) {
         this.lastError = 'no_bluetooth';
-        console.warn('[EEG] Web Bluetooth not available');
+        logger.warn('EEG', 'Web Bluetooth not available');
         return false;
       }
 
-      const eegWeb = await import('@elata-biosciences/eeg-web');
+      const eegWeb = await import('@elata-biosciences/eeg-web') as unknown as EegWebModule;
       const eegBle = await import('@elata-biosciences/eeg-web-ble');
 
       // Tear down any existing transport before creating a new one
@@ -195,38 +223,37 @@ export class ElataEEGProvider implements InputProvider {
       this.noFrameWarned = false;
       this.state.reconnecting = false;
 
-      console.log('[EEG] Creating BleTransport with AthenaWasmDecoder factory...');
+      logger.info('EEG', 'Creating BleTransport with AthenaWasmDecoder factory');
 
       this.transport = new eegBle.BleTransport({
         sourceName: 'monkey-mind',
         deviceOptions: {
           athenaDecoderFactory: () => {
             try {
-              console.log('[EEG] Instantiating AthenaWasmDecoder...');
+              logger.debug('EEG', 'Instantiating AthenaWasmDecoder');
               const decoder = new eegWeb.AthenaWasmDecoder();
-              console.log(
-                '[EEG] AthenaWasmDecoder created OK — methods:',
-                Object.getOwnPropertyNames(Object.getPrototypeOf(decoder)),
-              );
+              logger.debug('EEG', 'AthenaWasmDecoder created OK', {
+                methods: Object.getOwnPropertyNames(Object.getPrototypeOf(decoder)),
+              });
               return decoder;
             } catch (err) {
-              console.error('[EEG] AthenaWasmDecoder construction FAILED:', err);
+              logger.error('EEG', 'AthenaWasmDecoder construction FAILED', err);
               throw err;
             }
           },
           logger: (msg: string) => {
             if (msg.toLowerCase().includes('error') || msg.toLowerCase().includes('fail')) {
               this.decodeErrorCount++;
-              console.warn('[EEG:BLE]', msg);
+              logger.warn('EEG:BLE', msg);
             } else {
-              console.log('[EEG:BLE]', msg);
+              logger.debug('EEG:BLE', msg);
             }
           },
         },
       });
 
-      this.transport.onStatus = (status: any) => {
-        console.log('[EEG] Transport status:', status.state, status.reason ?? '', status.errorCode ?? '');
+      this.transport.onStatus = (status: HeadbandTransportStatus) => {
+        logger.info('EEG', `Transport status: ${status.state}`, { reason: status.reason, errorCode: status.errorCode });
         if (status.state === 'connected') {
           this.connected = true;
           this.state.connected = true;
@@ -234,8 +261,9 @@ export class ElataEEGProvider implements InputProvider {
           this.reconnectAttempts = 0;
           this.connectTime = Date.now();
           this.onReconnect?.();
+          this.notifySubscribers();
         } else if (status.state === 'streaming') {
-          console.log('[EEG] BLE streaming started — waiting for frames');
+          logger.info('EEG', 'BLE streaming started — waiting for frames');
           this.connectTime = Date.now();
         } else if (status.state === 'disconnected') {
           this.connected = false;
@@ -250,23 +278,24 @@ export class ElataEEGProvider implements InputProvider {
             this.state.reconnecting = false;
             this.onDisconnect?.();
           }
+          this.notifySubscribers();
         }
       };
 
-      this.transport.onFrame = (frame: any) => {
+      this.transport.onFrame = (frame: HeadbandFrameV1) => {
         this.processFrame(frame);
       };
 
-      console.log('[EEG] Calling transport.connect()...');
+      logger.debug('EEG', 'Calling transport.connect()');
       await this.transport.connect();
-      console.log('[EEG] transport.connect() resolved — calling transport.start()...');
+      logger.debug('EEG', 'transport.connect() resolved — calling transport.start()');
 
       // Log device info between connect and start to understand the protocol
       try {
         const boardInfo = this.transport.getBoardInfo?.();
         const charInfo = this.transport.getCharacteristicInfo?.();
         const isAthena = this.transport.getIsAthena?.();
-        console.log('[EEG] Device info:', {
+        logger.info('EEG', 'Device info', {
           isAthena,
           protocol: boardInfo?.protocol,
           deviceName: boardInfo?.device_name,
@@ -275,9 +304,9 @@ export class ElataEEGProvider implements InputProvider {
           eegChannels: boardInfo?.eeg_channel_names,
           opticsChannels: boardInfo?.optics_channel_count,
         });
-        console.log('[EEG] Characteristics found:', charInfo?.characteristics?.length, charInfo?.characteristics);
+        logger.debug('EEG', 'Characteristics found', { count: charInfo?.characteristics?.length, characteristics: charInfo?.characteristics });
       } catch (e) {
-        console.warn('[EEG] Could not read device info:', e);
+        logger.warn('EEG', 'Could not read device info', e);
       }
 
       await this.transport.start();
@@ -289,19 +318,19 @@ export class ElataEEGProvider implements InputProvider {
 
       // Store BluetoothDevice reference for GATT-level reconnect
       try {
-        this.storedDevice = this.transport.device?.device ?? null;
+        const transportInternal = this.transport as unknown as { device?: { device?: StoredBluetoothDevice } };
+        this.storedDevice = transportInternal.device?.device ?? null;
         if (this.storedDevice) {
-          console.log('[EEG] Stored BluetoothDevice for reconnect:', this.storedDevice.name);
+          logger.info('EEG', `Stored BluetoothDevice for reconnect: ${this.storedDevice.name}`);
         }
       } catch {
         this.storedDevice = null;
       }
 
-      console.log('[EEG] Connected and started — modelsReady:', this.modelsReady, 'wasmModule:', !!this.eegModule);
+      logger.info('EEG', 'Connected and started', { modelsReady: this.modelsReady, wasmModule: !!this.eegModule });
       return true;
-    } catch (err: any) {
-      console.error('[EEG] Connection failed:', err);
-      console.warn('[EEG] Error classified as:', this.classifyError(err));
+    } catch (err: unknown) {
+      logger.error('EEG', 'Connection failed', err);
       this.lastError = this.classifyError(err);
       this.connected = false;
       this.state.connected = false;
@@ -313,21 +342,21 @@ export class ElataEEGProvider implements InputProvider {
     this.reconnectAttempts++;
     this.reconnectCount++;
     this.state.reconnecting = true;
-    console.log(`[EEG] Reconnect attempt ${this.reconnectAttempts}/${MAX_RECONNECT_ATTEMPTS}`);
+    logger.info('EEG', `Reconnect attempt ${this.reconnectAttempts}/${MAX_RECONNECT_ATTEMPTS}`);
 
     try {
       // Try GATT-level reconnect first (no user gesture needed for paired device)
       if (this.storedDevice?.gatt) {
-        console.log('[EEG] Attempting GATT reconnect on stored device:', this.storedDevice.name);
+        logger.info('EEG', `Attempting GATT reconnect on stored device: ${this.storedDevice.name}`);
         await this.storedDevice.gatt.connect();
-        console.log('[EEG] GATT reconnected — restarting stream');
+        logger.info('EEG', 'GATT reconnected — restarting stream');
         await this.transport.start();
         this.connected = true;
         this.state.connected = true;
         this.state.reconnecting = false;
         this.reconnectAttempts = 0;
         this.connectTime = Date.now();
-        console.log('[EEG] Reconnected via GATT successfully');
+        logger.info('EEG', 'Reconnected via GATT successfully');
         this.onReconnect?.();
         return;
       }
@@ -345,22 +374,22 @@ export class ElataEEGProvider implements InputProvider {
         return;
       }
     } catch (err) {
-      console.warn(`[EEG] Reconnect attempt ${this.reconnectAttempts} failed:`, err);
+      logger.warn('EEG', `Reconnect attempt ${this.reconnectAttempts} failed`, err);
     }
 
     if (this.reconnectAttempts < MAX_RECONNECT_ATTEMPTS) {
       const delay = Math.min(2000 * 2 ** this.reconnectAttempts, MAX_RECONNECT_DELAY_MS);
-      console.log(`[EEG] Scheduling retry in ${delay}ms`);
+      logger.debug('EEG', `Scheduling retry in ${delay}ms`);
       this.reconnectTimer = setTimeout(() => this.reconnect(), delay);
     } else {
-      console.warn('[EEG] Max reconnect attempts reached — giving up');
+      logger.warn('EEG', 'Max reconnect attempts reached — giving up');
       this.state.reconnecting = false;
       this.onDisconnect?.();
     }
   }
 
-  private classifyError(err: any): EEGError {
-    const msg = String(err?.message ?? err ?? '').toLowerCase();
+  private classifyError(err: unknown): EEGError {
+    const msg = String((err as { message?: string })?.message ?? err ?? '').toLowerCase();
     if (msg.includes('globally disabled')) {
       return 'no_bluetooth';
     }
@@ -401,11 +430,11 @@ export class ElataEEGProvider implements InputProvider {
     }
   }
 
-  private processFrame(frame: any): void {
+  private processFrame(frame: HeadbandFrameV1): void {
     const isEarlyFrame = this.frameCount < EARLY_FRAME_LOG_LIMIT;
 
     if (this.frameCount === 0) {
-      console.log('[EEG] First frame received:', {
+      logger.info('EEG', 'First frame received', {
         keys: Object.keys(frame),
         hasEeg: !!frame?.eeg,
         hasSamples: !!frame?.eeg?.samples,
@@ -430,21 +459,16 @@ export class ElataEEGProvider implements InputProvider {
     if (!eeg) {
       this.emptyDecodeCount++;
       if (this.emptyDecodeCount <= 5) {
-        console.warn(
-          '[EEG] Frame has no eeg property. Keys:',
-          Object.keys(frame),
-          'emptyCount:',
-          this.emptyDecodeCount,
-        );
+        logger.warn('EEG', 'Frame has no eeg property', { keys: Object.keys(frame), emptyCount: this.emptyDecodeCount });
       }
       return;
     }
 
-    const samples = eeg.samples ?? eeg.data;
+    const samples = eeg.samples ?? (eeg as Record<string, unknown>).data as number[][] | undefined;
     if (!samples || samples.length === 0) {
       this.emptyDecodeCount++;
       if (this.emptyDecodeCount <= 5) {
-        console.warn('[EEG] Frame eeg has no samples. Keys:', Object.keys(eeg), 'emptyCount:', this.emptyDecodeCount);
+        logger.warn('EEG', 'Frame eeg has no samples', { keys: Object.keys(eeg), emptyCount: this.emptyDecodeCount });
       }
       return;
     }
@@ -459,12 +483,10 @@ export class ElataEEGProvider implements InputProvider {
     }
 
     if (isEarlyFrame) {
-      console.log(
-        `[EEG] Frame #${this.frameCount}: ${channelSamples.length} samples, range [${Math.min(...channelSamples).toFixed(1)}, ${Math.max(...channelSamples).toFixed(1)}]`,
-      );
+      logger.debug('EEG', `Frame #${this.frameCount}: ${channelSamples.length} samples, range [${Math.min(...channelSamples).toFixed(1)}, ${Math.max(...channelSamples).toFixed(1)}]`);
     }
 
-    this.sampleRate = eeg.sampleRateHz ?? eeg.sampleRate ?? 256;
+    this.sampleRate = eeg.sampleRateHz ?? (eeg as Record<string, unknown>).sampleRate as number ?? 256;
 
     // Append to accumulated buffer
     for (const s of channelSamples) {
@@ -477,7 +499,7 @@ export class ElataEEGProvider implements InputProvider {
     // Only run WASM analysis once we have enough accumulated samples
     if (this.recentSamples.length < MIN_ANALYSIS_SAMPLES) {
       if (isEarlyFrame) {
-        console.log(`[EEG] Accumulating samples: ${this.recentSamples.length}/${MIN_ANALYSIS_SAMPLES}`);
+        logger.debug('EEG', `Accumulating samples: ${this.recentSamples.length}/${MIN_ANALYSIS_SAMPLES}`);
       }
       this.state.signalQuality = Math.min(1, this.recentSamples.length / EEG_SAMPLE_BUFFER_SIZE);
       return;
@@ -498,17 +520,17 @@ export class ElataEEGProvider implements InputProvider {
           }
           this.state.alphaBetaRatio = result.alpha_beta_ratio ?? null;
           if (isEarlyFrame) {
-            console.log('[EEG] Calmness result:', {
+            logger.debug('EEG', 'Calmness result', {
               calm: this.state.calm,
               state: this.state.calmnessState,
               ratio: this.state.alphaBetaRatio,
             });
           }
         } else if (isEarlyFrame) {
-          console.log(`[EEG] Calmness model returned null (buffer: ${this.recentSamples.length} samples)`);
+          logger.debug('EEG', `Calmness model returned null (buffer: ${this.recentSamples.length} samples)`);
         }
       } else if (isEarlyFrame) {
-        console.warn('[EEG] calmnessModel is null — WASM models not initialized');
+        logger.warn('EEG', 'calmnessModel is null — WASM models not initialized');
       }
 
       if (this.alphaBumpDetector) {
@@ -542,7 +564,7 @@ export class ElataEEGProvider implements InputProvider {
         this.state.deltaPower = powers.delta / fullTotal;
         this.state.arousal = Math.min(1, Math.max(0, powers.beta / abTotal));
         if (isEarlyFrame) {
-          console.log('[EEG] Band powers normalized (excl-delta, buffer:', this.recentSamples.length, 'samples):', {
+          logger.debug('EEG', `Band powers normalized (excl-delta, buffer: ${this.recentSamples.length} samples)`, {
             alpha: this.state.alphaPower.toFixed(3),
             beta: this.state.betaPower.toFixed(3),
             theta: this.state.thetaPower.toFixed(3),
@@ -553,17 +575,19 @@ export class ElataEEGProvider implements InputProvider {
           });
         }
       } else if (isEarlyFrame) {
-        console.warn('[EEG] eegModule is null — cannot compute band powers');
+        logger.warn('EEG', 'eegModule is null — cannot compute band powers');
       }
 
       this.state.signalQuality = Math.min(1, this.recentSamples.length / EEG_SAMPLE_BUFFER_SIZE);
 
       this.recordBandPowerSnapshot();
 
+      this.notifySubscribers();
+
       const now = Date.now();
       if (now - this.lastLogTime >= LOG_INTERVAL_MS) {
         this.lastLogTime = now;
-        console.log('[EEG] Status', {
+        logger.debug('EEG', 'Status', {
           frames: this.frameCount,
           buffer: this.recentSamples.length,
           decodeErrors: this.decodeErrorCount,
@@ -584,11 +608,11 @@ export class ElataEEGProvider implements InputProvider {
         });
       }
     } catch (err) {
-      console.warn('[EEG] Frame processing error:', err);
+      logger.warn('EEG', 'Frame processing error', err);
     }
   }
 
-  private extractAuxData(frame: any): void {
+  private extractAuxData(frame: HeadbandFrameV1): void {
     // Battery level from Athena frames
     if (frame?.battery?.samples) {
       const batSamples = frame.battery.samples;
@@ -598,7 +622,7 @@ export class ElataEEGProvider implements InputProvider {
           const prev = this.state.batteryLevel;
           this.state.batteryLevel = Math.round(Math.max(0, Math.min(100, rawBattery)));
           if (prev === null || Math.abs(this.state.batteryLevel - prev) >= 5) {
-            console.log(`[EEG] Battery: ${this.state.batteryLevel}%`);
+            logger.info('EEG', `Battery: ${this.state.batteryLevel}%`);
           }
         }
       }
@@ -628,7 +652,7 @@ export class ElataEEGProvider implements InputProvider {
       if (this.frameCount === 0 && elapsed >= NO_FRAME_WARN_MS) {
         if (!this.noFrameWarned) {
           this.noFrameWarned = true;
-          console.warn('[EEG] ⚠ Connected for', (elapsed / 1000).toFixed(1), 's but ZERO EEG frames received.', {
+          logger.warn('EEG', `Connected for ${(elapsed / 1000).toFixed(1)}s but ZERO EEG frames received`, {
             bleNotifications: this.bleNotificationCount,
             emptyDecodes: this.emptyDecodeCount,
             decodeErrors: this.decodeErrorCount,
@@ -636,29 +660,18 @@ export class ElataEEGProvider implements InputProvider {
             transportExists: !!this.transport,
           });
           if (this.bleNotificationCount === 0) {
-            console.warn(
-              '[EEG] BLE notifications never arrived. The headband may not be streaming, or GATT subscriptions failed. Try: power cycle headband, refresh page, reconnect.',
-            );
+            logger.warn('EEG', 'BLE notifications never arrived. The headband may not be streaming, or GATT subscriptions failed.');
           } else if (this.emptyDecodeCount > 0) {
-            console.warn(
-              '[EEG] BLE notifications arrived but decoder returned empty EEG data.',
-              this.emptyDecodeCount,
-              'empty decodes.',
-            );
+            logger.warn('EEG', 'BLE notifications arrived but decoder returned empty EEG data', { emptyDecodes: this.emptyDecodeCount });
           }
         }
         // Repeat warning every 10 seconds while still 0 frames
         if (elapsed > 0 && Math.floor(elapsed / 10000) > Math.floor((elapsed - _dt * 1000) / 10000)) {
-          console.warn(
-            '[EEG] Still 0 frames after',
-            (elapsed / 1000).toFixed(0),
-            's. notifications:',
-            this.bleNotificationCount,
-            'empty:',
-            this.emptyDecodeCount,
-            'errors:',
-            this.decodeErrorCount,
-          );
+          logger.warn('EEG', `Still 0 frames after ${(elapsed / 1000).toFixed(0)}s`, {
+            notifications: this.bleNotificationCount,
+            empty: this.emptyDecodeCount,
+            errors: this.decodeErrorCount,
+          });
         }
       }
     }
@@ -696,6 +709,24 @@ export class ElataEEGProvider implements InputProvider {
     this.state.connected = false;
     this.state.reconnecting = false;
     this.reconnectAttempts = 0;
+  }
+
+  subscribeState(cb: (state: Readonly<EEGProviderState>) => void): () => void {
+    this.stateSubscribers.add(cb);
+    cb(this.state);
+    return () => {
+      this.stateSubscribers.delete(cb);
+    };
+  }
+
+  private notifySubscribers(): void {
+    for (const cb of this.stateSubscribers) {
+      try {
+        cb(this.state);
+      } catch {
+        // swallow subscriber errors
+      }
+    }
   }
 
   getState(): Readonly<EEGProviderState> {

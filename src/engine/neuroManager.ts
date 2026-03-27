@@ -3,6 +3,7 @@ import { events } from '../core/events';
 import { MockBCIProvider } from './bciMock';
 import { type EEGProviderState, ElataEEGProvider } from './eegProvider';
 import type { InputManager } from './input';
+import logger from './logger';
 import { ElataRppgProvider, type RppgProviderState } from './rppgProvider';
 
 export interface NeuroState {
@@ -137,30 +138,30 @@ export class NeuroManager {
     try {
       await this.eegProvider.initAsync();
       this.wasmReady = true;
-      console.log('[Neuro] WASM init succeeded — EEG features ready');
+      logger.info('Neuro', 'WASM init succeeded — EEG features ready');
     } catch (err) {
-      console.warn('[Neuro] WASM init failed — EEG features disabled:', err);
+      logger.warn('Neuro', 'WASM init failed — EEG features disabled', err);
       this.wasmReady = false;
     }
   }
 
   async connectHeadband(): Promise<boolean> {
     if (!this.wasmReady) {
-      console.warn('[Neuro] WASM not ready, cannot connect headband — initWasm() may have failed');
+      logger.warn('Neuro', 'WASM not ready, cannot connect headband — initWasm() may have failed');
       return false;
     }
-    console.log('[Neuro] Connecting headband...');
+    logger.info('Neuro', 'Connecting headband...');
     const success = await this.eegProvider.connect();
     this.state.eegConnected = success;
-    console.log('[Neuro] Headband connection result:', success);
+    logger.info('Neuro', 'Headband connection result', { success });
     return success;
   }
 
   async enableCamera(): Promise<boolean> {
-    console.log('[Neuro] Enabling camera...');
+    logger.info('Neuro', 'Enabling camera...');
     const success = await this.rppgProvider.enable();
     this.state.cameraActive = success;
-    console.log('[Neuro] Camera enable result:', success);
+    logger.info('Neuro', 'Camera enable result', { success });
     return success;
   }
 
@@ -308,7 +309,7 @@ export class NeuroManager {
     this.state.cameraActive = rppgState.active;
 
     if (source !== this.previousSource) {
-      console.log('[Neuro] Source changed:', this.previousSource, '->', source, {
+      logger.info('Neuro', `Source changed: ${this.previousSource} -> ${source}`, {
         eegConnected: eegState.connected,
         eegCalm: eegState.calm,
         eegAlpha: eegState.alphaPower,
@@ -328,7 +329,7 @@ export class NeuroManager {
     // Throttled periodic pipeline state log
     if (this.totalTime - this.lastNeuroLogTime >= NEURO_LOG_INTERVAL) {
       this.lastNeuroLogTime = this.totalTime;
-      console.log('[Neuro] Pipeline state', {
+      logger.debug('Neuro', 'Pipeline state', {
         source,
         eegConnected: eegState.connected,
         eegFrames: this.eegProvider.getFrameCount(),

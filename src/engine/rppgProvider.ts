@@ -1,4 +1,6 @@
 import type { InputProvider, PlayerIntent } from './input';
+import type { RppgProcessor, Metrics, Backend, DemoRunner } from '@elata-biosciences/rppg-web';
+import logger from './logger';
 
 export interface RppgDebugMetrics {
   spectralBpm: number | null;
@@ -54,8 +56,8 @@ const BPM_HISTORY_INTERVAL = 0.5;
 const LOG_INTERVAL = 5;
 
 export class ElataRppgProvider implements InputProvider {
-  private processor: any = null;
-  private runner: any = null;
+  private processor: RppgProcessor | null = null;
+  private runner: DemoRunner | null = null;
   private stream: MediaStream | null = null;
   private video: HTMLVideoElement | null = null;
   private active = false;
@@ -121,7 +123,7 @@ export class ElataRppgProvider implements InputProvider {
       await video.play();
       this.video = video;
 
-      let backend: any;
+      let backend: Backend | null;
       try {
         backend = await rppg.loadWasmBackend();
       } catch {
@@ -144,8 +146,8 @@ export class ElataRppgProvider implements InputProvider {
           get_metrics: () => ({ bpm: null, confidence: 0, signal_quality: 0 }),
           enable_tracker: () => {},
         };
-        this.processor = new rppg.RppgProcessor({ newPipeline: () => noopPipeline } as any, 30);
-        console.info('[rPPG] WASM backend unavailable — using JS-only signal processing');
+        this.processor = new rppg.RppgProcessor({ newPipeline: () => noopPipeline } as Backend, 30);
+        logger.info('rPPG', 'WASM backend unavailable — using JS-only signal processing');
       }
 
       this.runner = new rppg.DemoRunner(source, this.processor, {
@@ -156,13 +158,13 @@ export class ElataRppgProvider implements InputProvider {
       this.active = true;
       this.state.active = true;
       this.lastError = null;
-      console.log('[rPPG] Camera enabled', {
+      logger.info('rPPG', 'Camera enabled', {
         resolution: `${video.videoWidth}x${video.videoHeight}`,
         wasmBackend: !!backend,
       });
       return true;
-    } catch (err: any) {
-      console.error('[rPPG] Camera enable failed:', err);
+    } catch (err: unknown) {
+      logger.error('rPPG', 'Camera enable failed', err);
       this.lastError = this.classifyError(err);
 
       // Clean up any resources obtained before the failure
@@ -229,8 +231,8 @@ export class ElataRppgProvider implements InputProvider {
     this.lowQualityTimer = 0;
   }
 
-  private classifyError(err: any): RppgError {
-    const msg = String(err?.message ?? err ?? '').toLowerCase();
+  private classifyError(err: unknown): RppgError {
+    const msg = String((err as { message?: string })?.message ?? err ?? '').toLowerCase();
     if (msg.includes('permission') || msg.includes('denied') || msg.includes('notallowed')) {
       return 'permission_denied';
     }
@@ -372,16 +374,14 @@ export class ElataRppgProvider implements InputProvider {
       // Quality transition logging
       const qualityHigh = this.state.quality >= QUALITY_THRESHOLD;
       if (qualityHigh !== this.lastQualityHigh) {
-        console.log(
-          `[rPPG] Quality transition: ${this.lastQualityHigh ? 'HIGH' : 'LOW'} -> ${qualityHigh ? 'HIGH' : 'LOW'}`,
-        );
+        logger.info('rPPG', `Quality transition: ${this.lastQualityHigh ? 'HIGH' : 'LOW'} -> ${qualityHigh ? 'HIGH' : 'LOW'}`);
         this.lastQualityHigh = qualityHigh;
       }
 
       // Throttled periodic logging
       if (this.activeTime - this.lastLogTime >= LOG_INTERVAL) {
         this.lastLogTime = this.activeTime;
-        console.log('[rPPG] Status', {
+        logger.debug('rPPG', 'Status', {
           rawBpm: this.state.rawBpm,
           smoothedBpm: this.smoothedBpm?.toFixed(1),
           displayBpm: this.state.displayBpm,
@@ -403,7 +403,7 @@ export class ElataRppgProvider implements InputProvider {
         });
       }
     } catch (err) {
-      console.warn('[rPPG] Metrics error:', err);
+      logger.warn('rPPG', 'Metrics error', err);
       this.state.quality = 0;
     }
   }
@@ -417,7 +417,7 @@ export class ElataRppgProvider implements InputProvider {
    * we require 3+ votes AND that the "fundamental" candidate is supported by
    * at least two reliable estimators (those above 50 BPM).
    */
-  private detectAndCorrectHarmonic(rawBpm: number, metrics: any): { correctedBpm: number; wasHarmonic: boolean } {
+  private detectAndCorrectHarmonic(rawBpm: number, metrics: Metrics): { correctedBpm: number; wasHarmonic: boolean } {
     const spectral = metrics.spectral_bpm ?? null;
     const acf = metrics.acf_bpm ?? null;
     const peaks = metrics.peaks_bpm ?? null;
@@ -451,7 +451,7 @@ export class ElataRppgProvider implements InputProvider {
     if (bayes !== null && bayes >= 50 && bayes < rawBpm * 0.65) harmonicVotes++;
 
     if (harmonicVotes >= 3) {
-      console.log('[rPPG] Harmonic doubling corrected:', {
+      logger.info('rPPG', 'Harmonic doubling corrected', {
         rawBpm: rawBpm.toFixed(1),
         correctedBpm: halfBpm.toFixed(1),
         votes: harmonicVotes,

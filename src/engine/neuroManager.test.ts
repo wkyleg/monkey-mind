@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import logger from './logger';
 import { NeuroManager } from './neuroManager';
 
 vi.mock('../core/events', () => ({
@@ -278,26 +279,20 @@ describe('NeuroManager', () => {
     });
 
     it('should log WASM init success', async () => {
-      const logSpy = vi.spyOn(console, 'log');
+      logger.clear();
       await neuroManager.initWasm();
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[Neuro] WASM init succeeded'));
-      logSpy.mockRestore();
+      const logs = logger.getLogs();
+      expect(logs.some((l) => l.source === 'Neuro' && l.msg.includes('WASM init succeeded'))).toBe(true);
     });
   });
 
   describe('Source transition logging', () => {
     it('should log when source changes to mock', () => {
-      const logSpy = vi.spyOn(console, 'log');
+      logger.clear();
       neuroManager.enableMock();
       neuroManager.update(0.1);
-      expect(logSpy).toHaveBeenCalledWith(
-        expect.stringContaining('[Neuro] Source changed:'),
-        'none',
-        '->',
-        'mock',
-        expect.any(Object),
-      );
-      logSpy.mockRestore();
+      const logs = logger.getLogs();
+      expect(logs.some((l) => l.source === 'Neuro' && l.msg.includes('Source changed') && l.msg.includes('mock'))).toBe(true);
     });
   });
 
