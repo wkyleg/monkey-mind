@@ -198,37 +198,33 @@ export class LevelSelectScene extends Scene {
   }
 
   private renderTabs(renderer: Renderer, width: number): void {
+    const ctx = renderer.context;
     const tabY = 95;
-    const tabWidth = 160;
-    const gap = 20;
-    const leftX = width / 2 - tabWidth - gap / 2;
-    const rightX = width / 2 + gap / 2;
+    const tabH = 30;
+    const gap = 12;
+    const pad = 16;
 
-    // Acts tab
+    const actsLabel = contentLoader.getString('level_select_tab_canon');
+    const expLabel = contentLoader.getString('level_select_tab_expansion');
+
+    ctx.font = "14px 'SF Mono', Consolas, 'Liberation Mono', monospace";
+    const actsW = ctx.measureText(actsLabel).width + pad * 2;
+    const expW = ctx.measureText(expLabel).width + pad * 2;
+    const totalW = actsW + gap + expW;
+
+    const leftX = width / 2 - totalW / 2;
+    const rightX = leftX + actsW + gap;
+
     const actsSelected = this.viewMode === 'acts';
-    renderer.fillRect(leftX, tabY - 15, tabWidth, 30, actsSelected ? CONFIG.COLORS.PRIMARY : '#333344');
-    renderer.text(
-      contentLoader.getString('level_select_tab_canon'),
-      leftX + tabWidth / 2,
-      tabY,
-      actsSelected ? '#000000' : CONFIG.COLORS.TEXT_DIM,
-      14,
-      'center',
-    );
+    renderer.fillRect(leftX, tabY - tabH / 2, actsW, tabH, actsSelected ? CONFIG.COLORS.PRIMARY : '#333344');
+    renderer.text(actsLabel, leftX + actsW / 2, tabY, actsSelected ? '#000000' : CONFIG.COLORS.TEXT_DIM, 14, 'center');
 
-    // Expansions tab (disabled — coming soon)
-    renderer.fillRect(rightX, tabY - 15, tabWidth, 30, '#222233');
-    renderer.text(
-      contentLoader.getString('level_select_tab_expansion'),
-      rightX + tabWidth / 2,
-      tabY,
-      CONFIG.COLORS.TEXT_DIM,
-      14,
-      'center',
-    );
+    renderer.fillRect(rightX, tabY - tabH / 2, expW, tabH, '#222233');
+    renderer.text(expLabel, rightX + expW / 2, tabY, CONFIG.COLORS.TEXT_DIM, 14, 'center');
   }
 
   private renderActList(renderer: Renderer, width: number, height: number): void {
+    const ctx = renderer.context;
     const startY = 150;
     const itemHeight = 65;
     const maxVisible = Math.floor((height - startY - 60) / itemHeight);
@@ -253,18 +249,37 @@ export class LevelSelectScene extends Scene {
         renderer.fillRect(width / 2 - 210, y - 18, 50, 36, badgeColor);
         renderer.text(`ACT ${actInfo.act.number}`, width / 2 - 185, y, '#000000', 12, 'center');
 
-        // Act name
+        // Act name (truncated to fit within selection box)
+        const nameMaxW = 300;
+        let actName = actInfo.act.name.toUpperCase();
+        const nameSize = isSelected ? 18 : 16;
+        ctx.font = `bold ${nameSize}px 'SF Mono', Consolas, 'Liberation Mono', monospace`;
+        if (ctx.measureText(actName).width > nameMaxW) {
+          while (actName.length > 3 && ctx.measureText(actName + '...').width > nameMaxW) {
+            actName = actName.slice(0, -1);
+          }
+          actName += '...';
+        }
         renderer.hudText(
-          actInfo.act.name.toUpperCase(),
+          actName,
           width / 2 - 150,
           y - 8,
           isSelected ? CONFIG.COLORS.PRIMARY : CONFIG.COLORS.TEXT,
-          isSelected ? 18 : 16,
+          nameSize,
           'left',
         );
 
-        // Act thesis
-        renderer.text(actInfo.act.thesis, width / 2 - 150, y + 12, CONFIG.COLORS.TEXT_DIM, 11, 'left');
+        // Act thesis (truncated)
+        const thesisMaxW = 340;
+        let thesis = actInfo.act.thesis;
+        ctx.font = "11px 'SF Mono', Consolas, 'Liberation Mono', monospace";
+        if (ctx.measureText(thesis).width > thesisMaxW) {
+          while (thesis.length > 3 && ctx.measureText(thesis + '...').width > thesisMaxW) {
+            thesis = thesis.slice(0, -1);
+          }
+          thesis += '...';
+        }
+        renderer.text(thesis, width / 2 - 150, y + 12, CONFIG.COLORS.TEXT_DIM, 11, 'left');
 
         // Status indicator
         if (actInfo.completed) {

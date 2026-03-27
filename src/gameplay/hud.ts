@@ -248,12 +248,9 @@ export class Hud {
     // Top bar - solid dark background for maximum readability
     renderer.drawPanel(0, 0, width, 58, 'rgba(8, 8, 12, 0.95)', CONFIG.COLORS.PRIMARY, 2);
 
-    // Angular frame corners on score area
-    renderer.drawAngularFrame(8, 6, 210, 46, CONFIG.COLORS.PRIMARY, 12);
-
-    // Score with larger, bolder text
+    // Score — same font size as center wave text
     const scoreText = `SCORE: ${Math.floor(this.scoreDisplay).toString().padStart(6, '0')}`;
-    renderer.hudText(scoreText, 22, 30, CONFIG.COLORS.PRIMARY, 24, 'left');
+    renderer.hudText(scoreText, 22, 30, CONFIG.COLORS.PRIMARY, 16, 'left');
 
     // Combo indicator with glow effect when active
     if (state.combo > 1) {
@@ -282,24 +279,13 @@ export class Hud {
       this.renderPowerup(renderer, state, width / 2, 80);
     }
 
-    // Bottom bar - calm/arousal meters
-    this.renderMentalState(renderer, state, width, height);
-
-    // Meta-progression meters (if present)
-    if (state.noise !== undefined || state.focus !== undefined || state.stillness !== undefined) {
-      this.renderMetaMeters(renderer, state, width);
-    }
+    // Bottom cockpit panel — consolidated neuro HUD
+    this.renderCockpitPanel(renderer, state, width, height);
 
     // Rule card hint (if present)
     if (state.ruleCardHint) {
       this.renderRuleCardHint(renderer, state.ruleCardHint, width);
     }
-
-    // Neuro metrics strip (above bottom panel)
-    this.renderNeuroStrip(renderer, state, width, height);
-
-    // Waveform visualizations
-    this.renderWaveforms(renderer, state, width, height);
 
     // Pause, Mute, Info, and Neuro buttons
     if (state.showPauseButton !== false) {
@@ -385,8 +371,8 @@ export class Hud {
     const toastW = Math.max(300, this.toastMessage.length * 9 + 40);
     const toastH = 32;
     const toastX = (width - toastW) / 2;
-    // Place below the quote bar (y=130, h=30 → bottom at 145) when visible
-    const toastY = quoteVisible ? 155 : 100;
+    // Place below the rule hint pill (y=74, h=30 → bottom ~92) when visible
+    const toastY = quoteVisible ? 96 : 64;
 
     renderer.drawPanel(toastX, toastY, toastW, toastH, 'rgba(8,8,12,0.9)', this.toastColor, 1);
     renderer.hudText(this.toastMessage, width / 2, toastY + toastH / 2, this.toastColor, 14, 'center');
@@ -700,51 +686,45 @@ export class Hud {
     ctx.restore();
   }
 
-  /**
-   * Render pause button - larger touch target with clear iconography
-   */
-  private renderPauseButton(renderer: Renderer, width: number): void {
-    const buttonSize = 40;
-    const margin = 20;
-    const x = width - buttonSize - margin;
-    const y = 55;
+  private readonly btnSize = 32;
+  private readonly btnGap = 6;
+  private readonly btnMargin = 8;
+  private readonly btnStartY = 100;
 
-    // Store bounds for click detection
-    this.pauseButtonBounds = { x, y, width: buttonSize, height: buttonSize };
+  private btnSlotX(width: number): number {
+    return width - this.btnSize - this.btnMargin;
+  }
+
+  private btnSlotY(slot: number): number {
+    return this.btnStartY + slot * (this.btnSize + this.btnGap);
+  }
+
+  private renderPauseButton(renderer: Renderer, width: number): void {
+    const sz = this.btnSize;
+    const x = this.btnSlotX(width);
+    const y = this.btnSlotY(0);
+    this.pauseButtonBounds = { x, y, width: sz, height: sz };
 
     const ctx = renderer.context;
-    const centerX = x + buttonSize / 2;
-    const centerY = y + buttonSize / 2;
+    const cx = x + sz / 2;
+    const cy = y + sz / 2;
 
-    // Button background with glow
-    ctx.save();
-    ctx.shadowColor = CONFIG.COLORS.PRIMARY;
-    ctx.shadowBlur = 8;
-    renderer.drawRoundRect(x, y, buttonSize, buttonSize, 4, 'rgba(10, 10, 15, 0.95)');
-    ctx.restore();
-
-    // Border with glow
     ctx.save();
     ctx.shadowColor = CONFIG.COLORS.PRIMARY;
     ctx.shadowBlur = 6;
-    renderer.drawRoundRect(x, y, buttonSize, buttonSize, 4, 'transparent', CONFIG.COLORS.PRIMARY, 2);
+    renderer.drawRoundRect(x, y, sz, sz, 4, 'rgba(10,10,15,0.95)', CONFIG.COLORS.PRIMARY, 1.5);
     ctx.restore();
 
-    // Pause icon (two vertical bars) - larger and with glow
-    const barWidth = 7;
-    const barHeight = 20;
-    const gap = 6;
-
+    const bw = 4;
+    const bh = 12;
+    const bg = 4;
     ctx.save();
-    ctx.shadowColor = '#ffffff';
-    ctx.shadowBlur = 4;
     ctx.fillStyle = '#ffffff';
-    ctx.fillRect(centerX - barWidth - gap / 2, centerY - barHeight / 2, barWidth, barHeight);
-    ctx.fillRect(centerX + gap / 2, centerY - barHeight / 2, barWidth, barHeight);
+    ctx.fillRect(cx - bw - bg / 2, cy - bh / 2, bw, bh);
+    ctx.fillRect(cx + bg / 2, cy - bh / 2, bw, bh);
     ctx.restore();
 
-    // Label below button
-    renderer.hudText('PAUSE', centerX, y + buttonSize + 10, CONFIG.COLORS.TEXT_DIM, 8, 'center');
+    renderer.hudText('PAUSE', x - 4, cy, CONFIG.COLORS.TEXT_DIM, 7, 'right');
   }
 
   /**
@@ -755,101 +735,65 @@ export class Hud {
     return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
   }
 
-  /**
-   * Render mute button - larger touch target with clear iconography
-   */
   private renderMuteButton(renderer: Renderer, width: number, isMuted: boolean = false): void {
-    const buttonSize = 40;
-    const margin = 20;
-    const gap = 12;
-    // Position to the left of pause button
-    const x = width - buttonSize * 2 - margin - gap;
-    const y = 55;
-
-    // Store bounds for click detection
-    this.muteButtonBounds = { x, y, width: buttonSize, height: buttonSize };
+    const sz = this.btnSize;
+    const x = this.btnSlotX(width);
+    const y = this.btnSlotY(1);
+    this.muteButtonBounds = { x, y, width: sz, height: sz };
 
     const ctx = renderer.context;
-    const centerX = x + buttonSize / 2;
-    const centerY = y + buttonSize / 2;
+    const cx = x + sz / 2;
+    const cy = y + sz / 2;
+    const btnColor = isMuted ? CONFIG.COLORS.DANGER : CONFIG.COLORS.SECONDARY;
 
-    // Button color based on mute state
-    const buttonColor = isMuted ? CONFIG.COLORS.DANGER : CONFIG.COLORS.SECONDARY;
-
-    // Button background with glow
     ctx.save();
-    ctx.shadowColor = buttonColor;
-    ctx.shadowBlur = 8;
-    ctx.fillStyle = 'rgba(10, 10, 15, 0.95)';
-    renderer.drawRoundRect(x, y, buttonSize, buttonSize, 4, 'rgba(10, 10, 15, 0.95)');
-    ctx.restore();
-
-    // Border with glow
-    ctx.save();
-    ctx.shadowColor = buttonColor;
+    ctx.shadowColor = btnColor;
     ctx.shadowBlur = 6;
-    renderer.drawRoundRect(x, y, buttonSize, buttonSize, 4, 'transparent', buttonColor, 2);
+    renderer.drawRoundRect(x, y, sz, sz, 4, 'rgba(10,10,15,0.95)', btnColor, 1.5);
     ctx.restore();
 
-    // Speaker icon - larger
+    const ix = cx - 2;
     ctx.save();
-    ctx.shadowColor = '#ffffff';
-    ctx.shadowBlur = 4;
     ctx.fillStyle = '#ffffff';
     ctx.beginPath();
-    // Speaker body
-    ctx.moveTo(centerX - 10, centerY - 6);
-    ctx.lineTo(centerX - 4, centerY - 6);
-    ctx.lineTo(centerX + 4, centerY - 12);
-    ctx.lineTo(centerX + 4, centerY + 12);
-    ctx.lineTo(centerX - 4, centerY + 6);
-    ctx.lineTo(centerX - 10, centerY + 6);
+    ctx.moveTo(ix - 4, cy - 2.5);
+    ctx.lineTo(ix - 1.5, cy - 2.5);
+    ctx.lineTo(ix + 2.5, cy - 5);
+    ctx.lineTo(ix + 2.5, cy + 5);
+    ctx.lineTo(ix - 1.5, cy + 2.5);
+    ctx.lineTo(ix - 4, cy + 2.5);
     ctx.closePath();
     ctx.fill();
     ctx.restore();
 
     if (isMuted) {
-      // X mark for muted - larger and red
       ctx.save();
-      ctx.shadowColor = CONFIG.COLORS.DANGER;
-      ctx.shadowBlur = 6;
       ctx.strokeStyle = CONFIG.COLORS.DANGER;
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 1.5;
       ctx.lineCap = 'round';
       ctx.beginPath();
-      ctx.moveTo(centerX + 8, centerY - 8);
-      ctx.lineTo(centerX + 18, centerY + 8);
-      ctx.moveTo(centerX + 18, centerY - 8);
-      ctx.lineTo(centerX + 8, centerY + 8);
+      ctx.moveTo(ix + 5, cy - 3);
+      ctx.lineTo(ix + 9, cy + 3);
+      ctx.moveTo(ix + 9, cy - 3);
+      ctx.lineTo(ix + 5, cy + 3);
       ctx.stroke();
       ctx.restore();
     } else {
-      // Sound waves - larger and with glow
       ctx.save();
-      ctx.shadowColor = '#ffffff';
-      ctx.shadowBlur = 4;
       ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 1.2;
       ctx.lineCap = 'round';
       ctx.beginPath();
-      ctx.arc(centerX + 8, centerY, 6, -Math.PI / 3.5, Math.PI / 3.5);
+      ctx.arc(ix + 4, cy, 3, -Math.PI / 4, Math.PI / 4);
       ctx.stroke();
       ctx.beginPath();
-      ctx.arc(centerX + 8, centerY, 12, -Math.PI / 3.5, Math.PI / 3.5);
+      ctx.arc(ix + 4, cy, 6, -Math.PI / 4, Math.PI / 4);
       ctx.stroke();
       ctx.restore();
     }
 
-    // Label below button
     const label = isMuted ? 'MUTED' : 'SOUND';
-    renderer.hudText(
-      label,
-      centerX,
-      y + buttonSize + 10,
-      isMuted ? CONFIG.COLORS.DANGER : CONFIG.COLORS.TEXT_DIM,
-      8,
-      'center',
-    );
+    renderer.hudText(label, x - 4, cy, isMuted ? CONFIG.COLORS.DANGER : CONFIG.COLORS.TEXT_DIM, 7, 'right');
   }
 
   /**
@@ -883,8 +827,7 @@ export class Hud {
     const barX = x - barWidth;
     const barY = y - barHeight / 2;
 
-    // Label above bar
-    renderer.hudText('HEALTH', barX + barWidth / 2, barY - 12, CONFIG.COLORS.TEXT_LIGHT, 10, 'center');
+    // Health bar — no separate label, bar speaks for itself
 
     // Background with stronger contrast
     renderer.fillRect(barX, barY, barWidth, barHeight, '#101018');
@@ -919,9 +862,6 @@ export class Hud {
     ctx.lineWidth = 2;
     ctx.strokeRect(barX, barY, barWidth, barHeight);
     ctx.restore();
-
-    // Angular corners
-    renderer.drawAngularFrame(barX - 3, barY - 3, barWidth + 6, barHeight + 6, healthColor, 6);
 
     // Health text inside bar
     renderer.hudText(
@@ -1047,154 +987,203 @@ export class Hud {
    * Render neuro state panel — three-section layout:
    * Left: device status + signal. Center: brain ring + abilities. Right: weapon mode info.
    */
-  private renderMentalState(renderer: Renderer, state: HudState, width: number, height: number): void {
+  // ──────────────────────────────────────────────────────────────────
+  //  COCKPIT PANEL v2 — game mechanics on top, neuro data below
+  // ──────────────────────────────────────────────────────────────────
+
+  private readonly mechBarH = 22;
+  private readonly neuroH = 110;
+
+  private renderCockpitPanel(renderer: Renderer, state: HudState, width: number, height: number): void {
     const ctx = renderer.context;
-    const panelH = 95;
-    const panelY = height - panelH;
+    const totalH = this.mechBarH + this.neuroH;
+    const panelY = height - totalH;
 
-    renderer.drawPanel(0, panelY, width, panelH, 'rgba(8, 8, 12, 0.95)', CONFIG.COLORS.PRIMARY, 2);
+    // ── TOP SUB-BAR: game mechanics (weapon, shield, overdrive) ──
+    renderer.drawPanel(0, panelY, width, this.mechBarH, 'rgba(10,10,16,0.96)', CONFIG.COLORS.PRIMARY, 1);
+    this.renderMechanicsBar(renderer, state, 0, panelY, width, this.mechBarH);
 
+    // ── MAIN NEURO PANEL ──
+    const neuroY = panelY + this.mechBarH;
+    renderer.drawPanel(0, neuroY, width, this.neuroH, 'rgba(6,6,10,0.96)', CONFIG.COLORS.PRIMARY, 2);
+
+    // Scan-lines
+    ctx.save();
+    ctx.globalAlpha = 0.025;
+    for (let sy = neuroY; sy < height; sy += 3) {
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, sy, width, 1);
+    }
+    ctx.restore();
+
+    const leftW = width * 0.20;
+    const rightW = width * 0.25;
+    const centerLeft = leftW;
+    const centerW = width - leftW - rightW;
+    const centerMid = leftW + centerW / 2;
+
+    // LEFT (20 %): cam preview + device status
+    this.renderNeuroLeft(renderer, state, 10, neuroY + 4, leftW - 14);
+
+    // Divider
+    ctx.save();
+    ctx.strokeStyle = 'rgba(0,204,204,0.10)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(leftW, neuroY + 4);
+    ctx.lineTo(leftW, height - 4);
+    ctx.stroke();
+    ctx.restore();
+
+    // CENTER (55 %): EEG viz, band bars, brain ring
+    this.renderNeuroCenter(renderer, state, centerLeft + 6, neuroY + 4, centerW - 12, this.neuroH - 8, centerMid);
+
+    // Divider
+    ctx.save();
+    ctx.strokeStyle = 'rgba(0,204,204,0.10)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(width - rightW, neuroY + 4);
+    ctx.lineTo(width - rightW, height - 4);
+    ctx.stroke();
+    ctx.restore();
+
+    // RIGHT (25 %): BPM, sparkline, HRV, RESP, SIG, calmness, alpha
+    this.renderNeuroRight(renderer, state, width - rightW + 6, neuroY + 4, rightW - 12, this.neuroH - 8);
+  }
+
+  // ── MECHANICS BAR (weapon mode + shield/overdrive) ──
+  private renderMechanicsBar(renderer: Renderer, state: HudState, x: number, y: number, w: number, h: number): void {
+    const ctx = renderer.context;
+    const cy = y + h / 2;
     const calmColor = '#00ccff';
     const arousalColor = '#ff4466';
     const flowColor = '#ffdd44';
 
-    const leftW = width * 0.25;
-    const centerX = width / 2;
-    const rightStart = width * 0.75;
-
-    // ── LEFT SECTION: Device Status ──
-    this.renderDeviceStatus(renderer, state, 14, panelY + 8, leftW - 20);
-
-    // ── CENTER SECTION: Brain Ring + Calm/Arousal bars + Ability charges ──
-    const ringY = panelY + 38;
-    const ringR = 22;
-    const lineW = 5;
-
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(centerX, ringY, ringR, 0, Math.PI * 2);
-    ctx.strokeStyle = '#181822';
-    ctx.lineWidth = lineW + 2;
-    ctx.stroke();
-
-    const calmAngle = -Math.PI / 2 - Math.PI * state.calmLevel;
-    ctx.beginPath();
-    ctx.arc(centerX, ringY, ringR, -Math.PI / 2, calmAngle, true);
-    ctx.strokeStyle = calmColor;
-    ctx.lineWidth = lineW;
-    ctx.shadowColor = calmColor;
-    ctx.shadowBlur = 10;
-    ctx.stroke();
-
-    const arousalAngle = -Math.PI / 2 + Math.PI * state.arousalLevel;
-    ctx.beginPath();
-    ctx.arc(centerX, ringY, ringR, -Math.PI / 2, arousalAngle, false);
-    ctx.strokeStyle = arousalColor;
-    ctx.shadowColor = arousalColor;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-    ctx.restore();
-
     const mode = state.weaponMode ?? 'balanced';
     const modeIcon = mode === 'beam' ? '◎' : mode === 'spray' ? '✦' : mode === 'flow' ? '◈' : '•';
-    const modeColor =
-      mode === 'beam' ? calmColor : mode === 'spray' ? arousalColor : mode === 'flow' ? flowColor : '#aaaaaa';
-    renderer.hudText(modeIcon, centerX, ringY + 1, modeColor, 16, 'center');
+    const modeColor = mode === 'beam' ? calmColor : mode === 'spray' ? arousalColor : mode === 'flow' ? flowColor : '#aaaaaa';
+    const modeName = mode === 'beam' ? 'BEAM' : mode === 'spray' ? 'SPRAY' : mode === 'flow' ? 'FLOW' : 'BALANCED';
+    const modeDesc = mode === 'beam' ? 'Precision · x3 dmg' : mode === 'spray' ? 'Rapid · x2.5 rate' : mode === 'flow' ? 'Homing · x2 dmg' : 'Standard';
 
-    // Calm / Arousal labels under ring
-    renderer.hudText(
-      `C ${Math.round(state.calmLevel * 100)}%`,
-      centerX - 40,
-      ringY + ringR + 14,
-      calmColor,
-      9,
-      'center',
-    );
-    renderer.hudText(
-      `A ${Math.round(state.arousalLevel * 100)}%`,
-      centerX + 40,
-      ringY + ringR + 14,
-      arousalColor,
-      9,
-      'center',
-    );
+    renderer.hudText(`${modeIcon} ${modeName}`, x + 12, cy, modeColor, 11, 'left');
+    renderer.hudText(modeDesc, x + 90, cy, '#6a6a80', 8, 'left');
 
-    // Shield charge bar (left of ring)
-    const chargeBarW = 56;
-    const chargeBarH = 7;
+    // Shield bar
+    const barW = 80;
+    const barH = 6;
     const shieldCharge = state.shieldCharge ?? 0;
-    const shieldBarX = centerX - ringR - 12 - chargeBarW;
-    const shieldBarY = ringY - chargeBarH / 2;
-
+    const shieldX = w / 2 - barW - 30;
     const shieldLabel = state.shieldActive ? 'SHIELD ON' : 'SHIELD';
-    const shieldLabelColor = state.shieldActive ? '#ffffff' : calmColor;
-    renderer.hudText(shieldLabel, shieldBarX + chargeBarW / 2, shieldBarY - 9, shieldLabelColor, 8, 'center');
-    renderer.fillRect(shieldBarX, shieldBarY, chargeBarW, chargeBarH, '#101018');
+    const shieldLblColor = state.shieldActive ? '#ffffff' : calmColor;
+    renderer.hudText(shieldLabel, shieldX - 4, cy, shieldLblColor, 8, 'right');
+    renderer.fillRect(shieldX, cy - barH / 2, barW, barH, '#101018');
     ctx.save();
     ctx.shadowColor = calmColor;
-    ctx.shadowBlur = state.shieldActive ? 14 + Math.sin(this.time * 6) * 6 : shieldCharge > 0.9 ? 12 : 4;
+    ctx.shadowBlur = state.shieldActive ? 10 + Math.sin(this.time * 6) * 4 : shieldCharge > 0.9 ? 8 : 2;
     ctx.fillStyle = state.shieldActive ? '#66eeff' : calmColor;
-    ctx.fillRect(shieldBarX, shieldBarY, chargeBarW * shieldCharge, chargeBarH);
+    ctx.fillRect(shieldX, cy - barH / 2, barW * shieldCharge, barH);
     ctx.restore();
-    renderer.strokeRect(shieldBarX, shieldBarY, chargeBarW, chargeBarH, calmColor, 1);
+    renderer.strokeRect(shieldX, cy - barH / 2, barW, barH, calmColor, 1);
 
-    // Overdrive charge bar (right of ring)
-    const overdriveCharge = state.overdriveCharge ?? 0;
-    const odBarX = centerX + ringR + 12;
-    const odBarY = ringY - chargeBarH / 2;
-
+    // Overdrive bar
+    const odCharge = state.overdriveCharge ?? 0;
+    const odX = w / 2 + 30;
     const odLabel = state.overdriveActive ? 'OVERDRIVE!' : 'OVERDRIVE';
-    const odLabelColor = state.overdriveActive ? '#ffffff' : arousalColor;
-    renderer.hudText(odLabel, odBarX + chargeBarW / 2, odBarY - 9, odLabelColor, 8, 'center');
-    renderer.fillRect(odBarX, odBarY, chargeBarW, chargeBarH, '#101018');
+    const odLblColor = state.overdriveActive ? '#ffffff' : arousalColor;
+    renderer.fillRect(odX, cy - barH / 2, barW, barH, '#101018');
     ctx.save();
     ctx.shadowColor = arousalColor;
-    ctx.shadowBlur = state.overdriveActive ? 14 + Math.sin(this.time * 8) * 6 : overdriveCharge > 0.9 ? 12 : 4;
+    ctx.shadowBlur = state.overdriveActive ? 10 + Math.sin(this.time * 8) * 4 : odCharge > 0.9 ? 8 : 2;
     ctx.fillStyle = state.overdriveActive ? '#ff8888' : arousalColor;
-    ctx.fillRect(odBarX, odBarY, chargeBarW * overdriveCharge, chargeBarH);
+    ctx.fillRect(odX, cy - barH / 2, barW * odCharge, barH);
     ctx.restore();
-    renderer.strokeRect(odBarX, odBarY, chargeBarW, chargeBarH, arousalColor, 1);
+    renderer.strokeRect(odX, cy - barH / 2, barW, barH, arousalColor, 1);
+    renderer.hudText(odLabel, odX + barW + 4, cy, odLblColor, 8, 'left');
 
-    // ── RIGHT SECTION: Weapon Mode Info ──
-    this.renderWeaponModeInfo(renderer, state, rightStart + 6, panelY + 8, width - rightStart - 20);
+    // Active ability glow labels at right edge
+    let abilX = w - 12;
+    if (state.shieldActive) {
+      const glow = 0.7 + Math.sin(this.time * 6) * 0.3;
+      ctx.save();
+      ctx.shadowColor = calmColor;
+      ctx.shadowBlur = 8;
+      ctx.globalAlpha = glow;
+      renderer.hudText('◆ CALM SHIELD', abilX, cy, calmColor, 8, 'right');
+      ctx.restore();
+      abilX -= 90;
+    } else if (shieldCharge > 0.8) {
+      renderer.hudText('SHIELD RDY', abilX, cy, calmColor, 7, 'right');
+      abilX -= 70;
+    }
+    if (state.overdriveActive) {
+      const glow = 0.7 + Math.sin(this.time * 8) * 0.3;
+      ctx.save();
+      ctx.shadowColor = arousalColor;
+      ctx.shadowBlur = 8;
+      ctx.globalAlpha = glow;
+      renderer.hudText('◆ OVERDRIVE', abilX, cy, arousalColor, 8, 'right');
+      ctx.restore();
+    } else if (odCharge > 0.8) {
+      renderer.hudText('OVDRV RDY', abilX, cy, arousalColor, 7, 'right');
+    }
+
+    // Alpha bump flash
+    if (this.alphaBumpTimer > 0) {
+      const flash = 0.5 + Math.sin(this.time * 12) * 0.5;
+      ctx.save();
+      ctx.globalAlpha = flash;
+      renderer.hudText('ALPHA BUMP ×2', w / 2, cy, '#00ffff', 9, 'center');
+      ctx.restore();
+    }
   }
 
-  /**
-   * Render device status in the left section of the neuro panel.
-   * Shows connection icons, BPM, signal quality, and EEG band powers.
-   */
-  private renderDeviceStatus(renderer: Renderer, state: HudState, x: number, y: number, maxW: number): void {
+  // ── NEURO LEFT: cam preview + device status ──
+  private renderNeuroLeft(renderer: Renderer, state: HudState, x: number, y: number, maxW: number): void {
     const ctx = renderer.context;
     const source = state.neuroSource ?? 'none';
-    const quality = state.signalQuality ?? 0;
-
-    // Row 1: Source with connection icon
     const eegConn = state.eegConnected ?? false;
     const camActive = state.cameraActive ?? false;
     const calibProg = state.calibrationProgress ?? 0;
 
+    let curY = y;
+
+    // Webcam preview
+    const hasCam = camActive && this.videoElement && this.videoElement.readyState >= 2;
+    if (hasCam) {
+      const pw = Math.min(maxW, 80);
+      const ph = Math.round(pw * 0.75);
+      ctx.save();
+      ctx.translate(x + pw, curY);
+      ctx.scale(-1, 1);
+      ctx.drawImage(this.videoElement!, 0, 0, pw, ph);
+      ctx.restore();
+      ctx.save();
+      ctx.strokeStyle = '#00cccc';
+      ctx.lineWidth = 1;
+      ctx.shadowColor = '#00cccc';
+      ctx.shadowBlur = 3;
+      ctx.strokeRect(x, curY, pw, ph);
+      ctx.restore();
+      renderer.hudText('CAM', x + 2, curY + 1, 'rgba(0,204,204,0.6)', 6, 'left');
+      curY += ph + 3;
+    }
+
+    // Device status
     let icon: string;
     let iconColor: string;
     let statusLabel: string;
 
     if (source === 'eeg') {
-      icon = '●';
-      iconColor = '#44ff88';
-      statusLabel = 'EEG CONNECTED';
+      icon = '●'; iconColor = '#44ff88'; statusLabel = 'EEG CONNECTED';
     } else if (source === 'rppg') {
       if (calibProg < 1) {
-        icon = '◉';
-        iconColor = '#ffaa44';
-        statusLabel = `CAM ${Math.round(calibProg * 100)}%`;
+        icon = '◉'; iconColor = '#ffaa44'; statusLabel = `CAM ${Math.round(calibProg * 100)}%`;
       } else {
-        icon = '●';
-        iconColor = '#ffaa44';
-        statusLabel = 'WEBCAM ACTIVE';
+        icon = '●'; iconColor = '#ffaa44'; statusLabel = 'WEBCAM ACTIVE';
       }
     } else if (source === 'mock') {
-      icon = '◇';
-      iconColor = '#666688';
-      statusLabel = 'SIMULATED';
+      icon = '◇'; iconColor = '#666688'; statusLabel = 'SIMULATED';
     } else if (eegConn) {
       const dots = '.'.repeat(1 + (Math.floor(this.time * 2) % 3));
       const frames = state.eegFrameCount ?? 0;
@@ -1204,195 +1193,259 @@ export class Hud {
       const batStr = bat != null ? ` [${bat}%]` : '';
       icon = '◉';
       iconColor = errors > 0 ? '#ff6644' : frames > 0 ? '#44ff88' : '#ffaa44';
-      if (errors > 0) {
-        statusLabel = `EEG decode err (${errors})`;
-      } else if (frames > 0) {
-        statusLabel = `EEG active${dots}${batStr}`;
-      } else if (bleNotifs > 0) {
-        statusLabel = `EEG decoding${dots} (${bleNotifs} pkts)`;
-      } else {
-        statusLabel = `EEG waiting${dots} (no data)`;
-      }
+      if (errors > 0) statusLabel = `EEG err(${errors})`;
+      else if (frames > 0) statusLabel = `EEG on${dots}${batStr}`;
+      else if (bleNotifs > 0) statusLabel = `EEG dec${dots}`;
+      else statusLabel = `EEG wait${dots}`;
     } else if (state.eegReconnecting) {
       const dots = '.'.repeat(1 + (Math.floor(this.time * 2) % 3));
-      icon = '◎';
-      iconColor = '#ffaa44';
-      statusLabel = `EEG reconnecting${dots} (${state.eegReconnectAttempt ?? 0}/5)`;
+      icon = '◎'; iconColor = '#ffaa44';
+      statusLabel = `Recon${dots}(${state.eegReconnectAttempt ?? 0}/5)`;
     } else {
-      icon = '✕';
-      iconColor = '#ff4444';
-      statusLabel = 'NO DEVICE';
+      icon = '✕'; iconColor = '#ff4444'; statusLabel = 'NO DEVICE';
     }
 
-    // Pulsing animation for calibrating/reconnecting state
     if ((source === 'rppg' && calibProg < 1) || state.eegReconnecting) {
       const pulse = 0.6 + Math.sin(this.time * 4) * 0.4;
       ctx.save();
       ctx.globalAlpha = pulse;
-      renderer.hudText(icon, x, y + 6, iconColor, 11, 'left');
+      renderer.hudText(icon, x, curY + 3, iconColor, 9, 'left');
       ctx.restore();
     } else {
-      renderer.hudText(icon, x, y + 6, iconColor, 11, 'left');
+      renderer.hudText(icon, x, curY + 3, iconColor, 9, 'left');
     }
-    renderer.hudText(statusLabel, x + 14, y + 6, iconColor, 10, 'left');
+    renderer.hudText(statusLabel, x + 12, curY + 3, iconColor, 9, 'left');
+    curY += 13;
 
-    // Row 2: secondary device status
-    let row2Y = y + 20;
-
-    // Low battery warning (inside panel, below status label)
-    if (eegConn && state.eegBatteryLevel != null && state.eegBatteryLevel <= 20) {
-      const batWarnColor = state.eegBatteryLevel <= 10 ? '#ff4444' : '#ffaa44';
-      const batWarnPulse = state.eegBatteryLevel <= 10 ? 0.6 + Math.sin(this.time * 6) * 0.4 : 1;
-      ctx.save();
-      ctx.globalAlpha = batWarnPulse;
-      renderer.hudText(`⚡ LOW BATTERY ${state.eegBatteryLevel}%`, x + 14, row2Y, batWarnColor, 9, 'left');
-      ctx.restore();
-      row2Y += 12;
-    }
+    // Secondary device
     if (eegConn && source !== 'eeg') {
       const frames = state.eegFrameCount ?? 0;
       const errors = state.eegDecodeErrors ?? 0;
-      const hasEegData = state.alphaPower != null || frames > 0;
       if (errors > 0) {
-        renderer.hudText('✕', x, row2Y, '#ff6644', 10, 'left');
-        renderer.hudText(`EEG errors: ${errors}`, x + 14, row2Y, '#ff6644', 9, 'left');
-      } else if (hasEegData) {
-        renderer.hudText('●', x, row2Y, '#44ff88', 10, 'left');
-        renderer.hudText(`EEG active (${frames} frames)`, x + 14, row2Y, '#44ff88', 9, 'left');
-      } else {
-        const dots = '.'.repeat(1 + (Math.floor(this.time * 2) % 3));
-        renderer.hudText('◌', x, row2Y, '#ffaa44', 10, 'left');
-        renderer.hudText(`EEG syncing${dots} (0 frames)`, x + 14, row2Y, '#ffaa44', 9, 'left');
+        renderer.hudText(`✕ EEG err:${errors}`, x, curY, '#ff6644', 7, 'left');
+      } else if (state.alphaPower != null || frames > 0) {
+        renderer.hudText(`● EEG(${frames}f)`, x, curY, '#44ff88', 7, 'left');
       }
-      row2Y += 14;
+      curY += 10;
     }
     if (camActive && source !== 'rppg') {
-      renderer.hudText('◌', x, row2Y, '#555566', 10, 'left');
-      renderer.hudText('Camera standby', x + 14, row2Y, '#555566', 9, 'left');
-      row2Y += 14;
+      renderer.hudText('◌ Cam standby', x, curY, '#555566', 7, 'left');
+      curY += 10;
     }
 
-    // Heart rate (if available) — use displayBpm for a stable number
-    const displayBpm = state.displayBpm ?? state.bpm;
-    if (displayBpm !== null && displayBpm !== undefined) {
-      const beatPhase = Math.sin(this.time * ((displayBpm || 72) / 60) * Math.PI * 2);
-      const beatScale = 1 + beatPhase * 0.08;
+    // Low battery
+    if (eegConn && state.eegBatteryLevel != null && state.eegBatteryLevel <= 20) {
+      const batColor = state.eegBatteryLevel <= 10 ? '#ff4444' : '#ffaa44';
+      const batPulse = state.eegBatteryLevel <= 10 ? 0.6 + Math.sin(this.time * 6) * 0.4 : 1;
       ctx.save();
-      ctx.translate(x, row2Y);
-      ctx.scale(beatScale, beatScale);
-      ctx.translate(-x, -row2Y);
-      renderer.hudText('♥', x, row2Y, '#ff4466', 18, 'left');
+      ctx.globalAlpha = batPulse;
+      renderer.hudText(`⚡${state.eegBatteryLevel}%`, x, curY, batColor, 8, 'left');
       ctx.restore();
-      renderer.hudText(`${Math.round(displayBpm)}`, x + 18, row2Y, '#ff4466', 16, 'left');
-      renderer.hudText('BPM', x + 50, row2Y, '#cc3355', 9, 'left');
-      this.addTooltipRegion(x, row2Y - 10, 70, 20, 'Heart rate in beats per minute');
-      row2Y += 20;
+      curY += 10;
+    }
 
-      // BPM history sparkline
-      const history = state.bpmHistory;
-      if (history && history.length > 2) {
-        this.renderBpmSparkline(renderer, history, x, row2Y, Math.min(maxW - 4, 90), 20);
-        row2Y += 26;
+    // Mini EEG waveform (small, in left column) — only if there's enough room
+    if ((eegConn || source === 'eeg') && curY + 22 < y + 100) {
+      const waveH = 16;
+      const waveW = maxW;
+      const waveY = curY + 2;
+      ctx.save();
+      ctx.strokeStyle = 'rgba(0, 204, 255, 0.5)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let i = 0; i < waveW; i++) {
+        const t = this.time * 3 + i * 0.12;
+        const v = Math.sin(t) * 0.4 + Math.sin(t * 2.3) * 0.25 + Math.sin(t * 5.7) * 0.15;
+        const py = waveY + waveH / 2 + v * (waveH * 0.4);
+        if (i === 0) ctx.moveTo(x + i, py);
+        else ctx.lineTo(x + i, py);
       }
-    }
-
-    // Signal quality bar
-    const qualBarW = Math.min(maxW - 4, 90);
-    const qualBarH = 5;
-    const qualColor = quality > 0.6 ? '#44ff88' : quality > 0.3 ? '#ffaa44' : '#ff4444';
-    renderer.hudText('SIG', x, row2Y + 1, '#5a6070', 8, 'left');
-    this.addTooltipRegion(x, row2Y - 4, qualBarW + 26, qualBarH + 8, 'Neuro signal quality — higher is better');
-    renderer.fillRect(x + 22, row2Y - 1, qualBarW, qualBarH, '#101018');
-    ctx.save();
-    ctx.fillStyle = qualColor;
-    ctx.fillRect(x + 22, row2Y - 1, qualBarW * quality, qualBarH);
-    ctx.restore();
-    renderer.hudText(`${Math.round(quality * 100)}%`, x + 22 + qualBarW + 4, row2Y + 1, qualColor, 8, 'left');
-    row2Y += 14;
-
-    // Floating elements stacked upward above the panel
-    const floatW = Math.min(maxW - 4, 90);
-    const floatPad = 6;
-    const sectionGap = 8;
-
-    const hasCam = camActive && this.videoElement && this.videoElement.readyState >= 2;
-    const hasBands = eegConn && state.alphaPower !== undefined && state.alphaPower !== null;
-    const hasChart = hasBands && state.eegBandHistory && state.eegBandHistory.length > 2;
-    const hasWave = eegConn && state.eegSamples && state.eegSamples.length > 4;
-
-    const camH = hasCam ? 48 : 0;
-    const chartH = 32;
-    const waveH = 28;
-    let barsEstimate = 0;
-    if (hasBands) {
-      barsEstimate = 5 * 9 + 2;
-      if (state.calmnessState) barsEstimate += 10;
-      if (state.alphaPeakFreq != null) barsEstimate += 10;
-      if (state.alphaBumpState && state.alphaBumpState !== 'unknown') barsEstimate += 10;
-    }
-
-    let totalFloatH = 0;
-    if (hasCam) totalFloatH += camH + sectionGap;
-    if (hasBands) totalFloatH += barsEstimate + sectionGap;
-    if (hasChart) totalFloatH += chartH + 6;
-    if (hasWave) totalFloatH += waveH + sectionGap;
-
-    const floatClearance = 24;
-    if (totalFloatH > 0) {
-      totalFloatH += floatPad * 2;
-      const bgX = x - floatPad;
-      const bgY = y - floatClearance - totalFloatH;
-      const bgW = floatW + 30 + floatPad * 2;
-
-      renderer.drawRoundRect(bgX, bgY, bgW, totalFloatH, 4, 'rgba(8,8,16,0.75)', 'rgba(40,40,60,0.5)');
-    }
-
-    let floatY = y - floatClearance - floatPad;
-
-    if (hasCam) {
-      floatY -= camH;
-      this.renderFacePreview(renderer, x, floatY);
-      floatY -= sectionGap;
-      if (hasBands || hasChart || hasWave) {
-        ctx.save();
-        ctx.strokeStyle = '#1a1a2a';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(x, floatY + sectionGap / 2);
-        ctx.lineTo(x + floatW + 20, floatY + sectionGap / 2);
-        ctx.stroke();
-        ctx.restore();
-      }
-    }
-
-    if (hasBands) {
-      floatY -= barsEstimate;
-      this.renderBandPowerBars(renderer, state, x, floatY, floatW + 30);
-      floatY -= sectionGap;
-    }
-
-    if (hasChart) {
-      floatY -= chartH;
-      this.renderBandPowerChart(renderer, state.eegBandHistory!, x, floatY, Math.min(floatW + 30, 100), chartH);
-      floatY -= 6;
-    }
-
-    if (hasWave) {
-      if (hasBands || hasChart) {
-        ctx.save();
-        ctx.strokeStyle = '#1a1a2a';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(x, floatY + 2);
-        ctx.lineTo(x + floatW + 20, floatY + 2);
-        ctx.stroke();
-        ctx.restore();
-        floatY -= 4;
-      }
-      floatY -= waveH;
-      this.renderEEGWaveform(renderer, state.eegSamples!, x, floatY, floatW, waveH);
+      ctx.stroke();
+      ctx.restore();
+      renderer.hudText('RAW', x, waveY - 1, 'rgba(0,204,255,0.4)', 6, 'left');
     }
   }
+
+  // ── NEURO CENTER: EEG viz + band bars + brain ring ──
+  private renderNeuroCenter(
+    renderer: Renderer,
+    state: HudState,
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    centerMid: number,
+  ): void {
+    const calmColor = '#00ccff';
+    const arousalColor = '#ff4466';
+    const eegConn = state.eegConnected ?? false;
+    const camActive = state.cameraActive ?? false;
+    const hasBands = eegConn && state.alphaPower != null;
+    const hasChart = hasBands && state.eegBandHistory && state.eegBandHistory.length > 2;
+    const webcamOnly = !eegConn && camActive;
+
+    if (webcamOnly) {
+      // Webcam-only mode: large BPM sparkline + brain ring
+      const history = state.bpmHistory;
+      if (history && history.length > 2) {
+        renderer.hudText('HEART RATE TRACE', x + 2, y + 1, '#883344', 7, 'left');
+        this.renderBpmSparkline(renderer, history, x, y + 10, w, h * 0.55);
+      }
+
+      const ringY = y + h - 20;
+      this.renderBrainRing(renderer, state, centerMid, ringY, 14, calmColor, arousalColor);
+      return;
+    }
+
+    // Band bars on the left side of center column
+    const bandBarW = Math.round(w * 0.28);
+    if (hasBands) {
+      this.renderBandPowerBars(renderer, state, x, y, bandBarW);
+    }
+
+    // Brain waves chart as the hero visualization — takes most of the center
+    if (hasChart) {
+      const chartX = x + bandBarW + 4;
+      const chartW = w - bandBarW - 4;
+      const chartH = Math.round(h * 0.7);
+      this.renderBandPowerChart(renderer, state.eegBandHistory!, chartX, y, chartW, chartH);
+    }
+
+    // Brain ring at bottom
+    const ringY = y + h - 20;
+    this.renderBrainRing(renderer, state, centerMid, ringY, 14, calmColor, arousalColor);
+  }
+
+  private renderBrainRing(
+    renderer: Renderer,
+    state: HudState,
+    cx: number,
+    cy: number,
+    r: number,
+    calmColor: string,
+    arousalColor: string,
+  ): void {
+    const ctx = renderer.context;
+    const lw = 3;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = '#181822';
+    ctx.lineWidth = lw + 2;
+    ctx.stroke();
+
+    const calmAngle = -Math.PI / 2 - Math.PI * state.calmLevel;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, -Math.PI / 2, calmAngle, true);
+    ctx.strokeStyle = calmColor;
+    ctx.lineWidth = lw;
+    ctx.shadowColor = calmColor;
+    ctx.shadowBlur = 6;
+    ctx.stroke();
+
+    const arousalAngle = -Math.PI / 2 + Math.PI * state.arousalLevel;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, -Math.PI / 2, arousalAngle, false);
+    ctx.strokeStyle = arousalColor;
+    ctx.shadowColor = arousalColor;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+    ctx.restore();
+
+    // Brain state label
+    let brainLabel = 'BALANCED';
+    let brainColor = '#aaaaaa';
+    if (state.calmLevel > 0.65) { brainLabel = 'FOCUSED'; brainColor = calmColor; }
+    else if (state.arousalLevel > 0.65) { brainLabel = 'ALERT'; brainColor = arousalColor; }
+    else if (state.calmLevel > 0.45 && state.arousalLevel < 0.3) { brainLabel = 'RELAXED'; brainColor = '#44ddaa'; }
+    renderer.hudText(brainLabel, cx, cy - r - 5, brainColor, 7, 'center');
+
+    renderer.hudText(`C ${Math.round(state.calmLevel * 100)}%`, cx - r - 8, cy, calmColor, 7, 'right');
+    renderer.hudText(`A ${Math.round(state.arousalLevel * 100)}%`, cx + r + 8, cy, arousalColor, 7, 'left');
+
+    this.addTooltipRegion(cx - r - 30, cy - r - 8, r * 2 + 60, r * 2 + 16, 'Brain state: Calm (left) vs Arousal (right)');
+  }
+
+  // ── NEURO RIGHT: BPM, sparkline, HRV, RESP, BL±, SIG, calmness, alpha ──
+  private renderNeuroRight(renderer: Renderer, state: HudState, x: number, y: number, maxW: number, maxH: number): void {
+    const ctx = renderer.context;
+    const quality = state.signalQuality ?? 0;
+    const bottomLimit = y + maxH - 6;
+    let curY = y + 4;
+
+    // Heart rate
+    const displayBpm = state.displayBpm ?? state.bpm;
+    if (displayBpm != null) {
+      const beatPhase = Math.sin(this.time * ((displayBpm || 72) / 60) * Math.PI * 2);
+      const beatScale = 1 + beatPhase * 0.06;
+      ctx.save();
+      ctx.translate(x, curY + 2);
+      ctx.scale(beatScale, beatScale);
+      ctx.translate(-x, -(curY + 2));
+      renderer.hudText('♥', x, curY + 2, '#ff4466', 14, 'left');
+      ctx.restore();
+      renderer.hudText(`${Math.round(displayBpm)}`, x + 16, curY + 2, '#ff4466', 14, 'left');
+      renderer.hudText('BPM', x + 44, curY + 2, '#cc3355', 8, 'left');
+      this.addTooltipRegion(x, curY - 2, 60, 16, 'Heart rate (beats per minute)');
+      curY += 16;
+
+      const history = state.bpmHistory;
+      if (history && history.length > 2 && curY + 18 < bottomLimit) {
+        this.renderBpmSparkline(renderer, history, x, curY, Math.min(maxW, 90), 14);
+        curY += 18;
+      }
+    } else {
+      curY += 4;
+    }
+
+    // Continuous metrics — each on its own row
+    const metrics: Array<{ label: string; value: string; color: string; tip: string }> = [];
+
+    if (state.hrvRmssd != null && state.hrvRmssd > 0) {
+      metrics.push({ label: 'HRV', value: `${Math.round(state.hrvRmssd)}ms`, color: '#44ddaa', tip: 'Heart rate variability (RMSSD)' });
+    }
+    if (state.respirationRate != null && state.respirationRate > 0) {
+      metrics.push({ label: 'RESP', value: `${state.respirationRate.toFixed(1)}/m`, color: '#88aaff', tip: 'Breaths per minute' });
+    }
+    if (state.baselineDelta != null) {
+      const sign = state.baselineDelta >= 0 ? '+' : '';
+      metrics.push({
+        label: 'BL±',
+        value: `${sign}${Math.round(state.baselineDelta)}`,
+        color: state.baselineDelta > 5 ? '#ff8844' : '#88ff88',
+        tip: 'Deviation from baseline BPM',
+      });
+    }
+
+    const qualColor = quality > 0.6 ? '#44ff88' : quality > 0.3 ? '#ffaa44' : '#ff4444';
+    metrics.push({ label: 'SIG', value: `${Math.round(quality * 100)}%`, color: qualColor, tip: 'Signal quality — higher is better' });
+
+    if (state.calmnessState) {
+      metrics.push({ label: 'STATE', value: state.calmnessState.toUpperCase(), color: '#00ccff', tip: 'Overall calmness state' });
+    }
+
+    if (state.alphaPeakFreq != null) {
+      metrics.push({ label: 'αPk', value: `${state.alphaPeakFreq.toFixed(1)}Hz`, color: '#44ccff', tip: 'Alpha peak frequency (8-12Hz)' });
+    }
+
+    if (state.alphaBumpState && state.alphaBumpState !== 'unknown') {
+      metrics.push({ label: 'α', value: state.alphaBumpState, color: '#00ffcc', tip: 'Alpha bump detection state' });
+    }
+
+    for (const m of metrics) {
+      if (curY + 11 > bottomLimit) break;
+      renderer.hudText(m.label, x, curY + 1, '#6a7080', 8, 'left');
+      renderer.hudText(m.value, x + 30, curY + 1, m.color, 9, 'left');
+      this.addTooltipRegion(x, curY - 2, maxW, 11, m.tip);
+      curY += 11;
+    }
+  }
+
+  /**
+   * Render device status in the left section of the neuro panel.
+   * Shows connection icons, BPM, signal quality, and EEG band powers.
+   */
 
   private renderBpmSparkline(renderer: Renderer, history: number[], x: number, y: number, w: number, h: number): void {
     if (history.length < 2) return;
@@ -1426,98 +1479,47 @@ export class Hud {
     renderer.hudText(`${Math.round(max)}`, x + w, y + h + 6, '#883344', 6, 'right');
   }
 
-  private renderFacePreview(renderer: Renderer, x: number, y: number): void {
-    if (!this.videoElement) return;
-    const ctx = renderer.context;
-    const previewW = 64;
-    const previewH = 48;
-
-    ctx.save();
-    ctx.translate(x + previewW, y);
-    ctx.scale(-1, 1);
-    ctx.drawImage(this.videoElement, 0, 0, previewW, previewH);
-    ctx.restore();
-
-    ctx.save();
-    ctx.strokeStyle = '#00cccc';
-    ctx.lineWidth = 1;
-    ctx.shadowColor = '#00cccc';
-    ctx.shadowBlur = 4;
-    ctx.strokeRect(x, y, previewW, previewH);
-    ctx.restore();
-
-    renderer.hudText('CAM', x + 2, y + 2, 'rgba(0,204,204,0.7)', 6, 'left');
-  }
-
-  private renderEEGWaveform(renderer: Renderer, samples: number[], x: number, y: number, w: number, h: number): void {
-    const ctx = renderer.context;
-    if (samples.length < 2) return;
-
-    let min = Infinity;
-    let max = -Infinity;
-    for (const s of samples) {
-      if (s < min) min = s;
-      if (s > max) max = s;
-    }
-    const range = max - min || 1;
-
-    renderer.hudText('EEG', x + 1, y + 1, 'rgba(68,204,255,0.5)', 6, 'left');
-
-    ctx.save();
-    ctx.globalAlpha = 0.65;
-    ctx.strokeStyle = '#44ccff';
-    ctx.lineWidth = 1;
-    ctx.shadowColor = '#44ccff';
-    ctx.shadowBlur = 4;
-    ctx.beginPath();
-
-    const step = w / (samples.length - 1);
-    for (let i = 0; i < samples.length; i++) {
-      const px = x + i * step;
-      const py = y + h - ((samples[i] - min) / range) * h;
-      if (i === 0) ctx.moveTo(px, py);
-      else ctx.lineTo(px, py);
-    }
-    ctx.stroke();
-    ctx.restore();
-  }
 
   /**
    * Render EEG alpha/beta/theta band power mini-bars
    */
   private renderBandPowerBars(renderer: Renderer, state: HudState, x: number, y: number, maxW: number): number {
     const ctx = renderer.context;
-    const barH = 4;
-    const barW = Math.min(maxW - 30, 60);
-    const bands: Array<{ label: string; value: number; color: string }> = [
-      { label: 'δ', value: Math.min(1, state.deltaPower ?? 0), color: '#aa88ff' },
-      { label: 'θ', value: Math.min(1, state.thetaPower ?? 0), color: '#88cc44' },
-      { label: 'α', value: Math.min(1, state.alphaPower ?? 0), color: '#44ccff' },
-      { label: 'β', value: Math.min(1, state.betaPower ?? 0), color: '#ff6644' },
-      { label: 'γ', value: Math.min(1, state.gammaPower ?? 0), color: '#ffaa88' },
+    const barH = 5;
+    const rowH = 11;
+    const barW = Math.min(maxW - 30, 70);
+    const bands: Array<{ label: string; fullName: string; desc: string; value: number; color: string }> = [
+      { label: 'δ', fullName: 'Delta', desc: 'Deep sleep & unconscious processing', value: Math.min(1, state.deltaPower ?? 0), color: '#aa88ff' },
+      { label: 'θ', fullName: 'Theta', desc: 'Creativity, daydreaming & light meditation', value: Math.min(1, state.thetaPower ?? 0), color: '#88cc44' },
+      { label: 'α', fullName: 'Alpha', desc: 'Relaxed awareness & calm focus', value: Math.min(1, state.alphaPower ?? 0), color: '#44ccff' },
+      { label: 'β', fullName: 'Beta', desc: 'Active thinking & concentration', value: Math.min(1, state.betaPower ?? 0), color: '#ff6644' },
+      { label: 'γ', fullName: 'Gamma', desc: 'Peak attention & information processing', value: Math.min(1, state.gammaPower ?? 0), color: '#ffaa88' },
     ];
     for (let i = 0; i < bands.length; i++) {
-      const by = y + i * 9;
-      renderer.hudText(bands[i].label, x, by + 2, bands[i].color, 8, 'left');
-      renderer.fillRect(x + 12, by, barW, barH, '#101018');
+      const by = y + i * rowH;
+      renderer.hudText(bands[i].label, x, by + 3, bands[i].color, 9, 'left');
+      renderer.fillRect(x + 14, by, barW, barH, '#101018');
       ctx.save();
       ctx.fillStyle = bands[i].color;
-      ctx.fillRect(x + 12, by, barW * bands[i].value, barH);
+      ctx.fillRect(x + 14, by, barW * bands[i].value, barH);
       ctx.restore();
+      this.addTooltipRegion(x, by - 2, barW + 14, rowH, `${bands[i].fullName} (${Math.round(bands[i].value * 100)}%) — ${bands[i].desc}`);
     }
-    let extraY = y + bands.length * 9 + 2;
+    let extraY = y + bands.length * rowH + 3;
 
     if (state.calmnessState) {
-      renderer.hudText(state.calmnessState.toUpperCase(), x, extraY, '#00ccff', 8, 'left');
-      extraY += 10;
+      renderer.hudText(state.calmnessState.toUpperCase(), x, extraY, '#00ccff', 9, 'left');
+      this.addTooltipRegion(x, extraY - 4, maxW, 12, 'Current brain calmness state');
+      extraY += 12;
     }
     if (state.alphaPeakFreq != null) {
-      renderer.hudText(`αPk ${state.alphaPeakFreq.toFixed(1)}Hz`, x, extraY, '#44ccff', 7, 'left');
-      extraY += 10;
+      renderer.hudText(`αPk ${state.alphaPeakFreq.toFixed(1)}Hz`, x, extraY, '#44ccff', 8, 'left');
+      this.addTooltipRegion(x, extraY - 4, maxW, 11, 'Alpha peak frequency (8–12 Hz)');
+      extraY += 11;
     }
     if (state.alphaBumpState && state.alphaBumpState !== 'unknown') {
-      renderer.hudText(`α:${state.alphaBumpState}`, x, extraY, '#00ffcc', 7, 'left');
-      extraY += 10;
+      renderer.hudText(`α:${state.alphaBumpState}`, x, extraY, '#00ffcc', 8, 'left');
+      extraY += 11;
     }
     return extraY - y;
   }
@@ -1534,20 +1536,31 @@ export class Hud {
     const ctx = renderer.context;
 
     ctx.save();
-    ctx.fillStyle = 'rgba(8,8,16,0.6)';
+    ctx.fillStyle = 'rgba(8,8,16,0.5)';
     ctx.fillRect(x, y, w, h);
 
-    renderer.hudText('BRAIN WAVES', x + 2, y + 1, '#557799', 6, 'left');
+    renderer.hudText('BRAIN WAVES', x + 4, y + 2, '#7799bb', 8, 'left');
 
-    const chartY = y + 8;
-    const chartH = h - 10;
-    const bands: Array<{ key: keyof import('../engine/eegProvider').BandPowerSnapshot; color: string }> = [
-      { key: 'delta', color: 'rgba(170,136,255,0.7)' },
-      { key: 'theta', color: 'rgba(136,204,68,0.7)' },
-      { key: 'alpha', color: 'rgba(68,204,255,0.8)' },
-      { key: 'beta', color: 'rgba(255,102,68,0.8)' },
-      { key: 'gamma', color: 'rgba(255,170,136,0.6)' },
+    const chartY = y + 12;
+    const chartH = h - 16;
+    const bands: Array<{ key: keyof import('../engine/eegProvider').BandPowerSnapshot; label: string; color: string; solid: string }> = [
+      { key: 'delta', label: 'δ', color: 'rgba(170,136,255,0.8)', solid: '#aa88ff' },
+      { key: 'theta', label: 'θ', color: 'rgba(136,204,68,0.8)', solid: '#88cc44' },
+      { key: 'alpha', label: 'α', color: 'rgba(68,204,255,0.9)', solid: '#44ccff' },
+      { key: 'beta', label: 'β', color: 'rgba(255,102,68,0.9)', solid: '#ff6644' },
+      { key: 'gamma', label: 'γ', color: 'rgba(255,170,136,0.7)', solid: '#ffaa88' },
     ];
+
+    // Subtle grid lines
+    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+    ctx.lineWidth = 1;
+    for (let g = 0.25; g < 1; g += 0.25) {
+      const gy = chartY + chartH - g * chartH;
+      ctx.beginPath();
+      ctx.moveTo(x, gy);
+      ctx.lineTo(x + w, gy);
+      ctx.stroke();
+    }
 
     for (const band of bands) {
       ctx.beginPath();
@@ -1559,151 +1572,28 @@ export class Hud {
         else ctx.lineTo(px, py);
       }
       ctx.strokeStyle = band.color;
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 1.5;
       ctx.stroke();
+    }
+
+    // Inline legend at top-right of chart
+    let legendX = x + w - 4;
+    for (let i = bands.length - 1; i >= 0; i--) {
+      const lbl = bands[i].label;
+      legendX -= 14;
+      renderer.hudText(lbl, legendX, y + 2, bands[i].solid, 8, 'left');
     }
 
     ctx.restore();
   }
 
-  /**
-   * Render weapon mode info in the right section of the neuro panel.
-   */
-  private renderWeaponModeInfo(renderer: Renderer, state: HudState, x: number, y: number, _maxW: number): void {
-    const mode = state.weaponMode ?? 'balanced';
-    const calmColor = '#00ccff';
-    const arousalColor = '#ff4466';
-    const flowColor = '#ffdd44';
 
-    const modeIcon = mode === 'beam' ? '◎' : mode === 'spray' ? '✦' : mode === 'flow' ? '◈' : '•';
-    const modeColor =
-      mode === 'beam' ? calmColor : mode === 'spray' ? arousalColor : mode === 'flow' ? flowColor : '#aaaaaa';
-    const modeName = mode === 'beam' ? 'BEAM' : mode === 'spray' ? 'SPRAY' : mode === 'flow' ? 'FLOW' : 'BALANCED';
-    const modeDesc =
-      mode === 'beam'
-        ? 'Precision — High Damage'
-        : mode === 'spray'
-          ? 'Rapid — Wide Spread'
-          : mode === 'flow'
-            ? 'Homing — Damage x2'
-            : 'Standard Fire';
-
-    renderer.hudText(`${modeIcon} ${modeName}`, x, y + 6, modeColor, 12, 'left');
-    renderer.hudText(modeDesc, x, y + 22, '#8890a0', 9, 'left');
-
-    // Fire rate modifier display
-    const shieldCharge = state.shieldCharge ?? 0;
-    const overdriveCharge = state.overdriveCharge ?? 0;
-    let frLabel = '';
-    if (mode === 'beam') frLabel = 'x0.3 rate · x3 dmg';
-    else if (mode === 'spray') frLabel = 'x2.5 rate · x0.5 dmg';
-    else if (mode === 'flow') frLabel = 'x1 rate · x2 dmg';
-    else frLabel = 'x1 rate';
-    renderer.hudText(frLabel, x, y + 36, '#5a6070', 8, 'left');
-
-    // Active ability glow labels
-    let abilityY = y + 52;
-    if (state.shieldActive) {
-      const glow = 0.7 + Math.sin(this.time * 6) * 0.3;
-      const ctx = renderer.context;
-      ctx.save();
-      ctx.shadowColor = calmColor;
-      ctx.shadowBlur = 12;
-      ctx.globalAlpha = glow;
-      renderer.hudText('◆ CALM SHIELD', x, abilityY, calmColor, 10, 'left');
-      ctx.restore();
-      abilityY += 14;
-    } else if (shieldCharge > 0.8) {
-      renderer.hudText('SHIELD READY', x, abilityY, calmColor, 8, 'left');
-      abilityY += 12;
-    }
-
-    if (state.overdriveActive) {
-      const glow = 0.7 + Math.sin(this.time * 8) * 0.3;
-      const ctx = renderer.context;
-      ctx.save();
-      ctx.shadowColor = arousalColor;
-      ctx.shadowBlur = 12;
-      ctx.globalAlpha = glow;
-      renderer.hudText('◆ OVERDRIVE', x, abilityY, arousalColor, 10, 'left');
-      ctx.restore();
-    } else if (overdriveCharge > 0.8) {
-      renderer.hudText('OVERDRIVE READY', x, abilityY, arousalColor, 8, 'left');
-    }
-  }
-
-  /**
-   * Render meta-progression meters (Noise, Focus, Stillness)
-   */
-  private static readonly METER_TIPS: Record<string, string> = {
-    CALM: 'Mental calmness (0-100%)',
-    AROUSAL: 'Mental activation (0-100%)',
-    ALPHA: 'Relaxed focus (8-12Hz)',
-    BETA: 'Active thinking (12-30Hz)',
-    THETA: 'Deep relaxation (4-8Hz)',
-    HR: 'Heart rate (BPM)',
-  };
-
-  private renderMetaMeters(renderer: Renderer, state: HudState, width: number): void {
-    const eegConnected = !!state.eegConnected;
-
-    const meters: Array<{ label: string; value: number; color: string }> = [
-      { label: 'CALM', value: state.focus ?? 0, color: '#00ccff' },
-      { label: 'AROUSAL', value: state.noise ?? 0, color: '#ff4466' },
-    ];
-    if (eegConnected) {
-      meters.push(
-        { label: 'ALPHA', value: state.stillness ?? 0, color: '#44aaff' },
-        { label: 'BETA', value: state.betaMeter ?? 0, color: '#ff8844' },
-        { label: 'THETA', value: state.thetaMeter ?? 0, color: '#44cc44' },
-      );
-    }
-    const displayBpm = state.displayBpm ?? state.bpm;
-    if (state.cameraActive && displayBpm != null) {
-      meters.push({ label: 'HR', value: Math.min(200, Math.round(displayBpm)), color: '#ff4466' });
-    }
-
-    const meterW = meters.length > 5 ? 50 : 60;
-    const meterH = 8;
-    const gap = meters.length > 5 ? 6 : 10;
-    const totalW = meters.length * meterW + (meters.length - 1) * gap;
-    const startX = width / 2 - totalW / 2;
-    const y = 75;
-    const panelW = totalW + 20;
-    const panelH = 46;
-
-    renderer.drawPanel(startX - 10, y - 16, panelW, panelH, 'rgba(10,10,15,0.9)', CONFIG.COLORS.TEXT_DIM, 1, 4);
-
-    const ctx = renderer.context;
-
-    meters.forEach((m, i) => {
-      const x = startX + i * (meterW + gap);
-      renderer.hudText(m.label, x + meterW / 2, y - 5, m.color, 8, 'center');
-      renderer.fillRect(x, y + 3, meterW, meterH, '#101018');
-
-      const fill = (meterW * Math.min(100, m.value)) / 100;
-      ctx.save();
-      ctx.shadowColor = m.color;
-      ctx.shadowBlur = 4;
-      ctx.fillStyle = m.color;
-      ctx.fillRect(x, y + 3, fill, meterH);
-      ctx.restore();
-
-      renderer.strokeRect(x, y + 3, meterW, meterH, m.color, 1);
-      renderer.hudText(`${Math.round(m.value)}`, x + meterW / 2, y + 3 + meterH / 2, '#ffffff', 7, 'center');
-
-      const tip = Hud.METER_TIPS[m.label];
-      if (tip) {
-        this.addTooltipRegion(x, y - 16, meterW, panelH, tip);
-      }
-    });
-  }
 
   /**
    * Render level lore/insight hint at top of screen - informative flavor text
    */
   private renderRuleCardHint(renderer: Renderer, hint: string, width: number): void {
-    const y = 130;
+    const y = 74;
 
     // Calculate pill dimensions based on text
     const textWidth = hint.length * 7.5 + 50;
@@ -1739,22 +1629,15 @@ export class Hud {
     );
   }
 
-  /**
-   * Render [?] info button
-   */
   private renderInfoButton(renderer: Renderer, width: number): void {
-    const sz = 30;
-    const margin = 20;
-    const gap = 10;
-    const x = width - 40 - margin - gap - 40 - gap - sz;
-    const y = 60;
-
+    const sz = this.btnSize;
+    const x = this.btnSlotX(width);
+    const y = this.btnSlotY(2);
     this.infoButtonBounds = { x, y, width: sz, height: sz };
 
-    renderer.drawRoundRect(x, y, sz, sz, 4, 'rgba(10,10,15,0.9)', CONFIG.COLORS.TEXT_DIM);
-
-    renderer.hudText('?', x + sz / 2, y + sz / 2, CONFIG.COLORS.TEXT_LIGHT, 16, 'center');
-    renderer.hudText('INFO', x + sz / 2, y + sz + 8, CONFIG.COLORS.TEXT_DIM, 7, 'center');
+    renderer.drawRoundRect(x, y, sz, sz, 4, 'rgba(10,10,15,0.9)', CONFIG.COLORS.TEXT_DIM, 1.5);
+    renderer.hudText('?', x + sz / 2, y + sz / 2, CONFIG.COLORS.TEXT_LIGHT, 13, 'center');
+    renderer.hudText('INFO', x - 4, y + sz / 2, CONFIG.COLORS.TEXT_DIM, 7, 'right');
   }
 
   isInfoButtonClicked(mouseX: number, mouseY: number): boolean {
@@ -1762,23 +1645,16 @@ export class Hud {
     return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
   }
 
-  /**
-   * Render [N] neuro settings button
-   */
   private renderNeuroButton(renderer: Renderer, width: number): void {
-    const sz = 30;
-    const margin = 20;
-    const gap = 10;
-    const x = width - 40 - margin - gap - 40 - gap - sz - gap - sz;
-    const y = 60;
-
+    const sz = this.btnSize;
+    const x = this.btnSlotX(width);
+    const y = this.btnSlotY(3);
     this.neuroButtonBounds = { x, y, width: sz, height: sz };
 
     const neuroColor = CONFIG.COLORS.NEURAL;
-    renderer.drawRoundRect(x, y, sz, sz, 4, 'rgba(10,10,15,0.9)', neuroColor);
-
-    renderer.hudText('◈', x + sz / 2, y + sz / 2, neuroColor, 14, 'center');
-    renderer.hudText('NEURO', x + sz / 2, y + sz + 8, CONFIG.COLORS.TEXT_DIM, 7, 'center');
+    renderer.drawRoundRect(x, y, sz, sz, 4, 'rgba(10,10,15,0.9)', neuroColor, 1.5);
+    renderer.hudText('◈', x + sz / 2, y + sz / 2, neuroColor, 12, 'center');
+    renderer.hudText('NEURO', x - 4, y + sz / 2, CONFIG.COLORS.TEXT_DIM, 7, 'right');
   }
 
   isNeuroButtonClicked(mouseX: number, mouseY: number): boolean {
@@ -1786,252 +1662,6 @@ export class Hud {
     return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
   }
 
-  /**
-   * Render neuro metrics strip just above the bottom panel
-   */
-  private renderNeuroStrip(renderer: Renderer, state: HudState, width: number, height: number): void {
-    const stripH = 22;
-    const panelH = 95;
-    const stripY = height - panelH - stripH - 2;
-
-    const ctx = renderer.context;
-    ctx.save();
-    ctx.globalAlpha = 0.7;
-    renderer.fillRect(0, stripY, width, stripH, 'rgba(8,8,12,0.8)');
-    ctx.restore();
-
-    const camActive = state.cameraActive ?? false;
-    const eegConn = state.eegConnected ?? false;
-    const bothActive = camActive && eegConn;
-
-    const items: Array<{ label: string; value: string; color: string; tip?: string }> = [];
-
-    // Device status dots when both active
-    if (bothActive) {
-      items.push({ label: 'CAM', value: '●', color: '#ffaa44', tip: 'Webcam active' });
-      items.push({ label: 'EEG', value: '●', color: '#44ff88', tip: 'EEG headband' });
-    }
-
-    const source = state.neuroSource ?? 'none';
-    const calmLabel = source === 'eeg' ? 'CAL(eeg)' : camActive ? 'CAL(cam)' : 'CAL';
-    const aroLabel = source === 'eeg' ? 'ARO(eeg)' : camActive ? 'ARO(cam)' : 'ARO';
-    items.push({
-      label: calmLabel,
-      value: `${Math.round(state.calmLevel * 100)}%`,
-      color: '#00ccff',
-      tip: 'Mental calmness 0-100%',
-    });
-    items.push({
-      label: aroLabel,
-      value: `${Math.round(state.arousalLevel * 100)}%`,
-      color: '#ff4466',
-      tip: 'Mental activation 0-100%',
-    });
-
-    const stripBpm = state.displayBpm ?? state.bpm;
-    if (stripBpm != null) {
-      const hrLabel = camActive && eegConn ? 'HR(cam)' : 'HR';
-      items.push({ label: hrLabel, value: `${Math.round(stripBpm)}`, color: '#ff4466', tip: 'Heart rate (BPM)' });
-    }
-
-    if (state.hrvRmssd != null && state.hrvRmssd > 0) {
-      items.push({
-        label: 'HRV',
-        value: `${Math.round(state.hrvRmssd)}`,
-        color: '#44ddaa',
-        tip: 'Heart rate variability (ms)',
-      });
-    }
-    if (state.respirationRate != null && state.respirationRate > 0) {
-      items.push({
-        label: 'RESP',
-        value: `${state.respirationRate.toFixed(1)}`,
-        color: '#88aaff',
-        tip: 'Breaths per minute',
-      });
-    }
-    if (state.baselineDelta != null) {
-      const sign = state.baselineDelta >= 0 ? '+' : '';
-      items.push({
-        label: 'BL±',
-        value: `${sign}${Math.round(state.baselineDelta)}`,
-        color: state.baselineDelta > 5 ? '#ff8844' : '#88ff88',
-        tip: 'Deviation from baseline BPM',
-      });
-    }
-
-    items.push({
-      label: 'SIG',
-      value: `${Math.round((state.signalQuality ?? 0) * 100)}%`,
-      color: '#44ff88',
-      tip: 'Signal quality',
-    });
-
-    if (eegConn && state.alphaPower != null) {
-      items.push({
-        label: 'α',
-        value: `${Math.round((state.alphaPower ?? 0) * 100)}%`,
-        color: '#44ccff',
-        tip: 'Alpha 8-12Hz — relaxed focus',
-      });
-      items.push({
-        label: 'β',
-        value: `${Math.round((state.betaPower ?? 0) * 100)}%`,
-        color: '#ff6644',
-        tip: 'Beta 12-30Hz — active thinking',
-      });
-      items.push({
-        label: 'θ',
-        value: `${Math.round((state.thetaPower ?? 0) * 100)}%`,
-        color: '#88cc44',
-        tip: 'Theta 4-8Hz — deep relaxation',
-      });
-      if (state.deltaPower != null) {
-        items.push({
-          label: 'δ',
-          value: `${Math.round(state.deltaPower * 100)}%`,
-          color: '#aa88ff',
-          tip: 'Delta 0.5-4Hz — deep sleep',
-        });
-      }
-      if (state.gammaPower != null) {
-        items.push({
-          label: 'γ',
-          value: `${Math.round(state.gammaPower * 100)}%`,
-          color: '#ffaa88',
-          tip: 'Gamma 30-100Hz — high focus',
-        });
-      }
-    }
-
-    if (state.calmnessState) {
-      items.push({
-        label: '',
-        value: state.calmnessState.toUpperCase(),
-        color: '#00ccff',
-        tip: 'Overall calmness state',
-      });
-    }
-
-    if (this.alphaBumpTimer > 0) {
-      items.push({ label: '', value: 'ALPHA BUMP', color: '#00ffff', tip: '2x score bonus active' });
-    }
-
-    const spacing = width / (items.length + 1);
-    items.forEach((item, i) => {
-      const x = spacing * (i + 1);
-      const alpha = item.value === 'ALPHA BUMP' ? 0.5 + Math.sin(this.time * 12) * 0.5 : 1;
-      ctx.save();
-      ctx.globalAlpha = alpha;
-      if (item.label) {
-        renderer.hudText(item.label, x - 16, stripY + stripH / 2, '#5a6070', 8, 'right');
-      }
-      renderer.hudText(item.value, x - 12, stripY + stripH / 2, item.color, 10, 'left');
-      ctx.restore();
-
-      if (item.tip) {
-        const regionW = spacing * 0.9;
-        this.addTooltipRegion(x - regionW / 2, stripY, regionW, stripH, item.tip);
-      }
-    });
-  }
-
-  /**
-   * Render waveform oscilloscope and frequency spectrum mini-displays
-   */
-  private renderWaveforms(renderer: Renderer, state: HudState, width: number, height: number): void {
-    const ctx = renderer.context;
-    const panelH = 95;
-    const panelY = height - panelH;
-
-    // Audio oscilloscope (left edge, inside bottom panel)
-    if (state.waveformData) {
-      const wvW = 80;
-      const wvH = 28;
-      const wvX = 14;
-      const wvY = panelY + panelH - wvH - 6;
-
-      ctx.save();
-      ctx.globalAlpha = 0.45;
-      ctx.strokeStyle = '#00cccc';
-      ctx.lineWidth = 1;
-      ctx.shadowColor = '#00cccc';
-      ctx.shadowBlur = 4;
-      ctx.beginPath();
-
-      const data = state.waveformData;
-      const step = Math.max(1, Math.floor(data.length / wvW));
-      for (let i = 0; i < wvW; i++) {
-        const sample = data[i * step] ?? 128;
-        const y = wvY + (1 - sample / 255) * wvH;
-        if (i === 0) ctx.moveTo(wvX + i, y);
-        else ctx.lineTo(wvX + i, y);
-      }
-      ctx.stroke();
-      ctx.restore();
-    }
-
-    // Frequency spectrum (right edge, inside bottom panel)
-    if (state.frequencyData) {
-      const spW = 80;
-      const spH = 28;
-      const spX = width - spW - 14;
-      const spY = panelY + panelH - spH - 6;
-
-      ctx.save();
-      ctx.globalAlpha = 0.4;
-
-      const data = state.frequencyData;
-      const barCount = 20;
-      const barW = spW / barCount;
-      const step = Math.max(1, Math.floor(data.length / barCount));
-
-      for (let i = 0; i < barCount; i++) {
-        const val = data[i * step] ?? 0;
-        const barH = (val / 255) * spH;
-        const hue = 180 + (i / barCount) * 120;
-        ctx.fillStyle = `hsla(${hue}, 80%, 60%, 0.7)`;
-        ctx.fillRect(spX + i * barW, spY + spH - barH, barW - 1, barH);
-      }
-
-      ctx.restore();
-    }
-
-    // Heart rate ECG trace (near BPM in device status)
-    if (state.bpm != null && state.bpm > 0) {
-      const trW = 60;
-      const trH = 16;
-      const trX = 14;
-      const trY = panelY + 8;
-
-      ctx.save();
-      ctx.globalAlpha = 0.5;
-      ctx.strokeStyle = '#ff4466';
-      ctx.lineWidth = 1.5;
-      ctx.shadowColor = '#ff4466';
-      ctx.shadowBlur = 3;
-      ctx.beginPath();
-
-      const bpm = state.bpm;
-      const period = 60 / bpm;
-      for (let i = 0; i < trW; i++) {
-        const t = (i / trW) * period * 2;
-        const phase = ((this.time + t) % period) / period;
-        let y: number;
-        if (phase > 0.35 && phase < 0.45) {
-          y = trY + trH / 2 - trH * 0.8 * Math.sin(((phase - 0.35) / 0.1) * Math.PI);
-        } else if (phase > 0.45 && phase < 0.55) {
-          y = trY + trH / 2 + trH * 0.3 * Math.sin(((phase - 0.45) / 0.1) * Math.PI);
-        } else {
-          y = trY + trH / 2 + Math.sin(phase * Math.PI * 4) * 1;
-        }
-        if (i === 0) ctx.moveTo(trX + i, y);
-        else ctx.lineTo(trX + i, y);
-      }
-      ctx.stroke();
-      ctx.restore();
-    }
-  }
 
   /**
    * Reset HUD state
