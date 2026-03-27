@@ -195,7 +195,8 @@ export class AudioManager {
   playSfx(id: string, volume: number = 1): void {
     // For now, just play from URL
     // In production, would use pre-loaded sounds
-    const audio = new Audio(`/audio/sfx_${id}.ogg`);
+    const base = import.meta.env.BASE_URL ?? '/';
+    const audio = new Audio(`${base}audio/sfx_${id}.ogg`);
     audio.volume = volume * storage.settings.sfxVolume * storage.settings.masterVolume;
     audio.play().catch(() => {
       // Silent fail - audio might not be loaded yet

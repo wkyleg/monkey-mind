@@ -29,7 +29,7 @@ export interface SvgRenderOptions {
 class SvgAssetManager {
   private assets: Map<string, SvgAsset> = new Map();
   private loadPromises: Map<string, Promise<SvgAsset>> = new Map();
-  private basePath: string = '/assets/svg';
+  private basePath: string = `${import.meta.env.BASE_URL ?? '/'}assets/svg`;
 
   /**
    * Preload all game SVG assets
