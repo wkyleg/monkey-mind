@@ -118,9 +118,9 @@
     }
   ],
   "copyLayers": {
-    "ruleCard": "Kill order matters. The bloodline must be severed correctly.",
-    "codexSnippet": "First there was Chaos. Then Gaia. Then Uranus. The monkey learned that even gods have parents, and parents can be overthrown.",
-    "radioWhisper": "Caller claims his family tree goes back to the Titans. HR is concerned."
+    "ruleCard": "Defeat order matters. Each generation must be faced in sequence.",
+    "codexSnippet": "First there was Chaos. Then Gaia. Then the Titans. The monkey learned that even the cosmos has a family tree, and every branch tells a story.",
+    "radioWhisper": "Caller claims his family tree goes back to the Titans. HR is impressed."
   },
   "musicSeed": {
     "seed": "hesiod_001",
