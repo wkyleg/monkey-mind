@@ -116,6 +116,42 @@ export class MenuScene extends Scene {
     if (intent.confirm) {
       this.menuItems[this.selectedIndex].action();
     }
+
+    // Mouse support
+    this.handleMouseInput();
+  }
+
+  private handleMouseInput(): void {
+    const input = this.game.getInput();
+    const mousePos = input.getMousePos();
+    const click = input.getMouseClick();
+    const renderer = this.game.getRenderer();
+    const { height } = renderer;
+
+    const menuStartY = height * 0.48;
+    const availableHeight = height * 0.4;
+    const menuSpacing = Math.max(36, Math.min(46, availableHeight / this.menuItems.length));
+
+    if (mousePos) {
+      for (let i = 0; i < this.menuItems.length; i++) {
+        const y = menuStartY + i * menuSpacing;
+        if (mousePos.y >= y - 16 && mousePos.y <= y + 16) {
+          this.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    if (click) {
+      for (let i = 0; i < this.menuItems.length; i++) {
+        const y = menuStartY + i * menuSpacing;
+        if (click.y >= y - 16 && click.y <= y + 16) {
+          this.selectedIndex = i;
+          this.menuItems[i].action();
+          break;
+        }
+      }
+    }
   }
 
   private selectPrevious(): void {
@@ -289,7 +325,14 @@ export class MenuScene extends Scene {
       );
     }
 
-    renderer.text('↑ ↓ SELECT   SPACE CONFIRM', width / 2, height - 30, CONFIG.COLORS.TEXT_DIM, 11, 'center');
+    renderer.text(
+      '↑ ↓ SELECT   SPACE CONFIRM   CLICK TO SELECT',
+      width / 2,
+      height - 30,
+      CONFIG.COLORS.TEXT_DIM,
+      11,
+      'center',
+    );
 
     renderer.restore();
   }

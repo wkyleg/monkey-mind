@@ -55,6 +55,11 @@ class ContentLoader {
 
   private loaded: boolean = false;
 
+  private contentUrl(path: string): string {
+    const base = import.meta.env.BASE_URL ?? '/';
+    return `${base}content/${path.replace(/^\/+/, '')}`;
+  }
+
   /**
    * Load all content from JSON files
    */
@@ -63,7 +68,7 @@ class ContentLoader {
 
     try {
       // Load content index
-      const indexResponse = await fetch('/content/index.json');
+      const indexResponse = await fetch(this.contentUrl('index.json'));
       if (!indexResponse.ok) {
         console.warn('Content index not found, using defaults');
         this.loadDefaults();
@@ -265,7 +270,7 @@ class ContentLoader {
   private async loadSectors(paths: string[]): Promise<void> {
     for (const path of paths) {
       try {
-        const response = await fetch(`/content/${path}`);
+        const response = await fetch(this.contentUrl(path));
         const data: SectorData = await response.json();
         this.content.sectors.set(data.id, data);
 
@@ -286,7 +291,7 @@ class ContentLoader {
   private async loadEnemyPacks(paths: string[]): Promise<void> {
     for (const path of paths) {
       try {
-        const response = await fetch(`/content/${path}`);
+        const response = await fetch(this.contentUrl(path));
         const data: EnemyPackData = await response.json();
 
         for (const enemy of data.enemies) {
@@ -301,7 +306,7 @@ class ContentLoader {
   private async loadBosses(paths: string[]): Promise<void> {
     for (const path of paths) {
       try {
-        const response = await fetch(`/content/${path}`);
+        const response = await fetch(this.contentUrl(path));
         const data: BossData = await response.json();
         this.content.bosses.set(data.id, data);
       } catch (error) {
@@ -313,7 +318,7 @@ class ContentLoader {
   private async loadPowerups(paths: string[]): Promise<void> {
     for (const path of paths) {
       try {
-        const response = await fetch(`/content/${path}`);
+        const response = await fetch(this.contentUrl(path));
         const data: { powerups: PowerupData[] } = await response.json();
 
         for (const powerup of data.powerups) {
@@ -328,7 +333,7 @@ class ContentLoader {
   private async loadWaves(paths: string[]): Promise<void> {
     for (const path of paths) {
       try {
-        const response = await fetch(`/content/${path}`);
+        const response = await fetch(this.contentUrl(path));
         const data: { sectorId: string; waves: Record<string, WaveData> } = await response.json();
 
         // Add each wave to the content store
@@ -346,7 +351,7 @@ class ContentLoader {
   private async loadStrings(paths: string[]): Promise<void> {
     for (const path of paths) {
       try {
-        const response = await fetch(`/content/${path}`);
+        const response = await fetch(this.contentUrl(path));
         const data: Partial<StringsData> = await response.json();
 
         // Merge strings
@@ -369,7 +374,7 @@ class ContentLoader {
   private async loadActs(paths: string[]): Promise<void> {
     for (const actPath of paths) {
       try {
-        const response = await fetch(`/content/${actPath}`);
+        const response = await fetch(this.contentUrl(actPath));
         const actData = await response.json();
 
         // Get the directory path for loading level files
@@ -392,23 +397,19 @@ class ContentLoader {
               // Check if this is already a full path (contains '/' or ends with '.json')
               if (levelEntry.includes('/') || levelEntry.endsWith('.json')) {
                 // Full path - use directly (prepend /content/ if not absolute)
-                levelPath = levelEntry.startsWith('/') ? levelEntry : `/content/${levelEntry}`;
+                levelPath = this.contentUrl(levelEntry.replace(/^\/content\//, ''));
               } else {
                 // Short ID format like "act1_level1_zoo_escape"
-                // Extract the level name after the "levelN_" part
-                // e.g., "act1_level1_zoo_escape" -> "zoo_escape"
                 const parts = levelEntry.split('_');
-                // Find index of "levelN" part
                 const levelPartIndex = parts.findIndex((p) => p.startsWith('level'));
                 let levelName: string;
                 if (levelPartIndex >= 0 && levelPartIndex < parts.length - 1) {
                   levelName = parts.slice(levelPartIndex + 1).join('_');
                 } else {
-                  // Fallback: use parts after index 2
                   levelName = parts.slice(2).join('_');
                 }
                 const levelNum = String(i + 1).padStart(2, '0');
-                levelPath = `/content/${actDir}/level_${levelNum}_${levelName}.json`;
+                levelPath = this.contentUrl(`${actDir}/level_${levelNum}_${levelName}.json`);
               }
 
               try {
@@ -450,7 +451,7 @@ class ContentLoader {
    */
   private async loadEnemyDialogueForAct(actDir: string): Promise<void> {
     try {
-      const dialoguePath = `/content/${actDir}/enemies.json`;
+      const dialoguePath = this.contentUrl(`${actDir}/enemies.json`);
       const response = await fetch(dialoguePath);
 
       if (!response.ok) {
@@ -476,7 +477,7 @@ class ContentLoader {
   private async loadExpansionCategories(paths: string[]): Promise<void> {
     for (const expPath of paths) {
       try {
-        const response = await fetch(`/content/${expPath}`);
+        const response = await fetch(this.contentUrl(expPath));
         const expData = await response.json();
 
         // Get the directory path for loading level files
@@ -497,13 +498,13 @@ class ContentLoader {
               if (levelEntry.includes('/') || levelEntry.endsWith('.json')) {
                 // Full path - use directly (prepend /content/ if needed)
                 // Handle paths like "expansions/literature/level_01_plato_allegory.json"
-                levelPath = levelEntry.startsWith('/') ? levelEntry : `/content/${levelEntry}`;
+                levelPath = this.contentUrl(levelEntry.replace(/^\/content\//, ''));
               } else {
                 // Short ID format - reconstruct path
                 const parts = levelEntry.split('_');
                 const levelNum = String(i + 1).padStart(2, '0');
                 const levelName = parts.slice(2).join('_');
-                levelPath = `/content/${expDir}/level_${levelNum}_${levelName}.json`;
+                levelPath = this.contentUrl(`${expDir}/level_${levelNum}_${levelName}.json`);
               }
 
               try {
@@ -585,7 +586,7 @@ class ContentLoader {
   async loadLocale(locale: string): Promise<void> {
     if (locale === 'en') return;
     try {
-      const response = await fetch(`/content/strings/${locale}.json`);
+      const response = await fetch(this.contentUrl(`strings/${locale}.json`));
       if (!response.ok) {
         console.warn(`Locale file not found: ${locale}.json`);
         return;

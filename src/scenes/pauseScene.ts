@@ -84,6 +84,41 @@ export class PauseScene extends Scene {
     if (intent.confirm && this.inputCooldown <= 0) {
       this.menuItems[this.selectedIndex].action();
     }
+
+    // Mouse support
+    this.handleMouseInput();
+  }
+
+  private handleMouseInput(): void {
+    const input = this.game.getInput();
+    const mousePos = input.getMousePos();
+    const click = input.getMouseClick();
+    const renderer = this.game.getRenderer();
+    const { height } = renderer;
+
+    const menuStartY = height * 0.5;
+    const menuSpacing = 50;
+
+    if (mousePos) {
+      for (let i = 0; i < this.menuItems.length; i++) {
+        const y = menuStartY + i * menuSpacing;
+        if (mousePos.y >= y - 16 && mousePos.y <= y + 16) {
+          this.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    if (click && this.inputCooldown <= 0) {
+      for (let i = 0; i < this.menuItems.length; i++) {
+        const y = menuStartY + i * menuSpacing;
+        if (click.y >= y - 16 && click.y <= y + 16) {
+          this.selectedIndex = i;
+          this.menuItems[i].action();
+          break;
+        }
+      }
+    }
   }
 
   render(renderer: Renderer, _alpha: number): void {

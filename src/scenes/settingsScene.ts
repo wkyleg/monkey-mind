@@ -48,6 +48,7 @@ export class SettingsScene extends Scene {
   private selectedIndex: number = 0;
   private time: number = 0;
   private inputCooldown: number = 0;
+  private lastMoveDir: number = 0;
 
   constructor(game: Game) {
     super(game);
@@ -125,51 +126,67 @@ export class SettingsScene extends Scene {
   update(dt: number, intent: PlayerIntent): void {
     this.time += dt;
 
-    // Input cooldown
     if (this.inputCooldown > 0) {
       this.inputCooldown -= dt;
-      return;
     }
 
     // Back
-    if (intent.cancel) {
+    if (intent.cancel && this.inputCooldown <= 0) {
       this.game.getScenes().pop();
       return;
     }
 
-    // Navigation
-    if (intent.moveAxis < -0.5) {
-      const setting = this.settings[this.selectedIndex];
-      if (setting.type === 'slider') {
-        const currentValue = setting.getValue() as number;
-        const newValue = clamp(currentValue - (setting.step ?? 0.1), setting.min ?? 0, setting.max ?? 1);
-        setting.setValue(newValue);
-        this.inputCooldown = 0.1;
-      } else if (setting.type === 'cycle' && setting.options) {
-        const current = setting.getValue() as string;
-        const idx = setting.options.findIndex((o) => o.code === current);
-        const prev = setting.options[(idx - 1 + setting.options.length) % setting.options.length];
-        if (prev) setting.setValue(prev.code);
+    // Up/down navigation via menuAxis
+    const moveDir = intent.menuAxis < -0.5 ? -1 : intent.menuAxis > 0.5 ? 1 : 0;
+    const justStarted = moveDir !== 0 && this.lastMoveDir === 0;
+    const canRepeat = moveDir !== 0 && this.inputCooldown <= 0;
+
+    if (justStarted || canRepeat) {
+      if (moveDir < 0) {
+        this.selectedIndex = (this.selectedIndex - 1 + this.settings.length) % this.settings.length;
+        this.inputCooldown = 0.15;
+      } else if (moveDir > 0) {
+        this.selectedIndex = (this.selectedIndex + 1) % this.settings.length;
         this.inputCooldown = 0.15;
       }
-    } else if (intent.moveAxis > 0.5) {
-      const setting = this.settings[this.selectedIndex];
-      if (setting.type === 'slider') {
-        const currentValue = setting.getValue() as number;
-        const newValue = clamp(currentValue + (setting.step ?? 0.1), setting.min ?? 0, setting.max ?? 1);
-        setting.setValue(newValue);
-        this.inputCooldown = 0.1;
-      } else if (setting.type === 'cycle' && setting.options) {
-        const current = setting.getValue() as string;
-        const idx = setting.options.findIndex((o) => o.code === current);
-        const next = setting.options[(idx + 1) % setting.options.length];
-        if (next) setting.setValue(next.code);
-        this.inputCooldown = 0.15;
+    }
+    this.lastMoveDir = moveDir;
+
+    // Left/right value adjustment via moveAxis
+    if (this.inputCooldown <= 0) {
+      if (intent.moveAxis < -0.5) {
+        const setting = this.settings[this.selectedIndex];
+        if (setting.type === 'slider') {
+          const currentValue = setting.getValue() as number;
+          const newValue = clamp(currentValue - (setting.step ?? 0.1), setting.min ?? 0, setting.max ?? 1);
+          setting.setValue(newValue);
+          this.inputCooldown = 0.1;
+        } else if (setting.type === 'cycle' && setting.options) {
+          const current = setting.getValue() as string;
+          const idx = setting.options.findIndex((o) => o.code === current);
+          const prev = setting.options[(idx - 1 + setting.options.length) % setting.options.length];
+          if (prev) setting.setValue(prev.code);
+          this.inputCooldown = 0.15;
+        }
+      } else if (intent.moveAxis > 0.5) {
+        const setting = this.settings[this.selectedIndex];
+        if (setting.type === 'slider') {
+          const currentValue = setting.getValue() as number;
+          const newValue = clamp(currentValue + (setting.step ?? 0.1), setting.min ?? 0, setting.max ?? 1);
+          setting.setValue(newValue);
+          this.inputCooldown = 0.1;
+        } else if (setting.type === 'cycle' && setting.options) {
+          const current = setting.getValue() as string;
+          const idx = setting.options.findIndex((o) => o.code === current);
+          const next = setting.options[(idx + 1) % setting.options.length];
+          if (next) setting.setValue(next.code);
+          this.inputCooldown = 0.15;
+        }
       }
     }
 
     // Confirm (toggle, cycle, or next item)
-    if (intent.confirm) {
+    if (intent.confirm && this.inputCooldown <= 0) {
       const setting = this.settings[this.selectedIndex];
       if (setting.type === 'toggle') {
         setting.setValue(!setting.getValue());
@@ -183,6 +200,58 @@ export class SettingsScene extends Scene {
       } else {
         this.selectedIndex = (this.selectedIndex + 1) % this.settings.length;
         this.inputCooldown = 0.15;
+      }
+    }
+
+    // Mouse support
+    this.handleMouseInput();
+  }
+
+  private handleMouseInput(): void {
+    const input = this.game.getInput();
+    const mousePos = input.getMousePos();
+    const click = input.getMouseClick();
+    const renderer = this.game.getRenderer();
+    const { width, height } = renderer;
+    const startY = height * 0.3;
+    const spacing = 60;
+
+    if (mousePos) {
+      for (let i = 0; i < this.settings.length; i++) {
+        const y = startY + i * spacing;
+        if (mousePos.y >= y - 15 && mousePos.y <= y + 15 && mousePos.x >= width * 0.2 && mousePos.x <= width * 0.8) {
+          this.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    if (click) {
+      for (let i = 0; i < this.settings.length; i++) {
+        const y = startY + i * spacing;
+        if (click.y >= y - 15 && click.y <= y + 15) {
+          this.selectedIndex = i;
+          const setting = this.settings[i];
+
+          if (setting.type === 'slider') {
+            const barX = width * 0.55;
+            const barWidth = 200;
+            if (click.x >= barX && click.x <= barX + barWidth) {
+              const ratio = clamp((click.x - barX) / barWidth, 0, 1);
+              const step = setting.step ?? 0.1;
+              const snapped = Math.round(ratio / step) * step;
+              setting.setValue(clamp(snapped, setting.min ?? 0, setting.max ?? 1));
+            }
+          } else if (setting.type === 'toggle') {
+            setting.setValue(!setting.getValue());
+          } else if (setting.type === 'cycle' && setting.options) {
+            const current = setting.getValue() as string;
+            const idx = setting.options.findIndex((o) => o.code === current);
+            const next = setting.options[(idx + 1) % setting.options.length];
+            if (next) setting.setValue(next.code);
+          }
+          break;
+        }
       }
     }
   }
@@ -294,7 +363,7 @@ export class SettingsScene extends Scene {
 
     // Controls hint
     renderer.text(
-      '← → ADJUST   SPACE TOGGLE/NEXT   ESC BACK',
+      '↑ ↓ SELECT   ← → ADJUST   SPACE TOGGLE/NEXT   ESC BACK',
       width / 2,
       height - 40,
       CONFIG.COLORS.TEXT_DIM,
