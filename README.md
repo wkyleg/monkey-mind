@@ -8,6 +8,14 @@
 
 A brain-reactive arcade game powered by real-time neurotech. EEG headbands and webcam heart rate detection shape the gameplay as you fight through waves of enemies spawned from the depths of consciousness itself. A monkey escaped an experiment -- the headband isn't a crown, it's a shackle turned instrument.
 
+## Gameplay preview
+
+| Desktop | Mobile |
+| --- | --- |
+| ![Monkey Mind desktop gameplay](docs/store-assets/preview-desktop-01-1200w.webp) | ![Monkey Mind mobile](docs/store-assets/preview-mobile-01-800w.webp) |
+
+More sizes and store metadata: [`docs/store-assets/`](docs/store-assets/).
+
 ## Features
 
 - **Brain-reactive gameplay** -- alpha waves trigger score bonuses, theta power affects enemy spawns, gamma boosts damage
